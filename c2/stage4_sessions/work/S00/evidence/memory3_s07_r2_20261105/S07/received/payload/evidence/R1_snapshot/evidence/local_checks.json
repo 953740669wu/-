@@ -1,0 +1,60 @@
+{
+  "captured_utc": "2026-11-05T06:23:01.781357+00:00",
+  "scope": "LOCAL_STDLIB_STATIC_AND_IMPORT_ONLY; NO_TENSOR_COMMUNICATION",
+  "unittest": {
+    "command": [
+      "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-B",
+      "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\tests\\test_probe.py"
+    ],
+    "exit_code": 0,
+    "total": 16,
+    "passed": 15,
+    "skipped": 1,
+    "log": "evidence/tests.txt"
+  },
+  "python39_ast": {
+    "status": "PASS_SYNTAX_ONLY",
+    "files": [
+      "candidate\\comm_probe.py",
+      "candidate\\cpu36_contract.py",
+      "candidate\\run_checks.py",
+      "tests\\test_probe.py"
+    ]
+  },
+  "environment": {
+    "command": [
+      "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-B",
+      "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\candidate\\comm_probe.py",
+      "environment",
+      "--output",
+      "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\evidence\\tmpq6lf4lo4\\environment.json"
+    ],
+    "exit_code": 3,
+    "status": "UNAVAILABLE",
+    "communication": "NOT_RUN",
+    "log": "evidence/local_environment.json"
+  },
+  "windows_resource_refusal": {
+    "command": [
+      "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-B",
+      "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\candidate\\comm_probe.py",
+      "run",
+      "--allocation",
+      "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\allocation.template.json",
+      "--output",
+      "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\evidence\\windows_resource_refusal"
+    ],
+    "exit_code": 1,
+    "status": "EXPECTED_PRECONDITION_REFUSAL_NO_WORKERS",
+    "evidence": "evidence/windows_resource_refusal/summary.json"
+  },
+  "frozen_cpu36_copy": "BYTE_IDENTICAL",
+  "source_recheck": {
+    "unchanged": 14,
+    "total": 14,
+    "changed": []
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "task": "S07",
+  "round": "R1_COMMUNICATION_PREPARATION",
+  "status": "READY_FOR_REVIEW_LOCAL_ONLY_CLUSTER_NOT_RUN",
+  "generated_utc": "2026-11-05T06:24:20.419487+00:00",
+  "new_code": true,
+  "frozen_cpu36_source": "c2/stage4_sessions/work/S01/revisions/R7_CPU36_RUNNER_20261104T151540967239Z/candidate/cpu36_contract.py",
+  "initial_project_head": "51d408980f524ff22e62901523d0fd63c3d7ad9d",
+  "delivery_files": [
+    {
+      "path": "allocation.template.json",
+      "bytes": 148,
+      "sha256": "2cb84d2ec9616ec33f491e6e4156c3c25b0cdcb795f48ffc7e085bb15ba8948c"
+    },
+    {
+      "path": "candidate/comm_probe.py",
+      "bytes": 14971,
+      "sha256": "ba11ab467af7d876ba041068fcd2d79f1545e7f1aea4b4c6cacacb1a96f7866f"
+    },
+    {
+      "path": "candidate/cpu36_contract.py",
+      "bytes": 11171,
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d"
+    },
+    {
+      "path": "candidate/run_checks.py",
+      "bytes": 3161,
+      "sha256": "7b7cc96edd9401981a61db5122bf785e3e2348a41cda5363ba5d2ea4b0217d07"
+    },
+    {
+      "path": "evidence/historical_backend.json",
+      "bytes": 2071,
+      "sha256": "e25f5698f5f1d408bd14f97de6eff77951a4c8bb1aa6137a3aa878c240693bf1"
+    },
+    {
+      "path": "evidence/local_checks.json",
+      "bytes": 2048,
+      "sha256": "659a2da3dd1df7f49940af77371ae04e05a7af9da8cc6d0e2c25d3524ff8da4f"
+    },
+    {
+      "path": "evidence/local_environment.json",
+      "bytes": 382,
+      "sha256": "3147aeb1b2992d1496415618e2670c1461529e5961b2f0efd5dad5f317108557"
+    },
+    {
+      "path": "evidence/reference_sources.json",
+      "bytes": 3355,
+      "sha256": "206151c9b97453415acbd80e23be0fe043ca9b8d553a057b59b6c383b670e0dc"
+    },
+    {
+      "path": "evidence/source_recheck.json",
+      "bytes": 4777,
+      "sha256": "fe94f1238e3212266dc3fedcf4e41df7ed33318db84e2d35cdb56f4106ccdf55"
+    },
+    {
+      "path": "evidence/tests.txt",
+      "bytes": 1723,
+      "sha256": "03172afb35ba541f5bb86b496a7a2a124d35b208f438fee60e5f54012363de6c"
+    },
+    {
+      "path": "evidence/tests_before_implementation.txt",
+      "bytes": 232,
+      "sha256": "d947f23d5928d18e2b5d68ada55437f1079e6c3c20b72786fd04c909c4f1e065"
+    },
+    {
+      "path": "evidence/windows_resource_refusal/summary.json",
+      "bytes": 164,
+      "sha256": "0e55fad49311fec596dcba31d76b734730a407e45424b88ea4d25fdf8ecb3ca3"
+    },
+    {
+      "path": "INTERFACE_FOR_S00.md",
+      "bytes": 8108,
+      "sha256": "dccebfe68b68c9836f49846c91877938ac6664a9d19a0b79234ba75008fc598e"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 5054,
+      "sha256": "1b5087ad2d90c6bb614b5e15dda88edeb5b9a6f3a1f2e40a5a1df6df71239ffe"
+    },
+    {
+      "path": "ROUND_DELTA.md",
+      "bytes": 885,
+      "sha256": "a716ab2f3c20702e1a5b4de5023d08af0554983c9b3c45399c7ba637d0e5ffbd"
+    },
+    {
+      "path": "SESSION_STATUS.md",
+      "bytes": 1463,
+      "sha256": "054cd348e367ec917d54989c8924f5b6d2e0ed2817e8ef1538a5d6742fca7d6e"
+    },
+    {
+      "path": "tests/test_probe.py",
+      "bytes": 9312,
+      "sha256": "cf2a99b0ca1dde75195113f7a9a78973fd88ff3bb26e7bf7f022300641dedb50"
+    }
+  ],
+  "reference_files": [
+    {
+      "path": "c2/stage4_sessions/HANDOFF_PROTOCOL.md",
+      "bytes": 3073,
+      "mtime_ns": 1793852798684373400,
+      "sha256": "ec2d2888db8d765afd423797b0e4dccdda0d72bcdfa198b75ee633eb1f750223"
+    },
+    {
+      "path": "c2/stage4_sessions/work/COORDINATION/STATUS.md",
+      "bytes": 3142,
+      "mtime_ns": 1793858100275051100,
+      "sha256": "c3ecf9a7fdefd336da70167edf89b8396bf4fc2935827d22433acb434f1c6f40"
+    },
+    {
+      "path": "c2/stage4_sessions/S07_DDP.md",
+      "bytes": 2857,
+      "mtime_ns": 1793774437831011500,
+      "sha256": "8e3f83bfcaacb28cba3759c0f2454505823e1c25e47b67cacf78075bbcd9dd5b"
+    },
+    {
+      "path": "c2/stage4_sessions/README.md",
+      "bytes": 11829,
+      "mtime_ns": 1793852904394802900,
+      "sha256": "09bdc7da5d0d89ac4421cc4a41c267ff814ae5728ccac34871cf29525a47233f"
+    },
+    {
+      "path": "c2/stage4_sessions/REPORT_TEMPLATE.md",
+      "bytes": 2686,
+      "mtime_ns": 1793774436734798000,
+      "sha256": "590d56bd15177a43d1e4c017c24f8328d4459624f00527cbdc736828fa2e41cd"
+    },
+    {
+      "path": "c2/stage4_sessions/SESSION_STATUS_TEMPLATE.md",
+      "bytes": 719,
+      "mtime_ns": 1793852798823063600,
+      "sha256": "51d45799d9084e56988ead7065d320fad4284ecc1e2ac8bb7b4b548208b6feae"
+    },
+    {
+      "path": "c2/STAGE4_C2_PLAN.md",
+      "bytes": 18670,
+      "mtime_ns": 1793677320000000000,
+      "sha256": "f9326cb8bcce61967f167937a234c2be481b1ca7b283b969d4bba2c95e5fe11d"
+    },
+    {
+      "path": "c2/stage4_sessions/work/COORDINATION/CPU36_POLICY.md",
+      "bytes": 3536,
+      "mtime_ns": 1793802136193425100,
+      "sha256": "295f32fc3454c328f413073b76ccc7228cf84e29bae035d7c8fd736c08d67825"
+    },
+    {
+      "path": "c2/stage4_sessions/work/COORDINATION/CPU36_RUNNER_R7_REVIEW.md",
+      "bytes": 4002,
+      "mtime_ns": 1793846778420198300,
+      "sha256": "b5cbef418e648b6b5b4917b831819034441ebe1b026cd58067439eb6ebb282d0"
+    },
+    {
+      "path": "c2/stage4_sessions/work/S01/revisions/R7_CPU36_RUNNER_20261104T151540967239Z/INTERFACE_FOR_S00_S02.md",
+      "bytes": 6436,
+      "mtime_ns": 1793806352347258000,
+      "sha256": "d2172e0a92307e92fe6a69a09bcc6daf1d7ba44cea7a074fc55a7219f4448f46"
+    },
+    {
+      "path": "c2/stage4_sessions/work/S01/revisions/R7_CPU36_RUNNER_20261104T151540967239Z/candidate/cpu36_contract.py",
+      "bytes": 11171,
+      "mtime_ns": 1793845351263962700,
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d"
+    },
+    {
+      "path": "c2/stage4_sessions/work/S00/evidence/compute_env_job_2026200.json",
+      "bytes": 70482,
+      "mtime_ns": 1793797573572621400,
+      "sha256": "32ac4db400f486e861dde8b23a179fe9900eea02e8be02a65e0681ba0596d43c"
+    },
+    {
+      "path": "c2/stage4_sessions/work/S00/evidence/compute_environment_verified.json",
+      "bytes": 13627,
+      "mtime_ns": 1793798308813931300,
+      "sha256": "f5b57949d6fec24deb584c611ab66197baf838126588ea4ed33a7d2521c7bff0"
+    },
+    {
+      "path": "c2/stage4_sessions/work/S00/CPU36_R7_STARTUP_REPORT.md",
+      "bytes": 10213,
+      "mtime_ns": 1793848075954802600,
+      "sha256": "f72e77d1fc07ee74a5fc0df3a931daa1d00c97f691e603d8e24570bdaaa3e7aa"
+    }
+  ],
+  "self_hash": "EXCLUDED_TO_AVOID_RECURSION",
+  "communication": "NOT_RUN",
+  "global_batch": null,
+  "learning_rate": null,
+  "training_plan": null
+}

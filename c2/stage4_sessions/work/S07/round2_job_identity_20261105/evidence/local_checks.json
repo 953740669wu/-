@@ -1,0 +1,40 @@
+{
+  "captured_utc": "2026-11-05T06:45:01.540652+00:00",
+  "scope": "LOCAL_STDLIB_ONLY_NO_TORCH_OR_REAL_COMMUNICATION",
+  "checks": [
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round2_job_identity_20261105\\tests\\test_job_identity.py"
+      ],
+      "exit_code": 0,
+      "log": "evidence/job_identity_tests.txt"
+    },
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round2_job_identity_20261105\\tests\\test_probe.py"
+      ],
+      "exit_code": 0,
+      "log": "evidence/regression_tests.txt"
+    }
+  ],
+  "unittest_total": 22,
+  "passed": 21,
+  "skipped": 1,
+  "identity_new_methods": 6,
+  "python39_ast": {
+    "status": "PASS_SYNTAX_ONLY",
+    "files": [
+      "candidate/comm_probe.py",
+      "candidate/cpu36_contract.py",
+      "candidate/run_checks.py",
+      "tests/test_job_identity.py",
+      "tests/test_probe.py"
+    ]
+  },
+  "cluster_communication": "NOT_RUN",
+  "cluster_resources_requested": false
+}

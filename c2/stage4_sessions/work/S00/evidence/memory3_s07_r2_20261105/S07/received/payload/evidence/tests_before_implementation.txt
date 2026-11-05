@@ -1,0 +1,270 @@
+test_launcher_rejects_before_workers (__main__.JobIdentityChecks.test_launcher_rejects_before_workers) ... 
+  test_launcher_rejects_before_workers (__main__.JobIdentityChecks.test_launcher_rejects_before_workers) (current=None, configured='current') ... FAIL
+  test_launcher_rejects_before_workers (__main__.JobIdentityChecks.test_launcher_rejects_before_workers) (current='old', configured='current') ... FAIL
+  test_launcher_rejects_before_workers (__main__.JobIdentityChecks.test_launcher_rejects_before_workers) (current='current', configured='old') ... FAIL
+  test_launcher_rejects_before_workers (__main__.JobIdentityChecks.test_launcher_rejects_before_workers) (current='current', configured=None) ... FAIL
+test_matching_job (__main__.JobIdentityChecks.test_matching_job) ... ERROR
+test_missing_current_job (__main__.JobIdentityChecks.test_missing_current_job) ... 
+  test_missing_current_job (__main__.JobIdentityChecks.test_missing_current_job) (current=None) ... ERROR
+  test_missing_current_job (__main__.JobIdentityChecks.test_missing_current_job) (current='') ... ERROR
+  test_missing_current_job (__main__.JobIdentityChecks.test_missing_current_job) (current='   ') ... ERROR
+test_missing_or_old_configured_job (__main__.JobIdentityChecks.test_missing_or_old_configured_job) ... 
+  test_missing_or_old_configured_job (__main__.JobIdentityChecks.test_missing_or_old_configured_job) (configured=None) ... ERROR
+  test_missing_or_old_configured_job (__main__.JobIdentityChecks.test_missing_or_old_configured_job) (configured='') ... ERROR
+  test_missing_or_old_configured_job (__main__.JobIdentityChecks.test_missing_or_old_configured_job) (configured='old') ... ERROR
+  test_missing_or_old_configured_job (__main__.JobIdentityChecks.test_missing_or_old_configured_job) (configured=123) ... ERROR
+test_worker_matching_reaches_framework_gate (__main__.JobIdentityChecks.test_worker_matching_reaches_framework_gate) ... ok
+test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) ... 
+  test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current=None, manifest='current', allocation='current', rank=0) ... ERROR
+  test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current=None, manifest='current', allocation='current', rank=1) ... ERROR
+  test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='old', manifest='current', allocation='current', rank=0) ... ERROR
+  test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='old', manifest='current', allocation='current', rank=1) ... ERROR
+  test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest='old', allocation='current', rank=0) ... ERROR
+  test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest='old', allocation='current', rank=1) ... ERROR
+  test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest='current', allocation='old', rank=0) ... ERROR
+  test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest='current', allocation='old', rank=1) ... ERROR
+  test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest=None, allocation='current', rank=0) ... ERROR
+  test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest=None, allocation='current', rank=1) ... ERROR
+  test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest='current', allocation=None, rank=0) ... ERROR
+  test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest='current', allocation=None, rank=1) ... ERROR
+
+======================================================================
+ERROR: test_matching_job (__main__.JobIdentityChecks.test_matching_job)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 21, in test_matching_job
+    probe.validate_current_job('current')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'validate_current_job'
+
+======================================================================
+ERROR: test_missing_current_job (__main__.JobIdentityChecks.test_missing_current_job) (current=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 29, in test_missing_current_job
+    probe.validate_current_job('current')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'validate_current_job'
+
+======================================================================
+ERROR: test_missing_current_job (__main__.JobIdentityChecks.test_missing_current_job) (current='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 29, in test_missing_current_job
+    probe.validate_current_job('current')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'validate_current_job'
+
+======================================================================
+ERROR: test_missing_current_job (__main__.JobIdentityChecks.test_missing_current_job) (current='   ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 29, in test_missing_current_job
+    probe.validate_current_job('current')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'validate_current_job'
+
+======================================================================
+ERROR: test_missing_or_old_configured_job (__main__.JobIdentityChecks.test_missing_or_old_configured_job) (configured=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 35, in test_missing_or_old_configured_job
+    probe.validate_current_job(configured)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'validate_current_job'
+
+======================================================================
+ERROR: test_missing_or_old_configured_job (__main__.JobIdentityChecks.test_missing_or_old_configured_job) (configured='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 35, in test_missing_or_old_configured_job
+    probe.validate_current_job(configured)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'validate_current_job'
+
+======================================================================
+ERROR: test_missing_or_old_configured_job (__main__.JobIdentityChecks.test_missing_or_old_configured_job) (configured='old')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 35, in test_missing_or_old_configured_job
+    probe.validate_current_job(configured)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'validate_current_job'
+
+======================================================================
+ERROR: test_missing_or_old_configured_job (__main__.JobIdentityChecks.test_missing_or_old_configured_job) (configured=123)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 35, in test_missing_or_old_configured_job
+    probe.validate_current_job(configured)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'validate_current_job'
+
+======================================================================
+ERROR: test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current=None, manifest='current', allocation='current', rank=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 81, in test_worker_rejects_before_cpu_and_framework
+    probe.worker(directory, rank)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\candidate\comm_probe.py", line 158, in worker
+    receipt = spec['allocation']['ranks'][rank]
+              ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'ranks'
+
+======================================================================
+ERROR: test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current=None, manifest='current', allocation='current', rank=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 81, in test_worker_rejects_before_cpu_and_framework
+    probe.worker(directory, rank)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\candidate\comm_probe.py", line 158, in worker
+    receipt = spec['allocation']['ranks'][rank]
+              ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'ranks'
+
+======================================================================
+ERROR: test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='old', manifest='current', allocation='current', rank=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 81, in test_worker_rejects_before_cpu_and_framework
+    probe.worker(directory, rank)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\candidate\comm_probe.py", line 158, in worker
+    receipt = spec['allocation']['ranks'][rank]
+              ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'ranks'
+
+======================================================================
+ERROR: test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='old', manifest='current', allocation='current', rank=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 81, in test_worker_rejects_before_cpu_and_framework
+    probe.worker(directory, rank)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\candidate\comm_probe.py", line 158, in worker
+    receipt = spec['allocation']['ranks'][rank]
+              ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'ranks'
+
+======================================================================
+ERROR: test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest='old', allocation='current', rank=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 81, in test_worker_rejects_before_cpu_and_framework
+    probe.worker(directory, rank)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\candidate\comm_probe.py", line 158, in worker
+    receipt = spec['allocation']['ranks'][rank]
+              ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'ranks'
+
+======================================================================
+ERROR: test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest='old', allocation='current', rank=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 81, in test_worker_rejects_before_cpu_and_framework
+    probe.worker(directory, rank)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\candidate\comm_probe.py", line 158, in worker
+    receipt = spec['allocation']['ranks'][rank]
+              ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'ranks'
+
+======================================================================
+ERROR: test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest='current', allocation='old', rank=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 81, in test_worker_rejects_before_cpu_and_framework
+    probe.worker(directory, rank)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\candidate\comm_probe.py", line 158, in worker
+    receipt = spec['allocation']['ranks'][rank]
+              ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'ranks'
+
+======================================================================
+ERROR: test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest='current', allocation='old', rank=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 81, in test_worker_rejects_before_cpu_and_framework
+    probe.worker(directory, rank)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\candidate\comm_probe.py", line 158, in worker
+    receipt = spec['allocation']['ranks'][rank]
+              ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'ranks'
+
+======================================================================
+ERROR: test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest=None, allocation='current', rank=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 81, in test_worker_rejects_before_cpu_and_framework
+    probe.worker(directory, rank)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\candidate\comm_probe.py", line 158, in worker
+    receipt = spec['allocation']['ranks'][rank]
+              ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'ranks'
+
+======================================================================
+ERROR: test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest=None, allocation='current', rank=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 81, in test_worker_rejects_before_cpu_and_framework
+    probe.worker(directory, rank)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\candidate\comm_probe.py", line 158, in worker
+    receipt = spec['allocation']['ranks'][rank]
+              ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'ranks'
+
+======================================================================
+ERROR: test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest='current', allocation=None, rank=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 81, in test_worker_rejects_before_cpu_and_framework
+    probe.worker(directory, rank)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\candidate\comm_probe.py", line 158, in worker
+    receipt = spec['allocation']['ranks'][rank]
+              ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'ranks'
+
+======================================================================
+ERROR: test_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) (current='current', manifest='current', allocation=None, rank=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 81, in test_worker_rejects_before_cpu_and_framework
+    probe.worker(directory, rank)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\candidate\comm_probe.py", line 158, in worker
+    receipt = spec['allocation']['ranks'][rank]
+              ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+KeyError: 'ranks'
+
+======================================================================
+FAIL: test_launcher_rejects_before_workers (__main__.JobIdentityChecks.test_launcher_rejects_before_workers) (current=None, configured='current')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 58, in test_launcher_rejects_before_workers
+    self.assertIn('CCS_JOB_ID', summary['error'])
+AssertionError: 'CCS_JOB_ID' not found in "KeyError: 'scheduler_evidence'"
+
+======================================================================
+FAIL: test_launcher_rejects_before_workers (__main__.JobIdentityChecks.test_launcher_rejects_before_workers) (current='old', configured='current')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 58, in test_launcher_rejects_before_workers
+    self.assertIn('CCS_JOB_ID', summary['error'])
+AssertionError: 'CCS_JOB_ID' not found in "KeyError: 'scheduler_evidence'"
+
+======================================================================
+FAIL: test_launcher_rejects_before_workers (__main__.JobIdentityChecks.test_launcher_rejects_before_workers) (current='current', configured='old')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 58, in test_launcher_rejects_before_workers
+    self.assertIn('CCS_JOB_ID', summary['error'])
+AssertionError: 'CCS_JOB_ID' not found in "KeyError: 'scheduler_evidence'"
+
+======================================================================
+FAIL: test_launcher_rejects_before_workers (__main__.JobIdentityChecks.test_launcher_rejects_before_workers) (current='current', configured=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round2_job_identity_20261105\tests\test_job_identity.py", line 58, in test_launcher_rejects_before_workers
+    self.assertIn('CCS_JOB_ID', summary['error'])
+AssertionError: 'CCS_JOB_ID' not found in "KeyError: 'scheduler_evidence'"
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.150s
+
+FAILED (failures=4, errors=20)
