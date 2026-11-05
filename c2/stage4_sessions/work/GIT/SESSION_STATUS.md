@@ -1,12 +1,24 @@
 # GIT简短状态
 
-- 更新/轮次：2026-11-05T12:31:08+08:00；S00_RESULTS_COMMIT_20261105。
-- 路径基准：E:\eitfm_c2_stages2-4_2026-11-03；共用目录main，唯一Git操作者为本窗口。
-- 当前目标与进度：实测证据已本地提交，commit c73b64ebc39d43ffa98c6dcec804ad2d2297f941；未配置远端，未推送GitCode。
-- 本轮入库：最新实测TSV的114项及TSV自身共115文件；未夹带交接约定/其他任务变化。
-- 结论边界：S02数值FAIL（95/1063）；S03有限Linux C 25/25及独立构建PASS；真实HBM/共享部署/训练内存/性能未接受。
-- 核验增量：114项SHA/大小及115份Git对象原始字节一致；提交后范围与清单一致，暂存区空；无新增模型/C/集群执行。
-- 清单：../COORDINATION/GIT_SUBMIT_S00_RESULTS_20261105.md及同名TSV；提交时清单已由总协调同步更新，STATUS移至交接批。
-- 本轮修改：仅Git元数据及本目录SESSION_STATUS.md、ROUND_DELTA.md；作者代码/报告/证据均只读。
-- 未提交：交接协议、总表/历史归档、各任务状态、GIT_USAGE.md等其他变化；本目录两份更新留待交接约定批次重新核验。
-- 下一步：本批已完成本地提交；交接约定另批处理；GitCode远端地址及推送条件明确后再推送，不猜测账户或仓库。
+- 更新/轮次：2026-11-05T16:28:24+08:00；MEMORY3_S06R3_ARCHIVE_20261105；本窗口维护。
+- 项目/分支：E:\eitfm_c2_stages2-4_2026-11-03；main；本窗口唯一操作暂存区，未切分支或覆盖作者文件。
+- 目标与进度：总协调已核验归档范围分四批全部本地完成；原HEAD 51d4089保留，无重复提交。
+- 提交 S00：f1267e75762efce3d047bd0cdde40bc47a9628f5；448文件，3632223字节。
+- 提交 S06：75c46fbb767b343e6b7faa029a5b1ae9cad6c060；95文件，437020字节。
+- 提交 S07：62040d2acbc8a003b93c5a6054ee52931965c8e1；87文件，399395字节。
+- 提交 COORDINATION：e4a864567f549a9c9ed9cf41db8204e0a67192fd；32文件，326962字节。
+- 核验：661项清单SHA/大小全部匹配；加TSV共662份Git对象原始字节与每批/总差异范围一致；认证材料扫描无匹配，暂存区空；归档文件提交后漂移0项。
+- 边界：内存仅固定case首步DDR诊断；S06 R3仅本地通过；S07因S00包装器启动失败，候选/通信未运行；旧R5数值FAIL、UBSan阻断证据保留。未接受稳态、真实HBM、正式性能/生产。
+- 本轮验证未运行模型/C/UBSan/通信/集群作业；未执行会刷新作者证据的审计入口。
+- 清单：c2/stage4_sessions/work/COORDINATION/GIT_SUBMIT_MEMORY3_S06R3_20261105.md及同名TSV；TSV随协调批提交。
+- 遗漏：本轮清单遗漏0；后续S00新执行层/S06新实测/S02五步新代码不入本批。本目录SESSION_STATUS.md、ROUND_DELTA.md结束更新留下一批。
+- 剩余未提交明细（只列路径和状态）：E:/Codex/home/visualizations/2026/11/05/01a1a9d7-f74b-7e30-b951-571b11c51ea1/memory3_s06r3_commits/remaining_files.json。
+- 剩余未提交分组（具体逐文件路径见上方remaining_files.json）：
+  - c2/stage4_sessions/work/GIT/：2项。
+  - c2/stage4_sessions/work/S00/：3项。
+  - c2/stage4_sessions/work/S02/：17项。
+  - c2/stage4_sessions/work/S06/：26项。
+  - c2/stage4_sessions/work/S07/：16项。
+- 重点清单外路径：S00/evidence/s06r3_s07wrapper_20261105/；S02/round7_seq5_20261105T082315Z/；S06、S07根目录下未列入清单的旧准备/源码/测试/证据，均保持原位。
+- 远端/活动：未配置remote，未推送；无本Git会话活动进程/作业，其它任务远端job本轮未探测。
+- 下一步：只按新审核清单提交后续产物；待具体GitCode地址和推送条件明确后再推送，不猜测账户或仓库。
