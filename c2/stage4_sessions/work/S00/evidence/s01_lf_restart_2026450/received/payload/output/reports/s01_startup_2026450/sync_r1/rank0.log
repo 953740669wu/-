@@ -1,0 +1,53 @@
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+{
+ "gpu": "aarch64 cpu, 1 threads",
+ "device": "cpu",
+ "torch": "2.7.1+cpu",
+ "cases": [
+  "s0322p0",
+  "s0322p1"
+ ],
+ "config": {
+  "amp": "fp32",
+  "batch": 32,
+  "channels_last": false,
+  "compile": false,
+  "reps": 1,
+  "kml_conv": false,
+  "kml_blas": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+  "ckpt": false,
+  "kml_linear": true,
+  "linear_dtype": "fp32"
+ },
+ "params_M": {
+  "encoder": 37.995777,
+  "decoder": 29.416449
+ },
+ "16_adjacent": {
+  "pretrain_step_s_B32": 7.777790464926511,
+  "pretrain_frames_per_s": 4.114279003053904,
+  "decoder_step_s_B32": 35.51346624828875,
+  "decoder_frames_per_s": 0.9010666482476052,
+  "peak_mem_GB": 7.651592
+ },
+ "run": {
+  "run_id": "s01_startup_2026450",
+  "host": "cn21340",
+  "input_protocol": "LEGACY_TIMING_ONLY",
+  "round": 1,
+  "rank": 0,
+  "pid": 251527,
+  "started": 1793801034.038603,
+  "finished": 1793801180.3675277,
+  "omp_threads": 38,
+  "affinity": [
+   0
+  ],
+  "source_sha256": {
+   "s4_models.py": "512dc202e4c0d60363b57317ed612694b80a4d5d3467740ed582bcf600bf1d92",
+   "runner.py": "692113888fab4ac23c0188f39731ceea0f0fec1a8ef09f25cee872515ba7dd0b",
+   "kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+  }
+ }
+}

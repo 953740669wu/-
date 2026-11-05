@@ -1,0 +1,28 @@
+--- baseline/c2/opt/run_node16.sh
++++ candidate/run_node16_isolated.sh
+@@ -8,10 +8,10 @@
+ # HBM=1: memory policy d,16+d and LD_PRELOAD hbm_alloc (large torch buffers in the domain's HBM node 16+d).
+ # NDOM=n: only the first n domains (n = 4 is one die, which already shows the full bandwidth contention).
+ # argv: tag, then extra env assignments (e.g. KML_LINEAR=1 LINEAR_DTYPE=bf16).
+-H=/home/share/songzhenlong/eitfm; O=$H/opt/s4; K=/opt/HPCKit/kml-lib/sme/kblas/multi; B=/opt/HPCKit/bisheng-lib
++H=/home/share/songzhenlong/eitfm; S00_RUN=${S00_RUN:?set an absolute unique S00 run directory}; O=$S00_RUN/output; S00_CODE=$S00_RUN/baseline; S00_LIB=$S00_RUN/lib; K=/opt/HPCKit/kml-lib/sme/kblas/multi; B=/opt/HPCKit/bisheng-lib
+ export OMP_PLACES=cores OMP_PROC_BIND=close OMP_NUM_THREADS=38 KML_BLAS_LIB=$K/libkblas.so
+ export LD_LIBRARY_PATH=$K:/opt/HPCKit/kml-lib:$B${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+-export PYTHONPATH=$H/sw/torch_kml:$H/opt/code LD_PRELOAD=$H/sw/kml_shim/libkml_sgemm_shim.so
++export PYTHONPATH=$H/sw/torch_kml:$S00_CODE LD_PRELOAD=$S00_LIB/libkml_sgemm_shim.so
+ tag=${1:-node16}; shift; ROUNDS=${ROUNDS:-3}; MEMPOL=${MEMPOL:-membind}
+ nodes=$(for d in /sys/devices/system/node/node*; do [ -n "$(cat $d/cpulist)" ] && basename $d | tr -d node; done | sort -n |
+        head -n ${NDOM:-99})
+@@ -26,10 +26,10 @@
+            grep -vxF -f <(echo $busy | tr ' ' '\n' | grep .) | paste -sd,)
+     [ -z "$busy" ] && cpus=$(cat /sys/devices/system/node/node$d/cpulist)
+     mem=$d; hbm=()
+-    [ "${HBM:-0}" = 1 ] && { mem=$d,$((16 + d)); hbm=(HBM_NODE=$((16 + d)) HBM_STATS=1 LD_PRELOAD=$H/sw/hbm_alloc/libhbm_alloc.so:$LD_PRELOAD); }
++    [ "${HBM:-0}" = 1 ] && { mem=$d,$((16 + d)); hbm=(HBM_NODE=$((16 + d)) HBM_STATS=1 LD_PRELOAD=$S00_LIB/libhbm_alloc.so:$LD_PRELOAD); }
+     env SYNC_DIR=$S SYNC_N=$(echo $nodes | wc -w) TIMING_OUT=$tag/r${r}_d$d.json REPS=${REPS:-5} SAMPLING=0 GN=0 "$@" "${hbm[@]}" \
+       OMP_NUM_THREADS=$(echo $cpus | tr ',' '\n' | awk -F- '{n += NF == 2 ? $2 - $1 + 1 : 1} END {print n}') \
+-      timeout 5400 numactl --physcpubind=$cpus --$MEMPOL=$mem python3 $H/opt/code/s4_models.py $O s0322p0,s0322p1 \
++      timeout 5400 numactl --physcpubind=$cpus --$MEMPOL=$mem python3 $S00_CODE/s4_models.py $O s0322p0,s0322p1 \
+       > $O/reports/$tag/r${r}_d$d.log 2>&1 &
+   done
+   wait; echo "round $r wall $(( $(date +%s) - t0 )) s"; grep -l -E 'Killed|MemoryError|Traceback' $O/reports/$tag/r${r}_d*.log 2>/dev/null | sed 's/^/  failed: /'

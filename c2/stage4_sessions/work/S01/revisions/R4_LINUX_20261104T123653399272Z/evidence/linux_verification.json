@@ -1,0 +1,202 @@
+{
+  "verified_utc": "2026-11-04T12:40:58.858292+00:00",
+  "status": "LINUX_PROTOCOL_PASS_REAL_MODEL_PENDING",
+  "remote_context": {
+    "started_utc": "2026-11-04T12:38:26.884656+00:00",
+    "host": "login10",
+    "platform": "Linux-5.10.0-285.5.v2403.ky10p.aarch64-aarch64-with-glibc2.34",
+    "python": "/usr/bin/python3",
+    "python_version": "3.9.9 (main, Jul 29 2025, 11:26:21) \n[GCC 10.3.1]",
+    "account": "dengqingtian",
+    "root": "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z",
+    "scope": "SHORT_STDLIB_PROTOCOL_ONLY",
+    "torch_imported": false,
+    "model_started": false,
+    "hbm_started": false,
+    "jobs_submitted": 0,
+    "command": [
+      "bash",
+      "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z/linux_payload/run_linux_checks.sh"
+    ],
+    "exit_code": 0,
+    "finished_utc": "2026-11-04T12:38:31.535134+00:00"
+  },
+  "returned_archive_sha256": "70eaa43ca35c5714e04618fffb2ed53732986ea4e509e021a50048f1fc2f4eb4",
+  "returned_files_verified": 199,
+  "local_directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\linux_r4_received",
+  "protocol_result": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\linux_r4_received\\linux_payload\\evidence\\LINUX_PROTOCOL_20261104T123826969145Z\\RESULT.json",
+  "linux_process_tests": 4,
+  "bash_syntax_checks": 3,
+  "synthetic_scenarios": [
+    {
+      "mode": "complete",
+      "status": "PASS",
+      "cli_exit": 0,
+      "processes": [
+        {
+          "pid": 2089103,
+          "exit_code": 0,
+          "timed_out": false
+        },
+        {
+          "pid": 2089104,
+          "exit_code": 0,
+          "timed_out": false
+        },
+        {
+          "pid": 2089108,
+          "exit_code": 0,
+          "timed_out": false
+        },
+        {
+          "pid": 2089109,
+          "exit_code": 0,
+          "timed_out": false
+        },
+        {
+          "pid": 2089122,
+          "exit_code": 0,
+          "timed_out": false
+        },
+        {
+          "pid": 2089123,
+          "exit_code": 0,
+          "timed_out": false
+        }
+      ],
+      "local_directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\linux_r4_received\\linux_payload\\evidence\\SYNTHETIC_20261104T123828276345Z\\reports\\complete"
+    },
+    {
+      "mode": "failed_rank",
+      "status": "FAIL",
+      "cli_exit": 1,
+      "processes": [
+        {
+          "pid": 2089200,
+          "exit_code": -15,
+          "timed_out": false
+        },
+        {
+          "pid": 2089201,
+          "exit_code": 7,
+          "timed_out": false
+        }
+      ],
+      "local_directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\linux_r4_received\\linux_payload\\evidence\\SYNTHETIC_20261104T123828276345Z\\reports\\failed_rank"
+    },
+    {
+      "mode": "timeout",
+      "status": "FAIL",
+      "cli_exit": 1,
+      "processes": [
+        {
+          "pid": 2089203,
+          "exit_code": -15,
+          "timed_out": true
+        },
+        {
+          "pid": 2089204,
+          "exit_code": -15,
+          "timed_out": true
+        }
+      ],
+      "local_directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\linux_r4_received\\linux_payload\\evidence\\SYNTHETIC_20261104T123828276345Z\\reports\\timeout"
+    },
+    {
+      "mode": "missing_json",
+      "status": "FAIL",
+      "cli_exit": 1,
+      "processes": [
+        {
+          "pid": 2089320,
+          "exit_code": 0,
+          "timed_out": false
+        },
+        {
+          "pid": 2089322,
+          "exit_code": 0,
+          "timed_out": false
+        }
+      ],
+      "local_directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\linux_r4_received\\linux_payload\\evidence\\SYNTHETIC_20261104T123828276345Z\\reports\\missing_json"
+    },
+    {
+      "mode": "corrupt_json",
+      "status": "FAIL",
+      "cli_exit": 1,
+      "processes": [
+        {
+          "pid": 2089406,
+          "exit_code": 0,
+          "timed_out": false
+        },
+        {
+          "pid": 2089407,
+          "exit_code": 0,
+          "timed_out": false
+        }
+      ],
+      "local_directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\linux_r4_received\\linux_payload\\evidence\\SYNTHETIC_20261104T123828276345Z\\reports\\corrupt_json"
+    },
+    {
+      "mode": "stale",
+      "status": "FAIL",
+      "cli_exit": 1,
+      "processes": [
+        {
+          "pid": 2089410,
+          "exit_code": 0,
+          "timed_out": false
+        },
+        {
+          "pid": 2089411,
+          "exit_code": 0,
+          "timed_out": false
+        }
+      ],
+      "local_directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\linux_r4_received\\linux_payload\\evidence\\SYNTHETIC_20261104T123828276345Z\\reports\\stale"
+    },
+    {
+      "mode": "partial",
+      "status": "FAIL",
+      "cli_exit": 1,
+      "processes": [
+        {
+          "pid": 2089449,
+          "exit_code": 0,
+          "timed_out": false
+        },
+        {
+          "pid": 2089450,
+          "exit_code": 0,
+          "timed_out": false
+        }
+      ],
+      "local_directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\linux_r4_received\\linux_payload\\evidence\\SYNTHETIC_20261104T123828276345Z\\reports\\partial"
+    },
+    {
+      "mode": "config_mismatch",
+      "status": "FAIL",
+      "cli_exit": 1,
+      "processes": [
+        {
+          "pid": 2089453,
+          "exit_code": 0,
+          "timed_out": false
+        },
+        {
+          "pid": 2089454,
+          "exit_code": 0,
+          "timed_out": false
+        }
+      ],
+      "local_directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\linux_r4_received\\linux_payload\\evidence\\SYNTHETIC_20261104T123828276345Z\\reports\\config_mismatch"
+    }
+  ],
+  "accepted_r2_and_previous_1607_unchanged": true,
+  "original_108_unchanged": true,
+  "transport_recovery": "Saved complete transport reused locally; shorter destination avoids Windows path limit; no second login or remote rerun",
+  "model_startup": "NOT_RUN_NO_JOB_OR_VERIFIED_TORCH_NUMPY",
+  "compute_jobs_submitted": 0,
+  "compute_node_hours": 0
+}

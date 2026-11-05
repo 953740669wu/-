@@ -1,0 +1,50 @@
+{
+ "config": {
+  "amp": "fp32",
+  "batch": 32,
+  "channels_last": false,
+  "compile": false,
+  "reps": 5,
+  "kml_conv": false,
+  "kml_blas": "SYNTHETIC_LIBRARY",
+  "ckpt": false,
+  "kml_linear": true,
+  "linear_dtype": "fp32"
+ },
+ "device": "cpu",
+ "cases": [
+  "SYNTHETIC_CASE_A",
+  "SYNTHETIC_CASE_B"
+ ],
+ "torch": "SYNTHETIC_NO_TORCH",
+ "16_adjacent": {
+  "peak_mem_GB": 1,
+  "pretrain_frames_per_s": 16,
+  "pretrain_step_s_B32": 2.0,
+  "decoder_frames_per_s": 8,
+  "decoder_step_s_B32": 4.0
+ },
+ "32_skip4": {
+  "peak_mem_GB": 1,
+  "pretrain_frames_per_s": 16,
+  "pretrain_step_s_B32": 2.0,
+  "decoder_frames_per_s": 8,
+  "decoder_step_s_B32": 4.0
+ },
+ "run": {
+  "run_id": "complete",
+  "host": "DESKTOP-54BJCD6",
+  "round": 1,
+  "rank": 1,
+  "pid": 40328,
+  "started": 1793777893.877679,
+  "finished": 1793777893.9019396,
+  "omp_threads": 1,
+  "affinity": null,
+  "source_sha256": {
+   "s4_models.py": "bcbef12165e730ef3f9b1116ae2dc4323808ca528b2a639f870cb7b77d814783",
+   "runner.py": "d821aeac2b56f59f5e78dbe9026794d7b352dc338a9891fb7afb56af8e2e980f",
+   "kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+  }
+ }
+}

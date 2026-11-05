@@ -1,0 +1,101 @@
+{
+ "run_id": "s01_startup_2026450",
+ "host": "cn21340",
+ "domains": [
+  0
+ ],
+ "rounds": 3,
+ "belts": [
+  "16_adjacent"
+ ],
+ "parts": [
+  "pre",
+  "dec"
+ ],
+ "config": {
+  "amp": "fp32",
+  "batch": 32,
+  "channels_last": false,
+  "compile": false,
+  "reps": 1,
+  "kml_conv": false,
+  "kml_blas": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+  "ckpt": false,
+  "kml_linear": true,
+  "linear_dtype": "fp32"
+ },
+ "device": "cpu",
+ "cases": [
+  "s0322p0",
+  "s0322p1"
+ ],
+ "source_sha256": {
+  "s4_models.py": "512dc202e4c0d60363b57317ed612694b80a4d5d3467740ed582bcf600bf1d92",
+  "runner.py": "692113888fab4ac23c0188f39731ceea0f0fec1a8ef09f25cee872515ba7dd0b",
+  "kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+ },
+ "input_protocol": "LEGACY_TIMING_ONLY",
+ "diagnostics": {
+  "sample_foreign": false,
+  "sample_foreign_reason": "disabled: sample_foreign.py source unavailable",
+  "cores_per_domain": 38,
+  "python_faulthandler": true
+ },
+ "frozen_files": {
+  "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T140206Z_LF_RESTART/payload/output/cases/s0322p0/frames.npz": "4bb9cfaffa8f7d464d1efd80a45e98edd2cf990179b923c160573078f97bfdad",
+  "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T140206Z_LF_RESTART/payload/output/cases/s0322p1/frames.npz": "a5db12595bb7486a9a86e4f9bce9a0680876d2a732bc5f05d361c7b9657737c0",
+  "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T140206Z_LF_RESTART/payload/lib/libkml_sgemm_shim.so": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73",
+  "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c",
+  "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T140206Z_LF_RESTART/payload/candidate/run_node16.sh": "aaac8557b00abbf68a0e296e7119c0150c3fbfd467c42d132035ed69f929fd5f",
+  "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T140206Z_LF_RESTART/payload/candidate/legacy_inputs.json": "24df1ad655fa3263efaf1ec8a721074fdfbae15fcb1d054b30d88bf5b9734835"
+ },
+ "cpus": {
+  "1": {
+   "0": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37
+   ]
+  }
+ },
+ "memory_policy": "membind",
+ "hbm": false,
+ "skip_busy": "0",
+ "run_timeout": 180.0,
+ "sync_timeout": 120.0
+}

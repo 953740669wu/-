@@ -1,0 +1,21 @@
+{
+  "scope": "Execute only extracted set-options line; no model, source, job or network",
+  "checks": [
+    {
+      "file": "snapshot/pilot_s01_startup.sh",
+      "literal_option_line": "b'set -euo pipefail\\r'",
+      "igncr_disabled": true,
+      "exit_code": 0,
+      "stdout": "WRAPPER_OPTIONS_OK\n",
+      "stderr": ""
+    },
+    {
+      "file": "proposed/pilot_s01_startup.sh",
+      "literal_option_line": "b'set -euo pipefail'",
+      "igncr_disabled": true,
+      "exit_code": 0,
+      "stdout": "WRAPPER_OPTIONS_OK\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "started_utc": "2026-11-04T09:30:24.678394+00:00",
+  "ended_utc": "2026-11-04T09:30:26.298498+00:00",
+  "checks": [
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "c2\\stage4_sessions\\work\\S02\\tests\\test_contracts.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_candidate_has_single_update_outside_micro_loop (__main__.Contracts.test_candidate_has_single_update_outside_micro_loop) ... ok\ntest_empty_local_mask_and_uneven_last_chunk (__main__.Contracts.test_empty_local_mask_and_uneven_last_chunk) ... ok\ntest_masked_micro_means_are_not_full_mean (__main__.Contracts.test_masked_micro_means_are_not_full_mean) ... ok\ntest_model_copy_is_byte_identical (__main__.Contracts.test_model_copy_is_byte_identical) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.003s\n\nOK\n"
+    },
+    {
+      "command": [
+        "E:\\Codex\\home\\cache\\phase4-speed-venv\\Scripts\\python.exe",
+        "-B",
+        "c2\\stage4_sessions\\work\\S02\\tests\\test_paired_inputs.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_belt_specific_targets_and_reference_expansion (__main__.PairedInputs.test_belt_specific_targets_and_reference_expansion) ... ok\ntest_changed_same_shape_images_rejected_by_frozen_hash (__main__.PairedInputs.test_changed_same_shape_images_rejected_by_frozen_hash) ... ok\ntest_cross_belt_source_rejected (__main__.PairedInputs.test_cross_belt_source_rejected) ... ok\ntest_duplicate_source_rejected (__main__.PairedInputs.test_duplicate_source_rejected) ... ok\ntest_protocol_order_mismatch_rejected (__main__.PairedInputs.test_protocol_order_mismatch_rejected) ... ok\ntest_reference_index_out_of_bounds_rejected (__main__.PairedInputs.test_reference_index_out_of_bounds_rejected) ... ok\ntest_sidecar_frame_order_mismatch_rejected (__main__.PairedInputs.test_sidecar_frame_order_mismatch_rejected) ... ok\ntest_source_order_and_frame_indices_are_preserved (__main__.PairedInputs.test_source_order_and_frame_indices_are_preserved) ... ok\ntest_zero_denominator_and_nonfinite_rejected (__main__.PairedInputs.test_zero_denominator_and_nonfinite_rejected) ... ok\ntest_zero_scale_rejected (__main__.PairedInputs.test_zero_scale_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.636s\n\nOK\n"
+    },
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "c2\\stage4_sessions\\work\\S02\\tests\\check_equivalence.py",
+        "--belt",
+        "32_skip4",
+        "--part",
+        "pre",
+        "--microbatch",
+        "16",
+        "--checkpoint",
+        "--output",
+        "c2\\stage4_sessions\\work\\S02\\evidence\\numerical_not_run.json"
+      ],
+      "exit_code": 2,
+      "stdout": "{\n  \"status\": \"NOT_RUN\",\n  \"input_protocol\": \"S02_PAIRED_BELT_V1\",\n  \"config\": {\n    \"belt\": \"32_skip4\",\n    \"part\": \"pre\",\n    \"microbatch\": 16,\n    \"checkpoint\": true,\n    \"history\": \"fresh\",\n    \"threads\": 4,\n    \"kml\": false,\n    \"output\": \"c2\\\\stage4_sessions\\\\work\\\\S02\\\\evidence\\\\numerical_not_run.json\"\n  },\n  \"reason\": \"Missing torch, numpy; no model/autograd/AdamW executed.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "E:\\Codex\\home\\cache\\phase4-speed-venv\\Scripts\\python.exe",
+        "-B",
+        "c2\\stage4_sessions\\work\\S02\\tests\\check_equivalence.py",
+        "--belt",
+        "16_adjacent",
+        "--part",
+        "dec",
+        "--microbatch",
+        "32",
+        "--output",
+        "c2\\stage4_sessions\\work\\S02\\evidence\\numerical_numpy_env_not_run.json"
+      ],
+      "exit_code": 2,
+      "stdout": "{\n  \"status\": \"NOT_RUN\",\n  \"input_protocol\": \"S02_PAIRED_BELT_V1\",\n  \"config\": {\n    \"belt\": \"16_adjacent\",\n    \"part\": \"dec\",\n    \"microbatch\": 32,\n    \"checkpoint\": false,\n    \"history\": \"fresh\",\n    \"threads\": 4,\n    \"kml\": false,\n    \"output\": \"c2\\\\stage4_sessions\\\\work\\\\S02\\\\evidence\\\\numerical_numpy_env_not_run.json\"\n  },\n  \"reason\": \"Missing torch; no model/autograd/AdamW executed.\"\n}\n",
+      "stderr": ""
+    }
+  ],
+  "numpy_environment": {
+    "python": "E:\\Codex\\home\\cache\\phase4-speed-venv\\Scripts\\python.exe",
+    "numpy": "2.2.6",
+    "numpy_file": "E:\\Codex\\home\\cache\\phase4-speed-venv\\Lib\\site-packages\\numpy\\__init__.py"
+  },
+  "python_syntax": "PASS",
+  "numerical_status": "NOT_RUN",
+  "input_protocol": "S02_PAIRED_BELT_V1"
+}

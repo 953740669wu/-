@@ -1,0 +1,93 @@
+test_atomic_result_publication (__main__.RunnerChecks.test_atomic_result_publication) ... ok
+test_barrier_counts_expected_ranks_only (__main__.RunnerChecks.test_barrier_counts_expected_ranks_only) ... ok
+test_barrier_success_stale_peer_abort_timeout (__main__.RunnerChecks.test_barrier_success_stale_peer_abort_timeout) ... ok
+test_complete_three_rounds_and_metrics (__main__.RunnerChecks.test_complete_three_rounds_and_metrics) ... ok
+test_config_mismatch (__main__.RunnerChecks.test_config_mismatch) ... ok
+test_corrupt_or_duplicate_key_json (__main__.RunnerChecks.test_corrupt_or_duplicate_key_json) ... ok
+test_extra_rank_or_round (__main__.RunnerChecks.test_extra_rank_or_round) ... ok
+test_failed_exit_despite_valid_result (__main__.RunnerChecks.test_failed_exit_despite_valid_result) ... ok
+test_less_than_three_rounds (__main__.RunnerChecks.test_less_than_three_rounds) ... ok
+test_missing_rank (__main__.RunnerChecks.test_missing_rank) ... ok
+test_missing_status (__main__.RunnerChecks.test_missing_status) ... ok
+test_model_compute_ast_is_unchanged (__main__.RunnerChecks.test_model_compute_ast_is_unchanged) ... ok
+test_nonfinite_zero_negative_or_boolean_measurement (__main__.RunnerChecks.test_nonfinite_zero_negative_or_boolean_measurement) ... 
+  test_nonfinite_zero_negative_or_boolean_measurement (__main__.RunnerChecks.test_nonfinite_zero_negative_or_boolean_measurement) (value=nan) ... ERROR
+  test_nonfinite_zero_negative_or_boolean_measurement (__main__.RunnerChecks.test_nonfinite_zero_negative_or_boolean_measurement) (value=inf) ... ERROR
+test_partial_belt_or_part (__main__.RunnerChecks.test_partial_belt_or_part) ... ok
+test_rate_step_inconsistency (__main__.RunnerChecks.test_rate_step_inconsistency) ... ok
+test_real_subprocess_failure_cancels_only_owned_peer (__main__.RunnerChecks.test_real_subprocess_failure_cancels_only_owned_peer) ... ok
+test_real_subprocess_timeout_and_success (__main__.RunnerChecks.test_real_subprocess_timeout_and_success) ... ok
+test_requested_belt_subset_is_explicit (__main__.RunnerChecks.test_requested_belt_subset_is_explicit) ... ok
+test_spawn_error_is_recorded_and_peer_stopped (__main__.RunnerChecks.test_spawn_error_is_recorded_and_peer_stopped) ... ok
+test_stale_mtime (__main__.RunnerChecks.test_stale_mtime) ... ok
+test_stale_timestamp (__main__.RunnerChecks.test_stale_timestamp) ... ok
+test_timeout_despite_valid_result (__main__.RunnerChecks.test_timeout_despite_valid_result) ... ok
+test_unstable_three_rounds (__main__.RunnerChecks.test_unstable_three_rounds) ... ok
+test_wrong_input_or_device_or_runtime (__main__.RunnerChecks.test_wrong_input_or_device_or_runtime) ... ok
+test_wrong_run_host_round_rank_or_pid (__main__.RunnerChecks.test_wrong_run_host_round_rank_or_pid) ... ok
+test_zero_cores_and_affinity (__main__.RunnerChecks.test_zero_cores_and_affinity) ... ok
+
+======================================================================
+ERROR: test_nonfinite_zero_negative_or_boolean_measurement (__main__.RunnerChecks.test_nonfinite_zero_negative_or_boolean_measurement) (value=nan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\tests\test_runner.py", line 125, in test_nonfinite_zero_negative_or_boolean_measurement
+    self.rejected()
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\tests\test_runner.py", line 54, in rejected
+    self.write_fixture()
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\tests\test_runner.py", line 48, in write_fixture
+    runner.atomic_json(self.root / f'r{r}_d{d}.json', data)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\candidate\runner.py", line 21, in atomic_json
+    content = json.dumps(data, indent=1, allow_nan=False) + '\n'
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 398, in _iterencode_dict
+    yield _floatstr(value)
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 240, in floatstr
+    raise ValueError(
+ValueError: Out of range float values are not JSON compliant: nan
+
+======================================================================
+ERROR: test_nonfinite_zero_negative_or_boolean_measurement (__main__.RunnerChecks.test_nonfinite_zero_negative_or_boolean_measurement) (value=inf)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\tests\test_runner.py", line 125, in test_nonfinite_zero_negative_or_boolean_measurement
+    self.rejected()
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\tests\test_runner.py", line 54, in rejected
+    self.write_fixture()
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\tests\test_runner.py", line 48, in write_fixture
+    runner.atomic_json(self.root / f'r{r}_d{d}.json', data)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\candidate\runner.py", line 21, in atomic_json
+    content = json.dumps(data, indent=1, allow_nan=False) + '\n'
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 398, in _iterencode_dict
+    yield _floatstr(value)
+          ^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 240, in floatstr
+    raise ValueError(
+ValueError: Out of range float values are not JSON compliant: inf
+
+----------------------------------------------------------------------
+Ran 26 tests in 1.474s
+
+FAILED (errors=2)

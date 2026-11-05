@@ -1,0 +1,239 @@
+Read-only terminal transcript, already collected before the approval rejection.
+ANSI controls removed; terminal line wrapping remains. Not a byte-exact remote file copy.
+
+unset HISTFILE; set +o history
+pwd
+id
+date -u '+%Y-%m-%dT%H:%M:%SZ'
+ls -ld /home/share/songzhenlong/eitfm /home/share/dengqingtian /home/share/dengqingtian/eitfm 2>/dev/null
+ls -ld /home/share/songzhenlong/eitfm/opt /home/share/songzhenlong/eitfm/[dengqingtian@login10 ~]$ export PYTHONDONTWRITEBYTECODE=1
+[dengqingtian@login10 ~]$ whoami
+dengqingtian
+corpus_shape_20261102 2>/dev/null
+[dengqingtian@login10 ~]$ hostname
+login10
+[dengqingtian@login10 ~]$ pwd
+/home/share/dengqingtian/
+[dengqingtian@login10 ~]$ id
+uid=28609(dengqingtian) gid=25064(eapp) groups=25064(eapp)
+[dengqingtian@login10 ~]$ date -u '+%Y-%m-%dT%H:%M:%SZ'
+2026-11-04T08:45:02Z
+<qingtian /home/share/dengqingtian/eitfm 2>/dev/null
+drwx--x--x 57 dengqingtian eapp 20480 Nov  4 10:45 /home/share/dengqingtian     
+drwxr-xr-x 21 songzhenlong eapp  8192 Nov  4 16:31 /home/share/songzhenlong/eitf
+fm
+<ongzhenlong/eitfm/corpus_shape_20261102 2>/dev/null
+drwxr-xr-x  8 songzhenlong eapp  4096 Nov  3 00:10 /home/share/songzhenlong/eitf
+fm/corpus_shape_20261102
+drwxr-xr-x 18 songzhenlong eapp 12288 Nov  4 16:37 /home/share/songzhenlong/eitf
+fm/opt
+[dengqingtian@login10 ~]$ 
+> > > > > > > > > > > > > > > > > > > > > > > > > > > 
+ > > > >> > > > > > > > > > > > > > > > > > > > > > > 2026-11-04T08:45:31Z
+login10
+uid=28609(dengqingtian) gid=25064(eapp) groups=25064(eapp)
+/opt/batch/cli/bin/dsub
+/opt/batch/cli/bin/djob
+/opt/batch/cli/bin/dnode
+/opt/batch/cli/bin/dqueue
+/usr/bin/numactl
+/usr/bin/gcc
+/usr/bin/g++
+/usr/bin/clang
+/usr/bin/python3
+ID           NAME         STATE      USER         ACCOUNT      QUEUE            
+    START_TIME           END_TIME             EXEC_NODES
+2024464      dspark-prom* RUNNING    dengqingtian common       q_hpcai          
+    2026/11/04 16:09:07  -                    cn[21833-21834,2183*
+2024009      b0-9b-quali* RUNNING    dengqingtian common       q_hpcai          
+    2026/11/04 14:52:17  -                    cn[21338-21345]
+2015576      gllm5-quali* RUNNING    dengqingtian common       q_hpcai          
+    2026/11/03 06:42:29  -                    cn[21353,21362-2137*
+NAME                           STATUS           PRIORITY   RUNNING_JOBS    PENDI
+ING_JOBS    SSTOPPED_JOBS
+default                        OPEN,ACTIVE      1          0               0    
+            0
+q_hpcapp                       OPEN,ACTIVE      1          79              6    
+            0
+q_hpcai                        OPEN,ACTIVE      1          9               0    
+            0
+    PID    PPID     ELAPSED STAT COMMAND
+ 580267  578678       00:56 S    sshd
+ 580274  580267       00:56 Ss   bash
+ 586311  580274       00:01 S+   bash
+ 586525  586311       00:00 R+   ps
+9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2  /home/share/so
+ongzhenlong/eitfm/opt/code/s4_models.py
+e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26  /home/share/so
+ongzhenlong/eitfm/opt/code/kml_ops.py
+ea27c594dd61865dfbbd67e3bdda216fc8a63df4acb2cb363807be52d8f9ccaf  /home/share/so
+ongzhenlong/eitfm/opt/run_node16.sh
+edbf06f54a779271c97d739e4aaca18ffae306ccd20713443ecaee11c388cb15  /home/share/so
+ongzhenlong/eitfm/opt/hbm_alloc.c
+f9e28e0ce2a3bdeca53eebc27fdd941c3235b4bee5ace250766875708e727388  /home/share/so
+ongzhenlong/eitfm/opt/code/kml_sgemm_shim.c
+f981a205e0773c311c7905e4193adbce03b1efc17b0f73b1cbab24c98905c840  /home/share/so
+ongzhenlong/eitfm/sw/hbm_alloc/libhbm_alloc.so
+a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73  /home/share/so
+ongzhenlong/eitfm/sw/kml_shim/libkml_sgemm_shim.so
+f6328139edaa1028e578377d6334d94bdeb879345878882e92dbf7dc3bbbe9f7  /home/share/so
+ongzhenlong/eitfm/corpus_shape_20261102/code/s2_mesh.py
+adbf696b7d7dd6ce2ab9fbd891dd2f459d5083f93c2a6fc36a9bd7e4ed51a3f0  /home/share/so
+ongzhenlong/eitfm/corpus_shape_20261102/code/s3_forward.py
+2e2a1ca704b5c1240dee84a3017c23a3d3be8e8296930b2d6ce0ee453adbac43  /home/share/so
+ongzhenlong/eitfm/corpus_shape_20261102/code/s6_corpus.py
+083ae3215aee1872b4b4a7bb98bfa83b8ba4fc13910370d46bb742afadbd1941  /home/share/so
+ongzhenlong/eitfm/corpus_shape_20261102/code/HASHES
+f0a3c5bd443b63f06dc69c8bed5e58dd50999a91fddb5222f0c38594ba92d836  /home/share/so
+ongzhenlong/eitfm/corpus_shape_20261102/cases.txt
+4bb9cfaffa8f7d464d1efd80a45e98edd2cf990179b923c160573078f97bfdad  /home/share/so
+ongzhenlong/eitfm/opt/s4/cases/s0322p0/frames.npz
+a5db12595bb7486a9a86e4f9bce9a0680876d2a732bc5f05d361c7b9657737c0  /home/share/so
+ongzhenlong/eitfm/opt/s4/cases/s0322p1/frames.npz
+drwxr-xr-x 18 songzhenlong eapp  8192 Nov  4 16:37 /home/share/songzhenlong/eitf
+fm/opt/s4/reports
+drwxr-xr-x  3 songzhenlong eapp  4096 Nov  3 08:31 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/die4_b32_ddr
+drwxr-xr-x  3 songzhenlong eapp  4096 Nov  3 08:36 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/die4_b32_hbm
+-rw-r--r--  1 songzhenlong eapp   748 Nov  2 12:09 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_2x19_g0.json
+-rw-r--r--  1 songzhenlong eapp   964 Nov  2 12:09 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_2x19_g0.log
+-rw-r--r--  1 songzhenlong eapp   744 Nov  2 12:09 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_2x19_g1.json
+-rw-r--r--  1 songzhenlong eapp   960 Nov  2 12:09 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_2x19_g1.log
+-rw-r--r--  1 songzhenlong eapp   751 Nov  2 11:35 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_4x9_g0.json
+-rw-r--r--  1 songzhenlong eapp   967 Nov  2 11:35 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_4x9_g0.log
+-rw-r--r--  1 songzhenlong eapp   748 Nov  2 11:37 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_4x9_g1.json
+-rw-r--r--  1 songzhenlong eapp   964 Nov  2 11:37 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_4x9_g1.log
+-rw-r--r--  1 songzhenlong eapp   747 Nov  2 11:36 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_4x9_g2.json
+-rw-r--r--  1 songzhenlong eapp   963 Nov  2 11:36 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_4x9_g2.log
+-rw-r--r--  1 songzhenlong eapp   748 Nov  2 11:37 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_4x9_g3.json
+-rw-r--r--  1 songzhenlong eapp   964 Nov  2 11:37 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_4x9_g3.log
+-rw-r--r--  1 songzhenlong eapp   751 Nov  2 12:40 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_b128_t38.json
+-rw-r--r--  1 songzhenlong eapp   967 Nov  2 12:41 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_b128_t38.log
+-rw-r--r--  1 songzhenlong eapp   746 Nov  2 10:41 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_cl_t38.json
+-rw-r--r--  1 songzhenlong eapp   962 Nov  2 10:41 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_cl_t38.log
+-rw-r--r--  1 songzhenlong eapp  7174 Nov  2 12:41 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_compile_t38.log
+-rw-r--r--  1 songzhenlong eapp   744 Nov  2 10:24 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_t38.json
+-rw-r--r--  1 songzhenlong eapp   960 Nov  2 10:24 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_t38.log
+-rw-r--r--  1 songzhenlong eapp   991 Nov  2 12:54 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_t38_sampling.json
+-rw-r--r--  1 songzhenlong eapp  1207 Nov  2 12:54 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/fp32_t38_sampling.log
+drwxr-xr-x  8 songzhenlong eapp  8192 Nov  3 08:20 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/hbm_probe
+-rw-r--r--  1 songzhenlong eapp   987 Nov  2 15:04 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/kml_t38.json
+-rw-r--r--  1 songzhenlong eapp  1207 Nov  2 15:04 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/kml_t38.log
+drwxr-xr-x  2 songzhenlong eapp  4096 Nov  2 20:48 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/mem_probe
+drwxr-xr-x  4 songzhenlong eapp 12288 Nov  4 16:43 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/node16_b32ckpt16_hbm_c36
+drwxr-xr-x  3 songzhenlong eapp  8192 Nov  4 16:44 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/node16_b32ckpt16_hbm_c36s
+drwxr-xr-x  4 songzhenlong eapp 12288 Nov  4 16:18 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/node16_b32ckpt_hbm_c36
+drwxr-xr-x  4 songzhenlong eapp 12288 Nov  3 09:52 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/node16_b32_hbm
+drwxr-xr-x  4 songzhenlong eapp  8192 Nov  4 16:39 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/node16_b32_hbm_c36
+drwxr-xr-x  5 songzhenlong eapp 16384 Nov  2 22:42 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/node16_b32_membind
+drwxr-xr-x  4 songzhenlong eapp  8192 Nov  3 10:07 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/node16_b64ckpt_hbm
+drwxr-xr-x  3 songzhenlong eapp  4096 Nov  4 16:10 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/node16_b64ckpt_hbm_c36
+drwxr-xr-x  4 songzhenlong eapp 12288 Nov  3 09:11 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/node16_b64ckpt_skip
+drwxr-xr-x  2 songzhenlong eapp 16384 Nov  2 17:08 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/node16_kmlfp32
+drwxr-xr-x  5 songzhenlong eapp 16384 Nov  2 20:04 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/node16_sync_kmlfp32
+drwxr-xr-x  6 songzhenlong eapp 12288 Nov  2 23:24 /home/share/songzhenlong/eitf
+fm/opt/s4/reports/scale_probe
+drwxr-xr-x 25 songzhenlong eapp   4096 Nov  2 08:58 /home/share/songzhenlong/eit
+tfm/sw/torch_kml
+drwxr-xr-x  2 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/bin
+drwxr-xr-x  3 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/filelock
+drwxr-xr-x  3 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/filelock-3.19.1.dist-info
+drwxr-xr-x  5 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/fsspec
+drwxr-xr-x  3 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/fsspec-2025.10.0.dist-info
+drwxr-xr-x  8 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/functorch
+-rw-r--r--  1 songzhenlong eapp  11220 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/isympy.py
+drwxr-xr-x  3 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/jinja2
+drwxr-xr-x  3 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/jinja2-3.1.6.dist-info
+drwxr-xr-x  3 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/markupsafe
+drwxr-xr-x  3 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/markupsafe-3.0.4.dist-info
+drwxr-xr-x  8 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/mpmath
+drwxr-xr-x  2 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/mpmath-1.3.0.dist-info
+drwxr-xr-x 11 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/networkx
+drwxr-xr-x  2 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/networkx-3.2.1.dist-info
+drwxr-xr-x  2 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/__pycache__
+drwxr-xr-x  3 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/share
+drwxr-xr-x 43 songzhenlong eapp   8192 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/sympy
+drwxr-xr-x  3 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/sympy-1.14.0.dist-info
+drwxr-xr-x 63 songzhenlong eapp  16384 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/torch
+drwxr-xr-x  2 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/torch-2.7.1+cpu.dist-info
+drwxr-xr-x 11 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/torchgen
+drwxr-xr-x  2 songzhenlong eapp   4096 Nov  2 14:06 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/torch.libs
+drwxr-xr-x  3 songzhenlong eapp   4096 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/typing_extensions-4.16.0.dist-info
+-rw-r--r--  1 songzhenlong eapp 165012 Nov  2 08:57 /home/share/songzhenlong/eit
+tfm/sw/torch_kml/typing_extensions.py
+python 3.9.9 (main, Jul 29 2025, 11:26:21) 
+[GCC 10.3.1] /usr/bin/python3 arch aarch64
+torch 2.7.1+cpu /home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py
+numpy MISSING
+manifest_sha256 db6b84e5481bc256ab03ae939d3d96125765f1c62ecf5cb0ab6b3264b0666f75
+manifest_rows 11900 pairs 1190000
+code_hash {'d8b2be8d1f': 11900}
+config_hash {'b1049eac1a': 11900}
+status {'done': 11900}
+finite {'True': 11900}
+belt {'16_adjacent': 5950, '32_skip4': 5950}
+unique_cases 119
+split_fields []
+S00_READONLY_AUDIT_END (not a performance acceptance)
+[dengqingtian@login10 ~]$ 

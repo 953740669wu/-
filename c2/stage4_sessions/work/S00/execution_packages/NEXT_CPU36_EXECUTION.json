@@ -1,0 +1,51 @@
+{
+  "status": "R7_BOUNDED_STARTUP_PASS_WAITING_REVIEW",
+  "registered_utc": "2026-11-04T14:27:30.474104+00:00",
+  "policy_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\CPU36_POLICY.md",
+  "policy_sha256": "295f32fc3454c328f413073b76ccc7228cf84e29bae035d7c8fd736c08d67825",
+  "selected_physical_cores_per_domain": 36,
+  "preferred_scheduler_allocation_cores_per_domain": 38,
+  "reserve": "last two physical cores of each actual domain; topology verified",
+  "allowed_alternative": "36 allocated only if same-domain and reserved-core conditions proven",
+  "s01_cores_per_dom": 36,
+  "s01_worker_omp_num_threads": 36,
+  "s02_checker_threads": 36,
+  "s02_selected_cpus": 36,
+  "thread_environment": "NOT_FINAL_UNTIL_ACCEPTED_S01_DIAGNOSIS",
+  "thread_affinity_contract": "Every compute TID stays within selected36; pinned single-core masks allowed; actual thread counts also verified",
+  "memory_limit_MB": 24576,
+  "wall_limit_s": 900,
+  "cpu36_package_status": "R7_LOCAL_CANDIDATE_EXECUTED_PASS_FORMAL_ACCEPTANCE_PENDING",
+  "execution_allowed": false,
+  "new_jobs": 0,
+  "ssh_this_turn": false,
+  "s02_numerical_gate": "NOT_PASSED",
+  "training_memory": "NOT_READY",
+  "historical_files_sha256": {
+    "S01_LF_RESTART_REPORT.md": "5b5ef8c44be7c23ca8c6ec21b74ba4143cf50a3cd5ae8e15c7da1bb02d1f1519",
+    "PILOT_EXECUTION_REPORT.md": "8ed6d7103d4984e5c0d071d6faa65ebe69d9fe536a2ecdb30b8ef07247d6bcd1",
+    "evidence\\s01_lf_restart_2026450\\full_evidence.zip": "1403bb4c5ba5032eb16df5aab4b3acd7836b6edd692db4ccc2b5626df0cbe87d",
+    "evidence\\s01_pilot_job_2026356.json": "ab548ec565ed918cff3006cfb9e5a7cfc49cdc80121227ab3f041c4a0a1d5b65",
+    "execution_packages\\S01_pilot_prepared.zip": "747f9c36354136afa3383a3d836c7e3db7568a043d1712fb2f03765068b4ec5e",
+    "execution_packages\\S02_pilot_prepared.zip": "de1f683449e4bad6ecab9b98254a669941e3765870b4c705a4ba6c88d2f4795b",
+    "execution_packages\\pilot_s01_startup.sh": "72ba04253bc4b68446d642a70bcc0571ee926b71bc81e553c1a385d91dc1709f",
+    "execution_packages\\pilot_s02_equivalence.sh": "f1a7562ee25e65c36c79d0ee1e8d921170f526c76ff42095def67f26afdab3b0",
+    "execution_packages\\run_s02_checker_bound.py": "dde9119d6d37bd3700293e2677f58f50e73bbcb85c09416d8b9ba0a5f02c7a16",
+    "execution_packages\\cluster_runtime.env": "e5bf5072fe91037bd335897435426fda7e9848c5fdcce4c18f4d5eaf194ea333"
+  },
+  "bounded_r6_diagnostic": {
+    "job_id": "2026725",
+    "state": "SUCCEEDED",
+    "summary": "DIAGNOSTIC_DATA_COMPLETE",
+    "report": "CPU36_R6_DIAGNOSTIC_REPORT.md",
+    "scope": "SMALL_OPERATORS_ONLY_NOT_MODEL_PACKAGE_ACCEPTANCE"
+  },
+  "bounded_r7_startup": {
+    "job_id": "2034247",
+    "state": "SUCCEEDED",
+    "summary": "PASS",
+    "offline_summary": "PASS",
+    "report": "CPU36_R7_STARTUP_REPORT.md",
+    "scope": "THREE_REPS1_ROUNDS_SINGLE_DOMAIN_STARTUP_ONLY"
+  }
+}

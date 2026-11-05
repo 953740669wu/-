@@ -1,0 +1,31 @@
+{
+  "status": "LOCAL_PACKAGE_READY_REMOTE_LOGIN_REQUIRED_NOT_SUBMITTED",
+  "checks": [
+    "python_syntax_pass",
+    "original_zip_sha_pass",
+    "nine_payload_hashes_pass",
+    "shell_env_LF_pass",
+    "tampered_zip_rejected_before_shell_or_submit",
+    "duplicate_directory_rejected_before_shell_or_submit",
+    "outer_zip_two_files_byte_equal"
+  ],
+  "not_run": [
+    "remote_linux_syntax",
+    "real_dsub",
+    "C2_model"
+  ],
+  "files": {
+    "R7_DEPLOY_READY.zip": {
+      "sha256": "c4024a629abd9ecbd21fbde4c88d0d50b2d48cf85857fce343461d41ef226f75",
+      "bytes": 31933
+    },
+    "deploy_r7_once.py": {
+      "sha256": "40d487399a753f0aed19fac1465612c2a47b7333a70a37b77cbf25853c0a3fb6",
+      "bytes": 4167
+    },
+    "S01_CPU36_MODEL_R7.zip": {
+      "sha256": "288a74181c36ec87b3953be5cde7e26575e45c219e9f446a21fca0683659119c",
+      "bytes": 30493
+    }
+  }
+}

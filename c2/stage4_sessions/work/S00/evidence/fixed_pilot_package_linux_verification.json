@@ -1,0 +1,208 @@
+{
+  "scope": "Linux syntax and tiny affinity fixture only; no model job retry",
+  "syntax_checks": [
+    {
+      "file": "S01/cluster_runtime.env",
+      "exit_code": 0,
+      "stderr": "",
+      "sha256": "e5bf5072fe91037bd335897435426fda7e9848c5fdcce4c18f4d5eaf194ea333"
+    },
+    {
+      "file": "S01/pilot_s01_startup.sh",
+      "exit_code": 0,
+      "stderr": "",
+      "sha256": "72ba04253bc4b68446d642a70bcc0571ee926b71bc81e553c1a385d91dc1709f"
+    },
+    {
+      "file": "S02/cluster_runtime.env",
+      "exit_code": 0,
+      "stderr": "",
+      "sha256": "e5bf5072fe91037bd335897435426fda7e9848c5fdcce4c18f4d5eaf194ea333"
+    },
+    {
+      "file": "S02/pilot_s02_equivalence.sh",
+      "exit_code": 0,
+      "stderr": "",
+      "sha256": "f1a7562ee25e65c36c79d0ee1e8d921170f526c76ff42095def67f26afdab3b0"
+    }
+  ],
+  "fixture_exit_code": 0,
+  "fixture_stdout": "S02_AFFINITY_GUARD_TESTS_PASS\n",
+  "fixture_stderr": "",
+  "affinity_tests": {
+    "status": "PASS",
+    "scope": "Linux standard-library fixture and fake torch/numpy; NOT full real checker/model execution",
+    "allowed_test_cpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "cases": [
+      {
+        "scenario": "same_process_pass",
+        "exit_code": 0,
+        "guard_result": "PASS",
+        "affinity_report": {
+          "pid": 2538663,
+          "expected_cpus": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "stages": [
+            {
+              "stage": "checker_process_before_import",
+              "actual_cpus": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "thread_cpus": {
+                "2538663": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "stage": "checker_process_after_torch_thread_setup",
+              "actual_cpus": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "thread_cpus": {
+                "2538663": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "stage": "checker_process_exit",
+              "actual_cpus": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "thread_cpus": {
+                "2538663": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            }
+          ]
+        },
+        "stderr": ""
+      },
+      {
+        "scenario": "wrong_expected_set",
+        "exit_code": 1,
+        "guard_result": "EXPECTED_REJECTION",
+        "affinity_report": {
+          "pid": 2538664,
+          "expected_cpus": [
+            0,
+            1,
+            2,
+            4
+          ],
+          "stages": [
+            {
+              "stage": "checker_process_before_import",
+              "actual_cpus": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "thread_cpus": {
+                "2538664": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            }
+          ]
+        },
+        "stderr": "Traceback (most recent call last):\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T134538Z/FIXED_PACKAGE_VERIFICATION/S02/run_s02_checker_bound.py\", line 25, in <module>\n    verify('checker_process_before_import')\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T134538Z/FIXED_PACKAGE_VERIFICATION/S02/run_s02_checker_bound.py\", line 21, in verify\n    assert actual == expected, f'{stage}: checker CPU set {actual} != {expected}'\nAssertionError: checker_process_before_import: checker CPU set {0, 1, 2, 3} != {0, 1, 2, 4}\n"
+      },
+      {
+        "scenario": "checker_changes_affinity",
+        "exit_code": 1,
+        "guard_result": "EXPECTED_REJECTION",
+        "affinity_report": {
+          "pid": 2538665,
+          "expected_cpus": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "stages": [
+            {
+              "stage": "checker_process_before_import",
+              "actual_cpus": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "thread_cpus": {
+                "2538665": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "stage": "checker_process_after_torch_thread_setup",
+              "actual_cpus": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "thread_cpus": {
+                "2538665": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "stage": "checker_process_exit",
+              "actual_cpus": [
+                0
+              ],
+              "thread_cpus": {
+                "2538665": [
+                  0
+                ]
+              }
+            }
+          ]
+        },
+        "stderr": "Traceback (most recent call last):\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T134538Z/FIXED_PACKAGE_VERIFICATION/S02/run_s02_checker_bound.py\", line 37, in <module>\n    verify('checker_process_exit')\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T134538Z/FIXED_PACKAGE_VERIFICATION/S02/run_s02_checker_bound.py\", line 21, in verify\n    assert actual == expected, f'{stage}: checker CPU set {actual} != {expected}'\nAssertionError: checker_process_exit: checker CPU set {0} != {0, 1, 2, 3}\n"
+      }
+    ]
+  }
+}

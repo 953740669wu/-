@@ -1,0 +1,48 @@
+{
+  "scope": "S01_R6_SMALL_THREAD_DIAGNOSTIC_ONLY",
+  "source_root": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\revisions\\R6_CPU36_DIAG_20261104T143214257047Z",
+  "package_sha256": "1db8b1818a387a0c3dd404bf1efd40a3aba777bad7d7c4226379ef369ad9fd81",
+  "expected_payload_files": {
+    "diagnostic/cluster_runtime.env": "e5bf5072fe91037bd335897435426fda7e9848c5fdcce4c18f4d5eaf194ea333",
+    "diagnostic/cpu36_contract.py": "ef34df5d0b66784dd88c7453b0ea208beb64ee54169c37aa799b584db225fb09",
+    "diagnostic/kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "diagnostic/run_diagnostics.py": "05804fc198df43700e57ca5ceb976d6764bafdcf781ae55c0d9cfc6b472df389",
+    "diagnostic/run_thread_diagnostics.sh": "9e0080b7e7dffdbda337f3d1241db5e0539c3e21b7effa6107c2a2a25c59ee1b",
+    "diagnostic/SOURCE_MANIFEST.json": "a4e0c758bb390ab6d34775afe12595a9aac87a01126d125f3c90641d6f98cda6",
+    "diagnostic/thread_worker.py": "0da9ae8efac6472bea92303caeb447d387f3d153bf004bd035157ec4d8463c0a",
+    "tests/test_cpu36_contract.py": "23296dc5b9ee6bb641789f3f84902346d2cc0b1fa30325399634f7cdbe141a10",
+    "DIAGNOSTIC_PLAN_FOR_S00.md": "e90d9c20ba80377496d148a279ed35b3665b3bf273c4ca0c0fd3176862a644a3",
+    "MINIMAL_FIX_PLAN.md": "f72a0a12595a120a63e38716e61070261fc52cbbf4d4bc12dca4b921b5bd83b6",
+    "SYNC_TO_S00_S02.md": "d7a73a09cde68380e08e5aa8bb16b9b3743cd18ed95903fdf354c9c364d039b4",
+    "STATUS.json": "cca1b6bf2e0006368f5d8c6938a22a9b87af825080e34ac542c22a1aa0e73e2a"
+  },
+  "allocated_cpu_request": 38,
+  "selected_physical_cores": 36,
+  "memory_MB": 24576,
+  "memory_limit_MB": 24576,
+  "job_wall_limit_s": 300,
+  "outer_timeout_s": 270,
+  "outer_kill_after_s": 5,
+  "worker_timeout_s": 45,
+  "queue_wait_limit_s": 600,
+  "max_submissions": 1,
+  "cases": [
+    "A_mkl1_negative",
+    "B_mkl_unset",
+    "C_mkl36",
+    "D_bind_false",
+    "E_openblas36"
+  ],
+  "stop_on_failure": true,
+  "full_model": "NOT_AUTHORIZED",
+  "S02": "NOT_AUTHORIZED",
+  "training_memory": "NOT_AUTHORIZED",
+  "prior_evidence_sha256": {
+    "S01_LF_RESTART_REPORT.md": "5b5ef8c44be7c23ca8c6ec21b74ba4143cf50a3cd5ae8e15c7da1bb02d1f1519",
+    "PILOT_EXECUTION_REPORT.md": "8ed6d7103d4984e5c0d071d6faa65ebe69d9fe536a2ecdb30b8ef07247d6bcd1",
+    "evidence\\s01_lf_restart_2026450\\full_evidence.zip": "1403bb4c5ba5032eb16df5aab4b3acd7836b6edd692db4ccc2b5626df0cbe87d",
+    "evidence\\executed_packages\\S01_job_2026356.zip": "5bb0a6718ec8ae3eb794e7f05f0faae9addd22342df0253833234320427a7616"
+  },
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/DIAG_CPU36_R6_20261104T145326Z",
+  "job_id": "2026725"
+}

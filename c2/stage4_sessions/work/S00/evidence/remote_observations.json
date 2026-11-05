@@ -1,0 +1,112 @@
+{
+  "captured_utc": "2026-11-04T08:45:31Z",
+  "status": "REMOTE_AUDIT_PARTIAL_BENCHMARK_NOT_RUN",
+  "source": "Transcribed from the approved read-only terminal audit; see remote_audit_20261104.txt",
+  "connection": {
+    "host": "10.44.9.4",
+    "port": 22,
+    "username": "dengqingtian",
+    "login_host": "login10",
+    "login_succeeded": true,
+    "password_persisted": false
+  },
+  "project": {
+    "path": "/home/share/songzhenlong/eitfm",
+    "read_access": true,
+    "write_access": false,
+    "owner": "songzhenlong"
+  },
+  "proposed_own_remote_root": "/home/share/dengqingtian/opt/stage4_sessions/S00",
+  "remote_files_created_or_modified": false,
+  "new_jobs_submitted": 0,
+  "compute_node_hours_used": 0,
+  "scheduler": {
+    "dsub": "/opt/batch/cli/bin/dsub",
+    "djob": "/opt/batch/cli/bin/djob",
+    "queue": "q_hpcai",
+    "queue_status": "OPEN,ACTIVE",
+    "queue_running_jobs_snapshot": 9
+  },
+  "current_account_running_job_ids": [
+    2024464,
+    2024009,
+    2015576
+  ],
+  "job_scope": "Default djob query for dengqingtian only. These jobs were already running; none is a new S00 allocation. Project-owner job state and compute processes not audited.",
+  "python": {
+    "executable": "/usr/bin/python3",
+    "version": "3.9.9",
+    "build_compiler": "GCC 10.3.1",
+    "architecture": "aarch64",
+    "torch_distribution_version": "2.7.1+cpu",
+    "torch_module_origin": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+    "numpy_distribution_found": false,
+    "note": "Metadata/spec lookup only with PYTHONPATH=project/sw/torch_kml; torch was not imported. Missing numpy applies to this account and invocation, not every cluster environment."
+  },
+  "login_commands_found": [
+    "numactl",
+    "gcc",
+    "g++",
+    "clang",
+    "python3"
+  ],
+  "manifest": {
+    "path": "/home/share/songzhenlong/eitfm/corpus_shape_20261102/manifest.csv",
+    "sha256": "db6b84e5481bc256ab03ae939d3d96125765f1c62ecf5cb0ab6b3264b0666f75",
+    "rows": 11900,
+    "pairs": 1190000,
+    "unique_cases": 119,
+    "code_hash": {
+      "d8b2be8d1f": 11900
+    },
+    "config_hash": {
+      "b1049eac1a": 11900
+    },
+    "status": {
+      "done": 11900
+    },
+    "finite": {
+      "True": 11900
+    },
+    "belt": {
+      "16_adjacent": 5950,
+      "32_skip4": 5950
+    },
+    "split_fields": [],
+    "note": "Manifest assertions only; corpus payload arrays and per-unit checksums not independently verified."
+  },
+  "remote_sha256": {
+    "opt/code/s4_models.py": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+    "opt/code/kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "opt/run_node16.sh": "ea27c594dd61865dfbbd67e3bdda216fc8a63df4acb2cb363807be52d8f9ccaf",
+    "opt/hbm_alloc.c": "edbf06f54a779271c97d739e4aaca18ffae306ccd20713443ecaee11c388cb15",
+    "opt/code/kml_sgemm_shim.c": "f9e28e0ce2a3bdeca53eebc27fdd941c3235b4bee5ace250766875708e727388",
+    "sw/hbm_alloc/libhbm_alloc.so": "f981a205e0773c311c7905e4193adbce03b1efc17b0f73b1cbab24c98905c840",
+    "sw/kml_shim/libkml_sgemm_shim.so": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73",
+    "corpus_shape_20261102/code/s2_mesh.py": "f6328139edaa1028e578377d6334d94bdeb879345878882e92dbf7dc3bbbe9f7",
+    "corpus_shape_20261102/code/s3_forward.py": "adbf696b7d7dd6ce2ab9fbd891dd2f459d5083f93c2a6fc36a9bd7e4ed51a3f0",
+    "corpus_shape_20261102/code/s6_corpus.py": "2e2a1ca704b5c1240dee84a3017c23a3d3be8e8296930b2d6ce0ee453adbac43",
+    "corpus_shape_20261102/code/HASHES": "083ae3215aee1872b4b4a7bb98bfa83b8ba4fc13910370d46bb742afadbd1941",
+    "corpus_shape_20261102/cases.txt": "f0a3c5bd443b63f06dc69c8bed5e58dd50999a91fddb5222f0c38594ba92d836",
+    "opt/s4/cases/s0322p0/frames.npz": "4bb9cfaffa8f7d464d1efd80a45e98edd2cf990179b923c160573078f97bfdad",
+    "opt/s4/cases/s0322p1/frames.npz": "a5db12595bb7486a9a86e4f9bce9a0680876d2a732bc5f05d361c7b9657737c0"
+  },
+  "historical_report_directories_observed": [
+    "die4_b32_ddr",
+    "die4_b32_hbm",
+    "node16_sync_kmlfp32",
+    "node16_b32_membind",
+    "node16_b32_hbm",
+    "node16_b64ckpt_hbm"
+  ],
+  "recent_report_directories_observed": [
+    "node16_b32_hbm_c36",
+    "node16_b64ckpt_hbm_c36",
+    "node16_b32ckpt_hbm_c36",
+    "node16_b32ckpt16_hbm_c36",
+    "node16_b32ckpt16_hbm_c36s"
+  ],
+  "report_scope": "Directory names and timestamps only. No raw per-domain JSON contents have been audited or accepted.",
+  "further_evidence_collection": "USER_AUTHORIZED_AND_COMPLETED_SEE_REMOTE_DETAILS",
+  "superseded_scope_note": "This retains the 16:45 metadata snapshot; use remote_details.json for 17:00 observations and remote_launcher_latest.json for the 17:09 launcher snapshot."
+}

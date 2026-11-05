@@ -1,0 +1,55 @@
+--- /dev/null
++++ candidate/training_step.py
+@@ -0,0 +1,52 @@
++"""Isolated fp32 step; caller fixes the full effective batch and random tensors.
++
++No data loading, scheduler, distributed synchronization or performance claims.
++"""
++import torch
++import torch.nn.functional as F
++
++
++def enable_checkpoint(enc):
++    """Same per-layer non-reentrant checkpoint wrapper as the frozen source."""
++    from torch.utils.checkpoint import checkpoint
++    for layer in enc.tf.layers:
++        layer.forward = lambda *a, _f=layer.forward, **k: checkpoint(_f, *a, use_reentrant=False, **k)
++
++
++def training_step(enc, dec, opt, v, angles, belt, y0, *, part, microbatch,
++                  mask=None, t=None, noise=None, abar=None):
++    B, M = v.shape
++    if microbatch <= 0 or B == 0 or part not in ('pre', 'dec'):
++        raise ValueError('invalid batch/part')
++    if y0.shape != (B, 1, 64, 64) or angles.shape != (B, M, 4) or belt.shape != (B, M):
++        raise ValueError('inconsistent fixed-batch shapes')
++    if part == 'pre':
++        if mask is None or mask.shape != v.shape or mask.dtype != torch.bool:
++            raise ValueError('provide the full fixed boolean mask')
++        count = int(mask.sum())
++        if count == 0:
++            raise ValueError('empty full mask has no finite original masked mean')
++    elif t is None or noise is None or abar is None or t.shape != (B,) or noise.shape != y0.shape:
++        raise ValueError('provide full fixed diffusion t/noise and schedule')
++    opt.zero_grad(set_to_none=True)
++    total = v.new_zeros(())
++    for start in range(0, B, microbatch):
++        s = slice(start, start + microbatch)
++        if part == 'pre':
++            h = enc(v[s], angles[s], belt[s], mask[s])
++            loss = F.mse_loss(enc.head_v(h)[..., 0][mask[s]], v[s][mask[s]], reduction='sum') / count
++            loss = loss + F.mse_loss(enc.head_coarse(h.mean(1)),
++                F.adaptive_avg_pool2d(y0[s], 16).flatten(1), reduction='sum') / (B * 256)
++        else:
++            a = abar[t[s]][:, None, None, None]
++            xt = a.sqrt() * y0[s] + (1 - a).sqrt() * noise[s]
++            h = enc(v[s], angles[s], belt[s])
++            loss = F.mse_loss(dec(xt, t[s], h), noise[s], reduction='sum') / y0.numel()
++        loss.backward()
++        total += loss.detach()
++        # Do not retain a completed microbatch's output graph into the next one.
++        del h, loss
++        if part == 'dec':
++            del xt, a
++    opt.step()
++    return total

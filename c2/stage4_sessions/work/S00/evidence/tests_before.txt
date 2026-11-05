@@ -1,0 +1,61 @@
+test_existing_summary_can_pass_missing_and_stale_domains (__main__.BaselineChecks.test_existing_summary_can_pass_missing_and_stale_domains) ... original_summary:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\tests\\tmpv_8xey5i\\r1_d0.json' mode='r' encoding='cp936'>
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+original_summary:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\tests\\tmpv_8xey5i\\r2_d0.json' mode='r' encoding='cp936'>
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+original_summary:4: ResourceWarning: unclosed file <_io.TextIOWrapper name='E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\tests\\tmpv_8xey5i\\r3_d0.json' mode='r' encoding='cp936'>
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_explicit_configurations (__main__.BaselineChecks.test_explicit_configurations) ... ERROR
+test_frozen_copies_are_byte_identical (__main__.BaselineChecks.test_frozen_copies_are_byte_identical) ... ERROR
+test_isolated_launcher_paths (__main__.BaselineChecks.test_isolated_launcher_paths) ... ERROR
+test_protocol_matches_forward_order (__main__.BaselineChecks.test_protocol_matches_forward_order) ... ok
+
+======================================================================
+ERROR: test_explicit_configurations (__main__.BaselineChecks.test_explicit_configurations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\tests\test_baseline.py", line 86, in test_explicit_configurations
+    configs = json.loads((WORK / 'baseline_configs.json').read_text())
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\baseline_configs.json'
+
+======================================================================
+ERROR: test_frozen_copies_are_byte_identical (__main__.BaselineChecks.test_frozen_copies_are_byte_identical)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\tests\test_baseline.py", line 30, in test_frozen_copies_are_byte_identical
+    rows = json.loads((WORK / 'evidence/baseline_manifest.json').read_text())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\evidence\\baseline_manifest.json'
+
+======================================================================
+ERROR: test_isolated_launcher_paths (__main__.BaselineChecks.test_isolated_launcher_paths)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\tests\test_baseline.py", line 77, in test_isolated_launcher_paths
+    text = (WORK / 'candidate/run_node16_isolated.sh').read_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\candidate\\run_node16_isolated.sh'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.056s
+
+FAILED (errors=3)

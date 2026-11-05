@@ -1,0 +1,44 @@
+{
+  "started_utc": "2026-11-04T12:35:56.349698+00:00",
+  "part": "pre",
+  "diagnostic": true,
+  "belt": "16_adjacent",
+  "effective_batch": 64,
+  "microbatch": 32,
+  "checkpoint": false,
+  "history": "fresh",
+  "threads": 4,
+  "resource_before": {
+    "physical_bytes": 17917550592,
+    "commit_bytes": 25000321024,
+    "total_physical_bytes": 33341927424,
+    "commit_limit_bytes": 47300571136
+  },
+  "launch_gate_GiB": {
+    "available_physical": 12,
+    "available_commit": 16
+  },
+  "command": [
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\tests\\diagnose_same_config.py",
+    "--belt",
+    "16_adjacent",
+    "--part",
+    "pre",
+    "--microbatch",
+    "32",
+    "--history",
+    "fresh",
+    "--threads",
+    "4",
+    "--output",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\evidence\\20261104T123556349698Z_pre\\equivalence.json"
+  ],
+  "checker_sha256": "427d01b57390ae45d86757cac0876ec099f9da312a376709af84cadf2b9d1f47",
+  "child_exit_code": 1,
+  "elapsed_s": 32.03099999999904,
+  "model_executed": true,
+  "status": "CHECK_FAILED",
+  "ended_utc": "2026-11-04T12:36:28.369242+00:00"
+}

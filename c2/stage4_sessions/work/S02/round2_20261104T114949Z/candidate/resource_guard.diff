@@ -1,0 +1,101 @@
+--- /dev/null
++++ run_16_representative.py
+@@ -0,0 +1,98 @@
++"""Run the accepted full-model 16-electrode B64 vs B32 step behind a resource guard.
++
++Guard samples are safety evidence for the comparison harness, not training-memory
++measurements. All child computation is native Windows CPU torch, not C2/KML.
++"""
++import argparse
++import ctypes
++from datetime import datetime, timezone
++import hashlib
++import json
++from pathlib import Path
++import subprocess
++import sys
++import time
++
++ROOT = Path(__file__).resolve().parent
++GIB = 2 ** 30
++
++
++class Memory(ctypes.Structure):
++    _fields_ = [('length', ctypes.c_ulong), ('load', ctypes.c_ulong)] + [
++        (name, ctypes.c_ulonglong) for name in ('total_phys', 'avail_phys', 'total_page',
++        'avail_page', 'total_virtual', 'avail_virtual', 'avail_extended')]
++
++
++def available():
++    m = Memory()
++    m.length = ctypes.sizeof(m)
++    if not ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(m)):
++        raise OSError('GlobalMemoryStatusEx failed')
++    return dict(physical_bytes=m.avail_phys, commit_bytes=m.avail_page,
++                total_physical_bytes=m.total_phys, commit_limit_bytes=m.total_page)
++
++
++def main(part, diagnostic=False):
++    tag = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ') + '_' + part
++    output = ROOT / 'evidence' / tag
++    output.mkdir(exist_ok=False)
++    result = dict(started_utc=datetime.now(timezone.utc).isoformat(), part=part, diagnostic=diagnostic,
++                  belt='16_adjacent', effective_batch=64, microbatch=32,
++                  checkpoint=False, history='fresh', threads=4,
++                  resource_before=available())
++    # Conservative engineering launch gates, NOT measured peak requirements.
++    physical, commit = (12, 16) if part == 'pre' else (20, 24)
++    result['launch_gate_GiB'] = dict(available_physical=physical, available_commit=commit)
++    before = result['resource_before']
++    if before['physical_bytes'] < physical * GIB or before['commit_bytes'] < commit * GIB:
++        result.update(status='NOT_RUN_RESOURCE_GUARD', model_executed=False,
++                      reason='Insufficient headroom for full B64 reference and retained comparison snapshots.')
++        code = 3
++    else:
++        checker = ROOT / 'tests' / ('diagnose_same_config.py' if diagnostic else 'check_equivalence.py')
++        command = [sys.executable, '-B', str(checker),
++                   '--belt', '16_adjacent', '--part', part, '--microbatch', '32',
++                   '--history', 'fresh', '--threads', '4', '--output', str(output / 'equivalence.json')]
++        result['command'] = command
++        result['checker_sha256'] = hashlib.sha256(checker.read_bytes()).hexdigest()
++        start = time.monotonic()
++        stopped = None
++        with (output / 'stdout_stderr.txt').open('w', encoding='utf-8') as log, \
++                (output / 'guard_samples.jsonl').open('w', encoding='utf-8') as samples:
++            child = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT)
++            while child.poll() is None:
++                memory = available()
++                elapsed = time.monotonic() - start
++                samples.write(json.dumps(dict(elapsed_s=elapsed, **memory)) + '\n')
++                samples.flush()
++                if memory['physical_bytes'] < GIB or memory['commit_bytes'] < 2 * GIB:
++                    stopped = 'RESOURCE_GUARD_STOP'
++                elif elapsed > (900 if part == 'pre' else 1800):
++                    stopped = 'WALL_TIMEOUT'
++                if stopped:
++                    child.kill()
++                    break
++                time.sleep(1)
++            child.wait()
++        result.update(child_exit_code=child.returncode, elapsed_s=time.monotonic() - start,
++                      model_executed=True)
++        if stopped:
++            result.update(status=stopped, reason='Guard stopped this exact comparison child; not an OOM claim.')
++            code = 3
++        else:
++            result['status'] = 'CHECK_COMPLETED' if child.returncode == 0 else 'CHECK_FAILED'
++            code = child.returncode
++    result['ended_utc'] = datetime.now(timezone.utc).isoformat()
++    (output / 'run.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
++    print(json.dumps(dict(output=str(output), **result), indent=2))
++    return code
++
++
++if __name__ == '__main__':
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--part', choices=['pre', 'dec'], required=True)
++    parser.add_argument('--diagnostic', action='store_true')
++    args = parser.parse_args()
++    if args.diagnostic and args.part != 'pre':
++        parser.error('diagnostic replay is limited to the failed pre configuration')
++    sys.exit(main(args.part, args.diagnostic))

@@ -1,0 +1,872 @@
+E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round2_20261104T114949Z\.venv\Lib\site-packages\torch\nn\modules\transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+{
+  "status": "FAIL_DIAGNOSTIC",
+  "diagnostic_only": true,
+  "config": {
+    "belt": "16_adjacent",
+    "part": "pre",
+    "microbatch": 32,
+    "history": "fresh",
+    "threads": 4,
+    "output": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\evidence\\20261104T123556349698Z_pre\\equivalence.json",
+    "checkpoint": false,
+    "kml": false
+  },
+  "loss_unit_check": "PASS_REAL_AUTOGRAD_UNIT_ONLY",
+  "input_protocol": "S02_PAIRED_BELT_V1",
+  "input_normalization": "per_belt_frozen_cohort_absmax",
+  "input_scale": 0.30000001192092896,
+  "fixture_files_deleted_after_read": true,
+  "fixed_tensor_sha256": {
+    "v": "1ea0b8117304e40e6906966af78cd374560baf972af38b3ab5be66e5d1ed7868",
+    "y0": "71c98d8a13605626bfb90f3b9b256a348fc666210ad6db581490e2026ee5cc27",
+    "idx": "719b836f9eae3b9451fcc403ebad9681cc7c134c04e3487c8e46eacf8834a927",
+    "mask": "086140d0db27e48f11dc2f854428f606950860f0d8dd35fb2e2eed3240d99d65",
+    "t": "389e2a26d4302653588a9345f549efa1511f2a8591fd0791c8cf543d2c2ffcef",
+    "noise": "7fb86f5b64f7903bd2a0977434606c6d242d013b2021f4c22f95c331d4e56202"
+  },
+  "initial_weights_sha256": "662a4f7ffc490412c92aa6dedcbd8dcb1e811e61b3ce9d3fcaa8327e13a7ed41",
+  "environment": {
+    "python": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Scripts\\python.exe",
+    "torch": "2.7.1+cpu",
+    "torch_file": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Lib\\site-packages\\torch\\__init__.py",
+    "threads": 4,
+    "backend": "native_torch",
+    "device": "cpu"
+  },
+  "mask_counts": [
+    0,
+    647,
+    2674,
+    2641
+  ],
+  "failures": [
+    {
+      "name": "loss",
+      "reason": "loss: max_abs=3.0517578125e-05, relative=1.0070243979857095e-07"
+    },
+    {
+      "name": "grad.enc.mask_tok",
+      "reason": "grad.enc.mask_tok: max_abs=0.0009765625, relative=8.388256785697665e-08"
+    },
+    {
+      "name": "state.enc.mask_tok.exp_avg",
+      "reason": "state.enc.mask_tok.exp_avg: max_abs=9.1552734375e-05, relative=8.782803875146009e-08"
+    },
+    {
+      "name": "state.enc.mask_tok.exp_avg_sq",
+      "reason": "state.enc.mask_tok.exp_avg_sq: max_abs=0.01171875, relative=1.7549997727773726e-07"
+    },
+    {
+      "name": "param.enc.tf.layers.0.self_attn.in_proj_bias",
+      "reason": "param.enc.tf.layers.0.self_attn.in_proj_bias: max_abs=2.0111801859457046e-06, relative=0.0021491112316635312"
+    },
+    {
+      "name": "delta.enc.tf.layers.0.self_attn.in_proj_bias",
+      "reason": "delta.enc.tf.layers.0.self_attn.in_proj_bias: max_abs=2.0111801859457046e-06, relative=0.0021491112316635312"
+    },
+    {
+      "name": "grad.enc.tf.layers.0.norm1.bias",
+      "reason": "grad.enc.tf.layers.0.norm1.bias: max_abs=0.00029850006103515625, relative=7.64764614857757e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.0.norm1.bias.exp_avg",
+      "reason": "state.enc.tf.layers.0.norm1.bias.exp_avg: max_abs=2.9921531677246094e-05, relative=7.648794539137959e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.0.norm1.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.0.norm1.bias.exp_avg_sq: max_abs=1.1146068572998047e-05, relative=1.546401991114249e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.0.norm2.weight",
+      "reason": "grad.enc.tf.layers.0.norm2.weight: max_abs=8.392333984375e-05, relative=7.001368482552745e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.0.norm2.weight.exp_avg",
+      "reason": "state.enc.tf.layers.0.norm2.weight.exp_avg: max_abs=8.404254913330078e-06, relative=6.999997633750229e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.0.norm2.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.0.norm2.weight.exp_avg_sq: max_abs=8.940696716308594e-07, relative=1.1573054440538661e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.0.norm2.bias",
+      "reason": "grad.enc.tf.layers.0.norm2.bias: max_abs=4.3392181396484375e-05, relative=6.568729456719752e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.0.norm2.bias.exp_avg",
+      "reason": "state.enc.tf.layers.0.norm2.bias.exp_avg: max_abs=4.351139068603516e-06, relative=6.567109762068654e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.0.norm2.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.0.norm2.bias.exp_avg_sq: max_abs=2.728775143623352e-07, relative=1.1444370314112092e-05"
+    },
+    {
+      "name": "delta.enc.tf.layers.1.self_attn.in_proj_weight",
+      "reason": "delta.enc.tf.layers.1.self_attn.in_proj_weight: max_abs=2.094777300953865e-06, relative=2.374880038556013e-05"
+    },
+    {
+      "name": "param.enc.tf.layers.1.self_attn.in_proj_bias",
+      "reason": "param.enc.tf.layers.1.self_attn.in_proj_bias: max_abs=1.633757665331359e-05, relative=0.008112706693812585"
+    },
+    {
+      "name": "delta.enc.tf.layers.1.self_attn.in_proj_bias",
+      "reason": "delta.enc.tf.layers.1.self_attn.in_proj_bias: max_abs=1.633757665331359e-05, relative=0.008112706693812585"
+    },
+    {
+      "name": "grad.enc.tf.layers.1.norm1.weight",
+      "reason": "grad.enc.tf.layers.1.norm1.weight: max_abs=5.1975250244140625e-05, relative=6.3107124870507615e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.1.norm1.weight.exp_avg",
+      "reason": "state.enc.tf.layers.1.norm1.weight.exp_avg: max_abs=5.185604095458984e-06, relative=6.303380361831698e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.1.norm1.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.1.norm1.weight.exp_avg_sq: max_abs=6.034970283508301e-07, relative=1.1824304404852046e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.1.norm1.bias",
+      "reason": "grad.enc.tf.layers.1.norm1.bias: max_abs=4.887580871582031e-05, relative=6.5910936085846755e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.1.norm1.bias.exp_avg",
+      "reason": "state.enc.tf.layers.1.norm1.bias.exp_avg: max_abs=4.887580871582031e-06, relative=6.5896469539052766e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.1.norm1.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.1.norm1.bias.exp_avg_sq: max_abs=3.241002559661865e-07, relative=1.2819841440363506e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.1.norm2.weight",
+      "reason": "grad.enc.tf.layers.1.norm2.weight: max_abs=2.8014183044433594e-05, relative=7.4750631329429885e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.1.norm2.weight.exp_avg",
+      "reason": "state.enc.tf.layers.1.norm2.weight.exp_avg: max_abs=2.8014183044433594e-06, relative=7.4693594756904865e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.1.norm2.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.1.norm2.weight.exp_avg_sq: max_abs=1.3224780559539795e-07, relative=1.5087721575393312e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.1.norm2.bias",
+      "reason": "grad.enc.tf.layers.1.norm2.bias: max_abs=2.2172927856445312e-05, relative=6.876427401551935e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.1.norm2.bias.exp_avg",
+      "reason": "state.enc.tf.layers.1.norm2.bias.exp_avg: max_abs=2.2202730178833008e-06, relative=6.873005916024259e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.1.norm2.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.1.norm2.bias.exp_avg_sq: max_abs=6.146728992462158e-08, relative=1.3634191737967585e-05"
+    },
+    {
+      "name": "param.enc.tf.layers.2.self_attn.in_proj_bias",
+      "reason": "param.enc.tf.layers.2.self_attn.in_proj_bias: max_abs=9.247967682313174e-06, relative=0.004873589182017759"
+    },
+    {
+      "name": "delta.enc.tf.layers.2.self_attn.in_proj_bias",
+      "reason": "delta.enc.tf.layers.2.self_attn.in_proj_bias: max_abs=9.247967682313174e-06, relative=0.004873589182017759"
+    },
+    {
+      "name": "grad.enc.tf.layers.2.norm1.weight",
+      "reason": "grad.enc.tf.layers.2.norm1.weight: max_abs=3.457069396972656e-05, relative=6.589204844507593e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.2.norm1.weight.exp_avg",
+      "reason": "state.enc.tf.layers.2.norm1.weight.exp_avg: max_abs=3.4570693969726562e-06, relative=6.589642946540723e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.2.norm1.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.2.norm1.weight.exp_avg_sq: max_abs=1.3783574104309082e-07, relative=1.128411186683178e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.2.norm1.bias",
+      "reason": "grad.enc.tf.layers.2.norm1.bias: max_abs=2.7418136596679688e-05, relative=6.646541348839807e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.2.norm1.bias.exp_avg",
+      "reason": "state.enc.tf.layers.2.norm1.bias.exp_avg: max_abs=2.7418136596679688e-06, relative=6.650548429825218e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.2.norm1.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.2.norm1.bias.exp_avg_sq: max_abs=1.19674950838089e-07, relative=1.299152526099661e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.2.norm2.weight",
+      "reason": "grad.enc.tf.layers.2.norm2.weight: max_abs=2.1457672119140625e-05, relative=7.110784939634985e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.2.norm2.weight.exp_avg",
+      "reason": "state.enc.tf.layers.2.norm2.weight.exp_avg: max_abs=2.1457672119140625e-06, relative=7.110718363308721e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.2.norm2.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.2.norm2.weight.exp_avg_sq: max_abs=6.472691893577576e-08, relative=1.5347827668151067e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.2.norm2.bias",
+      "reason": "grad.enc.tf.layers.2.norm2.bias: max_abs=1.6570091247558594e-05, relative=7.099878010907696e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.2.norm2.bias.exp_avg",
+      "reason": "state.enc.tf.layers.2.norm2.bias.exp_avg: max_abs=1.6540288925170898e-06, relative=7.100511296224703e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.2.norm2.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.2.norm2.bias.exp_avg_sq: max_abs=4.225876182317734e-08, relative=1.5202947762159495e-05"
+    },
+    {
+      "name": "delta.enc.tf.layers.3.self_attn.in_proj_weight",
+      "reason": "delta.enc.tf.layers.3.self_attn.in_proj_weight: max_abs=2.2351741790771484e-07, relative=2.9055945692716975e-06"
+    },
+    {
+      "name": "param.enc.tf.layers.3.self_attn.in_proj_bias",
+      "reason": "param.enc.tf.layers.3.self_attn.in_proj_bias: max_abs=1.8714500242822396e-06, relative=0.0016380440754162333"
+    },
+    {
+      "name": "delta.enc.tf.layers.3.self_attn.in_proj_bias",
+      "reason": "delta.enc.tf.layers.3.self_attn.in_proj_bias: max_abs=1.8714500242822396e-06, relative=0.0016380440754162333"
+    },
+    {
+      "name": "grad.enc.tf.layers.3.norm1.weight",
+      "reason": "grad.enc.tf.layers.3.norm1.weight: max_abs=2.7894973754882812e-05, relative=6.492745972137262e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.3.norm1.weight.exp_avg",
+      "reason": "state.enc.tf.layers.3.norm1.weight.exp_avg: max_abs=2.7865171432495117e-06, relative=6.491262212241734e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.3.norm1.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.3.norm1.weight.exp_avg_sq: max_abs=9.313225746154785e-08, relative=1.2021795912866144e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.3.norm1.bias",
+      "reason": "grad.enc.tf.layers.3.norm1.bias: max_abs=2.086162567138672e-05, relative=6.581637459541573e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.3.norm1.bias.exp_avg",
+      "reason": "state.enc.tf.layers.3.norm1.bias.exp_avg: max_abs=2.086162567138672e-06, relative=6.584046836642681e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.3.norm1.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.3.norm1.bias.exp_avg_sq: max_abs=7.194466888904572e-08, relative=1.296125143205441e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.3.norm2.weight",
+      "reason": "grad.enc.tf.layers.3.norm2.weight: max_abs=1.1265277862548828e-05, relative=6.486666630985763e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.3.norm2.weight.exp_avg",
+      "reason": "state.enc.tf.layers.3.norm2.weight.exp_avg: max_abs=1.125037670135498e-06, relative=6.491867023304894e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.3.norm2.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.3.norm2.weight.exp_avg_sq: max_abs=2.759043127298355e-08, relative=1.2969571729768082e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.3.norm2.bias",
+      "reason": "grad.enc.tf.layers.3.norm2.bias: max_abs=1.0728836059570312e-05, relative=6.606163985676607e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.3.norm2.bias.exp_avg",
+      "reason": "state.enc.tf.layers.3.norm2.bias.exp_avg: max_abs=1.0728836059570312e-06, relative=6.605702020327884e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.3.norm2.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.3.norm2.bias.exp_avg_sq: max_abs=1.5541445463895798e-08, relative=1.3727321070826688e-05"
+    },
+    {
+      "name": "delta.enc.tf.layers.4.self_attn.in_proj_weight",
+      "reason": "delta.enc.tf.layers.4.self_attn.in_proj_weight: max_abs=8.828938007354736e-07, relative=1.0040819810458172e-05"
+    },
+    {
+      "name": "param.enc.tf.layers.4.self_attn.in_proj_bias",
+      "reason": "param.enc.tf.layers.4.self_attn.in_proj_bias: max_abs=1.9785366021096706e-06, relative=0.002506429177212792"
+    },
+    {
+      "name": "delta.enc.tf.layers.4.self_attn.in_proj_bias",
+      "reason": "delta.enc.tf.layers.4.self_attn.in_proj_bias: max_abs=1.9785366021096706e-06, relative=0.002506429177212792"
+    },
+    {
+      "name": "delta.enc.tf.layers.4.linear2.weight",
+      "reason": "delta.enc.tf.layers.4.linear2.weight: max_abs=2.8870999813079834e-07, relative=3.246658685023844e-06"
+    },
+    {
+      "name": "grad.enc.tf.layers.4.norm1.weight",
+      "reason": "grad.enc.tf.layers.4.norm1.weight: max_abs=2.5272369384765625e-05, relative=7.062906551647252e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.4.norm1.weight.exp_avg",
+      "reason": "state.enc.tf.layers.4.norm1.weight.exp_avg: max_abs=2.5331974029541016e-06, relative=7.057593279654436e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.4.norm1.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.4.norm1.weight.exp_avg_sq: max_abs=1.2386590242385864e-07, relative=1.6183850363217278e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.4.norm1.bias",
+      "reason": "grad.enc.tf.layers.4.norm1.bias: max_abs=1.6927719116210938e-05, relative=6.403472116310143e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.4.norm1.bias.exp_avg",
+      "reason": "state.enc.tf.layers.4.norm1.bias.exp_avg: max_abs=1.691281795501709e-06, relative=6.4068493848632e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.4.norm1.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.4.norm1.bias.exp_avg_sq: max_abs=4.109460860490799e-08, relative=1.2477518286645861e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.4.norm2.weight",
+      "reason": "grad.enc.tf.layers.4.norm2.weight: max_abs=8.702278137207031e-06, relative=6.051838748848573e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.4.norm2.weight.exp_avg",
+      "reason": "state.enc.tf.layers.4.norm2.weight.exp_avg: max_abs=8.717179298400879e-07, relative=6.052532574531226e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.4.norm2.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.4.norm2.weight.exp_avg_sq: max_abs=1.664739102125168e-08, relative=1.0746197078761676e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.4.norm2.bias",
+      "reason": "grad.enc.tf.layers.4.norm2.bias: max_abs=7.68899917602539e-06, relative=6.065637263693481e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.4.norm2.bias.exp_avg",
+      "reason": "state.enc.tf.layers.4.norm2.bias.exp_avg: max_abs=7.674098014831543e-07, relative=6.065766981044167e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.4.norm2.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.4.norm2.bias.exp_avg_sq: max_abs=1.1757947504520416e-08, relative=1.1713169079374578e-05"
+    },
+    {
+      "name": "param.enc.tf.layers.5.self_attn.in_proj_bias",
+      "reason": "param.enc.tf.layers.5.self_attn.in_proj_bias: max_abs=3.6542006682793726e-06, relative=0.0036394787615240108"
+    },
+    {
+      "name": "delta.enc.tf.layers.5.self_attn.in_proj_bias",
+      "reason": "delta.enc.tf.layers.5.self_attn.in_proj_bias: max_abs=3.6542006682793726e-06, relative=0.0036394787615240108"
+    },
+    {
+      "name": "delta.enc.tf.layers.5.linear1.weight",
+      "reason": "delta.enc.tf.layers.5.linear1.weight: max_abs=2.5779008865356445e-06, relative=2.7480154990320885e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.5.norm1.weight",
+      "reason": "grad.enc.tf.layers.5.norm1.weight: max_abs=1.6927719116210938e-05, relative=6.211978946480871e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.5.norm1.weight.exp_avg",
+      "reason": "state.enc.tf.layers.5.norm1.weight.exp_avg: max_abs=1.6987323760986328e-06, relative=6.211305860255102e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.5.norm1.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.5.norm1.weight.exp_avg_sq: max_abs=7.636845111846924e-08, relative=1.2164757109600353e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.5.norm1.bias",
+      "reason": "grad.enc.tf.layers.5.norm1.bias: max_abs=9.953975677490234e-06, relative=5.709376388034366e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.5.norm1.bias.exp_avg",
+      "reason": "state.enc.tf.layers.5.norm1.bias.exp_avg: max_abs=9.98377799987793e-07, relative=5.710832374630412e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.5.norm1.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.5.norm1.bias.exp_avg_sq: max_abs=1.83936208486557e-08, relative=1.062751084519001e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.5.norm2.weight",
+      "reason": "grad.enc.tf.layers.5.norm2.weight: max_abs=7.68899917602539e-06, relative=6.058807428588725e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.5.norm2.weight.exp_avg",
+      "reason": "state.enc.tf.layers.5.norm2.weight.exp_avg: max_abs=7.674098014831543e-07, relative=6.062346680925199e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.5.norm2.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.5.norm2.weight.exp_avg_sq: max_abs=1.3969838619232178e-08, relative=1.046762562931177e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.5.norm2.bias",
+      "reason": "grad.enc.tf.layers.5.norm2.bias: max_abs=8.285045623779297e-06, relative=6.220891751361625e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.5.norm2.bias.exp_avg",
+      "reason": "state.enc.tf.layers.5.norm2.bias.exp_avg: max_abs=8.307397365570068e-07, relative=6.221581566286043e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.5.norm2.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.5.norm2.bias.exp_avg_sq: max_abs=8.498318493366241e-09, relative=1.18701428776536e-05"
+    },
+    {
+      "name": "delta.enc.tf.layers.6.self_attn.in_proj_weight",
+      "reason": "delta.enc.tf.layers.6.self_attn.in_proj_weight: max_abs=1.6391277313232422e-07, relative=2.357652569420854e-06"
+    },
+    {
+      "name": "param.enc.tf.layers.6.self_attn.in_proj_bias",
+      "reason": "param.enc.tf.layers.6.self_attn.in_proj_bias: max_abs=1.0313483187474048e-05, relative=0.005615034933212704"
+    },
+    {
+      "name": "delta.enc.tf.layers.6.self_attn.in_proj_bias",
+      "reason": "delta.enc.tf.layers.6.self_attn.in_proj_bias: max_abs=1.0313483187474048e-05, relative=0.005615034933212704"
+    },
+    {
+      "name": "delta.enc.tf.layers.6.linear1.weight",
+      "reason": "delta.enc.tf.layers.6.linear1.weight: max_abs=8.989591151475906e-07, relative=9.679213425519408e-06"
+    },
+    {
+      "name": "grad.enc.tf.layers.6.norm1.weight",
+      "reason": "grad.enc.tf.layers.6.norm1.weight: max_abs=2.3126602172851562e-05, relative=7.203077230447875e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.6.norm1.weight.exp_avg",
+      "reason": "state.enc.tf.layers.6.norm1.weight.exp_avg: max_abs=2.3096799850463867e-06, relative=7.201208192379535e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.6.norm1.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.6.norm1.weight.exp_avg_sq: max_abs=9.452924132347107e-08, relative=1.6928881221110054e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.6.norm1.bias",
+      "reason": "grad.enc.tf.layers.6.norm1.bias: max_abs=1.3887882232666016e-05, relative=6.157872279353678e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.6.norm1.bias.exp_avg",
+      "reason": "state.enc.tf.layers.6.norm1.bias.exp_avg: max_abs=1.3932585716247559e-06, relative=6.157406492853786e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.6.norm1.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.6.norm1.bias.exp_avg_sq: max_abs=2.7706846594810486e-08, relative=1.247430548560529e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.6.norm2.weight",
+      "reason": "grad.enc.tf.layers.6.norm2.weight: max_abs=1.239776611328125e-05, relative=7.2776103046847504e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.6.norm2.weight.exp_avg",
+      "reason": "state.enc.tf.layers.6.norm2.weight.exp_avg: max_abs=1.2442469596862793e-06, relative=7.279751398182808e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.6.norm2.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.6.norm2.weight.exp_avg_sq: max_abs=1.6530975699424744e-08, relative=1.40159430621671e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.6.norm2.bias",
+      "reason": "grad.enc.tf.layers.6.norm2.bias: max_abs=6.67572021484375e-06, relative=6.513032039088344e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.6.norm2.bias.exp_avg",
+      "reason": "state.enc.tf.layers.6.norm2.bias.exp_avg: max_abs=6.668269634246826e-07, relative=6.511299262548253e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.6.norm2.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.6.norm2.bias.exp_avg_sq: max_abs=7.683411240577698e-09, relative=1.2475573224212548e-05"
+    },
+    {
+      "name": "delta.enc.tf.layers.7.self_attn.in_proj_weight",
+      "reason": "delta.enc.tf.layers.7.self_attn.in_proj_weight: max_abs=4.4424086809158325e-07, relative=5.891973167992325e-06"
+    },
+    {
+      "name": "param.enc.tf.layers.7.self_attn.in_proj_bias",
+      "reason": "param.enc.tf.layers.7.self_attn.in_proj_bias: max_abs=1.240514302480733e-05, relative=0.004613264308292953"
+    },
+    {
+      "name": "delta.enc.tf.layers.7.self_attn.in_proj_bias",
+      "reason": "delta.enc.tf.layers.7.self_attn.in_proj_bias: max_abs=1.240514302480733e-05, relative=0.004613264308292953"
+    },
+    {
+      "name": "delta.enc.tf.layers.7.linear1.weight",
+      "reason": "delta.enc.tf.layers.7.linear1.weight: max_abs=1.601874828338623e-07, relative=2.1473298444264726e-06"
+    },
+    {
+      "name": "delta.enc.tf.layers.7.linear2.weight",
+      "reason": "delta.enc.tf.layers.7.linear2.weight: max_abs=4.651956260204315e-07, relative=5.397877107182515e-06"
+    },
+    {
+      "name": "grad.enc.tf.layers.7.norm1.weight",
+      "reason": "grad.enc.tf.layers.7.norm1.weight: max_abs=1.3172626495361328e-05, relative=6.583888818616974e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.7.norm1.weight.exp_avg",
+      "reason": "state.enc.tf.layers.7.norm1.weight.exp_avg: max_abs=1.3187527656555176e-06, relative=6.5749819538695986e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.7.norm1.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.7.norm1.weight.exp_avg_sq: max_abs=4.7730281949043274e-08, relative=1.2476459823334845e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.7.norm1.bias",
+      "reason": "grad.enc.tf.layers.7.norm1.bias: max_abs=1.1146068572998047e-05, relative=6.376309185565356e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.7.norm1.bias.exp_avg",
+      "reason": "state.enc.tf.layers.7.norm1.bias.exp_avg: max_abs=1.1175870895385742e-06, relative=6.373975317894409e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.7.norm1.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.7.norm1.bias.exp_avg_sq: max_abs=1.816079020500183e-08, relative=1.2996850895287344e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.7.norm2.weight",
+      "reason": "grad.enc.tf.layers.7.norm2.weight: max_abs=9.238719940185547e-06, relative=6.9683160991125325e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.7.norm2.weight.exp_avg",
+      "reason": "state.enc.tf.layers.7.norm2.weight.exp_avg: max_abs=9.238719940185547e-07, relative=6.975027852807204e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.7.norm2.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.7.norm2.weight.exp_avg_sq: max_abs=1.2194504961371422e-08, relative=1.3191716329709872e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.7.norm2.bias",
+      "reason": "grad.enc.tf.layers.7.norm2.bias: max_abs=6.794929504394531e-06, relative=5.828743762748568e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.7.norm2.bias.exp_avg",
+      "reason": "state.enc.tf.layers.7.norm2.bias.exp_avg: max_abs=6.780028343200684e-07, relative=5.827421025344714e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.7.norm2.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.7.norm2.bias.exp_avg_sq: max_abs=7.363269105553627e-09, relative=1.1308836400756457e-05"
+    },
+    {
+      "name": "delta.enc.tf.layers.8.self_attn.in_proj_weight",
+      "reason": "delta.enc.tf.layers.8.self_attn.in_proj_weight: max_abs=1.8998980522155762e-07, relative=2.7444544250043032e-06"
+    },
+    {
+      "name": "param.enc.tf.layers.8.self_attn.in_proj_bias",
+      "reason": "param.enc.tf.layers.8.self_attn.in_proj_bias: max_abs=3.8056523408158682e-06, relative=0.0031089889072723315"
+    },
+    {
+      "name": "delta.enc.tf.layers.8.self_attn.in_proj_bias",
+      "reason": "delta.enc.tf.layers.8.self_attn.in_proj_bias: max_abs=3.8056523408158682e-06, relative=0.0031089889072723315"
+    },
+    {
+      "name": "delta.enc.tf.layers.8.linear1.weight",
+      "reason": "delta.enc.tf.layers.8.linear1.weight: max_abs=1.366250216960907e-06, relative=1.4618153072828807e-05"
+    },
+    {
+      "name": "delta.enc.tf.layers.8.linear2.weight",
+      "reason": "delta.enc.tf.layers.8.linear2.weight: max_abs=2.416782081127167e-07, relative=2.687784631447657e-06"
+    },
+    {
+      "name": "grad.enc.tf.layers.8.norm1.weight",
+      "reason": "grad.enc.tf.layers.8.norm1.weight: max_abs=1.3947486877441406e-05, relative=6.328273545602197e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.8.norm1.weight.exp_avg",
+      "reason": "state.enc.tf.layers.8.norm1.weight.exp_avg: max_abs=1.3932585716247559e-06, relative=6.321156751682737e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.8.norm1.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.8.norm1.weight.exp_avg_sq: max_abs=3.1781382858753204e-08, relative=1.1698649784538608e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.8.norm1.bias",
+      "reason": "grad.enc.tf.layers.8.norm1.bias: max_abs=1.0967254638671875e-05, relative=5.985036351966825e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.8.norm1.bias.exp_avg",
+      "reason": "state.enc.tf.layers.8.norm1.bias.exp_avg: max_abs=1.0952353477478027e-06, relative=5.983009236661284e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.8.norm1.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.8.norm1.bias.exp_avg_sq: max_abs=1.7113052308559418e-08, relative=1.1359763472135263e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.8.norm2.weight",
+      "reason": "grad.enc.tf.layers.8.norm2.weight: max_abs=1.0669231414794922e-05, relative=6.635308222901715e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.8.norm2.weight.exp_avg",
+      "reason": "state.enc.tf.layers.8.norm2.weight.exp_avg: max_abs=1.0654330253601074e-06, relative=6.632830782021917e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.8.norm2.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.8.norm2.weight.exp_avg_sq: max_abs=2.1012965589761734e-08, relative=1.4429126463043388e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.8.norm2.bias",
+      "reason": "grad.enc.tf.layers.8.norm2.bias: max_abs=6.735324859619141e-06, relative=6.51404028223187e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.8.norm2.bias.exp_avg",
+      "reason": "state.enc.tf.layers.8.norm2.bias.exp_avg: max_abs=6.742775440216064e-07, relative=6.519599866537038e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.8.norm2.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.8.norm2.bias.exp_avg_sq: max_abs=8.17817635834217e-09, relative=1.3754396053115372e-05"
+    },
+    {
+      "name": "delta.enc.tf.layers.9.self_attn.in_proj_weight",
+      "reason": "delta.enc.tf.layers.9.self_attn.in_proj_weight: max_abs=9.313225746154785e-08, relative=2.025402307855274e-06"
+    },
+    {
+      "name": "param.enc.tf.layers.9.self_attn.in_proj_bias",
+      "reason": "param.enc.tf.layers.9.self_attn.in_proj_bias: max_abs=1.8099699445883743e-06, relative=0.0024436651201434605"
+    },
+    {
+      "name": "delta.enc.tf.layers.9.self_attn.in_proj_bias",
+      "reason": "delta.enc.tf.layers.9.self_attn.in_proj_bias: max_abs=1.8099699445883743e-06, relative=0.0024436651201434605"
+    },
+    {
+      "name": "delta.enc.tf.layers.9.self_attn.out_proj.weight",
+      "reason": "delta.enc.tf.layers.9.self_attn.out_proj.weight: max_abs=3.25031578540802e-07, relative=6.376817129529835e-06"
+    },
+    {
+      "name": "delta.enc.tf.layers.9.linear1.weight",
+      "reason": "delta.enc.tf.layers.9.linear1.weight: max_abs=1.6763806343078613e-07, relative=3.2130302957159985e-06"
+    },
+    {
+      "name": "delta.enc.tf.layers.9.linear2.weight",
+      "reason": "delta.enc.tf.layers.9.linear2.weight: max_abs=2.5331974029541016e-07, relative=3.60984090946193e-06"
+    },
+    {
+      "name": "grad.enc.tf.layers.9.norm1.weight",
+      "reason": "grad.enc.tf.layers.9.norm1.weight: max_abs=1.4662742614746094e-05, relative=7.0213908345873765e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.9.norm1.weight.exp_avg",
+      "reason": "state.enc.tf.layers.9.norm1.weight.exp_avg: max_abs=1.4603137969970703e-06, relative=7.019665923908566e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.9.norm1.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.9.norm1.weight.exp_avg_sq: max_abs=4.423782229423523e-08, relative=1.3650476251481914e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.9.norm1.bias",
+      "reason": "grad.enc.tf.layers.9.norm1.bias: max_abs=1.4483928680419922e-05, relative=6.29440646265369e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.9.norm1.bias.exp_avg",
+      "reason": "state.enc.tf.layers.9.norm1.bias.exp_avg: max_abs=1.4454126358032227e-06, relative=6.28984674960755e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.9.norm1.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.9.norm1.bias.exp_avg_sq: max_abs=2.427259460091591e-08, relative=1.2655680819627879e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.9.norm2.weight",
+      "reason": "grad.enc.tf.layers.9.norm2.weight: max_abs=1.1682510375976562e-05, relative=6.74300582378769e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.9.norm2.weight.exp_avg",
+      "reason": "state.enc.tf.layers.9.norm2.weight.exp_avg: max_abs=1.166015863418579e-06, relative=6.73856766366225e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.9.norm2.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.9.norm2.weight.exp_avg_sq: max_abs=1.3329554349184036e-08, relative=1.1769807054684926e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.9.norm2.bias",
+      "reason": "grad.enc.tf.layers.9.norm2.bias: max_abs=8.58306884765625e-06, relative=6.995698544792178e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.9.norm2.bias.exp_avg",
+      "reason": "state.enc.tf.layers.9.norm2.bias.exp_avg: max_abs=8.568167686462402e-07, relative=6.9989893393596364e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.9.norm2.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.9.norm2.bias.exp_avg_sq: max_abs=1.1350493878126144e-08, relative=1.4966143268368886e-05"
+    },
+    {
+      "name": "param.enc.tf.layers.10.self_attn.in_proj_weight",
+      "reason": "param.enc.tf.layers.10.self_attn.in_proj_weight: max_abs=3.666430711746216e-05, relative=1.3233471862458803e-06"
+    },
+    {
+      "name": "delta.enc.tf.layers.10.self_attn.in_proj_weight",
+      "reason": "delta.enc.tf.layers.10.self_attn.in_proj_weight: max_abs=3.666430711746216e-05, relative=0.0004134444063606714"
+    },
+    {
+      "name": "param.enc.tf.layers.10.self_attn.in_proj_bias",
+      "reason": "param.enc.tf.layers.10.self_attn.in_proj_bias: max_abs=6.566882802871987e-06, relative=0.004501731840627661"
+    },
+    {
+      "name": "delta.enc.tf.layers.10.self_attn.in_proj_bias",
+      "reason": "delta.enc.tf.layers.10.self_attn.in_proj_bias: max_abs=6.566882802871987e-06, relative=0.004501731840627661"
+    },
+    {
+      "name": "delta.enc.tf.layers.10.linear1.weight",
+      "reason": "delta.enc.tf.layers.10.linear1.weight: max_abs=4.591420292854309e-07, relative=5.046056620815633e-06"
+    },
+    {
+      "name": "grad.enc.tf.layers.10.norm1.weight",
+      "reason": "grad.enc.tf.layers.10.norm1.weight: max_abs=1.990795135498047e-05, relative=7.121411508572223e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.10.norm1.weight.exp_avg",
+      "reason": "state.enc.tf.layers.10.norm1.weight.exp_avg: max_abs=1.989305019378662e-06, relative=7.117036651414525e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.10.norm1.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.10.norm1.weight.exp_avg_sq: max_abs=4.807952791452408e-08, relative=1.5393045608252092e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.10.norm1.bias",
+      "reason": "grad.enc.tf.layers.10.norm1.bias: max_abs=1.0371208190917969e-05, relative=6.338283786111843e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.10.norm1.bias.exp_avg",
+      "reason": "state.enc.tf.layers.10.norm1.bias.exp_avg: max_abs=1.043081283569336e-06, relative=6.340189563920191e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.10.norm1.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.10.norm1.bias.exp_avg_sq: max_abs=1.8510036170482635e-08, relative=1.2333258164227492e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.10.norm2.weight",
+      "reason": "grad.enc.tf.layers.10.norm2.weight: max_abs=8.344650268554688e-06, relative=6.916225385612053e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.10.norm2.weight.exp_avg",
+      "reason": "state.enc.tf.layers.10.norm2.weight.exp_avg: max_abs=8.344650268554688e-07, relative=6.915033289644082e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.10.norm2.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.10.norm2.weight.exp_avg_sq: max_abs=1.123407855629921e-08, relative=1.276631361817306e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.10.norm2.bias",
+      "reason": "grad.enc.tf.layers.10.norm2.bias: max_abs=7.897615432739258e-06, relative=7.036345251116229e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.10.norm2.bias.exp_avg",
+      "reason": "state.enc.tf.layers.10.norm2.bias.exp_avg: max_abs=7.897615432739258e-07, relative=7.039654372771614e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.10.norm2.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.10.norm2.bias.exp_avg_sq: max_abs=7.697963155806065e-09, relative=1.4597999143299157e-05"
+    },
+    {
+      "name": "delta.enc.tf.layers.11.self_attn.in_proj_weight",
+      "reason": "delta.enc.tf.layers.11.self_attn.in_proj_weight: max_abs=5.103647708892822e-07, relative=6.118297015992349e-06"
+    },
+    {
+      "name": "param.enc.tf.layers.11.self_attn.in_proj_bias",
+      "reason": "param.enc.tf.layers.11.self_attn.in_proj_bias: max_abs=2.9631955840159208e-06, relative=0.003062746468374812"
+    },
+    {
+      "name": "delta.enc.tf.layers.11.self_attn.in_proj_bias",
+      "reason": "delta.enc.tf.layers.11.self_attn.in_proj_bias: max_abs=2.9631955840159208e-06, relative=0.003062746468374812"
+    },
+    {
+      "name": "delta.enc.tf.layers.11.self_attn.out_proj.weight",
+      "reason": "delta.enc.tf.layers.11.self_attn.out_proj.weight: max_abs=1.2014061212539673e-07, relative=2.418114941151335e-06"
+    },
+    {
+      "name": "grad.enc.tf.layers.11.norm1.weight",
+      "reason": "grad.enc.tf.layers.11.norm1.weight: max_abs=1.0848045349121094e-05, relative=6.228832008152559e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.11.norm1.weight.exp_avg",
+      "reason": "state.enc.tf.layers.11.norm1.weight.exp_avg: max_abs=1.087784767150879e-06, relative=6.236608968490772e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.11.norm1.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.11.norm1.weight.exp_avg_sq: max_abs=2.200249582529068e-08, relative=1.1017086573811779e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.11.norm1.bias",
+      "reason": "grad.enc.tf.layers.11.norm1.bias: max_abs=9.59634780883789e-06, relative=6.283359292087037e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.11.norm1.bias.exp_avg",
+      "reason": "state.enc.tf.layers.11.norm1.bias.exp_avg: max_abs=9.611248970031738e-07, relative=6.284937870454736e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.11.norm1.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.11.norm1.bias.exp_avg_sq: max_abs=1.8568243831396103e-08, relative=1.3140686218926334e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.11.norm2.weight",
+      "reason": "grad.enc.tf.layers.11.norm2.weight: max_abs=7.808208465576172e-06, relative=6.3925130939912e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.11.norm2.weight.exp_avg",
+      "reason": "state.enc.tf.layers.11.norm2.weight.exp_avg: max_abs=7.82310962677002e-07, relative=6.392820601728881e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.11.norm2.weight.exp_avg_sq",
+      "reason": "state.enc.tf.layers.11.norm2.weight.exp_avg_sq: max_abs=1.4086253941059113e-08, relative=1.1983964157623642e-05"
+    },
+    {
+      "name": "grad.enc.tf.layers.11.norm2.bias",
+      "reason": "grad.enc.tf.layers.11.norm2.bias: max_abs=9.357929229736328e-06, relative=6.620110603661263e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.11.norm2.bias.exp_avg",
+      "reason": "state.enc.tf.layers.11.norm2.bias.exp_avg: max_abs=9.313225746154785e-07, relative=6.621826692966028e-06"
+    },
+    {
+      "name": "state.enc.tf.layers.11.norm2.bias.exp_avg_sq",
+      "reason": "state.enc.tf.layers.11.norm2.bias.exp_avg_sq: max_abs=1.2631062418222427e-08, relative=1.4100035688120477e-05"
+    },
+    {
+      "name": "grad.enc.head_v.weight",
+      "reason": "grad.enc.head_v.weight: max_abs=0.010223388671875, relative=1.1408186826186996e-05"
+    },
+    {
+      "name": "state.enc.head_v.weight.exp_avg",
+      "reason": "state.enc.head_v.weight.exp_avg: max_abs=0.0010223388671875, relative=1.1413562986728968e-05"
+    },
+    {
+      "name": "state.enc.head_v.weight.exp_avg_sq",
+      "reason": "state.enc.head_v.weight.exp_avg_sq: max_abs=0.00620269775390625, relative=2.3147254441307437e-05"
+    }
+  ],
+  "summary": {
+    "loss": {
+      "tensors": 1,
+      "failed": 1,
+      "max_abs": 3.0517578125e-05,
+      "max_relative": 1.0070243979857095e-07
+    },
+    "input_v": {
+      "tensors": 1,
+      "failed": 0,
+      "max_abs": 0.0,
+      "max_relative": 0.0
+    },
+    "input_y0": {
+      "tensors": 1,
+      "failed": 0,
+      "max_abs": 0.0,
+      "max_relative": 0.0
+    },
+    "output": {
+      "tensors": 3,
+      "failed": 0,
+      "max_abs": 0.0,
+      "max_relative": 0.0
+    },
+    "grad": {
+      "tensors": 153,
+      "failed": 49,
+      "max_abs": 0.010223388671875,
+      "max_relative": 1.1408186826186996e-05
+    },
+    "param": {
+      "tensors": 299,
+      "failed": 13,
+      "max_abs": 3.666430711746216e-05,
+      "max_relative": 0.008112706693812585
+    },
+    "delta": {
+      "tensors": 299,
+      "failed": 33,
+      "max_abs": 3.666430711746216e-05,
+      "max_relative": 0.008112706693812585
+    },
+    "state": {
+      "tensors": 306,
+      "failed": 98,
+      "max_abs": 0.01171875,
+      "max_relative": 2.3147254441307437e-05
+    }
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "status": "COMPUTE_IMPORTS_AND_S01_IMPORT_PREFLIGHT_PASS",
+  "host": "cn21417",
+  "account": "dengqingtian",
+  "validation_job_id": "2026223",
+  "validation_end_utc": "2026-11-04T13:09:53Z",
+  "root": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4",
+  "python": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+  "python_version": "3.9.9 (main, Jul 29 2025, 11:26:21) \n[GCC 10.3.1]",
+  "torch": {
+    "version": "2.7.1+cpu",
+    "file": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py"
+  },
+  "numpy": {
+    "version": "1.26.4",
+    "file": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib64/python3.9/site-packages/numpy/__init__.py"
+  },
+  "environment": {
+    "PYTHONPATH": "/home/share/songzhenlong/eitfm/sw/torch_kml",
+    "LD_LIBRARY_PATH": "/opt/HPCKit/kml-lib/sme/kblas/multi:/opt/HPCKit/kml-lib:/opt/HPCKit/bisheng-lib",
+    "LD_PRELOAD": "/home/share/songzhenlong/eitfm/sw/kml_shim/libkml_sgemm_shim.so",
+    "KML_BLAS_LIB": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+    "PYTHONNOUSERSITE": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "actual_cpu_affinity": [
+    0
+  ],
+  "memory_allocated_MB": 4096,
+  "memory_limit_visibility": "CGROUP_FILES_PERMISSION_DENIED; scheduler allocation known, kernel hard limit not independently read",
+  "host_memory_available_is_not_allocation": true,
+  "s01_preflight": {
+    "scope": "ACTUAL_IMPORT_AND_INPUT_IDENTITY_ONLY",
+    "status": "PASS",
+    "host": "cn21417",
+    "declared_job_id": "2026223",
+    "python": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+    "python_version": "3.9.9 (main, Jul 29 2025, 11:26:21) \n[GCC 10.3.1]",
+    "platform": "Linux-5.10.0-285.6.v2403.ky10p.aarch64-aarch64-with-glibc2.34",
+    "model_forward_backward": "NOT_RUN",
+    "cluster_performance": "NOT_RUN",
+    "source_sha256": {
+      "candidate/run_node16.sh": "aaac8557b00abbf68a0e296e7119c0150c3fbfd467c42d132035ed69f929fd5f",
+      "candidate/runner.py": "692113888fab4ac23c0188f39731ceea0f0fec1a8ef09f25cee872515ba7dd0b",
+      "candidate/s4_models.py": "512dc202e4c0d60363b57317ed612694b80a4d5d3467740ed582bcf600bf1d92",
+      "candidate/kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+      "candidate/legacy_inputs.json": "24df1ad655fa3263efaf1ec8a721074fdfbae15fcb1d054b30d88bf5b9734835",
+      "tests/test_runner.py": "45830b540625a583656ac4cf0c91ae249929274a86dd6e513650ecc48374878d",
+      "tests/synthetic_worker.py": "39310e0dfe93e7450a3d4fc4ea4e2f5fc12085771f0617585f498cb536c1e33c",
+      "exercise_local.py": "09d08da72ef8c7704b1dbc97563098f6af9e180c0dd87dba33b83814a737182b"
+    },
+    "cpu_affinity": [
+      0
+    ],
+    "allowed_sets": [
+      "Cpus_allowed_list:\t0",
+      "Mems_allowed_list:\t0-31"
+    ],
+    "environment": {
+      "PYTHONPATH": "/home/share/songzhenlong/eitfm/sw/torch_kml:/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/candidate",
+      "LD_LIBRARY_PATH": "/opt/HPCKit/kml-lib/sme/kblas/multi:/opt/HPCKit/kml-lib:/opt/HPCKit/bisheng-lib",
+      "LD_PRELOAD": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+      "KML_BLAS_LIB": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+      "OMP_PLACES": "cores",
+      "OMP_PROC_BIND": "close",
+      "OMP_NUM_THREADS": "1",
+      "DEVICE": "cpu",
+      "AMP": "fp32",
+      "KML_LINEAR": "1",
+      "LINEAR_DTYPE": "fp32"
+    },
+    "input_protocol": "LEGACY_TIMING_ONLY",
+    "inputs": {
+      "s0322p0": {
+        "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/output/cases/s0322p0/frames.npz",
+        "sha256": "4bb9cfaffa8f7d464d1efd80a45e98edd2cf990179b923c160573078f97bfdad"
+      },
+      "s0322p1": {
+        "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/output/cases/s0322p1/frames.npz",
+        "sha256": "a5db12595bb7486a9a86e4f9bce9a0680876d2a732bc5f05d361c7b9657737c0"
+      }
+    },
+    "numpy": {
+      "version": "1.26.4",
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/__init__.py"
+    },
+    "torch": {
+      "version": "2.7.1+cpu",
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py"
+    },
+    "kml_ops": {
+      "version": null,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/candidate/kml_ops.py"
+    },
+    "model_import": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/candidate/s4_models.py",
+    "loaded_libraries": {
+      "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73",
+      "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a",
+      "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute-489746be.so": "7f338493638c8b4f8ba0f3d6ef44e272d7ddfc67391282dbc0c25eaf4c82a9c2",
+      "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute_graph-17c2200a.so": "1712d2c6eba7d87189788766fd56120cf1d1cb42ca53b7809ea14ee27ac7d238",
+      "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libgfortran-0b50f350.so.5.0.0": "6e85b148428f0eeb8445270806f25deb8a9e749086157d47a5955bed23189642",
+      "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f",
+      "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so": "0098ec8982bc60ae9511ee3a636d9b9c8f9d3decceb4b44c7e1d446d8b74ab0b",
+      "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so": "34370e00fc38fe83b82685b113358b12afe6959286b8f5fc8125682ce9e0af10",
+      "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libshm.so": "0f3cef29d8ca21eaa84e547ce55a7913bf504a9530f00307caa6535a7db1d2c1",
+      "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so": "340a49fc5a0ed13f02b67f08f62bc1a7e9636a0f277950ef00c8da0ff896a646",
+      "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so": "eee755641450652e0c08aeb5d3436f39bd9d3ff89e501a4262b3b0ca5862ac7a",
+      "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so": "2cbf6ab7259b743b02eb75babb72548784b1503b280f934eeceefec0fb1816e4",
+      "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so": "c26b39e44ea1b339ab2828f492dfc8d6ddf854c3da3f5c5f5cf4aa3d06e47912",
+      "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac",
+      "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c"
+    },
+    "limitation": "Imports and legacy file identity only; OMP ABI pairing and actual training require further review",
+    "finished_utc": "2026-11-04T13:09:52.108104+00:00"
+  },
+  "loaded_paths": [
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libgfortran-daac5196.so.5.0.0",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/core/_multiarray_tests.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/core/_multiarray_umath.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/fft/_pocketfft_internal.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/linalg/_umath_linalg.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/random/_bounded_integers.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/random/_common.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/random/_generator.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/random/_mt19937.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/random/_pcg64.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/random/_philox.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/random/_sfc64.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/random/bit_generator.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/random/mtrand.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/songzhenlong/eitfm/sw/kml_shim/libkml_sgemm_shim.so",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute-489746be.so",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute_graph-17c2200a.so",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libgfortran-0b50f350.so.5.0.0",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libshm.so",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so",
+    "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+    "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1"
+  ],
+  "jobs": [
+    {
+      "job_id": "2026157",
+      "node": "cn21417",
+      "state": "FAILED",
+      "job_exit_code": 1,
+      "start_utc": "2026-11-04T12:54:57Z",
+      "end_utc": "2026-11-04T12:54:58Z",
+      "wall_s": 1.0,
+      "scheduler_time_limit_s": 300,
+      "resources": {
+        "cpu": 1,
+        "mem": 4096,
+        "gpu": {
+          "amount": 0,
+          "type": "gpu"
+        },
+        "npu": {
+          "count": 0,
+          "name": "npu"
+        },
+        "license": {}
+      },
+      "exclusive": true
+    },
+    {
+      "job_id": "2026164",
+      "node": "cn21417",
+      "state": "FAILED",
+      "job_exit_code": 2,
+      "start_utc": "2026-11-04T12:56:54Z",
+      "end_utc": "2026-11-04T12:56:55Z",
+      "wall_s": 1.0,
+      "scheduler_time_limit_s": 240,
+      "resources": {
+        "cpu": 1,
+        "mem": 4096,
+        "gpu": {
+          "amount": 0,
+          "type": "gpu"
+        },
+        "npu": {
+          "count": 0,
+          "name": "npu"
+        },
+        "license": {}
+      },
+      "exclusive": true
+    },
+    {
+      "job_id": "2026200",
+      "node": "cn21417",
+      "state": "SUCCEEDED",
+      "job_exit_code": 0,
+      "start_utc": "2026-11-04T13:02:45Z",
+      "end_utc": "2026-11-04T13:02:57Z",
+      "wall_s": 12.0,
+      "scheduler_time_limit_s": 180,
+      "resources": {
+        "cpu": 1,
+        "mem": 4096,
+        "gpu": {
+          "amount": 0,
+          "type": "gpu"
+        },
+        "npu": {
+          "count": 0,
+          "name": "npu"
+        },
+        "license": {}
+      },
+      "exclusive": true
+    },
+    {
+      "job_id": "2026223",
+      "node": "cn21417",
+      "state": "SUCCEEDED",
+      "job_exit_code": 0,
+      "start_utc": "2026-11-04T13:09:33Z",
+      "end_utc": "2026-11-04T13:09:53Z",
+      "wall_s": 20.0,
+      "scheduler_time_limit_s": 120,
+      "resources": {
+        "cpu": 1,
+        "mem": 4096,
+        "gpu": {
+          "amount": 0,
+          "type": "gpu"
+        },
+        "npu": {
+          "count": 0,
+          "name": "npu"
+        },
+        "license": {}
+      },
+      "exclusive": true
+    }
+  ],
+  "total_scheduled_node_wall_s": 34.0,
+  "configured_time_limits_sum_s": 840,
+  "new_model_forward_backward": false,
+  "cluster_performance": false,
+  "job_still_running": false
+}

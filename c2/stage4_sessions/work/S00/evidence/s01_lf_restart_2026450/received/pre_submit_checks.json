@@ -1,0 +1,57 @@
+{
+  "status": "PASS_BEFORE_SUBMISSION",
+  "captured_utc": "2026-11-04T14:03:17.410669+00:00",
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T140206Z_LF_RESTART",
+  "package_sha256": "747f9c36354136afa3383a3d836c7e3db7568a043d1712fb2f03765068b4ec5e",
+  "all_payload_files_sha256": {
+    "PILOT_MANIFEST_S00.json": "d34152e132f517915b0c985dac55b8d32584992135edc377f98d0cc966916022",
+    "PILOT_STATUS_S00.json": "746164884698a51c33d9f70296c5eeabf8af9e8aaac2a03ca5929754f3de61bc",
+    "SOURCE_MANIFEST.json": "d1d792863c98803652ea863f6f25244426c703f6ff8110c0b2628689bb51aac5",
+    "candidate/kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "candidate/legacy_inputs.json": "24df1ad655fa3263efaf1ec8a721074fdfbae15fcb1d054b30d88bf5b9734835",
+    "candidate/run_node16.sh": "aaac8557b00abbf68a0e296e7119c0150c3fbfd467c42d132035ed69f929fd5f",
+    "candidate/runner.py": "692113888fab4ac23c0188f39731ceea0f0fec1a8ef09f25cee872515ba7dd0b",
+    "candidate/s4_models.py": "512dc202e4c0d60363b57317ed612694b80a4d5d3467740ed582bcf600bf1d92",
+    "cluster_runtime.env": "e5bf5072fe91037bd335897435426fda7e9848c5fdcce4c18f4d5eaf194ea333",
+    "exercise_local.py": "09d08da72ef8c7704b1dbc97563098f6af9e180c0dd87dba33b83814a737182b",
+    "lib/libkml_sgemm_shim.so": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73",
+    "output/cases/s0322p0/frames.npz": "4bb9cfaffa8f7d464d1efd80a45e98edd2cf990179b923c160573078f97bfdad",
+    "output/cases/s0322p1/frames.npz": "a5db12595bb7486a9a86e4f9bce9a0680876d2a732bc5f05d361c7b9657737c0",
+    "pilot_s01_startup.sh": "72ba04253bc4b68446d642a70bcc0571ee926b71bc81e553c1a385d91dc1709f",
+    "runtime_preflight.sh": "a13650e48109704a9111ff00dd37cfc983e1040a12347e4f05706b136923899b",
+    "runtime_probe.py": "fb1384a231b2a785ba215b916519231b5e03cf6cef1de13da6500fa096b92731",
+    "tests/synthetic_worker.py": "39310e0dfe93e7450a3d4fc4ea4e2f5fc12085771f0617585f498cb536c1e33c",
+    "tests/test_runner.py": "45830b540625a583656ac4cf0c91ae249929274a86dd6e513650ecc48374878d"
+  },
+  "shell_checks": [
+    {
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T140206Z_LF_RESTART/payload/candidate/run_node16.sh",
+      "sha256": "aaac8557b00abbf68a0e296e7119c0150c3fbfd467c42d132035ed69f929fd5f",
+      "cr_bytes": 0,
+      "bash_n_exit": 0,
+      "stderr": ""
+    },
+    {
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T140206Z_LF_RESTART/payload/cluster_runtime.env",
+      "sha256": "e5bf5072fe91037bd335897435426fda7e9848c5fdcce4c18f4d5eaf194ea333",
+      "cr_bytes": 0,
+      "bash_n_exit": 0,
+      "stderr": ""
+    },
+    {
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T140206Z_LF_RESTART/payload/pilot_s01_startup.sh",
+      "sha256": "72ba04253bc4b68446d642a70bcc0571ee926b71bc81e553c1a385d91dc1709f",
+      "cr_bytes": 0,
+      "bash_n_exit": 0,
+      "stderr": ""
+    },
+    {
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T140206Z_LF_RESTART/payload/runtime_preflight.sh",
+      "sha256": "a13650e48109704a9111ff00dd37cfc983e1040a12347e4f05706b136923899b",
+      "cr_bytes": 0,
+      "bash_n_exit": 0,
+      "stderr": ""
+    }
+  ],
+  "actual_entry": "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T140206Z_LF_RESTART/payload/pilot_s01_startup.sh"
+}

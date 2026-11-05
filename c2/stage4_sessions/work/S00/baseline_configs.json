@@ -1,0 +1,131 @@
+{
+  "DDR_B32_MEMBIND": {
+    "env": {
+      "DEVICE": "cpu",
+      "AMP": "fp32",
+      "CHANNELS_LAST": "0",
+      "COMPILE": "0",
+      "MKLDNN": "1",
+      "KML_CONV": "0",
+      "KML_LINEAR": "1",
+      "LINEAR_DTYPE": "fp32",
+      "CKPT": "0",
+      "SAMPLING": "0",
+      "GN": "0",
+      "REPS": "5",
+      "ROUNDS": "3",
+      "SKIP_BUSY": "1",
+      "BELTS": "16_adjacent,32_skip4",
+      "PARTS": "pre,dec",
+      "HBM_MB": "3800",
+      "HBM_MIN_KB": "256",
+      "OMP_PLACES": "cores",
+      "OMP_PROC_BIND": "close",
+      "BATCH": "32",
+      "HBM": "0",
+      "MEMPOL": "membind"
+    },
+    "domains_sequence": [
+      1,
+      4,
+      16
+    ],
+    "cases": [
+      "s0322p0",
+      "s0322p1"
+    ],
+    "gradient_accumulation": 1,
+    "independent_models": true,
+    "distributed_training": false,
+    "global_batch": null,
+    "warmup": "2 pre + 2 decoder updates per belt, even when PARTS filters timing",
+    "seed": 0,
+    "status": "PREPARED_NOT_RUN"
+  },
+  "HBM_B32_MEMBIND": {
+    "env": {
+      "DEVICE": "cpu",
+      "AMP": "fp32",
+      "CHANNELS_LAST": "0",
+      "COMPILE": "0",
+      "MKLDNN": "1",
+      "KML_CONV": "0",
+      "KML_LINEAR": "1",
+      "LINEAR_DTYPE": "fp32",
+      "CKPT": "0",
+      "SAMPLING": "0",
+      "GN": "0",
+      "REPS": "5",
+      "ROUNDS": "3",
+      "SKIP_BUSY": "1",
+      "BELTS": "16_adjacent,32_skip4",
+      "PARTS": "pre,dec",
+      "HBM_MB": "3800",
+      "HBM_MIN_KB": "256",
+      "OMP_PLACES": "cores",
+      "OMP_PROC_BIND": "close",
+      "BATCH": "32",
+      "HBM": "1",
+      "MEMPOL": "membind"
+    },
+    "domains_sequence": [
+      1,
+      4,
+      16
+    ],
+    "cases": [
+      "s0322p0",
+      "s0322p1"
+    ],
+    "gradient_accumulation": 1,
+    "independent_models": true,
+    "distributed_training": false,
+    "global_batch": null,
+    "warmup": "2 pre + 2 decoder updates per belt, even when PARTS filters timing",
+    "seed": 0,
+    "status": "PREPARED_NOT_RUN"
+  },
+  "DDR_B64_PREFERRED": {
+    "env": {
+      "DEVICE": "cpu",
+      "AMP": "fp32",
+      "CHANNELS_LAST": "0",
+      "COMPILE": "0",
+      "MKLDNN": "1",
+      "KML_CONV": "0",
+      "KML_LINEAR": "1",
+      "LINEAR_DTYPE": "fp32",
+      "CKPT": "0",
+      "SAMPLING": "0",
+      "GN": "0",
+      "REPS": "5",
+      "ROUNDS": "3",
+      "SKIP_BUSY": "1",
+      "BELTS": "16_adjacent,32_skip4",
+      "PARTS": "pre,dec",
+      "HBM_MB": "3800",
+      "HBM_MIN_KB": "256",
+      "OMP_PLACES": "cores",
+      "OMP_PROC_BIND": "close",
+      "BATCH": "64",
+      "HBM": "0",
+      "MEMPOL": "preferred"
+    },
+    "domains_sequence": [
+      1,
+      4,
+      16
+    ],
+    "cases": [
+      "s0322p0",
+      "s0322p1"
+    ],
+    "gradient_accumulation": 1,
+    "independent_models": true,
+    "distributed_training": false,
+    "global_batch": null,
+    "warmup": "2 pre + 2 decoder updates per belt, even when PARTS filters timing",
+    "seed": 0,
+    "status": "PREPARED_NOT_RUN"
+  }
+}

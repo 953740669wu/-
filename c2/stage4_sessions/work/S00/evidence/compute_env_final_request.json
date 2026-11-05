@@ -1,0 +1,19 @@
+{
+  "run_id": "ENV_20261104T130039Z_R3",
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130039Z_R3",
+  "cpu": 1,
+  "memory": "4096MB",
+  "runtime_limit_s": 180,
+  "queue_wait_limit_s": 600,
+  "purpose": "actual imports, tiny autograd/NumPy bridge and dependency load only; no model training",
+  "wheel": {
+    "filename": "numpy-1.26.4-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl",
+    "sha256": "d5241e0a80d808d70546c697135da2c613f30e28251ff8307eb72ba696945764",
+    "bytes": 14226281,
+    "requires_python": ">=3.9"
+  },
+  "source_sha256": {
+    "probe_compute_env.py": "22261ee0bf405fdbaf35ecb3332adeeef18c6da5b604734d35b66bc6c9a7e49b",
+    "run_env_probe.sh": "e788122659a2281f2dd6fbbaba986b3c9417e95ee0da038205a40cc483d88c82"
+  }
+}

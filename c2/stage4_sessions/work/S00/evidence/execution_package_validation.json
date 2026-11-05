@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "packages": {
+    "S01": {
+      "zip_sha256": "747f9c36354136afa3383a3d836c7e3db7568a043d1712fb2f03765068b4ec5e",
+      "hashed_files": 14,
+      "status": "PASS"
+    },
+    "S02": {
+      "zip_sha256": "de1f683449e4bad6ecab9b98254a669941e3765870b4c705a4ba6c88d2f4795b",
+      "hashed_files": 15,
+      "status": "PASS"
+    }
+  },
+  "unchanged_s01_source_files": 8,
+  "unchanged_s02_source_files": 10,
+  "jobs": [
+    {
+      "job_id": 2026157,
+      "state": "FAILED",
+      "seconds": 1.0,
+      "exclusive": true
+    },
+    {
+      "job_id": 2026164,
+      "state": "FAILED",
+      "seconds": 1.0,
+      "exclusive": true
+    },
+    {
+      "job_id": 2026200,
+      "state": "SUCCEEDED",
+      "seconds": 12.0,
+      "exclusive": true
+    },
+    {
+      "job_id": 2026223,
+      "state": "SUCCEEDED",
+      "seconds": 20.0,
+      "exclusive": true
+    }
+  ],
+  "actual_node_seconds": 34.0,
+  "full_model_pilots": "NOT_EXECUTED",
+  "s02_memory": "NOT_READY",
+  "startup_attempt": {
+    "job_id": 2026356,
+    "status": "FAILED_BEFORE_MODEL_NO_RETRY",
+    "host": "cn21338",
+    "node_seconds": 1,
+    "resource_cpu": 38,
+    "resource_mem_MB": 24576,
+    "mem_limit_MB": 24576,
+    "wall_limit_s": 900
+  },
+  "total_s00_node_seconds": 35,
+  "s02_model": "NOT_SUBMITTED_S01_GATE_NOT_PASSED",
+  "corrected_package_linux_checks": "PASS_SYNTAX_AND_AFFINITY_FIXTURES_ONLY"
+}

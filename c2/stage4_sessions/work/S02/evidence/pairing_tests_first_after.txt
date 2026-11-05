@@ -1,0 +1,41 @@
+test_belt_specific_targets_and_reference_expansion (__main__.PairedInputs.test_belt_specific_targets_and_reference_expansion) ... FAIL
+test_changed_same_shape_images_rejected_by_frozen_hash (__main__.PairedInputs.test_changed_same_shape_images_rejected_by_frozen_hash) ... ok
+test_cross_belt_source_rejected (__main__.PairedInputs.test_cross_belt_source_rejected) ... ok
+test_duplicate_source_rejected (__main__.PairedInputs.test_duplicate_source_rejected) ... ok
+test_protocol_order_mismatch_rejected (__main__.PairedInputs.test_protocol_order_mismatch_rejected) ... ok
+test_reference_index_out_of_bounds_rejected (__main__.PairedInputs.test_reference_index_out_of_bounds_rejected) ... ok
+test_sidecar_frame_order_mismatch_rejected (__main__.PairedInputs.test_sidecar_frame_order_mismatch_rejected) ... ok
+test_source_order_and_frame_indices_are_preserved (__main__.PairedInputs.test_source_order_and_frame_indices_are_preserved) ... ok
+test_zero_denominator_and_nonfinite_rejected (__main__.PairedInputs.test_zero_denominator_and_nonfinite_rejected) ... ok
+test_zero_scale_rejected (__main__.PairedInputs.test_zero_scale_rejected) ... ok
+
+======================================================================
+FAIL: test_belt_specific_targets_and_reference_expansion (__main__.PairedInputs.test_belt_specific_targets_and_reference_expansion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\tests\test_paired_inputs.py", line 46, in test_belt_specific_targets_and_reference_expansion
+    np.testing.assert_array_equal(out['y0'][i*4:(i+1)*4, 0] * out['scale'], z['images'])
+  File "E:\Codex\home\cache\phase4-speed-venv\Lib\site-packages\numpy\_utils\__init__.py", line 86, in wrapper
+    return fun(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\Codex\home\cache\phase4-speed-venv\Lib\site-packages\numpy\testing\_private\utils.py", line 1057, in assert_array_equal
+    assert_array_compare(operator.__eq__, actual, desired, err_msg=err_msg,
+  File "E:\Codex\home\cache\phase4-speed-venv\Lib\site-packages\numpy\testing\_private\utils.py", line 921, in assert_array_compare
+    raise AssertionError(msg)
+AssertionError: 
+Arrays are not equal
+
+Mismatched elements: 2728 / 16384 (16.7%)
+Max absolute difference among violations: 1.4901161e-08
+Max relative difference among violations: 9.9337846e-08
+ ACTUAL: array([[[0.15    , 0.150005, 0.15001 , ..., 0.150298, 0.150303,
+         0.150308],
+        [0.150313, 0.150317, 0.150322, ..., 0.15061 , 0.150615,...
+ DESIRED: array([[[0.15    , 0.150005, 0.15001 , ..., 0.150298, 0.150303,
+         0.150308],
+        [0.150313, 0.150317, 0.150322, ..., 0.15061 , 0.150615,...
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.708s
+
+FAILED (failures=1)

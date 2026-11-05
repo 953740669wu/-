@@ -1,0 +1,345 @@
+--- /dev/null
++++ b/diagnostic/cpu36_contract.py
+@@ -0,0 +1,73 @@
++"""CPU36 selection and per-TID boundary checks, independent of torch."""
++import json
++import os
++from pathlib import Path
++
++
++def cpu_list(text):
++    values = []
++    for item in text.strip().split(','):
++        if item:
++            a, sep, b = item.partition('-')
++            values.extend(range(int(a), int(b) + 1) if sep else [int(a)])
++    return values
++
++
++def select_cpus(allocated, domain, siblings):
++    allocated, domain = sorted(set(allocated)), sorted(set(domain))
++    if len(domain) != 38 or len(allocated) not in (36, 38) or not set(allocated) <= set(domain):
++        raise ValueError('require an authorized 38-core domain or its exact first 36 cores')
++    if len({tuple(sorted(siblings[cpu])) for cpu in domain}) != 38:
++        raise ValueError('domain does not contain 38 distinct physical cores')
++    selected, reserved = domain[:-2], domain[-2:]
++    if not set(selected) <= set(allocated):
++        raise ValueError('allocation cannot provide first36 while reserving the last2 cores')
++    return dict(allocated=allocated, domain_cpus=domain, selected=selected, reserved=reserved)
++
++
++def validate_threads(selected, snapshot, torch_threads, expected_threads=36):
++    errors = []
++    if len(set(selected)) != 36:
++        errors.append('selected CPU set must contain 36 CPUs')
++    if type(torch_threads) is not int or torch_threads != expected_threads:
++        errors.append(f'actual torch intra-op threads {torch_threads} != {expected_threads}')
++    rows = snapshot.get('threads', [])
++    if snapshot.get('complete') is not True or not rows:
++        errors.append('all-TID evidence is missing/incomplete')
++    tids = []
++    for row in rows:
++        tids.append(row.get('tid'))
++        mask = row.get('affinity')
++        if not isinstance(mask, list) or not mask or not set(mask) <= set(selected):
++            errors.append(f'TID {row.get("tid")} outside/unknown selected36 boundary: {mask}')
++    if len(set(tids)) != len(tids) or any(type(tid) is not int or tid <= 0 for tid in tids):
++        errors.append('invalid/duplicate TID evidence')
++    return errors
++
++
++def snapshot_threads(pid):
++    result = dict(complete=True, threads=[], vanished=[], errors=[])
++    try:
++        entries = list(Path(f'/proc/{pid}/task').iterdir())
++    except OSError as exc:
++        return dict(complete=False, threads=[], errors=[str(exc)])
++    for entry in entries:
++        try:
++            stat = (entry / 'stat').read_text()
++            fields = stat[stat.rfind(')') + 2:].split()  # fields start at Linux stat field3
++            result['threads'].append(dict(tid=int(entry.name), affinity=sorted(os.sched_getaffinity(int(entry.name))),
++                                          ticks=int(fields[11]) + int(fields[12]), last_cpu=int(fields[36]),
++                                          state=fields[0], start_ticks=int(fields[19])))
++        except (FileNotFoundError, ProcessLookupError):
++            result['vanished'].append(int(entry.name))
++        except (OSError, ValueError, IndexError) as exc:
++            result['complete'] = False
++            result['errors'].append(f'{entry.name}: {exc}')
++    return result
++
++
++def atomic_json(path, data):
++    path = Path(path)
++    temporary = path.with_name(path.name + f'.{os.getpid()}.tmp')
++    temporary.write_text(json.dumps(data, indent=2, allow_nan=False) + '\n', encoding='utf-8')
++    os.replace(temporary, path)
+--- /dev/null
++++ b/diagnostic/run_diagnostics.py
+@@ -0,0 +1,147 @@
++"""Five bounded, single-variable comparisons. Execute only via an allocated compute job."""
++from datetime import datetime, timezone
++import hashlib
++import json
++import os
++from pathlib import Path
++import signal
++import socket
++import subprocess
++import sys
++import time
++
++from cpu36_contract import atomic_json, cpu_list, select_cpus, snapshot_threads
++
++root = Path(__file__).resolve().parent
++
++
++def main():
++    if sys.platform != 'linux' or not os.environ.get('CCS_JOB_ID') or socket.gethostname().startswith('login'):
++        raise RuntimeError('allocated Linux compute job required; no login-node operator execution')
++    source = json.loads((root / 'SOURCE_MANIFEST.json').read_text())
++    for relative, digest in source.items():
++        assert hashlib.sha256((root / relative).read_bytes()).hexdigest() == digest, relative
++    allocated = sorted(os.sched_getaffinity(0))
++    domains = []
++    for path in Path('/sys/devices/system/node').glob('node[0-9]*'):
++        domain = cpu_list((path / 'cpulist').read_text())
++        if domain and set(allocated) <= set(domain):
++            domains.append((int(path.name[4:]), domain))
++    if len(domains) != 1:
++        raise RuntimeError('allocation must be wholly within one NUMA domain')
++    node, domain = domains[0]
++    siblings = {cpu: cpu_list(Path(f'/sys/devices/system/cpu/cpu{cpu}/topology/thread_siblings_list').read_text())
++                for cpu in domain}
++    receipt = select_cpus(allocated, domain, siblings)
++    receipt.update(node=node, host=socket.gethostname(), job_id=os.environ['CCS_JOB_ID'], python=sys.executable,
++                   python_version=sys.version, physical_siblings=siblings,
++                   scope='CPU36_SMALL_OPERATOR_DIAG_ONLY_NO_MODEL_OR_HBM')
++    output = root / ('results_' + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
++    output.mkdir()
++    atomic_json(output / 'cpu_receipt.json', receipt)
++    # Only narrow the inherited allocation; neither observer nor worker may expand it.
++    os.sched_setaffinity(0, receipt['selected'])
++    cases = [
++        ('A_mkl1_negative', '1', '1', 'close'),
++        ('B_mkl_unset', None, '1', 'close'),
++        ('C_mkl36', '36', '1', 'close'),
++        ('D_bind_false', '36', '1', 'false'),
++        ('E_openblas36', '36', '36', 'close'),
++    ]
++    results = []
++    for name, mkl, openblas, bind in cases:
++        directory = output / name
++        directory.mkdir()
++        env = os.environ.copy()
++        env.update(OMP_NUM_THREADS='36', OPENBLAS_NUM_THREADS=openblas, OMP_PROC_BIND=bind,
++                   OMP_PLACES='cores', PYTHONDONTWRITEBYTECODE='1', PYTHONFAULTHANDLER='1')
++        if mkl is None:
++            env.pop('MKL_NUM_THREADS', None)
++        else:
++            env['MKL_NUM_THREADS'] = mkl
++        command = ['numactl', '--physcpubind=' + ','.join(map(str, receipt['selected'])),
++                   f'--membind={node}', sys.executable, '-B', str(root / 'thread_worker.py'),
++                   str(directory), str(output / 'cpu_receipt.json')]
++        atomic_json(directory / 'command.json', dict(argv=command, comparison=dict(MKL_NUM_THREADS=mkl,
++                    OPENBLAS_NUM_THREADS=openblas, OMP_PROC_BIND=bind), single_thread_negative=(name == 'A_mkl1_negative')))
++        samples, violations, ticks = 0, [], {}
++        reason = None
++        proc = None
++        with (directory / 'worker.log').open('wb') as log, (directory / 'samples.jsonl').open('w', encoding='utf-8') as stream:
++            try:
++                proc = subprocess.Popen(command, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
++                deadline = time.monotonic() + 45
++                previous = {}
++                while proc.poll() is None:
++                    snapshot = snapshot_threads(proc.pid)
++                    phase_path = directory / 'phase.json'
++                    phase = json.loads(phase_path.read_text())['name'] if phase_path.exists() else 'process_start'
++                    stream.write(json.dumps(dict(time_ns=time.time_ns(), phase=phase, snapshot=snapshot)) + '\n')
++                    samples += 1
++                    for row in snapshot['threads']:
++                        if not row['affinity'] or not set(row['affinity']) <= set(receipt['selected']):
++                            violations.append(row)
++                        key = (row['tid'], row['start_ticks'])
++                        delta = row['ticks'] - previous.get(key, row['ticks'])
++                        if delta > 0:
++                            bucket = ticks.setdefault(phase, {})
++                            bucket[str(row['tid'])] = bucket.get(str(row['tid']), 0) + delta
++                        previous[key] = row['ticks']
++                    if violations:
++                        reason = 'TID escaped selected36; stop immediately'
++                        break
++                    if time.monotonic() >= deadline:
++                        reason = 'case exceeded 45 seconds; stop without repeating'
++                        break
++                    time.sleep(0.02)
++            finally:
++                if proc is not None and proc.poll() is None:
++                    os.killpg(proc.pid, signal.SIGTERM)
++                    try:
++                        proc.wait(timeout=1)
++                    except subprocess.TimeoutExpired:
++                        os.killpg(proc.pid, signal.SIGKILL)
++                code = proc.wait(timeout=3) if proc is not None else 127
++        worker_path = directory / 'worker.json'
++        worker = json.loads(worker_path.read_text()) if worker_path.exists() else {}
++        stages = worker.get('stages', [])
++        for stage in stages:
++            for row in stage['threads'].get('threads', []):
++                if not row['affinity'] or not set(row['affinity']) <= set(receipt['selected']):
++                    violations.append(dict(stage=stage['name'], **row))
++        if violations and not reason:
++            reason = 'worker stage evidence contains selected36 boundary violation'
++        if not reason and any(stage['threads'].get('complete') is not True or not stage['threads'].get('threads') for stage in stages):
++            reason = 'incomplete per-stage all-TID evidence; stop without declaring boundary acceptance'
++        metadata = dict(case=name, exit_code=code, reason=reason, samples=samples, boundary_violations=violations,
++                        activity={phase: dict(active_tids=len(values), ticks_by_tid=values) for phase, values in ticks.items()},
++                        torch_reports=[dict(stage=stage['name'], intraop=stage.get('torch_intraop'), interop=stage.get('torch_interop'))
++                                       for stage in stages], model_executed=False,
++                        limitation='CPU tick activity and omp_max are observations, not exact in-region team membership or model acceptance')
++        atomic_json(directory / 'assessment.json', metadata)
++        results.append(metadata)
++        if reason or code != 0:
++            break
++    summary = dict(status='DIAGNOSTIC_DATA_COMPLETE' if len(results) == 5 and all(x['exit_code'] == 0 and not x['reason'] for x in results)
++                   else 'DIAGNOSTIC_STOPPED_FAILURE', cases=results, cpu_receipt=receipt,
++                   formal_model_acceptance=False, production_config_accepted=False)
++    atomic_json(output / 'SUMMARY.json', summary)
++    collected = {}
++    for path in sorted(root.rglob('*')):
++        if path.is_file() and path.name != 'COLLECTION.json':
++            before = path.stat()
++            digest = hashlib.sha256(path.read_bytes()).hexdigest()
++            after = path.stat()
++            if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
++                raise RuntimeError(f'file changed during collection: {path}')
++            collected[path.relative_to(root).as_posix()] = dict(sha256=digest, bytes=after.st_size, mtime_ns=after.st_mtime_ns)
++    atomic_json(output / 'COLLECTION.json', collected)
++    print(output / 'SUMMARY.json')
++    return 0 if summary['status'] == 'DIAGNOSTIC_DATA_COMPLETE' else 1
++
++
++if __name__ == '__main__':
++    def stop(signum, frame):
++        raise KeyboardInterrupt(f'signal {signum}')
++    signal.signal(signal.SIGTERM, stop)
++    raise SystemExit(main())
+--- /dev/null
++++ b/diagnostic/run_thread_diagnostics.sh
+@@ -0,0 +1,9 @@
++#!/bin/bash
++# Prepared for S00: small operators only, never a model restart.
++set -euo pipefail
++HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
++source "$HERE/cluster_runtime.env"
++: "${CCS_JOB_ID:?S00 must allocate a new compute job}"
++[[ "$(hostname)" != login* ]] || exit 2
++export PYTHONDONTWRITEBYTECODE=1
++exec "$C2_PYTHON" -B "$HERE/run_diagnostics.py"
+--- /dev/null
++++ b/diagnostic/thread_worker.py
+@@ -0,0 +1,104 @@
++"""Small native operators only. No EIT model, data, optimizer, timing benchmark or HBM."""
++import ctypes
++import importlib
++import hashlib
++import os
++from pathlib import Path
++import re
++import sys
++import time
++
++from cpu36_contract import atomic_json, snapshot_threads
++
++directory, receipt_path = Path(sys.argv[1]), Path(sys.argv[2])
++import json
++receipt = json.loads(receipt_path.read_text())
++record = dict(pid=os.getpid(), selected=receipt['selected'], stages=[], model_executed=False)
++keys = ('OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'OMP_PROC_BIND', 'OMP_PLACES',
++        'OMP_THREAD_LIMIT', 'OMP_DYNAMIC', 'MKL_DYNAMIC', 'GOMP_CPU_AFFINITY', 'KMP_AFFINITY',
++        'KMP_HW_SUBSET', 'OMP_WAIT_POLICY', 'PYTHONPATH', 'LD_PRELOAD', 'KML_BLAS_LIB')
++record['environment'] = {key: os.environ.get(key) for key in keys}
++library_hashes = {}
++
++
++def runtime_info():
++    libraries = sorted({line.split()[-1] for line in Path('/proc/self/maps').read_text().splitlines()
++                        if re.search(r'libomp|libgomp|openblas|kblas|shim', line, re.I) and line.split()[-1].startswith('/')})
++    result = {}
++    for path in libraries:
++        entry = {}
++        try:
++            if path not in library_hashes:
++                digest = hashlib.sha256()
++                with open(path, 'rb') as stream:
++                    for block in iter(lambda: stream.read(1024 * 1024), b''):
++                        digest.update(block)
++                library_hashes[path] = digest.hexdigest()
++            entry['sha256'] = library_hashes[path]
++            # Only query already-loaded libraries; never introduce another runtime for the probe.
++            lib = ctypes.CDLL(path, mode=os.RTLD_NOLOAD | os.RTLD_LOCAL)
++            for name in ('omp_get_max_threads', 'omp_get_num_threads', 'omp_get_dynamic', 'omp_get_proc_bind',
++                         'omp_get_num_places', 'openblas_get_num_threads', 'openblas_get_num_threads64_',
++                         'openblas_get_num_threads_64_'):
++                if hasattr(lib, name):
++                    fn = getattr(lib, name)
++                    fn.argtypes, fn.restype = [], ctypes.c_int
++                    entry[name] = fn()
++        except (OSError, AttributeError) as exc:
++            entry['query_error'] = str(exc)
++        result[path] = entry
++    return result
++
++
++def stage(name):
++    atomic_json(directory / 'phase.json', dict(name=name, monotonic=time.monotonic()))
++    data = dict(name=name, threads=snapshot_threads(os.getpid()))
++    if 'torch' in globals():
++        data.update(torch_intraop=torch.get_num_threads(), torch_interop=torch.get_num_interop_threads(),
++                    parallel_info=torch.__config__.parallel_info(), runtimes=runtime_info())
++    record['stages'].append(data)
++    atomic_json(directory / 'worker.json', record)
++
++
++def exercise(name, fn):
++    atomic_json(directory / 'phase.json', dict(name=name, monotonic=time.monotonic()))
++    start, count = time.monotonic(), 0
++    while time.monotonic() - start < 0.5:
++        fn()
++        count += 1
++    record.setdefault('operator_calls', {})[name] = count  # not a throughput metric
++    stage('after_' + name)
++
++
++try:
++    stage('before_import')
++    if not set(os.sched_getaffinity(0)) <= set(receipt['selected']):
++        raise RuntimeError('worker escaped selected36 before framework import')
++    import torch
++    stage('after_torch_import')
++    record['torch'] = dict(version=torch.__version__, path=torch.__file__)
++    # Do not call torch.set_num_threads: it would conceal environment precedence.
++    a = torch.ones((2048, 2048), dtype=torch.float32)
++    output = torch.empty_like(a)
++    exercise('torch_elementwise', lambda: torch.add(a, a, out=output))
++    import numpy as np
++    record['numpy'] = dict(version=np.__version__, path=np.__file__)
++    n = np.ones((512, 512), dtype=np.float32)
++    dest = np.empty_like(n)
++    exercise('numpy_dot', lambda: np.dot(n, n, out=dest))
++    ops = importlib.import_module('kml_ops')
++    record['kml_ops_path'] = ops.__file__
++    if getattr(ops, '_lib', None) is None:
++        raise RuntimeError('KML is not actually loaded; do not substitute native torch.mm')
++    x = torch.ones((1024, 1024), dtype=torch.float32)
++    y = torch.empty_like(x)
++    atomic_json(directory / 'phase.json', dict(name='kml_first_call', monotonic=time.monotonic()))
++    ops.gemm(x, x, out=y)
++    stage('after_kml_first_call')
++    exercise('kml_repeated', lambda: ops.gemm(x, x, out=y))
++    record['status'] = 'OPERATORS_COMPLETED_NOT_MODEL_ACCEPTANCE'
++except Exception as exc:
++    record.update(status='FAIL', error=f'{type(exc).__name__}: {exc}')
++finally:
++    atomic_json(directory / 'worker.json', record)
++raise SystemExit(0 if record['status'] != 'FAIL' else 1)

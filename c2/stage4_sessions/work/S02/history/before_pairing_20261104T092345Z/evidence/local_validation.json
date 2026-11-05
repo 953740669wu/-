@@ -1,0 +1,37 @@
+{
+  "started_utc": "2026-11-04T07:40:08.672140+00:00",
+  "ended_utc": "2026-11-04T07:40:08.890597+00:00",
+  "checks": [
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "c2\\stage4_sessions\\work\\S02\\tests\\test_contracts.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_candidate_has_single_update_outside_micro_loop (__main__.Contracts.test_candidate_has_single_update_outside_micro_loop) ... ok\ntest_empty_local_mask_and_uneven_last_chunk (__main__.Contracts.test_empty_local_mask_and_uneven_last_chunk) ... ok\ntest_masked_micro_means_are_not_full_mean (__main__.Contracts.test_masked_micro_means_are_not_full_mean) ... ok\ntest_model_copy_is_byte_identical (__main__.Contracts.test_model_copy_is_byte_identical) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.003s\n\nOK\n"
+    },
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "c2\\stage4_sessions\\work\\S02\\tests\\check_equivalence.py",
+        "--belt",
+        "32_skip4",
+        "--part",
+        "pre",
+        "--microbatch",
+        "16",
+        "--checkpoint",
+        "--output",
+        "c2\\stage4_sessions\\work\\S02\\evidence\\numerical_not_run.json"
+      ],
+      "exit_code": 2,
+      "stdout": "{\n  \"status\": \"NOT_RUN\",\n  \"config\": {\n    \"belt\": \"32_skip4\",\n    \"part\": \"pre\",\n    \"microbatch\": 16,\n    \"checkpoint\": true,\n    \"history\": \"fresh\",\n    \"threads\": 4,\n    \"kml\": false,\n    \"output\": \"c2\\\\stage4_sessions\\\\work\\\\S02\\\\evidence\\\\numerical_not_run.json\"\n  },\n  \"reason\": \"No torch in this interpreter; no model/autograd/AdamW executed.\"\n}\n",
+      "stderr": ""
+    }
+  ],
+  "python_syntax": "PASS",
+  "numerical_status": "NOT_RUN"
+}

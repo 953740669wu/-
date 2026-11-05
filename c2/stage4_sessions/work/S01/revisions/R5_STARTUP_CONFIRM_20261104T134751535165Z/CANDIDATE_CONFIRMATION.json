@@ -1,0 +1,102 @@
+{
+  "status": "FIRST_PILOT_FAILED_BEFORE_RUNNER_CORRECTED_CANDIDATE_CONFIRMED",
+  "reviewed_utc": "2026-11-04T13:50:30.469193+00:00",
+  "candidate_version": "S01_LOCAL_RUNNER_R2_20261104",
+  "candidate_files": [
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\candidate\\run_node16.sh",
+      "sha256": "aaac8557b00abbf68a0e296e7119c0150c3fbfd467c42d132035ed69f929fd5f",
+      "bytes": 734
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\candidate\\runner.py",
+      "sha256": "692113888fab4ac23c0188f39731ceea0f0fec1a8ef09f25cee872515ba7dd0b",
+      "bytes": 24909
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\candidate\\s4_models.py",
+      "sha256": "512dc202e4c0d60363b57317ed612694b80a4d5d3467740ed582bcf600bf1d92",
+      "bytes": 14016
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\candidate\\kml_ops.py",
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+      "bytes": 10255
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\candidate\\legacy_inputs.json",
+      "sha256": "24df1ad655fa3263efaf1ec8a721074fdfbae15fcb1d054b30d88bf5b9734835",
+      "bytes": 504
+    }
+  ],
+  "first_job": {
+    "job_id": "2026356",
+    "state": "FAILED",
+    "job_exit_code": 2,
+    "scheduler_query_exit": 0,
+    "node": "cn21338",
+    "start_utc": "2026-11-04T13:46:29Z",
+    "end_utc": "2026-11-04T13:46:30Z",
+    "memory_request_MB": 24576,
+    "memory_limit_request_MB": 24576,
+    "allocated_cpu": 38,
+    "allocated_memory_MB": 24576,
+    "scheduler_hw_threads": "0-37",
+    "job_log": "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T134538Z/payload/pilot_s01_startup.sh: line 3: set: pipefail\n: invalid option name\n",
+    "model_execution": "NOT_REACHED",
+    "s02_status": "NOT_SUBMITTED",
+    "retry": "STOPPED_AFTER_FAILURE",
+    "failed_package_sha256": "5bb0a6718ec8ae3eb794e7f05f0faae9addd22342df0253833234320427a7616"
+  },
+  "corrected_package": {
+    "source": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\execution_packages\\S01_pilot_prepared.zip",
+    "sha256": "747f9c36354136afa3383a3d836c7e3db7568a043d1712fb2f03765068b4ec5e",
+    "wrapper_sha256": "72ba04253bc4b68446d642a70bcc0571ee926b71bc81e553c1a385d91dc1709f",
+    "manifest_entries": 14,
+    "zip_entries": 15,
+    "changed_entries": [
+      "pilot_s01_startup.sh",
+      "PILOT_MANIFEST_S00.json"
+    ],
+    "wrapper_change": "CRLF to LF only relative to frozen failed job package",
+    "executed": false
+  },
+  "results_integrity": {
+    "runner_reached": false,
+    "model_reached": false,
+    "model_manifest_received": false,
+    "per_rank_json_received": false,
+    "per_rank_exit_received": false,
+    "summary_received": false,
+    "output_directory_listing_received": false,
+    "independent_summarize": "NOT_APPLICABLE_NO_MODEL_RUN_DIRECTORY",
+    "startup_acceptance": "NOT_PASSED",
+    "resource_allocation": "SCHEDULER_RECORD_ONLY_NOT_ACTUAL_MODEL_AFFINITY_OR_CGROUP_PROOF"
+  },
+  "pilot": {
+    "domains": 1,
+    "cpu": 38,
+    "memory_MB": 24576,
+    "time_limit_s": 900,
+    "wrapper_timeout_s": 780,
+    "kill_after_s": 15,
+    "round_timeout_s": 180,
+    "sync_timeout_s": 120,
+    "rounds": 3,
+    "reps": 1,
+    "batch": 32,
+    "belts": [
+      "16_adjacent"
+    ],
+    "parts": [
+      "pre",
+      "dec"
+    ],
+    "hbm": false,
+    "ckpt": false,
+    "input_protocol": "LEGACY_TIMING_ONLY"
+  },
+  "no_s00_file_modified": true,
+  "no_jobs_submitted_by_s01": true,
+  "no_automatic_retry": true
+}

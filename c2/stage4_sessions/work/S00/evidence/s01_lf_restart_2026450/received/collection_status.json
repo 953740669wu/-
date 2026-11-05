@@ -1,0 +1,87 @@
+{
+  "captured_utc": "2026-11-04T14:07:20.731057+00:00",
+  "job_id": "2026450",
+  "scheduler_state": "FAILED",
+  "job_exit_code": 1,
+  "start_time": "2026-11-04T14:03:41Z",
+  "end_time": "2026-11-04T14:06:22Z",
+  "host": "cn21340",
+  "changed_payload_files": [],
+  "complete_generated_evidence_files": {
+    "collect_s01_restart.py": {
+      "sha256": "77af848108b6474500a4ae87e3f725eb24cf52c01e3106727170d1d5d96bedcb",
+      "bytes": 2672
+    },
+    "djob_final.json": {
+      "sha256": "131c1b836d637f0fb3e0de19e8f4c2f554a2bfbf9dfb7c2a6c95d7f4f197a615",
+      "bytes": 6408
+    },
+    "djob_latest.json": {
+      "sha256": "23b4acc013bd025d2bf66d5492d6453fb4abb3dbd40e6c17f95d6fef9dd27f98",
+      "bytes": 6408
+    },
+    "job.log": {
+      "sha256": "48051923235b47bd8911744e908c38669f5700865b3e676e033cdf7ce5578699",
+      "bytes": 250
+    },
+    "job_id.txt": {
+      "sha256": "3e1d3d6bbc23918f66b9e31e0576e8f454726535435f1e022524cd4105d0dc67",
+      "bytes": 8
+    },
+    "payload/evidence/RUNTIME_PREFLIGHT_20261104T140342308313Z/RESULT.json": {
+      "sha256": "51b7dc036c85e04d56273eb7c93c74e563c8d9151f161083180c8fb261fd2402",
+      "bytes": 6179
+    },
+    "payload/output/reports/s01_startup_2026450/manifest.json": {
+      "sha256": "e85b7d51e3d8bf8f5980b2c4935333abd6dec6bf2ec1aa21578e40209d77be11",
+      "bytes": 2545
+    },
+    "payload/output/reports/s01_startup_2026450/r1_d0.json": {
+      "sha256": "cab8754c9b14579242673bddc4e9c66caaa2f20b5d52498afd7e0920a146bc14",
+      "bytes": 1219
+    },
+    "payload/output/reports/s01_startup_2026450/r1_d0.status.json": {
+      "sha256": "cbd7164bebded579d73d352077c2b5e4d917a340d3d0d0ff1a1662ad71076e52",
+      "bytes": 178
+    },
+    "payload/output/reports/s01_startup_2026450/summary.json": {
+      "sha256": "074f8bb6f3bd3ef54d967e055b557778fe1c8a61b4cf81f45e94c97e17cc8703",
+      "bytes": 79
+    },
+    "payload/output/reports/s01_startup_2026450/sync_r1/16_adjacent_dec.0.json": {
+      "sha256": "7f75211123506ae8b7b4b2a863f0537a8a82083563aaafb10f8e6c4ef9ed2cb7",
+      "bytes": 49
+    },
+    "payload/output/reports/s01_startup_2026450/sync_r1/16_adjacent_pre.0.json": {
+      "sha256": "7f75211123506ae8b7b4b2a863f0537a8a82083563aaafb10f8e6c4ef9ed2cb7",
+      "bytes": 49
+    },
+    "payload/output/reports/s01_startup_2026450/sync_r1/commands.json": {
+      "sha256": "ef2fff620c9c3bbc5dceafad03802849a7bcdd3e2aaaf89d337dbb11fb1ec98e",
+      "bytes": 513
+    },
+    "payload/output/reports/s01_startup_2026450/sync_r1/rank0.log": {
+      "sha256": "94134fc50c0f30b2e4460f205fea70e1dab87cf6ceaedf369b2bdc7aa4b807b3",
+      "bytes": 1438
+    },
+    "payload/output/reports/s01_startup_2026450/sync_r1/rank0.status.json": {
+      "sha256": "cbd7164bebded579d73d352077c2b5e4d917a340d3d0d0ff1a1662ad71076e52",
+      "bytes": 178
+    },
+    "pre_submit_checks.json": {
+      "sha256": "7637370925a24c00c3ceaaa2b8801410c5d70e7221cdc9b8c19ca11a9419d944",
+      "bytes": 3432
+    },
+    "submission.json": {
+      "sha256": "eb06fc9cc9c619677314b1eff2ddd176f865c184f2169a329d5b356b1b58ec4c",
+      "bytes": 976
+    },
+    "submit_once.marker": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "scope": "All generated job/runner/rank/preflight logs and results, not raw NPZ or shared source",
+  "s02": "NOT_SUBMITTED",
+  "training_memory": "NOT_RUN"
+}

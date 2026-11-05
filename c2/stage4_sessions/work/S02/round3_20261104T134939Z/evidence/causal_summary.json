@@ -1,0 +1,831 @@
+{
+  "scope": "WINDOWS_NATIVE_ONE_FIXED_CONFIGURATION_ONLY",
+  "case_identity": {
+    "initial_weights_sha256": "662a4f7ffc490412c92aa6dedcbd8dcb1e811e61b3ce9d3fcaa8327e13a7ed41",
+    "fixed_tensor_sha256": {
+      "v": "1ea0b8117304e40e6906966af78cd374560baf972af38b3ab5be66e5d1ed7868",
+      "y0": "71c98d8a13605626bfb90f3b9b256a348fc666210ad6db581490e2026ee5cc27",
+      "idx": "719b836f9eae3b9451fcc403ebad9681cc7c134c04e3487c8e46eacf8834a927",
+      "mask": "086140d0db27e48f11dc2f854428f606950860f0d8dd35fb2e2eed3240d99d65",
+      "t": "389e2a26d4302653588a9345f549efa1511f2a8591fd0791c8cf543d2c2ffcef",
+      "noise": "7fb86f5b64f7903bd2a0977434606c6d242d013b2021f4c22f95c331d4e56202"
+    }
+  },
+  "round2_metrics_reproduced_exactly": true,
+  "pinned_micro_metrics_equal_strict": true,
+  "projection_trace_metrics_equal_strict": true,
+  "controls": {
+    "candidate_repeat": {
+      "result": "evidence\\native_candidate_repeat_20261104T135635489580Z\\result.json",
+      "status": "PASS_CONTROL_ONLY",
+      "failures": 0,
+      "summary": {
+        "loss": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_v": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_y0": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "output": {
+          "tensors": 3,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "grad": {
+          "tensors": 153,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "param": {
+          "tensors": 299,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "delta": {
+          "tensors": 299,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "state": {
+          "tensors": 306,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        }
+      },
+      "exact_repeat": true
+    },
+    "full_sum": {
+      "result": "evidence\\native_full_sum_20261104T135846646414Z\\result.json",
+      "status": "PASS_CONTROL_ONLY",
+      "failures": 0,
+      "summary": {
+        "loss": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_v": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_y0": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "output": {
+          "tensors": 3,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "grad": {
+          "tensors": 153,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "param": {
+          "tensors": 299,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "delta": {
+          "tensors": 299,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "state": {
+          "tensors": 306,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        }
+      },
+      "exact_repeat": null
+    },
+    "optimizer_same_gradient": {
+      "result": "evidence\\native_optimizer_same_gradient_20261104T140038195452Z\\result.json",
+      "status": "PASS_CONTROL_ONLY",
+      "failures": 0,
+      "summary": {
+        "grad": {
+          "tensors": 153,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "param": {
+          "tensors": 299,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "delta": {
+          "tensors": 299,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "state": {
+          "tensors": 306,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        }
+      },
+      "exact_repeat": null
+    },
+    "pinned_full": {
+      "result": "evidence\\native_pinned_full_20261104T135942923940Z\\result.json",
+      "status": "PASS_CONTROL_ONLY",
+      "failures": 0,
+      "summary": {
+        "loss": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_v": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_y0": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "output": {
+          "tensors": 3,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "grad": {
+          "tensors": 153,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "param": {
+          "tensors": 299,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "delta": {
+          "tensors": 299,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "state": {
+          "tensors": 306,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        }
+      },
+      "exact_repeat": null
+    },
+    "pinned_micro": {
+      "result": "evidence\\native_pinned_micro_20261104T140011061906Z\\result.json",
+      "status": "FAIL_ORIGINAL_CRITERIA",
+      "failures": 194,
+      "summary": {
+        "loss": {
+          "tensors": 1,
+          "failed": 1,
+          "max_abs": 3.0517578125e-05,
+          "max_relative": 1.0070243979857095e-07
+        },
+        "input_v": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_y0": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "output": {
+          "tensors": 3,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "grad": {
+          "tensors": 153,
+          "failed": 49,
+          "max_abs": 0.010223388671875,
+          "max_relative": 1.1408186826186996e-05
+        },
+        "param": {
+          "tensors": 299,
+          "failed": 13,
+          "max_abs": 3.666430711746216e-05,
+          "max_relative": 0.008112706693812585
+        },
+        "delta": {
+          "tensors": 299,
+          "failed": 33,
+          "max_abs": 3.666430711746216e-05,
+          "max_relative": 0.008112706693812585
+        },
+        "state": {
+          "tensors": 306,
+          "failed": 98,
+          "max_abs": 0.01171875,
+          "max_relative": 2.3147254441307437e-05
+        }
+      },
+      "exact_repeat": null
+    },
+    "reduction_trace": {
+      "result": "evidence\\native_reduction_trace_20261104T140344760074Z\\result.json",
+      "status": "FAIL_ORIGINAL_CRITERIA",
+      "failures": 194,
+      "summary": {
+        "loss": {
+          "tensors": 1,
+          "failed": 1,
+          "max_abs": 3.0517578125e-05,
+          "max_relative": 1.0070243979857095e-07
+        },
+        "input_v": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_y0": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "output": {
+          "tensors": 3,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "grad": {
+          "tensors": 153,
+          "failed": 49,
+          "max_abs": 0.010223388671875,
+          "max_relative": 1.1408186826186996e-05
+        },
+        "param": {
+          "tensors": 299,
+          "failed": 13,
+          "max_abs": 3.666430711746216e-05,
+          "max_relative": 0.008112706693812585
+        },
+        "delta": {
+          "tensors": 299,
+          "failed": 33,
+          "max_abs": 3.666430711746216e-05,
+          "max_relative": 0.008112706693812585
+        },
+        "state": {
+          "tensors": 306,
+          "failed": 98,
+          "max_abs": 0.01171875,
+          "max_relative": 2.3147254441307437e-05
+        }
+      },
+      "exact_repeat": null
+    },
+    "reference_repeat": {
+      "result": "evidence\\native_reference_repeat_20261104T135525522100Z\\result.json",
+      "status": "PASS_CONTROL_ONLY",
+      "failures": 0,
+      "summary": {
+        "loss": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_v": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_y0": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "output": {
+          "tensors": 3,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "grad": {
+          "tensors": 153,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "param": {
+          "tensors": 299,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "delta": {
+          "tensors": 299,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "state": {
+          "tensors": 306,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        }
+      },
+      "exact_repeat": true
+    },
+    "split_full": {
+      "result": "evidence\\native_split_full_20261104T135914783587Z\\result.json",
+      "status": "FAIL_ORIGINAL_CRITERIA",
+      "failures": 1,
+      "summary": {
+        "loss": {
+          "tensors": 1,
+          "failed": 1,
+          "max_abs": 3.0517578125e-05,
+          "max_relative": 1.0070243979857095e-07
+        },
+        "input_v": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_y0": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "output": {
+          "tensors": 3,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "grad": {
+          "tensors": 153,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "param": {
+          "tensors": 299,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "delta": {
+          "tensors": 299,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "state": {
+          "tensors": 306,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        }
+      },
+      "exact_repeat": null
+    },
+    "strict": {
+      "result": "evidence\\native_strict_20261104T135819513253Z\\result.json",
+      "status": "FAIL_ORIGINAL_CRITERIA",
+      "failures": 194,
+      "summary": {
+        "loss": {
+          "tensors": 1,
+          "failed": 1,
+          "max_abs": 3.0517578125e-05,
+          "max_relative": 1.0070243979857095e-07
+        },
+        "input_v": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_y0": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "output": {
+          "tensors": 3,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "grad": {
+          "tensors": 153,
+          "failed": 49,
+          "max_abs": 0.010223388671875,
+          "max_relative": 1.1408186826186996e-05
+        },
+        "param": {
+          "tensors": 299,
+          "failed": 13,
+          "max_abs": 3.666430711746216e-05,
+          "max_relative": 0.008112706693812585
+        },
+        "delta": {
+          "tensors": 299,
+          "failed": 33,
+          "max_abs": 3.666430711746216e-05,
+          "max_relative": 0.008112706693812585
+        },
+        "state": {
+          "tensors": 306,
+          "failed": 98,
+          "max_abs": 0.01171875,
+          "max_relative": 2.3147254441307437e-05
+        }
+      },
+      "exact_repeat": null
+    }
+  },
+  "local_dot_sum_trace": {
+    "enc.tf.layers.1.self_attn.in_proj_weight": {
+      "input": {
+        "max_abs": 0.0,
+        "l2_relative": 0.0,
+        "reference_norm": 2610.612340072988,
+        "exact": true
+      },
+      "output_adjoint": {
+        "max_abs": 0.0,
+        "l2_relative": 0.0,
+        "reference_norm": 0.5791760356179962,
+        "exact": true
+      },
+      "round2_worst_coordinate": {
+        "index": 576,
+        "reference_sum_float64": 4.655321291652248e-09,
+        "candidate_sum_float64": 4.655321291652248e-09,
+        "reference_gradient": 2.7939677238464355e-09,
+        "candidate_gradient": 5.820766091346741e-10
+      }
+    },
+    "enc.tf.layers.10.self_attn.in_proj_weight": {
+      "input": {
+        "max_abs": 0.0,
+        "l2_relative": 0.0,
+        "reference_norm": 2610.6975565250295,
+        "exact": true
+      },
+      "output_adjoint": {
+        "max_abs": 0.0,
+        "l2_relative": 0.0,
+        "reference_norm": 0.1282345572916514,
+        "exact": true
+      },
+      "round2_worst_coordinate": {
+        "row": 1379,
+        "column": 79,
+        "reference_dot_float64": 1.2744479523899184e-09,
+        "candidate_dot_float64": 1.2744479523899184e-09,
+        "reference_gradient": 1.052285369951278e-09,
+        "candidate_gradient": -3.725290298461914e-09
+      }
+    }
+  },
+  "worst_update_coordinates": [
+    {
+      "name": "enc.tf.layers.10.self_attn.in_proj_weight",
+      "flat_index": 706127,
+      "ref_gradient": 1.052285369951278e-09,
+      "got_gradient": -3.725290298461914e-09,
+      "ref_delta": -9.540468454360962e-06,
+      "got_delta": 2.7123838663101196e-05,
+      "delta_max_abs": 3.666430711746216e-05,
+      "ref_gradient_over_eps": 0.1052285369951278,
+      "got_gradient_over_eps": -0.3725290298461914,
+      "ref_first_step_float64_formula": -9.539981786178565e-06,
+      "got_first_step_float64_formula": 2.7122789640643287e-05
+    },
+    {
+      "name": "enc.tf.layers.1.self_attn.in_proj_bias",
+      "flat_index": 576,
+      "ref_gradient": 2.7939677238464355e-09,
+      "got_gradient": 5.820766091346741e-10,
+      "ref_delta": -2.1838166503584944e-05,
+      "got_delta": -5.5005898502713535e-06,
+      "delta_max_abs": 1.633757710806094e-05,
+      "ref_gradient_over_eps": 0.27939677238464355,
+      "got_gradient_over_eps": 0.05820766091346741,
+      "ref_first_step_float64_formula": -2.1838164548741295e-05,
+      "got_first_step_float64_formula": -5.500589635045858e-06
+    },
+    {
+      "name": "enc.tf.layers.7.self_attn.in_proj_bias",
+      "flat_index": 733,
+      "ref_gradient": -7.566995918750763e-10,
+      "got_gradient": 5.675246939063072e-10,
+      "ref_delta": 7.034682312223595e-06,
+      "got_delta": -5.370460712583736e-06,
+      "delta_max_abs": 1.240514302480733e-05,
+      "ref_gradient_over_eps": -0.07566995918750763,
+      "got_gradient_over_eps": 0.05675246939063072,
+      "ref_first_step_float64_formula": 7.0346818316525165e-06,
+      "got_first_step_float64_formula": -5.370460068416652e-06
+    }
+  ],
+  "key_bias_blocks": [
+    {
+      "name": "enc.tf.layers.0.self_attn.in_proj_bias",
+      "blocks": {
+        "Q": {
+          "reference_gradient_max_abs": 1.151885747909546,
+          "candidate_gradient_max_abs": 1.1518855094909668,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        },
+        "K": {
+          "reference_gradient_max_abs": 1.7171259969472885e-09,
+          "candidate_gradient_max_abs": 1.5752448234707117e-09,
+          "delta_error_max_abs": 2.0111801859457046e-06
+        },
+        "V": {
+          "reference_gradient_max_abs": 35.99091720581055,
+          "candidate_gradient_max_abs": 35.99091339111328,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        }
+      }
+    },
+    {
+      "name": "enc.tf.layers.1.self_attn.in_proj_bias",
+      "blocks": {
+        "Q": {
+          "reference_gradient_max_abs": 1.4338446855545044,
+          "candidate_gradient_max_abs": 1.4338446855545044,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        },
+        "K": {
+          "reference_gradient_max_abs": 6.770715117454529e-07,
+          "candidate_gradient_max_abs": 6.757327355444431e-07,
+          "delta_error_max_abs": 1.633757710806094e-05
+        },
+        "V": {
+          "reference_gradient_max_abs": 6.199187755584717,
+          "candidate_gradient_max_abs": 6.199187278747559,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        }
+      }
+    },
+    {
+      "name": "enc.tf.layers.2.self_attn.in_proj_bias",
+      "blocks": {
+        "Q": {
+          "reference_gradient_max_abs": 0.7939454317092896,
+          "candidate_gradient_max_abs": 0.7939455509185791,
+          "delta_error_max_abs": 1.4551915228366852e-11
+        },
+        "K": {
+          "reference_gradient_max_abs": 2.0721927285194397e-07,
+          "candidate_gradient_max_abs": 2.0765583030879498e-07,
+          "delta_error_max_abs": 9.247967682313174e-06
+        },
+        "V": {
+          "reference_gradient_max_abs": 3.4590415954589844,
+          "candidate_gradient_max_abs": 3.4590415954589844,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        }
+      }
+    },
+    {
+      "name": "enc.tf.layers.3.self_attn.in_proj_bias",
+      "blocks": {
+        "Q": {
+          "reference_gradient_max_abs": 0.4572082459926605,
+          "candidate_gradient_max_abs": 0.45720815658569336,
+          "delta_error_max_abs": 1.4551915228366852e-11
+        },
+        "K": {
+          "reference_gradient_max_abs": 2.013694029301405e-07,
+          "candidate_gradient_max_abs": 2.0131119526922703e-07,
+          "delta_error_max_abs": 1.8714499674388207e-06
+        },
+        "V": {
+          "reference_gradient_max_abs": 2.6113882064819336,
+          "candidate_gradient_max_abs": 2.6113882064819336,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        }
+      }
+    },
+    {
+      "name": "enc.tf.layers.4.self_attn.in_proj_bias",
+      "blocks": {
+        "Q": {
+          "reference_gradient_max_abs": 0.3119019567966461,
+          "candidate_gradient_max_abs": 0.3119019567966461,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        },
+        "K": {
+          "reference_gradient_max_abs": 1.240987330675125e-07,
+          "candidate_gradient_max_abs": 1.2556847650557756e-07,
+          "delta_error_max_abs": 1.9785366021096706e-06
+        },
+        "V": {
+          "reference_gradient_max_abs": 2.109013319015503,
+          "candidate_gradient_max_abs": 2.109013319015503,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        }
+      }
+    },
+    {
+      "name": "enc.tf.layers.5.self_attn.in_proj_bias",
+      "blocks": {
+        "Q": {
+          "reference_gradient_max_abs": 0.27295711636543274,
+          "candidate_gradient_max_abs": 0.2729571461677551,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        },
+        "K": {
+          "reference_gradient_max_abs": 1.2200325727462769e-07,
+          "candidate_gradient_max_abs": 1.213338691741228e-07,
+          "delta_error_max_abs": 3.654200554592535e-06
+        },
+        "V": {
+          "reference_gradient_max_abs": 1.824027419090271,
+          "candidate_gradient_max_abs": 1.8240275382995605,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        }
+      }
+    },
+    {
+      "name": "enc.tf.layers.6.self_attn.in_proj_bias",
+      "blocks": {
+        "Q": {
+          "reference_gradient_max_abs": 0.23956234753131866,
+          "candidate_gradient_max_abs": 0.23956236243247986,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        },
+        "K": {
+          "reference_gradient_max_abs": 1.525040715932846e-07,
+          "candidate_gradient_max_abs": 1.5302794054150581e-07,
+          "delta_error_max_abs": 1.0313483471691143e-05
+        },
+        "V": {
+          "reference_gradient_max_abs": 1.6323267221450806,
+          "candidate_gradient_max_abs": 1.6323267221450806,
+          "delta_error_max_abs": 1.4551915228366852e-11
+        }
+      }
+    },
+    {
+      "name": "enc.tf.layers.7.self_attn.in_proj_bias",
+      "blocks": {
+        "Q": {
+          "reference_gradient_max_abs": 0.21566073596477509,
+          "candidate_gradient_max_abs": 0.21566075086593628,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        },
+        "K": {
+          "reference_gradient_max_abs": 1.448206603527069e-07,
+          "candidate_gradient_max_abs": 1.4528632164001465e-07,
+          "delta_error_max_abs": 1.240514302480733e-05
+        },
+        "V": {
+          "reference_gradient_max_abs": 1.531664490699768,
+          "candidate_gradient_max_abs": 1.531664490699768,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        }
+      }
+    },
+    {
+      "name": "enc.tf.layers.8.self_attn.in_proj_bias",
+      "blocks": {
+        "Q": {
+          "reference_gradient_max_abs": 0.22093017399311066,
+          "candidate_gradient_max_abs": 0.22093015909194946,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        },
+        "K": {
+          "reference_gradient_max_abs": 1.2549571692943573e-07,
+          "candidate_gradient_max_abs": 1.2433156371116638e-07,
+          "delta_error_max_abs": 3.8056523408158682e-06
+        },
+        "V": {
+          "reference_gradient_max_abs": 1.5115578174591064,
+          "candidate_gradient_max_abs": 1.5115578174591064,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        }
+      }
+    },
+    {
+      "name": "enc.tf.layers.9.self_attn.in_proj_bias",
+      "blocks": {
+        "Q": {
+          "reference_gradient_max_abs": 0.224417045712471,
+          "candidate_gradient_max_abs": 0.22441703081130981,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        },
+        "K": {
+          "reference_gradient_max_abs": 9.319046512246132e-08,
+          "candidate_gradient_max_abs": 9.333598427474499e-08,
+          "delta_error_max_abs": 1.8099699445883743e-06
+        },
+        "V": {
+          "reference_gradient_max_abs": 1.4895622730255127,
+          "candidate_gradient_max_abs": 1.4895620346069336,
+          "delta_error_max_abs": 1.4551915228366852e-11
+        }
+      }
+    },
+    {
+      "name": "enc.tf.layers.10.self_attn.in_proj_bias",
+      "blocks": {
+        "Q": {
+          "reference_gradient_max_abs": 0.2222929298877716,
+          "candidate_gradient_max_abs": 0.2222929298877716,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        },
+        "K": {
+          "reference_gradient_max_abs": 5.273614078760147e-08,
+          "candidate_gradient_max_abs": 5.256151780486107e-08,
+          "delta_error_max_abs": 6.566882802871987e-06
+        },
+        "V": {
+          "reference_gradient_max_abs": 1.4629486799240112,
+          "candidate_gradient_max_abs": 1.4629484415054321,
+          "delta_error_max_abs": 1.4551915228366852e-11
+        }
+      }
+    },
+    {
+      "name": "enc.tf.layers.11.self_attn.in_proj_bias",
+      "blocks": {
+        "Q": {
+          "reference_gradient_max_abs": 0.21615122258663177,
+          "candidate_gradient_max_abs": 0.21615123748779297,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        },
+        "K": {
+          "reference_gradient_max_abs": 1.6996636986732483e-07,
+          "candidate_gradient_max_abs": 1.7066486179828644e-07,
+          "delta_error_max_abs": 2.9631955840159208e-06
+        },
+        "V": {
+          "reference_gradient_max_abs": 1.4326249361038208,
+          "candidate_gradient_max_abs": 1.4326250553131104,
+          "delta_error_max_abs": 2.1827872842550278e-11
+        }
+      }
+    }
+  ],
+  "loss_abs_difference_is_one_fp32_ulp": true,
+  "numerical_acceptance": false,
+  "training_memory": "NOT_RUN",
+  "c2_kml": "NOT_RUN_BY_S02"
+}

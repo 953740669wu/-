@@ -1,0 +1,200 @@
+{
+  "djob": {
+    "data": {
+      "successData": [
+        {
+          "jobId": "2026356",
+          "jobName": "default",
+          "description": "",
+          "priority": 1,
+          "exclusive": true,
+          "interactionMode": "DEFAULT",
+          "state": "FAILED",
+          "currentOperation": "EMPTY",
+          "createTime": "2026-11-04T13:46:27Z",
+          "startTime": "2026-11-04T13:46:29Z",
+          "lastModifiedTime": "-",
+          "endTime": "2026-11-04T13:46:30Z",
+          "queue": "q_hpcai",
+          "account": "common",
+          "reserveRes": "-",
+          "backfillRes": "-",
+          "backfilledRes": "-",
+          "startTimeEstimated": "-",
+          "jobType": "COSCHED",
+          "mpiType": "DEFAULT",
+          "assistJob": "DEFAULT",
+          "pmiType": "OTHER",
+          "scheduledTime": "-",
+          "jobWallClockLimit": 900,
+          "retryPolicy": {
+            "maxRetryCnt": 0,
+            "currentRetryTimes": 0
+          },
+          "user": "dengqingtian",
+          "execPath": "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T134538Z/payload",
+          "submitNode": "login10",
+          "depInfo": {
+            "depJobList": [],
+            "children": []
+          },
+          "traceMessages": [
+            "2026-11-04T13:46:27Z   :    [JOB_ADD] Job 2026356 is submitted by dengqingtian, job state is PENDING.",
+            "2026-11-04T13:46:29Z   :    [JOB_START] Job 2026356 start message has been sent.",
+            "2026-11-04T13:46:29Z   :    [JOB_START_ACK] Job 2026356 start message has been received by agent cn21338.",
+            "2026-11-04T13:46:29Z   :    [JOB_EXECUTION] Job 2026356 state is from PENDING to RUNNING, execution path: /home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T134538Z/payload.",
+            "2026-11-04T13:46:30Z   :    [JOB_FINISH] Job 2026356 state is from RUNNING to FAILED, reason: job failed."
+          ],
+          "resGroups": [
+            {
+              "taskGroupName": "rg0",
+              "minReplica": 1,
+              "replica": 1,
+              "preferNodes": "-",
+              "nodeSelectPolicyReq": "-",
+              "nodeSelectPolicyEff": "SEQUENCE",
+              "affinityRequest": [
+                "numa[count=1, distribution=pack]"
+              ],
+              "taskLabels": "queue_q_hpcai aarch64",
+              "resReq": {
+                "cpu": 38,
+                "mem": 24576,
+                "gpu": {
+                  "amount": 0,
+                  "type": "gpu"
+                },
+                "npu": {
+                  "count": 0,
+                  "name": "npu"
+                },
+                "license": {}
+              },
+              "resLimit": {
+                "cpu": 0,
+                "mem": 24576,
+                "gpu": {
+                  "amount": 0,
+                  "type": "gpu"
+                },
+                "npu": {
+                  "count": 0,
+                  "name": "npu"
+                },
+                "license": {}
+              },
+              "resAlloc": {
+                "cpu": 38,
+                "mem": 24576,
+                "gpu": {
+                  "amount": 0,
+                  "type": "gpu"
+                },
+                "npu": {
+                  "count": 0,
+                  "name": "npu"
+                },
+                "license": {}
+              },
+              "nodeResUsages": [
+                {
+                  "tPreCheckRunTime": 0,
+                  "execNode": "cn21338",
+                  "resIndex": "0/1",
+                  "userCpuTime": 0,
+                  "systemCpuTime": 0,
+                  "memswMax": 0,
+                  "memMax": 0,
+                  "memAvg": 0,
+                  "memReal": 0,
+                  "rss": 0,
+                  "cache": 0,
+                  "preHookRunTime": 0,
+                  "postHookRunTime": 0,
+                  "hostPreHookRunTime": 0,
+                  "hostPostHookRunTime": 0,
+                  "swap": 0,
+                  "swapMax": 0,
+                  "wallclockDuration": 0,
+                  "sstoppedTime": 0,
+                  "cpuUtilAvg": 15,
+                  "cpuUtilRecent": 0,
+                  "gpuUtilAvg": [],
+                  "gpuUtilRecent": [],
+                  "npuUtilRecent": [],
+                  "pids": "-",
+                  "hwThreads": "0-37",
+                  "gpuIds": "-",
+                  "npuIds": "-"
+                }
+              ]
+            }
+          ],
+          "adminPriority": -1,
+          "taskExecNodes": "cn21338",
+          "taskExecNodesCount": 1,
+          "totalResUsage": {
+            "userCpuTimeTotal": 0,
+            "systemCpuTimeTotal": 0,
+            "memswMaxTotal": 0,
+            "memMaxTotal": 0,
+            "wallclockDurationTotal": 0,
+            "sstoppedTimeTotal": 0,
+            "preHookRunTime": 0,
+            "postHookRunTime": 0,
+            "hostPreHookRunTime": 0,
+            "hostPostHookRunTime": 0,
+            "coreHours": 0
+          },
+          "jobResReq": {
+            "license": {}
+          },
+          "jobResAlloc": {
+            "license": {}
+          },
+          "transferInfo": {
+            "transferType": "LOCAL",
+            "forwardTime": "-",
+            "recallTime": "-"
+          },
+          "logRedirectPath": {
+            "stderrRedirectPath": "",
+            "stdoutRedirectPath": "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T134538Z/job.log",
+            "stderrRedirectType": "append",
+            "stdoutRedirectType": "override"
+          },
+          "cmd": "env S01_RUN=/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T134538Z/payload bash /home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T134538Z/payload/pilot_s01_startup.sh",
+          "preHook": {},
+          "postHook": {},
+          "hostPreHook": {},
+          "hostPostHook": {},
+          "exitCode": 10001,
+          "exitMessage": "Job command execution failed, errCode: 2",
+          "jobExitCode": 2,
+          "isX11ForwardEnabled": false,
+          "logRedirectOutputPath": {
+            "stderrRedirectOutputPath": "",
+            "stdoutRedirectOutputPath": "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T134538Z/job.log"
+          },
+          "isAutoResizable": false,
+          "resizeNotifyCmd": "",
+          "hasResourceAffinityReq": false
+        }
+      ],
+      "errorData": {}
+    },
+    "message": "List job detail infos successfully.",
+    "code": "success",
+    "requestId": "req-dda8498f-1528-4100-baf4-5fe6ea99045f",
+    "totalElements": 1,
+    "pageNumber": 1,
+    "pageSize": 1
+  },
+  "djob_exit": 0,
+  "job_log": "/home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_20261104T134538Z/payload/pilot_s01_startup.sh: line 3: set: pipefail\n: invalid option name\n",
+  "shell_bytes_cr_count": 31,
+  "package_sha256": "5bb0a6718ec8ae3eb794e7f05f0faae9addd22342df0253833234320427a7616",
+  "model_execution": "NOT_REACHED",
+  "S02_job": "NOT_SUBMITTED",
+  "retry": "STOPPED_AFTER_FAILURE"
+}

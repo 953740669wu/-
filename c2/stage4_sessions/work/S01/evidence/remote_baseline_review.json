@@ -1,0 +1,30 @@
+{
+  "version": "S01_LOCAL_RUNNER_R2_20261104",
+  "s00_report_sha256": "8c10b0b2182608eba42eeaa14285d6ee05c9d9f088e9b1bd51fc44ccd3deec08",
+  "s00_indexed_files": 87,
+  "snapshots": {
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\baseline\\c2\\opt\\run_node16.sh": "a21aafcd1a3384f4ab07b146f24f5ebcf0b2a1b25eb35b725e8d26db9c655979",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\evidence\\remote_sources\\run_node16.sh": "ea27c594dd61865dfbbd67e3bdda216fc8a63df4acb2cb363807be52d8f9ccaf",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\evidence\\remote_sources\\run_node16_latest.sh": "0da6c46de4e4f7ac9694ba966af9ee23a4b63227137fea72f9c99b7e62f73e41"
+  },
+  "summary_identical": true,
+  "selected_launcher_baseline": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\evidence\\remote_sources\\run_node16_latest.sh",
+  "diagnostics": {
+    "SAMPLE_FOREIGN": "disabled explicitly; source not retrieved; SAMPLE_FOREIGN=1 rejected",
+    "CORES_PER_DOM": "retained, applied after affinity/busy filtering",
+    "PYTHONFAULTHANDLER": "retained, enabled for launcher and workers",
+    "failure_keywords": "retained as bounded diagnostic excerpts; actual exit status is authoritative",
+    "round_timestamps": "retained in per-process started/finished status; foreign.log not created without a sampler"
+  },
+  "legacy_input_protocol": {
+    "input_protocol": "LEGACY_TIMING_ONLY",
+    "source_evidence_sha256": "ecee2a68d77e70f389f0bbe7fdd488f9c3aaa448d755f1255307b0294273dd0a",
+    "cases": {
+      "s0322p0": "4bb9cfaffa8f7d464d1efd80a45e98edd2cf990179b923c160573078f97bfdad",
+      "s0322p1": "a5db12595bb7486a9a86e4f9bce9a0680876d2a732bc5f05d361c7b9657737c0"
+    },
+    "limitation": "The saved demo images match the 32-electrode source and differ from the 16-electrode source. File identity is not scientific target-pairing acceptance."
+  },
+  "remote_candidate_root": "/home/share/dengqingtian/opt/stage4_sessions/S01/<unique_run_id>/",
+  "remote_executed": false
+}

@@ -1,0 +1,65 @@
+--- a/pilot_s01_startup.sh
++++ b/pilot_s01_startup.sh
+@@ -1,31 +1,31 @@
+-#!/bin/bash
+-# Prepared only: accepted S01 code is unchanged; no performance acceptance claim.
+-set -euo pipefail
+-HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
+-source "$HERE/cluster_runtime.env"
+-: "${S01_RUN:?set a fresh staged S01 task root}"
+-: "${CCS_JOB_ID:?run inside the allocated Donau job}"
+-case "$S01_RUN" in /home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_*/payload) ;; *) exit 2 ;; esac
+-[[ "$(hostname)" != login* ]] || exit 2
+-"$C2_PYTHON" -B - <<'PY'
+-import os
+-from pathlib import Path
+-allowed = set(os.sched_getaffinity(0))
+-assert len(allowed) == 38, 'expected exactly 38 allocated CPUs'
+-matches = 0
+-for node in Path('/sys/devices/system/node').glob('node[0-9]*'):
+-    cpus = set()
+-    for part in (node / 'cpulist').read_text().strip().split(','):
+-        if part:
+-            bounds = part.split('-')
+-            cpus.update(range(int(bounds[0]), int(bounds[-1]) + 1))
+-    matches += allowed <= cpus
+-assert matches == 1, 'allocated CPUs must belong to one NUMA domain'
+-PY
+-export S01_JOB_ID=$CCS_JOB_ID S01_COMPUTE_HOST=$(hostname)
+-bash "$S01_RUN/runtime_preflight.sh"
+-export ROUNDS=3 NDOM=1 HBM=0 MEMPOL=membind SKIP_BUSY=0 SAMPLE_FOREIGN=0
+-export CORES_PER_DOM=38 RUN_TIMEOUT=180 SYNC_TIMEOUT=120
+-timeout --signal=TERM --kill-after=15s 780 \
+-  bash "$S01_RUN/candidate/run_node16.sh" "s01_startup_${CCS_JOB_ID}" \
+-  BATCH=32 KML_LINEAR=1 LINEAR_DTYPE=fp32 CKPT=0 BELTS=16_adjacent PARTS=pre,dec REPS=1
++#!/bin/bash
++# Prepared only: accepted S01 code is unchanged; no performance acceptance claim.
++set -euo pipefail
++HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
++source "$HERE/cluster_runtime.env"
++: "${S01_RUN:?set a fresh staged S01 task root}"
++: "${CCS_JOB_ID:?run inside the allocated Donau job}"
++case "$S01_RUN" in /home/share/dengqingtian/opt/stage4_sessions/S00/PILOT_S01_*/payload) ;; *) exit 2 ;; esac
++[[ "$(hostname)" != login* ]] || exit 2
++"$C2_PYTHON" -B - <<'PY'
++import os
++from pathlib import Path
++allowed = set(os.sched_getaffinity(0))
++assert len(allowed) == 38, 'expected exactly 38 allocated CPUs'
++matches = 0
++for node in Path('/sys/devices/system/node').glob('node[0-9]*'):
++    cpus = set()
++    for part in (node / 'cpulist').read_text().strip().split(','):
++        if part:
++            bounds = part.split('-')
++            cpus.update(range(int(bounds[0]), int(bounds[-1]) + 1))
++    matches += allowed <= cpus
++assert matches == 1, 'allocated CPUs must belong to one NUMA domain'
++PY
++export S01_JOB_ID=$CCS_JOB_ID S01_COMPUTE_HOST=$(hostname)
++bash "$S01_RUN/runtime_preflight.sh"
++export ROUNDS=3 NDOM=1 HBM=0 MEMPOL=membind SKIP_BUSY=0 SAMPLE_FOREIGN=0
++export CORES_PER_DOM=38 RUN_TIMEOUT=180 SYNC_TIMEOUT=120
++timeout --signal=TERM --kill-after=15s 780 \
++  bash "$S01_RUN/candidate/run_node16.sh" "s01_startup_${CCS_JOB_ID}" \
++  BATCH=32 KML_LINEAR=1 LINEAR_DTYPE=fp32 CKPT=0 BELTS=16_adjacent PARTS=pre,dec REPS=1

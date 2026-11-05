@@ -1,0 +1,57 @@
+test_core_limit_applies_after_affinity_and_busy_filter (__main__.RemoteDeltaChecks.test_core_limit_applies_after_affinity_and_busy_filter) ... ERROR
+test_fault_diagnostics_retained_with_real_exit_status (__main__.RemoteDeltaChecks.test_fault_diagnostics_retained_with_real_exit_status) ... ERROR
+test_legacy_input_label_is_enforced (__main__.RemoteDeltaChecks.test_legacy_input_label_is_enforced) ... FAIL
+test_shell_keeps_faulthandler_and_owner_path_is_read_only (__main__.RemoteDeltaChecks.test_shell_keeps_faulthandler_and_owner_path_is_read_only) ... FAIL
+test_snapshot_identity_and_summary_equivalence (__main__.RemoteDeltaChecks.test_snapshot_identity_and_summary_equivalence) ... ok
+test_unknown_sampler_is_explicitly_disabled_or_rejected (__main__.RemoteDeltaChecks.test_unknown_sampler_is_explicitly_disabled_or_rejected) ... ERROR
+
+======================================================================
+ERROR: test_core_limit_applies_after_affinity_and_busy_filter (__main__.RemoteDeltaChecks.test_core_limit_applies_after_affinity_and_busy_filter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\tests\test_remote_delta.py", line 29, in test_core_limit_applies_after_affinity_and_busy_filter
+    self.assertEqual(runner.select_cpus(list(range(38)), set(range(38)), set(), limit=36), list(range(36)))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: select_cpus() got an unexpected keyword argument 'limit'
+
+======================================================================
+ERROR: test_fault_diagnostics_retained_with_real_exit_status (__main__.RemoteDeltaChecks.test_fault_diagnostics_retained_with_real_exit_status)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\tests\test_remote_delta.py", line 52, in test_fault_diagnostics_retained_with_real_exit_status
+    self.assertEqual(states[0]['diagnostic_matches']['count'], 1)
+                     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'diagnostic_matches'
+
+======================================================================
+ERROR: test_unknown_sampler_is_explicitly_disabled_or_rejected (__main__.RemoteDeltaChecks.test_unknown_sampler_is_explicitly_disabled_or_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\tests\test_remote_delta.py", line 36, in test_unknown_sampler_is_explicitly_disabled_or_rejected
+    config = runner.diagnostic_config({})
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'runner' has no attribute 'diagnostic_config'
+
+======================================================================
+FAIL: test_legacy_input_label_is_enforced (__main__.RemoteDeltaChecks.test_legacy_input_label_is_enforced)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\tests\test_remote_delta.py", line 69, in test_legacy_input_label_is_enforced
+    self.assertEqual(runner.summarize(fixture.root)['status'], 'FAIL')
+AssertionError: 'PASS' != 'FAIL'
+- PASS
++ FAIL
+
+
+======================================================================
+FAIL: test_shell_keeps_faulthandler_and_owner_path_is_read_only (__main__.RemoteDeltaChecks.test_shell_keeps_faulthandler_and_owner_path_is_read_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\tests\test_remote_delta.py", line 75, in test_shell_keeps_faulthandler_and_owner_path_is_read_only
+    self.assertIn('PYTHONFAULTHANDLER=1', text)
+AssertionError: 'PYTHONFAULTHANDLER=1' not found in '#!/bin/bash\n# S01 isolated runner. Same tag and model env-assignment interface as the frozen launcher.\nset -euo pipefail\nH=/home/share/songzhenlong/eitfm\nS01_RUN=${S01_RUN:?set an absolute unique S01 run directory}\n[[ "$S01_RUN" = /* ]] || { echo \'S01_RUN must be absolute\' >&2; exit 1; }\nK=/opt/HPCKit/kml-lib/sme/kblas/multi\nB=/opt/HPCKit/bisheng-lib\nexport S01_RUN OMP_PLACES=cores OMP_PROC_BIND=close\nexport KML_BLAS_LIB=$K/libkblas.so\nexport LD_LIBRARY_PATH=$K:/opt/HPCKit/kml-lib:$B${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}\nexport PYTHONPATH=$H/sw/torch_kml:$S01_RUN/candidate\nexport LD_PRELOAD=$S01_RUN/lib/libkml_sgemm_shim.so\nexport PYTHONDONTWRITEBYTECODE=1\nexec python3 "$S01_RUN/candidate/runner.py" "$@"\n'
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.213s
+
+FAILED (failures=2, errors=3)

@@ -1,0 +1,269 @@
+{
+  "status": "PASS_R7_BOUNDED_STARTUP_EVIDENCE_REVIEW_PENDING",
+  "job_id": "2034247",
+  "host": "cn21340",
+  "scheduler_state": "SUCCEEDED",
+  "job_exit_code": 0,
+  "start_utc": "2026-11-05T03:00:01Z",
+  "end_utc": "2026-11-05T03:01:52Z",
+  "node_seconds": 111.0,
+  "node_hours": 0.030833333333333334,
+  "cumulative_s00_node_seconds": 377.0,
+  "selected_cpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "reserved_cpus": [
+    36,
+    37
+  ],
+  "allocated_cpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "child_exit_code": 0,
+      "timed_out": false,
+      "monitor_samples": 571,
+      "checkpoints": 6,
+      "actual_torch_intraop": 36,
+      "calling_affinity": [
+        0
+      ],
+      "measurements": {
+        "pretrain_step_s_B32": 1.480991710908711,
+        "pretrain_frames_per_s": 21.607143216463616,
+        "decoder_step_s_B32": 3.7716822661459446,
+        "decoder_frames_per_s": 8.48427776836538,
+        "peak_mem_GB": 7.979972
+      }
+    },
+    {
+      "round": 2,
+      "child_exit_code": 0,
+      "timed_out": false,
+      "monitor_samples": 547,
+      "checkpoints": 6,
+      "actual_torch_intraop": 36,
+      "calling_affinity": [
+        0
+      ],
+      "measurements": {
+        "pretrain_step_s_B32": 1.4679568810388446,
+        "pretrain_frames_per_s": 21.79900541584997,
+        "decoder_step_s_B32": 3.748083028011024,
+        "decoder_frames_per_s": 8.53769774064511,
+        "peak_mem_GB": 7.8983
+      }
+    },
+    {
+      "round": 3,
+      "child_exit_code": 0,
+      "timed_out": false,
+      "monitor_samples": 565,
+      "checkpoints": 6,
+      "actual_torch_intraop": 36,
+      "calling_affinity": [
+        0
+      ],
+      "measurements": {
+        "pretrain_step_s_B32": 1.4379141200333834,
+        "pretrain_frames_per_s": 22.254458422911288,
+        "decoder_step_s_B32": 3.7251520310528576,
+        "decoder_frames_per_s": 8.590253426772406,
+        "peak_mem_GB": 7.84136
+      }
+    }
+  ],
+  "summary": {
+    "status": "PASS",
+    "errors": [],
+    "metrics": {
+      "16_adjacent/pre": {
+        "rounds": [
+          {
+            "round": 1,
+            "domains": 1,
+            "sum": 21.607143216463616,
+            "minimum": 21.607143216463616,
+            "median": 21.607143216463616,
+            "maximum": 21.607143216463616,
+            "conservative": 21.607143216463616,
+            "slowest_step_s": 1.480991710908711,
+            "legacy_peak_mem_GB": 7.979972
+          },
+          {
+            "round": 2,
+            "domains": 1,
+            "sum": 21.79900541584997,
+            "minimum": 21.79900541584997,
+            "median": 21.79900541584997,
+            "maximum": 21.79900541584997,
+            "conservative": 21.79900541584997,
+            "slowest_step_s": 1.4679568810388446,
+            "legacy_peak_mem_GB": 7.8983
+          },
+          {
+            "round": 3,
+            "domains": 1,
+            "sum": 22.254458422911288,
+            "minimum": 22.254458422911288,
+            "median": 22.254458422911288,
+            "maximum": 22.254458422911288,
+            "conservative": 22.254458422911288,
+            "slowest_step_s": 1.4379141200333834,
+            "legacy_peak_mem_GB": 7.84136
+          }
+        ],
+        "sums": [
+          21.607143216463616,
+          21.79900541584997,
+          22.254458422911288
+        ],
+        "conservative": [
+          21.607143216463616,
+          21.79900541584997,
+          22.254458422911288
+        ],
+        "spread": 0.02957550510779946,
+        "stable": true
+      },
+      "16_adjacent/dec": {
+        "rounds": [
+          {
+            "round": 1,
+            "domains": 1,
+            "sum": 8.48427776836538,
+            "minimum": 8.48427776836538,
+            "median": 8.48427776836538,
+            "maximum": 8.48427776836538,
+            "conservative": 8.48427776836538,
+            "slowest_step_s": 3.7716822661459446,
+            "legacy_peak_mem_GB": 7.979972
+          },
+          {
+            "round": 2,
+            "domains": 1,
+            "sum": 8.53769774064511,
+            "minimum": 8.53769774064511,
+            "median": 8.53769774064511,
+            "maximum": 8.53769774064511,
+            "conservative": 8.53769774064511,
+            "slowest_step_s": 3.748083028011024,
+            "legacy_peak_mem_GB": 7.8983
+          },
+          {
+            "round": 3,
+            "domains": 1,
+            "sum": 8.590253426772406,
+            "minimum": 8.590253426772406,
+            "median": 8.590253426772406,
+            "maximum": 8.590253426772406,
+            "conservative": 8.590253426772406,
+            "slowest_step_s": 3.7251520310528576,
+            "legacy_peak_mem_GB": 7.84136
+          }
+        ],
+        "sums": [
+          8.48427776836538,
+          8.53769774064511,
+          8.590253426772406
+        ],
+        "conservative": [
+          8.48427776836538,
+          8.53769774064511,
+          8.590253426772406
+        ],
+        "spread": 0.01241309282445546,
+        "stable": true
+      }
+    },
+    "scope": "runner integrity and legacy A1 spread only; no numerical or deployment acceptance"
+  },
+  "full_evidence_files": 54,
+  "bundle_sha256": "cf5db0ce6ac812c719b5879e26c68955f26fbfa23154a6bea96f31962bcb9755",
+  "source_package_sha256": "288a74181c36ec87b3953be5cde7e26575e45c219e9f446a21fca0683659119c",
+  "preflight": "PASS_IMPORT_ONLY_SAME_JOB",
+  "offline_summary": "PASS",
+  "offline_copy": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\tmp\\r7_offline_sq78u1iv\\received",
+  "offline_max_mtime_rounding_ns": 90,
+  "received_original_bytes_unchanged": true,
+  "prior_evidence_unchanged": true,
+  "S02": "NOT_SUBMITTED",
+  "training_memory_test": "NOT_RUN",
+  "numerical_equivalence": "NOT_TESTED",
+  "formal_performance": "NOT_ACCEPTED",
+  "production_deployment": "NOT_DONE"
+}

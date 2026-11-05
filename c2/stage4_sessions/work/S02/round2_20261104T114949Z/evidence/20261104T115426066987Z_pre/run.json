@@ -1,0 +1,24 @@
+{
+  "started_utc": "2026-11-04T11:54:26.066987+00:00",
+  "part": "pre",
+  "belt": "16_adjacent",
+  "effective_batch": 64,
+  "microbatch": 32,
+  "checkpoint": false,
+  "history": "fresh",
+  "threads": 4,
+  "resource_before": {
+    "physical_bytes": 3077398528,
+    "commit_bytes": 3321384960,
+    "total_physical_bytes": 33341927424,
+    "commit_limit_bytes": 47300571136
+  },
+  "launch_gate_GiB": {
+    "available_physical": 12,
+    "available_commit": 16
+  },
+  "status": "NOT_RUN_RESOURCE_GUARD",
+  "model_executed": false,
+  "reason": "Insufficient headroom for full B64 reference and retained comparison snapshots.",
+  "ended_utc": "2026-11-04T11:54:26.066987+00:00"
+}

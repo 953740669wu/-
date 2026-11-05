@@ -1,0 +1,56 @@
+{
+  "status": "PASS_CODE_SHA_LF_LINUX_SYNTAX_BEFORE_SUBMISSION",
+  "captured_utc": "2026-11-04T14:55:05.540975+00:00",
+  "package_sha256": "1db8b1818a387a0c3dd404bf1efd40a3aba777bad7d7c4226379ef369ad9fd81",
+  "payload_files": {
+    "diagnostic/cluster_runtime.env": "e5bf5072fe91037bd335897435426fda7e9848c5fdcce4c18f4d5eaf194ea333",
+    "diagnostic/cpu36_contract.py": "ef34df5d0b66784dd88c7453b0ea208beb64ee54169c37aa799b584db225fb09",
+    "diagnostic/kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "diagnostic/run_diagnostics.py": "05804fc198df43700e57ca5ceb976d6764bafdcf781ae55c0d9cfc6b472df389",
+    "diagnostic/run_thread_diagnostics.sh": "9e0080b7e7dffdbda337f3d1241db5e0539c3e21b7effa6107c2a2a25c59ee1b",
+    "diagnostic/SOURCE_MANIFEST.json": "a4e0c758bb390ab6d34775afe12595a9aac87a01126d125f3c90641d6f98cda6",
+    "diagnostic/thread_worker.py": "0da9ae8efac6472bea92303caeb447d387f3d153bf004bd035157ec4d8463c0a",
+    "tests/test_cpu36_contract.py": "23296dc5b9ee6bb641789f3f84902346d2cc0b1fa30325399634f7cdbe141a10",
+    "DIAGNOSTIC_PLAN_FOR_S00.md": "e90d9c20ba80377496d148a279ed35b3665b3bf273c4ca0c0fd3176862a644a3",
+    "MINIMAL_FIX_PLAN.md": "f72a0a12595a120a63e38716e61070261fc52cbbf4d4bc12dca4b921b5bd83b6",
+    "SYNC_TO_S00_S02.md": "d7a73a09cde68380e08e5aa8bb16b9b3743cd18ed95903fdf354c9c364d039b4",
+    "STATUS.json": "cca1b6bf2e0006368f5d8c6938a22a9b87af825080e34ac542c22a1aa0e73e2a"
+  },
+  "shell_checks": [
+    {
+      "file": "diagnostic/cluster_runtime.env",
+      "sha256": "e5bf5072fe91037bd335897435426fda7e9848c5fdcce4c18f4d5eaf194ea333",
+      "cr_bytes": 0,
+      "bash_n_exit": 0,
+      "stderr": ""
+    },
+    {
+      "file": "diagnostic/run_thread_diagnostics.sh",
+      "sha256": "9e0080b7e7dffdbda337f3d1241db5e0539c3e21b7effa6107c2a2a25c59ee1b",
+      "cr_bytes": 0,
+      "bash_n_exit": 0,
+      "stderr": ""
+    }
+  ],
+  "login_visible_dependencies": {
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3": {
+      "realpath": "/usr/bin/python3.9",
+      "sha256": "41ed40932add50d0a953bbe92ba15a9e60a2ee476ce68cfd4798cf814647c383"
+    },
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/__init__.py": {
+      "realpath": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/__init__.py",
+      "sha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e"
+    },
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py": {
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+      "sha256": "9801e75447c7f585545f989f8a21940b60e0c4cc888effb2f08e739664b4b904"
+    },
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so": {
+      "realpath": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+      "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+    }
+  },
+  "compute_only_dependency": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+  "login_kml_path_present": false,
+  "dependency_scope": "Initial optional login dependency check could not stat KML; computation-node library import/API and operators are verified only by actual workers. No diagnostic job submitted before these code gates."
+}

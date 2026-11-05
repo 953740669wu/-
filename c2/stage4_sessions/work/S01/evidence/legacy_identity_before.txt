@@ -1,0 +1,30 @@
+test_core_limit_applies_after_affinity_and_busy_filter (__main__.RemoteDeltaChecks.test_core_limit_applies_after_affinity_and_busy_filter) ... ok
+test_fault_diagnostics_retained_with_real_exit_status (__main__.RemoteDeltaChecks.test_fault_diagnostics_retained_with_real_exit_status) ... ok
+test_legacy_file_identity_is_pinned_to_saved_evidence (__main__.RemoteDeltaChecks.test_legacy_file_identity_is_pinned_to_saved_evidence) ... ERROR
+test_legacy_input_label_is_enforced (__main__.RemoteDeltaChecks.test_legacy_input_label_is_enforced) ... ok
+test_shell_keeps_faulthandler_and_owner_path_is_read_only (__main__.RemoteDeltaChecks.test_shell_keeps_faulthandler_and_owner_path_is_read_only) ... ok
+test_snapshot_identity_and_summary_equivalence (__main__.RemoteDeltaChecks.test_snapshot_identity_and_summary_equivalence) ... ok
+test_unknown_sampler_is_explicitly_disabled_or_rejected (__main__.RemoteDeltaChecks.test_unknown_sampler_is_explicitly_disabled_or_rejected) ... ok
+
+======================================================================
+ERROR: test_legacy_file_identity_is_pinned_to_saved_evidence (__main__.RemoteDeltaChecks.test_legacy_file_identity_is_pinned_to_saved_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\tests\test_remote_delta.py", line 81, in test_legacy_file_identity_is_pinned_to_saved_evidence
+    identity = runner.read_json(WORK / 'candidate/legacy_inputs.json')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\candidate\runner.py", line 39, in read_json
+    value = json.loads(Path(path).read_text(encoding='utf-8'), object_pairs_hook=unique)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\candidate\\legacy_inputs.json'
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.189s
+
+FAILED (errors=1)

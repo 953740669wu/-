@@ -1,0 +1,26 @@
+{
+  "observations": [
+    {
+      "command": [
+        "wsl",
+        "--list",
+        "--quiet"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "未安装适用于 Linux 的 Windows 子系统。可通过运行 “wsl.exe --install” 进行安装。\r\r\n有关详细信息，请访问 https://aka.ms/wslinstall\r\r\n"
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--version"
+      ],
+      "exit_code": 3221225794,
+      "stdout": "",
+      "stderr": "      0 [main] bash (38576) C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe: *** fatal error - NtCreateDirectoryObject(\\BaseNamedObjects\\msys-2.0S5-1888ae32e00d56aa): 0xC0000022\n"
+    }
+  ],
+  "docker": null,
+  "podman": null,
+  "linux_executed": false
+}

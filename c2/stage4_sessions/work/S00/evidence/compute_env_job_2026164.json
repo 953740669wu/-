@@ -1,0 +1,190 @@
+{
+  "djob": "{\"data\":{\"successData\":[{\"jobId\":\"2026164\",\"jobName\":\"s00_env_20261104T125633Z_R2\",\"description\":\"\",\"priority\":1,\"exclusive\":true,\"interactionMode\":\"DEFAULT\",\"state\":\"FAILED\",\"currentOperation\":\"EMPTY\",\"createTime\":\"2026-11-04T12:56:51Z\",\"startTime\":\"2026-11-04T12:56:54Z\",\"lastModifiedTime\":\"-\",\"endTime\":\"2026-11-04T12:56:55Z\",\"queue\":\"q_hpcai\",\"account\":\"common\",\"reserveRes\":\"-\",\"backfillRes\":\"-\",\"backfilledRes\":\"-\",\"startTimeEstimated\":\"-\",\"jobType\":\"COSCHED\",\"mpiType\":\"DEFAULT\",\"assistJob\":\"DEFAULT\",\"pmiType\":\"OTHER\",\"scheduledTime\":\"-\",\"jobWallClockLimit\":240,\"retryPolicy\":{\"maxRetryCnt\":0,\"currentRetryTimes\":0},\"user\":\"dengqingtian\",\"execPath\":\"/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2\",\"submitNode\":\"login10\",\"depInfo\":{\"depJobList\":[],\"children\":[]},\"traceMessages\":[\"2026-11-04T12:56:51Z   :    [JOB_ADD] Job 2026164 is submitted by dengqingtian, job state is PENDING.\",\"2026-11-04T12:56:53Z   :    [JOB_START] Job 2026164 start message has been sent.\",\"2026-11-04T12:56:53Z   :    [JOB_START_ACK] Job 2026164 start message has been received by agent cn21417.\",\"2026-11-04T12:56:54Z   :    [JOB_EXECUTION] Job 2026164 state is from PENDING to RUNNING, execution path: /home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2.\",\"2026-11-04T12:56:55Z   :    [JOB_FINISH] Job 2026164 state is from RUNNING to FAILED, reason: job failed.\"],\"resGroups\":[{\"taskGroupName\":\"rg0\",\"minReplica\":1,\"replica\":1,\"preferNodes\":\"-\",\"nodeSelectPolicyReq\":\"-\",\"nodeSelectPolicyEff\":\"SEQUENCE\",\"affinityRequest\":[\"numa[count=1, distribution=pack]\"],\"taskLabels\":\"queue_q_hpcai aarch64\",\"resReq\":{\"cpu\":1,\"mem\":4096,\"gpu\":{\"amount\":0,\"type\":\"gpu\"},\"npu\":{\"count\":0,\"name\":\"npu\"},\"license\":{}},\"resAlloc\":{\"cpu\":1,\"mem\":4096,\"gpu\":{\"amount\":0,\"type\":\"gpu\"},\"npu\":{\"count\":0,\"name\":\"npu\"},\"license\":{}},\"nodeResUsages\":[{\"tPreCheckRunTime\":0,\"execNode\":\"cn21417\",\"resIndex\":\"0/1\",\"userCpuTime\":0,\"systemCpuTime\":0,\"memswMax\":10,\"memMax\":10,\"memAvg\":0,\"memReal\":0,\"rss\":0,\"cache\":0,\"preHookRunTime\":0,\"postHookRunTime\":0,\"hostPreHookRunTime\":0,\"hostPostHookRunTime\":0,\"swap\":0,\"swapMax\":0,\"wallclockDuration\":1,\"sstoppedTime\":0,\"cpuUtilAvg\":82,\"cpuUtilRecent\":0,\"gpuUtilAvg\":[],\"gpuUtilRecent\":[],\"npuUtilRecent\":[],\"pids\":\"-\",\"hwThreads\":\"0\",\"gpuIds\":\"-\",\"npuIds\":\"-\"}]}],\"adminPriority\":-1,\"taskExecNodes\":\"cn21417\",\"taskExecNodesCount\":1,\"totalResUsage\":{\"userCpuTimeTotal\":0,\"systemCpuTimeTotal\":0,\"memswMaxTotal\":0,\"memMaxTotal\":0,\"wallclockDurationTotal\":1,\"sstoppedTimeTotal\":0,\"preHookRunTime\":0,\"postHookRunTime\":0,\"hostPreHookRunTime\":0,\"hostPostHookRunTime\":0,\"coreHours\":608},\"jobResReq\":{\"license\":{}},\"jobResAlloc\":{\"license\":{}},\"transferInfo\":{\"transferType\":\"LOCAL\",\"forwardTime\":\"-\",\"recallTime\":\"-\"},\"logRedirectPath\":{\"stderrRedirectPath\":\"\",\"stdoutRedirectPath\":\"/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2/job.log\",\"stderrRedirectType\":\"append\",\"stdoutRedirectType\":\"override\"},\"cmd\":\"bash /home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2/run_env_probe.sh\",\"preHook\":{},\"postHook\":{},\"hostPreHook\":{},\"hostPostHook\":{},\"exitCode\":10001,\"exitMessage\":\"Job command execution failed, errCode: 2\",\"jobExitCode\":2,\"isX11ForwardEnabled\":false,\"logRedirectOutputPath\":{\"stderrRedirectOutputPath\":\"\",\"stdoutRedirectOutputPath\":\"/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2/job.log\"},\"isAutoResizable\":false,\"resizeNotifyCmd\":\"\",\"hasResourceAffinityReq\":false}],\"errorData\":{}},\"message\":\"List job detail infos successfully.\",\"code\":\"success\",\"requestId\":\"req-311a19c0-052c-440e-8cfb-bde48742db93\",\"totalElements\":1,\"pageNumber\":1,\"pageSize\":1}\n\n",
+  "djob_exit": 0,
+  "job_log": "cn21417\n2026-11-04T12:56:54Z\n13:rdma:/\n12:pids:/system.slice/batch-agent.service\n11:blkio:/\n10:memory:/batch/container_2026164_rg0_00000000_e01\n9:hugetlb:/\n8:cpuset:/batch/container_2026164_rg0_00000000_e01\n7:freezer:/batch/container_2026164_rg0_00000000_e01\n6:perf_event:/\n5:devices:/system.slice/batch-agent.service\n4:cpu,cpuacct:/batch/container_2026164_rg0_00000000_e01\n3:net_cls,net_prio:/\n2:files:/\n1:name=systemd:/system.slice/batch-agent.service\n{\"status\": \"NO_VERIFIED_TORCH_NUMPY_ENVIRONMENT\", \"host\": \"cn21417\", \"root\": \"/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2\", \"elapsed_s\": 0.4564763121306896}\n",
+  "result": {
+    "started_utc": "2026-11-04T12:56:54.572956+00:00",
+    "host": "cn21417",
+    "user": null,
+    "root": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2",
+    "resources": {
+      "affinity": [
+        0
+      ],
+      "host_cpu_count": 608,
+      "proc_status": {
+        "Cpus_allowed_list": "0",
+        "Mems_allowed_list": "0-31",
+        "VmRSS": "10212 kB",
+        "Threads": "1"
+      },
+      "host_memory": {
+        "MemTotal": "592446008 kB",
+        "MemAvailable": "466722736 kB",
+        "SwapFree": "0 kB",
+        "HugePages_Total": "32320",
+        "HugePages_Free": "32320",
+        "Hugepagesize": "2048 kB"
+      },
+      "host_memory_is_not_job_budget": true,
+      "cgroup": "13:rdma:/\n12:pids:/system.slice/batch-agent.service\n11:blkio:/\n10:memory:/batch/container_2026164_rg0_00000000_e01\n9:hugetlb:/\n8:cpuset:/batch/container_2026164_rg0_00000000_e01\n7:freezer:/batch/container_2026164_rg0_00000000_e01\n6:perf_event:/\n5:devices:/system.slice/batch-agent.service\n4:cpu,cpuacct:/batch/container_2026164_rg0_00000000_e01\n3:net_cls,net_prio:/\n2:files:/\n1:name=systemd:/system.slice/batch-agent.service",
+      "cgroup_files": {
+        "/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/memory.max": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/memory.max'",
+        "/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/memory.current": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/memory.current'",
+        "/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/memory.limit_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/memory.limit_in_bytes'",
+        "/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/memory.usage_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/memory.usage_in_bytes'",
+        "/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/memory.soft_limit_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/memory.soft_limit_in_bytes'",
+        "/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpu.max": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpu.max'",
+        "/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpu.cfs_quota_us": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpu.cfs_quota_us'",
+        "/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpu.cfs_period_us": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpu.cfs_period_us'",
+        "/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpuset.cpus": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpuset.cpus'",
+        "/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpuset.mems": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpuset.mems'",
+        "/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpuset.cpus.effective": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpuset.cpus.effective'",
+        "/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpuset.mems.effective": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2026164_rg0_00000000_e01/cpuset.mems.effective'",
+        "/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/memory.max": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/memory.max'",
+        "/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/memory.current": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/memory.current'",
+        "/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/memory.limit_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/memory.limit_in_bytes'",
+        "/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/memory.usage_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/memory.usage_in_bytes'",
+        "/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/memory.soft_limit_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/memory.soft_limit_in_bytes'",
+        "/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpu.max": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpu.max'",
+        "/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpu.cfs_quota_us": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpu.cfs_quota_us'",
+        "/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpu.cfs_period_us": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpu.cfs_period_us'",
+        "/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpuset.cpus": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpuset.cpus'",
+        "/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpuset.mems": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpuset.mems'",
+        "/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpuset.cpus.effective": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpuset.cpus.effective'",
+        "/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpuset.mems.effective": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuset/batch/container_2026164_rg0_00000000_e01/cpuset.mems.effective'",
+        "/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/memory.max": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/memory.max'",
+        "/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/memory.current": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/memory.current'",
+        "/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/memory.limit_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/memory.limit_in_bytes'",
+        "/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/memory.usage_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/memory.usage_in_bytes'",
+        "/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/memory.soft_limit_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/memory.soft_limit_in_bytes'",
+        "/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpu.max": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpu.max'",
+        "/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpu.cfs_quota_us": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpu.cfs_quota_us'",
+        "/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpu.cfs_period_us": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpu.cfs_period_us'",
+        "/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpuset.cpus": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpuset.cpus'",
+        "/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpuset.mems": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpuset.mems'",
+        "/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpuset.cpus.effective": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpuset.cpus.effective'",
+        "/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpuset.mems.effective": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/freezer/batch/container_2026164_rg0_00000000_e01/cpuset.mems.effective'",
+        "/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/memory.max": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/memory.max'",
+        "/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/memory.current": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/memory.current'",
+        "/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/memory.limit_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/memory.limit_in_bytes'",
+        "/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/memory.usage_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/memory.usage_in_bytes'",
+        "/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/memory.soft_limit_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/memory.soft_limit_in_bytes'",
+        "/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpu.max": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpu.max'",
+        "/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpu.cfs_quota_us": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpu.cfs_quota_us'",
+        "/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpu.cfs_period_us": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpu.cfs_period_us'",
+        "/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpuset.cpus": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpuset.cpus'",
+        "/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpuset.mems": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpuset.mems'",
+        "/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpuset.cpus.effective": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpuset.cpus.effective'",
+        "/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpuset.mems.effective": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu/batch/container_2026164_rg0_00000000_e01/cpuset.mems.effective'",
+        "/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/memory.max": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/memory.max'",
+        "/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/memory.current": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/memory.current'",
+        "/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/memory.limit_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/memory.limit_in_bytes'",
+        "/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/memory.usage_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/memory.usage_in_bytes'",
+        "/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/memory.soft_limit_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/memory.soft_limit_in_bytes'",
+        "/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpu.max": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpu.max'",
+        "/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpu.cfs_quota_us": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpu.cfs_quota_us'",
+        "/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpu.cfs_period_us": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpu.cfs_period_us'",
+        "/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.cpus": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.cpus'",
+        "/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.mems": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.mems'",
+        "/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.cpus.effective": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.cpus.effective'",
+        "/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.mems.effective": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.mems.effective'",
+        "/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/memory.max": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/memory.max'",
+        "/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/memory.current": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/memory.current'",
+        "/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/memory.limit_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/memory.limit_in_bytes'",
+        "/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/memory.usage_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/memory.usage_in_bytes'",
+        "/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/memory.soft_limit_in_bytes": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/memory.soft_limit_in_bytes'",
+        "/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpu.max": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpu.max'",
+        "/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpu.cfs_quota_us": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpu.cfs_quota_us'",
+        "/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpu.cfs_period_us": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpu.cfs_period_us'",
+        "/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.cpus": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.cpus'",
+        "/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.mems": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.mems'",
+        "/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.cpus.effective": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.cpus.effective'",
+        "/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.mems.effective": "UNAVAILABLE: [Errno 13] Permission denied: '/sys/fs/cgroup/cpu,cpuacct/batch/container_2026164_rg0_00000000_e01/cpuset.mems.effective'"
+      }
+    },
+    "request": {
+      "queue": "q_hpcai",
+      "cpu": 1,
+      "memory_argument": "4096MB",
+      "runtime_limit_s": 300
+    },
+    "scheduler_env": {
+      "CCS_JOB_ID": "2026164",
+      "BATCH_JOB_ID": "2026164"
+    },
+    "attempts": [
+      {
+        "interpreter": "/usr/bin/python3",
+        "tree": "torch_kml",
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2/probe_compute_env.py",
+          "--worker"
+        ],
+        "environment": {
+          "PYTHONPATH": "/home/share/songzhenlong/eitfm/sw/torch_kml",
+          "LD_LIBRARY_PATH": "/opt/HPCKit/kml-lib/sme/kblas/multi:/opt/HPCKit/kml-lib:/opt/HPCKit/bisheng-lib",
+          "LD_PRELOAD": "/home/share/songzhenlong/eitfm/sw/kml_shim/libkml_sgemm_shim.so",
+          "KML_BLAS_LIB": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+          "PYTHONNOUSERSITE": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        },
+        "exit_code": 1,
+        "stderr": "Traceback (most recent call last):\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2/probe_compute_env.py\", line 139, in <module>\n    worker()\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2/probe_compute_env.py\", line 56, in worker\n    import numpy as np\nModuleNotFoundError: No module named 'numpy'\n",
+        "stdout": ""
+      },
+      {
+        "interpreter": "/home/share/songzhenlong/eitfm/sw/venv/bin/python",
+        "tree": "torch_kml",
+        "command": [
+          "/home/share/songzhenlong/eitfm/sw/venv/bin/python",
+          "-B",
+          "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2/probe_compute_env.py",
+          "--worker"
+        ],
+        "environment": {
+          "PYTHONPATH": "/home/share/songzhenlong/eitfm/sw/torch_kml",
+          "LD_LIBRARY_PATH": "/opt/HPCKit/kml-lib/sme/kblas/multi:/opt/HPCKit/kml-lib:/opt/HPCKit/bisheng-lib",
+          "LD_PRELOAD": "/home/share/songzhenlong/eitfm/sw/kml_shim/libkml_sgemm_shim.so",
+          "KML_BLAS_LIB": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+          "PYTHONNOUSERSITE": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        },
+        "exit_code": 1,
+        "stderr": "Traceback (most recent call last):\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2/probe_compute_env.py\", line 139, in <module>\n    worker()\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2/probe_compute_env.py\", line 56, in worker\n    import numpy as np\nModuleNotFoundError: No module named 'numpy'\n",
+        "stdout": ""
+      },
+      {
+        "interpreter": "/usr/bin/python3",
+        "tree": "torch",
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2/probe_compute_env.py",
+          "--worker"
+        ],
+        "environment": {
+          "PYTHONPATH": "/home/share/songzhenlong/eitfm/sw/torch",
+          "PYTHONNOUSERSITE": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        },
+        "exit_code": 1,
+        "stderr": "Traceback (most recent call last):\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2/probe_compute_env.py\", line 139, in <module>\n    worker()\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2/probe_compute_env.py\", line 56, in worker\n    import numpy as np\nModuleNotFoundError: No module named 'numpy'\n",
+        "stdout": ""
+      }
+    ],
+    "model_started": false,
+    "hbm_started": false,
+    "status": "NO_VERIFIED_TORCH_NUMPY_ENVIRONMENT",
+    "finished_utc": "2026-11-04T12:56:55.029378+00:00",
+    "elapsed_s": 0.4564763121306896
+  }
+}

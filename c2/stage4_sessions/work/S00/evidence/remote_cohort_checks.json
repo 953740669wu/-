@@ -1,0 +1,160 @@
+{
+  "node16_sync_kmlfp32": {
+    "json_count": 47,
+    "config_variants": 1,
+    "configurations": [
+      {
+        "cases": [
+          "s0322p0",
+          "s0322p1"
+        ],
+        "config": {
+          "amp": "fp32",
+          "batch": 64,
+          "channels_last": false,
+          "compile": false,
+          "kml_blas": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+          "kml_conv": false,
+          "kml_linear": true,
+          "linear_dtype": "fp32",
+          "reps": 5
+        },
+        "device": "cpu",
+        "torch": "2.7.1+cpu"
+      }
+    ],
+    "all_snapshots_stable": true,
+    "per_domain_exit_status": "NOT_RECORDED",
+    "runtime_input_library_fingerprints": "NOT_RECORDED",
+    "formal_acceptance": false
+  },
+  "node16_b32_membind": {
+    "json_count": 48,
+    "config_variants": 1,
+    "configurations": [
+      {
+        "cases": [
+          "s0322p0",
+          "s0322p1"
+        ],
+        "config": {
+          "amp": "fp32",
+          "batch": 32,
+          "channels_last": false,
+          "ckpt": false,
+          "compile": false,
+          "kml_blas": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+          "kml_conv": false,
+          "kml_linear": true,
+          "linear_dtype": "fp32",
+          "reps": 5
+        },
+        "device": "cpu",
+        "torch": "2.7.1+cpu"
+      }
+    ],
+    "all_snapshots_stable": true,
+    "per_domain_exit_status": "NOT_RECORDED",
+    "runtime_input_library_fingerprints": "NOT_RECORDED",
+    "formal_acceptance": false
+  },
+  "node16_b32_hbm": {
+    "json_count": 32,
+    "config_variants": 1,
+    "configurations": [
+      {
+        "cases": [
+          "s0322p0",
+          "s0322p1"
+        ],
+        "config": {
+          "amp": "fp32",
+          "batch": 32,
+          "channels_last": false,
+          "ckpt": false,
+          "compile": false,
+          "kml_blas": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+          "kml_conv": false,
+          "kml_linear": true,
+          "linear_dtype": "fp32",
+          "reps": 5
+        },
+        "device": "cpu",
+        "torch": "2.7.1+cpu"
+      }
+    ],
+    "all_snapshots_stable": true,
+    "per_domain_exit_status": "NOT_RECORDED",
+    "runtime_input_library_fingerprints": "NOT_RECORDED",
+    "formal_acceptance": false
+  },
+  "die4_b32_ddr": {
+    "json_count": 4,
+    "config_variants": 1,
+    "configurations": [
+      {
+        "cases": [
+          "s0322p0",
+          "s0322p1"
+        ],
+        "config": {
+          "amp": "fp32",
+          "batch": 32,
+          "channels_last": false,
+          "ckpt": false,
+          "compile": false,
+          "kml_blas": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+          "kml_conv": false,
+          "kml_linear": true,
+          "linear_dtype": "fp32",
+          "reps": 3
+        },
+        "device": "cpu",
+        "torch": "2.7.1+cpu"
+      }
+    ],
+    "all_snapshots_stable": true,
+    "per_domain_exit_status": "NOT_RECORDED",
+    "runtime_input_library_fingerprints": "NOT_RECORDED",
+    "formal_acceptance": false
+  },
+  "die4_b32_hbm": {
+    "json_count": 4,
+    "config_variants": 1,
+    "configurations": [
+      {
+        "cases": [
+          "s0322p0",
+          "s0322p1"
+        ],
+        "config": {
+          "amp": "fp32",
+          "batch": 32,
+          "channels_last": false,
+          "ckpt": false,
+          "compile": false,
+          "kml_blas": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+          "kml_conv": false,
+          "kml_linear": true,
+          "linear_dtype": "fp32",
+          "reps": 3
+        },
+        "device": "cpu",
+        "torch": "2.7.1+cpu"
+      }
+    ],
+    "all_snapshots_stable": true,
+    "per_domain_exit_status": "NOT_RECORDED",
+    "runtime_input_library_fingerprints": "NOT_RECORDED",
+    "formal_acceptance": false
+  },
+  "node16_b64ckpt_hbm": {
+    "json_count": 0,
+    "config_variants": 0,
+    "configurations": [],
+    "all_snapshots_stable": true,
+    "per_domain_exit_status": "NOT_RECORDED",
+    "runtime_input_library_fingerprints": "NOT_RECORDED",
+    "formal_acceptance": false
+  }
+}

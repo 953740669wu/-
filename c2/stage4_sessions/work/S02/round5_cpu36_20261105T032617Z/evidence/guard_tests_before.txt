@@ -1,0 +1,21 @@
+test_cpu36_guard (unittest.loader._FailedTest.test_cpu36_guard) ... ERROR
+
+======================================================================
+ERROR: test_cpu36_guard (unittest.loader._FailedTest.test_cpu36_guard)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_cpu36_guard
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round5_cpu36_20261105T032617Z\tests\test_cpu36_guard.py", line 11, in <module>
+    import cpu36_guard as guard
+ModuleNotFoundError: No module named 'cpu36_guard'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

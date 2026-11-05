@@ -1,0 +1,65 @@
+{
+  "decision": "ACCEPTED_BOUNDED_CPU36_MODEL_STARTUP_EVIDENCE",
+  "review_basis": "Independent local replay of frozen cluster evidence; no new SSH or jobs",
+  "job_id": "2034247",
+  "host": "cn21340",
+  "job_exit": 0,
+  "files_verified": 54,
+  "original_package_members_byte_equal": 11,
+  "rounds": [
+    {
+      "round": 1,
+      "checkpoints": 6,
+      "monitor_samples": 571,
+      "child_exit": 0,
+      "torch_intraop": 36
+    },
+    {
+      "round": 2,
+      "checkpoints": 6,
+      "monitor_samples": 547,
+      "child_exit": 0,
+      "torch_intraop": 36
+    },
+    {
+      "round": 3,
+      "checkpoints": 6,
+      "monitor_samples": 565,
+      "child_exit": 0,
+      "torch_intraop": 36
+    }
+  ],
+  "monitor_samples": 1683,
+  "checkpoint_count": 18,
+  "offline_summary": "PASS",
+  "restored_copy_max_mtime_rounding_ns": 90,
+  "prior_evidence_unchanged": true,
+  "source_evidence_bundle_sha256": "cf5db0ce6ac812c719b5879e26c68955f26fbfa23154a6bea96f31962bcb9755",
+  "metrics": {
+    "16_adjacent/pre": {
+      "sums": [
+        21.607143216463616,
+        21.79900541584997,
+        22.254458422911288
+      ],
+      "spread": 0.02957550510779946
+    },
+    "16_adjacent/dec": {
+      "sums": [
+        8.48427776836538,
+        8.53769774064511,
+        8.590253426772406
+      ],
+      "spread": 0.01241309282445546
+    }
+  },
+  "next": "Prepare and review S02 CPU36 same-PID wrapper, then one C2/KML strict 16-pre comparison",
+  "not_accepted": [
+    "S02 numerical equivalence",
+    "training-memory gain",
+    "HBM",
+    "formal performance baseline",
+    "production deployment"
+  ],
+  "S01_specialist_review": "PENDING_REPORT_NOT_CLAIMED_COMPLETE"
+}

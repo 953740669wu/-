@@ -1,0 +1,15 @@
+{
+  "run_id": "ENV_20261104T125633Z_R2",
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T125633Z_R2",
+  "cpu": 1,
+  "memory": "4096MB",
+  "runtime_limit_s": 240,
+  "queue_wait_limit_s": 600,
+  "purpose": "actual imports and resource inspection only; no model training",
+  "source_sha256": {
+    "probe_compute_env.py": "269173384635c96c220daf94cd5da898d33c6833896dc48509e68d91d9a1dce6",
+    "run_env_probe.sh": "e788122659a2281f2dd6fbbaba986b3c9417e95ee0da038205a40cc483d88c82"
+  },
+  "retry_of_job": "2026157",
+  "reason": "Record inaccessible cgroup files instead of failing before imports"
+}

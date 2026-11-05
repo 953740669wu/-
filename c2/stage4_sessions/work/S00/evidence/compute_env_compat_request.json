@@ -1,0 +1,29 @@
+{
+  "run_id": "ENV_20261104T130730Z_R4",
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4",
+  "cpu": 1,
+  "memory": "4096MB",
+  "runtime_limit_s": 120,
+  "queue_wait_limit_s": 600,
+  "purpose": "dedicated venv actual imports plus unchanged S01 import/input/library preflight; no model forward/backward",
+  "payload_sha256": "e4b4b5046907b8db0e81cfaab0bd32f5485ec1809099e93106db11ca10772caa",
+  "payload_filename": "S01_R4_unmodified_preflight.zip",
+  "source_sha256": {
+    "probe_compute_env.py": "3cbde8fabaacd16e326c86ae4760229f8661cd84d62f02d6bc312a049e12353f",
+    "run_env_probe.sh": "e788122659a2281f2dd6fbbaba986b3c9417e95ee0da038205a40cc483d88c82",
+    "run_s01_preflight_probe.sh": "0e3ba12838215ac8ff527b81cf776c44a71ba6f820fddf6aaea429bfce2a59b9"
+  },
+  "s01_sources": {
+    "candidate/run_node16.sh": "aaac8557b00abbf68a0e296e7119c0150c3fbfd467c42d132035ed69f929fd5f",
+    "candidate/runner.py": "692113888fab4ac23c0188f39731ceea0f0fec1a8ef09f25cee872515ba7dd0b",
+    "candidate/s4_models.py": "512dc202e4c0d60363b57317ed612694b80a4d5d3467740ed582bcf600bf1d92",
+    "candidate/kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "candidate/legacy_inputs.json": "24df1ad655fa3263efaf1ec8a721074fdfbae15fcb1d054b30d88bf5b9734835",
+    "tests/test_runner.py": "45830b540625a583656ac4cf0c91ae249929274a86dd6e513650ecc48374878d",
+    "tests/synthetic_worker.py": "39310e0dfe93e7450a3d4fc4ea4e2f5fc12085771f0617585f498cb536c1e33c",
+    "exercise_local.py": "09d08da72ef8c7704b1dbc97563098f6af9e180c0dd87dba33b83814a737182b",
+    "SOURCE_MANIFEST.json": "d1d792863c98803652ea863f6f25244426c703f6ff8110c0b2628689bb51aac5",
+    "runtime_preflight.sh": "a13650e48109704a9111ff00dd37cfc983e1040a12347e4f05706b136923899b",
+    "runtime_probe.py": "fb1384a231b2a785ba215b916519231b5e03cf6cef1de13da6500fa096b92731"
+  }
+}

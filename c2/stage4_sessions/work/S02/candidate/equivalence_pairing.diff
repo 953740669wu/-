@@ -1,0 +1,72 @@
+--- previous/tests/check_equivalence.py
++++ tests/check_equivalence.py
+@@ -6,11 +6,13 @@
+ import argparse
+ import ast
+ import copy
++import hashlib
+ import importlib.util
+ import json
+ import math
+ from pathlib import Path
+ import sys
++import tempfile
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+ 
+@@ -123,7 +125,23 @@
+     L, skip = (16, 1) if args.belt == '16_adjacent' else (32, 5)
+     angle = ns['protocol_angles'](L, skip)
+     M = len(angle)
+-    v0, y0 = torch.randn(B, M), torch.randn(B, 1, 64, 64) * 0.1
++    # Each belt's voltages and targets come from the same synthetic source unit
++    # and row. Never reuse legacy demo images or independently draw targets.
++    sys.path.insert(0, str(ROOT / 'candidate'))
++    from paired_inputs import load_belt_inputs
++    from paired_fixture import write_fixture
++    with tempfile.TemporaryDirectory(dir=ROOT / 'evidence', prefix='equivalence_input_') as directory:
++        sources = write_fixture(directory)
++        paired = load_belt_inputs(sources[args.belt], args.belt)
++    idx = torch.randint(0, len(paired['v']), (B,))
++    v0 = torch.from_numpy(paired['v'])[idx].clone()
++    y0 = torch.from_numpy(paired['y0'])[idx].clone()
++    result['input_protocol'] = paired['protocol']
++    result['input_normalization'] = paired['normalization']
++    result['input_scale'] = paired['scale']
++    result['synthetic_sources'] = paired['sources']
++    result['selected_frame_ids'] = [paired['frame_ids'][i] for i in idx.tolist()]
++    result['fixture_files_deleted_after_read'] = True
+     angles = angle.expand(B, M, 4)
+     belt = torch.full((B, M), float(L == 32))
+     mask = torch.rand(B, M) < 0.8
+@@ -131,6 +149,14 @@
+     mask[16:32] = torch.rand(16, M) < 0.2
+     t, noise = torch.randint(0, 1000, (B,)), torch.randn_like(y0)
+     abar = torch.cumprod(1 - torch.linspace(1e-4, 0.02, 1000), 0)
++    tensors = dict(v=v0, y0=y0, idx=idx, mask=mask, t=t, noise=noise)
++    result['fixed_tensor_sha256'] = {name: hashlib.sha256(value.contiguous().numpy().tobytes()).hexdigest()
++                                    for name, value in tensors.items()}
++    weights_hash = hashlib.sha256()
++    for name, value in initial.items():
++        weights_hash.update(name.encode())
++        weights_hash.update(value.contiguous().numpy().tobytes())
++    result['initial_weights_sha256'] = weights_hash.hexdigest()
+     spec = importlib.util.spec_from_file_location('s02_step', ROOT / 'candidate' / 'training_step.py')
+     candidate = importlib.util.module_from_spec(spec)
+     spec.loader.exec_module(candidate)
+@@ -246,10 +272,12 @@
+     parser.add_argument('--kml', action='store_true')
+     parser.add_argument('--output', type=Path, required=True)
+     args = parser.parse_args()
+-    result = dict(status='NOT_RUN', config={k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()})
++    result = dict(status='NOT_RUN', input_protocol='S02_PAIRED_BELT_V1',
++                  config={k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()})
+     code = 2
+-    if importlib.util.find_spec('torch') is None:
+-        result['reason'] = 'No torch in this interpreter; no model/autograd/AdamW executed.'
++    missing = [name for name in ('torch', 'numpy') if importlib.util.find_spec(name) is None]
++    if missing:
++        result['reason'] = 'Missing ' + ', '.join(missing) + '; no model/autograd/AdamW executed.'
+     else:
+         try:
+             import torch

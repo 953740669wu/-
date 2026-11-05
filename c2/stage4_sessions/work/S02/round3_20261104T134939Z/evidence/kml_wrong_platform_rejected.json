@@ -1,0 +1,30 @@
+{
+  "status": "ERROR_RUNTIME_OR_INPUT",
+  "started_utc": "2026-11-04T14:00:35.777830+00:00",
+  "mode": "strict",
+  "config": {
+    "belt": "16_adjacent",
+    "part": "pre",
+    "effective_batch": 64,
+    "microbatch": 32,
+    "checkpoint": false,
+    "history": "fresh",
+    "precision": "fp32",
+    "threads": 4
+  },
+  "diagnostic_only": false,
+  "source_sha256": {
+    "diagnose_update.py": "9d3fdce56577c77a902a863062cd1faaff790c8b66405a66a116c53483c2f295",
+    "diagnostic_common.py": "beafa77f00649f7f4662a50fcfeb573c40a8b01021874245897848facd82a5c0",
+    "tests/check_equivalence.py": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e",
+    "tests/paired_fixture.py": "7b438c839eefc2d2726bb55d9082df57e5db3e8127336d654203cd9880c35c00",
+    "baseline/s4_models.py": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+    "baseline/kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "candidate/training_step.py": "524e35817080a3f28a0bc0cda8ecce9c8264b15d73edebe05c5d9d8b9632a0aa",
+    "candidate/paired_inputs.py": "51d44bd85cdd9e730c9bc455dc796e9c7d6849f33326df7372c95227f24087b1",
+    "VALIDATION_PLAN.md": "24a1648ea000037818c5f174ca1fb71790f4032f5647127e559d067758034d86"
+  },
+  "error": "RuntimeError('actual KML mode requires Linux; no native fallback')",
+  "traceback": "Traceback (most recent call last):\n  File \"E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round3_20261104T134939Z\\diagnose_update.py\", line 267, in <module>\n    try:code=main(args,result)\n             ^^^^^^^^^^^^^^^^^\n  File \"E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round3_20261104T134939Z\\diagnose_update.py\", line 204, in main\n    runtime, expected = configure_backend(torch,args.backend,args.expected_cpus)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round3_20261104T134939Z\\diagnostic_common.py\", line 75, in configure_backend\n    raise RuntimeError('actual KML mode requires Linux; no native fallback')\nRuntimeError: actual KML mode requires Linux; no native fallback\n",
+  "ended_utc": "2026-11-04T14:00:35.792295+00:00"
+}

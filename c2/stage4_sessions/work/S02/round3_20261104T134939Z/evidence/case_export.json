@@ -1,0 +1,64 @@
+{
+  "status": "CASE_EXPORTED_NOT_A_NUMERICAL_TEST",
+  "started_utc": "2026-11-04T13:55:11.370144+00:00",
+  "mode": "strict",
+  "config": {
+    "belt": "16_adjacent",
+    "part": "pre",
+    "effective_batch": 64,
+    "microbatch": 32,
+    "checkpoint": false,
+    "history": "fresh",
+    "precision": "fp32",
+    "threads": 4
+  },
+  "diagnostic_only": false,
+  "source_sha256": {
+    "diagnose_update.py": "9d3fdce56577c77a902a863062cd1faaff790c8b66405a66a116c53483c2f295",
+    "diagnostic_common.py": "beafa77f00649f7f4662a50fcfeb573c40a8b01021874245897848facd82a5c0",
+    "tests/check_equivalence.py": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e",
+    "tests/paired_fixture.py": "7b438c839eefc2d2726bb55d9082df57e5db3e8127336d654203cd9880c35c00",
+    "baseline/s4_models.py": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+    "baseline/kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "candidate/training_step.py": "524e35817080a3f28a0bc0cda8ecce9c8264b15d73edebe05c5d9d8b9632a0aa",
+    "candidate/paired_inputs.py": "51d44bd85cdd9e730c9bc455dc796e9c7d6849f33326df7372c95227f24087b1",
+    "VALIDATION_PLAN.md": "24a1648ea000037818c5f174ca1fb71790f4032f5647127e559d067758034d86"
+  },
+  "runtime": {
+    "backend": "native",
+    "python": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Scripts\\python.exe",
+    "python_version": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "host": "DESKTOP-54BJCD6",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "torch": "2.7.1+cpu",
+    "torch_file": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Lib\\site-packages\\torch\\__init__.py",
+    "torch_threads": 4,
+    "interop_threads": 8,
+    "torch_config": "PyTorch built with:\n  - C++ Version: 201703\n  - MSVC 192930158\n  - Intel(R) oneAPI Math Kernel Library Version 2025.1-Product Build 20250306 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 2019\n  - LAPACK is enabled (usually provided by MKL)\n  - CPU capability usage: AVX512\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=e2d141dbde55c2a4370fac5165b0561b6af4798b, CXX_COMPILER=C:/actions-runner/_work/pytorch/pytorch/pytorch/.ci/pytorch/windows/tmp_bin/sccache-cl.exe, CXX_FLAGS=/DWIN32 /D_WINDOWS /GR /EHsc /Zc:__cplusplus /bigobj /FS /utf-8 -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE /wd4624 /wd4068 /wd4067 /wd4267 /wd4661 /wd4717 /wd4244 /wd4804 /wd4273, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.7.1, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, \n",
+    "env": {
+      "KML_BLAS_LIB": null,
+      "LINEAR_DTYPE": null,
+      "LD_PRELOAD": null,
+      "OMP_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "OMP_PROC_BIND": null,
+      "OMP_PLACES": null
+    }
+  },
+  "small_autograd_control": "PASS_REAL_AUTOGRAD_UNIT_ONLY",
+  "case_identity": {
+    "initial_weights_sha256": "662a4f7ffc490412c92aa6dedcbd8dcb1e811e61b3ce9d3fcaa8327e13a7ed41",
+    "fixed_tensor_sha256": {
+      "v": "1ea0b8117304e40e6906966af78cd374560baf972af38b3ab5be66e5d1ed7868",
+      "y0": "71c98d8a13605626bfb90f3b9b256a348fc666210ad6db581490e2026ee5cc27",
+      "idx": "719b836f9eae3b9451fcc403ebad9681cc7c134c04e3487c8e46eacf8834a927",
+      "mask": "086140d0db27e48f11dc2f854428f606950860f0d8dd35fb2e2eed3240d99d65",
+      "t": "389e2a26d4302653588a9345f549efa1511f2a8591fd0791c8cf543d2c2ffcef",
+      "noise": "7fb86f5b64f7903bd2a0977434606c6d242d013b2021f4c22f95c331d4e56202"
+    }
+  },
+  "case_file_sha256": "4de1fb40eb1c4b43a8747586399f336bf9e37184592d66fdbf711abad8469846",
+  "case_file_bytes": 271979513,
+  "ended_utc": "2026-11-04T13:55:14.383442+00:00"
+}

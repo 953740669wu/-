@@ -1,0 +1,62 @@
+--- /dev/null
++++ run_c2_diagnostic.sh
+@@ -0,0 +1,59 @@
++#!/bin/bash
++# Staged preparation only. S00 supplies the accepted environment and allocation.
++set -euo pipefail
++HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
++: "${C2_PYTHON:?source the S00 verified runtime environment first}"
++: "${CCS_JOB_ID:?must run inside the newly allocated Donau job}"
++[[ "$(hostname)" != login* ]] || exit 2
++case "$HERE" in /home/share/dengqingtian/*) ;; *) echo 'not an owned staging path' >&2; exit 2 ;; esac
++MODE=${1:-strict}
++case "$MODE" in strict|reference_repeat|candidate_repeat|full_sum|split_full|pinned_full|pinned_micro|optimizer_same_gradient|reduction_trace) ;; *) exit 2 ;; esac
++export OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 OMP_PROC_BIND=false
++export PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 LINEAR_DTYPE=fp32
++export S02_DIAGNOSTIC_ROOT="$HERE"
++PLACEMENT=$("$C2_PYTHON" -B - <<'PY'
++import hashlib, json, os
++from pathlib import Path
++root = Path(os.environ['S02_DIAGNOSTIC_ROOT'])
++def sha(path):
++    digest = hashlib.sha256()
++    with path.open('rb') as stream:
++        for block in iter(lambda: stream.read(1024*1024), b''):
++            digest.update(block)
++    return digest.hexdigest()
++for name, expected in json.loads((root/'SOURCE_SHA256.json').read_text()).items():
++    assert sha(root/name) == expected, name
++case = json.loads((root/'CASE_MANIFEST.json').read_text())
++assert sha(root/'case/fixed_16_pre.pt') == case['sha256'], 'wrong frozen case'
++allowed = sorted(os.sched_getaffinity(0))
++assert len(allowed) == 4, 'must inherit exactly four allocated CPUs'
++if os.environ.get('S02_CPUSET'):
++    assert allowed == sorted(map(int, os.environ['S02_CPUSET'].split(','))), 'outer allocation differs'
++nodes = []
++for node in Path('/sys/devices/system/node').glob('node[0-9]*'):
++    cpus = set()
++    for part in (node/'cpulist').read_text().strip().split(','):
++        if not part: continue
++        bounds = part.split('-')
++        cpus.update(range(int(bounds[0]),int(bounds[-1])+1))
++    if set(allowed) <= cpus: nodes.append(int(node.name[4:]))
++assert len(nodes) == 1, 'four allocated CPUs must lie in one NUMA domain'
++print(str(nodes[0]) + ' ' + ','.join(map(str,allowed)))
++PY
++)
++read -r NUMA_NODE S02_CPUSET <<< "$PLACEMENT"
++export S02_CPUSET
++OUT="$HERE/evidence/c2_${CCS_JOB_ID}_${MODE}"
++mkdir -p "$HERE/evidence"
++mkdir "$OUT"
++set +e
++timeout --signal=TERM --kill-after=15s 780 \
++  numactl --physcpubind="$S02_CPUSET" --membind="$NUMA_NODE" \
++  "$C2_PYTHON" -B "$HERE/diagnose_update.py" --backend kml --mode "$MODE" \
++    --expected-cpus "$S02_CPUSET" --case-file "$HERE/case/fixed_16_pre.pt" \
++    --output "$OUT/result.json" >"$OUT/stdout_stderr.txt" 2>&1
++CODE=$?
++set -e
++echo "$CODE" >"$OUT/checker_exit_code.txt"
++echo "S02_DIAGNOSTIC_EXIT=$CODE OUT=$OUT"
++exit "$CODE"

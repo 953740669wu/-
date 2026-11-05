@@ -1,0 +1,90 @@
+{
+  "status": "PASS_REMOTE_SHA_LF_LINUX_SYNTAX_BEFORE_SUBMISSION",
+  "captured_utc": "2026-11-05T02:59:28.729674+00:00",
+  "login_host": "login02",
+  "package_sha256": "288a74181c36ec87b3953be5cde7e26575e45c219e9f446a21fca0683659119c",
+  "source_files": {
+    "candidate/cpu36_contract.py": {
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+      "bytes": 11171
+    },
+    "candidate/kml_ops.py": {
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+      "bytes": 10255
+    },
+    "candidate/legacy_inputs.json": {
+      "sha256": "24df1ad655fa3263efaf1ec8a721074fdfbae15fcb1d054b30d88bf5b9734835",
+      "bytes": 504
+    },
+    "candidate/run_node16.sh": {
+      "sha256": "8910b84fd8cd0b1c7df64d6c61ea0a0027291aac92e9c327eb197d3c8d20752d",
+      "bytes": 941
+    },
+    "candidate/runner.py": {
+      "sha256": "e04a703b7da429e3d85607f66b2c4d18cb3306b9a6320f92d7fd3be41539674a",
+      "bytes": 33572
+    },
+    "candidate/s4_models.py": {
+      "sha256": "ebc31ca6f726df886e147da7ff4766b32142a6b83c7336f15e6c1a52e25e1461",
+      "bytes": 14739
+    },
+    "INTERFACE_FOR_S00_S02.md": {
+      "sha256": "d2172e0a92307e92fe6a69a09bcc6daf1d7ba44cea7a074fc55a7219f4448f46",
+      "bytes": 6436
+    },
+    "interfaces/cluster_runtime.env": {
+      "sha256": "32248af7857b7fd1616b19899c1411a4a59f9378c9231f0ec56f6c922ec2866d",
+      "bytes": 786
+    },
+    "interfaces/run_s01_startup36.sh": {
+      "sha256": "eae64b092b9a62525a6362f6ea93a96019266a79bb2070e36fb107eb8d91fde1",
+      "bytes": 1342
+    }
+  },
+  "payload_files": {
+    "INTERFACE_FOR_S00_S02.md": "d2172e0a92307e92fe6a69a09bcc6daf1d7ba44cea7a074fc55a7219f4448f46",
+    "SOURCE_MANIFEST.json": "45ce97a9159a8e071e0dac83a44590505bcf5e229389658600c181f40ec648b7",
+    "SOURCE_SHA256.txt": "278d5cf1f7424e0e35a0c76120a121ce2a77a4286d2e651b874bdd8529d95b03",
+    "candidate/cpu36_contract.py": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+    "candidate/kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "candidate/legacy_inputs.json": "24df1ad655fa3263efaf1ec8a721074fdfbae15fcb1d054b30d88bf5b9734835",
+    "candidate/run_node16.sh": "8910b84fd8cd0b1c7df64d6c61ea0a0027291aac92e9c327eb197d3c8d20752d",
+    "candidate/runner.py": "e04a703b7da429e3d85607f66b2c4d18cb3306b9a6320f92d7fd3be41539674a",
+    "candidate/s4_models.py": "ebc31ca6f726df886e147da7ff4766b32142a6b83c7336f15e6c1a52e25e1461",
+    "interfaces/cluster_runtime.env": "32248af7857b7fd1616b19899c1411a4a59f9378c9231f0ec56f6c922ec2866d",
+    "interfaces/run_s01_startup36.sh": "eae64b092b9a62525a6362f6ea93a96019266a79bb2070e36fb107eb8d91fde1",
+    "lib/libkml_sgemm_shim.so": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73",
+    "output/cases/s0322p0/frames.npz": "4bb9cfaffa8f7d464d1efd80a45e98edd2cf990179b923c160573078f97bfdad",
+    "output/cases/s0322p1/frames.npz": "a5db12595bb7486a9a86e4f9bce9a0680876d2a732bc5f05d361c7b9657737c0"
+  },
+  "shell_checks": [
+    {
+      "file": "candidate/run_node16.sh",
+      "sha256": "8910b84fd8cd0b1c7df64d6c61ea0a0027291aac92e9c327eb197d3c8d20752d",
+      "cr_bytes": 0,
+      "bash_n_exit": 0,
+      "stderr": ""
+    },
+    {
+      "file": "interfaces/cluster_runtime.env",
+      "sha256": "32248af7857b7fd1616b19899c1411a4a59f9378c9231f0ec56f6c922ec2866d",
+      "cr_bytes": 0,
+      "bash_n_exit": 0,
+      "stderr": ""
+    },
+    {
+      "file": "interfaces/run_s01_startup36.sh",
+      "sha256": "eae64b092b9a62525a6362f6ea93a96019266a79bb2070e36fb107eb8d91fde1",
+      "cr_bytes": 0,
+      "bash_n_exit": 0,
+      "stderr": ""
+    }
+  ],
+  "python_syntax": [
+    "candidate/cpu36_contract.py",
+    "candidate/kml_ops.py",
+    "candidate/runner.py",
+    "candidate/s4_models.py"
+  ],
+  "scope": "No torch/model execution on login; new same-job import preflight required by R7"
+}

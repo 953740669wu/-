@@ -1,0 +1,37 @@
+{
+  "date_local": "2026-11-04",
+  "timezone": "Asia/Shanghai",
+  "action": "Execute candidate/audit_remote_details.py through the authenticated SSH session and return its structured evidence to work/S00",
+  "status": "USER_AUTHORIZED_AND_COMPLETED_WITH_LIMITED_SCOPE",
+  "reason_verbatim": "脚本虽声明只读，却将远端源代码文本、manifest、NPZ内容统计、报告数据及作业信息打包输出到本地；这超出已授权的有限核查范围，且构成未明确授权的敏感数据跨主机传输。",
+  "unaffected_work_completed": "Approved initial audit evidence saved; current account, login host, manifest metadata, selected SHA256 and directory availability recorded; local report and file integrity updated.",
+  "proposed_permission_scope": {
+    "source_root": "/home/share/songzhenlong/eitfm",
+    "local_destination": "E:/eitfm_c2_stages2-4_2026-11-03/c2/stage4_sessions/work/S00/evidence",
+    "launcher_source": "opt/run_node16.sh",
+    "source_identity_files": [
+      "corpus_shape_20261102/code/HASHES"
+    ],
+    "historical_report_tags": [
+      "node16_sync_kmlfp32",
+      "node16_b32_membind",
+      "node16_b32_hbm",
+      "die4_b32_ddr",
+      "die4_b32_hbm",
+      "node16_b64ckpt_hbm"
+    ],
+    "historical_payload": "Per-domain JSON, SHA256/mtime, and bounded log error/HBM summaries for these tags only",
+    "demo_inputs": [
+      "opt/s4/cases/s0322p0/frames.npz",
+      "opt/s4/cases/s0322p1/frames.npz"
+    ],
+    "input_payload": "Array shape, dtype, finite/range/denominator statistics and checksums only; do not download raw NPZ or sample values",
+    "other_metadata": "Manifest counts/checksums and current scheduler/runtime metadata; no new jobs or remote writes"
+  },
+  "password_or_private_key_included": false,
+  "bypass_attempted": false,
+  "ssh_session_closed_cleanly": true,
+  "user_authorization": "S00 continue checking remote versions and the performance baseline; saving evidence is permitted.",
+  "authorized_details_saved": "evidence/remote_details.json",
+  "context_scope_note": "A follow-up request for complete logs and helper/environment source bodies was rejected. The final collector was reduced to authorized summaries, input statistics and dependency hashes; no full helper/environment source or full logs returned."
+}

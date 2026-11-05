@@ -1,0 +1,259 @@
+--- R3/diagnose_update.py
++++ R5/diagnose_update.py
+@@ -12,16 +12,14 @@
+ import sys
+ import tempfile
+ import traceback
+-import torch
+-import torch.nn.functional as F
++torch = None
++F = None
+ 
+ ROOT = Path(__file__).resolve().parent
+ sys.path.insert(0, str(ROOT / 'tests'))
+ from diagnostic_common import configure_backend, finish_backend, errors, first_update, sha_file, tensor_sha
+-from paired_fixture import write_fixture
+ sys.path.insert(0, str(ROOT / 'candidate'))
+-from paired_inputs import load_belt_inputs
+-import training_step as candidate
++candidate = None
+ 
+ spec = importlib.util.spec_from_file_location('accepted_check', ROOT / 'tests' / 'check_equivalence.py')
+ accepted = importlib.util.module_from_spec(spec)
+@@ -31,6 +29,8 @@
+ 
+ 
+ def initial_case(models, definitions):
++    from paired_fixture import write_fixture
++    from paired_inputs import load_belt_inputs
+     with tempfile.TemporaryDirectory(dir=ROOT / 'evidence', prefix='paired_') as directory:
+         sources = write_fixture(directory)
+         paired = load_belt_inputs(sources['16_adjacent'], '16_adjacent')
+@@ -206,8 +206,20 @@
+ 
+ 
+ def main(args, result):
++    global torch, F, candidate
++    if args.backend == 'kml':
++        import cpu36_guard
++        result['cpu36'] = {}
++        cpu36_guard.prepare(args.expected_cpus, args.cpu_contract, result['cpu36'])
++    import torch
++    import torch.nn.functional as F
++    import training_step as candidate
++    if args.backend == 'kml':
++        cpu36_guard.checkpoint(result['cpu36'], 'after_framework', torch)
+     runtime, expected = configure_backend(torch,args.backend,args.expected_cpus)
+     result['runtime']=runtime
++    if args.backend == 'kml':
++        cpu36_guard.checkpoint(result['cpu36'], 'after_backend', torch)
+     torch.manual_seed(0)
+     result['small_autograd_control']=accepted.loss_unit_checks(torch)
+     definitions=accepted.model_definitions(torch)
+@@ -222,17 +234,28 @@
+                       case_file_sha256=sha_file(args.export_case),case_file_bytes=args.export_case.stat().st_size)
+         return 0
+     if not args.case_file:raise RuntimeError('provide the frozen --case-file; do not regenerate cross-backend inputs')
++    manifest = json.loads((ROOT / 'CASE_MANIFEST.json').read_text())
++    if sha_file(args.case_file) != manifest['sha256'] or args.case_file.stat().st_size != manifest['bytes']:
++        raise RuntimeError('frozen case file identity mismatch')
+     case=torch.load(args.case_file,map_location='cpu',weights_only=True)
+     assert case['input_protocol']=='S02_PAIRED_BELT_V1'
+     assert case['v'].shape==(64,208) and case['y0'].shape==(64,1,64,64)
+     result.update(case_identity=case_identity(case),case_file_sha256=sha_file(args.case_file))
++    if result['case_identity'] != manifest['identity']:
++        raise RuntimeError('loaded fixed tensor/initial weight identity mismatch')
+     left='candidate' if args.mode=='candidate_repeat' else 'mean'
+     traces_ref,traces_got=({}, {}) if args.mode=='reduction_trace' else (None,None)
++    if args.backend == 'kml':
++        cpu36_guard.checkpoint(result['cpu36'], 'before_reference', torch)
+     ref,up_ref,score_ref=run(models,case,left,projection_records=traces_ref)
++    if args.backend == 'kml':
++        cpu36_guard.checkpoint(result['cpu36'], 'after_reference', torch)
+     choices=dict(reference_repeat='mean',candidate_repeat='candidate',strict='candidate',full_sum='full_sum',
+                  split_full='split_full',pinned_full='pinned_full',pinned_micro='pinned_micro',
+                  optimizer_same_gradient='optimizer_copy',reduction_trace='candidate')
+     got,up_got,score_got=run(models,case,choices[args.mode],ref,up_ref,traces_got)
++    if args.backend == 'kml':
++        cpu36_guard.checkpoint(result['cpu36'], 'after_candidate', torch)
+     if args.mode=='optimizer_same_gradient':ref={k:v for k,v in ref.items() if k in got}
+     metrics,failures=compare_snapshots(ref,got)
+     result.update(metrics=metrics,failures=failures,comparison_failures=len(failures),
+@@ -252,6 +275,8 @@
+         import projection_trace
+         result['projection_trace']=projection_trace.summarize(traces_ref,traces_got,ref,got)
+     finish_backend(runtime,expected)
++    if args.backend == 'kml':
++        cpu36_guard.finish(result['cpu36'], torch)
+     result['status']='FAIL_ORIGINAL_CRITERIA' if failures else 'PASS_CONTROL_ONLY' if args.mode!='strict' else 'PASS_STRICT_SYNTHETIC_ONLY'
+     result['exact_repeat']=all(ref[k] is None or torch.equal(ref[k],got[k]) for k in ref) if 'repeat' in args.mode else None
+     return int(bool(failures))
+@@ -264,15 +289,17 @@
+     parser.add_argument('--case-file',type=Path)
+     parser.add_argument('--export-case',type=Path)
+     parser.add_argument('--expected-cpus',type=lambda s:[int(v) for v in s.split(',')])
++    parser.add_argument('--cpu-contract',type=Path)
+     parser.add_argument('--output',type=Path,required=True)
+     args=parser.parse_args()
+     if args.output.exists() or (args.export_case and args.export_case.exists()):parser.error('refuse existing output/case')
+     result=dict(status='STARTED',started_utc=datetime.now(timezone.utc).isoformat(),mode=args.mode,
+         config=dict(belt='16_adjacent',part='pre',effective_batch=64,microbatch=32,checkpoint=False,
+-                    history='fresh',precision='fp32',threads=4),diagnostic_only=args.mode!='strict',
++                    history='fresh',precision='fp32',threads=36),diagnostic_only=args.mode!='strict',
+         source_sha256={name:sha_file(ROOT/name) for name in ['diagnose_update.py','diagnostic_common.py','projection_trace.py',
+             'tests/check_equivalence.py','tests/paired_fixture.py','baseline/s4_models.py',
+-            'baseline/kml_ops.py','candidate/training_step.py','candidate/paired_inputs.py','VALIDATION_PLAN.md']})
++            'baseline/kml_ops.py','candidate/training_step.py','candidate/paired_inputs.py','VALIDATION_PLAN.md',
++            'cpu36_guard.py','cpu36_contract.py','run_c2_diagnostic.sh','CASE_MANIFEST.json']})
+     try:code=main(args,result)
+     except Exception as exc:
+         result.update(status='ERROR_RUNTIME_OR_INPUT',error=repr(exc),traceback=traceback.format_exc());code=2
+--- R3/diagnostic_common.py
++++ R5/diagnostic_common.py
+@@ -33,19 +33,16 @@
+ 
+ 
+ def affinity(expected):
++    from cpu36_contract import snapshot_threads, validate_snapshot
++    if len(expected) != 36 or len(set(expected)) != 36:
++        raise RuntimeError('checker requires explicit selected36 CPUs')
+     actual = sorted(os.sched_getaffinity(0))
+-    if actual != expected:
+-        raise RuntimeError('checker CPU affinity differs from four allocated CPUs')
+-    threads = {}
+-    for path in Path('/proc/self/task').iterdir():
+-        try:
+-            cpus = sorted(os.sched_getaffinity(int(path.name)))
+-        except ProcessLookupError:
+-            continue
+-        if not set(cpus) <= set(expected):
+-            raise RuntimeError('worker thread affinity exceeds allocated CPUs')
+-        threads[path.name] = cpus
+-    return dict(expected=expected, actual=actual, thread_affinities=threads)
++    snapshot = snapshot_threads(os.getpid())
++    validate_snapshot(expected, snapshot)
++    caller = next((row for row in snapshot['threads'] if row['tid'] == os.getpid()), None)
++    if not actual or not set(actual) <= set(expected) or caller is None or caller['affinity'] != actual:
++        raise RuntimeError('checker calling-thread affinity evidence invalid')
++    return dict(expected=expected, actual=actual, snapshot=snapshot)
+ 
+ 
+ def mapped_libraries():
+@@ -60,7 +57,6 @@
+ 
+ def configure_backend(torch, backend, expected_cpus):
+     import numpy
+-    torch.set_num_threads(4)
+     record = dict(backend=backend, python=sys.executable, python_version=sys.version,
+                   host=platform.node(), platform=platform.platform(), torch=torch.__version__,
+                   torch_file=torch.__file__, numpy=numpy.__version__, numpy_file=numpy.__file__,
+@@ -75,8 +71,10 @@
+         return record, None
+     if sys.platform != 'linux':
+         raise RuntimeError('actual KML mode requires Linux; no native fallback')
+-    if not expected_cpus or len(expected_cpus) != 4 or len(set(expected_cpus)) != 4:
+-        raise RuntimeError('actual KML mode requires exactly four explicit allocated CPUs')
++    if not expected_cpus or len(expected_cpus) != 36 or len(set(expected_cpus)) != 36:
++        raise RuntimeError('actual KML mode requires exactly36 explicit selected CPUs')
++    if torch.get_num_threads() != 36:
++        raise RuntimeError('actual PyTorch intra-op threads must be36')
+     record['affinity_before'] = affinity(sorted(expected_cpus))
+     if os.environ.get('LINEAR_DTYPE') != 'fp32' or not os.environ.get('KML_BLAS_LIB'):
+         raise RuntimeError('actual KML mode requires KML_BLAS_LIB and LINEAR_DTYPE=fp32')
+--- R3/run_c2_diagnostic.sh
++++ R5/run_c2_diagnostic.sh
+@@ -1,17 +1,22 @@
+ #!/bin/bash
+-# Staged preparation only. S00 supplies the accepted environment and allocation.
++# One strict CPU36 comparison. S00 alone supplies the new allocation and runtime.
+ set -euo pipefail
+ HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
+-: "${C2_PYTHON:?source the S00 verified runtime environment first}"
+-: "${CCS_JOB_ID:?must run inside the newly allocated Donau job}"
+-[[ "$(hostname)" != login* ]] || exit 2
+-case "$HERE" in /home/share/dengqingtian/*) ;; *) echo 'not an owned staging path' >&2; exit 2 ;; esac
+-MODE=${1:-strict}
+-case "$MODE" in strict|reference_repeat|candidate_repeat|full_sum|split_full|pinned_full|pinned_micro|optimizer_same_gradient|reduction_trace) ;; *) exit 2 ;; esac
+-export OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 OMP_PROC_BIND=false
++fail() { echo "$*" >&2; exit 2; }
++[[ -n "${C2_PYTHON:-}" && -n "${CCS_JOB_ID:-}" ]] || fail 'source verified runtime inside a new Donau job'
++[[ "$(hostname)" != login* ]] || fail 'compute allocation required'
++case "$HERE" in /home/share/dengqingtian/*) ;; *) fail 'not an owned staging path' ;; esac
++[[ "${1:-strict}" == strict && $# -le 1 ]] || fail 'this wrapper runs only one strict configuration'
++export OMP_NUM_THREADS=36 MKL_NUM_THREADS=36 OPENBLAS_NUM_THREADS=1
++export OMP_PLACES=cores OMP_PROC_BIND=close
+ export PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 LINEAR_DTYPE=fp32
+ export S02_DIAGNOSTIC_ROOT="$HERE"
+-PLACEMENT=$("$C2_PYTHON" -B - <<'PY'
++export S02_CASE_FILE="${S02_CASE_FILE:-$HERE/case/fixed_16_pre.pt}"
++OUT="$HERE/evidence/c2_${CCS_JOB_ID}_strict"
++mkdir -p "$HERE/evidence"
++mkdir "$OUT" || fail 'refuse existing output; do not repeat this comparison'
++trap 'code=$?; echo "$code" >"$OUT/wrapper_error_code.txt"; echo 2 >"$OUT/checker_exit_code.txt"; exit 2' ERR
++"$C2_PYTHON" -B - >"$OUT/identity_check.json" 2>"$OUT/identity_error.txt" <<'PY'
+ import hashlib, json, os
+ from pathlib import Path
+ root = Path(os.environ['S02_DIAGNOSTIC_ROOT'])
+@@ -21,37 +26,35 @@
+         for block in iter(lambda: stream.read(1024*1024), b''):
+             digest.update(block)
+     return digest.hexdigest()
+-for name, expected in json.loads((root/'SOURCE_SHA256.json').read_text()).items():
++source = json.loads((root/'SOURCE_SHA256.json').read_text())
++for name, expected in source.items():
+     assert sha(root/name) == expected, name
+ case = json.loads((root/'CASE_MANIFEST.json').read_text())
+-assert sha(root/'case/fixed_16_pre.pt') == case['sha256'], 'wrong frozen case'
+-allowed = sorted(os.sched_getaffinity(0))
+-assert len(allowed) == 4, 'must inherit exactly four allocated CPUs'
+-if os.environ.get('S02_CPUSET'):
+-    assert allowed == sorted(map(int, os.environ['S02_CPUSET'].split(','))), 'outer allocation differs'
+-nodes = []
+-for node in Path('/sys/devices/system/node').glob('node[0-9]*'):
+-    cpus = set()
+-    for part in (node/'cpulist').read_text().strip().split(','):
+-        if not part: continue
+-        bounds = part.split('-')
+-        cpus.update(range(int(bounds[0]),int(bounds[-1])+1))
+-    if set(allowed) <= cpus: nodes.append(int(node.name[4:]))
+-assert len(nodes) == 1, 'four allocated CPUs must lie in one NUMA domain'
+-print(str(nodes[0]) + ' ' + ','.join(map(str,allowed)))
++path = Path(os.environ['S02_CASE_FILE']).resolve()
++assert path.stat().st_size == case['bytes'] and sha(path) == case['sha256'], 'wrong frozen case'
++print(json.dumps(dict(source_sha256=source, case_path=str(path), case_sha256=case['sha256'],
++                     case_bytes=case['bytes'], python=os.sys.executable), indent=2))
+ PY
+-)
+-read -r NUMA_NODE S02_CPUSET <<< "$PLACEMENT"
+-export S02_CPUSET
+-OUT="$HERE/evidence/c2_${CCS_JOB_ID}_${MODE}"
+-mkdir -p "$HERE/evidence"
+-mkdir "$OUT"
++PLACEMENT=$("$C2_PYTHON" -B "$HERE/cpu36_guard.py" --capture "$OUT/cpu_allocation.json" 2>"$OUT/allocation_error.txt")
++read -r NUMA_NODE ALLOCATED_CPUSET SELECTED_CPUSET <<< "$PLACEMENT"
++if [[ -n "${S02_CPUSET:-}" && "$S02_CPUSET" != "$SELECTED_CPUSET" ]]; then
++  echo 2 >"$OUT/checker_exit_code.txt"
++  fail 'outer S02_CPUSET differs from selected36; remove obsolete four-core setting'
++fi
++export S02_CPUSET="$SELECTED_CPUSET"
++printf '%s\n' "node=$NUMA_NODE allocated=$ALLOCATED_CPUSET selected=$S02_CPUSET" >"$OUT/placement.txt"
++# Preserve authorization until the checker captures it; that same PID binds selected36
++# before importing numpy/torch. No computation executes on the two reserved cores.
++COMMAND=(timeout --signal=TERM --kill-after=15s 780
++  numactl --physcpubind="$ALLOCATED_CPUSET" --membind="$NUMA_NODE"
++  "$C2_PYTHON" -B "$HERE/diagnose_update.py" --backend kml --mode strict
++  --expected-cpus "$S02_CPUSET" --cpu-contract "$OUT/cpu_allocation.json"
++  --case-file "$S02_CASE_FILE" --output "$OUT/result.json")
++printf '%q ' "${COMMAND[@]}" >"$OUT/command.txt"
++printf '\n' >>"$OUT/command.txt"
++trap - ERR
+ set +e
+-timeout --signal=TERM --kill-after=15s 780 \
+-  numactl --physcpubind="$S02_CPUSET" --membind="$NUMA_NODE" \
+-  "$C2_PYTHON" -B "$HERE/diagnose_update.py" --backend kml --mode "$MODE" \
+-    --expected-cpus "$S02_CPUSET" --case-file "$HERE/case/fixed_16_pre.pt" \
+-    --output "$OUT/result.json" >"$OUT/stdout_stderr.txt" 2>&1
++"${COMMAND[@]}" >"$OUT/stdout_stderr.txt" 2>&1
+ CODE=$?
+ set -e
+ echo "$CODE" >"$OUT/checker_exit_code.txt"

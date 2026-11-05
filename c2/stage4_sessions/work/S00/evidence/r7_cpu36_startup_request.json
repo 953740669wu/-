@@ -1,0 +1,51 @@
+{
+  "scope": "ONE_R7_CPU36_FULL_MODEL_STARTUP_ONLY",
+  "source_root": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\revisions\\R7_CPU36_RUNNER_20261104T151540967239Z",
+  "source_index_files_verified": 27,
+  "package_sha256": "288a74181c36ec87b3953be5cde7e26575e45c219e9f446a21fca0683659119c",
+  "expected_payload_files": {
+    "candidate/cpu36_contract.py": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+    "candidate/kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "candidate/legacy_inputs.json": "24df1ad655fa3263efaf1ec8a721074fdfbae15fcb1d054b30d88bf5b9734835",
+    "candidate/run_node16.sh": "8910b84fd8cd0b1c7df64d6c61ea0a0027291aac92e9c327eb197d3c8d20752d",
+    "candidate/runner.py": "e04a703b7da429e3d85607f66b2c4d18cb3306b9a6320f92d7fd3be41539674a",
+    "candidate/s4_models.py": "ebc31ca6f726df886e147da7ff4766b32142a6b83c7336f15e6c1a52e25e1461",
+    "INTERFACE_FOR_S00_S02.md": "d2172e0a92307e92fe6a69a09bcc6daf1d7ba44cea7a074fc55a7219f4448f46",
+    "interfaces/cluster_runtime.env": "32248af7857b7fd1616b19899c1411a4a59f9378c9231f0ec56f6c922ec2866d",
+    "interfaces/run_s01_startup36.sh": "eae64b092b9a62525a6362f6ea93a96019266a79bb2070e36fb107eb8d91fde1",
+    "SOURCE_MANIFEST.json": "45ce97a9159a8e071e0dac83a44590505bcf5e229389658600c181f40ec648b7",
+    "SOURCE_SHA256.txt": "278d5cf1f7424e0e35a0c76120a121ce2a77a4286d2e651b874bdd8529d95b03"
+  },
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/MODEL_CPU36_R7_20261105T025806Z",
+  "allocation_cpu": 38,
+  "selected_physical_cores": 36,
+  "reserve_cores": 2,
+  "memory_MB": 24576,
+  "memory_limit_MB": 24576,
+  "wall_limit_s": 900,
+  "queue_wait_limit_s": 600,
+  "max_submissions": 1,
+  "HBM": 0,
+  "CKPT": 0,
+  "BATCH": 32,
+  "BELTS": "16_adjacent",
+  "PARTS": [
+    "pre",
+    "dec"
+  ],
+  "ROUNDS": 3,
+  "REPS": 1,
+  "stop_on_failure_or_unstable": true,
+  "S02": "NOT_AUTHORIZED_THIS_TURN",
+  "training_memory": "NOT_AUTHORIZED_THIS_TURN",
+  "hostkey_verified_by_user": "SHA256:DUcxv6m2GsdQszU1xemf9oRdmk+a8RCSAZJf7Sr9rjw",
+  "login_host": "login02",
+  "prior_evidence_sha256": {
+    "S01_LF_RESTART_REPORT.md": "5b5ef8c44be7c23ca8c6ec21b74ba4143cf50a3cd5ae8e15c7da1bb02d1f1519",
+    "PILOT_EXECUTION_REPORT.md": "8ed6d7103d4984e5c0d071d6faa65ebe69d9fe536a2ecdb30b8ef07247d6bcd1",
+    "CPU36_R6_DIAGNOSTIC_REPORT.md": "1f28f070a9435d7877b481d5f10cb71f8344a85cb32558c2b2137351c8f01d05",
+    "evidence\\cpu36_r6_2026725\\full_evidence.zip": "af5b01f9a7890d0bcaeb8c989e30a12ad64f65a6c40c5e7663d8d2f05d5b22b1",
+    "evidence\\s01_lf_restart_2026450\\full_evidence.zip": "1403bb4c5ba5032eb16df5aab4b3acd7836b6edd692db4ccc2b5626df0cbe87d",
+    "evidence\\executed_packages\\S01_job_2026356.zip": "5bb0a6718ec8ae3eb794e7f05f0faae9addd22342df0253833234320427a7616"
+  }
+}

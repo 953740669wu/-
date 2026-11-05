@@ -1,0 +1,45 @@
+"""Affinity-policy unit tests, not actual Linux allocation or KML validation."""
+import importlib.util
+from pathlib import Path
+from unittest.mock import patch
+import unittest
+
+ROOT=Path(__file__).resolve().parents[1]
+spec=importlib.util.spec_from_file_location('common',ROOT/'diagnostic_common.py')
+common=importlib.util.module_from_spec(spec);spec.loader.exec_module(common)
+
+
+class AffinityContract(unittest.TestCase):
+    def test_main_thread_cannot_expand_to_whole_numa_domain(self):
+        with patch.object(common.os,'sched_getaffinity',return_value=set(range(38)),create=True):
+            with self.assertRaisesRegex(RuntimeError,'checker CPU'):
+                common.affinity([0,1,2,3])
+
+    def test_worker_thread_cannot_escape_allocated_cpus(self):
+        with patch.object(common.os,'sched_getaffinity',side_effect=lambda pid:
+                          {0,1,2,3} if pid==0 else {0,1,2,3,4},create=True), \
+             patch.object(common.Path,'iterdir',return_value=[Path('101')]):
+            with self.assertRaisesRegex(RuntimeError,'worker thread'):
+                common.affinity([0,1,2,3])
+
+    def test_exact_main_and_subset_workers_are_recorded(self):
+        with patch.object(common.os,'sched_getaffinity',side_effect=lambda pid:
+                          {0,1,2,3} if pid==0 else {1,2},create=True), \
+             patch.object(common.Path,'iterdir',return_value=[Path('101'),Path('102')]):
+            record=common.affinity([0,1,2,3])
+        self.assertEqual(record['actual'],[0,1,2,3])
+        self.assertEqual(record['thread_affinities'],{'101':[1,2],'102':[1,2]})
+
+    def test_actual_kml_requires_an_observed_direct_gemm(self):
+        with self.assertRaisesRegex(RuntimeError,'no actual'):
+            common.finish_backend({'kml_gemm_calls':0},[0,1,2,3])
+
+    def test_runtime_library_identity_cannot_drift(self):
+        record={'kml_gemm_calls':1,'libraries':[{'path':'/actual/kml.so','sha256':'before'}]}
+        with patch.object(common,'affinity',return_value={}), \
+             patch.object(common,'mapped_libraries',return_value=[{'path':'/actual/kml.so','sha256':'after'}]):
+            with self.assertRaisesRegex(RuntimeError,'library changed'):
+                common.finish_backend(record,[0,1,2,3])
+
+
+if __name__=='__main__':unittest.main(verbosity=2)

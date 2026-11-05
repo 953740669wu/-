@@ -1,0 +1,68 @@
+--- /dev/null
++++ tests/diagnose_same_config.py
+@@ -0,0 +1,65 @@
++"""Collect every original comparison failure without changing computations/tolerances.
++
++This is a diagnostic replay of the failed 16-pre configuration, never a relaxed
++acceptance test. The accepted checker and candidate files remain byte-identical.
++"""
++import argparse
++import importlib.util
++import json
++from pathlib import Path
++import sys
++import traceback
++import torch
++
++CHECKER = Path(__file__).with_name('check_equivalence.py')
++spec = importlib.util.spec_from_file_location('accepted_check', CHECKER)
++check = importlib.util.module_from_spec(spec)
++spec.loader.exec_module(check)
++original_compare = check.compare
++failures = []
++
++
++def collect(torch, name, ref, got, category, metrics):
++    if name == 'negative_control' or name.startswith('loss_unit.'):
++        return original_compare(torch, name, ref, got, category, metrics)
++    try:
++        original_compare(torch, name, ref, got, category, metrics)
++    except AssertionError as exc:
++        failures.append(dict(name=name, reason=str(exc)))
++
++
++if __name__ == '__main__':
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--belt', choices=['16_adjacent'], required=True)
++    parser.add_argument('--part', choices=['pre'], required=True)
++    parser.add_argument('--microbatch', type=int, choices=[32], required=True)
++    parser.add_argument('--history', choices=['fresh'], required=True)
++    parser.add_argument('--threads', type=int, default=4)
++    parser.add_argument('--output', type=Path, required=True)
++    args = parser.parse_args()
++    args.checkpoint = False
++    args.kml = False
++    result = dict(status='IN_PROGRESS', diagnostic_only=True,
++                  config={k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()})
++    check.compare = collect
++    try:
++        check.main(args, torch, result)
++        result['status'] = 'FAIL_DIAGNOSTIC' if failures else 'PASS_DIAGNOSTIC_ONLY'
++        result['failures'] = failures
++        summary = {}
++        for item in result['metrics']:
++            family = item['name'].split('.')[0]
++            group = summary.setdefault(family, dict(tensors=0, failed=0, max_abs=0., max_relative=0.))
++            group['tensors'] += 1
++            group['failed'] += int(not item['passed'])
++            group['max_abs'] = max(group['max_abs'], item['max_abs'])
++            group['max_relative'] = max(group['max_relative'], item['l2_relative'])
++        result['summary'] = summary
++        code = int(bool(failures))
++    except Exception as exc:
++        result.update(status='ERROR_DIAGNOSTIC', error=repr(exc), traceback=traceback.format_exc())
++        code = 1
++    args.output.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
++    print(json.dumps({k: v for k, v in result.items() if k not in ('metrics', 'selected_frame_ids',
++                                                                  'synthetic_sources')}, indent=2))
++    sys.exit(code)

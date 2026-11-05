@@ -1,0 +1,50 @@
+{
+  "captured_utc": "2026-11-04T06:45:54.245753+00:00",
+  "host": "DESKTOP-54BJCD6",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "architecture": "AMD64",
+  "python": "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+  "python_version": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "torch_present": false,
+  "numpy_present": false,
+  "observations": [
+    {
+      "command": [
+        "ssh",
+        "-G",
+        "hpc-vpn"
+      ],
+      "exit_code": 0,
+      "stdout": "user a\nhostname hpc-vpn\nport 22\nbatchmode no\nconnecttimeout none",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=12",
+        "-o",
+        "ConnectionAttempts=1",
+        "hpc-vpn",
+        "printf S00_READ_ONLY_CONNECTION_OK"
+      ],
+      "exit_code": 255,
+      "stdout": "",
+      "stderr": "ssh: Could not resolve hostname hpc-vpn: \\262\\273\\326\\252\\265\\300\\325\\342\\321\\371\\265\\304\\326\\367\\273\\372\\241\\243 \r\n"
+    },
+    {
+      "command": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--version"
+      ],
+      "exit_code": 3221225794,
+      "stdout": "",
+      "stderr": "      0 [main] bash (33872) C:\\Program Files\\Git\\bin\\..\\usr\\bin\\bash.exe: *** fatal error - NtCreateDirectoryObject(\\BaseNamedObjects\\msys-2.0S5-1888ae32e00d56aa): 0xC0000022\n"
+    }
+  ],
+  "remote_status": "NOT_VERIFIED_CONNECTION_FAILED",
+  "submitted_jobs": 0,
+  "node_hours": 0
+}

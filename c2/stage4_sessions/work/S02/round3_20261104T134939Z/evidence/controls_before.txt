@@ -1,0 +1,53 @@
+test_constant_key_bias_is_mathematically_redundant (__main__.Controls.test_constant_key_bias_is_mathematically_redundant) ... ERROR
+test_fresh_adam_formula_and_small_gradient_amplification (__main__.Controls.test_fresh_adam_formula_and_small_gradient_amplification) ... ERROR
+test_kml_rejects_missing_actual_environment (__main__.Controls.test_kml_rejects_missing_actual_environment) ... ERROR
+test_loss_target_and_prediction_adjoints_replay (__main__.Controls.test_loss_target_and_prediction_adjoints_replay) ... ERROR
+
+======================================================================
+ERROR: test_constant_key_bias_is_mathematically_redundant (__main__.Controls.test_constant_key_bias_is_mathematically_redundant)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round3_20261104T134939Z\tests\test_diagnostic_controls.py", line 15, in setUp
+    spec.loader.exec_module(self.common)
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1073, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1130, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round3_20261104T134939Z\\diagnostic_common.py'
+
+======================================================================
+ERROR: test_fresh_adam_formula_and_small_gradient_amplification (__main__.Controls.test_fresh_adam_formula_and_small_gradient_amplification)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round3_20261104T134939Z\tests\test_diagnostic_controls.py", line 15, in setUp
+    spec.loader.exec_module(self.common)
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1073, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1130, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round3_20261104T134939Z\\diagnostic_common.py'
+
+======================================================================
+ERROR: test_kml_rejects_missing_actual_environment (__main__.Controls.test_kml_rejects_missing_actual_environment)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round3_20261104T134939Z\tests\test_diagnostic_controls.py", line 15, in setUp
+    spec.loader.exec_module(self.common)
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1073, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1130, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round3_20261104T134939Z\\diagnostic_common.py'
+
+======================================================================
+ERROR: test_loss_target_and_prediction_adjoints_replay (__main__.Controls.test_loss_target_and_prediction_adjoints_replay)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round3_20261104T134939Z\tests\test_diagnostic_controls.py", line 15, in setUp
+    spec.loader.exec_module(self.common)
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1073, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1130, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round3_20261104T134939Z\\diagnostic_common.py'
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+FAILED (errors=4)

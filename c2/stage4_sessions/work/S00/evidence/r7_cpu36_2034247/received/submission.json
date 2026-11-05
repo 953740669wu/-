@@ -1,0 +1,30 @@
+{
+  "submitted_utc": "2026-11-05T02:59:59.615081+00:00",
+  "command": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "900",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/MODEL_CPU36_R7_20261105T025806Z/payload",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/MODEL_CPU36_R7_20261105T025806Z/job.log",
+    "env",
+    "S01_RUN=/home/share/dengqingtian/opt/stage4_sessions/S00/MODEL_CPU36_R7_20261105T025806Z/payload",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/MODEL_CPU36_R7_20261105T025806Z/payload/interfaces/run_s01_startup36.sh"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"data\":{\"jobId\":\"2034247\"},\"message\":\"Submit job successfully.\",\"code\":\"success\",\"requestId\":\"req-c7a5fff5-eb5e-474a-9c8b-3c679f8b4609\"}\n",
+  "stderr": ""
+}

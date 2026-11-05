@@ -1,0 +1,34 @@
+{
+ "run_id": "failed_rank",
+ "host": "DESKTOP-54BJCD6",
+ "domains": [
+  0,
+  1
+ ],
+ "rounds": 3,
+ "belts": [
+  "16_adjacent",
+  "32_skip4"
+ ],
+ "parts": [
+  "pre",
+  "dec"
+ ],
+ "device": "cpu",
+ "cases": [
+  "SYNTHETIC_CASE_A",
+  "SYNTHETIC_CASE_B"
+ ],
+ "config": {
+  "amp": "fp32",
+  "batch": 32,
+  "channels_last": false,
+  "compile": false,
+  "reps": 5,
+  "kml_conv": false,
+  "kml_blas": "SYNTHETIC_LIBRARY",
+  "ckpt": false,
+  "kml_linear": true,
+  "linear_dtype": "fp32"
+ }
+}

@@ -1,0 +1,605 @@
+--- a/candidate/runner.py
++++ b/candidate/runner.py
+@@ -12,9 +12,11 @@
+ import time
+ import hashlib
+ from collections import deque
++import cpu36_contract as cpu
+ 
+ _STARTED = time.time()
+ RATE = {'pre': 'pretrain', 'dec': 'decoder'}
++_CPU36_KEY, _CPU36_EVIDENCE = None, None
+ 
+ 
+ def atomic_json(path, data):
+@@ -90,8 +92,44 @@
+         time.sleep(min(0.05, max(0, deadline - time.monotonic())))
+ 
+ 
+-def publish_result(out, output):
++def thread_checkpoint(name, torch_threads=None, torch_interop=None, parallel_info=None):
++    """Fail closed and retain evidence outside the measured model step."""
++    if not os.environ.get('RUN_ID'):
++        return
++    global _CPU36_KEY, _CPU36_EVIDENCE
++    path = Path(os.environ['CPU36_CONTEXT']).resolve()
++    if path.parent != Path(os.environ['SYNC_DIR']).resolve():
++        raise ValueError('CPU36 context must belong to this round sync directory')
++    context = read_json(path)
++    if context['version'] != cpu.VERSION or not context['job_id']:
++        raise ValueError('CPU36 context version/job identity missing')
++    for key, value in [('run_id', os.environ['RUN_ID']), ('host', socket.gethostname()),
++                       ('round', int(os.environ['RUN_ROUND'])), ('rank', int(os.environ['SYNC_RANK']))]:
++        if context[key] != value:
++            raise ValueError(f'CPU36 context identity mismatch: {key}')
++    cpu.validate_receipt(context['receipt'])
++    key = (str(path), sha(path))
++    if key != _CPU36_KEY:
++        _CPU36_KEY = key
++        _CPU36_EVIDENCE = dict(version=cpu.VERSION, context=context, checkpoints=[])
++    runtime = cpu.runtime_info() if name != 'before_framework' else None
++    item = dict(name=name, pid=os.getpid(), calling_tid=os.getpid(), time=time.time(),
++                calling_affinity=sorted(os.sched_getaffinity(0)), snapshot=cpu.snapshot_threads(os.getpid()),
++                torch_intraop=torch_threads, torch_interop=torch_interop, parallel_info=parallel_info,
++                environment={key: os.environ.get(key) for key in cpu.ENVIRONMENT}, runtime=runtime)
++    _CPU36_EVIDENCE['checkpoints'].append(item)
++    try:
++        cpu.validate_checkpoint(item, context['receipt'])
++    except (ValueError, KeyError, TypeError) as exc:
++        _CPU36_EVIDENCE.setdefault('errors', []).append(str(exc))
++        raise
++    finally:
++        atomic_json(path.parent / f'thread_rank{context["rank"]}.json', _CPU36_EVIDENCE)
++
++
++def publish_result(out, output, torch_threads=None, torch_interop=None, parallel_info=None):
+     if os.environ.get('RUN_ID'):
++        thread_checkpoint('publish', torch_threads, torch_interop, parallel_info)
+         code = Path(__file__).resolve().parent
+         out['run'] = dict(run_id=os.environ['RUN_ID'], host=socket.gethostname(),
+                           input_protocol=os.environ['INPUT_PROTOCOL'],
+@@ -99,7 +137,8 @@
+                           pid=os.getpid(), started=_STARTED, finished=time.time(),
+                           omp_threads=int(os.environ['OMP_NUM_THREADS']),
+                           affinity=sorted(os.sched_getaffinity(0)) if hasattr(os, 'sched_getaffinity') else None,
+-                          source_sha256={name: sha(code / name) for name in ('s4_models.py', 'runner.py', 'kml_ops.py')})
++                          source_sha256={name: sha(code / name) for name in ('s4_models.py', 'runner.py', 'kml_ops.py', 'cpu36_contract.py')},
++                          cpu36=_CPU36_EVIDENCE)
+     atomic_json(Path(output) / 'reports' / os.environ.get('TIMING_OUT', 'models_timing.json'), out)
+ 
+ 
+@@ -107,9 +146,9 @@
+     # The remote sampler was identified by hash only; never execute unreviewed shared code.
+     if env.get('SAMPLE_FOREIGN', '0') != '0':
+         raise ValueError('SAMPLE_FOREIGN cannot be enabled: sample_foreign.py source unavailable')
+-    limit = int(env.get('CORES_PER_DOM', '99'))
+-    if limit <= 0:
+-        raise ValueError('CORES_PER_DOM must be positive')
++    limit = int(env.get('CORES_PER_DOM', '36'))
++    if limit != 36:
++        raise ValueError('this candidate requires CORES_PER_DOM=36')
+     return dict(sample_foreign=False, sample_foreign_reason='disabled: sample_foreign.py source unavailable',
+                 cores_per_domain=limit, python_faulthandler=True)
+ 
+@@ -122,23 +161,13 @@
+             raise ValueError(f'legacy timing file hash mismatch: {case}')
+ 
+ 
+-def select_cpus(domain, allowed, busy, limit=None):
+-    cpus = sorted(set(domain) & set(allowed) - set(busy))
+-    if limit is not None:
+-        if type(limit) is not int or limit <= 0:
+-            raise ValueError('core limit must be a positive integer')
+-        cpus = cpus[:limit]
+-    if not cpus:
+-        raise ValueError('domain has zero usable cores after affinity/SKIP_BUSY filtering')
+-    return cpus
+-
+-
+ def supervise(commands, environments, directory, timeout):
+     """Own each child/session; record every exit, fail fast, bound termination."""
+     if not positive(timeout) or not commands:
+         raise ValueError('positive timeout and at least one child required')
+     directory = Path(directory)
+     processes, states, logs = {}, {}, []
++    thread_logs, observed, monitor_contexts = {}, {}, {}
+     reason = None
+     try:
+         for rank, command in commands.items():
+@@ -154,6 +183,13 @@
+                 break
+             processes[rank] = proc
+             states[rank]['pid'] = proc.pid
++            if environments[rank].get('CPU36_CONTEXT'):
++                monitor_contexts[rank] = read_json(environments[rank]['CPU36_CONTEXT'])
++                thread_logs[rank] = open(directory / f'rank{rank}.threads.jsonl', 'w', encoding='utf-8')
++                logs.append(thread_logs[rank])
++                observed[rank] = {}
++                states[rank]['thread_monitor'] = dict(pid=proc.pid, snapshots=0, incomplete_samples=0,
++                                                      violations=[], threads=[])
+         deadline = time.monotonic() + timeout
+         while not reason:
+             for rank, proc in processes.items():
+@@ -163,6 +199,29 @@
+                     status.update(exit_code=code, finished=time.time())
+                 if code is not None and code != 0:
+                     reason = f'rank {rank}: exit {code}'
++                marker = directory / f'thread_rank{rank}.json'
++                if code is None and rank in thread_logs and marker.exists():
++                    evidence = read_json(marker)
++                    monitor = status['thread_monitor']
++                    selected = monitor_contexts[rank]['receipt']['selected']
++                    if evidence['context'] != monitor_contexts[rank] or evidence['checkpoints'][0]['pid'] != proc.pid:
++                        reason = f'rank {rank}: thread monitor handshake identity mismatch'
++                    if evidence.get('errors'):
++                        reason = f'rank {rank}: CPU36 worker checkpoint failed'
++                    snap = cpu.snapshot_threads(proc.pid)
++                    thread_logs[rank].write(json.dumps(dict(time_ns=time.time_ns(), snapshot=snap)) + '\n')
++                    for row in snap['threads']:
++                        entry = observed[rank].setdefault(row['tid'], dict(tid=row['tid'], masks=[]))
++                        if row['affinity'] not in entry['masks']:
++                            entry['masks'].append(row['affinity'])
++                        if not row['affinity'] or not set(row['affinity']) <= set(selected):
++                            monitor['violations'].append(row)
++                            reason = f'rank {rank}: TID outside selected36'
++                    if snap['complete'] and snap['threads']:
++                        monitor['snapshots'] += 1
++                    elif proc.poll() is None:
++                        monitor['incomplete_samples'] += 1
++                        reason = f'rank {rank}: incomplete live all-TID evidence'
+             if reason or all(p.poll() is not None for p in processes.values()):
+                 break
+             if time.monotonic() >= deadline:
+@@ -204,6 +263,8 @@
+                 status['exit_code'] = processes[rank].wait(timeout=2)
+             if status['finished'] is None:
+                 status['finished'] = time.time()
++            if rank in observed:
++                status['thread_monitor']['threads'] = list(observed[rank].values())
+             matches, count = deque(maxlen=20), 0
+             log = directory / f'rank{rank}.log'
+             if log.is_file():
+@@ -272,8 +333,7 @@
+                             raise ValueError(f'{key} mismatch')
+                     if 'source_sha256' in spec and meta['source_sha256'] != spec['source_sha256']:
+                         raise ValueError('loaded candidate source hash mismatch')
+-                    if 'cpus' in spec and meta['affinity'] != spec['cpus'][str(r)][str(d)]:
+-                        raise ValueError('actual CPU affinity mismatch')
++                    cpu.validate_result(spec, data, state, r, d)
+                     if 'cpus' in spec and meta['omp_threads'] != len(spec['cpus'][str(r)][str(d)]):
+                         raise ValueError('thread count mismatch')
+                     if not isinstance(data['torch'], str) or not data['torch']:
+@@ -319,21 +379,50 @@
+         return dict(status='FAIL', errors=[f'manifest: {exc}'])
+ 
+ 
+-def cpulist(text):
+-    values = []
+-    for item in text.strip().split(','):
+-        if not item:
+-            continue
+-        a, sep, b = item.partition('-')
+-        values.extend(range(int(a), int(b) + 1) if sep else [int(a)])
+-    return values
+-
+-
+ def model_config(env):
+     return dict(amp=env['AMP'], batch=int(env['BATCH']), channels_last=env['CHANNELS_LAST'] == '1',
+                 compile=env['COMPILE'] == '1', reps=int(env['REPS']), kml_conv=env['KML_CONV'] == '1',
+                 kml_blas=env['KML_BLAS_LIB'], ckpt=env['CKPT'] == '1', kml_linear=env['KML_LINEAR'] == '1',
+                 linear_dtype=env['LINEAR_DTYPE'] if env['KML_LINEAR'] == '1' else None)
++
++
++def preflight(root, contracts, sources, files, job_id):
++    """Actual imports only; a fresh same-job reference is mandatory for model launch."""
++    if os.environ.get('RUN_ID'):
++        raise ValueError('preflight cannot inherit a worker RUN_ID')
++    selected = sorted({cpu_id for receipt in contracts.values() for cpu_id in receipt['selected']})
++    os.sched_setaffinity(0, selected)
++    import importlib
++    import torch
++    import numpy
++    import kml_ops
++    saved = sys.argv
++    try:
++        sys.argv = [str(root / 'candidate/s4_models.py'), str(root / 'output'), 's0322p0,s0322p1']
++        importlib.import_module('s4_models')
++    finally:
++        sys.argv = saved
++    if torch.get_num_threads() != 36:
++        raise ValueError('actual preflight PyTorch intra-op threads !=36')
++    snapshot = cpu.snapshot_threads(os.getpid())
++    cpu.validate_snapshot(selected, snapshot)
++    runtime = cpu.runtime_info()
++    for path in [root / 'lib/libkml_sgemm_shim.so', Path(os.environ['KML_BLAS_LIB'])]:
++        mappings = {str(Path(name).resolve()): info['sha256'] for name, info in runtime['libraries'].items()}
++        if mappings.get(str(path.resolve())) != sha(path):
++            raise ValueError(f'required library not actually loaded with frozen identity: {path}')
++    record = dict(status='PASS_IMPORT_ONLY', version=cpu.VERSION, job_id=job_id, host=socket.gethostname(),
++                  source_sha256=sources, frozen_files=files,
++                  cpu_contracts={str(d): value for d, value in contracts.items()}, runtime=runtime,
++                  torch_intraop=torch.get_num_threads(), torch_interop=torch.get_num_interop_threads(),
++                  snapshot=snapshot, environment={key: os.environ.get(key) for key in cpu.ENVIRONMENT},
++                  model_forward_backward='NOT_RUN', timestamp_ns=time.time_ns())
++    directory = root / 'evidence'
++    directory.mkdir(exist_ok=True)
++    path = directory / f'CPU36_PREFLIGHT_{time.time_ns()}.json'
++    atomic_json(path, record)
++    print(path, flush=True)
++    return 0
+ 
+ 
+ def main():
+@@ -343,12 +432,20 @@
+         return 0 if result['status'] == 'PASS' else 1
+     if sys.platform != 'linux':
+         raise ValueError('cluster launch requires Linux; use tests for local protocol verification')
++    if socket.gethostname().lower().startswith('login'):
++        raise ValueError('model/import preflight requires an allocated compute node')
+     env = os.environ.copy()
++    if {key: env.get(key) for key in cpu.ENVIRONMENT} != cpu.ENVIRONMENT:
++        raise ValueError('use the explicit CPU36 C-group launcher environment')
++    job_id = env.get('CCS_JOB_ID') or env.get('S01_JOB_ID')
++    if not job_id:
++        raise ValueError('an allocated compute job identity is required')
++    import_only = len(sys.argv) == 2 and sys.argv[1] == '--preflight'
+     defaults = dict(DEVICE='cpu', AMP='fp32', BATCH='64', REPS='5', BELTS='16_adjacent,32_skip4', PARTS='pre,dec',
+                     CHANNELS_LAST='0', COMPILE='0', MKLDNN='1', CKPT='0', KML_LINEAR='0', LINEAR_DTYPE='fp32', KML_CONV='0')
+     for key, value in defaults.items():
+         env.setdefault(key, value)
+-    tag = sys.argv[1] if len(sys.argv) > 1 else 'node16'
++    tag = 'preflight' if import_only else (sys.argv[1] if len(sys.argv) > 1 else 'node16')
+     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]*', tag):
+         raise ValueError('tag must be a single safe directory name')
+     for assignment in sys.argv[2:]:
+@@ -380,14 +477,8 @@
+     if Path(__file__).resolve().parent != code:
+         raise ValueError('runner must execute from S01_RUN/candidate')
+     allowed = os.sched_getaffinity(0)
+-    topology = {}
+-    for node in Path('/sys/devices/system/node').glob('node[0-9]*'):
+-        cpus = cpulist((node / 'cpulist').read_text())
+-        if set(cpus) & allowed:
+-            topology[int(node.name[4:])] = cpus
+-    ranks = sorted(topology)[:count]
+-    if len(ranks) != count:
+-        raise ValueError(f'expected {count} authorized CPU domains, found {len(ranks)}')
++    contracts = cpu.discover_contracts(allowed, count)
++    ranks = sorted(contracts)
+     hbm = env.get('HBM', '0') == '1'
+     libraries = [root / 'lib/libkml_sgemm_shim.so', Path(env['KML_BLAS_LIB'])]
+     if hbm:
+@@ -396,15 +487,32 @@
+             node = Path(f'/sys/devices/system/node/node{16+d}')
+             if d >= 16 or not node.is_dir() or (node / 'cpulist').read_text().strip():
+                 raise ValueError(f'historical HBM mapping 16+{d} is not a memory-only node; require topology review')
+-    sources = {name: sha(code / name) for name in ('s4_models.py', 'runner.py', 'kml_ops.py')}
++    sources = {name: sha(code / name) for name in ('s4_models.py', 'runner.py', 'kml_ops.py', 'cpu36_contract.py')}
+     inputs = {case: output / f'cases/{case}/frames.npz' for case in ('s0322p0', 's0322p1')}
+     verify_legacy_inputs(inputs, read_json(code / 'legacy_inputs.json'))
+     files = {str(path): sha(path) for path in [*inputs.values(), *libraries, code / 'run_node16.sh', code / 'legacy_inputs.json']}
++    if import_only:
++        return preflight(root, contracts, sources, files, job_id)
++    reference_path = Path(env['CPU36_RUNTIME_REFERENCE']).resolve()
++    reference_path.relative_to((root / 'evidence').resolve())
++    reference = read_json(reference_path)
++    if not (reference['status'] == 'PASS_IMPORT_ONLY' and reference['version'] == cpu.VERSION
++            and reference['job_id'] == job_id and reference['host'] == socket.gethostname()
++            and reference['source_sha256'] == sources and reference['frozen_files'] == files
++            and reference['cpu_contracts'] == {str(d): value for d, value in contracts.items()}
++            and reference['environment'] == cpu.ENVIRONMENT and reference['torch_intraop'] == 36):
++        raise ValueError('fresh same-job CPU36 import/source/input/library reference mismatch')
++    files[str(reference_path)] = sha(reference_path)
++    files.update({path: info['sha256'] for path, info in reference['runtime']['libraries'].items()})
++    os.sched_setaffinity(0, sorted({c for receipt in contracts.values() for c in receipt['selected']}))
+     directory = output / 'reports' / tag
+     directory.mkdir(parents=True, exist_ok=False)  # Never reuse even an empty old tag.
+     spec = dict(run_id=tag, host=socket.gethostname(), domains=ranks, rounds=rounds, belts=belts, parts=parts,
+                 config=model_config(env), device=env['DEVICE'], cases=['s0322p0', 's0322p1'], source_sha256=sources,
+                 input_protocol=env['INPUT_PROTOCOL'], diagnostics=diagnostics,
++                cpu36_version=cpu.VERSION, job_id=job_id, worker_environment=cpu.ENVIRONMENT,
++                cpu_contracts={str(d): value for d, value in contracts.items()}, cpu_contexts={},
++                runtime_reference=reference['runtime'],
+                 frozen_files=files, cpus={}, memory_policy=mempol, hbm=hbm, skip_busy=env.get('SKIP_BUSY', '0'),
+                 run_timeout=timeout, sync_timeout=sync_timeout)
+     atomic_json(directory / 'manifest.json', spec)
+@@ -417,21 +525,31 @@
+             (sync / 'busy_snapshot.txt').write_text(sample)
+             busy = {int(line.split()[0]) for line in sample.splitlines() if float(line.split()[1]) > 5}
+         # Validate ALL domains before launching ANY process. Never drop an empty/slow domain.
+-        selected = {d: select_cpus(topology[d], allowed, busy, diagnostics['cores_per_domain']) for d in ranks}
++        selected = {d: contracts[d]['selected'] for d in ranks}
++        if any(set(cpus) & busy for cpus in selected.values()):
++            raise ValueError('SKIP_BUSY conflicts with the fixed first36/reserved2 CPU contract')
+         spec['cpus'][str(r)] = {str(d): cpus for d, cpus in selected.items()}
+         atomic_json(directory / 'manifest.json', spec)
+         commands, environments = {}, {}
+         for d in ranks:
++            context = dict(version=cpu.VERSION, run_id=tag, host=socket.gethostname(), job_id=job_id,
++                           round=r, rank=d, receipt=contracts[d])
++            context_path = sync / f'cpu36_d{d}.json'
++            atomic_json(context_path, context)
++            spec['cpu_contexts'].setdefault(str(r), {})[str(d)] = context
+             child = env.copy()
+             child.update(RUN_ID=tag, RUN_ROUND=str(r), SYNC_DIR=str(sync), SYNC_N=str(len(ranks)),
+                          SYNC_RANKS=','.join(map(str, ranks)), SYNC_RANK=str(d), SYNC_TIMEOUT=str(sync_timeout),
+                          TIMING_OUT=f'{tag}/r{r}_d{d}.json', OMP_NUM_THREADS=str(len(selected[d])))
++            child.update(cpu.ENVIRONMENT)
++            child['CPU36_CONTEXT'] = str(context_path)
+             if hbm:
+                 child.update(HBM_NODE=str(16+d), HBM_STATS='1', LD_PRELOAD=f'{root}/lib/libhbm_alloc.so:' + env['LD_PRELOAD'])
+             memory = f'{d},{16+d}' if hbm else str(d)
+             commands[d] = ['numactl', '--physcpubind=' + ','.join(map(str, selected[d])), f'--{mempol}={memory}',
+                            sys.executable, str(code / 's4_models.py'), str(output), 's0322p0,s0322p1']
+             environments[d] = child
++        atomic_json(directory / 'manifest.json', spec)
+         atomic_json(sync / 'commands.json', {str(d): command for d, command in commands.items()})
+         states = supervise(commands, environments, sync, timeout)
+         for d, state in states.items():
+--- a/candidate/s4_models.py
++++ b/candidate/s4_models.py
+@@ -11,8 +11,10 @@
+ SAMPLING (1: time guided sampling), GN (1: time the GN/NOSER baseline), REPS (20 timed training steps).
+ """
+ import os, sys, json, time, math, glob, resource, platform
+-from runner import barrier as wait_barrier, publish_result
++from runner import barrier as wait_barrier, publish_result, thread_checkpoint
++thread_checkpoint('before_framework')
+ import numpy as np, torch, torch.nn as nn, torch.nn.functional as F
++thread_checkpoint('after_framework', torch.get_num_threads(), torch.get_num_interop_threads(), torch.__config__.parallel_info())
+ 
+ O = sys.argv[1]
+ CASES = sys.argv[2].split(',')
+@@ -234,12 +236,15 @@
+                 opt.zero_grad(); loss.backward(); opt.step()
+ 
+             for f in (pre_step, dec_step): f(); f()          # warm-up
++            thread_checkpoint(f'{belt}_after_warmup', torch.get_num_threads(), torch.get_num_interop_threads(), torch.__config__.parallel_info())
+             if dev == 'cuda': torch.cuda.reset_peak_memory_stats()
+             if 'pre' in PARTS:
+                 barrier(f'{belt}_pre'); tp, _ = timed(pre_step, REPS)
++                thread_checkpoint(f'{belt}_after_pre', torch.get_num_threads(), torch.get_num_interop_threads(), torch.__config__.parallel_info())
+                 R[f'pretrain_step_s_B{B}'] = tp; R['pretrain_frames_per_s'] = B / tp
+             if 'dec' in PARTS:
+                 barrier(f'{belt}_dec'); td, _ = timed(dec_step, REPS)
++                thread_checkpoint(f'{belt}_after_dec', torch.get_num_threads(), torch.get_num_interop_threads(), torch.__config__.parallel_info())
+                 R[f'decoder_step_s_B{B}'] = td; R['decoder_frames_per_s'] = B / td
+             R['peak_mem_GB'] = torch.cuda.max_memory_allocated() / 1e9 if dev == 'cuda' else \
+                 resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1e6     # CPU: process peak RSS
+@@ -269,7 +274,7 @@
+             ts_, _ = timed(sample, 3)
+             R[f'guided_sampling_ms_per_frame_S{S}_K{K}'] = ts_ * 1e3
+         out[belt] = R
+-    publish_result(out, O)
++    publish_result(out, O, torch.get_num_threads(), torch.get_num_interop_threads(), torch.__config__.parallel_info())
+     print(json.dumps(out, indent=1, default=float))
+ 
+ 
+--- a/candidate/run_node16.sh
++++ b/candidate/run_node16.sh
+@@ -7,6 +7,9 @@
+ K=/opt/HPCKit/kml-lib/sme/kblas/multi
+ B=/opt/HPCKit/bisheng-lib
+ export S01_RUN OMP_PLACES=cores OMP_PROC_BIND=close
++export OMP_NUM_THREADS=36 MKL_NUM_THREADS=36 OPENBLAS_NUM_THREADS=1
++export CORES_PER_DOM=${CORES_PER_DOM:-36}
++[[ "$CORES_PER_DOM" = 36 ]] || { echo 'CPU36 candidate requires CORES_PER_DOM=36' >&2; exit 2; }
+ export KML_BLAS_LIB=$K/libkblas.so
+ export LD_LIBRARY_PATH=$K:/opt/HPCKit/kml-lib:$B${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+ export PYTHONPATH=$H/sw/torch_kml:$S01_RUN/candidate
+--- /dev/null
++++ b/candidate/cpu36_contract.py
+@@ -0,0 +1,213 @@
++"""CPU36_MODEL_V1: allocation, per-TID boundaries and actual framework evidence."""
++import ctypes
++import hashlib
++import json
++import math
++import os
++from pathlib import Path
++import re
++import sys
++
++VERSION = 'CPU36_MODEL_V1'
++ENVIRONMENT = dict(OMP_NUM_THREADS='36', MKL_NUM_THREADS='36', OPENBLAS_NUM_THREADS='1',
++                   OMP_PLACES='cores', OMP_PROC_BIND='close')
++_HASHES = {}
++
++
++def sha(path):
++    digest = hashlib.sha256()
++    with open(path, 'rb') as stream:
++        for block in iter(lambda: stream.read(1024 * 1024), b''):
++            digest.update(block)
++    return digest.hexdigest()
++
++
++def cpu_list(text):
++    values = []
++    for item in text.strip().split(','):
++        if item:
++            a, sep, b = item.partition('-')
++            values.extend(range(int(a), int(b) + 1) if sep else [int(a)])
++    return values
++
++
++def select_cpus(allocated, domain, siblings):
++    siblings = {str(key): value for key, value in siblings.items()}
++    if any(type(cpu) is not int or cpu < 0 for cpu in [*allocated, *domain]):
++        raise ValueError('invalid CPU identifiers')
++    allocated, domain = sorted(set(allocated)), sorted(set(domain))
++    if len(domain) != 38 or len(allocated) not in (36, 38) or not set(allocated) <= set(domain):
++        raise ValueError('require an authorized 38-core domain or its exact first36')
++    groups = [tuple(sorted(siblings[str(cpu)])) for cpu in domain]
++    if any(cpu not in group for cpu, group in zip(domain, groups)) or len(set(groups)) != 38:
++        raise ValueError('38 distinct physical cores required')
++    selected, reserved = domain[:-2], domain[-2:]
++    if not set(selected) <= set(allocated):
++        raise ValueError('cannot select first36 and reserve last2 from this allocation')
++    return dict(allocated=allocated, domain_cpus=domain, selected=selected, reserved=reserved,
++                physical_siblings={str(cpu): list(group) for cpu, group in zip(domain, groups)})
++
++
++def discover_contracts(allowed, count):
++    contracts = {}
++    for node in sorted(Path('/sys/devices/system/node').glob('node[0-9]*'), key=lambda p: int(p.name[4:])):
++        domain = cpu_list((node / 'cpulist').read_text())
++        allocated = sorted(set(domain) & set(allowed))
++        if allocated:
++            siblings = {str(cpu): cpu_list(Path(f'/sys/devices/system/cpu/cpu{cpu}/topology/thread_siblings_list').read_text())
++                        for cpu in domain}
++            receipt = select_cpus(allocated, domain, siblings)
++            receipt['node'] = int(node.name[4:])
++            contracts[receipt['node']] = receipt
++            if len(contracts) == count:
++                break
++    if len(contracts) != count:
++        raise ValueError(f'expected {count} authorized CPU36 domains, found {len(contracts)}')
++    return contracts
++
++
++def validate_receipt(receipt):
++    rebuilt = select_cpus(receipt['allocated'], receipt['domain_cpus'], receipt['physical_siblings'])
++    if receipt['selected'] != rebuilt['selected'] or receipt['reserved'] != rebuilt['reserved']:
++        raise ValueError('selected36/reserved2 receipt mismatch')
++
++
++def snapshot_threads(pid):
++    result = dict(complete=True, threads=[], vanished=[], errors=[])
++    try:
++        entries = list(Path(f'/proc/{pid}/task').iterdir())
++    except OSError as exc:
++        return dict(complete=False, threads=[], vanished=[], errors=[str(exc)])
++    for entry in entries:
++        try:
++            stat = (entry / 'stat').read_text()
++            fields = stat[stat.rfind(')') + 2:].split()
++            result['threads'].append(dict(tid=int(entry.name), affinity=sorted(os.sched_getaffinity(int(entry.name))),
++                                          ticks=int(fields[11]) + int(fields[12]), start_ticks=int(fields[19]),
++                                          last_cpu=int(fields[36]), state=fields[0]))
++        except (FileNotFoundError, ProcessLookupError):
++            result['complete'] = False
++            result['vanished'].append(int(entry.name))
++        except (OSError, ValueError, IndexError) as exc:
++            result['complete'] = False
++            result['errors'].append(f'{entry.name}: {exc}')
++    return result
++
++
++def validate_snapshot(selected, snapshot):
++    rows = snapshot['threads']
++    if snapshot.get('complete') is not True or snapshot.get('vanished') or snapshot.get('errors') or not rows:
++        raise ValueError('missing/incomplete all-TID evidence')
++    tids = []
++    for row in rows:
++        tids.append(row['tid'])
++        mask = row['affinity']
++        if not isinstance(mask, list) or not mask or any(type(cpu) is not int for cpu in mask) or not set(mask) <= set(selected):
++            raise ValueError(f'TID {row["tid"]} outside selected36 boundary')
++    if len(set(tids)) != len(tids) or any(type(tid) is not int or tid <= 0 for tid in tids):
++        raise ValueError('invalid/duplicate TID evidence')
++
++
++def runtime_info():
++    modules = {}
++    for name in ('torch', 'numpy', 'kml_ops'):
++        module = sys.modules.get(name)
++        if module is not None:
++            modules[name] = dict(version=getattr(module, '__version__', None), path=str(Path(module.__file__).resolve()))
++    paths = sorted({line.split()[-1] for line in Path('/proc/self/maps').read_text().splitlines()
++                    if re.search(r'kml|blas|libomp|libgomp|hbm', line, re.I) and line.split()[-1].startswith('/')})
++    libraries = {}
++    for path in paths:
++        if path not in _HASHES:
++            _HASHES[path] = sha(path)
++        info = dict(sha256=_HASHES[path])
++        lib = ctypes.CDLL(path, mode=os.RTLD_NOLOAD | os.RTLD_LOCAL)
++        for name in ('omp_get_max_threads', 'omp_get_dynamic', 'omp_get_proc_bind', 'omp_get_num_places',
++                     'openblas_get_num_threads', 'openblas_get_num_threads64_', 'openblas_get_num_threads_64_'):
++            if hasattr(lib, name):
++                fn = getattr(lib, name)
++                fn.argtypes, fn.restype = [], ctypes.c_int
++                info[name] = fn()
++        libraries[path] = info
++    return dict(modules=modules, libraries=libraries)
++
++
++def required_checkpoints(spec):
++    names = ['before_framework', 'after_framework']
++    for belt in spec['belts']:
++        names += [f'{belt}_after_warmup'] + [f'{belt}_after_{part}' for part in spec['parts']]
++    return names + ['publish']
++
++
++def validate_checkpoint(record, receipt):
++    validate_snapshot(receipt['selected'], record['snapshot'])
++    caller = next((row for row in record['snapshot']['threads'] if row['tid'] == record['calling_tid']), None)
++    if caller is None or caller['affinity'] != record['calling_affinity']:
++        raise ValueError('calling TID mask does not match all-TID snapshot')
++    if record['environment'] != ENVIRONMENT:
++        raise ValueError('conflicting CPU36 worker environment')
++    if record['name'] != 'before_framework':
++        if type(record['torch_intraop']) is not int or record['torch_intraop'] != 36:
++            raise ValueError('actual PyTorch intra-op threads must be36')
++        if type(record['torch_interop']) is not int or record['torch_interop'] <= 0 or not record['parallel_info']:
++            raise ValueError('missing actual PyTorch thread metadata')
++        omp = [entry for entry in record['runtime']['libraries'].values() if 'omp_get_max_threads' in entry]
++        if not omp or any(entry['omp_get_max_threads'] != 36 for entry in omp):
++            raise ValueError('missing/conflicting loaded OpenMP thread API')
++
++
++def validate_result(spec, data, state, round_id, rank):
++    if spec['cpu36_version'] != VERSION or spec['worker_environment'] != ENVIRONMENT:
++        raise ValueError('CPU36 manifest contract missing/conflicting')
++    receipt = spec['cpu_contracts'][str(rank)]
++    validate_receipt(receipt)
++    if spec['cpus'][str(round_id)][str(rank)] != receipt['selected']:
++        raise ValueError('manifest selected36 mismatch')
++    evidence = data['run']['cpu36']
++    if evidence.get('errors'):
++        raise ValueError('worker retained a failed CPU36 checkpoint')
++    expected_context = dict(version=VERSION, run_id=spec['run_id'], host=spec['host'], job_id=spec['job_id'],
++                            round=round_id, rank=rank, receipt=receipt)
++    if (evidence['version'] != VERSION
++            or json.dumps(evidence['context'], sort_keys=True) != json.dumps(expected_context, sort_keys=True)
++            or json.dumps(evidence['context'], sort_keys=True) != json.dumps(spec['cpu_contexts'][str(round_id)][str(rank)], sort_keys=True)):
++        raise ValueError('CPU36 worker context identity mismatch')
++    names = [item['name'] for item in evidence['checkpoints']]
++    if len(set(names)) != len(names) or not set(required_checkpoints(spec)) <= set(names):
++        raise ValueError('missing/duplicate CPU36 checkpoints')
++    order = [names.index(name) for name in required_checkpoints(spec)]
++    if order != sorted(order) or names[:2] != ['before_framework', 'after_framework']:
++        raise ValueError('CPU36 checkpoint order mismatch')
++    for item in evidence['checkpoints']:
++        if (type(item['time']) not in (int, float) or not math.isfinite(item['time'])
++                or not data['run']['started'] <= item['time'] <= data['run']['finished']):
++            raise ValueError('CPU36 checkpoint outside worker time window')
++        if item['pid'] != data['run']['pid'] or item['calling_tid'] not in [row['tid'] for row in item['snapshot']['threads']]:
++            raise ValueError('checkpoint PID/TID identity mismatch')
++        validate_checkpoint(item, receipt)
++        if item['name'] == 'before_framework':
++            continue
++        actual, reference = item['runtime'], spec['runtime_reference']
++        for name, expected in reference['modules'].items():
++            if name == 'kml_ops' and item['name'] == 'after_framework':
++                continue
++            if actual['modules'].get(name) != expected:
++                raise ValueError(f'actual module identity mismatch: {name}')
++        for path, info in actual['libraries'].items():
++            if reference['libraries'].get(path, {}).get('sha256') != info['sha256']:
++                raise ValueError(f'unfrozen/changed runtime library: {path}')
++        if item['name'] != 'after_framework' and not set(reference['libraries']) <= set(actual['libraries']):
++            raise ValueError('required runtime library mapping missing')
++    last = evidence['checkpoints'][-1]
++    if last['name'] != 'publish' or data['run']['affinity'] != last['calling_affinity']:
++        raise ValueError('publication calling-thread metadata mismatch')
++    monitor = state['thread_monitor']
++    if monitor['pid'] != state['pid'] or type(monitor['snapshots']) is not int or monitor['snapshots'] < 1:
++        raise ValueError('missing parent thread monitor evidence')
++    if monitor['incomplete_samples'] or monitor['violations'] or not monitor['threads']:
++        raise ValueError('incomplete/out-of-bound parent thread evidence')
++    for thread in monitor['threads']:
++        if not thread['masks']:
++            raise ValueError('missing monitored TID mask')
++        for mask in thread['masks']:
++            validate_snapshot(receipt['selected'], dict(complete=True, threads=[dict(tid=thread['tid'], affinity=mask)]))

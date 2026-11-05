@@ -1,0 +1,31 @@
+{
+  "environment": "Windows Git Bash parser only; no Linux model execution",
+  "checks": [
+    {
+      "file": "snapshot/pilot_s01_startup.sh",
+      "command": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\revisions\\R5_STARTUP_CONFIRM_20261104T134751535165Z\\snapshot\\pilot_s01_startup.sh"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "file": "proposed/pilot_s01_startup.sh",
+      "command": [
+        "C:\\Program Files\\Git\\bin\\bash.exe",
+        "--noprofile",
+        "--norc",
+        "-n",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\revisions\\R5_STARTUP_CONFIRM_20261104T134751535165Z\\proposed\\pilot_s01_startup.sh"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ]
+}

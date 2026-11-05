@@ -1,0 +1,57 @@
+E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round2_20261104T114949Z\.venv\Lib\site-packages\torch\nn\modules\transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+{
+  "status": "FAIL_ORIGINAL_CRITERIA",
+  "mode": "strict",
+  "comparison_failures": 194,
+  "summary": {
+    "loss": {
+      "tensors": 1,
+      "failed": 1,
+      "max_abs": 3.0517578125e-05,
+      "max_relative": 1.0070243979857095e-07
+    },
+    "input_v": {
+      "tensors": 1,
+      "failed": 0,
+      "max_abs": 0.0,
+      "max_relative": 0.0
+    },
+    "input_y0": {
+      "tensors": 1,
+      "failed": 0,
+      "max_abs": 0.0,
+      "max_relative": 0.0
+    },
+    "output": {
+      "tensors": 3,
+      "failed": 0,
+      "max_abs": 0.0,
+      "max_relative": 0.0
+    },
+    "grad": {
+      "tensors": 153,
+      "failed": 49,
+      "max_abs": 0.010223388671875,
+      "max_relative": 1.1408186826186996e-05
+    },
+    "param": {
+      "tensors": 299,
+      "failed": 13,
+      "max_abs": 3.666430711746216e-05,
+      "max_relative": 0.008112706693812585
+    },
+    "delta": {
+      "tensors": 299,
+      "failed": 33,
+      "max_abs": 3.666430711746216e-05,
+      "max_relative": 0.008112706693812585
+    },
+    "state": {
+      "tensors": 306,
+      "failed": 98,
+      "max_abs": 0.01171875,
+      "max_relative": 2.3147254441307437e-05
+    }
+  }
+}

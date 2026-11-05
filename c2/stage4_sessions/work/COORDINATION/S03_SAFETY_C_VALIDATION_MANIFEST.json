@@ -1,0 +1,102 @@
+{
+  "decision": "ACCEPTED_STATIC_CANDIDATE_FOR_BOUNDED_LINUX_C_FAULT_TESTS_ONLY",
+  "source_root": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S03",
+  "artifact_files_verified": 18,
+  "local_checks": {
+    "frozen": {
+      "tests": 6,
+      "failures": 5,
+      "returncode": 1
+    },
+    "candidate": {
+      "tests": 6,
+      "failures": 0,
+      "returncode": 0
+    }
+  },
+  "candidate_sha256": "8ec586c60c97bbcdb437fe848b6d9645ea3cfca850952ff9d94c0d36fdaed35d",
+  "outside_init_unchanged": true,
+  "package_name": "S03_SAFETY_C_VALIDATION.zip",
+  "package_sha256": "f8b4998223c8c00765666e43f338ebe9540418d6bc326356172357d925c79a21",
+  "package_bytes": 29925,
+  "package_members": 19,
+  "files": {
+    "BEHAVIOR.md": {
+      "sha256": "fcaeecdf41ff9ec5e147a740f64593dcb7fc93a03cae20acddd524e6e086358f",
+      "bytes": 2233
+    },
+    "candidate/hbm_alloc.c": {
+      "sha256": "8ec586c60c97bbcdb437fe848b6d9645ea3cfca850952ff9d94c0d36fdaed35d",
+      "bytes": 6538
+    },
+    "candidate/hbm_alloc.diff": {
+      "sha256": "06de88e3b88d6a8c0dc8e3b8e4d973935f5d74a1a25a9f2f1e1cbafa2651f0f2",
+      "bytes": 2458
+    },
+    "evidence/after_local.json": {
+      "sha256": "83cc20124c592b6793459f8cd913e3e5fafdc88ebe9ea0b284c0cf59caac3451",
+      "bytes": 497
+    },
+    "evidence/after_local.txt": {
+      "sha256": "3b64cf6658ef8883ad158458618c8f2fb2158546f4b9bb20bbba0db31163209d",
+      "bytes": 897
+    },
+    "evidence/bash_syntax_attempt.json": {
+      "sha256": "c6e9dc11a321c3ed2256c56130c7d6f74f1bcad6b8ca14f38c3fb805e5e7fd87",
+      "bytes": 529
+    },
+    "evidence/before_local.json": {
+      "sha256": "3f58196a2c5fadceb7ffe20d37798a425163c8c3f8aa276d0d26e0bbef62c05b",
+      "bytes": 914
+    },
+    "evidence/before_local.txt": {
+      "sha256": "cfa3360623d7c7c56898e19aa1d04aa708a2a8aca535daf29f9fe477409d3763",
+      "bytes": 16159
+    },
+    "evidence/delivery_validation.json": {
+      "sha256": "f6653958ecc9769b120d2959b80f4ad9e2eee1d23dd3176418969d1576da469b",
+      "bytes": 993
+    },
+    "evidence/environment.json": {
+      "sha256": "d4865e7c7ffe6811c43bd3e220a5f0e8c411034a61873940370cd3d95df84cdd",
+      "bytes": 287
+    },
+    "frozen/hbm_alloc.c": {
+      "sha256": "edbf06f54a779271c97d739e4aaca18ffae306ccd20713443ecaee11c388cb15",
+      "bytes": 5929
+    },
+    "LINUX_VALIDATION.md": {
+      "sha256": "5c5ea6574fcff79f6c13ad222954c4be991c77bd76133750ee8146131fda4297",
+      "bytes": 5773
+    },
+    "REPORT.md": {
+      "sha256": "437414125f77ab1bda7251913c5ba56116ddb2e6cde102adae30c75e31a68818",
+      "bytes": 13118
+    },
+    "SOURCE_SHA256.txt": {
+      "sha256": "a8de999f5082b4b06faaa32eda345e207e6ad655145855c4824894905eca9021",
+      "bytes": 572
+    },
+    "tests/check_local.py": {
+      "sha256": "55779ad467d51c195e28cd1b5f0c886e0539d808a513677bbad8d07dea58b4cb",
+      "bytes": 4009
+    },
+    "tests/fault_harness.c": {
+      "sha256": "b645b40ddcf7c1e55df86a8e8f29e5cee9822dccfba949d7662317ced4bb0a5b",
+      "bytes": 7465
+    },
+    "tests/policy_probe.c": {
+      "sha256": "44c76cf5139b9523cc9a77a7eda1a55831101328d3d3f6de0354d2d3689ea21e",
+      "bytes": 1467
+    },
+    "tests/run_faults.py": {
+      "sha256": "fe95a21652ee67d787d5f522cbe2e8e942f9f20bb4a4cbb8856e41764893f905",
+      "bytes": 3360
+    }
+  },
+  "Linux_C_build": "NOT_RUN",
+  "fault_injection_25_cases": "NOT_RUN",
+  "real_HBM": "NOT_RUN",
+  "shared_integration": "NOT_ACCEPTED",
+  "next_scope": "Build frozen and candidate harness, inspect expected baseline failures, require candidate 25/25, build isolated .so and record ELF/SHA; no real HBM or model"
+}

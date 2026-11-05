@@ -1,0 +1,258 @@
+{
+  "top_logs": {
+    "opt_s4_A1_node16_sync.log": {
+      "sha256": "b9d2025e009b6d2f9d2b700cc870d61aaa93ac91cd8da0dc62e2967a7a6d29f1",
+      "bytes": 3519,
+      "mtime": 1793621097.178068,
+      "summary": [
+        "host cn21346  compute domains: 16  (0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)",
+        "round 1 wall 866 s",
+        "round 2 wall 5400 s",
+        "round 3 wall 4212 s",
+        "round 1 16_adjacent  pretrain_frames_per_s  domains 16  node sum   243.00  per-domain min 13.25 median 15.32 max 16.35  conservative   212.04  peak mem max 14.6 GB",
+        "round 1 16_adjacent  decoder_frames_per_s   domains 16  node sum    75.90  per-domain min 2.56 median 4.79 max 5.70  conservative    40.97  peak mem max 14.6 GB",
+        "round 1 32_skip4     pretrain_frames_per_s  domains 16  node sum    30.97  per-domain min 1.54 median 1.94 max 2.21  conservative    24.61  peak mem max 30.9 GB",
+        "round 1 32_skip4     decoder_frames_per_s   domains 16  node sum    20.54  per-domain min 1.22 median 1.24 max 1.47  conservative    19.46  peak mem max 30.9 GB",
+        "round 2 16_adjacent  pretrain_frames_per_s  domains 15  node sum   232.97  per-domain min 14.71 median 15.26 max 18.55  conservative   220.68  peak mem max 14.9 GB",
+        "round 2 16_adjacent  decoder_frames_per_s   domains 15  node sum    49.32  per-domain min 3.14 median 3.25 max 3.45  conservative    47.05  peak mem max 14.9 GB",
+        "round 2 32_skip4     pretrain_frames_per_s  domains 15  node sum    31.07  per-domain min 1.92 median 2.01 max 2.45  conservative    28.73  peak mem max 30.8 GB",
+        "round 2 32_skip4     decoder_frames_per_s   domains 15  node sum    20.44  per-domain min 1.22 median 1.37 max 1.67  conservative    18.24  peak mem max 30.8 GB",
+        "round 3 16_adjacent  pretrain_frames_per_s  domains 16  node sum   236.75  per-domain min 2.04 median 15.35 max 18.48  conservative    32.72  peak mem max 14.7 GB",
+        "round 3 16_adjacent  decoder_frames_per_s   domains 16  node sum    49.29  per-domain min 1.70 median 3.09 max 4.20  conservative    27.27  peak mem max 14.7 GB",
+        "round 3 32_skip4     pretrain_frames_per_s  domains 16  node sum    32.70  per-domain min 1.56 median 2.01 max 2.45  conservative    25.02  peak mem max 31.4 GB",
+        "round 3 32_skip4     decoder_frames_per_s   domains 16  node sum    21.33  per-domain min 0.10 median 1.40 max 1.59  conservative     1.58  peak mem max 31.4 GB",
+        "gate A1 (round-to-round spread of node sum, (max-min)/mean <= 5%):",
+        "  16_adjacent  pretrain_frames_per_s  sum [243.0, 232.97, 236.75]  spread 4.2%  PASS   conservative [212.04, 220.68, 32.72]",
+        "  16_adjacent  decoder_frames_per_s   sum [75.9, 49.32, 49.29]  spread 45.7%  FAIL   conservative [40.97, 47.05, 27.27]",
+        "  32_skip4     pretrain_frames_per_s  sum [30.97, 31.07, 32.7]  spread 5.5%  FAIL   conservative [24.61, 28.73, 25.02]",
+        "  32_skip4     decoder_frames_per_s   sum [20.54, 20.44, 21.33]  spread 4.3%  PASS   conservative [19.46, 18.24, 1.58]",
+        "NODE16_DONE"
+      ],
+      "host_candidates": [
+        "cn21346"
+      ]
+    },
+    "opt_s4_A1_node16_b32.log": {
+      "sha256": "9767a8cd3dd8de4dd0637eaece0689f9aa84fc007a96a1822c365ddad086187f",
+      "bytes": 3506,
+      "mtime": 1793630559.428824,
+      "summary": [
+        "host cn21348  compute domains: 16  (0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)",
+        "round 1 wall 762 s",
+        "round 2 wall 4244 s",
+        "round 3 wall 1770 s",
+        "round 1 16_adjacent  pretrain_frames_per_s  domains 16  node sum   150.14  per-domain min 1.99 median 9.79 max 10.57  conservative    31.87  peak mem max 8.4 GB",
+        "round 1 16_adjacent  decoder_frames_per_s   domains 16  node sum    43.04  per-domain min 1.45 median 2.48 max 3.83  conservative    23.16  peak mem max 8.4 GB",
+        "round 1 32_skip4     pretrain_frames_per_s  domains 16  node sum    21.85  per-domain min 1.25 median 1.35 max 1.50  conservative    20.07  peak mem max 17.5 GB",
+        "round 1 32_skip4     decoder_frames_per_s   domains 16  node sum    17.04  per-domain min 0.88 median 1.00 max 1.32  conservative    14.05  peak mem max 17.5 GB",
+        "round 2 16_adjacent  pretrain_frames_per_s  domains 16  node sum   150.75  per-domain min 1.73 median 9.79 max 10.52  conservative    27.72  peak mem max 8.3 GB",
+        "round 2 16_adjacent  decoder_frames_per_s   domains 16  node sum    45.53  per-domain min 1.51 median 2.66 max 3.49  conservative    24.21  peak mem max 8.3 GB",
+        "round 2 32_skip4     pretrain_frames_per_s  domains 16  node sum    20.86  per-domain min 0.15 median 1.35 max 1.56  conservative     2.39  peak mem max 17.5 GB",
+        "round 2 32_skip4     decoder_frames_per_s   domains 16  node sum    16.54  per-domain min 0.10 median 1.06 max 1.30  conservative     1.67  peak mem max 17.5 GB",
+        "round 3 16_adjacent  pretrain_frames_per_s  domains 16  node sum   150.97  per-domain min 1.77 median 9.94 max 11.57  conservative    28.24  peak mem max 8.4 GB",
+        "round 3 16_adjacent  decoder_frames_per_s   domains 16  node sum    45.54  per-domain min 1.49 median 2.63 max 3.54  conservative    23.85  peak mem max 8.4 GB",
+        "round 3 32_skip4     pretrain_frames_per_s  domains 16  node sum    20.88  per-domain min 0.14 median 1.35 max 1.57  conservative     2.27  peak mem max 17.3 GB",
+        "round 3 32_skip4     decoder_frames_per_s   domains 16  node sum    16.75  per-domain min 0.89 median 1.00 max 1.36  conservative    14.26  peak mem max 17.3 GB",
+        "gate A1 (round-to-round spread of node sum, (max-min)/mean <= 5%):",
+        "  16_adjacent  pretrain_frames_per_s  sum [150.14, 150.75, 150.97]  spread 0.6%  PASS   conservative [31.87, 27.72, 28.24]",
+        "  16_adjacent  decoder_frames_per_s   sum [43.04, 45.53, 45.54]  spread 5.6%  FAIL   conservative [23.16, 24.21, 23.85]",
+        "  32_skip4     pretrain_frames_per_s  sum [21.85, 20.86, 20.88]  spread 4.6%  PASS   conservative [20.07, 2.39, 2.27]",
+        "  32_skip4     decoder_frames_per_s   sum [17.04, 16.54, 16.75]  spread 3.0%  PASS   conservative [14.05, 1.67, 14.26]",
+        "NODE16_DONE"
+      ],
+      "host_candidates": [
+        "cn21348"
+      ]
+    },
+    "opt_s4_A1_node16_b32_hbm.log": {
+      "sha256": "9ded59efd9f3f1c09c7efaf6768207b01e43644c6198c9dad00d3d471bf25883",
+      "bytes": 2898,
+      "mtime": 1793670776.900132,
+      "summary": [
+        "host cn21338  compute domains: 16  (0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)",
+        "round 1 busy cores skipped: 227 265 303 341 379 455 531 569 607 ",
+        "round 1 wall 1795 s",
+        "round 2 busy cores skipped: 75 189 265 341 ",
+        "round 2 wall 2761 s",
+        "round 1 16_adjacent  pretrain_frames_per_s  domains 16  node sum   289.50  per-domain min 3.32 median 17.99 max 24.21  conservative    53.12  peak mem max 3.0 GB",
+        "round 1 16_adjacent  decoder_frames_per_s   domains 16  node sum    75.11  per-domain min 2.54 median 4.85 max 5.10  conservative    40.60  peak mem max 3.0 GB",
+        "round 1 32_skip4     pretrain_frames_per_s  domains 16  node sum    21.92  per-domain min 1.14 median 1.34 max 1.78  conservative    18.23  peak mem max 13.0 GB",
+        "round 1 32_skip4     decoder_frames_per_s   domains 16  node sum    18.01  per-domain min 0.93 median 1.08 max 1.39  conservative    14.83  peak mem max 13.0 GB",
+        "round 2 16_adjacent  pretrain_frames_per_s  domains 16  node sum   318.02  per-domain min 2.77 median 20.40 max 24.82  conservative    44.27  peak mem max 3.0 GB",
+        "round 2 16_adjacent  decoder_frames_per_s   domains 16  node sum    72.12  per-domain min 2.38 median 4.51 max 5.76  conservative    38.07  peak mem max 3.0 GB",
+        "round 2 32_skip4     pretrain_frames_per_s  domains 16  node sum    21.42  per-domain min 0.15 median 1.34 max 1.70  conservative     2.39  peak mem max 13.0 GB",
+        "round 2 32_skip4     decoder_frames_per_s   domains 16  node sum    18.26  per-domain min 0.90 median 1.09 max 1.39  conservative    14.42  peak mem max 13.0 GB",
+        "gate A1 (round-to-round spread of node sum, (max-min)/mean <= 5%):",
+        "  16_adjacent  pretrain_frames_per_s  sum [289.5, 318.02]  spread 9.4%  FAIL   conservative [53.12, 44.27]",
+        "  16_adjacent  decoder_frames_per_s   sum [75.11, 72.12]  spread 4.1%  PASS   conservative [40.6, 38.07]",
+        "  32_skip4     pretrain_frames_per_s  sum [21.92, 21.42]  spread 2.3%  PASS   conservative [18.23, 2.39]",
+        "  32_skip4     decoder_frames_per_s   sum [18.01, 18.26]  spread 1.4%  PASS   conservative [14.83, 14.42]",
+        "NODE16_DONE"
+      ],
+      "host_candidates": [
+        "cn21338"
+      ]
+    },
+    "opt_s4_hbm_ab.log": {
+      "sha256": "ddfc4239e68c884e8ebb81d09f28853c8d1c8df3c1838d9da8958fca9470f82b",
+      "bytes": 2028,
+      "mtime": 1793666161.724378,
+      "summary": [
+        "host cn21338; HBM node 16 free hugepages before: 2020",
+        "round 1 wall 416 s",
+        "round 1 16_adjacent  pretrain_frames_per_s  domains  4  node sum    36.20  per-domain min 4.12 median 10.61 max 10.86  conservative    16.46  peak mem max 8.5 GB",
+        "round 1 16_adjacent  decoder_frames_per_s   domains  4  node sum    16.42  per-domain min 2.57 median 4.51 max 4.83  conservative    10.26  peak mem max 8.5 GB",
+        "round 1 32_skip4     pretrain_frames_per_s  domains  4  node sum     5.61  per-domain min 1.33 median 1.42 max 1.44  conservative     5.33  peak mem max 17.1 GB",
+        "round 1 32_skip4     decoder_frames_per_s   domains  4  node sum     4.58  per-domain min 1.05 median 1.17 max 1.20  conservative     4.19  peak mem max 17.1 GB",
+        "round 1 wall 289 s",
+        "round 1 16_adjacent  pretrain_frames_per_s  domains  4  node sum   125.62  per-domain min 30.43 median 31.44 max 32.30  conservative   121.71  peak mem max 2.8 GB",
+        "round 1 16_adjacent  decoder_frames_per_s   domains  4  node sum    29.27  per-domain min 4.52 median 7.91 max 8.94  conservative    18.08  peak mem max 2.8 GB",
+        "round 1 32_skip4     pretrain_frames_per_s  domains  4  node sum     7.21  per-domain min 1.71 median 1.82 max 1.86  conservative     6.84  peak mem max 12.7 GB",
+        "round 1 32_skip4     decoder_frames_per_s   domains  4  node sum     6.01  per-domain min 1.38 median 1.54 max 1.56  conservative     5.52  peak mem max 12.7 GB"
+      ],
+      "host_candidates": [
+        "cn21338"
+      ]
+    },
+    "opt_s4_A1_node16_b64ckpt_hbm.log": {
+      "sha256": "b33a547bea6fa1900bf9464de01a86e00ce64082c4e17ab85b9f5dfa02c33054",
+      "bytes": 2466,
+      "mtime": 1793677021.946326,
+      "summary": [
+        "host cn21382  compute domains: 16  (0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)",
+        "round 1 busy cores skipped: 303 341 417 569 ",
+        "/tmp/n16_3998450.sh: line 35: 3998822 Bus error               env SYNC_DIR=$S SYNC_N=$(echo $nodes | wc -w) TIMING_OUT=$tag/r${r}_d$d.json REPS=${REPS:-5} SAMPLING=0 GN=0 \"$@\" \"${hbm[@]}\" OMP_NUM_THREADS=$(echo $cpus | tr ',' '\\n' | awk -F- '{n += NF == 2 ? $2 - $1 + 1 : 1} END {print n}') timeout 5400 numactl --physcpubind=$cpus --$MEMPOL=$mem python3 $H/opt/code/s4_models.py $O s0322p0,s0322p1 >",
+        "round 1 wall 5401 s",
+        "round 2 busy cores skipped: 379 531 ",
+        "/tmp/n16_3998450.sh: line 35: 262604 Bus error               env SYNC_DIR=$S SYNC_N=$(echo $nodes | wc -w) TIMING_OUT=$tag/r${r}_d$d.json REPS=${REPS:-5} SAMPLING=0 GN=0 \"$@\" \"${hbm[@]}\" OMP_NUM_THREADS=$(echo $cpus | tr ',' '\\n' | awk -F- '{n += NF == 2 ? $2 - $1 + 1 : 1} END {print n}') timeout 5400 numactl --physcpubind=$cpus --$MEMPOL=$mem python3 $H/opt/code/s4_models.py $O s0322p0,s0322p1 > ",
+        "/tmp/n16_3998450.sh: line 35: 262625 Bus error               env SYNC_DIR=$S SYNC_N=$(echo $nodes | wc -w) TIMING_OUT=$tag/r${r}_d$d.json REPS=${REPS:-5} SAMPLING=0 GN=0 \"$@\" \"${hbm[@]}\" OMP_NUM_THREADS=$(echo $cpus | tr ',' '\\n' | awk -F- '{n += NF == 2 ? $2 - $1 + 1 : 1} END {print n}') timeout 5400 numactl --physcpubind=$cpus --$MEMPOL=$mem python3 $H/opt/code/s4_models.py $O s0322p0,s0322p1 > ",
+        "round 2 wall 5402 s",
+        "gate A1 (round-to-round spread of node sum, (max-min)/mean <= 5%):",
+        "NODE16_DONE"
+      ],
+      "host_candidates": [
+        "cn21382"
+      ]
+    },
+    "opt_hbm_fix.log": {
+      "sha256": "33a4107bf2f858b36b6d9fed9bd19cffdcf0b614384638b615ed21cb09fb9e2b",
+      "bytes": 486,
+      "mtime": 1793677270.957326,
+      "summary": [
+        "host cn21347 domain 0 hbm node 16 free 2020",
+        "HBM_MB=3800 ok True node 16 free hugepages while held 130",
+        "HBM_MB=9000 ok True node 16 free hugepages while held 66",
+        "HBM_FIX_DONE"
+      ],
+      "host_candidates": [
+        "cn21347"
+      ]
+    }
+  },
+  "provenance": {
+    "0": {
+      "sources": {
+        "16_adjacent": {
+          "path": "/home/share/songzhenlong/eitfm/opt/worker_test/parts/s0322_p0_16_adjacent_c0.npz",
+          "images": {
+            "header": {
+              "descr": "<f2",
+              "fortran_order": false,
+              "shape": [
+                2,
+                64,
+                64
+              ]
+            },
+            "payload_sha256": "e0f1571d557065a48d52236a13582803633689fe4ae62c15f998b1915b77974d"
+          },
+          "file_sha256": "9e0faaad769d118bf0355282142df58b98b81bcc7478160168dd723500b68b3f"
+        },
+        "32_skip4": {
+          "path": "/home/share/songzhenlong/eitfm/opt/worker_test/parts/s0322_p0_32_skip4_c0.npz",
+          "images": {
+            "header": {
+              "descr": "<f2",
+              "fortran_order": false,
+              "shape": [
+                2,
+                64,
+                64
+              ]
+            },
+            "payload_sha256": "97769db5e9d3ce90204ed3c6dba628240c4c9af8427738461e0fc2ebc104a363"
+          },
+          "file_sha256": "21178714621ef505337d61bc580a92afc8d29432bb2231868fca176968ff9000"
+        }
+      },
+      "demo_images": {
+        "header": {
+          "descr": "<f2",
+          "fortran_order": false,
+          "shape": [
+            2,
+            64,
+            64
+          ]
+        },
+        "payload_sha256": "97769db5e9d3ce90204ed3c6dba628240c4c9af8427738461e0fc2ebc104a363"
+      }
+    },
+    "1": {
+      "sources": {
+        "16_adjacent": {
+          "path": "/home/share/songzhenlong/eitfm/opt/worker_test/parts/s0322_p1_16_adjacent_c0.npz",
+          "images": {
+            "header": {
+              "descr": "<f2",
+              "fortran_order": false,
+              "shape": [
+                2,
+                64,
+                64
+              ]
+            },
+            "payload_sha256": "046983d7e5650095ae0b81f627bfc9e3bf539c69830b713355389a1a729e5fc1"
+          },
+          "file_sha256": "cac3d37844416943f1de6ecee812a75f3f9fdd314e9584e83d8d324cce747758"
+        },
+        "32_skip4": {
+          "path": "/home/share/songzhenlong/eitfm/opt/worker_test/parts/s0322_p1_32_skip4_c0.npz",
+          "images": {
+            "header": {
+              "descr": "<f2",
+              "fortran_order": false,
+              "shape": [
+                2,
+                64,
+                64
+              ]
+            },
+            "payload_sha256": "40daff48fc6df35df22d7f9ba10147aa61d5f5db3b75777b17b7164ec89481e7"
+          },
+          "file_sha256": "4f1afbea5068360e3e823cf556b09752acdd5e0042a0e03d7c3b4c0ef7f8bc59"
+        }
+      },
+      "demo_images": {
+        "header": {
+          "descr": "<f2",
+          "fortran_order": false,
+          "shape": [
+            2,
+            64,
+            64
+          ]
+        },
+        "payload_sha256": "40daff48fc6df35df22d7f9ba10147aa61d5f5db3b75777b17b7164ec89481e7"
+      }
+    }
+  },
+  "dependencies": {
+    "/home/share/songzhenlong/eitfm/opt/sample_foreign.py": {
+      "sha256": "0a42121514a547c6195b0f2ac336849eea5e073b8b32bd29c5a535c900cc2242",
+      "bytes": 3077
+    }
+  },
+  "numpy_locations": [],
+  "gpu_report_candidates": []
+}

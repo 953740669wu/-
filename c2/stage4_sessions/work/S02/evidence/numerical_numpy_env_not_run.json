@@ -1,0 +1,15 @@
+{
+  "status": "NOT_RUN",
+  "input_protocol": "S02_PAIRED_BELT_V1",
+  "config": {
+    "belt": "16_adjacent",
+    "part": "dec",
+    "microbatch": 32,
+    "checkpoint": false,
+    "history": "fresh",
+    "threads": 4,
+    "kml": false,
+    "output": "c2\\stage4_sessions\\work\\S02\\evidence\\numerical_numpy_env_not_run.json"
+  },
+  "reason": "Missing torch; no model/autograd/AdamW executed."
+}

@@ -1,0 +1,63 @@
+{
+  "scope": "LINUX_PROCESS_PROTOCOL_ONLY",
+  "host": "login10",
+  "python": "/usr/bin/python3",
+  "python_version": "3.9.9 (main, Jul 29 2025, 11:26:21) \n[GCC 10.3.1]",
+  "platform": "Linux-5.10.0-285.5.v2403.ky10p.aarch64-aarch64-with-glibc2.34",
+  "steps": [
+    {
+      "command": [
+        "bash",
+        "-n",
+        "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z/linux_payload/candidate/run_node16.sh"
+      ],
+      "exit_code": 0,
+      "log": "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z/linux_payload/evidence/LINUX_PROTOCOL_20261104T123826969145Z/step1.txt"
+    },
+    {
+      "command": [
+        "bash",
+        "-n",
+        "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z/linux_payload/run_linux_checks.sh"
+      ],
+      "exit_code": 0,
+      "log": "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z/linux_payload/evidence/LINUX_PROTOCOL_20261104T123826969145Z/step2.txt"
+    },
+    {
+      "command": [
+        "bash",
+        "-n",
+        "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z/linux_payload/runtime_preflight.sh"
+      ],
+      "exit_code": 0,
+      "log": "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z/linux_payload/evidence/LINUX_PROTOCOL_20261104T123826969145Z/step3.txt"
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z/linux_payload/tests/test_runner.py",
+        "RunnerChecks.test_posix_descendant_cleanup",
+        "RunnerChecks.test_real_subprocess_failure_cancels_only_owned_peer",
+        "RunnerChecks.test_real_subprocess_timeout_and_success",
+        "RunnerChecks.test_spawn_error_is_recorded_and_peer_stopped"
+      ],
+      "exit_code": 0,
+      "log": "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z/linux_payload/evidence/LINUX_PROTOCOL_20261104T123826969145Z/step4.txt"
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z/linux_payload/exercise_local.py"
+      ],
+      "exit_code": 0,
+      "log": "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z/linux_payload/evidence/LINUX_PROTOCOL_20261104T123826969145Z/step5.txt"
+    }
+  ],
+  "model_execution": "NOT_RUN",
+  "cluster_performance": "NOT_RUN",
+  "status": "PASS",
+  "synthetic_index": "/home/share/dengqingtian/opt/stage4_sessions/S01/R4_LINUX_20261104T123653399272Z/linux_payload/evidence/local_exercise_index.json",
+  "finished_utc": "2026-11-04T12:38:31.521977+00:00"
+}

@@ -1,0 +1,29 @@
+{
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python39_syntax": [
+    "candidate\\cpu36_contract.py",
+    "candidate\\kml_ops.py",
+    "candidate\\runner.py",
+    "candidate\\s4_models.py",
+    "tests\\cpu_fixtures.py",
+    "tests\\test_cpu36_pipeline.py",
+    "tests\\test_regressions.py"
+  ],
+  "lf_files": [
+    "candidate\\run_node16.sh",
+    "interfaces\\cluster_runtime.env",
+    "interfaces\\run_s01_startup36.sh"
+  ],
+  "windows_launch_guard": {
+    "exit": 1,
+    "stderr": "NODE16_FAILED: cluster launch requires Linux; use tests for local protocol verification\n"
+  },
+  "diff_apply_check": {
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "original_s01_index_verified": 1607,
+  "original_s01_report_sha256": "e0a840aa4552fc52f5d6748591c6d3b8c5b4d1d651540a178ca29b1059fb8420"
+}

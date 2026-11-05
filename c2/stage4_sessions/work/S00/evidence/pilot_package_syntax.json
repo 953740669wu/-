@@ -1,0 +1,21 @@
+{
+  "platform": "Windows Git Bash",
+  "scope": "syntax only; model pilots not executed on Linux",
+  "checks": [
+    {
+      "file": "cluster_runtime.env",
+      "exit_code": 0,
+      "sha256": "e5bf5072fe91037bd335897435426fda7e9848c5fdcce4c18f4d5eaf194ea333"
+    },
+    {
+      "file": "pilot_s01_startup.sh",
+      "exit_code": 0,
+      "sha256": "5bbbc02ddb9c3ad54b1475cf076c36e40691da11828b6c45d8b1e9460a5a5e39"
+    },
+    {
+      "file": "pilot_s02_equivalence.sh",
+      "exit_code": 0,
+      "sha256": "58fd96bac39358f55a7df35fedd9d5d82b40b5ec9558fbbac900b727ad5c97f6"
+    }
+  ]
+}

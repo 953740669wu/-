@@ -1,0 +1,70 @@
+{
+  "status": "ANALYTIC_LOGICAL_BYTES_NOT_PEAK_OR_RESIDENCY",
+  "parameters": {
+    "encoder": 37995777,
+    "decoder": 29416449,
+    "encoder_inactive_in_dec": 132353
+  },
+  "fp32_weights_bytes": 269648904,
+  "both_phase_adam_moments_bytes": 539297808,
+  "fresh_pre_state_bytes": 303966216,
+  "fresh_dec_state_bytes": 538238984,
+  "pre_gradient_bytes": 151983108,
+  "dec_gradient_bytes": 269119492,
+  "shapes": [
+    {
+      "B": 16,
+      "M": 208,
+      "encoder_h_bytes": 6815744,
+      "encoder_ff_hidden_bytes": 27262976,
+      "one_attention_score_if_materialized_bytes": 22151168,
+      "unet_first_feature_bytes": 33554432,
+      "full_effective_batch_v_y0_noise_t_mask_bytes": 2164224
+    },
+    {
+      "B": 32,
+      "M": 208,
+      "encoder_h_bytes": 13631488,
+      "encoder_ff_hidden_bytes": 54525952,
+      "one_attention_score_if_materialized_bytes": 44302336,
+      "unet_first_feature_bytes": 67108864,
+      "full_effective_batch_v_y0_noise_t_mask_bytes": 2164224
+    },
+    {
+      "B": 64,
+      "M": 208,
+      "encoder_h_bytes": 27262976,
+      "encoder_ff_hidden_bytes": 109051904,
+      "one_attention_score_if_materialized_bytes": 88604672,
+      "unet_first_feature_bytes": 134217728,
+      "full_effective_batch_v_y0_noise_t_mask_bytes": 2164224
+    },
+    {
+      "B": 16,
+      "M": 928,
+      "encoder_h_bytes": 30408704,
+      "encoder_ff_hidden_bytes": 121634816,
+      "one_attention_score_if_materialized_bytes": 440926208,
+      "unet_first_feature_bytes": 33554432,
+      "full_effective_batch_v_y0_noise_t_mask_bytes": 2394624
+    },
+    {
+      "B": 32,
+      "M": 928,
+      "encoder_h_bytes": 60817408,
+      "encoder_ff_hidden_bytes": 243269632,
+      "one_attention_score_if_materialized_bytes": 881852416,
+      "unet_first_feature_bytes": 67108864,
+      "full_effective_batch_v_y0_noise_t_mask_bytes": 2394624
+    },
+    {
+      "B": 64,
+      "M": 928,
+      "encoder_h_bytes": 121634816,
+      "encoder_ff_hidden_bytes": 486539264,
+      "one_attention_score_if_materialized_bytes": 1763704832,
+      "unet_first_feature_bytes": 134217728,
+      "full_effective_batch_v_y0_noise_t_mask_bytes": 2394624
+    }
+  ]
+}

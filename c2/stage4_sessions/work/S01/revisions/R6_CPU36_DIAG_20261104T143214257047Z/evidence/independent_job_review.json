@@ -1,0 +1,71 @@
+{
+  "job_id": 2026450,
+  "child_exit": 0,
+  "job_exit": 1,
+  "child_timeout": false,
+  "rounds_completed": 1,
+  "rounds_planned": 3,
+  "remote_original_summary": {
+    "status": "FAIL",
+    "errors": [
+      "r1_d0: actual CPU affinity mismatch"
+    ]
+  },
+  "expected_legacy_cpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37
+  ],
+  "calling_thread_affinity": [
+    0
+  ],
+  "worker_omp_string": 38,
+  "actual_torch_description": "aarch64 cpu, 1 threads",
+  "all_tids_in_legacy_evidence": false,
+  "local_received_mtime_ns": 1793801315101677600,
+  "original_remote_mtime_ns_available": false,
+  "received_directory_summary": {
+    "status": "FAIL",
+    "errors": [
+      "r1_d0: stale/future result mtime"
+    ]
+  },
+  "archive_warning": "Local mtime failure cannot supersede the original remote affinity failure; no timestamp was rewritten",
+  "performance_accepted": false,
+  "numerical_equivalence_run": false
+}

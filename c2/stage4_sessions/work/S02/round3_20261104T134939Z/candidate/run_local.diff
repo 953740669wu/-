@@ -1,0 +1,48 @@
+--- /dev/null
++++ run_local.py
+@@ -0,0 +1,45 @@
++"""Bounded Windows replay only. C2 uses its allocated-job wrapper instead."""
++import argparse
++from datetime import datetime, timezone
++import importlib.util
++import json
++from pathlib import Path
++import subprocess
++import sys
++import time
++
++ROOT=Path(__file__).resolve().parent
++spec=importlib.util.spec_from_file_location('round2_guard',ROOT.parent/'round2_20261104T114949Z/run_16_representative.py')
++guard=importlib.util.module_from_spec(spec);spec.loader.exec_module(guard)
++
++if __name__=='__main__':
++    p=argparse.ArgumentParser(description=__doc__)
++    p.add_argument('--mode',required=True)
++    args=p.parse_args()
++    out=ROOT/'evidence'/('native_'+args.mode+'_'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
++    out.mkdir(exist_ok=False)
++    memory=guard.available()
++    record=dict(mode=args.mode,resource_before=memory,started_utc=datetime.now(timezone.utc).isoformat())
++    if memory['physical_bytes']<12*2**30 or memory['commit_bytes']<16*2**30:
++        code=3;record['status']='NOT_RUN_RESOURCE_GUARD'
++    else:
++        command=[sys.executable,'-B',str(ROOT/'diagnose_update.py'),'--backend','native',
++            '--mode',args.mode,'--case-file',str(ROOT/'case/fixed_16_pre.pt'),'--output',str(out/'result.json')]
++        record['command']=command
++        start=time.monotonic()
++        with (out/'stdout_stderr.txt').open('w',encoding='utf-8') as log:
++            child=subprocess.Popen(command,stdout=log,stderr=subprocess.STDOUT)
++            stopped=None
++            while child.poll() is None:
++                now=guard.available()
++                if now['physical_bytes']<2**30 or now['commit_bytes']<2*2**30:stopped='RESOURCE_GUARD_STOP'
++                if time.monotonic()-start>900:stopped='WALL_TIMEOUT'
++                if stopped:child.kill();break
++                time.sleep(1)
++            child.wait()
++        code=3 if stopped else child.returncode
++        record.update(status=stopped or 'COMPLETED',exit_code=child.returncode,elapsed_s=time.monotonic()-start)
++    record['ended_utc']=datetime.now(timezone.utc).isoformat()
++    (out/'run.json').write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
++    print(json.dumps(dict(output=str(out),**record),indent=2))
++    sys.exit(code)

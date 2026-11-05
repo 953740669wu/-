@@ -1,0 +1,18 @@
+--- REMOTE_1700/run_node16.sh
++++ REMOTE_LATEST/run_node16.sh
+@@ -32,13 +32,13 @@
+            grep -vxF -f <(echo ${busy:-none} | tr ' ' '\n' | grep .) | head -n ${CORES_PER_DOM:-99} | paste -sd,)
+     mem=$d; hbm=()
+     [ "${HBM:-0}" = 1 ] && { mem=$d,$((16 + d)); hbm=(HBM_NODE=$((16 + d)) HBM_STATS=1 LD_PRELOAD=$H/sw/hbm_alloc/libhbm_alloc.so:$LD_PRELOAD); }
+-    env SYNC_DIR=$S SYNC_N=$(echo $nodes | wc -w) TIMING_OUT=$tag/r${r}_d$d.json REPS=${REPS:-5} SAMPLING=0 GN=0 "$@" "${hbm[@]}" \
++    env PYTHONFAULTHANDLER=1 SYNC_DIR=$S SYNC_N=$(echo $nodes | wc -w) TIMING_OUT=$tag/r${r}_d$d.json REPS=${REPS:-5} SAMPLING=0 GN=0 "$@" "${hbm[@]}" \
+       OMP_NUM_THREADS=$(echo $cpus | tr ',' '\n' | awk -F- '{n += NF == 2 ? $2 - $1 + 1 : 1} END {print n}') \
+       timeout 5400 numactl --physcpubind=$cpus --$MEMPOL=$mem python3 $H/opt/code/s4_models.py $O s0322p0,s0322p1 \
+       > $O/reports/$tag/r${r}_d$d.log 2>&1 &
+     pids="$pids $!"
+   done
+-  wait $pids; echo "round $r wall $(( $(date +%s) - t0 )) s"; grep -l -E 'Killed|MemoryError|Traceback' $O/reports/$tag/r${r}_d*.log 2>/dev/null | sed 's/^/  failed: /'
++  wait $pids; echo "round $r wall $(( $(date +%s) - t0 )) s"; grep -l -E 'Killed|MemoryError|Traceback|dumped core|Fatal Python error|Bus error|Segmentation' $O/reports/$tag/r${r}_d*.log 2>/dev/null | sed 's/^/  failed: /'
+ done
+ [ -n "$SAMPLER" ] && kill $SAMPLER
+ python3 - "$O/reports/$tag" "$ROUNDS" <<'PY'

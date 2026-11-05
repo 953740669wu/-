@@ -1,0 +1,18 @@
+SYNTHETIC BUG WITNESS ONLY: 1/16 domains, stale JSON, no process or logs.
+round 1 16_adjacent  pretrain_frames_per_s  domains  1  node sum     1.00  per-domain min 1.00 median 1.00 max 1.00  conservative     1.00  peak mem max 1.0 GB
+round 1 16_adjacent  decoder_frames_per_s   domains  1  node sum     1.00  per-domain min 1.00 median 1.00 max 1.00  conservative     1.00  peak mem max 1.0 GB
+round 1 32_skip4     pretrain_frames_per_s  domains  1  node sum     1.00  per-domain min 1.00 median 1.00 max 1.00  conservative     1.00  peak mem max 1.0 GB
+round 1 32_skip4     decoder_frames_per_s   domains  1  node sum     1.00  per-domain min 1.00 median 1.00 max 1.00  conservative     1.00  peak mem max 1.0 GB
+round 2 16_adjacent  pretrain_frames_per_s  domains  1  node sum     1.00  per-domain min 1.00 median 1.00 max 1.00  conservative     1.00  peak mem max 1.0 GB
+round 2 16_adjacent  decoder_frames_per_s   domains  1  node sum     1.00  per-domain min 1.00 median 1.00 max 1.00  conservative     1.00  peak mem max 1.0 GB
+round 2 32_skip4     pretrain_frames_per_s  domains  1  node sum     1.00  per-domain min 1.00 median 1.00 max 1.00  conservative     1.00  peak mem max 1.0 GB
+round 2 32_skip4     decoder_frames_per_s   domains  1  node sum     1.00  per-domain min 1.00 median 1.00 max 1.00  conservative     1.00  peak mem max 1.0 GB
+round 3 16_adjacent  pretrain_frames_per_s  domains  1  node sum     1.00  per-domain min 1.00 median 1.00 max 1.00  conservative     1.00  peak mem max 1.0 GB
+round 3 16_adjacent  decoder_frames_per_s   domains  1  node sum     1.00  per-domain min 1.00 median 1.00 max 1.00  conservative     1.00  peak mem max 1.0 GB
+round 3 32_skip4     pretrain_frames_per_s  domains  1  node sum     1.00  per-domain min 1.00 median 1.00 max 1.00  conservative     1.00  peak mem max 1.0 GB
+round 3 32_skip4     decoder_frames_per_s   domains  1  node sum     1.00  per-domain min 1.00 median 1.00 max 1.00  conservative     1.00  peak mem max 1.0 GB
+gate A1 (round-to-round spread of node sum, (max-min)/mean <= 5%):
+  16_adjacent  pretrain_frames_per_s  sum [1, 1, 1]  spread 0.0%  PASS   conservative [1, 1, 1]
+  16_adjacent  decoder_frames_per_s   sum [1, 1, 1]  spread 0.0%  PASS   conservative [1, 1, 1]
+  32_skip4     pretrain_frames_per_s  sum [1, 1, 1]  spread 0.0%  PASS   conservative [1, 1, 1]
+  32_skip4     decoder_frames_per_s   sum [1, 1, 1]  spread 0.0%  PASS   conservative [1, 1, 1]

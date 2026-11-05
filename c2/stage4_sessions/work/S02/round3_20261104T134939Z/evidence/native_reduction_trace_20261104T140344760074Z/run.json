@@ -1,0 +1,27 @@
+{
+  "mode": "reduction_trace",
+  "resource_before": {
+    "physical_bytes": 17039093760,
+    "commit_bytes": 24890130432,
+    "total_physical_bytes": 33341927424,
+    "commit_limit_bytes": 47300571136
+  },
+  "started_utc": "2026-11-04T14:03:44.760579+00:00",
+  "command": [
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Scripts\\python.exe",
+    "-B",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round3_20261104T134939Z\\diagnose_update.py",
+    "--backend",
+    "native",
+    "--mode",
+    "reduction_trace",
+    "--case-file",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round3_20261104T134939Z\\case\\fixed_16_pre.pt",
+    "--output",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round3_20261104T134939Z\\evidence\\native_reduction_trace_20261104T140344760074Z\\result.json"
+  ],
+  "status": "COMPLETED",
+  "exit_code": 1,
+  "elapsed_s": 35.015999999995984,
+  "ended_utc": "2026-11-04T14:04:19.777016+00:00"
+}

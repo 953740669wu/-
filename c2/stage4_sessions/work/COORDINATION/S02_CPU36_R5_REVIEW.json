@@ -1,0 +1,28 @@
+{
+  "decision": "ACCEPTED_LOCAL_WRAPPER_FOR_ONE_BOUNDED_C2_KML_STRICT_COMPARISON",
+  "source_root": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round5_cpu36_20261105T032617Z",
+  "code_archive_sha256": "64605deb9a08de087a42f9026272a18bfed1d1896acdd449852ed2837aa43003",
+  "code_archive_bytes": 50873,
+  "artifact_index_files_verified": 42,
+  "package_entries_verified": 20,
+  "source_hashes_verified": 19,
+  "guard_tests_passed": 14,
+  "fixed_case_verified": true,
+  "unchanged_compute_and_comparison_AST": [
+    "diagnose_update.py:run",
+    "diagnose_update.py:compare_snapshots",
+    "diagnose_update.py:optimizer_details",
+    "diagnose_update.py:case_identity",
+    "diagnostic_common.py:errors",
+    "diagnostic_common.py:first_update",
+    "diagnostic_common.py:tensor_sha"
+  ],
+  "CPU_contract": "38 allocated preferred, selected36, reserve2, all TID subsets, actual torch36",
+  "scope": "16_adjacent/pre KML strict fp32 CKPT0 fresh B64 vs B32x2, 24576MB, 900s, one job",
+  "command_correction": "After sourcing runtime.env and before dsub, source /etc/profile.d/donaukit_scheduler.sh and require command -v dsub; runtime.env resets PATH.",
+  "remote_linux_syntax": "PENDING_S00_PRE_SUBMISSION",
+  "C2_numerical_result": "NOT_RUN",
+  "training_memory": "NOT_READY",
+  "original_archive_modified": false,
+  "new_jobs_by_coordinator": 0
+}

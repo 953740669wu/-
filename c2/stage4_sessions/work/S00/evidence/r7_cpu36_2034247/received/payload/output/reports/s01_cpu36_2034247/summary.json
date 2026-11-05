@@ -1,0 +1,105 @@
+{
+ "status": "PASS",
+ "errors": [],
+ "metrics": {
+  "16_adjacent/pre": {
+   "rounds": [
+    {
+     "round": 1,
+     "domains": 1,
+     "sum": 21.607143216463616,
+     "minimum": 21.607143216463616,
+     "median": 21.607143216463616,
+     "maximum": 21.607143216463616,
+     "conservative": 21.607143216463616,
+     "slowest_step_s": 1.480991710908711,
+     "legacy_peak_mem_GB": 7.979972
+    },
+    {
+     "round": 2,
+     "domains": 1,
+     "sum": 21.79900541584997,
+     "minimum": 21.79900541584997,
+     "median": 21.79900541584997,
+     "maximum": 21.79900541584997,
+     "conservative": 21.79900541584997,
+     "slowest_step_s": 1.4679568810388446,
+     "legacy_peak_mem_GB": 7.8983
+    },
+    {
+     "round": 3,
+     "domains": 1,
+     "sum": 22.254458422911288,
+     "minimum": 22.254458422911288,
+     "median": 22.254458422911288,
+     "maximum": 22.254458422911288,
+     "conservative": 22.254458422911288,
+     "slowest_step_s": 1.4379141200333834,
+     "legacy_peak_mem_GB": 7.84136
+    }
+   ],
+   "sums": [
+    21.607143216463616,
+    21.79900541584997,
+    22.254458422911288
+   ],
+   "conservative": [
+    21.607143216463616,
+    21.79900541584997,
+    22.254458422911288
+   ],
+   "spread": 0.02957550510779946,
+   "stable": true
+  },
+  "16_adjacent/dec": {
+   "rounds": [
+    {
+     "round": 1,
+     "domains": 1,
+     "sum": 8.48427776836538,
+     "minimum": 8.48427776836538,
+     "median": 8.48427776836538,
+     "maximum": 8.48427776836538,
+     "conservative": 8.48427776836538,
+     "slowest_step_s": 3.7716822661459446,
+     "legacy_peak_mem_GB": 7.979972
+    },
+    {
+     "round": 2,
+     "domains": 1,
+     "sum": 8.53769774064511,
+     "minimum": 8.53769774064511,
+     "median": 8.53769774064511,
+     "maximum": 8.53769774064511,
+     "conservative": 8.53769774064511,
+     "slowest_step_s": 3.748083028011024,
+     "legacy_peak_mem_GB": 7.8983
+    },
+    {
+     "round": 3,
+     "domains": 1,
+     "sum": 8.590253426772406,
+     "minimum": 8.590253426772406,
+     "median": 8.590253426772406,
+     "maximum": 8.590253426772406,
+     "conservative": 8.590253426772406,
+     "slowest_step_s": 3.7251520310528576,
+     "legacy_peak_mem_GB": 7.84136
+    }
+   ],
+   "sums": [
+    8.48427776836538,
+    8.53769774064511,
+    8.590253426772406
+   ],
+   "conservative": [
+    8.48427776836538,
+    8.53769774064511,
+    8.590253426772406
+   ],
+   "spread": 0.01241309282445546,
+   "stable": true
+  }
+ },
+ "scope": "runner integrity and legacy A1 spread only; no numerical or deployment acceptance"
+}

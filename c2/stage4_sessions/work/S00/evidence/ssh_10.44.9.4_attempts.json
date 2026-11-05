@@ -1,0 +1,80 @@
+{
+  "date_local": "2026-11-04",
+  "timezone": "Asia/Shanghai",
+  "target": "10.44.9.4:22",
+  "source_for_project_username": "c2/sync_c2.sh: C=songzhenlong@10.44.9.4",
+  "network_reachable": true,
+  "ssh_server_reached": true,
+  "remote_login_succeeded": true,
+  "remote_commands_executed": true,
+  "remote_files_written": false,
+  "submitted_jobs": 0,
+  "observations": [
+    {
+      "context": "sandbox_default",
+      "command": "ssh -o BatchMode=yes -o ConnectTimeout=12 -o ConnectionAttempts=1 10.44.9.4 'printf S00_READ_ONLY_CONNECTION_OK'",
+      "tool_exit_code": 1,
+      "stderr": "ssh: connect to host 10.44.9.4 port 22: Permission denied",
+      "interpretation": "Default sandbox connection failed; not proof that remote server is unreachable."
+    },
+    {
+      "context": "escalated_execution_auto_review_allowed",
+      "username": "a (client default)",
+      "stderr": "Host key verification failed.",
+      "interpretation": "No remote command ran; first contact was subsequently recorded using accept-new and an S00-only known_hosts file."
+    },
+    {
+      "context": "escalated_execution_auto_review_allowed",
+      "username": "a (client default)",
+      "known_hosts": "evidence/known_hosts_10.44.9.4",
+      "host_key_policy": "accept-new, then strict yes on subsequent attempt",
+      "stderr": "a@10.44.9.4: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password)."
+    },
+    {
+      "context": "escalated_execution_auto_review_allowed",
+      "username": "songzhenlong (project script)",
+      "identity_path": "C:/Users/A/.ssh/id_ed25519_szl",
+      "identities_only": true,
+      "batch_mode": true,
+      "host_key_policy": "yes",
+      "stderr": "songzhenlong@10.44.9.4: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).",
+      "interpretation": "Existing key did not authorize login. Server access and project state remain unverified."
+    },
+    {
+      "context": "after_user_clarified_VPN_access_and_rejected_key_assumption",
+      "username": "songzhenlong (project script, manual confirmation still pending)",
+      "public_key_authentication": false,
+      "batch_mode": true,
+      "host_key_policy": "yes",
+      "stderr": "songzhenlong@10.44.9.4: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).",
+      "interpretation": "No-key, non-interactive login also failed. VPN provides reachability; the correct login procedure remains unknown. Interactive password login was not attempted and no password was requested or tested."
+    },
+    {
+      "context": "interactive_password_attempt_explicitly_authorized_by_user",
+      "username": "songzhenlong (project script, user-specific username unconfirmed)",
+      "public_key_authentication": false,
+      "password_prompt_observed": true,
+      "password_attempts": 1,
+      "password_source": "user supplied in the active conversation; value not persisted",
+      "remote_command_executed": false,
+      "stderr": "songzhenlong@10.44.9.4: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).",
+      "interpretation": "The supplied credential did not authenticate this username. Cannot distinguish an incorrect username from an incorrect or inapplicable password. No further guesses were attempted."
+    },
+    {
+      "context": "user_confirmed_cluster_account_interactive_login",
+      "username": "dengqingtian",
+      "login_succeeded": true,
+      "public_key_authentication": false,
+      "password_persisted": false,
+      "remote_host": "login10",
+      "remote_audit": "APPROVED_INITIAL_READONLY_AUDIT_COMPLETED",
+      "session_exit_code": 0
+    }
+  ],
+  "pending_input": null,
+  "credentials_recorded": false,
+  "note": "Historical failures followed by a successful user-confirmed cluster login. No passwords or private key contents are stored in these artifacts.",
+  "current_username": "dengqingtian",
+  "current_login_host": "login10",
+  "latest_status": "User authorized evidence retention; detailed read-only audit completed; SSH sessions exited cleanly. No new compute allocation assigned."
+}
