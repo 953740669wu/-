@@ -1,16 +1,18 @@
 # S02简短状态
 
-- 更新/轮次：2026-11-05T04:42:19Z；R6_CKPT64_PREPARED_20261105（Asia/Shanghai日期2026-11-05）。
-- 当前目标与进度：完整B64仅开现有encoder非重入checkpoint的替代候选及独立轻量内存入口已准备，待总协调核包；本轮未提交集群job。
-- 当前目录：c2/stage4_sessions/work/S02/round6_ckpt64_20261105T043038Z。
-- 候选边界：16_adjacent/pre，完整B64 CKPT0对完整B64 CKPT1；原mean、固定case、模型、AdamW及原比较器/阈值保持；参考/候选实例隔离。
-- 修改文件：新增candidate/full_batch_step.py、train_memory.py、memory_metrics.py、memory_gate.py、run_c2_memory.sh；checker/守卫/包装必要适配，详细源与diff见本轮PACKAGE_MANIFEST和diff。
-- 测试增量：本轮25项通过（2项小型真实Torch36、14项CPU36守卫、9项内存/门禁/阶段策略）；两入口Windows KML拒绝退出2；语法/LF/来源核验通过。
-- 测试边界：小型Torch不是完整模型或C2验证；RSS/门禁有替身；新C2严格对照、Linux计数重置、训练内存/HBM均未运行。
-- 最新包：本轮package/S02_CKPT64_R6_CODE.zip，62584字节、28文件；SHA256=26e542430f024f60277bdbbbc699b41a203ee74270022806074040a531ac166f。
-- 数值历史：R5真实C2仍95/1063失败（grad9/param18/delta52/state16）；保存指标分析在本轮evidence/R5_saved_failure_analysis.json；不重跑或改写该结果。
-- 内存入口：CKPT0/1各独立进程、同一fresh完整B64一步；分阶段RSS/时间，不留比较快照；须本R6严格PASS及另行执行安排，不自动测量/宣布收益。
-- 报告/命令：本轮REPORT.md、C2_HANDOFF.md；新包/SHA/绝对来源见package/PACKAGE_MANIFEST.json；最小diff见diff/R5_TO_R6_CODE.patch。
-- 阻塞：本地准备无实质代码阻塞；仍缺新C2数值证据与Linux轻量内存实测，数值门槛未解锁。
-- 活动进程/job：本轮本地检查已结束，新增集群job=0；可见进程未见匹配任务，远端队列本轮未查询，由S00执行前去重。
-- 下一步：总协调核验新包后由S00单组B64 CKPT0/1严格对照；通过后另行安排独立DDR/HBM0内存入口。保持实际36核、24576MB同值limit、900秒，不扩矩阵。
+- 更新/轮次：2026-11-05T08:47:33Z；R7_SEQUENCE5_PREPARED_20261105（Asia/Shanghai日期2026-11-05）。
+- 当前目标与进度：新增三组首步配对已复核；连续5次更新的严格门槛和独立内存入口已准备，待协调核包。本轮不上集群。
+- 当前目录：c2/stage4_sessions/work/S02/round7_seq5_20261105T082315Z。
+- 已完成历史证据：R6/job2037034固定case1063/1063严格PASS；job2039061/cn21340新增三组首步配对有效。R5拆批95项FAIL和旧Windows失败保留。
+- 三组结论：峰值各降16.2777%—17.1633%，首步各慢29.0218%—41.1983%，步末RSS各高28.5549%—31.0074%；保留实验候选、暂不集成。旧cn21339单列。
+- 新入口：check_sequence5.py、train_sequence5.py、sequence_core.py、sequence_gate.py、sequence_runtime.py及独立包装。R6模型/checkpoint/mean/AdamW/比较器/阈值/计量基础保持原字节。
+- 状态承接：每侧只在序列开始fresh初始化一次，参数/moments/step连续1..5；每步清模型和输入梯度，同一冻结case重复，不是新数据或收敛实验。
+- 新数值门槛：每步完整1063项，5步共5315项；状态摘要链/对象/步号与双侧KML/CPU36核对，失败即停。新五步C2未运行，旧一步PASS不能解锁内存。
+- 新内存入口：CKPT0/1各独立进程连续5步，不留比较快照；每步原HWM重置、先读训练峰值再验证/JSON，验证真实AdamW步号和梯度。不是稳态/HBM或收益接受。
+- 验证增量：本轮3项小型真实Torch36+11项标准库协议检查通过；另实际旧R6 PASS负控被拒；语法/LF/源与包身份核验通过，均非新C2数值或RSS实测。
+- 新包：package/S02_SEQUENCE5_R7_CODE.zip，55378字节、24文件；SHA256=bb405ccde523e63ea5db98aa3ab2b5ab622ded3e0f1711ec312ac8d29c014092。
+- 报告/来源/命令：本轮REPORT.md、C2_HANDOFF.md、package/PACKAGE_MANIFEST.json、diff/SEQUENCE5_ADDITIONS.patch及R6_MEMORY_TO_SEQUENCE5.patch。
+- 证据：evidence/memory3_assessment.json、saved_result_identity_review.json、native_tests_after.txt、protocol_tests.txt、local_validation.json和final_review.json。
+- 阻塞：本地准备无实质代码阻塞；新五步C2严格数值与独立五步内存尚缺，先核包，不能把旧一步PASS提升为新序列等价。
+- 活动进程/job：本轮本地检查已结束，新增集群job=0；远端队列未查询，由S00执行前去重。未取消不明进程或改共享环境。
+- 下一步：协调复核后S00另行安排一组五步严格对照，完整通过后再安排内存；单域38分配/36实际、24576MB同值limit、最多900秒，超限回报不扩配置。

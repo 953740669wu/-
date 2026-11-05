@@ -1,0 +1,24 @@
+{
+  "initial_finalization": "Detected pre-final source SHA in earlier rejection receipts; final check stopped",
+  "cause": "Harness reused output paths; entry correctly refused overwrite, then harness read old JSON",
+  "preserved_previous_results": true,
+  "first_refresh_attempt": "Inline harness IndentationError; no statement or model executed",
+  "resolved": "New output paths plus fresh result existence/current manifest/source SHA assertions",
+  "final_results": [
+    {
+      "entry": "check_sequence5.py",
+      "exit": 2,
+      "error": "ValueError('CPU36/KML requires Linux; no native fallback')",
+      "result": "evidence/rejected_final_check_sequence5.json",
+      "source_manifest_sha256": "5b2c2cd542d7410c302bcf783e6a90a06efe73b0735526e3957ffd4bfc2b9cbc"
+    },
+    {
+      "entry": "train_sequence5.py",
+      "exit": 2,
+      "error": "ValueError('five-step source identity required; old one-step result refused')",
+      "result": "evidence/rejected_final_train_sequence5.json",
+      "source_manifest_sha256": "5b2c2cd542d7410c302bcf783e6a90a06efe73b0735526e3957ffd4bfc2b9cbc"
+    }
+  ],
+  "production_code_or_archive_changed": false
+}

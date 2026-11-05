@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round7_seq5_20261105T082315Z\sequence_gate.py", line 86, in <module>
+    print(json.dumps(check_path(Path(sys.argv[1])), indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round7_seq5_20261105T082315Z\sequence_gate.py", line 77, in check_path
+    raise ValueError('five-step source identity required; old one-step result refused')
+ValueError: five-step source identity required; old one-step result refused

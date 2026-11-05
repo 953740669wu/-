@@ -1,0 +1,87 @@
+{
+  "status": "PASS_LOCAL_SYNTAX_IDENTITY_BOUNDARIES_ONLY",
+  "python": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Scripts\\python.exe",
+  "python_version": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "torch_distribution_version": "2.7.1+cpu",
+  "full_model_runs": 0,
+  "new_jobs": 0,
+  "memory_runs": 0,
+  "python39_syntax": [
+    "check_sequence5.py",
+    "cpu36_contract.py",
+    "cpu36_guard.py",
+    "diagnostic_common.py",
+    "memory_metrics.py",
+    "sequence_core.py",
+    "sequence_gate.py",
+    "sequence_runtime.py",
+    "train_sequence5.py",
+    "baseline/kml_ops.py",
+    "baseline/s4_models.py",
+    "candidate/full_batch_step.py",
+    "candidate/training_step.py",
+    "evidence/build_delivery.py",
+    "evidence/verify_local.py",
+    "tests/check_equivalence.py",
+    "tests/check_seq5_native.py",
+    "tests/test_sequence_contract.py"
+  ],
+  "shell_checks": [
+    {
+      "file": "run_sequence5.sh",
+      "cr_bytes": 0,
+      "git_bash_n_exit": 0
+    },
+    {
+      "file": "run_s00_seq5_job.sh",
+      "cr_bytes": 0,
+      "git_bash_n_exit": 0
+    },
+    {
+      "file": "interfaces/cluster_runtime.env",
+      "cr_bytes": 0,
+      "git_bash_n_exit": 0
+    },
+    {
+      "file": "evidence/S00_COMMANDS_1.sh",
+      "cr_bytes": 0,
+      "git_bash_n_exit": 0
+    },
+    {
+      "file": "evidence/S00_COMMANDS_2.sh",
+      "cr_bytes": 0,
+      "git_bash_n_exit": 0
+    }
+  ],
+  "protected_sources_unchanged": 42,
+  "entry_rejections": [
+    {
+      "entry": "check_sequence5.py",
+      "exit": 2,
+      "error": "ValueError('CPU36/KML requires Linux; no native fallback')"
+    },
+    {
+      "entry": "train_sequence5.py",
+      "exit": 2,
+      "error": "ValueError('five-step source identity required; old one-step result refused')"
+    }
+  ],
+  "framework_imported_by_this_check": false,
+  "shell_commands_executed": false,
+  "final_entry_rejections": [
+    {
+      "entry": "check_sequence5.py",
+      "exit": 2,
+      "error": "ValueError('CPU36/KML requires Linux; no native fallback')",
+      "result": "evidence/rejected_final_check_sequence5.json",
+      "source_manifest_sha256": "5b2c2cd542d7410c302bcf783e6a90a06efe73b0735526e3957ffd4bfc2b9cbc"
+    },
+    {
+      "entry": "train_sequence5.py",
+      "exit": 2,
+      "error": "ValueError('five-step source identity required; old one-step result refused')",
+      "result": "evidence/rejected_final_train_sequence5.json",
+      "source_manifest_sha256": "5b2c2cd542d7410c302bcf783e6a90a06efe73b0735526e3957ffd4bfc2b9cbc"
+    }
+  ]
+}

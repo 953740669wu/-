@@ -1,0 +1,824 @@
+--- /dev/null
++++ R7/check_sequence5.py
+@@ -0,0 +1,147 @@
++"""Five full B64 CKPT0/1 updates; original complete comparison after every step."""
++import argparse
++from datetime import datetime, timezone
++import json
++from pathlib import Path
++import sys
++import traceback
++
++import cpu36_guard
++from diagnostic_common import configure_backend, finish_backend, sha_file
++import sequence_runtime
++from sequence_core import SequenceState, STEPS, accepted, load_case
++
++ROOT = Path(__file__).resolve().parent
++METRICS_PER_STEP = 1063
++
++
++def numerical_step(state, step):
++    torch, models = state.torch, state.models
++    before_digest = state.digest()
++    previous = {name: parameter.detach().clone() for name, parameter in models.named_parameters()}
++    before = state.begin(step)
++    outputs, handles = {}, []
++    def hook(name):
++        def capture(_module, _args, value):
++            outputs[name] = value.detach().clone()
++        return capture
++    for name, module in dict(h=models['enc'].tf, voltage=models['enc'].head_v,
++                             coarse=models['enc'].head_coarse).items():
++        handles.append(module.register_forward_hook(hook(name)))
++    try:
++        loss = state.update()
++    finally:
++        for handle in handles:
++            handle.remove()
++    after = state.validate(step)
++    snapshot = dict(loss=loss, input_v=state.v.grad.detach().clone(), input_y0=state.image.grad.detach().clone())
++    snapshot.update({'output.' + name: value for name, value in outputs.items()})
++    for name, parameter in models.named_parameters():
++        snapshot['grad.' + name] = None if parameter.grad is None else parameter.grad.detach().clone()
++        snapshot['param.' + name] = parameter.detach().clone()
++        snapshot['delta.' + name] = parameter.detach() - previous[name]
++        for key, value in state.optimizer.state.get(parameter, {}).items():
++            snapshot['state.' + name + '.' + key] = value.detach().clone()
++        if not accepted.expected_gradient(name, 'pre'):
++            assert torch.equal(parameter, previous[name]), 'inactive parameter changed: ' + name
++    return snapshot, dict(step=step, before=before, after=after, before_digest=before_digest,
++                          after_digest=state.digest(), delta_origin='own_previous_update_parameters')
++
++
++def compare_step(torch, reference, candidate):
++    if set(reference) != set(candidate):
++        raise ValueError('snapshot keys differ')
++    metrics, failures = [], []
++    for name in reference:
++        category = 'exact' if name.endswith('.step') else 'state' if name.startswith('state.') else 'tensor'
++        try:
++            accepted.compare(torch, name, reference[name], candidate[name], category, metrics)
++        except AssertionError as exc:
++            failures.append(dict(name=name, reason=str(exc)))
++    return metrics, failures
++
++
++def run_steps(states, result, observe, runtime):
++    previous = [state.digest() for state in states]
++    if previous[0] != previous[1]:
++        raise ValueError('reference and candidate initial parameter/optimizer states differ')
++    result['steps'] = []
++    for step in range(1, STEPS + 1):
++        record = dict(step=step, lineage={}, case_file_sha256=result['case_file_sha256'],
++                      source_manifest_sha256=result['source_manifest_sha256'])
++        result['steps'].append(record)
++        snapshots, lineage, calls = [], [], []
++        for label, state in zip(('reference', 'candidate'), states):
++            observe(f'before_{label}_{step}')
++            count = runtime.get('kml_gemm_calls', 0)
++            snapshot, meta = numerical_step(state, step)
++            observe(f'after_{label}_{step}')
++            snapshots.append(snapshot); lineage.append(meta)
++            record['lineage'][label] = meta
++            calls.append(runtime.get('kml_gemm_calls', 0) - count)
++        if [item['before_digest'] for item in lineage] != previous:
++            raise ValueError('parameters/optimizer state not carried from previous update')
++        metrics, failures = compare_step(states[0].torch, *snapshots)
++        if not failures and len(metrics) != METRICS_PER_STEP:
++            raise ValueError('incomplete original metric coverage')
++        if any(value <= 0 for value in calls):
++            raise ValueError('each side/step requires actual KML calls')
++        record.update(kml_calls=dict(zip(('reference','candidate'), calls)), metrics=metrics,
++                      failures=failures, comparison_failures=len(failures))
++        del snapshots, snapshot
++        previous = [item['after_digest'] for item in lineage]
++        if failures:
++            return False
++    return True
++
++
++def main(args, result):
++    result['cpu36'] = {}
++    cpu36_guard.prepare(args.expected_cpus, args.cpu_contract, result['cpu36'])
++    import torch
++    cpu36_guard.checkpoint(result['cpu36'], 'after_framework', torch)
++    runtime, expected = configure_backend(torch, 'kml', args.expected_cpus)
++    result['runtime'] = runtime
++    cpu36_guard.checkpoint(result['cpu36'], 'after_backend', torch)
++    torch.manual_seed(0)
++    case, identity = load_case(torch, args.case_file); result.update(identity)
++    definitions = accepted.model_definitions(torch)
++    states = [SequenceState(torch, definitions, case, checkpoint) for checkpoint in (False, True)]
++    counts = {name: sum(p.numel() for p in model.parameters()) for name, model in states[0].models.items()}
++    assert counts == dict(enc=37995777, dec=29416449)
++    result['parameter_counts'] = counts
++    result['checkpoint_wrapped_layers'] = len(states[1].models['enc'].tf.layers)
++    passed = run_steps(states, result, lambda name: cpu36_guard.checkpoint(result['cpu36'], name, torch), runtime)
++    finish_backend(runtime, expected)
++    sequence_runtime.finish(result['cpu36'], torch, 'strict', len(result['steps']))
++    result.update(completed_steps=len(result['steps']), comparison_failures=sum(s['comparison_failures'] for s in result['steps']),
++                  status='PASS_STRICT_SEQUENCE5_SYNTHETIC_ONLY' if passed else 'FAIL_ORIGINAL_CRITERIA')
++    return 0 if passed else 1
++
++
++if __name__ == '__main__':
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--case-file', type=Path, required=True)
++    parser.add_argument('--expected-cpus', type=lambda s: [int(x) for x in s.split(',')], required=True)
++    parser.add_argument('--cpu-contract', type=Path, required=True)
++    parser.add_argument('--output', type=Path, required=True)
++    args = parser.parse_args()
++    if args.output.exists(): parser.error('refuse existing output')
++    result = dict(status='STARTED', started_utc=datetime.now(timezone.utc).isoformat(), mode='sequence5_strict',
++        config=dict(belt='16_adjacent', part='pre', effective_batch=64, microbatch=64,
++            reference_checkpoint=False, candidate_checkpoint=True, precision='fp32', threads=36, hbm=False,
++            history='fresh_once_then_continuous', updates=5, repeated_same_fixed_case=True, loss='original_mean'),
++        source_manifest_sha256=sha_file(ROOT / 'SOURCE_SHA256.json'),
++        source_sha256={name: sha_file(ROOT / name) for name in [
++            'check_sequence5.py','sequence_core.py','sequence_runtime.py','candidate/full_batch_step.py',
++            'candidate/training_step.py','baseline/s4_models.py','baseline/kml_ops.py',
++            'tests/check_equivalence.py','diagnostic_common.py','cpu36_guard.py','cpu36_contract.py','CASE_MANIFEST.json']})
++    try:
++        code = main(args, result)
++    except Exception as exc:
++        result.update(status='ERROR_RUNTIME_OR_STATE', error=repr(exc), traceback=traceback.format_exc()); code = 2
++    result['ended_utc'] = datetime.now(timezone.utc).isoformat()
++    args.output.parent.mkdir(parents=True, exist_ok=True)
++    args.output.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
++    print(json.dumps({k: result[k] for k in ('status','completed_steps','comparison_failures','error') if k in result}, indent=2))
++    sys.exit(code)
+--- /dev/null
++++ R7/run_s00_seq5_job.sh
+@@ -0,0 +1,6 @@
++#!/bin/bash
++set -euo pipefail
++HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
++source "$HERE/interfaces/cluster_runtime.env"
++# No login-only scheduler profile is sourced on the compute node.
++exec bash "$HERE/run_sequence5.sh" "${1:?strict or memory}"
+--- /dev/null
++++ R7/run_sequence5.sh
+@@ -0,0 +1,62 @@
++#!/bin/bash
++# S00 executes only after review; strict and memory are separate job arrangements.
++set -euo pipefail
++HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
++fail() { echo "$*" >&2; exit 2; }
++[[ -n "${C2_PYTHON:-}" && -n "${CCS_JOB_ID:-}" ]] || fail 'verified runtime and real new job required'
++[[ "$(hostname)" != login* ]] || fail 'allocated compute node required'
++case "$HERE" in /home/share/dengqingtian/*) ;; *) fail 'owned staging path required' ;; esac
++MODE=${1:?strict or memory}
++case "$MODE" in strict|memory) ;; *) fail 'strict or memory only' ;; esac
++export OMP_NUM_THREADS=36 MKL_NUM_THREADS=36 OPENBLAS_NUM_THREADS=1 OMP_PLACES=cores OMP_PROC_BIND=close
++export PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 LINEAR_DTYPE=fp32 HBM=0
++export S02_SEQUENCE_ROOT="$HERE" S02_CASE_FILE="${S02_CASE_FILE:-$HERE/case/fixed_16_pre.pt}"
++OUT="$HERE/evidence/sequence5_${CCS_JOB_ID}_${MODE}"
++mkdir -p "$HERE/evidence"
++mkdir "$OUT" || fail 'refuse existing sequence output'
++trap 'code=$?; echo "$code" >"$OUT/wrapper_error_code.txt"; exit 2' ERR
++"$C2_PYTHON" -B - >"$OUT/identity_check.json" 2>"$OUT/identity_error.txt" <<'PY'
++import hashlib,json,os
++from pathlib import Path
++root=Path(os.environ['S02_SEQUENCE_ROOT'])
++sources=json.loads((root/'SOURCE_SHA256.json').read_text())
++for name,expected in sources.items():
++    assert hashlib.sha256((root/name).read_bytes()).hexdigest()==expected,name
++case=Path(os.environ['S02_CASE_FILE']);frozen=json.loads((root/'CASE_MANIFEST.json').read_text())
++h=hashlib.sha256()
++with case.open('rb') as stream:
++    for block in iter(lambda:stream.read(1024*1024),b''):h.update(block)
++assert h.hexdigest()==frozen['sha256'] and case.stat().st_size==frozen['bytes']
++print(json.dumps(dict(source_sha256=sources,case_file_sha256=h.hexdigest(),case_file_bytes=case.stat().st_size),indent=2))
++PY
++if [[ "$MODE" == memory ]]; then
++  [[ -n "${S02_SEQUENCE5_RESULT:-}" ]] || fail 'new five-step PASS path required; one-step PASS is refused'
++  "$C2_PYTHON" -B "$HERE/sequence_gate.py" "$S02_SEQUENCE5_RESULT" >"$OUT/strict_gate.json" 2>"$OUT/strict_gate_error.txt"
++fi
++PLACEMENT=$("$C2_PYTHON" -B "$HERE/cpu36_guard.py" --capture "$OUT/cpu_allocation.json" 2>"$OUT/allocation_error.txt")
++read -r NUMA_NODE ALLOCATED_CPUSET SELECTED_CPUSET <<< "$PLACEMENT"
++if [[ -n "${S02_CPUSET:-}" && "$S02_CPUSET" != "$SELECTED_CPUSET" ]]; then fail 'outer CPU set differs'; fi
++BASE=(numactl --physcpubind="$ALLOCATED_CPUSET" --membind="$NUMA_NODE" "$C2_PYTHON" -B)
++ARGS=(--case-file "$S02_CASE_FILE" --expected-cpus "$SELECTED_CPUSET" --cpu-contract "$OUT/cpu_allocation.json")
++run_child() {
++  local DIR=$1
++  shift
++  mkdir "$DIR"
++  printf '%q ' "$@" >"$DIR/command.txt"
++  printf '\n' >>"$DIR/command.txt"
++  local CODE=0
++  "$@" >"$DIR/stdout_stderr.txt" 2>&1 || CODE=$?
++  echo "$CODE" >"$DIR/exit_code.txt"
++  [[ "$CODE" == 0 ]] || exit "$CODE"
++}
++if [[ "$MODE" == strict ]]; then
++  run_child "$OUT/checker" timeout --signal=TERM --kill-after=15s 780 "${BASE[@]}" \
++    "$HERE/check_sequence5.py" "${ARGS[@]}" --output "$OUT/checker/result.json"
++else
++  for CKPT in 0 1; do
++    run_child "$OUT/ckpt$CKPT" timeout --signal=TERM --kill-after=15s 360 "${BASE[@]}" \
++      "$HERE/train_sequence5.py" "${ARGS[@]}" --checkpoint "$CKPT" \
++      --strict-result "$S02_SEQUENCE5_RESULT" --output "$OUT/ckpt$CKPT/result.json"
++  done
++fi
++echo "SEQUENCE5_DONE MODE=$MODE OUT=$OUT"
+--- /dev/null
++++ R7/sequence_core.py
+@@ -0,0 +1,110 @@
++"""Five repeated fixed-case updates with one model and AdamW per sequence."""
++import hashlib
++import json
++from pathlib import Path
++import sys
++
++from diagnostic_common import sha_file, tensor_sha
++
++ROOT = Path(__file__).resolve().parent
++sys.path.insert(0, str(ROOT / 'tests'))
++import check_equivalence as accepted
++sys.path.insert(0, str(ROOT / 'candidate'))
++STEPS = 5
++
++
++def load_case(torch, path):
++    manifest = json.loads((ROOT / 'CASE_MANIFEST.json').read_text())
++    if sha_file(path) != manifest['sha256'] or path.stat().st_size != manifest['bytes']:
++        raise ValueError('wrong original fixed case')
++    case = torch.load(path, map_location='cpu', weights_only=True)
++    digest = hashlib.sha256()
++    for name, value in case['initial'].items():
++        digest.update(name.encode()); digest.update(value.contiguous().numpy().tobytes())
++    identity = dict(initial_weights_sha256=digest.hexdigest(), fixed_tensor_sha256={
++        name: tensor_sha(case[name]) for name in ('v', 'y0', 'idx', 'mask', 't', 'noise')})
++    if identity != manifest['identity'] or case['input_protocol'] != 'S02_PAIRED_BELT_V1':
++        raise ValueError('wrong loaded weights/tensors/protocol')
++    if case['v'].shape != (64, 208) or case['y0'].shape != (64, 1, 64, 64):
++        raise ValueError('wrong full B64 case shapes')
++    return case, dict(case_file_sha256=manifest['sha256'], case_identity=identity)
++
++
++class SequenceState:
++    def __init__(self, torch, definitions, case, checkpoint):
++        from full_batch_step import enable_checkpoint, training_step
++        self.torch, self.case = torch, case
++        self.models = torch.nn.ModuleDict({'enc': definitions['Encoder'](), 'dec': definitions['UNet']()})
++        self.models.load_state_dict(case['initial'], strict=True)
++        if checkpoint:
++            enable_checkpoint(self.models['enc'])
++        self.optimizer = torch.optim.AdamW(self.models.parameters(), lr=1e-4, betas=(0.9, 0.999),
++                                           eps=1e-8, weight_decay=0.01)
++        self.model_id, self.optimizer_id = id(self.models), id(self.optimizer)
++        self.v = case['v'].clone().requires_grad_()
++        self.image = case['y0'].clone().requires_grad_()
++        self.completed, self.pending = 0, False
++        self.training_step = training_step
++
++    def state_summary(self):
++        values = [float(state['step'].item()) for state in self.optimizer.state.values()]
++        return dict(completed_updates=self.completed, model_id=id(self.models), optimizer_id=id(self.optimizer),
++                    optimizer_states=len(values), optimizer_step_min=min(values) if values else 0,
++                    optimizer_step_max=max(values) if values else 0)
++
++    def check_optimizer(self, expected):
++        if id(self.models) != self.model_id or id(self.optimizer) != self.optimizer_id:
++            raise ValueError('model or optimizer recreated within sequence')
++        for name, parameter in self.models.named_parameters():
++            state = self.optimizer.state.get(parameter, {})
++            active = accepted.expected_gradient(name, 'pre')
++            keys = {'step', 'exp_avg', 'exp_avg_sq'} if active and expected else set()
++            if set(state) != keys or (keys and state['step'].item() != expected):
++                raise ValueError('AdamW state/step continuity failed: ' + name)
++
++    def begin(self, step):
++        if self.pending or step != self.completed + 1 or not 1 <= step <= STEPS:
++            raise ValueError('missing/repeated/out-of-order sequence update')
++        self.check_optimizer(self.completed)
++        before = self.state_summary()
++        self.optimizer.zero_grad(set_to_none=True)
++        self.v.grad = None; self.image.grad = None
++        if any(p.grad is not None for p in self.models.parameters()):
++            raise ValueError('previous parameter gradients were not cleared')
++        self.pending = True
++        return dict(**before, parameter_gradients_cleared=True, input_gradients_cleared=True)
++
++    def update(self):
++        if not self.pending:
++            raise ValueError('begin/gradient cleanup required before update')
++        loss = self.training_step(self.models['enc'], self.models['dec'], self.optimizer,
++            self.v, self.case['angles'], self.case['belt'], self.image, self.case['mask'])
++        self.completed += 1; self.pending = False
++        return loss
++
++    def validate(self, step):
++        if self.completed != step or self.pending:
++            raise ValueError('update did not complete')
++        self.check_optimizer(step)
++        for name, parameter in self.models.named_parameters():
++            active = accepted.expected_gradient(name, 'pre')
++            if (parameter.grad is not None) != active:
++                raise ValueError('incorrect gradient presence: ' + name)
++            if not self.torch.isfinite(parameter).all() or (active and not self.torch.isfinite(parameter.grad).all()):
++                raise ValueError('nonfinite parameter/gradient: ' + name)
++            for value in self.optimizer.state.get(parameter, {}).values():
++                if not self.torch.isfinite(value).all():
++                    raise ValueError('nonfinite optimizer state: ' + name)
++        if any(value.grad is None or not self.torch.isfinite(value.grad).all() for value in (self.v, self.image)):
++            raise ValueError('missing/nonfinite input gradient')
++        return dict(**self.state_summary(), input_gradients_finite=True, parameter_gradients_finite=True,
++                    optimizer_state_finite=True)
++
++    def digest(self):
++        """Strict checker only; the lightweight memory path never hashes live state."""
++        digest = hashlib.sha256()
++        for name, parameter in self.models.named_parameters():
++            digest.update(name.encode()); digest.update(parameter.detach().contiguous().numpy().tobytes())
++            for key, value in sorted(self.optimizer.state.get(parameter, {}).items()):
++                digest.update(key.encode()); digest.update(value.detach().contiguous().numpy().tobytes())
++        return digest.hexdigest()
+--- /dev/null
++++ R7/sequence_gate.py
+@@ -0,0 +1,86 @@
++"""Only this complete five-update numerical PASS unlocks memory preparation."""
++import json
++from pathlib import Path
++import sys
++
++from diagnostic_common import sha_file
++import sequence_runtime
++
++ROOT = Path(__file__).resolve().parent
++REQUIRED_CONFIG = dict(belt='16_adjacent', part='pre', effective_batch=64, microbatch=64,
++    reference_checkpoint=False, candidate_checkpoint=True, precision='fp32', threads=36, hbm=False,
++    history='fresh_once_then_continuous', updates=5, repeated_same_fixed_case=True, loss='original_mean')
++FAMILIES = dict(loss=1, input_v=1, input_y0=1, output=3, grad=153, param=299, delta=299, state=306)
++
++
++def validate(data, frozen, source_sha256, manifest_sha256):
++    if (data.get('status') != 'PASS_STRICT_SEQUENCE5_SYNTHETIC_ONLY'
++            or data.get('mode') != 'sequence5_strict' or data.get('completed_steps') != 5
++            or data.get('comparison_failures') != 0):
++        raise ValueError('complete new five-step strict PASS required; one-step PASS is insufficient')
++    if any(data.get('config', {}).get(key) != value for key, value in REQUIRED_CONFIG.items()):
++        raise ValueError('wrong five-step configuration')
++    if (data.get('source_sha256') != source_sha256 or data.get('source_manifest_sha256') != manifest_sha256
++            or data.get('case_file_sha256') != frozen['sha256'] or data.get('case_identity') != frozen['identity']):
++        raise ValueError('wrong five-step source/case identity')
++    records = data.get('steps', [])
++    if len(records) != 5 or data.get('runtime', {}).get('backend') != 'kml':
++        raise ValueError('missing steps/actual KML')
++    previous, identities, metric_names = None, None, None
++    for step, record in enumerate(records, 1):
++        if (record['step'] != step or record['comparison_failures'] != 0 or record['failures'] != []
++                or record['case_file_sha256'] != frozen['sha256'] or record['source_manifest_sha256'] != manifest_sha256):
++            raise ValueError('failed/misidentified sequence step')
++        metrics = record['metrics']; names = [item['name'] for item in metrics]
++        families = {}
++        for item in metrics:
++            family = item['name'].split('.')[0]; families[family] = families.get(family, 0) + 1
++        if (len(names) != len(set(names)) or families != FAMILIES
++                or any(item.get('passed') is not True for item in metrics)
++                or (metric_names is not None and names != metric_names)):
++            raise ValueError('incomplete/failed/changed original metric coverage')
++        metric_names = names
++        lineage = [record['lineage'][side] for side in ('reference','candidate')]
++        if step == 1 and lineage[0]['before_digest'] != lineage[1]['before_digest']:
++            raise ValueError('reference and candidate did not start from the same state')
++        if previous is not None and [item['before_digest'] for item in lineage] != previous:
++            raise ValueError('parameter/optimizer digest chain broken')
++        current_ids = []
++        for item in lineage:
++            before, after = item['before'], item['after']
++            if (item['step'] != step or before['completed_updates'] != step-1 or after['completed_updates'] != step
++                    or before['optimizer_step_min'] != step-1 or before['optimizer_step_max'] != step-1
++                    or before['optimizer_states'] != (0 if step == 1 else 153)
++                    or after['optimizer_step_min'] != step or after['optimizer_step_max'] != step
++                    or after['optimizer_states'] != 153 or not before['input_gradients_cleared']
++                    or not before['parameter_gradients_cleared']):
++                raise ValueError('optimizer steps/gradient cleanup not continuous')
++            if (before['model_id'],before['optimizer_id']) != (after['model_id'],after['optimizer_id']):
++                raise ValueError('model/optimizer recreated within update')
++            current_ids.append((after['model_id'],after['optimizer_id']))
++        if identities is not None and identities != current_ids:
++            raise ValueError('model/optimizer recreated across updates')
++        if current_ids[0][0] == current_ids[1][0] or current_ids[0][1] == current_ids[1][1]:
++            raise ValueError('reference and candidate must be isolated instances')
++        identities = current_ids; previous = [item['after_digest'] for item in lineage]
++        if set(record['kml_calls']) != {'reference','candidate'} or any(x <= 0 for x in record['kml_calls'].values()):
++            raise ValueError('missing actual KML on a sequence side/step')
++    sequence_runtime.validate(data['cpu36'], 'strict', 5)
++
++
++def check_path(path):
++    data = json.loads(path.read_text())
++    source = data.get('source_sha256', {})
++    required = {'check_sequence5.py','sequence_core.py','sequence_runtime.py','candidate/full_batch_step.py',
++                'candidate/training_step.py','tests/check_equivalence.py','cpu36_guard.py','cpu36_contract.py'}
++    if not required <= set(source):
++        raise ValueError('five-step source identity required; old one-step result refused')
++    actual = {name: sha_file(ROOT / name) for name in source}
++    validate(data, json.loads((ROOT/'CASE_MANIFEST.json').read_text()), actual, sha_file(ROOT/'SOURCE_SHA256.json'))
++    return dict(path=str(path.resolve()), sha256=sha_file(path), source_manifest_sha256=data['source_manifest_sha256'],
++                strict_libraries={item['path']: item['sha256'] for item in data['runtime']['libraries']},
++                status='FIVE_STEP_PASS_REFERENCE_ONLY_NOT_SUBMISSION_AUTHORIZATION')
++
++
++if __name__ == '__main__':
++    print(json.dumps(check_path(Path(sys.argv[1])), indent=2))
+--- /dev/null
++++ R7/sequence_runtime.py
+@@ -0,0 +1,29 @@
++"""CPU36 publication order for the strict and independent five-step entries."""
++import cpu36_guard
++
++
++def checkpoint_names(kind, steps):
++    if kind not in ('strict', 'memory') or not 0 <= steps <= 5:
++        raise ValueError('invalid fixed sequence contract')
++    names = ['before_framework', 'after_framework', 'after_backend']
++    if kind == 'memory':
++        names += ['initialized']
++    for step in range(1, steps + 1):
++        names += ([f'before_reference_{step}', f'after_reference_{step}',
++                   f'before_candidate_{step}', f'after_candidate_{step}'] if kind == 'strict'
++                  else [f'before_training_{step}', f'after_training_{step}'])
++    return names + ['publish']
++
++
++def finish(state, torch, kind, steps):
++    cpu36_guard.checkpoint(state, 'publish', torch)
++    validate(state, kind, steps)
++
++
++def validate(state, kind, steps):
++    if state['errors'] or [x['name'] for x in state['checkpoints']] != checkpoint_names(kind, steps):
++        raise ValueError('missing/out-of-order sequence CPU36 evidence')
++    for record in state['checkpoints']:
++        if record['pid'] != state['pid']:
++            raise ValueError('CPU checkpoint PID changed')
++        cpu36_guard.validate_checkpoint(record, state['receipt'])
+--- /dev/null
++++ R7/tests/check_seq5_native.py
+@@ -0,0 +1,93 @@
++"""Small native Torch36 state-carry tests; never a full-model/C2 result."""
++import copy
++from pathlib import Path
++import sys
++import unittest
++import torch
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT))
++sys.path.insert(0, str(ROOT / 'candidate'))
++from full_batch_step import training_step
++from sequence_core import SequenceState
++from check_sequence5 import numerical_step, compare_step
++
++
++class Encoder(torch.nn.Module):
++    def __init__(self):
++        super().__init__()
++        self.input = torch.nn.Linear(1, 8)
++        self.tf = torch.nn.TransformerEncoder(torch.nn.TransformerEncoderLayer(
++            8, 2, 16, dropout=0., batch_first=True), 2, enable_nested_tensor=False)
++        self.head_v = torch.nn.Linear(8, 1)
++        self.head_coarse = torch.nn.Linear(8, 256)
++
++    def forward(self, v, angles, belt, mask):
++        return self.tf(self.input(v.unsqueeze(-1)), src_key_padding_mask=~mask)
++
++
++class NativeSequenceTests(unittest.TestCase):
++    def setUp(self):
++        torch.manual_seed(31)
++        self.definitions = dict(Encoder=Encoder, UNet=lambda: torch.nn.Linear(2, 2))
++        models = torch.nn.ModuleDict({'enc': Encoder(), 'dec': self.definitions['UNet']()})
++        self.case = dict(initial=copy.deepcopy(models.state_dict()), v=torch.randn(4, 3),
++            y0=torch.randn(4, 1, 16, 16), angles=None, belt=None,
++            mask=torch.tensor([[1,0,1],[1,1,1],[0,1,1],[1,1,0]], dtype=torch.bool))
++
++    def test_five_updates_carry_state_and_clear_all_previous_gradients(self):
++        actual = SequenceState(torch, self.definitions, self.case, False)
++        manual = SequenceState(torch, self.definitions, self.case, False)
++        identity = id(actual.optimizer)
++        for step in range(1, 6):
++            for parameter in actual.models.parameters():
++                parameter.grad = torch.full_like(parameter, 1e8)
++            actual.v.grad = torch.full_like(actual.v, 1e8)
++            actual.image.grad = torch.full_like(actual.image, 1e8)
++            actual.begin(step)
++            self.assertIsNone(actual.v.grad); self.assertIsNone(actual.image.grad)
++            self.assertTrue(all(p.grad is None for p in actual.models.parameters()))
++            actual.update(); actual.validate(step)
++            manual.optimizer.zero_grad(set_to_none=True)
++            manual.v.grad = None; manual.image.grad = None
++            training_step(manual.models['enc'], manual.models['dec'], manual.optimizer,
++                manual.v, None, None, manual.image, self.case['mask'])
++            for left, right in zip(actual.models.parameters(), manual.models.parameters()):
++                self.assertTrue(torch.equal(left, right))
++                if left.grad is not None:
++                    self.assertTrue(torch.equal(left.grad, right.grad))
++                    for key in ('step', 'exp_avg', 'exp_avg_sq'):
++                        self.assertTrue(torch.equal(actual.optimizer.state[left][key], manual.optimizer.state[right][key]))
++            self.assertEqual(id(actual.optimizer), identity)
++            self.assertEqual(actual.state_summary()['optimizer_step_min'], step)
++            self.assertTrue(torch.equal(actual.v.grad, manual.v.grad))
++
++    def test_five_checkpoint_updates_keep_full_original_comparisons(self):
++        reference = SequenceState(torch, self.definitions, self.case, False)
++        candidate = SequenceState(torch, self.definitions, self.case, True)
++        previous = [state.digest() for state in (reference, candidate)]
++        for step in range(1, 6):
++            left, left_meta = numerical_step(reference, step)
++            right, right_meta = numerical_step(candidate, step)
++            self.assertEqual([left_meta['before_digest'], right_meta['before_digest']], previous)
++            metrics, failures = compare_step(torch, left, right)
++            self.assertFalse(failures); self.assertTrue(all(m['passed'] for m in metrics))
++            self.assertTrue(all(family in {m['name'].split('.')[0] for m in metrics}
++                for family in ('loss','input_v','input_y0','output','grad','param','delta','state')))
++            previous = [left_meta['after_digest'], right_meta['after_digest']]
++
++    def test_optimizer_recreation_or_skipped_update_is_rejected(self):
++        state = SequenceState(torch, self.definitions, self.case, False)
++        state.begin(1); state.update(); state.validate(1)
++        with self.assertRaises(ValueError):
++            state.begin(3)
++        state.optimizer = torch.optim.AdamW(state.models.parameters(), lr=1e-4)
++        with self.assertRaises(ValueError):
++            state.begin(2)
++
++
++if __name__ == '__main__':
++    torch.set_num_threads(36)
++    assert torch.get_num_threads() == 36
++    print('SMALL_NATIVE_TORCH36_ONLY; no full fixed case, C2, or training-memory measurement', flush=True)
++    unittest.main(verbosity=2)
+--- /dev/null
++++ R7/tests/test_sequence_contract.py
+@@ -0,0 +1,159 @@
++"""Stdlib protocol/metering tests with explicit substitutes, not C2 or RSS data."""
++import copy
++import importlib.util
++from pathlib import Path
++import sys
++import unittest
++from unittest.mock import patch
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT))
++import check_sequence5 as checker
++import sequence_gate as gate
++import sequence_runtime as runtime
++import train_sequence5 as memory
++
++
++class GateTests(unittest.TestCase):
++    def setUp(self):
++        self.sources = {'sequence_core.py':'source'}
++        self.frozen = dict(sha256='case', identity={'weights':'initial'})
++        self.data = dict(status='PASS_STRICT_SEQUENCE5_SYNTHETIC_ONLY', mode='sequence5_strict',
++            completed_steps=5, comparison_failures=0, config=gate.REQUIRED_CONFIG.copy(),
++            source_sha256=self.sources, source_manifest_sha256='manifest', case_file_sha256='case',
++            case_identity=self.frozen['identity'], runtime=dict(backend='kml'), steps=[], cpu36={})
++        for step in range(1, 6):
++            lineage = {}
++            for index, side in enumerate(('reference','candidate')):
++                before = dict(completed_updates=step-1, optimizer_step_min=step-1, optimizer_step_max=step-1,
++                    optimizer_states=0 if step==1 else 153, model_id=index+1, optimizer_id=index+10,
++                    parameter_gradients_cleared=True, input_gradients_cleared=True)
++                after = dict(before, completed_updates=step, optimizer_step_min=step, optimizer_step_max=step,
++                             optimizer_states=153)
++                lineage[side] = dict(step=step, before=before, after=after,
++                    before_digest='initial' if step==1 else side+str(step-1), after_digest=side+str(step))
++            metrics = [dict(name=f'{family}.{i}',passed=True) for family,count in gate.FAMILIES.items() for i in range(count)]
++            self.data['steps'].append(dict(step=step, comparison_failures=0, failures=[],
++                case_file_sha256='case', source_manifest_sha256='manifest', metrics=metrics,
++                lineage=lineage, kml_calls=dict(reference=149,candidate=197)))
++
++    def validate(self, data):
++        with patch.object(gate.sequence_runtime,'validate') as check:
++            gate.validate(data,self.frozen,self.sources,'manifest')
++            return check
++
++    def test_complete_five_step_protocol_reaches_cpu_gate(self):
++        check=self.validate(self.data); check.assert_called_once_with({},'strict',5)
++
++    def test_old_one_step_pass_cannot_unlock_five_step_memory(self):
++        for change in [dict(status='PASS_STRICT_CHECKPOINT_SYNTHETIC_ONLY'),dict(completed_steps=1),
++                       dict(mode='checkpoint_strict'),dict(steps=self.data['steps'][:1])]:
++            with self.subTest(change=list(change)),self.assertRaises(ValueError):
++                self.validate(dict(self.data,**change))
++
++    def test_reset_optimizer_parameters_or_instance_is_rejected(self):
++        for mutation in ('counter','digest','identity'):
++            data=copy.deepcopy(self.data); item=data['steps'][2]['lineage']['candidate']
++            if mutation=='counter':item['after']['optimizer_step_min']=1
++            elif mutation=='digest':item['before_digest']='initial'
++            else:item['before']['optimizer_id']=item['after']['optimizer_id']=999
++            with self.subTest(mutation=mutation),self.assertRaises(ValueError):self.validate(data)
++
++    def test_missing_duplicate_failed_metrics_or_kml_is_rejected(self):
++        for mutation in ('missing','duplicate','failed','kml'):
++            data=copy.deepcopy(self.data); record=data['steps'][3]
++            if mutation=='missing':record['metrics'].pop()
++            elif mutation=='duplicate':record['metrics'][1]['name']=record['metrics'][0]['name']
++            elif mutation=='failed':record['metrics'][1]['passed']=False
++            else:record['kml_calls']['candidate']=0
++            with self.subTest(mutation=mutation),self.assertRaises(ValueError):self.validate(data)
++
++    def test_wrong_source_or_fixed_case_is_rejected(self):
++        for key in ('source_manifest_sha256','case_file_sha256'):
++            with self.subTest(key=key),self.assertRaises(ValueError):self.validate(dict(self.data,**{key:'old'}))
++
++
++class MeteringTests(unittest.TestCase):
++    def setUp(self):
++        self.events=[]; self.calls=dict(kml_gemm_calls=0)
++        events,calls=self.events,self.calls
++        class State:
++            def begin(self,step):events.append('begin');return {'step':step}
++            def update(self):
++                events.append('update');calls['kml_gemm_calls']+=149
++                class Loss:
++                    def item(self):events.append('loss_item');return 1.
++                return Loss()
++            def validate(self,step):events.append('validate');return {'step':step}
++        self.state=State()
++
++    def test_reset_clock_peak_and_validation_order(self):
++        def rss():
++            index=sum(x.startswith('rss') for x in self.events);self.events.append('rss'+str(index))
++            return dict(rss_bytes=1024,peak_rss_bytes=2048,hugetlb_bytes=0)
++        def reset():self.events.append('reset');return dict(available=True)
++        def clock():self.events.append('clock');return float(self.events.count('clock'))
++        record={}
++        with patch.object(memory.memory_metrics,'rss',side_effect=rss), \
++             patch.object(memory.memory_metrics,'reset_peak',side_effect=reset), \
++             patch.object(memory.time,'perf_counter',side_effect=clock):
++            memory.measure_step(self.state,1,lambda name:self.events.append(name),self.calls,record)
++        self.assertEqual(self.events,['begin','before_training_1','rss0','reset','rss1','clock',
++            'update','clock','rss2','validate','loss_item','after_training_1'])
++        self.assertEqual(record['training']['elapsed_seconds'],1.)
++        self.assertEqual(record['kml_calls'],149)
++
++    def test_reset_failure_stops_before_update(self):
++        with patch.object(memory.memory_metrics,'rss',return_value={}), \
++             patch.object(memory.memory_metrics,'reset_peak',return_value=dict(available=False)), \
++             self.assertRaises(ValueError):
++            memory.measure_step(self.state,1,lambda name:None,self.calls,{})
++        self.assertNotIn('update',self.events)
++
++    def test_second_step_failure_stops_sequence_and_retains_partial_record(self):
++        records=[]
++        with patch.object(memory.memory_metrics,'rss',return_value={}), \
++             patch.object(memory.memory_metrics,'reset_peak',side_effect=[dict(available=True),dict(available=False)]), \
++             self.assertRaises(ValueError):
++            for step in range(1,6):
++                record={};records.append(record)
++                memory.measure_step(self.state,step,lambda name:None,self.calls,record)
++        self.assertEqual(len(records),2);self.assertEqual(self.events.count('update'),1)
++        self.assertEqual(records[1]['step'],2);self.assertFalse(records[1]['peak_reset']['available'])
++
++
++class StrictLoopTests(unittest.TestCase):
++    def test_numerical_failure_stops_after_full_failing_step(self):
++        states=[];calls=dict(kml_gemm_calls=0)
++        class State:
++            torch=None
++            def __init__(self):self.completed=0
++            def digest(self):return str(self.completed)
++        states=[State(),State()]
++        def numerical(state,step):
++            before=state.digest();state.completed+=1;calls['kml_gemm_calls']+=1
++            return {},dict(before_digest=before,after_digest=state.digest())
++        comparisons=[([{}]*1063,[]),([{}]*1063,[dict(name='delta.x',reason='original criterion')])]
++        result=dict(case_file_sha256='case',source_manifest_sha256='manifest')
++        with patch.object(checker,'numerical_step',side_effect=numerical), \
++             patch.object(checker,'compare_step',side_effect=comparisons):
++            passed=checker.run_steps(states,result,lambda name:None,calls)
++        self.assertFalse(passed);self.assertEqual([s.completed for s in states],[2,2])
++        self.assertEqual(len(result['steps']),2);self.assertEqual(result['steps'][-1]['comparison_failures'],1)
++
++    def test_strict_and_memory_cpu_order_include_every_update(self):
++        self.assertEqual(len(runtime.checkpoint_names('strict',5)),24)
++        self.assertEqual(len(runtime.checkpoint_names('memory',5)),15)
++        names=runtime.checkpoint_names('memory',5)
++        state=dict(pid=10,errors=[],receipt={},checkpoints=[dict(name=name,pid=10) for name in names])
++        with patch.object(runtime.cpu36_guard,'validate_checkpoint') as check:
++            runtime.validate(state,'memory',5)
++            self.assertEqual(check.call_count,15)
++        state['checkpoints'].pop(6)
++        with self.assertRaises(ValueError):runtime.validate(state,'memory',5)
++
++    def test_importing_new_entries_does_not_import_frameworks(self):
++        self.assertNotIn('torch',sys.modules);self.assertNotIn('numpy',sys.modules)
++
++
++if __name__=='__main__':unittest.main(verbosity=2)
+--- /dev/null
++++ R7/train_sequence5.py
+@@ -0,0 +1,105 @@
++"""Independent five-update DDR/HBM0 sequence; no comparison snapshots."""
++import argparse
++from datetime import datetime, timezone
++import gc
++import json
++from pathlib import Path
++import sys
++import time
++import traceback
++
++import cpu36_guard
++from diagnostic_common import configure_backend, finish_backend, sha_file
++import memory_metrics
++from sequence_core import SequenceState, STEPS, accepted, load_case
++import sequence_gate
++import sequence_runtime
++
++ROOT = Path(__file__).resolve().parent
++
++
++def measure_step(state, step, observe, runtime, record):
++    record.update(step=step, before=state.begin(step))
++    observe(f'before_training_{step}')
++    record['before_reset'] = memory_metrics.rss()
++    record['peak_reset'] = memory_metrics.reset_peak()
++    if not record['peak_reset']['available']:
++        raise ValueError('training HWM reset unavailable; this update was not executed')
++    record['training_start'] = memory_metrics.rss()
++    calls = runtime.get('kml_gemm_calls', 0)
++    started = time.perf_counter()
++    loss = state.update()
++    elapsed = time.perf_counter() - started
++    # First operation after the clock: capture HWM before validation/loss.item/JSON.
++    record['training'] = dict(elapsed_seconds=elapsed, **memory_metrics.rss())
++    record['after'] = state.validate(step)
++    record['loss'] = loss.item()
++    record['kml_calls'] = runtime.get('kml_gemm_calls', 0) - calls
++    if record['kml_calls'] <= 0:
++        raise ValueError('no actual KML on this training update')
++    observe(f'after_training_{step}')
++
++
++def main(args, result):
++    initialized = time.perf_counter()
++    result['strict_reference'] = sequence_gate.check_path(args.strict_result)
++    result['cpu36'] = {}
++    cpu36_guard.prepare(args.expected_cpus, args.cpu_contract, result['cpu36'])
++    import torch
++    cpu36_guard.checkpoint(result['cpu36'], 'after_framework', torch)
++    runtime, expected = configure_backend(torch, 'kml', args.expected_cpus)
++    result['runtime'] = runtime
++    if {item['path']: item['sha256'] for item in runtime['libraries']} != result['strict_reference']['strict_libraries']:
++        raise ValueError('memory runtime library identity differs from five-step strict result')
++    cpu36_guard.checkpoint(result['cpu36'], 'after_backend', torch)
++    torch.manual_seed(0)
++    case, identity = load_case(torch, args.case_file); result.update(identity)
++    state = SequenceState(torch, accepted.model_definitions(torch), case, bool(args.checkpoint))
++    counts = {name: sum(p.numel() for p in model.parameters()) for name, model in state.models.items()}
++    assert counts == dict(enc=37995777, dec=29416449)
++    result['parameter_counts'] = counts
++    del case['initial']; gc.collect()
++    cpu36_guard.checkpoint(result['cpu36'], 'initialized', torch)
++    result['initialization'] = dict(elapsed_seconds=time.perf_counter()-initialized, **memory_metrics.rss())
++    result['steps'] = []
++    for step in range(1, STEPS+1):
++        record = dict(case_file_sha256=result['case_file_sha256'], source_manifest_sha256=result['source_manifest_sha256'])
++        result['steps'].append(record)
++        measure_step(state, step, lambda name: cpu36_guard.checkpoint(result['cpu36'], name, torch), runtime, record)
++    finish_backend(runtime, expected)
++    sequence_runtime.finish(result['cpu36'], torch, 'memory', STEPS)
++    result.update(status='DDR_SEQUENCE5_DIAGNOSTIC_ONLY_NOT_STEADY_STATE', completed_steps=state.completed,
++                  comparison_snapshots_retained=False, repeated_same_fixed_case=True)
++    return 0
++
++
++if __name__ == '__main__':
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--checkpoint', type=int, choices=[0,1], required=True)
++    parser.add_argument('--strict-result', type=Path, required=True)
++    parser.add_argument('--case-file', type=Path, required=True)
++    parser.add_argument('--expected-cpus', type=lambda s:[int(x) for x in s.split(',')], required=True)
++    parser.add_argument('--cpu-contract', type=Path, required=True)
++    parser.add_argument('--output', type=Path, required=True)
++    args = parser.parse_args()
++    if args.output.exists(): parser.error('refuse existing output')
++    result = dict(status='STARTED', started_utc=datetime.now(timezone.utc).isoformat(), mode='sequence5_memory',
++        config=dict(belt='16_adjacent', part='pre', effective_batch=64, microbatch=64, checkpoint=bool(args.checkpoint),
++            precision='fp32', threads=36, hbm=False, history='fresh_once_then_continuous', updates=5,
++            repeated_same_fixed_case=True, loss='original_mean', warmup_steps=0),
++        measurement=dict(unit='bytes / MiB (2**20 bytes) / seconds', method='same R6 VmRSS/VmHWM and clear_refs=5',
++            scope='whole-process DDR/HBM0 RSS, not tensor-only/PSS/HBM residency; five updates are not steady-state'),
++        source_manifest_sha256=sha_file(ROOT/'SOURCE_SHA256.json'),
++        source_sha256={name: sha_file(ROOT/name) for name in ['train_sequence5.py','sequence_core.py','sequence_gate.py',
++            'sequence_runtime.py','memory_metrics.py','candidate/full_batch_step.py','candidate/training_step.py',
++            'tests/check_equivalence.py','baseline/s4_models.py','baseline/kml_ops.py',
++            'diagnostic_common.py','cpu36_guard.py','cpu36_contract.py','CASE_MANIFEST.json']})
++    try:
++        code = main(args, result)
++    except Exception as exc:
++        result.update(status='ERROR_RUNTIME_OR_STATE', error=repr(exc), traceback=traceback.format_exc()); code=2
++    result['ended_utc'] = datetime.now(timezone.utc).isoformat()
++    args.output.parent.mkdir(parents=True, exist_ok=True)
++    args.output.write_text(json.dumps(result, indent=2)+'\n', encoding='utf-8')
++    print(json.dumps({key:result[key] for key in ('status','completed_steps','error') if key in result}, indent=2))
++    sys.exit(code)
