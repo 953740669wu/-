@@ -1,0 +1,133 @@
+"""One fresh full B64 mean/AdamW step per process, CKPT0 or CKPT1, DDR/HBM0.
+
+No comparison snapshots, output hooks, warm-up, allocator counters or HBM test.
+Prepared only: execution needs a separately authorized strict checkpoint PASS.
+"""
+import argparse
+from datetime import datetime, timezone
+import gc
+import hashlib
+import json
+from pathlib import Path
+import sys
+import time
+import traceback
+
+import cpu36_guard
+from diagnostic_common import configure_backend, finish_backend, sha_file, tensor_sha
+import memory_metrics
+
+ROOT = Path(__file__).resolve().parent
+
+
+def main(args, result):
+    initialized_at = time.perf_counter()
+    result['cpu36'] = {}
+    cpu36_guard.prepare(args.expected_cpus, args.cpu_contract, result['cpu36'])
+    import torch
+    cpu36_guard.checkpoint(result['cpu36'], 'after_framework', torch)
+    torch.manual_seed(0)
+    runtime, expected = configure_backend(torch, 'kml', args.expected_cpus)
+    result['runtime'] = runtime
+    cpu36_guard.checkpoint(result['cpu36'], 'after_backend', torch)
+    sys.path.insert(0, str(ROOT / 'tests'))
+    from check_equivalence import model_definitions, expected_gradient
+    sys.path.insert(0, str(ROOT / 'candidate'))
+    from full_batch_step import enable_checkpoint, training_step
+    manifest = json.loads((ROOT / 'CASE_MANIFEST.json').read_text())
+    if sha_file(args.case_file) != manifest['sha256'] or args.case_file.stat().st_size != manifest['bytes']:
+        raise RuntimeError('frozen case file identity mismatch')
+    case = torch.load(args.case_file, map_location='cpu', weights_only=True)
+    assert case['input_protocol'] == 'S02_PAIRED_BELT_V1'
+    assert case['v'].shape == (64, 208) and case['y0'].shape == (64, 1, 64, 64)
+    digest = hashlib.sha256()
+    for name, value in case['initial'].items():
+        digest.update(name.encode()); digest.update(value.contiguous().numpy().tobytes())
+    identity = dict(initial_weights_sha256=digest.hexdigest(), fixed_tensor_sha256={
+        name: tensor_sha(case[name]) for name in ('v', 'y0', 'idx', 'mask', 't', 'noise')})
+    if identity != manifest['identity']:
+        raise RuntimeError('loaded frozen tensor/weight identity mismatch')
+    result.update(case_identity=identity, case_file_sha256=manifest['sha256'],
+                  case_file_bytes=manifest['bytes'])
+    definitions = model_definitions(torch)
+    models = torch.nn.ModuleDict({'enc': definitions['Encoder'](), 'dec': definitions['UNet']()})
+    counts = {name: sum(p.numel() for p in model.parameters()) for name, model in models.items()}
+    assert counts == dict(enc=37995777, dec=29416449)
+    models.load_state_dict(case['initial'], strict=True)
+    if args.checkpoint:
+        enable_checkpoint(models['enc'])
+    result['checkpoint_wrapped_layers'] = len(models['enc'].tf.layers) if args.checkpoint else 0
+    del case['initial']
+    gc.collect()
+    # Input gradients are part of the fixed comparator workload on both sides.
+    v = case['v'].clone().requires_grad_()
+    image = case['y0'].clone().requires_grad_()
+    opt = torch.optim.AdamW(models.parameters(), lr=1e-4, betas=(0.9, 0.999),
+                            eps=1e-8, weight_decay=0.01)
+    assert not opt.state
+    steps = []
+    handle = opt.register_step_post_hook(lambda *_: steps.append(1))
+    cpu36_guard.checkpoint(result['cpu36'], 'initialized', torch)
+    cpu36_guard.checkpoint(result['cpu36'], 'before_training', torch)
+    result['initialization'] = dict(elapsed_seconds=time.perf_counter() - initialized_at,
+                                    **memory_metrics.rss())
+    result['peak_reset'] = memory_metrics.reset_peak()
+    if not result['peak_reset']['available']:
+        raise RuntimeError('cannot isolate training RSS peak; no training step executed')
+    result['training_start'] = memory_metrics.rss()
+    started = time.perf_counter()
+    loss = training_step(models['enc'], models['dec'], opt, v, case['angles'], case['belt'], image, case['mask'])
+    elapsed = time.perf_counter() - started
+    # Capture the training high-water counter before validation/JSON/guard overhead.
+    result['training'] = dict(elapsed_seconds=elapsed, **memory_metrics.rss())
+    handle.remove()
+    assert steps == [1] and v.grad is not None and image.grad is not None
+    assert torch.isfinite(loss).all()
+    for name, parameter in models.named_parameters():
+        active = expected_gradient(name, 'pre')
+        assert (parameter.grad is not None) == active, name
+        assert set(opt.state.get(parameter, {})) == ({'step', 'exp_avg', 'exp_avg_sq'} if active else set())
+        if active:
+            assert opt.state[parameter]['step'].item() == 1
+    result.update(loss=loss.item(), optimizer_steps=1, parameter_counts=counts,
+        initial_weights_released_before_training=True, comparison_snapshots_retained=False,
+        observed_peak_init_or_training_bytes=max(result['initialization']['peak_rss_bytes'],
+                                                result['training']['peak_rss_bytes']))
+    cpu36_guard.checkpoint(result['cpu36'], 'after_training', torch)
+    finish_backend(runtime, expected)
+    cpu36_guard.finish_memory(result['cpu36'], torch)
+    result['status'] = 'DDR_ONE_STEP_DIAGNOSTIC_ONLY_NOT_BENEFIT_ACCEPTANCE'
+    return 0
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--checkpoint', type=int, choices=[0, 1], required=True)
+    parser.add_argument('--case-file', type=Path, required=True)
+    parser.add_argument('--expected-cpus', type=lambda s: [int(v) for v in s.split(',')], required=True)
+    parser.add_argument('--cpu-contract', type=Path, required=True)
+    parser.add_argument('--output', type=Path, required=True)
+    args = parser.parse_args()
+    if args.output.exists():
+        parser.error('refuse existing output')
+    result = dict(status='STARTED', started_utc=datetime.now(timezone.utc).isoformat(),
+        config=dict(belt='16_adjacent', part='pre', effective_batch=64, microbatch=64,
+                    checkpoint=bool(args.checkpoint), history='fresh', precision='fp32', threads=36,
+                    loss='original_mean', hbm=False, training_steps=1, warmup_steps=0),
+        measurement=dict(unit='bytes and MiB (2**20 bytes); elapsed_seconds',
+            method='Linux /proc/self/status VmRSS/VmHWM; training HWM reset via clear_refs=5',
+            scope='whole process RSS, including shared runtime pages; not tensor-only/PSS/HBM residency'),
+        source_sha256={name: sha_file(ROOT / name) for name in [
+            'train_memory.py', 'memory_metrics.py', 'candidate/full_batch_step.py', 'candidate/training_step.py',
+            'baseline/s4_models.py', 'baseline/kml_ops.py', 'tests/check_equivalence.py',
+            'diagnostic_common.py', 'cpu36_guard.py', 'cpu36_contract.py', 'CASE_MANIFEST.json']})
+    try:
+        code = main(args, result)
+    except Exception as exc:
+        result.update(status='ERROR_RUNTIME_OR_INPUT', error=repr(exc), traceback=traceback.format_exc())
+        code = 2
+    result['ended_utc'] = datetime.now(timezone.utc).isoformat()
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
+    print(json.dumps({k: result[k] for k in ('status', 'error', 'initialization', 'training') if k in result}, indent=2))
+    sys.exit(code)

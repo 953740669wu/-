@@ -1,0 +1,584 @@
+{
+  "source": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\evidence\\s02_r5_s03_c_20261105\\S02\\received\\payload\\evidence\\c2_2034953_strict\\result.json",
+  "sha256": "d19c3739d846094fc79a8d3bb8051ef3ef45e3dc7c18788e67f0640e16a35738",
+  "status": "FAIL_ORIGINAL_CRITERIA",
+  "metrics": 1063,
+  "failures": 95,
+  "families": {
+    "grad": 9,
+    "state": 16,
+    "param": 18,
+    "delta": 52
+  },
+  "failed_gradient_metrics": [
+    {
+      "name": "grad.enc.mask_tok",
+      "max_abs": 0.001953125,
+      "l2_relative": 2.626075564094673e-07,
+      "reference_norm": 45628.743488543085,
+      "passed": false
+    },
+    {
+      "name": "grad.enc.pos.weight",
+      "max_abs": 1.851294655352831e-07,
+      "l2_relative": 1.1895939199681503e-05,
+      "reference_norm": 0.8012513561379585,
+      "passed": false
+    },
+    {
+      "name": "grad.enc.tf.layers.0.self_attn.out_proj.weight",
+      "max_abs": 4.57763671875e-05,
+      "l2_relative": 5.900838839068841e-07,
+      "reference_norm": 1513.798096621097,
+      "passed": false
+    },
+    {
+      "name": "grad.enc.tf.layers.0.linear2.weight",
+      "max_abs": 3.62396240234375e-05,
+      "l2_relative": 4.153980886904623e-07,
+      "reference_norm": 2736.536577723791,
+      "passed": false
+    },
+    {
+      "name": "grad.enc.tf.layers.0.norm1.bias",
+      "max_abs": 2.47955322265625e-05,
+      "l2_relative": 6.492736459188316e-07,
+      "reference_norm": 181.58429726977997,
+      "passed": false
+    },
+    {
+      "name": "grad.enc.tf.layers.1.self_attn.in_proj_weight",
+      "max_abs": 2.47955322265625e-05,
+      "l2_relative": 6.083197595619782e-07,
+      "reference_norm": 814.0967027565773,
+      "passed": false
+    },
+    {
+      "name": "grad.enc.tf.layers.1.self_attn.out_proj.weight",
+      "max_abs": 2.288818359375e-05,
+      "l2_relative": 5.891897597544474e-07,
+      "reference_norm": 1026.224621422234,
+      "passed": false
+    },
+    {
+      "name": "grad.enc.tf.layers.4.linear1.weight",
+      "max_abs": 3.675185143947601e-05,
+      "l2_relative": 1.7868004451086458e-06,
+      "reference_norm": 221.10380865153297,
+      "passed": false
+    },
+    {
+      "name": "grad.enc.head_v.weight",
+      "max_abs": 0.010223388671875,
+      "l2_relative": 1.1353054013355215e-05,
+      "reference_norm": 3176.0301932438374,
+      "passed": false
+    }
+  ],
+  "optimizer_details": {
+    "worst_update_coordinates": [
+      {
+        "name": "enc.tf.layers.3.self_attn.in_proj_bias",
+        "flat_index": 898,
+        "ref_gradient": -4.024768713861704e-07,
+        "got_gradient": 4.023313522338867e-07,
+        "ref_delta": 9.757561201695353e-05,
+        "got_delta": -9.757476072991267e-05,
+        "delta_max_abs": 0.0001951503800228238,
+        "ref_gradient_over_eps": -40.24768713861704,
+        "got_gradient_over_eps": 40.23313522338867,
+        "ref_first_step_float64_formula": 9.757562164239804e-05,
+        "got_first_step_float64_formula": -9.757476603565967e-05
+      },
+      {
+        "name": "enc.tf.layers.8.self_attn.in_proj_bias",
+        "flat_index": 659,
+        "ref_gradient": 1.7101410776376724e-07,
+        "got_gradient": -1.9813887774944305e-07,
+        "ref_delta": -9.447557386010885e-05,
+        "got_delta": 9.519552259007469e-05,
+        "delta_max_abs": 0.00018967108917422593,
+        "ref_gradient_over_eps": 17.101410776376724,
+        "got_gradient_over_eps": -19.813887774944305,
+        "ref_first_step_float64_formula": -9.447556871475978e-05,
+        "got_first_step_float64_formula": 9.519551555762785e-05
+      },
+      {
+        "name": "enc.tf.layers.2.self_attn.in_proj_bias",
+        "flat_index": 669,
+        "ref_gradient": 7.82310962677002e-08,
+        "got_gradient": -2.0643346942961216e-07,
+        "ref_delta": -8.866612915880978e-05,
+        "got_delta": 9.53796406975016e-05,
+        "delta_max_abs": 0.00018404576985631138,
+        "ref_gradient_over_eps": 7.8231096267700195,
+        "got_gradient_over_eps": -20.643346942961216,
+        "ref_first_step_float64_formula": -8.866612745050884e-05,
+        "got_first_step_float64_formula": 9.537964251723454e-05
+      },
+      {
+        "name": "enc.tf.layers.5.self_attn.in_proj_bias",
+        "flat_index": 758,
+        "ref_gradient": 8.963979780673981e-08,
+        "got_gradient": -1.0346411727368832e-07,
+        "ref_delta": -8.99638471310027e-05,
+        "got_delta": 9.118663729168475e-05,
+        "delta_max_abs": 0.00018115047714672983,
+        "ref_gradient_over_eps": 8.96397978067398,
+        "got_gradient_over_eps": -10.346411727368832,
+        "ref_first_step_float64_formula": -8.996384956601791e-05,
+        "got_first_step_float64_formula": 9.11866409925185e-05
+      },
+      {
+        "name": "enc.tf.layers.4.self_attn.in_proj_bias",
+        "flat_index": 659,
+        "ref_gradient": 9.010545909404755e-08,
+        "got_gradient": -4.173489287495613e-08,
+        "ref_delta": -9.001053695101291e-05,
+        "got_delta": 8.067068847594783e-05,
+        "delta_max_abs": 0.00017068121815100312,
+        "ref_gradient_over_eps": 9.010545909404755,
+        "got_gradient_over_eps": -4.173489287495613,
+        "ref_first_step_float64_formula": -9.001053479950065e-05,
+        "got_first_step_float64_formula": 8.067068579001387e-05
+      },
+      {
+        "name": "enc.tf.layers.10.self_attn.in_proj_bias",
+        "flat_index": 898,
+        "ref_gradient": -9.546056389808655e-08,
+        "got_gradient": 3.754394128918648e-08,
+        "ref_delta": 9.051778033608571e-05,
+        "got_delta": -7.89668265497312e-05,
+        "delta_max_abs": 0.00016948461416177452,
+        "ref_gradient_over_eps": -9.546056389808655,
+        "got_gradient_over_eps": 3.7543941289186478,
+        "ref_first_step_float64_formula": 9.051778254318492e-05,
+        "got_first_step_float64_formula": -7.896682578506712e-05
+      },
+      {
+        "name": "enc.tf.layers.1.self_attn.in_proj_bias",
+        "flat_index": 682,
+        "ref_gradient": 1.2200325727462769e-07,
+        "got_gradient": -2.8230715543031693e-08,
+        "ref_delta": -9.242443047696725e-05,
+        "got_delta": 7.384302443824708e-05,
+        "delta_max_abs": 0.00016626744763925672,
+        "ref_gradient_over_eps": 12.200325727462769,
+        "got_gradient_over_eps": -2.8230715543031693,
+        "ref_first_step_float64_formula": -9.242442936146993e-05,
+        "got_first_step_float64_formula": 7.38430216176723e-05
+      },
+      {
+        "name": "enc.tf.layers.6.self_attn.in_proj_bias",
+        "flat_index": 781,
+        "ref_gradient": -2.9453076422214508e-08,
+        "got_gradient": 9.092036634683609e-08,
+        "ref_delta": 7.465343514923006e-05,
+        "got_delta": -9.009119821712375e-05,
+        "delta_max_abs": 0.0001647446333663538,
+        "ref_gradient_over_eps": -2.945307642221451,
+        "got_gradient_over_eps": 9.092036634683609,
+        "ref_first_step_float64_formula": 7.465343413785248e-05,
+        "got_first_step_float64_formula": -9.00911972855581e-05
+      },
+      {
+        "name": "enc.tf.layers.8.self_attn.in_proj_weight",
+        "flat_index": 77497,
+        "ref_gradient": 3.72037902707234e-08,
+        "got_gradient": -3.608874976634979e-08,
+        "ref_delta": -7.880199700593948e-05,
+        "got_delta": 7.83158466219902e-05,
+        "delta_max_abs": 0.0001571178436279297,
+        "ref_gradient_over_eps": 3.7203790270723403,
+        "got_gradient_over_eps": -3.6088749766349792,
+        "ref_first_step_float64_formula": -7.880275218475769e-05,
+        "got_first_step_float64_formula": 7.831523935527491e-05
+      },
+      {
+        "name": "enc.tf.layers.7.self_attn.in_proj_bias",
+        "flat_index": 573,
+        "ref_gradient": -1.924490788951516e-08,
+        "got_gradient": 6.04086380917579e-08,
+        "ref_delta": 6.58060162095353e-05,
+        "got_delta": -8.57971899677068e-05,
+        "delta_max_abs": 0.0001516032061772421,
+        "ref_gradient_over_eps": -1.9244907889515162,
+        "got_gradient_over_eps": 6.040863809175789,
+        "ref_first_step_float64_formula": 6.58060130065064e-05,
+        "got_first_step_float64_formula": -8.57971972317263e-05
+      },
+      {
+        "name": "enc.tf.layers.3.linear1.weight",
+        "flat_index": 639200,
+        "ref_gradient": 1.705484464764595e-08,
+        "got_gradient": -2.7008354663848877e-08,
+        "ref_delta": -6.305798888206482e-05,
+        "got_delta": 7.295794785022736e-05,
+        "delta_max_abs": 0.00013601593673229218,
+        "ref_gradient_over_eps": 1.705484464764595,
+        "got_gradient_over_eps": -2.7008354663848877,
+        "ref_first_step_float64_formula": -6.305912737466482e-05,
+        "got_first_step_float64_formula": 7.295799013657309e-05
+      },
+      {
+        "name": "enc.tf.layers.7.self_attn.out_proj.weight",
+        "flat_index": 223980,
+        "ref_gradient": 8.527422323822975e-09,
+        "got_gradient": -6.705522537231445e-08,
+        "ref_delta": -4.600919783115387e-05,
+        "got_delta": 8.703954517841339e-05,
+        "delta_max_abs": 0.00013304874300956726,
+        "ref_gradient_over_eps": 0.8527422323822975,
+        "got_gradient_over_eps": -6.705522537231445,
+        "ref_first_step_float64_formula": -4.6009044021686625e-05,
+        "got_first_step_float64_formula": 8.703920178423014e-05
+      },
+      {
+        "name": "enc.tf.layers.6.self_attn.in_proj_weight",
+        "flat_index": 652863,
+        "ref_gradient": 4.249159246683121e-09,
+        "got_gradient": -3.608874976634979e-08,
+        "ref_delta": -2.979487180709839e-05,
+        "got_delta": 7.83279538154602e-05,
+        "delta_max_abs": 0.0001081228256225586,
+        "ref_gradient_over_eps": 0.4249159246683121,
+        "got_gradient_over_eps": -3.6088749766349792,
+        "ref_first_step_float64_formula": -2.979476379756805e-05,
+        "got_first_step_float64_formula": 7.832838802815365e-05
+      },
+      {
+        "name": "enc.tf.layers.9.self_attn.in_proj_bias",
+        "flat_index": 958,
+        "ref_gradient": -3.5099219530820847e-08,
+        "got_gradient": 3.65253072232008e-09,
+        "ref_delta": 7.782666216371581e-05,
+        "got_delta": -2.6753508791443892e-05,
+        "delta_max_abs": 0.0001045801691361703,
+        "ref_gradient_over_eps": -3.5099219530820847,
+        "got_gradient_over_eps": 0.365253072232008,
+        "ref_first_step_float64_formula": 7.782666728153468e-05,
+        "got_first_step_float64_formula": -2.6753506705893552e-05
+      },
+      {
+        "name": "enc.tf.layers.11.self_attn.in_proj_bias",
+        "flat_index": 918,
+        "ref_gradient": -3.91155481338501e-08,
+        "got_gradient": 2.270098775625229e-09,
+        "ref_delta": 7.963984535308555e-05,
+        "got_delta": -1.8501064914744347e-05,
+        "delta_max_abs": 9.81409102678299e-05,
+        "ref_gradient_over_eps": -3.9115548133850098,
+        "got_gradient_over_eps": 0.2270098775625229,
+        "ref_first_step_float64_formula": 7.963984852057864e-05,
+        "got_first_step_float64_formula": -1.850106357851675e-05
+      },
+      {
+        "name": "enc.pos.weight",
+        "flat_index": 10944,
+        "ref_gradient": -1.4948454918339849e-07,
+        "got_gradient": -2.5684130378067493e-09,
+        "ref_delta": 9.383261203765869e-05,
+        "got_delta": 2.0541250705718994e-05,
+        "delta_max_abs": 7.32913613319397e-05,
+        "ref_gradient_over_eps": -14.948454918339849,
+        "got_gradient_over_eps": -0.25684130378067493,
+        "ref_first_step_float64_formula": 9.383028580225766e-05,
+        "got_first_step_float64_formula": 2.0535945824864625e-05
+      },
+      {
+        "name": "enc.tf.layers.2.self_attn.in_proj_weight",
+        "flat_index": 198844,
+        "ref_gradient": -7.194103091023862e-10,
+        "got_gradient": -5.238689482212067e-09,
+        "ref_delta": 6.713671609759331e-06,
+        "got_delta": 3.437977284193039e-05,
+        "delta_max_abs": 2.766610123217106e-05,
+        "ref_gradient_over_eps": -0.07194103091023862,
+        "got_gradient_over_eps": -0.5238689482212067,
+        "ref_first_step_float64_formula": 6.7135526881633095e-06,
+        "got_first_step_float64_formula": 3.437982554404808e-05
+      },
+      {
+        "name": "enc.tf.layers.11.self_attn.in_proj_weight",
+        "flat_index": 493634,
+        "ref_gradient": -8.015376806724817e-09,
+        "got_gradient": -1.7171259969472885e-08,
+        "ref_delta": 4.45246696472168e-05,
+        "got_delta": 6.322935223579407e-05,
+        "delta_max_abs": 1.870468258857727e-05,
+        "ref_gradient_over_eps": -0.8015376806724817,
+        "got_gradient_over_eps": -1.7171259969472885,
+        "ref_first_step_float64_formula": 4.452490356833124e-05,
+        "got_first_step_float64_formula": 6.322944710240447e-05
+      },
+      {
+        "name": "enc.tf.layers.0.self_attn.in_proj_bias",
+        "flat_index": 535,
+        "ref_gradient": -7.203198038041592e-10,
+        "got_gradient": 5.165929906070232e-10,
+        "ref_delta": 6.71920133754611e-06,
+        "got_delta": -4.912170879833866e-06,
+        "delta_max_abs": 1.1631372217379976e-05,
+        "ref_gradient_over_eps": -0.07203198038041592,
+        "got_gradient_over_eps": 0.051659299060702324,
+        "ref_first_step_float64_formula": 6.719200704707989e-06,
+        "got_first_step_float64_formula": -4.91217061522132e-06
+      },
+      {
+        "name": "enc.tf.layers.2.linear2.weight",
+        "flat_index": 242409,
+        "ref_gradient": -1.010926098388154e-08,
+        "got_gradient": -6.638742888753768e-09,
+        "ref_delta": 5.0268834456801414e-05,
+        "got_delta": 3.9896462112665176e-05,
+        "delta_max_abs": 1.0372372344136238e-05,
+        "ref_gradient_over_eps": -1.010926098388154,
+        "got_gradient_over_eps": -0.6638742888753768,
+        "ref_first_step_float64_formula": 5.0268850296646096e-05,
+        "got_first_step_float64_formula": 3.9896487667938006e-05
+      }
+    ],
+    "packed_bias_blocks": [
+      {
+        "name": "enc.tf.layers.0.self_attn.in_proj_bias",
+        "blocks": {
+          "Q": {
+            "reference_gradient_max_abs": 1.1518909931182861,
+            "candidate_gradient_max_abs": 1.1518912315368652,
+            "delta_error_max_abs": 1.2587406672537327e-09
+          },
+          "K": {
+            "reference_gradient_max_abs": 1.025910023599863e-09,
+            "candidate_gradient_max_abs": 7.712515071034431e-10,
+            "delta_error_max_abs": 1.1631372217379976e-05
+          },
+          "V": {
+            "reference_gradient_max_abs": 35.99099349975586,
+            "candidate_gradient_max_abs": 35.99099349975586,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          }
+        }
+      },
+      {
+        "name": "enc.tf.layers.1.self_attn.in_proj_bias",
+        "blocks": {
+          "Q": {
+            "reference_gradient_max_abs": 1.4338401556015015,
+            "candidate_gradient_max_abs": 1.433840036392212,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          },
+          "K": {
+            "reference_gradient_max_abs": 9.350478649139404e-07,
+            "candidate_gradient_max_abs": 1.1229421943426132e-06,
+            "delta_error_max_abs": 0.00016626744763925672
+          },
+          "V": {
+            "reference_gradient_max_abs": 6.199187278747559,
+            "candidate_gradient_max_abs": 6.199187755584717,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          }
+        }
+      },
+      {
+        "name": "enc.tf.layers.2.self_attn.in_proj_bias",
+        "blocks": {
+          "Q": {
+            "reference_gradient_max_abs": 0.7939399480819702,
+            "candidate_gradient_max_abs": 0.7939400672912598,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          },
+          "K": {
+            "reference_gradient_max_abs": 3.0122464522719383e-07,
+            "candidate_gradient_max_abs": 2.925517037510872e-07,
+            "delta_error_max_abs": 0.00018404576985631138
+          },
+          "V": {
+            "reference_gradient_max_abs": 3.4590418338775635,
+            "candidate_gradient_max_abs": 3.4590420722961426,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          }
+        }
+      },
+      {
+        "name": "enc.tf.layers.3.self_attn.in_proj_bias",
+        "blocks": {
+          "Q": {
+            "reference_gradient_max_abs": 0.457206666469574,
+            "candidate_gradient_max_abs": 0.4572068750858307,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          },
+          "K": {
+            "reference_gradient_max_abs": 4.024768713861704e-07,
+            "candidate_gradient_max_abs": 4.023313522338867e-07,
+            "delta_error_max_abs": 0.0001951503800228238
+          },
+          "V": {
+            "reference_gradient_max_abs": 2.611387252807617,
+            "candidate_gradient_max_abs": 2.611387252807617,
+            "delta_error_max_abs": 2.9103830456733704e-11
+          }
+        }
+      },
+      {
+        "name": "enc.tf.layers.4.self_attn.in_proj_bias",
+        "blocks": {
+          "Q": {
+            "reference_gradient_max_abs": 0.31190019845962524,
+            "candidate_gradient_max_abs": 0.31190019845962524,
+            "delta_error_max_abs": 2.9103830456733704e-11
+          },
+          "K": {
+            "reference_gradient_max_abs": 2.2363383322954178e-07,
+            "candidate_gradient_max_abs": 2.2508902475237846e-07,
+            "delta_error_max_abs": 0.00017068121815100312
+          },
+          "V": {
+            "reference_gradient_max_abs": 2.109010934829712,
+            "candidate_gradient_max_abs": 2.109010934829712,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          }
+        }
+      },
+      {
+        "name": "enc.tf.layers.5.self_attn.in_proj_bias",
+        "blocks": {
+          "Q": {
+            "reference_gradient_max_abs": 0.27295351028442383,
+            "candidate_gradient_max_abs": 0.27295348048210144,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          },
+          "K": {
+            "reference_gradient_max_abs": 2.427259460091591e-07,
+            "candidate_gradient_max_abs": 1.9971048459410667e-07,
+            "delta_error_max_abs": 0.00018115047714672983
+          },
+          "V": {
+            "reference_gradient_max_abs": 1.8240103721618652,
+            "candidate_gradient_max_abs": 1.8240104913711548,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          }
+        }
+      },
+      {
+        "name": "enc.tf.layers.6.self_attn.in_proj_bias",
+        "blocks": {
+          "Q": {
+            "reference_gradient_max_abs": 0.23955833911895752,
+            "candidate_gradient_max_abs": 0.23955824971199036,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          },
+          "K": {
+            "reference_gradient_max_abs": 1.7741695046424866e-07,
+            "candidate_gradient_max_abs": 1.6583362594246864e-07,
+            "delta_error_max_abs": 0.0001647446333663538
+          },
+          "V": {
+            "reference_gradient_max_abs": 1.632309079170227,
+            "candidate_gradient_max_abs": 1.6323091983795166,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          }
+        }
+      },
+      {
+        "name": "enc.tf.layers.7.self_attn.in_proj_bias",
+        "blocks": {
+          "Q": {
+            "reference_gradient_max_abs": 0.21565672755241394,
+            "candidate_gradient_max_abs": 0.21565671265125275,
+            "delta_error_max_abs": 6.548361852765083e-11
+          },
+          "K": {
+            "reference_gradient_max_abs": 1.7372076399624348e-07,
+            "candidate_gradient_max_abs": 2.766028046607971e-07,
+            "delta_error_max_abs": 0.0001516032061772421
+          },
+          "V": {
+            "reference_gradient_max_abs": 1.5316557884216309,
+            "candidate_gradient_max_abs": 1.5316559076309204,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          }
+        }
+      },
+      {
+        "name": "enc.tf.layers.8.self_attn.in_proj_bias",
+        "blocks": {
+          "Q": {
+            "reference_gradient_max_abs": 0.22092626988887787,
+            "candidate_gradient_max_abs": 0.22092607617378235,
+            "delta_error_max_abs": 8.003553375601768e-11
+          },
+          "K": {
+            "reference_gradient_max_abs": 2.1175947040319443e-07,
+            "candidate_gradient_max_abs": 2.2666063159704208e-07,
+            "delta_error_max_abs": 0.00018967108917422593
+          },
+          "V": {
+            "reference_gradient_max_abs": 1.511549472808838,
+            "candidate_gradient_max_abs": 1.5115493535995483,
+            "delta_error_max_abs": 2.9103830456733704e-11
+          }
+        }
+      },
+      {
+        "name": "enc.tf.layers.9.self_attn.in_proj_bias",
+        "blocks": {
+          "Q": {
+            "reference_gradient_max_abs": 0.2244134545326233,
+            "candidate_gradient_max_abs": 0.2244134098291397,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          },
+          "K": {
+            "reference_gradient_max_abs": 2.0314473658800125e-07,
+            "candidate_gradient_max_abs": 1.5199475456029177e-07,
+            "delta_error_max_abs": 0.0001045801691361703
+          },
+          "V": {
+            "reference_gradient_max_abs": 1.4895541667938232,
+            "candidate_gradient_max_abs": 1.4895540475845337,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          }
+        }
+      },
+      {
+        "name": "enc.tf.layers.10.self_attn.in_proj_bias",
+        "blocks": {
+          "Q": {
+            "reference_gradient_max_abs": 0.22228972613811493,
+            "candidate_gradient_max_abs": 0.22228986024856567,
+            "delta_error_max_abs": 2.9103830456733704e-11
+          },
+          "K": {
+            "reference_gradient_max_abs": 1.8277205526828766e-07,
+            "candidate_gradient_max_abs": 2.469751052558422e-07,
+            "delta_error_max_abs": 0.00016948461416177452
+          },
+          "V": {
+            "reference_gradient_max_abs": 1.4629404544830322,
+            "candidate_gradient_max_abs": 1.4629404544830322,
+            "delta_error_max_abs": 2.9831426218152046e-10
+          }
+        }
+      },
+      {
+        "name": "enc.tf.layers.11.self_attn.in_proj_bias",
+        "blocks": {
+          "Q": {
+            "reference_gradient_max_abs": 0.21614837646484375,
+            "candidate_gradient_max_abs": 0.21614840626716614,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          },
+          "K": {
+            "reference_gradient_max_abs": 2.1851155906915665e-07,
+            "candidate_gradient_max_abs": 2.3093889467418194e-07,
+            "delta_error_max_abs": 9.81409102678299e-05
+          },
+          "V": {
+            "reference_gradient_max_abs": 1.4326171875,
+            "candidate_gradient_max_abs": 1.4326171875,
+            "delta_error_max_abs": 2.1827872842550278e-11
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "scope": "LOCAL_STATIC_AND_WRONG_PLATFORM_ONLY",
+  "framework_imported": false,
+  "full_model_runs": 0,
+  "c2_runs": 0,
+  "memory_runs": 0,
+  "entry_imports_without_framework": true,
+  "python39_syntax": [
+    "cpu36_contract.py",
+    "cpu36_guard.py",
+    "diagnose_update.py",
+    "diagnostic_common.py",
+    "memory_gate.py",
+    "memory_metrics.py",
+    "projection_trace.py",
+    "train_memory.py",
+    "baseline/kml_ops.py",
+    "baseline/s4_models.py",
+    "candidate/full_batch_step.py",
+    "candidate/paired_inputs.py",
+    "candidate/training_step.py",
+    "tests/check_equivalence.py",
+    "tests/paired_fixture.py",
+    "tests/check_checkpoint_step.py",
+    "tests/test_cpu36_guard.py",
+    "tests/test_memory_gate.py",
+    "tests/test_memory_metrics.py"
+  ],
+  "original_mean_loss_ast_unchanged_except_image_argument_name": true,
+  "wrong_platform": [
+    {
+      "entry": "diagnose_update.py",
+      "exit": 2,
+      "error": "ValueError('CPU36/KML requires Linux; no native fallback')"
+    },
+    {
+      "entry": "train_memory.py",
+      "exit": 2,
+      "error": "ValueError('CPU36/KML requires Linux; no native fallback')"
+    }
+  ]
+}
