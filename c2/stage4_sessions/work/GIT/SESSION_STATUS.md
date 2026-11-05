@@ -1,24 +1,15 @@
 # GIT简短状态
 
-- 更新/轮次：2026-11-05T16:28:24+08:00；MEMORY3_S06R3_ARCHIVE_20261105；本窗口维护。
-- 项目/分支：E:\eitfm_c2_stages2-4_2026-11-03；main；本窗口唯一操作暂存区，未切分支或覆盖作者文件。
-- 目标与进度：总协调已核验归档范围分四批全部本地完成；原HEAD 51d4089保留，无重复提交。
-- 提交 S00：f1267e75762efce3d047bd0cdde40bc47a9628f5；448文件，3632223字节。
-- 提交 S06：75c46fbb767b343e6b7faa029a5b1ae9cad6c060；95文件，437020字节。
-- 提交 S07：62040d2acbc8a003b93c5a6054ee52931965c8e1；87文件，399395字节。
-- 提交 COORDINATION：e4a864567f549a9c9ed9cf41db8204e0a67192fd；32文件，326962字节。
-- 核验：661项清单SHA/大小全部匹配；加TSV共662份Git对象原始字节与每批/总差异范围一致；认证材料扫描无匹配，暂存区空；归档文件提交后漂移0项。
-- 边界：内存仅固定case首步DDR诊断；S06 R3仅本地通过；S07因S00包装器启动失败，候选/通信未运行；旧R5数值FAIL、UBSan阻断证据保留。未接受稳态、真实HBM、正式性能/生产。
-- 本轮验证未运行模型/C/UBSan/通信/集群作业；未执行会刷新作者证据的审计入口。
-- 清单：c2/stage4_sessions/work/COORDINATION/GIT_SUBMIT_MEMORY3_S06R3_20261105.md及同名TSV；TSV随协调批提交。
-- 遗漏：本轮清单遗漏0；后续S00新执行层/S06新实测/S02五步新代码不入本批。本目录SESSION_STATUS.md、ROUND_DELTA.md结束更新留下一批。
-- 剩余未提交明细（只列路径和状态）：E:/Codex/home/visualizations/2026/11/05/01a1a9d7-f74b-7e30-b951-571b11c51ea1/memory3_s06r3_commits/remaining_files.json。
-- 剩余未提交分组（具体逐文件路径见上方remaining_files.json）：
-  - c2/stage4_sessions/work/GIT/：2项。
-  - c2/stage4_sessions/work/S00/：3项。
-  - c2/stage4_sessions/work/S02/：17项。
-  - c2/stage4_sessions/work/S06/：26项。
-  - c2/stage4_sessions/work/S07/：16项。
-- 重点清单外路径：S00/evidence/s06r3_s07wrapper_20261105/；S02/round7_seq5_20261105T082315Z/；S06、S07根目录下未列入清单的旧准备/源码/测试/证据，均保持原位。
-- 远端/活动：未配置remote，未推送；无本Git会话活动进程/作业，其它任务远端job本轮未探测。
-- 下一步：只按新审核清单提交后续产物；待具体GitCode地址和推送条件明确后再推送，不猜测账户或仓库。
+- 更新/轮次：2026-11-05T17:29:36+08:00；GITHUB_ORIGIN_INITIAL_PUSH_20261105；本窗口维护。
+- 项目/分支：E:\eitfm_c2_stages2-4_2026-11-03；main；HEAD 5a22dbee7d7d056bacef145cb15e91de2bd657db。
+- 当前目标与进度：已按用户提供的地址配置origin并成功首次推送main及全部12次提交；本地main跟踪origin/main。
+- 实际平台：GitHub；用户给定https://github.com/953740669wu/-，不是GitCode；未向GitCode推送，也未猜测其地址。
+- origin：https://github.com/953740669wu/-.git；网页https://github.com/953740669wu/-。
+- 验证：推送前ls-remote确认远端为空；普通push成功创建main。推送后实时ls-remote的HEAD和refs/heads/main、本地HEAD和origin/main四者均为5a22dbee7d7d056bacef145cb15e91de2bd657db。
+- 本轮改动：只写仓库本地Git元数据和自己的两份交接文件；未新增代码提交、未切分支、未强推、未改全局Git配置、未覆盖工作区。
+- 认证：首次非交互推送缺认证而停止；用户已完成Git Credential Manager官方GitHub浏览器登录授权，随后正常推送成功；凭据由系统管理，未读取/记录密码或令牌。
+- 版本范围：先前已审核提交全部随main历史推送；当前工作区未提交变化不在远端快照中。
+- 边界：提交与推送仅版本归档，不新增科学/数值/内存/通信/性能或生产验收；各报告原有失败、未运行与本地接受边界不变。
+- 未提交：S00的两份活动状态及SEQUENCE5_S07_R3_REPORT.md、新执行/审计/证据；S06/S07根目录未列清单的旧准备/源码/测试/证据；本目录两份结束状态，均留待新的审核清单。
+- 证据：E:/Codex/home/visualizations/2026/11/05/01a1a9d7-f74b-7e30-b951-571b11c51ea1/github_push_verification/verification.json，含现场核验时间、URL、远端SHA及当时剩余工作区状态。
+- 活动/下一步：认证和push进程均正常退出，暂存区空；后续只按总协调新清单分批提交，再正常push origin main并复核远端。不把工作区清空作为目标。
