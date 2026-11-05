@@ -1,0 +1,15 @@
+{"event": "worker_ready", "time_ns": 1793876698956508399, "monotonic_ns": 3898075337730415, "pid": 310132, "rank": 0, "job_id": "2041165", "run_id": "normal"}
+{"event": "checkpoint_begin", "time_ns": 1793876698966995919, "monotonic_ns": 3898075348217835, "pid": 310132, "stage": "before_framework"}
+{"event": "checkpoint_end", "time_ns": 1793876698984680517, "monotonic_ns": 3898075365902203, "pid": 310132, "stage": "before_framework"}
+{"event": "torch_import_begin", "time_ns": 1793876698986289378, "monotonic_ns": 3898075367510664, "pid": 310132}
+{"event": "torch_import_end", "time_ns": 1793876714614377948, "monotonic_ns": 3898090995599834, "pid": 310132}
+{"event": "distributed_import_begin", "time_ns": 1793876714616297360, "monotonic_ns": 3898090997518856, "pid": 310132}
+{"event": "distributed_import_end", "time_ns": 1793876714617747019, "monotonic_ns": 3898090998967675, "pid": 310132}
+{"event": "runtime_metadata_begin", "time_ns": 1793876714619151469, "monotonic_ns": 3898091000372215, "pid": 310132}
+{"event": "library_sha_begin", "time_ns": 1793876714623001074, "monotonic_ns": 3898091004221900, "pid": 310132, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so"}
+{"event": "library_sha_end", "time_ns": 1793876714625879152, "monotonic_ns": 3898091007100738, "pid": 310132, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so"}
+{"event": "library_sha_begin", "time_ns": 1793876714639218849, "monotonic_ns": 3898091020439985, "pid": 310132, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so"}
+{"event": "library_sha_end", "time_ns": 1793876714644268752, "monotonic_ns": 3898091025491218, "pid": 310132, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so"}
+{"event": "library_sha_begin", "time_ns": 1793876714646418136, "monotonic_ns": 3898091027640322, "pid": 310132, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so"}
+{"event": "library_sha_end", "time_ns": 1793876714649059003, "monotonic_ns": 3898091030280659, "pid": 310132, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so"}
+{"event": "library_sha_begin", "time_ns": 1793876714650831924, "monotonic_ns": 3898091032055180, "pid": 310132, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"}

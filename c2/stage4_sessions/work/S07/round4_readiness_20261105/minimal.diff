@@ -1,0 +1,155 @@
+--- a/candidate/comm_probe.py
++++ b/candidate/comm_probe.py
+@@ -4,6 +4,7 @@
+ import json
+ import os
+ from pathlib import Path
++import secrets
+ import signal
+ import socket
+ import subprocess
+@@ -20,6 +21,65 @@
+ 
+ def write_json(path, data):
+     path.write_text(json.dumps(data, indent=2, allow_nan=False) + '\n', encoding='utf-8')
++
++
++def publish_json(path, data):
++    if path.exists():
++        raise ValueError('refuse existing readiness file: ' + str(path))
++    temporary = path.with_name(path.name + '.tmp')
++    with temporary.open('x', encoding='utf-8') as stream:
++        stream.write(json.dumps(data, allow_nan=False) + '\n')
++        stream.flush()
++        os.fsync(stream.fileno())
++    os.replace(temporary, path)
++
++
++def await_peer_ready(directory, spec, rank, event_path):
++    stop = int(os.environ['S07_CASE_DEADLINE_NS'])
++    identity = dict(run_id=spec['run_id'], job_id=spec['job_id'], ready_token=spec['ready_token'])
++
++    def check_deadline():
++        if time.monotonic_ns() >= stop:
++            raise TimeoutError('original case deadline reached while awaiting readiness')
++
++    record_event(event_path, 'ready_context_wait', rank=rank)
++    while True:
++        check_deadline()
++        try:
++            context = json.loads((directory / 'participants.json').read_text(encoding='utf-8'))
++            break
++        except FileNotFoundError:
++            time.sleep(0.05)
++    pids = context.get('pids') if isinstance(context, dict) else None
++    if (not isinstance(pids, list) or len(pids) != 2
++            or any(type(pid) is not int or pid <= 0 for pid in pids)
++            or len(set(pids)) != 2 or pids[rank] != os.getpid()
++            or type(context.get('deadline_ns')) is not int
++            or context != dict(identity, pids=pids, deadline_ns=stop)):
++        raise ValueError('invalid current-run readiness participant identity/deadline')
++    check_deadline()
++    publish_json(directory / f'ready_rank{rank}.json', dict(identity, rank=rank, pid=pids[rank]))
++    record_event(event_path, 'ready_published', rank=rank, job_id=spec['job_id'],
++                 run_id=spec['run_id'], ready_token=spec['ready_token'])
++    record_event(event_path, 'peer_ready_wait', rank=rank)
++    while True:
++        check_deadline()
++        complete = True
++        for peer in range(2):
++            try:
++                ready = json.loads((directory / f'ready_rank{peer}.json').read_text(encoding='utf-8'))
++            except FileNotFoundError:
++                complete = False
++                continue
++            if (not isinstance(ready, dict) or type(ready.get('rank')) is not int
++                    or type(ready.get('pid')) is not int
++                    or ready != dict(identity, rank=peer, pid=pids[peer])):
++                raise ValueError(f'invalid current-run ready identity for rank{peer}')
++        check_deadline()
++        if complete:
++            record_event(event_path, 'both_ready', rank=rank, pids=pids)
++            return
++        time.sleep(0.05)
+ 
+ 
+ def record_event(path, event, **fields):
+@@ -141,10 +201,13 @@
+                 raise ValueError(f'rank{rank}: {key} mismatch')
+ 
+ 
+-def supervise(commands, directory, deadline, environment):
++def supervise(commands, directory, deadline, environment, ready_context=None):
+     processes, logs = [], []
+     state = dict(reason='complete', errors=[])
+     started = time.monotonic()
++    stop_ns = int((started + deadline) * 1e9)
++    if ready_context is not None:
++        environment = dict(environment, S07_CASE_DEADLINE_NS=str(stop_ns))
+     event_path = directory / 'supervisor.events.jsonl'
+     record_event(event_path, 'supervisor_begin', deadline_seconds=deadline)
+     try:
+@@ -155,6 +218,9 @@
+             processes.append(subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT,
+                                                env=environment, start_new_session=(os.name == 'posix')))
+             record_event(event_path, 'spawned', rank=rank, child_pid=processes[-1].pid)
++        if ready_context is not None:
++            publish_json(directory / 'participants.json',
++                         dict(ready_context, pids=[p.pid for p in processes], deadline_ns=stop_ns))
+         while True:
+             codes = [process.poll() for process in processes]
+             if any(code is not None and code != 0 for code in codes):
+@@ -245,9 +311,14 @@
+         record['torch_interop'] = torch.get_num_interop_threads()
+         if record['torch_intraop'] != 36:
+             raise ValueError('actual torch intraop must be36')
++        checkpoint('after_framework')
++        record_event(event_path, 'preparation_complete', rank=rank)
++        await_peer_ready(directory, spec, rank, event_path)
+         checkpoint('init_process_group')
+         record_event(event_path, 'init_process_group_begin', pg_timeout_seconds=spec['pg_timeout'],
+                      rank=rank, world_size=2, backend='gloo', init_method=(directory / 'rendezvous').as_uri())
++        if time.monotonic_ns() >= int(os.environ['S07_CASE_DEADLINE_NS']):
++            raise TimeoutError('original case deadline reached before process group initialization')
+         dist.init_process_group('gloo', init_method=(directory / 'rendezvous').as_uri(),
+                                 rank=rank, world_size=2,
+                                 timeout=timedelta(seconds=spec['pg_timeout']))
+@@ -306,7 +377,7 @@
+             raise ValueError('require 1 <= pg-timeout < deadline <= 120 seconds')
+         allocation = load_allocation(args.allocation.resolve())
+         source = {p.name: cpu36.sha(p) for p in (Path(__file__), Path(cpu36.__file__))}
+-        spec = dict(run_id=directory.name, case=args.case, pg_timeout=args.pg_timeout,
++        spec = dict(run_id=directory.name, ready_token=secrets.token_hex(16), case=args.case, pg_timeout=args.pg_timeout,
+                     deadline=args.deadline, allocation=allocation, source_sha256=source,
+                     tensor_contract=dict(broadcast=BROADCAST, total=TOTAL, tolerance=0,
+                                          dtype='torch.float32', shape=[4]),
+@@ -317,7 +388,8 @@
+         commands = [[sys.executable, '-B', str(Path(__file__).resolve()), '_worker',
+                      '--output', str(directory), '--rank', str(rank)] for rank in range(2)]
+         write_json(directory / 'commands.json', commands)
+-        state = supervise(commands, directory, args.deadline, environment)
++        state = supervise(commands, directory, args.deadline, environment,
++                          ready_context={key: spec[key] for key in ('run_id', 'job_id', 'ready_token')})
+         summary['supervisor'] = state
+         if (state['reason'] != 'complete' or state['exit_codes'] != [0, 0]
+                 or not state['all_reaped']):
+--- a/tests/test_diagnostics.py
++++ b/tests/test_diagnostics.py
+@@ -77,13 +77,15 @@
+         dist.init_process_group = unittest.mock.Mock(side_effect=RuntimeError('Wait timeout'))
+         with tempfile.TemporaryDirectory(dir=BASE / 'evidence') as folder, \
+                 patch.dict(sys.modules, {'torch': torch, 'torch.distributed': dist}), \
+-                patch.dict(os.environ, dict(probe.ENVIRONMENT, CCS_JOB_ID='synthetic')), \
++                patch.dict(os.environ, dict(probe.ENVIRONMENT, CCS_JOB_ID='synthetic',
++                    S07_CASE_DEADLINE_NS=str(probe.time.monotonic_ns() + 30_000_000_000))), \
+                 patch.object(probe.cpu36, 'validate_receipt'), \
+                 patch.object(probe.cpu36, 'snapshot_threads', return_value={}), \
+                 patch.object(probe.cpu36, 'validate_snapshot'), \
+                 patch.object(probe.os, 'sched_getaffinity', create=True, return_value={0}), \
+                 patch.object(probe.os, 'sched_setaffinity', create=True), \
+-                patch.object(probe, 'backend_info', return_value=dict(status='AVAILABLE_BUILT_NOT_COMM_TESTED')):
++                patch.object(probe, 'backend_info', return_value=dict(status='AVAILABLE_BUILT_NOT_COMM_TESTED')), \
++                patch.object(probe, 'await_peer_ready'):
+             directory = Path(folder)
+             probe.write_json(directory / 'manifest.json', dict(job_id='synthetic', run_id='normal',
+                 pg_timeout=5, allocation=dict(job_id='synthetic', ranks=[dict(selected=[0])] * 2)))

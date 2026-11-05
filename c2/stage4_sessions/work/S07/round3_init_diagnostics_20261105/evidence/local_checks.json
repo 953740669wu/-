@@ -1,0 +1,58 @@
+{
+  "checked_utc": "2026-11-05T09:40:43.184132+00:00",
+  "scope": "STDLIB_FAKE_FRAMEWORK_DIAGNOSTICS_ONLY",
+  "checks": [
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round3_init_diagnostics_20261105\\tests\\test_diagnostics.py"
+      ],
+      "exit_code": 0,
+      "log": "evidence/diagnostic_tests.txt"
+    },
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round3_init_diagnostics_20261105\\tests\\test_job_identity.py"
+      ],
+      "exit_code": 0,
+      "log": "evidence/job_identity_tests.txt"
+    },
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round3_init_diagnostics_20261105\\tests\\test_probe.py"
+      ],
+      "exit_code": 0,
+      "log": "evidence/regression_tests.txt"
+    }
+  ],
+  "total": 28,
+  "passed": 27,
+  "skipped": 1,
+  "python39_ast": {
+    "status": "PASS_SYNTAX_ONLY",
+    "files": [
+      "candidate/comm_probe.py",
+      "candidate/cpu36_contract.py",
+      "candidate/run_checks.py",
+      "tests/test_diagnostics.py",
+      "tests/test_job_identity.py",
+      "tests/test_probe.py"
+    ]
+  },
+  "unchanged": [
+    "CPU36 contract",
+    "job identity checks in comm_probe",
+    "all four case criteria in run_checks",
+    "numeric/rank tensor contract",
+    "pg_timeout=5; deadline=30; grace=2; wait=2",
+    "S00 270s consumer and 300s job proposal"
+  ],
+  "old_2040233_linux_tests": "22 passed, historical distinct run",
+  "real_communication_this_round": "NOT_RUN",
+  "root_cause_fixed": false
+}

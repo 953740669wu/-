@@ -1,0 +1,15 @@
+test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) ... 
+  test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'pid': 100340.0}) ... FAIL
+
+======================================================================
+FAIL: test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'pid': 100340.0})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 119, in test_wrong_or_partial_peer_ready_rejected
+    with patch.dict(os.environ, {'S07_CASE_DEADLINE_NS': str(self.stop)}), \
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.122s
+
+FAILED (failures=1)

@@ -1,0 +1,25 @@
+{"event": "worker_ready", "time_ns": 1793876699036751175, "monotonic_ns": 3898075417974091, "pid": 310133, "rank": 1, "job_id": "2041165", "run_id": "normal"}
+{"event": "checkpoint_begin", "time_ns": 1793876699040987603, "monotonic_ns": 3898075422208419, "pid": 310133, "stage": "before_framework"}
+{"event": "checkpoint_end", "time_ns": 1793876699047308776, "monotonic_ns": 3898075428530542, "pid": 310133, "stage": "before_framework"}
+{"event": "torch_import_begin", "time_ns": 1793876699048587594, "monotonic_ns": 3898075429807960, "pid": 310133}
+{"event": "torch_import_end", "time_ns": 1793876707104947562, "monotonic_ns": 3898083486169598, "pid": 310133}
+{"event": "distributed_import_begin", "time_ns": 1793876707106978615, "monotonic_ns": 3898083488199981, "pid": 310133}
+{"event": "distributed_import_end", "time_ns": 1793876707108134223, "monotonic_ns": 3898083489354779, "pid": 310133}
+{"event": "runtime_metadata_begin", "time_ns": 1793876707109104559, "monotonic_ns": 3898083490324655, "pid": 310133}
+{"event": "library_sha_begin", "time_ns": 1793876707112566712, "monotonic_ns": 3898083493788968, "pid": 310133, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so"}
+{"event": "library_sha_end", "time_ns": 1793876707115087099, "monotonic_ns": 3898083496309595, "pid": 310133, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so"}
+{"event": "library_sha_begin", "time_ns": 1793876707116600189, "monotonic_ns": 3898083497821475, "pid": 310133, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so"}
+{"event": "library_sha_end", "time_ns": 1793876707121856093, "monotonic_ns": 3898083503078279, "pid": 310133, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so"}
+{"event": "library_sha_begin", "time_ns": 1793876707123830906, "monotonic_ns": 3898083505052012, "pid": 310133, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so"}
+{"event": "library_sha_end", "time_ns": 1793876707125938670, "monotonic_ns": 3898083507160516, "pid": 310133, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so"}
+{"event": "library_sha_begin", "time_ns": 1793876707127376220, "monotonic_ns": 3898083508597266, "pid": 310133, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"}
+{"event": "library_sha_end", "time_ns": 1793876707521873515, "monotonic_ns": 3898083903095431, "pid": 310133, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"}
+{"event": "library_sha_begin", "time_ns": 1793876707523698427, "monotonic_ns": 3898083904919673, "pid": 310133, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so"}
+{"event": "library_sha_end", "time_ns": 1793876707525385608, "monotonic_ns": 3898083906606574, "pid": 310133, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so"}
+{"event": "library_sha_begin", "time_ns": 1793876707526672297, "monotonic_ns": 3898083907893003, "pid": 310133, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so"}
+{"event": "library_sha_end", "time_ns": 1793876707566214597, "monotonic_ns": 3898083947437323, "pid": 310133, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so"}
+{"event": "runtime_metadata_end", "time_ns": 1793876707624254389, "monotonic_ns": 3898084005477145, "pid": 310133}
+{"event": "checkpoint_begin", "time_ns": 1793876707625845149, "monotonic_ns": 3898084007067455, "pid": 310133, "stage": "init_process_group"}
+{"event": "checkpoint_end", "time_ns": 1793876707630651701, "monotonic_ns": 3898084011874767, "pid": 310133, "stage": "init_process_group"}
+{"event": "init_process_group_begin", "time_ns": 1793876707631800919, "monotonic_ns": 3898084013022125, "pid": 310133, "pg_timeout_seconds": 5, "rank": 1, "world_size": 2, "backend": "gloo", "init_method": "file:///home/share/dengqingtian/opt/stage4_sessions/S00/S07_INIT_DIAG_R4_20261105T104153Z/payload/checks_current_job/normal/rendezvous"}
+{"event": "worker_error", "time_ns": 1793876714155139344, "monotonic_ns": 3898090536360600, "pid": 310133, "stage": "init_process_group", "error": "RuntimeError: Wait timeout"}

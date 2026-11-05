@@ -1,0 +1,167 @@
+{
+  "job_id": "2040233",
+  "host": "cn21339",
+  "timezone": "Asia/Shanghai",
+  "events": [
+    {
+      "event": "job_identity_tests_started",
+      "source": "job_evidence/job_identity_tests_receipt.json::started",
+      "kind": "RECORDED_WALL_CLOCK",
+      "epoch_seconds": 1793870344.0199306,
+      "china_time": "2026-11-05T17:19:04.019931+08:00"
+    },
+    {
+      "event": "job_identity_tests_finished",
+      "source": "job_evidence/job_identity_tests_receipt.json::finished",
+      "kind": "RECORDED_WALL_CLOCK",
+      "epoch_seconds": 1793870349.3189306,
+      "china_time": "2026-11-05T17:19:09.318931+08:00"
+    },
+    {
+      "event": "probe_tests_started",
+      "source": "job_evidence/probe_tests_receipt.json::started",
+      "kind": "RECORDED_WALL_CLOCK",
+      "epoch_seconds": 1793870350.1493008,
+      "china_time": "2026-11-05T17:19:10.149301+08:00"
+    },
+    {
+      "event": "probe_tests_finished",
+      "source": "job_evidence/probe_tests_receipt.json::finished",
+      "kind": "RECORDED_WALL_CLOCK",
+      "epoch_seconds": 1793870358.1765814,
+      "china_time": "2026-11-05T17:19:18.176581+08:00"
+    },
+    {
+      "event": "environment_started",
+      "source": "job_evidence/environment_receipt.json::started",
+      "kind": "RECORDED_WALL_CLOCK",
+      "epoch_seconds": 1793870359.0552266,
+      "china_time": "2026-11-05T17:19:19.055227+08:00"
+    },
+    {
+      "event": "environment_finished",
+      "source": "job_evidence/environment_receipt.json::finished",
+      "kind": "RECORDED_WALL_CLOCK",
+      "epoch_seconds": 1793870380.920487,
+      "china_time": "2026-11-05T17:19:40.920487+08:00"
+    },
+    {
+      "event": "run_checks_started",
+      "source": "job_evidence/run_checks_receipt.json::started",
+      "kind": "RECORDED_WALL_CLOCK",
+      "epoch_seconds": 1793870381.7492344,
+      "china_time": "2026-11-05T17:19:41.749234+08:00"
+    },
+    {
+      "event": "run_checks_finished",
+      "source": "job_evidence/run_checks_receipt.json::finished",
+      "kind": "RECORDED_WALL_CLOCK",
+      "epoch_seconds": 1793870401.941482,
+      "china_time": "2026-11-05T17:20:01.941482+08:00"
+    },
+    {
+      "event": "normal_manifest.json",
+      "source": "COLLECTION_S00.json::files/payload/checks_current_job/normal/manifest.json/mtime_ns",
+      "kind": "REMOTE_ORIGINAL_FILE_MTIME_NOT_STAGE_TIME",
+      "mtime_ns": 1793870382518293000,
+      "china_time": "2026-11-05T17:19:42.518293000+08:00"
+    },
+    {
+      "event": "normal_commands.json",
+      "source": "COLLECTION_S00.json::files/payload/checks_current_job/normal/commands.json/mtime_ns",
+      "kind": "REMOTE_ORIGINAL_FILE_MTIME_NOT_STAGE_TIME",
+      "mtime_ns": 1793870382561015000,
+      "china_time": "2026-11-05T17:19:42.561015000+08:00"
+    },
+    {
+      "event": "normal_rank0.log",
+      "source": "COLLECTION_S00.json::files/payload/checks_current_job/normal/rank0.log/mtime_ns",
+      "kind": "REMOTE_ORIGINAL_FILE_MTIME_NOT_STAGE_TIME",
+      "mtime_ns": 1793870382523398336,
+      "china_time": "2026-11-05T17:19:42.523398336+08:00"
+    },
+    {
+      "event": "normal_rank0.json",
+      "source": "COLLECTION_S00.json::files/payload/checks_current_job/normal/rank0.json/mtime_ns",
+      "kind": "REMOTE_ORIGINAL_FILE_MTIME_NOT_STAGE_TIME",
+      "mtime_ns": 1793870383100332000,
+      "china_time": "2026-11-05T17:19:43.100332000+08:00"
+    },
+    {
+      "event": "normal_rank1.json",
+      "source": "COLLECTION_S00.json::files/payload/checks_current_job/normal/rank1.json/mtime_ns",
+      "kind": "REMOTE_ORIGINAL_FILE_MTIME_NOT_STAGE_TIME",
+      "mtime_ns": 1793870397807462000,
+      "china_time": "2026-11-05T17:19:57.807462000+08:00"
+    },
+    {
+      "event": "normal_rank1.log",
+      "source": "COLLECTION_S00.json::files/payload/checks_current_job/normal/rank1.log/mtime_ns",
+      "kind": "REMOTE_ORIGINAL_FILE_MTIME_NOT_STAGE_TIME",
+      "mtime_ns": 1793870398338736000,
+      "china_time": "2026-11-05T17:19:58.338736000+08:00"
+    },
+    {
+      "event": "normal_summary.json",
+      "source": "COLLECTION_S00.json::files/payload/checks_current_job/normal/summary.json/mtime_ns",
+      "kind": "REMOTE_ORIGINAL_FILE_MTIME_NOT_STAGE_TIME",
+      "mtime_ns": 1793870398487698000,
+      "china_time": "2026-11-05T17:19:58.487698000+08:00"
+    },
+    {
+      "event": "scheduler_startTime",
+      "source": "scheduler_latest.stdout::data.successData[0].startTime",
+      "kind": "SCHEDULER_SECONDS_ONLY",
+      "china_time": "2026-11-05T17:19:03+08:00"
+    },
+    {
+      "event": "scheduler_endTime",
+      "source": "scheduler_latest.stdout::data.successData[0].endTime",
+      "kind": "SCHEDULER_SECONDS_ONLY",
+      "china_time": "2026-11-05T17:20:03+08:00"
+    }
+  ],
+  "rank_main_start_ticks": [
+    389167343,
+    389167348
+  ],
+  "start_ticks_difference": 5,
+  "start_ticks_seconds_conversion": "NOT_AVAILABLE; SC_CLK_TCK and boot epoch not captured",
+  "observed_rank_stages": [
+    "before_framework",
+    "init_process_group"
+  ],
+  "rank0_missing": [
+    "framework_import_begin/end",
+    "library_SHA_begin/end",
+    "init_process_group_begin/end"
+  ],
+  "rank1_error": "RuntimeError: Wait timeout",
+  "pg_timeout_seconds": 5,
+  "parent_deadline_seconds": 30,
+  "supervisor": {
+    "reason": "child_failed",
+    "errors": [],
+    "pids": [
+      2321423,
+      2321424
+    ],
+    "exit_codes": [
+      -15,
+      1
+    ],
+    "all_reaped": true,
+    "wall_seconds": 15.916535114869475
+  },
+  "environment_command_wall_seconds": 21.865260362625122,
+  "mtime_caveat": "Original remote mtime is metadata, not checkpoint wall time; commands.json and rank0.log mtimes invert source order by ~38 ms. Do not infer exact launch/cleanup/PG durations from these values.",
+  "root_cause": "UNDETERMINED",
+  "stages_not_run": [
+    "all_gather_identity",
+    "broadcast",
+    "all_reduce_sum",
+    "crash",
+    "collective-timeout",
+    "watchdog"
+  ]
+}

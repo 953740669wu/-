@@ -1,0 +1,64 @@
+{
+  "checked_utc": "2026-11-05T11:31:53.725781+00:00",
+  "checks": [
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round4_readiness_20261105\\tests\\test_readiness.py"
+      ],
+      "exit_code": 0,
+      "methods": 16,
+      "log": "evidence/test_readiness.txt"
+    },
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round4_readiness_20261105\\tests\\test_diagnostics.py"
+      ],
+      "exit_code": 0,
+      "methods": 6,
+      "log": "evidence/test_diagnostics.txt"
+    },
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round4_readiness_20261105\\tests\\test_job_identity.py"
+      ],
+      "exit_code": 0,
+      "methods": 6,
+      "log": "evidence/test_job_identity.txt"
+    },
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round4_readiness_20261105\\tests\\test_probe.py"
+      ],
+      "exit_code": 0,
+      "methods": 16,
+      "log": "evidence/test_probe.txt"
+    }
+  ],
+  "total": 44,
+  "passed": 43,
+  "skipped": 1,
+  "python39_ast": {
+    "status": "PASS_SYNTAX_ONLY",
+    "files": [
+      "candidate/comm_probe.py",
+      "candidate/cpu36_contract.py",
+      "candidate/run_checks.py",
+      "tests/test_diagnostics.py",
+      "tests/test_job_identity.py",
+      "tests/test_probe.py",
+      "tests/test_readiness.py"
+    ]
+  },
+  "readiness_stagger_seconds": 6.25,
+  "stagger_scope": "CONTROLLED_CLOCK_FAKE_FRAMEWORK_NOT_REAL_GLOO",
+  "real_communication": "NOT_RUN",
+  "new_cluster_job": false
+}

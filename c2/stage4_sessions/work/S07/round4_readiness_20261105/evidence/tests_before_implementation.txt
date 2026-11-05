@@ -1,0 +1,291 @@
+test_launch_failure_cleans_waiting_rank (__main__.ParentReadinessChecks.test_launch_failure_cleans_waiting_rank) ... ERROR
+test_missing_ready_bounded_cleanup (__main__.ParentReadinessChecks.test_missing_ready_bounded_cleanup) ... ERROR
+test_parent_pids_and_original_deadline (__main__.ParentReadinessChecks.test_parent_pids_and_original_deadline) ... ERROR
+test_peer_failure_cleans_waiting_rank (__main__.ParentReadinessChecks.test_peer_failure_cleans_waiting_rank) ... ERROR
+test_failed_preparation_never_publishes_ready (__main__.ReadinessChecks.test_failed_preparation_never_publishes_ready) ... 
+  test_failed_preparation_never_publishes_ready (__main__.ReadinessChecks.test_failed_preparation_never_publishes_ready) (mode='torch1') ... ERROR
+  test_failed_preparation_never_publishes_ready (__main__.ReadinessChecks.test_failed_preparation_never_publishes_ready) (mode='bad_tid') ... ERROR
+test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) ... 
+  test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) (changes={'job_id': 'old'}) ... ERROR
+  test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) (changes={'run_id': 'old'}) ... ERROR
+  test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) (changes={'ready_token': 'old'}) ... ERROR
+  test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) (changes={'pids': [108860, 98860]}) ... ERROR
+  test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) (changes={'pids': [98860, 98860]}) ... ERROR
+  test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) (changes={'deadline_ns': 30000000001}) ... ERROR
+test_matching_atomic_ready (__main__.ReadinessChecks.test_matching_atomic_ready) ... ERROR
+test_missing_participant_context_times_out_without_own_ready (__main__.ReadinessChecks.test_missing_participant_context_times_out_without_own_ready) ... ERROR
+test_missing_peer_uses_remaining_case_budget (__main__.ReadinessChecks.test_missing_peer_uses_remaining_case_budget) ... ERROR
+test_old_own_ready_is_not_overwritten (__main__.ReadinessChecks.test_old_own_ready_is_not_overwritten) ... ERROR
+test_preparation_stagger_over_five_seconds_before_init (__main__.ReadinessChecks.test_preparation_stagger_over_five_seconds_before_init) ... FAIL
+test_ready_error_never_calls_init (__main__.ReadinessChecks.test_ready_error_never_calls_init) ... ERROR
+test_ready_fsync_failure_is_fatal_not_diagnostic_tolerance (__main__.ReadinessChecks.test_ready_fsync_failure_is_fatal_not_diagnostic_tolerance) ... ERROR
+test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) ... 
+  test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'run_id': 'old'}) ... ERROR
+  test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'job_id': 'old'}) ... ERROR
+  test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'ready_token': 'old'}) ... ERROR
+  test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'rank': 0}) ... ERROR
+  test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'rank': True}) ... ERROR
+  test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'pid': 108861}) ... ERROR
+  test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes=None) ... ERROR
+
+======================================================================
+ERROR: test_launch_failure_cleans_waiting_rank (__main__.ParentReadinessChecks.test_launch_failure_cleans_waiting_rank)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 237, in test_launch_failure_cleans_waiting_rank
+    state, context, _ = self.run_pair(lambda directory: [self.waiter(directory),
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 203, in run_pair
+    state = probe.supervise(commands(directory), directory, limit, environment, ready_context=spec)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: supervise() got an unexpected keyword argument 'ready_context'
+
+======================================================================
+ERROR: test_missing_ready_bounded_cleanup (__main__.ParentReadinessChecks.test_missing_ready_bounded_cleanup)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 222, in test_missing_ready_bounded_cleanup
+    state, _, _ = self.run_pair(lambda directory: [self.waiter(directory),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 203, in run_pair
+    state = probe.supervise(commands(directory), directory, limit, environment, ready_context=spec)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: supervise() got an unexpected keyword argument 'ready_context'
+
+======================================================================
+ERROR: test_parent_pids_and_original_deadline (__main__.ParentReadinessChecks.test_parent_pids_and_original_deadline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 215, in test_parent_pids_and_original_deadline
+    state, context, rows = self.run_pair(lambda _: [[sys.executable, '-c', 'pass']] * 2, limit=2)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 203, in run_pair
+    state = probe.supervise(commands(directory), directory, limit, environment, ready_context=spec)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: supervise() got an unexpected keyword argument 'ready_context'
+
+======================================================================
+ERROR: test_peer_failure_cleans_waiting_rank (__main__.ParentReadinessChecks.test_peer_failure_cleans_waiting_rank)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 230, in test_peer_failure_cleans_waiting_rank
+    state, _, _ = self.run_pair(lambda directory: [self.waiter(directory),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 203, in run_pair
+    state = probe.supervise(commands(directory), directory, limit, environment, ready_context=spec)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: supervise() got an unexpected keyword argument 'ready_context'
+
+======================================================================
+ERROR: test_failed_preparation_never_publishes_ready (__main__.ReadinessChecks.test_failed_preparation_never_publishes_ready) (mode='torch1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 175, in test_failed_preparation_never_publishes_ready
+    with fake_worker() as (torch, dist, validate), \
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\mock.py", line 1446, in __enter__
+    original, local = self.get_original()
+                      ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\mock.py", line 1419, in get_original
+    raise AttributeError(
+AttributeError: <module 'comm_probe' from 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round4_readiness_20261105\\candidate\\comm_probe.py'> does not have the attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_failed_preparation_never_publishes_ready (__main__.ReadinessChecks.test_failed_preparation_never_publishes_ready) (mode='bad_tid')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 175, in test_failed_preparation_never_publishes_ready
+    with fake_worker() as (torch, dist, validate), \
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\mock.py", line 1446, in __enter__
+    original, local = self.get_original()
+                      ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\mock.py", line 1419, in get_original
+    raise AttributeError(
+AttributeError: <module 'comm_probe' from 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round4_readiness_20261105\\candidate\\comm_probe.py'> does not have the attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) (changes={'job_id': 'old'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 153, in test_invalid_participant_context_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) (changes={'run_id': 'old'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 153, in test_invalid_participant_context_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) (changes={'ready_token': 'old'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 153, in test_invalid_participant_context_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) (changes={'pids': [108860, 98860]})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 153, in test_invalid_participant_context_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) (changes={'pids': [98860, 98860]})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 153, in test_invalid_participant_context_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_invalid_participant_context_rejected (__main__.ReadinessChecks.test_invalid_participant_context_rejected) (changes={'deadline_ns': 30000000001})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 153, in test_invalid_participant_context_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_matching_atomic_ready (__main__.ReadinessChecks.test_matching_atomic_ready)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 69, in test_matching_atomic_ready
+    probe.await_peer_ready(self.directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_missing_participant_context_times_out_without_own_ready (__main__.ReadinessChecks.test_missing_participant_context_times_out_without_own_ready)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 139, in test_missing_participant_context_times_out_without_own_ready
+    probe.await_peer_ready(self.directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_missing_peer_uses_remaining_case_budget (__main__.ReadinessChecks.test_missing_peer_uses_remaining_case_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 130, in test_missing_peer_uses_remaining_case_budget
+    probe.await_peer_ready(self.directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_old_own_ready_is_not_overwritten (__main__.ReadinessChecks.test_old_own_ready_is_not_overwritten)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 166, in test_old_own_ready_is_not_overwritten
+    probe.publish_json(path, dict(self.spec, rank=0, pid=self.pids[0]))
+    ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'publish_json'
+
+======================================================================
+ERROR: test_ready_error_never_calls_init (__main__.ReadinessChecks.test_ready_error_never_calls_init)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 189, in test_ready_error_never_calls_init
+    with fake_worker() as (_, dist, _), \
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\mock.py", line 1446, in __enter__
+    original, local = self.get_original()
+                      ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\mock.py", line 1419, in get_original
+    raise AttributeError(
+AttributeError: <module 'comm_probe' from 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round4_readiness_20261105\\candidate\\comm_probe.py'> does not have the attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_ready_fsync_failure_is_fatal_not_diagnostic_tolerance (__main__.ReadinessChecks.test_ready_fsync_failure_is_fatal_not_diagnostic_tolerance)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 159, in test_ready_fsync_failure_is_fatal_not_diagnostic_tolerance
+    probe.publish_json(self.directory / 'ready_rank0.json', dict(self.spec, rank=0, pid=self.pids[0]))
+    ^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'publish_json'
+
+======================================================================
+ERROR: test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'run_id': 'old'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 121, in test_wrong_or_partial_peer_ready_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'job_id': 'old'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 121, in test_wrong_or_partial_peer_ready_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'ready_token': 'old'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 121, in test_wrong_or_partial_peer_ready_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'rank': 0})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 121, in test_wrong_or_partial_peer_ready_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'rank': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 121, in test_wrong_or_partial_peer_ready_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes={'pid': 108861})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 121, in test_wrong_or_partial_peer_ready_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+ERROR: test_wrong_or_partial_peer_ready_rejected (__main__.ReadinessChecks.test_wrong_or_partial_peer_ready_rejected) (changes=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 121, in test_wrong_or_partial_peer_ready_rejected
+    probe.await_peer_ready(directory, self.spec, 0, None)
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'await_peer_ready'
+
+======================================================================
+FAIL: test_preparation_stagger_over_five_seconds_before_init (__main__.ReadinessChecks.test_preparation_stagger_over_five_seconds_before_init)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round4_readiness_20261105\tests\test_readiness.py", line 102, in test_preparation_stagger_over_five_seconds_before_init
+    self.assertEqual(len(called), 1)
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.133s
+
+FAILED (failures=1, errors=25)

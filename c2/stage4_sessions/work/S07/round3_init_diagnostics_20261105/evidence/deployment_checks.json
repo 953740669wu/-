@@ -1,0 +1,26 @@
+{
+  "scope": "ISOLATED_ZIP_STANDARD_LIBRARY_TESTS_ONLY",
+  "package_items": 13,
+  "payload_manifest_hashes": "11/11 MATCH",
+  "total": 28,
+  "passed": 27,
+  "skipped": 1,
+  "checks": [
+    {
+      "test": "test_diagnostics.py",
+      "exit_code": 0,
+      "output": "test_events_have_wall_monotonic_and_fsync (__main__.DiagnosticChecks.test_events_have_wall_monotonic_and_fsync) ... ok\ntest_hash_entry_is_distinct_from_framework_import (__main__.DiagnosticChecks.test_hash_entry_is_distinct_from_framework_import) ... ok\ntest_import_entry_is_visible_without_import_exit (__main__.DiagnosticChecks.test_import_entry_is_visible_without_import_exit) ... ok\ntest_init_timeout_keeps_original_failure_and_records_entry (__main__.DiagnosticChecks.test_init_timeout_keeps_original_failure_and_records_entry) ... ok\ntest_supervisor_records_spawn_failure_cleanup_and_reap (__main__.DiagnosticChecks.test_supervisor_records_spawn_failure_cleanup_and_reap) ... ok\ntest_trace_io_failure_does_not_skip_cleanup (__main__.DiagnosticChecks.test_trace_io_failure_does_not_skip_cleanup) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.362s\n\nOK\n"
+    },
+    {
+      "test": "test_job_identity.py",
+      "exit_code": 0,
+      "output": "test_launcher_rejects_before_workers (__main__.JobIdentityChecks.test_launcher_rejects_before_workers) ... ok\ntest_matching_job (__main__.JobIdentityChecks.test_matching_job) ... ok\ntest_missing_current_job (__main__.JobIdentityChecks.test_missing_current_job) ... ok\ntest_missing_or_old_configured_job (__main__.JobIdentityChecks.test_missing_or_old_configured_job) ... ok\ntest_worker_matching_reaches_framework_gate (__main__.JobIdentityChecks.test_worker_matching_reaches_framework_gate) ... ok\ntest_worker_rejects_before_cpu_and_framework (__main__.JobIdentityChecks.test_worker_rejects_before_cpu_and_framework) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.152s\n\nOK\n"
+    },
+    {
+      "test": "test_probe.py",
+      "exit_code": 0,
+      "output": "test_preflight_failure_is_not_injected_failure_success (__main__.FailureAcceptanceChecks.test_preflight_failure_is_not_injected_failure_success) ... ok\ntest_timeout_must_be_gloo_broadcast_timeout (__main__.FailureAcceptanceChecks.test_timeout_must_be_gloo_broadcast_timeout) ... ok\ntest_watchdog_requires_both_injections (__main__.FailureAcceptanceChecks.test_watchdog_requires_both_injections) ... ok\ntest_bad_values_and_identity (__main__.ReportChecks.test_bad_values_and_identity) ... ok\ntest_complete_pair (__main__.ReportChecks.test_complete_pair) ... ok\ntest_missing_or_extra_rank (__main__.ReportChecks.test_missing_or_extra_rank) ... ok\ntest_bad_allocation (__main__.ResourceChecks.test_bad_allocation) ... ok\ntest_exact36_and_reserved2 (__main__.ResourceChecks.test_exact36_and_reserved2) ... ok\ntest_live_allocation_guards_with_synthetic_sysfs (__main__.ResourceChecks.test_live_allocation_guards_with_synthetic_sysfs) ... ok\ntest_overlapping_rank_domains (__main__.ResourceChecks.test_overlapping_rank_domains) ... ok\ntest_thread_outside_boundary (__main__.ResourceChecks.test_thread_outside_boundary) ... ok\ntest_failed_rank_stops_peer (__main__.SupervisorChecks.test_failed_rank_stops_peer) ... ok\ntest_linux_process_group (__main__.SupervisorChecks.test_linux_process_group) ... skipped 'Linux process-group cleanup only'\ntest_spawn_error_cleans_started_peer (__main__.SupervisorChecks.test_spawn_error_cleans_started_peer) ... ok\ntest_success (__main__.SupervisorChecks.test_success) ... ok\ntest_watchdog_stops_pair (__main__.SupervisorChecks.test_watchdog_stops_pair) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 0.781s\n\nOK (skipped=1)\n"
+    }
+  ],
+  "real_communication": "NOT_RUN"
+}

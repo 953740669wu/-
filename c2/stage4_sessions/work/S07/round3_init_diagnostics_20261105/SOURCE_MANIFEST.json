@@ -1,0 +1,79 @@
+{
+  "task": "S07",
+  "round": "R3_INIT_DIAGNOSTICS",
+  "status": "ROOT_CAUSE_UNDETERMINED_DIAGNOSTIC_CANDIDATE_ONLY",
+  "delivery_files": [
+    {
+      "path": "candidate/comm_probe.py",
+      "bytes": 18491,
+      "sha256": "7bd8cbc70f2e837fa2df03879a8f721ff9482de7386df2717176c3d92b4b45be"
+    },
+    {
+      "path": "candidate/cpu36_contract.py",
+      "bytes": 11171,
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d"
+    },
+    {
+      "path": "candidate/run_checks.py",
+      "bytes": 3161,
+      "sha256": "7b7cc96edd9401981a61db5122bf785e3e2348a41cda5363ba5d2ea4b0217d07"
+    },
+    {
+      "path": "tests/test_diagnostics.py",
+      "bytes": 7255,
+      "sha256": "a165228c1a1441c75297e192c30e6fea4c95c7684479236b328506f15c6b9a4a"
+    },
+    {
+      "path": "tests/test_job_identity.py",
+      "bytes": 6012,
+      "sha256": "4f1abca370e2c15ce843737f9883f48b6bcea510f3b8a56706e3fd1f1bb387d1"
+    },
+    {
+      "path": "tests/test_probe.py",
+      "bytes": 9383,
+      "sha256": "00be905b4dd2b0aa17592edbc725d70611cf91f59ccbd7f9120664503685673f"
+    },
+    {
+      "path": "allocation.template.json",
+      "bytes": 148,
+      "sha256": "2cb84d2ec9616ec33f491e6e4156c3c25b0cdcb795f48ffc7e085bb15ba8948c"
+    },
+    {
+      "path": "INTERFACE_FOR_S00.md",
+      "bytes": 4556,
+      "sha256": "9a346422e80d5fe3912eb3ce840417c88114191e4fe11bd745255755bedff39f"
+    },
+    {
+      "path": "TIMELINE.md",
+      "bytes": 6501,
+      "sha256": "e4751a2b886cd3db362500ed333986ba2aa39ca98d2e05616d8f0a01cc5aa15a"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 4694,
+      "sha256": "f09722db4dc1a8256e1d19db6b1a03afe859d4e8e043a5a1dd0a75a23b84bfb3"
+    },
+    {
+      "path": "minimal.diff",
+      "bytes": 9789,
+      "sha256": "75736f92dbb371b0a1306fe88697a80ce0acff46dee935ceb97f94fafe1a427b"
+    }
+  ],
+  "empty_directories": [
+    "evidence/"
+  ],
+  "reference_sources": "evidence/reference_sources.json (local evidence index, not a remote runtime dependency)",
+  "baseline_probe_sha256": "13fdc08a872871ae61173f0761e81a961a9ecfa425ee79ff5d3e15d13a6cb5e8",
+  "pg_timeout_seconds": 5,
+  "deadline_seconds": 30,
+  "case_order": [
+    "normal",
+    "crash",
+    "collective-timeout",
+    "watchdog"
+  ],
+  "consumer_budget_seconds": 270,
+  "job_proposal_seconds": 300,
+  "cluster_run_this_round": false,
+  "root_cause_fixed": false
+}

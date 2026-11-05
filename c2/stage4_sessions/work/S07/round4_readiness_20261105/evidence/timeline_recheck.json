@@ -1,0 +1,111 @@
+{
+  "job_id": "2041165",
+  "host": "cn21338",
+  "clock": "same-node monotonic_ns relative to supervisor_begin",
+  "events": [
+    {
+      "stream": "rank0",
+      "relative_seconds": 16.383993928,
+      "event": "torch_import_end",
+      "time_ns": 1793876714614377948,
+      "monotonic_ns": 3898090995599834,
+      "pid": 310132
+    },
+    {
+      "stream": "rank0",
+      "relative_seconds": 16.420449274,
+      "event": "library_sha_begin",
+      "time_ns": 1793876714650831924,
+      "monotonic_ns": 3898091032055180,
+      "pid": 310132,
+      "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"
+    },
+    {
+      "stream": "rank1",
+      "relative_seconds": 8.874563692,
+      "event": "torch_import_end",
+      "time_ns": 1793876707104947562,
+      "monotonic_ns": 3898083486169598,
+      "pid": 310133
+    },
+    {
+      "stream": "rank1",
+      "relative_seconds": 8.89699136,
+      "event": "library_sha_begin",
+      "time_ns": 1793876707127376220,
+      "monotonic_ns": 3898083508597266,
+      "pid": 310133,
+      "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"
+    },
+    {
+      "stream": "rank1",
+      "relative_seconds": 9.393871239,
+      "event": "runtime_metadata_end",
+      "time_ns": 1793876707624254389,
+      "monotonic_ns": 3898084005477145,
+      "pid": 310133
+    },
+    {
+      "stream": "rank1",
+      "relative_seconds": 9.401416219,
+      "event": "init_process_group_begin",
+      "time_ns": 1793876707631800919,
+      "monotonic_ns": 3898084013022125,
+      "pid": 310133,
+      "pg_timeout_seconds": 5,
+      "rank": 1,
+      "world_size": 2,
+      "backend": "gloo",
+      "init_method": "file:///home/share/dengqingtian/opt/stage4_sessions/S00/S07_INIT_DIAG_R4_20261105T104153Z/payload/checks_current_job/normal/rendezvous"
+    },
+    {
+      "stream": "rank1",
+      "relative_seconds": 15.924754694,
+      "event": "worker_error",
+      "time_ns": 1793876714155139344,
+      "monotonic_ns": 3898090536360600,
+      "pid": 310133,
+      "stage": "init_process_group",
+      "error": "RuntimeError: Wait timeout"
+    },
+    {
+      "stream": "supervisor",
+      "relative_seconds": 16.567949732,
+      "event": "cleanup_begin",
+      "time_ns": 1793876714798334392,
+      "monotonic_ns": 3898091179555638,
+      "pid": 310130,
+      "reason": "child_failed",
+      "exit_codes": [
+        null,
+        1
+      ]
+    },
+    {
+      "stream": "supervisor",
+      "relative_seconds": 16.569892145,
+      "event": "signal_sent",
+      "time_ns": 1793876714800277095,
+      "monotonic_ns": 3898091181498051,
+      "pid": 310130,
+      "child_pid": 310132,
+      "signal": 15
+    },
+    {
+      "stream": "supervisor",
+      "relative_seconds": 16.676002744,
+      "event": "supervisor_end",
+      "time_ns": 1793876714906387674,
+      "monotonic_ns": 3898091287608650,
+      "pid": 310130,
+      "reason": "child_failed",
+      "exit_codes": [
+        -15,
+        1
+      ],
+      "all_reaped": true
+    }
+  ],
+  "mechanism": "rank1 initialization timeout precedes rank0 preparation completion; no claim of identical cause for 2040233",
+  "old_r3_probe_sha256": "7bd8cbc70f2e837fa2df03879a8f721ff9482de7386df2717176c3d92b4b45be"
+}

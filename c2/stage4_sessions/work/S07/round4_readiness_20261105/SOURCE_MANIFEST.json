@@ -1,0 +1,105 @@
+{
+  "task": "S07",
+  "round": "R4_READINESS",
+  "status": "READY_FOR_REVIEW_LOCAL_ONLY_REAL_COMMUNICATION_NOT_RUN",
+  "delivery_files": [
+    {
+      "path": "candidate/comm_probe.py",
+      "bytes": 21991,
+      "sha256": "67090fa9b07acf532bc7331f4b9d6e4b9451d7f24b7590f20f19529f860c0dd7"
+    },
+    {
+      "path": "candidate/cpu36_contract.py",
+      "bytes": 11171,
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d"
+    },
+    {
+      "path": "candidate/run_checks.py",
+      "bytes": 3161,
+      "sha256": "7b7cc96edd9401981a61db5122bf785e3e2348a41cda5363ba5d2ea4b0217d07"
+    },
+    {
+      "path": "tests/test_diagnostics.py",
+      "bytes": 7404,
+      "sha256": "9f3430ec82bb200a56c292754d47837b2e3989b12590b0adb1cd83efd6c4cc03"
+    },
+    {
+      "path": "tests/test_job_identity.py",
+      "bytes": 6012,
+      "sha256": "4f1abca370e2c15ce843737f9883f48b6bcea510f3b8a56706e3fd1f1bb387d1"
+    },
+    {
+      "path": "tests/test_probe.py",
+      "bytes": 9383,
+      "sha256": "00be905b4dd2b0aa17592edbc725d70611cf91f59ccbd7f9120664503685673f"
+    },
+    {
+      "path": "tests/test_readiness.py",
+      "bytes": 14382,
+      "sha256": "c4cee8e78621b05023303762b7c3a9c94f882db411b4effaa32763bcbff35c2f"
+    },
+    {
+      "path": "allocation.template.json",
+      "bytes": 148,
+      "sha256": "2cb84d2ec9616ec33f491e6e4156c3c25b0cdcb795f48ffc7e085bb15ba8948c"
+    },
+    {
+      "path": "INTERFACE_FOR_S00.md",
+      "bytes": 5572,
+      "sha256": "b241a891dea6541ad01e25d129e3160b97ec603611125016659fd01224867d14"
+    },
+    {
+      "path": "TIMELINE.md",
+      "bytes": 2792,
+      "sha256": "2b61fb0ad803a0f2f854fb4f6b3e0c6814cacf24b6eeabae69f39b055fc5e1e3"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 4759,
+      "sha256": "58f9391014c305cece7f25768e10fd5bf303cfa8b6179ddac4a2427a84cd128f"
+    },
+    {
+      "path": "minimal.diff",
+      "bytes": 8340,
+      "sha256": "7054094e67d97702b09a8935698651bbb9d3b8ad4f73cadfa58c852abd2623a2"
+    }
+  ],
+  "empty_directories": [
+    "evidence/"
+  ],
+  "baseline_probe_sha256": "7bd8cbc70f2e837fa2df03879a8f721ff9482de7386df2717176c3d92b4b45be",
+  "pg_timeout_seconds": 5,
+  "deadline_seconds": 30,
+  "case_order": [
+    "normal",
+    "crash",
+    "collective-timeout",
+    "watchdog"
+  ],
+  "consumer_budget_seconds": 270,
+  "job_proposal_seconds": 300,
+  "ready_protocol": {
+    "identity": [
+      "run_id",
+      "job_id",
+      "ready_token",
+      "rank",
+      "pid"
+    ],
+    "participants_source": "parent Popen PIDs; same-node original supervisor deadline",
+    "deadline_environment": "S07_CASE_DEADLINE_NS",
+    "clock_origin": "unchanged supervise started before spawn; no reset after readiness",
+    "publication": "exclusive tmp + flush/fsync + os.replace; prerequisite errors are fatal"
+  },
+  "tests": {
+    "readiness": 16,
+    "diagnostics": 6,
+    "job_identity": 6,
+    "probe": 16,
+    "total": 44,
+    "local_passed": 43,
+    "local_skipped": 1
+  },
+  "cluster_job_submitted": false,
+  "real_communication": "NOT_RUN"
+}
