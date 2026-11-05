@@ -1,0 +1,143 @@
+{
+  "indexes": {
+    "S00": 157,
+    "S06_R2": 65,
+    "S06_payload": 12,
+    "S07_R2": 33,
+    "S00_global": 663
+  },
+  "collections": {
+    "2037434": {
+      "sha": "d2dd91be74c2bba01f529f926d07ab38b184d88b6389bcbae0a1283fd1f51881",
+      "indexed_files": 89,
+      "archive_files": 90,
+      "state": "SUCCEEDED",
+      "exit": 0,
+      "remote_mtime": "preserved as collection metadata, local extraction times differ"
+    },
+    "2037491": {
+      "sha": "08410627941e6249cb10fed875c9204891f6ad9cdc93364880051ae3b9a22754",
+      "indexed_files": 48,
+      "archive_files": 49,
+      "state": "FAILED",
+      "exit": 1,
+      "remote_mtime": "preserved as collection metadata, local extraction times differ"
+    }
+  },
+  "memory": {
+    "ckpt0": {
+      "initialization": {
+        "elapsed_seconds": 14.657534260768443,
+        "rss_bytes": 728817664,
+        "peak_rss_bytes": 915197952,
+        "rss_MiB": 695.0546875,
+        "peak_rss_MiB": 872.80078125,
+        "hugetlb_bytes": 0
+      },
+      "peak_reset": {
+        "available": true,
+        "method": "/proc/self/clear_refs=5"
+      },
+      "training_start": {
+        "rss_bytes": 728817664,
+        "peak_rss_bytes": 728817664,
+        "rss_MiB": 695.0546875,
+        "peak_rss_MiB": 695.0546875,
+        "hugetlb_bytes": 0
+      },
+      "training": {
+        "elapsed_seconds": 2.4526388668455184,
+        "rss_bytes": 3695017984,
+        "peak_rss_bytes": 6119497728,
+        "rss_MiB": 3523.84375,
+        "peak_rss_MiB": 5836.0078125,
+        "hugetlb_bytes": 0
+      },
+      "loss": 303.04705810546875,
+      "optimizer_steps": 1,
+      "pid": 1428225,
+      "kml_calls": 149,
+      "cpu36_checkpoints": 7
+    },
+    "ckpt1": {
+      "initialization": {
+        "elapsed_seconds": 13.56830025697127,
+        "rss_bytes": 738398208,
+        "peak_rss_bytes": 946135040,
+        "rss_MiB": 704.19140625,
+        "peak_rss_MiB": 902.3046875,
+        "hugetlb_bytes": 0
+      },
+      "peak_reset": {
+        "available": true,
+        "method": "/proc/self/clear_refs=5"
+      },
+      "training_start": {
+        "rss_bytes": 738398208,
+        "peak_rss_bytes": 738398208,
+        "rss_MiB": 704.19140625,
+        "peak_rss_MiB": 704.19140625,
+        "hugetlb_bytes": 0
+      },
+      "training": {
+        "elapsed_seconds": 3.3435222790576518,
+        "rss_bytes": 4142383104,
+        "peak_rss_bytes": 4523429888,
+        "rss_MiB": 3950.484375,
+        "peak_rss_MiB": 4313.87890625,
+        "hugetlb_bytes": 0
+      },
+      "loss": 303.04705810546875,
+      "optimizer_steps": 1,
+      "pid": 1429732,
+      "kml_calls": 197,
+      "cpu36_checkpoints": 7
+    }
+  },
+  "peak_reduction_percent": 26.08168040813431,
+  "step_time_increase_percent": 36.32346466717908,
+  "ubsan": {
+    "status": "BLOCKED_UBSAN_OR_C_FAILURE",
+    "real_HBM": false,
+    "real_mempolicy": false,
+    "preload_probe": false,
+    "model": false,
+    "blocker": "NO_EXISTING_UBSAN_RUNTIME_IN_FINITE_ALLOWED_LOCATIONS",
+    "error": "RuntimeError('NO_EXISTING_UBSAN_RUNTIME_IN_FINITE_ALLOWED_LOCATIONS')"
+  },
+  "ubsan_steps": [
+    "compiler",
+    "uname",
+    "glibc",
+    "source_sha",
+    "package_integrity",
+    "compiler_elf",
+    "compiler_target",
+    "compiler_path_libubsan_so",
+    "compiler_path_libubsan_so_1",
+    "compiler_path_libgcc_s_so_1"
+  ],
+  "local_checks": {
+    "S06_normal_parent": {
+      "pass": 23,
+      "skip": 3
+    },
+    "S06_documented_isolated_parent": {
+      "pass": 22,
+      "skip": 3,
+      "fail": 1,
+      "blocker": "test_isolation_requires_I_and_S assumes unisolated parent"
+    },
+    "S07": {
+      "pass": 21,
+      "skip": 1
+    },
+    "python39_ast": "PASS"
+  },
+  "acceptance": {
+    "S00": "one paired first-step DDR diagnostic accepted, no benefit/steady/HBM acceptance",
+    "S06": "identity accepted; documented precheck blocker must fix before runtime",
+    "S07": "local preparation accepted; C2 not run",
+    "S03": "UBSan runtime blocker accepted; no new C acceptance"
+  }
+}

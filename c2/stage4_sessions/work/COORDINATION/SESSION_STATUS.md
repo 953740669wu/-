@@ -1,10 +1,11 @@
 # 总协调简短状态
 
-- 更新/轮次：2026-11-05；R6_S03R2_LOCAL_REVIEW。
-- 当前目标与进度：已按短状态收取S02 R6、S03第二轮和Git增量，完成本地候选验收与首批commit核验。
-- 修改的文件：本目录R6_S03R2_LOCAL_REVIEW.md/.json、复跑日志、R6_S03R2_NEXT_S00.md、本轮Git范围及清单、总任务表/本状态与增量。
-- 测试结果及证据：S02 53项索引/28包成员、25项检查独立复跑通过；S03 17项索引、6项副本检查和19项旧交付保护核对通过，C/UBSan未运行。
-- 证据路径：c2/stage4_sessions/work/COORDINATION/R6_S03R2_LOCAL_REVIEW.json；S02_R6_LOCAL_REVIEW_TESTS.txt。
-- Git核验：c73b64ebc39d43ffa98c6dcec804ad2d2297f941实际115文件与114项TSV+自身完全一致，逐Git对象SHA/大小通过；remote为空，未推送。
-- 阻塞：新C2 checkpoint数值、新50个C/UBSan与新库待S00实测；内存/真实HBM未授权本轮执行。
-- 下一步：现有S00按R6_S03R2_NEXT_S00.md跑一数值900秒和一C测试300秒；Git按刷新清单分两批提交，02/03保持会话待结果。
+- 更新/轮次：2026-11-05；MEMORY3_S06R3_REVIEW。
+- 当前目标与进度：2039061新增3个首步DDR配对接受；2039114为00包装器缺计算节点profile，07候选未运行；06 R3本地修复接受。
+- 修改文件：本目录审核MD/JSON、两份06复跑日志、下一轮固定交接、总表/自身状态/增量、Git合并清单；作者源码/证据未改。
+- 验证增量：S00本轮241项/总索引904项、168+52原件；R6三份各28源原样，6PID/42项CPU36/KML有效，原memory_gate复跑通过；06 R3索引28/payload13核验，两种启动各23通过3跳过。
+- 数据：新组CKPT0/1峰值中位5837.0234/4835.3516MiB、步末3492.6523/4498.1914MiB、首步4.39693/6.12779秒；旧异主机首组单列，无稳态/HBM/集成接受。
+- 证据：MEMORY3_S06R3_REVIEW.md/.json、S06_R3_ordinary_REVIEW_TESTS.txt、S06_R3_isolated_REVIEW_TESTS.txt；旧短状态在history/PRE_MEMORY3_S06R3_20261105/。
+- 阻塞：07包装器调度原件传递需修；06 Linux/Torch/compile未测；03缺UBSan。root无活动集群job，未代S00提交。
+- Git：现场HEAD51d4089；提醒唯一窗口按新合并TSV归档，实际commit/push待回报。
+- 下一步：00只跑一次06 R3有限探针并准备07包装器；02评估三配对并准备5步严格数值/独立内存入口；06/07保留待实测，其他不扩。

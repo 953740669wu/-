@@ -1,0 +1,180 @@
+{
+  "indexes": {
+    "S00_round": 241,
+    "S00_global": 904,
+    "S06_R3": 28,
+    "S06_payload": 13
+  },
+  "collections": {
+    "2039061": {
+      "archive_files": 168,
+      "indexed_files": 167,
+      "sha256": "cd6be5d0aaf6a690524f465598f3a79df29c2b838ba35479437e4bce4d6f7613",
+      "state": "SUCCEEDED",
+      "exit": 0
+    },
+    "2039114": {
+      "archive_files": 52,
+      "indexed_files": 51,
+      "sha256": "6e3f10538532c3455e9a0f021466c16d25fa2b4968e81d31b8e39c0b9bab6563",
+      "state": "FAILED",
+      "exit": 1
+    }
+  },
+  "new_pairs": [
+    {
+      "pair": 1,
+      "measurements": [
+        {
+          "checkpoint": 0,
+          "pid": 2061672,
+          "elapsed_seconds": 4.749420389067382,
+          "rss_bytes": 3662311424,
+          "peak_rss_bytes": 6085783552,
+          "rss_MiB": 3492.65234375,
+          "peak_rss_MiB": 5803.85546875,
+          "hugetlb_bytes": 0
+        },
+        {
+          "checkpoint": 1,
+          "pid": 2065777,
+          "elapsed_seconds": 6.127788343001157,
+          "rss_bytes": 4797898752,
+          "peak_rss_bytes": 5070233600,
+          "rss_MiB": 4575.6328125,
+          "peak_rss_MiB": 4835.3515625,
+          "hugetlb_bytes": 0
+        }
+      ],
+      "peak_reduction_percent": 16.687250595139147,
+      "step_time_increase_percent": 29.02181405349207
+    },
+    {
+      "pair": 2,
+      "measurements": [
+        {
+          "checkpoint": 0,
+          "pid": 2069454,
+          "elapsed_seconds": 4.396932111587375,
+          "rss_bytes": 3642273792,
+          "peak_rss_bytes": 6121635840,
+          "rss_MiB": 3473.54296875,
+          "peak_rss_MiB": 5838.046875,
+          "hugetlb_bytes": 0
+        },
+        {
+          "checkpoint": 1,
+          "pid": 2072708,
+          "elapsed_seconds": 5.959001389332116,
+          "rss_bytes": 4716695552,
+          "peak_rss_bytes": 5125173248,
+          "rss_MiB": 4498.19140625,
+          "peak_rss_MiB": 4887.74609375,
+          "hugetlb_bytes": 0
+        }
+      ],
+      "peak_reduction_percent": 16.277717558579894,
+      "step_time_increase_percent": 35.52634514479243
+    },
+    {
+      "pair": 3,
+      "measurements": [
+        {
+          "checkpoint": 0,
+          "pid": 2076756,
+          "elapsed_seconds": 4.396816019900143,
+          "rss_bytes": 3668377600,
+          "peak_rss_bytes": 6120562688,
+          "rss_MiB": 3498.4375,
+          "peak_rss_MiB": 5837.0234375,
+          "hugetlb_bytes": 0
+        },
+        {
+          "checkpoint": 1,
+          "pid": 2080003,
+          "elapsed_seconds": 6.208228330127895,
+          "rss_bytes": 4715880448,
+          "peak_rss_bytes": 5070069760,
+          "rss_MiB": 4497.4140625,
+          "peak_rss_MiB": 4835.1953125,
+          "hugetlb_bytes": 0
+        }
+      ],
+      "peak_reduction_percent": 17.163339084159713,
+      "step_time_increase_percent": 41.19827397892557
+    }
+  ],
+  "acceptance": {
+    "memory": "3 new fixed-case first-step DDR pairs accepted; no steady-state or HBM acceptance",
+    "S06": "R3 local preparation accepted; real Linux/C2 probe not run",
+    "S07": "S00 wrapper missing compute-node scheduler profile; candidate and communication NOT_RUN"
+  },
+  "new_pair_summary": {
+    "ckpt0": {
+      "peak_rss_MiB": {
+        "median": 5837.0234375,
+        "min": 5803.85546875,
+        "max": 5838.046875
+      },
+      "rss_MiB": {
+        "median": 3492.65234375,
+        "min": 3473.54296875,
+        "max": 3498.4375
+      },
+      "elapsed_seconds": {
+        "median": 4.396932111587375,
+        "min": 4.396816019900143,
+        "max": 4.749420389067382
+      }
+    },
+    "ckpt1": {
+      "peak_rss_MiB": {
+        "median": 4835.3515625,
+        "min": 4835.1953125,
+        "max": 4887.74609375
+      },
+      "rss_MiB": {
+        "median": 4498.19140625,
+        "min": 4497.4140625,
+        "max": 4575.6328125
+      },
+      "elapsed_seconds": {
+        "median": 6.127788343001157,
+        "min": 5.959001389332116,
+        "max": 6.208228330127895
+      }
+    }
+  },
+  "S06_unchanged_R2_files": [
+    "README_R2.md",
+    "source_identity.json",
+    "baseline/cluster_runtime_reference.env",
+    "baseline/environment_expected.json",
+    "baseline/kml_ops.py",
+    "baseline/s4_models.py",
+    "candidate/cpu36_contract.py",
+    "candidate/probe.py",
+    "candidate/run_linux.sh",
+    "candidate/run_probe.py",
+    "tests/test_revision.py"
+  ],
+  "S06_package": {
+    "bytes": 33571,
+    "sha256": "0aa9bbfe2c7f7bc102da0b4487aba301afbfdce14eeb259f3a9b2b6056162f5c"
+  },
+  "strict_reference_gate_replayed_locally": "PASS",
+  "S06_local_tests": {
+    "ordinary": {
+      "total": 26,
+      "pass": 23,
+      "skip": 3,
+      "exit": 0
+    },
+    "isolated": {
+      "total": 26,
+      "pass": 23,
+      "skip": 3,
+      "exit": 0
+    }
+  }
+}

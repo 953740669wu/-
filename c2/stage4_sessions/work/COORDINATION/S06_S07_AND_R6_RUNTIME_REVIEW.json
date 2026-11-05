@@ -1,0 +1,57 @@
+{
+  "S02": {
+    "job_id": "2037034",
+    "files_verified": 48,
+    "job_exit": 0,
+    "decision": "ACCEPTED_FIXED_CASE_CHECKPOINT_EQUIVALENCE",
+    "metrics_passed": 1063,
+    "max_abs": 0,
+    "max_relative": 0,
+    "KML_calls_by_side": {
+      "reference": 149,
+      "candidate": 197
+    },
+    "memory": "NOT_RUN"
+  },
+  "S03": {
+    "job_id": "2037064",
+    "files_verified": 43,
+    "job_exit": 1,
+    "decision": "ACCEPTED_UBSAN_LINK_BLOCKER_EVIDENCE",
+    "reason": "cannot find -lubsan",
+    "new_50_cases": "NOT_RUN"
+  },
+  "S06": {
+    "delivery_files_verified": 27,
+    "local_tests": "7 pass",
+    "real_C2_probe": "NOT_RUN",
+    "decision": "LOCAL_DELIVERY_VALIDATED_REVISION_REQUIRED_BEFORE_CLUSTER",
+    "required_revision": [
+      "OpenBLAS1 and observe actual Torch36 without forcing it",
+      "parent signal/exception cleanup for separately started child sessions"
+    ]
+  },
+  "S07": {
+    "delivery_files_verified": 17,
+    "local_tests": "15 pass 1 Linux skip",
+    "real_C2_probe": "NOT_RUN",
+    "decision": "LOCAL_DELIVERY_VALIDATED_REVISION_REQUIRED_BEFORE_CLUSTER",
+    "required_revision": [
+      "match allocation and worker job_id to actual CCS_JOB_ID before launch/import"
+    ]
+  },
+  "Git": {
+    "local_commits_verified": [
+      {
+        "commit": "a0b0308d822375c70ca4d6b9c5a3a9faee6f6a89",
+        "files_verified": 19
+      },
+      {
+        "commit": "51d408980f524ff22e62901523d0fd63c3d7ad9d",
+        "files_verified": 77
+      }
+    ],
+    "remote_push": "NOT_CLAIMED"
+  },
+  "new_jobs_in_coordinator_review": 0
+}
