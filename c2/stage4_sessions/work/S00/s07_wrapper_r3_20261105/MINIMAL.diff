@@ -1,0 +1,432 @@
+--- old/run_s07_r2_job.py
++++ revision/run_s07_r2_job.py
+@@ -9,9 +9,11 @@
+ import time
+ import traceback
+ from bounded_round_step import run_step, save, sha
++from scheduler_handoff import live_context, create_request, await_handoff
+ 
+ 
+ def main(root):
++    assert root.parent == Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
+     assert root.name.startswith('S07_R2_TWODOMAIN_') and os.environ.get('CCS_JOB_ID')
+     assert not socket.gethostname().startswith('login')
+     assert not os.environ.get('LD_PRELOAD') and not os.environ.get('KML_BLAS_LIB')
+@@ -26,19 +28,14 @@
+     try:
+         pre = json.loads((root / 'pre_submit_checks.json').read_text())
+         assert all(sha(root / name) == h for name, h in pre['payload_files'].items())
+-        # Query the real current job; never derive/overwrite CCS_JOB_ID from JSON.
+-        assert (root / 'scheduler_query_exit.txt').read_text().strip() == '0'
+-        raw = root / 'scheduler_allocation.json'
+-        job = json.loads(raw.read_text())['data']['successData'][0]
+-        assert str(job['jobId']) == os.environ['CCS_JOB_ID'] and job['state'] == 'RUNNING'
+-        assert job['jobWallClockLimit'] == 300 and len(job['resGroups']) == 1
+-        group = job['resGroups'][0]
+-        assert group['resReq']['cpu'] == 76 and group['resReq']['mem'] == group['resLimit']['mem'] == 24576
+-        assert len(group['nodeResUsages']) == 1
+-        actual = group['nodeResUsages'][0]
+-        assert actual['execNode'] == socket.gethostname()
+-        allowed = sorted(os.sched_getaffinity(0))
+-        assert cpu36.cpu_list(actual['hwThreads']) == allowed and len(allowed) == 76
++        context = live_context()
++        request = create_request(root, context)
++        authority = await_handoff(root, request, context, 76, 24576, 300, timeout=30)
++        if live_context() != context:
++            raise ValueError('native context changed during scheduler handoff')
++        save(out / 'scheduler_handoff_receipt.json', authority)
++        raw = Path(authority['scheduler_evidence'])
++        allowed = authority['allowed']
+         contracts = cpu36.discover_contracts(allowed, 2)
+         assert set(allowed) == set().union(*(set(x['allocated']) for x in contracts.values()))
+         assert all(len(x['allocated']) == 38 for x in contracts.values())
+--- old/run_s07_r2_job.sh
++++ revision/run_s07_r2_job.sh
+@@ -2,14 +2,4 @@
+ set -euo pipefail
+ HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
+ : "${CCS_JOB_ID:?requires real two-domain scheduler identity}"
+-source /etc/profile.d/donaukit_scheduler.sh
+-command -v djob > "$HERE/djob_cli_path.txt"
+-printf '%q ' timeout --signal=TERM --kill-after=1s 10 djob -J -l "$CCS_JOB_ID" > "$HERE/scheduler_query_command.txt"
+-printf '\n' >> "$HERE/scheduler_query_command.txt"
+-set +e
+-timeout --signal=TERM --kill-after=1s 10 djob -J -l "$CCS_JOB_ID" > "$HERE/scheduler_allocation.json" 2> "$HERE/scheduler_query_error.txt"
+-CODE=$?
+-set -e
+-echo "$CODE" > "$HERE/scheduler_query_exit.txt"
+-[[ "$CODE" == 0 ]] || exit "$CODE"
+ exec env -i PATH=/usr/bin:/bin HOME=/home/share/dengqingtian USER=dengqingtian LC_ALL=C PYTHONUTF8=1 PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 CCS_JOB_ID="$CCS_JOB_ID" HBM=0 S07_PY=/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3 PYTHONPATH=/home/share/songzhenlong/eitfm/sw/torch_kml LD_LIBRARY_PATH=/opt/HPCKit/kml-lib/sme/kblas/multi:/opt/HPCKit/kml-lib:/opt/HPCKit/bisheng-lib /usr/bin/python3 -B "$HERE/run_s07_r2_job.py" "$HERE"
+--- /dev/null
++++ revision/scheduler_handoff.py
+@@ -0,0 +1,141 @@
++"""Login-only scheduler query; atomic, fresh, job-bound handoff before frameworks."""
++import argparse
++import hashlib
++import json
++import os
++from pathlib import Path
++import socket
++import shutil
++import subprocess
++import time
++import uuid
++
++
++def encode(data):
++    return (json.dumps(data, sort_keys=True, indent=2) + '\n').encode('utf-8')
++
++
++def digest(data):
++    return hashlib.sha256(data).hexdigest()
++
++
++def atomic_write(path, data):
++    path = Path(path)
++    if path.exists():
++        raise FileExistsError(str(path))
++    temporary = path.with_name('.' + path.name + '.partial.' + uuid.uuid4().hex)
++    with temporary.open('xb') as stream:
++        stream.write(data)
++        stream.flush()
++        os.fsync(stream.fileno())
++    os.replace(str(temporary), str(path))
++
++
++def live_context():
++    job = os.environ.get('CCS_JOB_ID')
++    if not job or not job.strip():
++        raise ValueError('missing native CCS_JOB_ID')
++    return dict(job_id=job, host=socket.gethostname(), allowed=sorted(os.sched_getaffinity(0)))
++
++
++def create_request(root, context):
++    if not context['job_id'] or not context['job_id'].strip():
++        raise ValueError('missing current job identity')
++    request = dict(context=context, nonce=uuid.uuid4().hex, created_at=time.time())
++    atomic_write(root / 'scheduler_request.json', encode(request))
++    return request
++
++
++def cpus(text):
++    result = []
++    for item in text.split(','):
++        first, sep, last = item.strip().partition('-')
++        result.extend(range(int(first), int(last) + 1) if sep else [int(first)])
++    return sorted(result)
++
++
++def await_handoff(root, request, context, expected_cpu, expected_mem, expected_wall, timeout=30):
++    if request['context'] != context:
++        raise ValueError('live job/host/CPU context changed')
++    deadline = time.monotonic() + timeout
++    ready = root / 'scheduler_ready.json'
++    while not ready.is_file():
++        remaining = deadline - time.monotonic()
++        if remaining <= 0:
++            raise TimeoutError('no complete scheduler handoff within the bounded wait')
++        time.sleep(min(0.02, remaining))
++    header = json.loads(ready.read_bytes())
++    raw_path = root / 'scheduler_allocation.json'
++    before = raw_path.stat()
++    raw = raw_path.read_bytes()
++    after = raw_path.stat()
++    if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
++        raise ValueError('scheduler original changed while reading')
++    now = time.time()
++    if not (request['created_at'] <= header['generated_at'] <= now and now - header['generated_at'] <= 30):
++        raise ValueError('stale/future scheduler handoff')
++    if (header['job_id'] != context['job_id'] or header['nonce'] != request['nonce']
++            or header['request_sha256'] != digest(encode(request)) or header['raw_sha256'] != digest(raw)):
++        raise ValueError('job/request/original SHA mismatch')
++    rows = json.loads(raw)['data']['successData']
++    if len(rows) != 1:
++        raise ValueError('require one exact current job record')
++    job = rows[0]
++    if (str(job['jobId']) != context['job_id'] or job['state'] != 'RUNNING'
++            or job['exclusive'] is not True or job['jobWallClockLimit'] != expected_wall
++            or len(job['resGroups']) != 1):
++        raise ValueError('wrong job/state/exclusivity/wall limit')
++    group = job['resGroups'][0]
++    if (group['resReq']['cpu'] != expected_cpu or group['resReq']['mem'] != expected_mem
++            or group['resLimit']['mem'] != expected_mem or len(group['nodeResUsages']) != 1):
++        raise ValueError('wrong resources or multiple nodes')
++    node = group['nodeResUsages'][0]
++    if node['execNode'] != context['host'] or cpus(node['hwThreads']) != context['allowed']:
++        raise ValueError('scheduler host/CPU differs from native compute context')
++    if len(context['allowed']) != expected_cpu:
++        raise ValueError('unexpected inherited CPU count')
++    return dict(**context, scheduler_evidence=str(raw_path.resolve()), scheduler_sha256=digest(raw),
++                nonce=request['nonce'], verified_at=now, raw_mtime_ns=after.st_mtime_ns)
++
++
++def publish(root, job_id):
++    # This command is invoked on login only, after the actual job becomes RUNNING.
++    deadline = time.monotonic() + 30
++    request_path = root / 'scheduler_request.json'
++    while not request_path.is_file():
++        if time.monotonic() >= deadline:
++            raise TimeoutError('no compute request within 30 seconds')
++        time.sleep(0.05)
++    request = json.loads(request_path.read_bytes())
++    if request['context']['job_id'] != job_id or not 0 <= time.time() - request['created_at'] <= 30:
++        raise ValueError('request is not from the fresh submitted job')
++    cli = shutil.which('djob')
++    if not cli:
++        raise RuntimeError('login scheduler CLI unavailable; source its existing login profile first')
++    command = [cli, '-J', '-l', job_id]
++    try:
++        result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
++    except subprocess.TimeoutExpired as exc:
++        atomic_write(root / 'scheduler_query_stderr.txt', exc.stderr or b'')
++        atomic_write(root / 'scheduler_query_receipt.json', encode(dict(
++            command=command, exit_code=None, timed_out=True, timeout_seconds=5)))
++        atomic_write(root / 'scheduler_allocation.json', exc.stdout or b'')
++        raise
++    atomic_write(root / 'scheduler_query_stderr.txt', result.stderr)
++    atomic_write(root / 'scheduler_query_receipt.json', encode(dict(command=command, exit_code=result.returncode)))
++    atomic_write(root / 'scheduler_allocation.json', result.stdout)
++    if result.returncode:
++        raise RuntimeError('login scheduler query failed')
++    atomic_write(root / 'scheduler_ready.json', encode(dict(job_id=job_id, nonce=request['nonce'],
++        generated_at=time.time(), request_sha256=digest(encode(request)), raw_sha256=digest(result.stdout))))
++
++
++if __name__ == '__main__':
++    parser = argparse.ArgumentParser()
++    parser.add_argument('action', choices=['publish'])
++    parser.add_argument('--root', type=Path, required=True)
++    parser.add_argument('--job-id', required=True)
++    args = parser.parse_args()
++    if args.root.resolve().parent != Path('/home/share/dengqingtian/opt/stage4_sessions/S00'):
++        parser.error('new S00-owned remote staging root required')
++    publish(args.root.resolve(), args.job_id)
+--- /dev/null
++++ revision/prepare.py
+@@ -0,0 +1,33 @@
++"""Stage the exact accepted S07 R2 payload; no submission, import or workers."""
++import ast
++import hashlib
++import json
++from pathlib import Path
++import subprocess
++import zipfile
++
++root = Path(__file__).resolve().parent
++assert root.parent == Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
++assert root.name.startswith('S07_R2_TWODOMAIN_R3_')
++archive = root / 'S07_R2_VALIDATION.zip'
++assert archive.stat().st_size == 59801
++assert hashlib.sha256(archive.read_bytes()).hexdigest() == '9a95a23c14c9b6c65191bc9883abefb0ce0cf52c637ec370a357a02f56f27367'
++payload = root / 'payload'
++payload.mkdir(exist_ok=False)
++with zipfile.ZipFile(archive) as z:
++    assert len(z.namelist()) == 34
++    assert all(not Path(n).is_absolute() and '..' not in Path(n).parts for n in z.namelist())
++    z.extractall(payload)
++manifest = json.loads((payload / 'SOURCE_MANIFEST.json').read_text())
++sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
++assert all(sha(payload / x['path']) == x['sha256'] for x in manifest['delivery_files'])
++for p in list(payload.rglob('*.py')) + list(root.glob('*.py')) + list(root.glob('*.sh')):
++    assert b'\r' not in p.read_bytes(), str(p)
++    if p.suffix == '.py':
++        ast.parse(p.read_text(), filename=str(p), feature_version=(3, 9))
++    else:
++        subprocess.run(['bash', '-n', str(p)], check=True)
++pre = dict(status='PASS_ORIGINAL_R2_AND_NEW_WRAPPER_SYNTAX_ONLY',
++    package_sha256=sha(archive), payload_files={str(p.relative_to(root)): sha(p) for p in payload.rglob('*') if p.is_file()},
++    wrapper_files={p.name: sha(p) for p in root.iterdir() if p.is_file() and p.suffix in ('.py', '.sh')})
++(root / 'pre_submit_checks.json').write_text(json.dumps(pre, indent=2) + '\n')
+--- /dev/null
++++ revision/tests/test_scheduler_handoff.py
+@@ -0,0 +1,190 @@
++"""Portable standard-library controls; no SSH, scheduler submission or Torch."""
++import copy
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import time
++import unittest
++from unittest import mock
++
++sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
++import scheduler_handoff as h
++
++
++class HandoffTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1] / 'evidence')
++        self.addCleanup(self.temp.cleanup)
++        self.root = Path(self.temp.name)
++        self.ctx = dict(job_id='new-job', host='compute-test', allowed=list(range(76)))
++        self.req = h.create_request(self.root, self.ctx)
++        self.job = dict(jobId='new-job', state='RUNNING', exclusive=True, jobWallClockLimit=300,
++            resGroups=[dict(resReq=dict(cpu=76, mem=24576), resLimit=dict(mem=24576),
++                nodeResUsages=[dict(execNode='compute-test', hwThreads='0-75')])])
++
++    def publish_fixture(self, job=None, **changes):
++        raw = json.dumps(dict(data=dict(successData=[job or self.job]))).encode()
++        h.atomic_write(self.root / 'scheduler_allocation.json', raw)
++        header = dict(job_id=self.ctx['job_id'], nonce=self.req['nonce'], generated_at=time.time(),
++                      request_sha256=h.digest(h.encode(self.req)), raw_sha256=h.digest(raw))
++        header.update(changes)
++        h.atomic_write(self.root / 'scheduler_ready.json', h.encode(header))
++
++    def check(self):
++        return h.await_handoff(self.root, self.req, self.ctx, 76, 24576, 300, timeout=0.03)
++
++    def test_normal_atomic_receipt(self):
++        self.publish_fixture()
++        receipt = self.check()
++        self.assertEqual(receipt['job_id'], 'new-job')
++        self.assertEqual(receipt['allowed'], list(range(76)))
++
++    def test_missing_timeout(self):
++        with self.assertRaises(TimeoutError): self.check()
++
++    def test_partial_temporary_file_is_not_committed(self):
++        (self.root / '.scheduler_ready.json.partial').write_bytes(b'{')
++        with self.assertRaises(TimeoutError): self.check()
++
++    def test_raw_without_commit_times_out(self):
++        (self.root / 'scheduler_allocation.json').write_bytes(b'{}')
++        with self.assertRaises(TimeoutError): self.check()
++
++    def test_incomplete_committed_file_rejected(self):
++        (self.root / 'scheduler_ready.json').write_bytes(b'{')
++        with self.assertRaises(ValueError): self.check()
++
++    def test_corrupt_raw_rejected(self):
++        self.publish_fixture()
++        (self.root / 'scheduler_allocation.json').write_bytes(b'{')
++        with self.assertRaises(ValueError): self.check()
++
++    def test_old_or_future_receipt_rejected(self):
++        for age in (-60, 60):
++            with self.subTest(age=age):
++                for p in self.root.glob('scheduler_*json'):
++                    if p.name != 'scheduler_request.json': p.unlink()
++                self.publish_fixture(generated_at=time.time() + age)
++                with self.assertRaises(ValueError): self.check()
++
++    def test_other_request_nonce_rejected(self):
++        self.publish_fixture(nonce='old-request')
++        with self.assertRaises(ValueError): self.check()
++
++    def test_request_digest_mismatch_rejected(self):
++        self.publish_fixture(request_sha256='0' * 64)
++        with self.assertRaises(ValueError): self.check()
++
++    def test_missing_raw_after_commit_rejected(self):
++        self.publish_fixture(); (self.root / 'scheduler_allocation.json').unlink()
++        with self.assertRaises(OSError): self.check()
++
++    def test_blank_live_identity_rejected(self):
++        with self.assertRaises(ValueError):
++            h.create_request(self.root, dict(self.ctx, job_id='  '))
++
++    def test_old_job_rejected(self):
++        job = copy.deepcopy(self.job); job['jobId'] = 'old-job'
++        self.publish_fixture(job)
++        with self.assertRaises(ValueError): self.check()
++
++    def test_other_host_rejected(self):
++        job = copy.deepcopy(self.job); job['resGroups'][0]['nodeResUsages'][0]['execNode'] = 'other'
++        self.publish_fixture(job)
++        with self.assertRaises(ValueError): self.check()
++
++    def test_other_cpu_authority_rejected(self):
++        job = copy.deepcopy(self.job); job['resGroups'][0]['nodeResUsages'][0]['hwThreads'] = '1-76'
++        self.publish_fixture(job)
++        with self.assertRaises(ValueError): self.check()
++
++    def test_empty_raw_rejected(self):
++        self.publish_fixture(); (self.root / 'scheduler_allocation.json').write_bytes(b'')
++        with self.assertRaises(ValueError): self.check()
++
++    def test_wrong_resource_limits_rejected(self):
++        job = copy.deepcopy(self.job); job['resGroups'][0]['resLimit']['mem'] = 49152
++        self.publish_fixture(job)
++        with self.assertRaises(ValueError): self.check()
++
++    def test_nonrunning_or_nonexclusive_rejected(self):
++        for key, value in [('state', 'SUCCEEDED'), ('exclusive', False)]:
++            with self.subTest(key=key):
++                for p in self.root.glob('scheduler_*json'):
++                    if p.name != 'scheduler_request.json': p.unlink()
++                job = copy.deepcopy(self.job); job[key] = value; self.publish_fixture(job)
++                with self.assertRaises(ValueError): self.check()
++
++    def test_live_context_mismatch_rejected(self):
++        self.publish_fixture(); self.ctx = dict(self.ctx, job_id='different-live-job')
++        with self.assertRaises(ValueError): self.check()
++
++    def test_atomic_publish_preserves_exact_bytes(self):
++        raw = b'{"original":  1}\n'; p = self.root / 'raw.json'
++        h.atomic_write(p, raw)
++        self.assertEqual(p.read_bytes(), raw)
++        with self.assertRaises(FileExistsError): h.atomic_write(p, b'replace')
++
++    def test_native_identity_is_required_and_not_overwritten(self):
++        with mock.patch.dict(os.environ, {}, clear=True):
++            with self.assertRaises(ValueError): h.live_context()
++        with mock.patch.dict(os.environ, {'CCS_JOB_ID': 'native-job'}, clear=True), \
++                mock.patch.object(h.os, 'sched_getaffinity', return_value={2, 1}, create=True), \
++                mock.patch.object(h.socket, 'gethostname', return_value='native-host'):
++            self.assertEqual(h.live_context(), dict(job_id='native-job', host='native-host', allowed=[1, 2]))
++            self.publish_fixture()
++            self.check()
++            self.assertEqual(os.environ['CCS_JOB_ID'], 'native-job')
++
++    def test_wrong_cpu_memory_wall_or_multiple_nodes_rejected(self):
++        for field in ('cpu', 'mem', 'wall', 'nodes'):
++            with self.subTest(field=field):
++                for p in self.root.glob('scheduler_*json'):
++                    if p.name != 'scheduler_request.json': p.unlink()
++                job = copy.deepcopy(self.job)
++                group = job['resGroups'][0]
++                if field in ('cpu', 'mem'): group['resReq'][field] += 1
++                if field == 'wall': job['jobWallClockLimit'] += 1
++                if field == 'nodes': group['nodeResUsages'].append(copy.deepcopy(group['nodeResUsages'][0]))
++                self.publish_fixture(job)
++                with self.assertRaises(ValueError): self.check()
++
++    def test_publisher_preserves_raw_and_exact_bounded_command(self):
++        raw = json.dumps(dict(data=dict(successData=[self.job]))).encode()
++        with mock.patch.object(h.shutil, 'which', return_value='/scheduler/djob'), \
++                mock.patch.object(h.subprocess, 'run', return_value=subprocess.CompletedProcess([], 0, raw, b'')) as run:
++            h.publish(self.root, 'new-job')
++        run.assert_called_once_with(['/scheduler/djob', '-J', '-l', 'new-job'],
++                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
++        self.assertEqual((self.root / 'scheduler_allocation.json').read_bytes(), raw)
++        self.check()
++
++    def test_query_failure_keeps_original_without_ready(self):
++        with mock.patch.object(h.shutil, 'which', return_value='/scheduler/djob'), \
++                mock.patch.object(h.subprocess, 'run', return_value=subprocess.CompletedProcess([], 7, b'original error', b'denied')):
++            with self.assertRaises(RuntimeError): h.publish(self.root, 'new-job')
++        self.assertEqual((self.root / 'scheduler_allocation.json').read_bytes(), b'original error')
++        self.assertEqual(json.loads((self.root / 'scheduler_query_receipt.json').read_bytes())['exit_code'], 7)
++        self.assertFalse((self.root / 'scheduler_ready.json').exists())
++
++    def test_query_timeout_keeps_partial_output_without_ready(self):
++        with mock.patch.object(h.shutil, 'which', return_value='/scheduler/djob'), \
++                mock.patch.object(h.subprocess, 'run', side_effect=subprocess.TimeoutExpired('djob', 5, output=b'partial', stderr=b'timeout')):
++            with self.assertRaises(subprocess.TimeoutExpired): h.publish(self.root, 'new-job')
++        self.assertEqual((self.root / 'scheduler_allocation.json').read_bytes(), b'partial')
++        receipt = json.loads((self.root / 'scheduler_query_receipt.json').read_bytes())
++        self.assertTrue(receipt['timed_out'])
++        self.assertEqual(receipt['timeout_seconds'], 5)
++        self.assertFalse((self.root / 'scheduler_ready.json').exists())
++
++    def test_publisher_rejects_old_job_before_query(self):
++        with mock.patch.object(h.subprocess, 'run') as run:
++            with self.assertRaises(ValueError): h.publish(self.root, 'old-job')
++        run.assert_not_called()
++
++
++if __name__ == '__main__':
++    unittest.main(verbosity=2)

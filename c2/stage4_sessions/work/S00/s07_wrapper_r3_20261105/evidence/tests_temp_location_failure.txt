@@ -1,0 +1,229 @@
+test_atomic_publish_preserves_exact_bytes (__main__.HandoffTests.test_atomic_publish_preserves_exact_bytes) ... ERROR
+test_corrupt_raw_rejected (__main__.HandoffTests.test_corrupt_raw_rejected) ... ERROR
+test_empty_raw_rejected (__main__.HandoffTests.test_empty_raw_rejected) ... ERROR
+test_incomplete_committed_file_rejected (__main__.HandoffTests.test_incomplete_committed_file_rejected) ... ERROR
+test_live_context_mismatch_rejected (__main__.HandoffTests.test_live_context_mismatch_rejected) ... ERROR
+test_missing_timeout (__main__.HandoffTests.test_missing_timeout) ... ERROR
+test_nonrunning_or_nonexclusive_rejected (__main__.HandoffTests.test_nonrunning_or_nonexclusive_rejected) ... ERROR
+test_normal_atomic_receipt (__main__.HandoffTests.test_normal_atomic_receipt) ... ERROR
+test_old_job_rejected (__main__.HandoffTests.test_old_job_rejected) ... ERROR
+test_old_or_future_receipt_rejected (__main__.HandoffTests.test_old_or_future_receipt_rejected) ... ERROR
+test_other_cpu_authority_rejected (__main__.HandoffTests.test_other_cpu_authority_rejected) ... ERROR
+test_other_host_rejected (__main__.HandoffTests.test_other_host_rejected) ... ERROR
+test_other_request_nonce_rejected (__main__.HandoffTests.test_other_request_nonce_rejected) ... ERROR
+test_partial_temporary_file_is_not_committed (__main__.HandoffTests.test_partial_temporary_file_is_not_committed) ... ERROR
+test_raw_without_commit_times_out (__main__.HandoffTests.test_raw_without_commit_times_out) ... ERROR
+test_wrong_resource_limits_rejected (__main__.HandoffTests.test_wrong_resource_limits_rejected) ... ERROR
+
+======================================================================
+ERROR: test_atomic_publish_preserves_exact_bytes (__main__.HandoffTests.test_atomic_publish_preserves_exact_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmposkrwl7l\\.scheduler_request.json.partial.bb886089b76147a9bc680a981ce1d206' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmposkrwl7l\\scheduler_request.json'
+
+======================================================================
+ERROR: test_corrupt_raw_rejected (__main__.HandoffTests.test_corrupt_raw_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpg9pjwlwp\\.scheduler_request.json.partial.d9619e0393d54f7698983a6ce121bf35' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpg9pjwlwp\\scheduler_request.json'
+
+======================================================================
+ERROR: test_empty_raw_rejected (__main__.HandoffTests.test_empty_raw_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpkm4od4c5\\.scheduler_request.json.partial.57a8b4f8e62f4dcfa672c5a2cdff9e9b' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpkm4od4c5\\scheduler_request.json'
+
+======================================================================
+ERROR: test_incomplete_committed_file_rejected (__main__.HandoffTests.test_incomplete_committed_file_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpeaaipvic\\.scheduler_request.json.partial.4c527129d05c4b27adb1c2d961de0ae1' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpeaaipvic\\scheduler_request.json'
+
+======================================================================
+ERROR: test_live_context_mismatch_rejected (__main__.HandoffTests.test_live_context_mismatch_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpino85f9c\\.scheduler_request.json.partial.176d133300a24c5a9fa94c225eeaca84' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpino85f9c\\scheduler_request.json'
+
+======================================================================
+ERROR: test_missing_timeout (__main__.HandoffTests.test_missing_timeout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmp1j7jwfin\\.scheduler_request.json.partial.bc2cb319a0924c3cad78d1770a63d39e' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmp1j7jwfin\\scheduler_request.json'
+
+======================================================================
+ERROR: test_nonrunning_or_nonexclusive_rejected (__main__.HandoffTests.test_nonrunning_or_nonexclusive_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmph045zz20\\.scheduler_request.json.partial.1dcc475526024e59a16bfc18d029aa74' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmph045zz20\\scheduler_request.json'
+
+======================================================================
+ERROR: test_normal_atomic_receipt (__main__.HandoffTests.test_normal_atomic_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpwxq3jea_\\.scheduler_request.json.partial.f7e95a1fb4c34b98b2a356e53f449e72' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpwxq3jea_\\scheduler_request.json'
+
+======================================================================
+ERROR: test_old_job_rejected (__main__.HandoffTests.test_old_job_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmp5inj3eu6\\.scheduler_request.json.partial.7694778befc94d5890200c573d6990f3' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmp5inj3eu6\\scheduler_request.json'
+
+======================================================================
+ERROR: test_old_or_future_receipt_rejected (__main__.HandoffTests.test_old_or_future_receipt_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpchxarb6h\\.scheduler_request.json.partial.fff9a2ddb9204b958abc60dcf0884456' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpchxarb6h\\scheduler_request.json'
+
+======================================================================
+ERROR: test_other_cpu_authority_rejected (__main__.HandoffTests.test_other_cpu_authority_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpklvyk1tl\\.scheduler_request.json.partial.837540b56a724476aa7dabf3cfea6a1e' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpklvyk1tl\\scheduler_request.json'
+
+======================================================================
+ERROR: test_other_host_rejected (__main__.HandoffTests.test_other_host_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpy0589naz\\.scheduler_request.json.partial.4c30c9890a244d60b8245c2396305941' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpy0589naz\\scheduler_request.json'
+
+======================================================================
+ERROR: test_other_request_nonce_rejected (__main__.HandoffTests.test_other_request_nonce_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpo2ykpv6s\\.scheduler_request.json.partial.f8a83e64abf449589b0f109974cbe278' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpo2ykpv6s\\scheduler_request.json'
+
+======================================================================
+ERROR: test_partial_temporary_file_is_not_committed (__main__.HandoffTests.test_partial_temporary_file_is_not_committed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpjsks0878\\.scheduler_request.json.partial.8b982229ec8443108884377c08e5b27a' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmpjsks0878\\scheduler_request.json'
+
+======================================================================
+ERROR: test_raw_without_commit_times_out (__main__.HandoffTests.test_raw_without_commit_times_out)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmp1mt2z_i4\\.scheduler_request.json.partial.1c9dfeb3f9a9447fb98a5517308b5fa6' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmp1mt2z_i4\\scheduler_request.json'
+
+======================================================================
+ERROR: test_wrong_resource_limits_rejected (__main__.HandoffTests.test_wrong_resource_limits_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\tests\test_scheduler_handoff.py", line 21, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 44, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_wrapper_r3_20261105\scheduler_handoff.py", line 30, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] �ܾ����ʡ�: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmp9yv1ubum\\.scheduler_request.json.partial.9df789f56d7644acbbab7146df9d0ea9' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{8c13ca62-46c9-4083-95b2-07bfefb2ca2b}\\AC\\Temp\\tmp9yv1ubum\\scheduler_request.json'
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.051s
+
+FAILED (errors=16)

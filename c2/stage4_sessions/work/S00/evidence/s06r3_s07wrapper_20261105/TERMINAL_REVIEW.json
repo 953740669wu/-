@@ -1,0 +1,70 @@
+{
+  "status": "PASS_TERMINAL_EVIDENCE_AUDIT_NOT_PROBE_PASS",
+  "job_id": "2039859",
+  "scheduler_state": "FAILED",
+  "job_exit_code": 1,
+  "host": "cn21341",
+  "job_pids": "-",
+  "source_files_unchanged": 14,
+  "wrapper_files_unchanged": 6,
+  "original_metadata_entries": 46,
+  "archive_files": 47,
+  "original_mtime_preserved_as_metadata": true,
+  "resource_authority_verified": true,
+  "selected_cpu_count": 36,
+  "actual_torch_cpu36_measured": false,
+  "stop_reason": "AssertionError('required executable: /usr/bin/g++')",
+  "standard_library_tests_run": false,
+  "stages": [
+    {
+      "name": "imports",
+      "status": "NOT_RUN",
+      "reason": "S00 dependency preflight stopped before tests"
+    },
+    {
+      "name": "pointwise",
+      "status": "NOT_RUN",
+      "reason": "S00 dependency preflight stopped before tests"
+    },
+    {
+      "name": "conv",
+      "status": "NOT_RUN",
+      "reason": "S00 dependency preflight stopped before tests"
+    },
+    {
+      "name": "block",
+      "status": "NOT_RUN",
+      "reason": "S00 dependency preflight stopped before tests"
+    },
+    {
+      "name": "kml-explain",
+      "status": "NOT_RUN",
+      "reason": "S00 dependency preflight stopped before tests"
+    },
+    {
+      "name": "kml",
+      "status": "NOT_RUN",
+      "reason": "S00 dependency preflight stopped before tests"
+    }
+  ],
+  "thread_snapshots_run": false,
+  "model_or_probe_subprocesses_started": 0,
+  "scheduler_terminal_pids_cleared": true,
+  "new_session_submissions": 0,
+  "retries": 0,
+  "actual_node_seconds_from_utc": 2.0,
+  "scheduler_wallclock_seconds": 1,
+  "cumulative_known_S00_jobs": 17,
+  "cumulative_node_seconds_from_utc": 766.0,
+  "bundle": {
+    "bundle": "/home/share/dengqingtian/opt/stage4_sessions/S00/S06_R3_FIRST_20261105T084500Z/JOB_2039859_full_evidence.zip",
+    "bytes": 92956,
+    "sha256": "5437e40a591cdccf5013b0d39f433cb2975a9fdd9593debc7ce36bd69a1a6e1c",
+    "file_count": 47,
+    "state": "FAILED",
+    "job_exit_code": 1
+  },
+  "S07_job_submitted": false,
+  "real_HBM": false,
+  "formal_training": false
+}

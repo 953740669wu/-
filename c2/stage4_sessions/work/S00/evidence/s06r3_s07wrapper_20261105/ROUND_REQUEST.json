@@ -1,0 +1,62 @@
+{
+  "round": "S06_R3_FIRST_PROBE_S07_WRAPPER_PREP_20261105",
+  "max_new_jobs": 1,
+  "S06_alloc_cpu": 38,
+  "S06_selected_cpu": 36,
+  "memory_MB": 8192,
+  "memory_limit_MB": 8192,
+  "wall_s": 660,
+  "outer_execution_s": 640,
+  "cleanup_s": 10,
+  "S07_submit_allowed": false,
+  "formal_training": false,
+  "real_HBM": false,
+  "memory_repeat": false,
+  "UBSan_repeat": false,
+  "protected_files": {
+    "MEMORY3_S07_R2_REPORT.md": {
+      "sha256": "1f6ce8a9cbfbdef1f4609534e2a2a06c6ed2220fd19fc181a074ac3a3289f751",
+      "bytes": 12356
+    },
+    "R6_MEMORY_UBSAN_REPORT.md": {
+      "sha256": "667b52fc4490c7ef9e524ebd8e1a70da3084763f640f7cdc7a6d1654f837c9a5",
+      "bytes": 10920
+    },
+    "evidence/memory3_s07_r2_20261105/JOB_2039061_full_evidence.zip": {
+      "sha256": "cd6be5d0aaf6a690524f465598f3a79df29c2b838ba35479437e4bce4d6f7613",
+      "bytes": 320351
+    },
+    "evidence/memory3_s07_r2_20261105/JOB_2039114_full_evidence.zip": {
+      "sha256": "6e3f10538532c3455e9a0f021466c16d25fa2b4968e81d31b8e39c0b9bab6563",
+      "bytes": 83313
+    },
+    "evidence/r6_memory_ubsan_20261105/JOB_2037434_full_evidence.zip": {
+      "sha256": "d2dd91be74c2bba01f529f926d07ab38b184d88b6389bcbae0a1283fd1f51881",
+      "bytes": 196064
+    },
+    "evidence/r6_memory_ubsan_20261105/JOB_2037491_full_evidence.zip": {
+      "sha256": "08410627941e6249cb10fed875c9204891f6ad9cdc93364880051ae3b9a22754",
+      "bytes": 55539
+    },
+    "candidate/run_s07_r2_job.py": {
+      "sha256": "fcf6dbd6b99638d22ee702afee6223965ea0c002b40ff4607eb2bbc2be75d60c",
+      "bytes": 4971
+    },
+    "candidate/run_s07_r2_job.sh": {
+      "sha256": "4411c31bbfc692afd137b218f1eee6a386d5bc87601ffc436469387b15d1a651",
+      "bytes": 1117
+    },
+    "execution_packages/S07_R2_VALIDATION.zip": {
+      "sha256": "9a95a23c14c9b6c65191bc9883abefb0ce0cf52c637ec370a357a02f56f27367",
+      "bytes": 59801
+    },
+    "execution_packages/S02_CKPT64_R6_CODE.zip": {
+      "sha256": "26e542430f024f60277bdbbbc699b41a203ee74270022806074040a531ac166f",
+      "bytes": 62584
+    },
+    "execution_packages/S06_R3_PAYLOAD.zip": {
+      "sha256": "0aa9bbfe2c7f7bc102da0b4487aba301afbfdce14eeb259f3a9b2b6056162f5c",
+      "bytes": 33571
+    }
+  }
+}

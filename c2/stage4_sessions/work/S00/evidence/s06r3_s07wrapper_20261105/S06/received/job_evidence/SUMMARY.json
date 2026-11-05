@@ -1,0 +1,19 @@
+{
+  "status": "FAIL_STOP_NO_RETRY",
+  "job_id": "2039859",
+  "host": "cn21341",
+  "stages_expected": [
+    "imports",
+    "pointwise",
+    "conv",
+    "block",
+    "kml-explain",
+    "kml"
+  ],
+  "steps": [],
+  "full_model": false,
+  "formal_training": false,
+  "real_HBM": false,
+  "error": "AssertionError('required executable: /usr/bin/g++')",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S00/S06_R3_FIRST_20261105T084500Z/run_s06_r3_job.py\", line 53, in main\n    assert os.access(path, os.X_OK), 'required executable: ' + path\nAssertionError: required executable: /usr/bin/g++\n"
+}

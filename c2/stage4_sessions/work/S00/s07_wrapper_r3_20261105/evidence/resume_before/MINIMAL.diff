@@ -1,0 +1,59 @@
+--- old/run_s07_r2_job.py
++++ revision/run_s07_r2_job.py
+@@ -9,9 +9,11 @@
+ import time
+ import traceback
+ from bounded_round_step import run_step, save, sha
++from scheduler_handoff import live_context, create_request, await_handoff
+ 
+ 
+ def main(root):
++    assert root.parent == Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
+     assert root.name.startswith('S07_R2_TWODOMAIN_') and os.environ.get('CCS_JOB_ID')
+     assert not socket.gethostname().startswith('login')
+     assert not os.environ.get('LD_PRELOAD') and not os.environ.get('KML_BLAS_LIB')
+@@ -26,19 +28,14 @@
+     try:
+         pre = json.loads((root / 'pre_submit_checks.json').read_text())
+         assert all(sha(root / name) == h for name, h in pre['payload_files'].items())
+-        # Query the real current job; never derive/overwrite CCS_JOB_ID from JSON.
+-        assert (root / 'scheduler_query_exit.txt').read_text().strip() == '0'
+-        raw = root / 'scheduler_allocation.json'
+-        job = json.loads(raw.read_text())['data']['successData'][0]
+-        assert str(job['jobId']) == os.environ['CCS_JOB_ID'] and job['state'] == 'RUNNING'
+-        assert job['jobWallClockLimit'] == 300 and len(job['resGroups']) == 1
+-        group = job['resGroups'][0]
+-        assert group['resReq']['cpu'] == 76 and group['resReq']['mem'] == group['resLimit']['mem'] == 24576
+-        assert len(group['nodeResUsages']) == 1
+-        actual = group['nodeResUsages'][0]
+-        assert actual['execNode'] == socket.gethostname()
+-        allowed = sorted(os.sched_getaffinity(0))
+-        assert cpu36.cpu_list(actual['hwThreads']) == allowed and len(allowed) == 76
++        context = live_context()
++        request = create_request(root, context)
++        authority = await_handoff(root, request, context, 76, 24576, 300, timeout=30)
++        if live_context() != context:
++            raise ValueError('native context changed during scheduler handoff')
++        save(out / 'scheduler_handoff_receipt.json', authority)
++        raw = Path(authority['scheduler_evidence'])
++        allowed = authority['allowed']
+         contracts = cpu36.discover_contracts(allowed, 2)
+         assert set(allowed) == set().union(*(set(x['allocated']) for x in contracts.values()))
+         assert all(len(x['allocated']) == 38 for x in contracts.values())
+--- old/run_s07_r2_job.sh
++++ revision/run_s07_r2_job.sh
+@@ -2,14 +2,4 @@
+ set -euo pipefail
+ HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
+ : "${CCS_JOB_ID:?requires real two-domain scheduler identity}"
+-source /etc/profile.d/donaukit_scheduler.sh
+-command -v djob > "$HERE/djob_cli_path.txt"
+-printf '%q ' timeout --signal=TERM --kill-after=1s 10 djob -J -l "$CCS_JOB_ID" > "$HERE/scheduler_query_command.txt"
+-printf '\n' >> "$HERE/scheduler_query_command.txt"
+-set +e
+-timeout --signal=TERM --kill-after=1s 10 djob -J -l "$CCS_JOB_ID" > "$HERE/scheduler_allocation.json" 2> "$HERE/scheduler_query_error.txt"
+-CODE=$?
+-set -e
+-echo "$CODE" > "$HERE/scheduler_query_exit.txt"
+-[[ "$CODE" == 0 ]] || exit "$CODE"
+ exec env -i PATH=/usr/bin:/bin HOME=/home/share/dengqingtian USER=dengqingtian LC_ALL=C PYTHONUTF8=1 PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 CCS_JOB_ID="$CCS_JOB_ID" HBM=0 S07_PY=/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3 PYTHONPATH=/home/share/songzhenlong/eitfm/sw/torch_kml LD_LIBRARY_PATH=/opt/HPCKit/kml-lib/sme/kblas/multi:/opt/HPCKit/kml-lib:/opt/HPCKit/bisheng-lib /usr/bin/python3 -B "$HERE/run_s07_r2_job.py" "$HERE"
