@@ -1,0 +1,22 @@
+{
+  "scope": "new readiness code/diff and package review; original 28 tests and S04 numeric experiments not rerun",
+  "S07": {
+    "package_bytes": 34295,
+    "sha256": "d39ae26f2b29d53f733bdef937832edeeec4bf4a468adf2d0eff0dbe5fb39c45",
+    "files": 13,
+    "members": 14,
+    "delivery": 12,
+    "new_targeted_methods": 16,
+    "test_exit": 0,
+    "acceptance": "local input for S00 wrapper preparation only, no new C2 authorization"
+  },
+  "S04": {
+    "source": "summary and targeted R2 report sections",
+    "status": "NUMERICAL_FAIL retained",
+    "fp32_pass": 76,
+    "fp32_fail": 7,
+    "bf16_pass": 55,
+    "bf16_fail": 28,
+    "next": "one bounded fp32 operation-order alignment control; mixed-precision boundary proposal only; no performance/cluster work"
+  }
+}

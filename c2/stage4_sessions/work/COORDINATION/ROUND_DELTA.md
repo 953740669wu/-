@@ -1,6 +1,6 @@
-任务/轮次：COORDINATION / S00_RESUME_S02_SEQUENCE5_REVIEW_20261105
-状态变化：02五步本地准备/07包装器接受；06 job2039859固定g++路径预检失败，候选未到达。
-本轮改动：审核/复跑日志/上一批Git核验、新短交接/总表/自身状态及Git清单；作者源码与证据未改。
-验证增量：核02索引58/13项旧源/24文件包，00续接126/07包10文件，06原件47；11协议+3小模型和25交接模拟通过；旧Git 661对象SHA相符。
-证据：S00_RESUME_S02_SEQUENCE5_REVIEW.md/.json、S02_SEQUENCE5_*和S07_WRAPPER_R3*REVIEW_TESTS.txt、GIT_MEMORY3_COMMITS_REVIEW.json。
-阻塞与下一步：00顺序各一次02五步严格900秒/07两域300秒；06先有限定位工具链，内存待新数值接受；提醒Git归档。
+任务/轮次：COORDINATION / GIT_READY_R5_FP32_R3_REVIEW
+状态变化：00 R5本地准备/04 R3本地fp32控制核验，累积交付转唯一Git窗口归档；实际远端为GitHub。
+本轮改动：新归档指令/TSV、定向核验MD/JSON、10+2项复跑日志、总表/自身状态；作者源码不动。
+验证增量：核00索引15/86及16文件包、04索引29及30文件包/保存83零误差；新增10收集+2结构复跑全过，旧全量检查不重复。
+证据：GIT_READY_R5_FP32_R3_REVIEW.md/.json、S00_R5_GIT_TARGETED_TESTS.txt、S04_R3_GIT_TARGETED_TESTS.txt、新提交TSV。
+阻塞与下一步：Git按精确SHA分批commit并普通push现有origin，核远端/回报；bf16仍FAIL、P1未实施、就绪协议未现场测，root不代提交。

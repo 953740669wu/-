@@ -1,0 +1,31 @@
+{
+  "S00": {
+    "sha256": "b20e248be761db6c645fdbcebbbfc61d083642bb0e1d959eb1a0fcfa9b304284",
+    "bytes": 62715,
+    "files": 14,
+    "index_files": 13,
+    "new_deployment_tests_exit": 0,
+    "unchanged_handoff_cleanup_helpers": true,
+    "scope": "targeted new deployment review; original 25/inner 28 not rerun; no cluster run"
+  },
+  "S02": {
+    "source": "status and round delta",
+    "state": "checkpoint optional candidate closeout complete; standby; no new experiment"
+  },
+  "S04": {
+    "source": "status/delta plus targeted plan/diff/test and failed metrics inspection",
+    "numeric_methods_reported": 83,
+    "pass_reported": 55,
+    "fail_reported": 28,
+    "failed_gradient_tensors": [
+      "block.linear1.weight",
+      "block.linear1.bias",
+      "block.norm2.weight",
+      "block.norm2.bias"
+    ],
+    "reference_norms_not_near_zero": true,
+    "existing_fp32_control": "original block versus deepcopy; does not cover rewritten candidate path",
+    "acceptance": "NUMERICAL_FAIL; local diagnosis only, no cluster or performance run",
+    "numeric_tests_rerun_by_coordinator": false
+  }
+}
