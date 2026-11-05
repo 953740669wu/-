@@ -94,5 +94,66 @@
     "preload_probe": false,
     "production_integration": false,
     "automatic_repeat_allowed": false
+  },
+  "S02_R6_CKPT64": {
+    "filename": "S02_CKPT64_R6_CODE.zip",
+    "sha256": "26e542430f024f60277bdbbbc699b41a203ee74270022806074040a531ac166f",
+    "job_id": "2037034",
+    "status": "PASS_STRICT_CHECKPOINT_THIS_FIXED_CASE_ONLY",
+    "automatic_repeat_allowed": false,
+    "training_memory_run": false
+  },
+  "S03_R2": {
+    "filename": "S03_ROUND2_C_VALIDATION.zip",
+    "sha256": "0fe3eeb3a7ad7fe2fb34eea220f3147edba5b72cdc44f5c7db4fd46d98ea872a",
+    "job_id": "2037064",
+    "status": "UBSAN_LINK_BLOCKED_50_CASES_AND_SO_NOT_RUN",
+    "automatic_repeat_allowed": false,
+    "real_HBM": false
+  },
+  "S02_R6_MEMORY": {
+    "filename": "S02_CKPT64_R6_CODE.zip",
+    "sha256": "26e542430f024f60277bdbbbc699b41a203ee74270022806074040a531ac166f",
+    "strict_reference_job": "2037034",
+    "job_id": "2037434",
+    "status": "DDR_ONE_STEP_DIAGNOSTIC_ONLY_NOT_BENEFIT_ACCEPTANCE",
+    "independent_processes": 2,
+    "automatic_repeat_allowed": false,
+    "real_HBM": false
+  },
+  "S03_R2_UBSAN_RECOVERY": {
+    "filename": "S03_ROUND2_C_VALIDATION.zip",
+    "sha256": "0fe3eeb3a7ad7fe2fb34eea220f3147edba5b72cdc44f5c7db4fd46d98ea872a",
+    "job_id": "2037491",
+    "status": "BLOCKED_NO_EXISTING_UBSAN_RUNTIME_IN_FINITE_ALLOWED_LOCATIONS",
+    "controls_run": false,
+    "new_50_cases_run": false,
+    "independent_library_built": false,
+    "automatic_repeat_allowed": false,
+    "real_HBM": false
+  },
+  "S02_R6_MEMORY3": {
+    "filename": "S02_CKPT64_R6_CODE.zip",
+    "sha256": "26e542430f024f60277bdbbbc699b41a203ee74270022806074040a531ac166f",
+    "job_id": "2039061",
+    "strict_reference_job": "2037034",
+    "status": "PASS_THREE_NEW_PAIRS_DDR_FIRST_STEP_DIAGNOSTIC_ONLY",
+    "pairs": 3,
+    "independent_model_pids": 6,
+    "automatic_repeat_allowed": false,
+    "real_HBM": false
+  },
+  "S07_R2": {
+    "filename": "S07_R2_VALIDATION.zip",
+    "sha256": "9a95a23c14c9b6c65191bc9883abefb0ce0cf52c637ec370a357a02f56f27367",
+    "bytes": 59801,
+    "members": 34,
+    "job_id": "2039114",
+    "status": "S00_WRAPPER_STARTUP_BLOCKED_TESTS_AND_COMMUNICATION_NOT_RUN",
+    "candidate_changed": false,
+    "actual_workers": 0,
+    "automatic_repeat_allowed": false,
+    "formal_training": false,
+    "real_HBM": false
   }
 }

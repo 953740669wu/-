@@ -1,0 +1,33 @@
+{
+  "status": "PASS_REMOTE_SHA_LF_LINUX_SYNTAX",
+  "kind": "ubsan",
+  "captured_utc": "2026-11-05T06:51:37.947878+00:00",
+  "package_sha256": "0fe3eeb3a7ad7fe2fb34eea220f3147edba5b72cdc44f5c7db4fd46d98ea872a",
+  "payload_files": {
+    "BEHAVIOR.md": "68cc2dcc59aff4f81fac0dd722502628d201da13e3ce182f2056170beec4ef06",
+    "LINUX_COMMANDS.md": "aa51847c4ca5eff26c7189e1a1697949453c7ec9a3263a603f6dc966981664b6",
+    "REPORT.md": "2fa3f983e34482beb3cf635faba46ce9eccccd2461dfb1a338f4062e61f34d28",
+    "SOURCE_SHA256.txt": "3268d0feb04c50ebf4b9b507b8345ef274288b7708182380e6b4c4112a8bb3d5",
+    "ARTIFACT_SHA256.txt": "77cec1bd1670b1356cf6f5867e8bec9133ce1b1a479bfaf871757241d3069d1c",
+    "candidate/hbm_alloc.c": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+    "candidate/hbm_alloc.diff": "dbab1ab8f4e388913790a77a9418b7d08216a5d230ed2eb665d76a83344a9365",
+    "evidence/environment.json": "6d1085e0603a443a976db7ec3b40f6a5d47a5f5561deb37d6274f880c782e014",
+    "evidence/handoff_identity.json": "b9d16f7c1b79c5ff985057319bc3499e633a031aaf894900b086568a278c536d",
+    "evidence/local_validation.json": "4fcce59ac75d0df7fe9f517843a34659ca25df20237f0fe0576a48c205f52d4a",
+    "evidence/previous_acceptance_review.json": "0faade1bbea14c269df87f39f1ea931a93422ac22d2e4a8bdbe69b0171836dd2",
+    "evidence/protected_previous_files.json": "f52c59e5c6f2b5dfe8f203cc3c27e19776ddee1dc8ea6110ee55da0ec490a403",
+    "evidence/tests_before_candidate.json": "3e750811f639f7b96581e841ea307e607a42d477341998976e9bff723a787e9d",
+    "frozen/hbm_alloc.c": "8ec586c60c97bbcdb437fe848b6d9645ea3cfca850952ff9d94c0d36fdaed35d",
+    "tests/bounds_harness.c": "06b3145633824e0e9ad4763bdf16462524971ab206b234b7b15220e08cef6181",
+    "tests/cases.py": "726fd1c470fce8b6ebb5ed484a6d9b5f6a4ceee57cea314ac40cb5a378bc9eba",
+    "tests/run_cases.py": "f7bbf6163f36d9851839a3f24392c0b40179fdb57a85ab48f95c1aeaa5bc5047",
+    "tests/verify_delivery.py": "f1a0c213015ebf51ac90a489304936d95911d2e006ca0a3dd8c68cd83f3282e6"
+  },
+  "wrapper_files": {
+    "run_s03_r2_ubsan_recovery.py": "b962c2869ba07c7678389ae08586c0b0177dec912fae60ba2ef277aeddf10546",
+    "run_s03_r2_ubsan_recovery.sh": "c99c9cb46bf5b221a072371bb876f1bd7e960609214a1a53c0f79b592b7b80bb",
+    "cpu36_contract.py": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+    "prepare_memory_ubsan_round.py": "0abe3cd9c1887b80e86632bcba4148c3b024df2a3c43a162c905b29a6a55680c",
+    "submit_ubsan.sh": "6985a90f04ba97583e14753f99443bd8c5ac82b1e24c8491e6c2782f6ceaa801"
+  }
+}

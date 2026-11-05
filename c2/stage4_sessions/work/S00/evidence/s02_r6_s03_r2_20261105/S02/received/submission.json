@@ -1,0 +1,32 @@
+{
+  "submitted_utc": "2026-11-05T06:06:24.313522+00:00",
+  "command": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "900",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CKPT64_R6_20261105T060434Z/payload",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CKPT64_R6_20261105T060434Z/job.log",
+    "env",
+    "S02_CASE_FILE=/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CPU36_R5_20261105T034705Z/fixed_16_pre.pt",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CKPT64_R6_20261105T060434Z/payload/run_s00_job.sh",
+    "equivalence"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"data\":{\"jobId\":\"2037034\"},\"message\":\"Submit job successfully.\",\"code\":\"success\",\"requestId\":\"req-8359b304-4c82-4496-bc85-5faae15966f8\"}\n",
+  "stderr": "",
+  "donau_profile_reloaded_after_runtime": true
+}

@@ -1,0 +1,28 @@
+{
+  "status": "PRESUBMIT_CASE_IDENTITY_BLOCKED_NO_JOB",
+  "expected": {
+    "path": "case/fixed_16_pre.pt",
+    "sha256": "4de1fb40eb1c4b43a8747586399f336bf9e37184592d66fdbf711abad8469846",
+    "bytes": 271979513,
+    "input_protocol": "S02_PAIRED_BELT_V1",
+    "identity": {
+      "initial_weights_sha256": "662a4f7ffc490412c92aa6dedcbd8dcb1e811e61b3ce9d3fcaa8327e13a7ed41",
+      "fixed_tensor_sha256": {
+        "v": "1ea0b8117304e40e6906966af78cd374560baf972af38b3ab5be66e5d1ed7868",
+        "y0": "71c98d8a13605626bfb90f3b9b256a348fc666210ad6db581490e2026ee5cc27",
+        "idx": "719b836f9eae3b9451fcc403ebad9681cc7c134c04e3487c8e46eacf8834a927",
+        "mask": "086140d0db27e48f11dc2f854428f606950860f0d8dd35fb2e2eed3240d99d65",
+        "t": "389e2a26d4302653588a9345f549efa1511f2a8591fd0791c8cf543d2c2ffcef",
+        "noise": "7fb86f5b64f7903bd2a0977434606c6d242d013b2021f4c22f95c331d4e56202"
+      }
+    },
+    "note": "Frozen Windows case matches round2 tensor and initial weight hashes. No real corpus data."
+  },
+  "actual": {
+    "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CPU36_R5_20261105T034705Z/fixed_16_pre.pt",
+    "bytes": 271979513,
+    "mtime_ns": 1793850592308132590,
+    "sha256": "eaf361af4bc885bccf3320029a6a865ef884b1759d9c6ab944b124dce498b5b6"
+  },
+  "submission_exists": false
+}

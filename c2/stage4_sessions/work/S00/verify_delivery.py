@@ -20,17 +20,28 @@ added = [p.relative_to(ROOT).as_posix() for p in ROOT.rglob('*')
          and not p.is_relative_to(ROOT / '.git')
          and p.relative_to(ROOT).as_posix() not in known]
 external_review = json.loads((WORK / 'evidence/workspace_git_additions_20261105.json').read_text(encoding='utf-8'))
+handoff_review = json.loads((WORK / 'evidence/workspace_handoff_additions_20261105.json').read_text(encoding='utf-8'))
+external_review['reviewed_project_additions'].update(handoff_review['reviewed_project_additions'])
 reviewed_additions = [name for name in added
     if name in external_review['reviewed_project_additions']
     and hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
         == external_review['reviewed_project_additions'][name]['sha256']]
 unexpected_additions = [name for name in added if name not in reviewed_additions]
+documentation_review = json.loads((WORK / 'evidence/readme_handoff_review_20261105.json').read_text(encoding='utf-8'))
+reviewed_changes = [name for name in changed
+    if name in documentation_review['reviewed_original_changes']
+    and hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
+        == documentation_review['reviewed_original_changes'][name]]
+unreviewed_changes = [name for name in changed if name not in reviewed_changes]
 integrity = dict(captured_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
     original_file_count=len(before['files']), changed_or_missing=changed,
+    original_files_byte_matched=len(before['files']) - len(changed),
+    reviewed_documentation_changes=reviewed_changes, unreviewed_changes=unreviewed_changes,
+    documentation_change_review='evidence/readme_handoff_review_20261105.json',
     added_outside_session_work=added, externally_reviewed_additions=reviewed_additions,
     unexpected_additions=unexpected_additions, git_metadata_excluded=True,
     external_additions_review='evidence/workspace_git_additions_20261105.json',
-    status='PASS' if not changed and not unexpected_additions else 'FAIL',
+    status='PASS' if not unreviewed_changes and not unexpected_additions else 'FAIL',
     data_note='Remote manifest metadata and selected production source SHA verified; corpus payload integrity NOT_ESTABLISHED')
 (WORK / 'evidence/source_integrity.json').write_text(json.dumps(integrity, indent=2) + '\n', encoding='utf-8')
 assert integrity['status'] == 'PASS', integrity
@@ -129,6 +140,19 @@ validation.update(latest_model_job=pair['records']['S02']['job_id'],
     s03_real_HBM='NOT_RUN', r7_offline_summary='PASS',
     offline_summary='R7_HISTORICAL_PASS_CURRENT_PAIR_METRIC_AND_C_EVIDENCE_AUDIT_COMPLETE',
     numerical_and_performance_acceptance='S02_NUMERICAL_FAIL_NO_FORMAL_PERFORMANCE_ACCEPTANCE')
+current = json.loads((WORK / 'evidence/s02_r6_s03_r2_20261105/review.json').read_text(encoding='utf-8'))
+assert current['status'] == 'COMPLETE_S02_R6_STRICT_PASS_S03_R2_UBSAN_LINK_BLOCKED'
+assert current['new_jobs'] == 2 and current['retries'] == 0
+validation.update(latest_model_job=current['records']['S02']['job_id'],
+    latest_c_job=current['records']['S03']['job_id'],
+    latest_turn_scope='ONE_R6_CKPT64_STRICT_AND_ONE_R2_UBSAN_JOB_NO_MEMORY_OR_HBM',
+    current_round_evidence='evidence/s02_r6_s03_r2_20261105/review.json',
+    s02_model_pilot='R6_B64_CKPT0_VS_CKPT1_1063_STRICT_METRICS_PASS_THIS_CASE_ONLY',
+    s02_training_memory='NOT_RUN_THIS_ROUND',
+    s03_c_safety='R2_DEFAULT_TOOLCHAIN_CANNOT_LINK_LIBUBSAN_CASES_NOT_RUN',
+    full_model_evidence_files=current['records']['S02']['full_evidence_files'],
+    s03_evidence_files=current['records']['S03']['full_evidence_files'],
+    numerical_and_performance_acceptance='R6_THIS_CASE_STRICT_PASS_NO_MEMORY_OR_PERFORMANCE_ACCEPTANCE')
 (WORK / 'evidence/delivery_validation.json').write_text(json.dumps(validation, indent=2) + '\n', encoding='utf-8')
 index = WORK / 'ARTIFACT_SHA256.txt'
 paths = [p for p in sorted(WORK.rglob('*')) if p.is_file() and p != index

@@ -1,5 +1,7 @@
 # S00：阶段四基线与限定集群执行回传
 
+最新轮次请先读SESSION_STATUS.md和ROUND_DELTA.md：2039061新增3组R6独立首步内存配对有效；之后2039114因S00包装器引用计算节点不存在的调度profile而启动失败，S07检查/通信未运行且无重试。详见MEMORY3_S07_R2_REPORT.md及evidence/memory3_s07_r2_20261105/；下方保留旧轮时点。
+
 日期：2026-11-05（Asia/Shanghai；历史冻结/作业时点保留）。
 状态：**READY_FOR_REVIEW / S02_R5_NUMERICAL_FAIL / S03_C_SAFETY_PASS / BOTH_TERMINAL**。
 首次交接证据范围：REMOTE_VERIFIED / HISTORICAL_RECOMPUTED / NEW_CLUSTER_BENCHMARK_NOT_RUN。该标记只描述首次交接，不覆盖后续实际执行。

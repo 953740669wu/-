@@ -1,0 +1,458 @@
+{
+  "status": "COMPLETE_MEMORY3_DIAGNOSTIC_S07_STARTUP_FAILED_STOPPED",
+  "jobs": {
+    "S02": {
+      "job_id": "2039061",
+      "state": "SUCCEEDED",
+      "exit_code": 0,
+      "host": "cn21340",
+      "start_utc": "2026-11-05T07:32:21Z",
+      "end_utc": "2026-11-05T07:37:01Z",
+      "elapsed_wall_seconds": 280.0,
+      "allocated_cores": 38,
+      "scheduler_cpu_list": "0-37",
+      "memory_MB": 24576,
+      "wall_limit_seconds": 900,
+      "bundle_sha256": "cd6be5d0aaf6a690524f465598f3a79df29c2b838ba35479437e4bce4d6f7613",
+      "bundle_bytes": 320351,
+      "file_count": 168,
+      "status": "PASS_THREE_NEW_PAIRS_DDR_FIRST_STEP_DIAGNOSTIC_ONLY",
+      "pairs": [
+        {
+          "pair": 1,
+          "measurements": [
+            {
+              "checkpoint": 0,
+              "pid": 2061672,
+              "loss": 303.04705810546875,
+              "initialization": {
+                "elapsed_seconds": 35.03542443597689,
+                "rss_bytes": 692060160,
+                "peak_rss_bytes": 875122688,
+                "rss_MiB": 660.0,
+                "peak_rss_MiB": 834.58203125,
+                "hugetlb_bytes": 0
+              },
+              "training_start": {
+                "rss_bytes": 692060160,
+                "peak_rss_bytes": 692060160,
+                "rss_MiB": 660.0,
+                "peak_rss_MiB": 660.0,
+                "hugetlb_bytes": 0
+              },
+              "peak_reset": {
+                "available": true,
+                "method": "/proc/self/clear_refs=5"
+              },
+              "training": {
+                "elapsed_seconds": 4.749420389067382,
+                "rss_bytes": 3662311424,
+                "peak_rss_bytes": 6085783552,
+                "rss_MiB": 3492.65234375,
+                "peak_rss_MiB": 5803.85546875,
+                "hugetlb_bytes": 0
+              },
+              "kml_calls": 149,
+              "cpu_checkpoints": 7
+            },
+            {
+              "checkpoint": 1,
+              "pid": 2065777,
+              "loss": 303.04705810546875,
+              "initialization": {
+                "elapsed_seconds": 27.0959130669944,
+                "rss_bytes": 737550336,
+                "peak_rss_bytes": 945295360,
+                "rss_MiB": 703.3828125,
+                "peak_rss_MiB": 901.50390625,
+                "hugetlb_bytes": 0
+              },
+              "training_start": {
+                "rss_bytes": 737550336,
+                "peak_rss_bytes": 737550336,
+                "rss_MiB": 703.3828125,
+                "peak_rss_MiB": 703.3828125,
+                "hugetlb_bytes": 0
+              },
+              "peak_reset": {
+                "available": true,
+                "method": "/proc/self/clear_refs=5"
+              },
+              "training": {
+                "elapsed_seconds": 6.127788343001157,
+                "rss_bytes": 4797898752,
+                "peak_rss_bytes": 5070233600,
+                "rss_MiB": 4575.6328125,
+                "peak_rss_MiB": 4835.3515625,
+                "hugetlb_bytes": 0
+              },
+              "kml_calls": 197,
+              "cpu_checkpoints": 7
+            }
+          ]
+        },
+        {
+          "pair": 2,
+          "measurements": [
+            {
+              "checkpoint": 0,
+              "pid": 2069454,
+              "loss": 303.04705810546875,
+              "initialization": {
+                "elapsed_seconds": 28.652668519876897,
+                "rss_bytes": 728121344,
+                "peak_rss_bytes": 914432000,
+                "rss_MiB": 694.390625,
+                "peak_rss_MiB": 872.0703125,
+                "hugetlb_bytes": 0
+              },
+              "training_start": {
+                "rss_bytes": 728121344,
+                "peak_rss_bytes": 728121344,
+                "rss_MiB": 694.390625,
+                "peak_rss_MiB": 694.390625,
+                "hugetlb_bytes": 0
+              },
+              "peak_reset": {
+                "available": true,
+                "method": "/proc/self/clear_refs=5"
+              },
+              "training": {
+                "elapsed_seconds": 4.396932111587375,
+                "rss_bytes": 3642273792,
+                "peak_rss_bytes": 6121635840,
+                "rss_MiB": 3473.54296875,
+                "peak_rss_MiB": 5838.046875,
+                "hugetlb_bytes": 0
+              },
+              "kml_calls": 149,
+              "cpu_checkpoints": 7
+            },
+            {
+              "checkpoint": 1,
+              "pid": 2072708,
+              "loss": 303.04705810546875,
+              "initialization": {
+                "elapsed_seconds": 26.72410366591066,
+                "rss_bytes": 737382400,
+                "peak_rss_bytes": 945115136,
+                "rss_MiB": 703.22265625,
+                "peak_rss_MiB": 901.33203125,
+                "hugetlb_bytes": 0
+              },
+              "training_start": {
+                "rss_bytes": 737382400,
+                "peak_rss_bytes": 737382400,
+                "rss_MiB": 703.22265625,
+                "peak_rss_MiB": 703.22265625,
+                "hugetlb_bytes": 0
+              },
+              "peak_reset": {
+                "available": true,
+                "method": "/proc/self/clear_refs=5"
+              },
+              "training": {
+                "elapsed_seconds": 5.959001389332116,
+                "rss_bytes": 4716695552,
+                "peak_rss_bytes": 5125173248,
+                "rss_MiB": 4498.19140625,
+                "peak_rss_MiB": 4887.74609375,
+                "hugetlb_bytes": 0
+              },
+              "kml_calls": 197,
+              "cpu_checkpoints": 7
+            }
+          ]
+        },
+        {
+          "pair": 3,
+          "measurements": [
+            {
+              "checkpoint": 0,
+              "pid": 2076756,
+              "loss": 303.04705810546875,
+              "initialization": {
+                "elapsed_seconds": 29.251442435197532,
+                "rss_bytes": 729407488,
+                "peak_rss_bytes": 915714048,
+                "rss_MiB": 695.6171875,
+                "peak_rss_MiB": 873.29296875,
+                "hugetlb_bytes": 0
+              },
+              "training_start": {
+                "rss_bytes": 729407488,
+                "peak_rss_bytes": 729407488,
+                "rss_MiB": 695.6171875,
+                "peak_rss_MiB": 695.6171875,
+                "hugetlb_bytes": 0
+              },
+              "peak_reset": {
+                "available": true,
+                "method": "/proc/self/clear_refs=5"
+              },
+              "training": {
+                "elapsed_seconds": 4.396816019900143,
+                "rss_bytes": 3668377600,
+                "peak_rss_bytes": 6120562688,
+                "rss_MiB": 3498.4375,
+                "peak_rss_MiB": 5837.0234375,
+                "hugetlb_bytes": 0
+              },
+              "kml_calls": 149,
+              "cpu_checkpoints": 7
+            },
+            {
+              "checkpoint": 1,
+              "pid": 2080003,
+              "loss": 303.04705810546875,
+              "initialization": {
+                "elapsed_seconds": 27.346381893847138,
+                "rss_bytes": 739557376,
+                "peak_rss_bytes": 947290112,
+                "rss_MiB": 705.296875,
+                "peak_rss_MiB": 903.40625,
+                "hugetlb_bytes": 0
+              },
+              "training_start": {
+                "rss_bytes": 739557376,
+                "peak_rss_bytes": 739557376,
+                "rss_MiB": 705.296875,
+                "peak_rss_MiB": 705.296875,
+                "hugetlb_bytes": 0
+              },
+              "peak_reset": {
+                "available": true,
+                "method": "/proc/self/clear_refs=5"
+              },
+              "training": {
+                "elapsed_seconds": 6.208228330127895,
+                "rss_bytes": 4715880448,
+                "peak_rss_bytes": 5070069760,
+                "rss_MiB": 4497.4140625,
+                "peak_rss_MiB": 4835.1953125,
+                "hugetlb_bytes": 0
+              },
+              "kml_calls": 197,
+              "cpu_checkpoints": 7
+            }
+          ]
+        }
+      ],
+      "statistics_new_three_only": {
+        "0": {
+          "training_peak_MiB": {
+            "values": [
+              5803.85546875,
+              5838.046875,
+              5837.0234375
+            ],
+            "median": 5837.0234375,
+            "min": 5803.85546875,
+            "max": 5838.046875
+          },
+          "training_end_RSS_MiB": {
+            "values": [
+              3492.65234375,
+              3473.54296875,
+              3498.4375
+            ],
+            "median": 3492.65234375,
+            "min": 3473.54296875,
+            "max": 3498.4375
+          },
+          "training_seconds": {
+            "values": [
+              4.749420389067382,
+              4.396932111587375,
+              4.396816019900143
+            ],
+            "median": 4.396932111587375,
+            "min": 4.396816019900143,
+            "max": 4.749420389067382
+          },
+          "initialization_peak_MiB": {
+            "values": [
+              834.58203125,
+              872.0703125,
+              873.29296875
+            ],
+            "median": 872.0703125,
+            "min": 834.58203125,
+            "max": 873.29296875
+          }
+        },
+        "1": {
+          "training_peak_MiB": {
+            "values": [
+              4835.3515625,
+              4887.74609375,
+              4835.1953125
+            ],
+            "median": 4835.3515625,
+            "min": 4835.1953125,
+            "max": 4887.74609375
+          },
+          "training_end_RSS_MiB": {
+            "values": [
+              4575.6328125,
+              4498.19140625,
+              4497.4140625
+            ],
+            "median": 4498.19140625,
+            "min": 4497.4140625,
+            "max": 4575.6328125
+          },
+          "training_seconds": {
+            "values": [
+              6.127788343001157,
+              5.959001389332116,
+              6.208228330127895
+            ],
+            "median": 6.127788343001157,
+            "min": 5.959001389332116,
+            "max": 6.208228330127895
+          },
+          "initialization_peak_MiB": {
+            "values": [
+              901.50390625,
+              901.33203125,
+              903.40625
+            ],
+            "median": 901.50390625,
+            "min": 901.33203125,
+            "max": 903.40625
+          }
+        }
+      },
+      "distinct_model_pids": [
+        2061672,
+        2065777,
+        2069454,
+        2072708,
+        2076756,
+        2080003
+      ]
+    },
+    "S07": {
+      "job_id": "2039114",
+      "state": "FAILED",
+      "exit_code": 1,
+      "host": "cn21340",
+      "start_utc": "2026-11-05T07:38:32Z",
+      "end_utc": "2026-11-05T07:38:33Z",
+      "elapsed_wall_seconds": 1.0,
+      "allocated_cores": 76,
+      "scheduler_cpu_list": "0-75",
+      "memory_MB": 24576,
+      "wall_limit_seconds": 300,
+      "bundle_sha256": "6e3f10538532c3455e9a0f021466c16d25fa2b4968e81d31b8e39c0b9bab6563",
+      "bundle_bytes": 83313,
+      "file_count": 52,
+      "status": "BLOCKED_S00_WRAPPER_REQUIRES_LOGIN_ONLY_PROFILE_ON_COMPUTE",
+      "standard_library_tests": "NOT_RUN",
+      "environment_check": "NOT_RUN",
+      "communication_cases": "NOT_RUN",
+      "per_rank_physical_domain_authority": "NOT_REACHED",
+      "intended_selected_cores": 72,
+      "actual_workers": 0
+    }
+  },
+  "old_first_pair_separate": {
+    "job_id": "2037434",
+    "state": "SUCCEEDED",
+    "exit_code": 0,
+    "start_utc": "2026-11-05T06:48:38Z",
+    "end_utc": "2026-11-05T06:49:16Z",
+    "elapsed_wall_seconds": 38.0,
+    "host": "cn21339",
+    "allocated_cores": 38,
+    "selected_cores": 36,
+    "memory_MB": 24576,
+    "bundle_sha256": "d2dd91be74c2bba01f529f926d07ab38b184d88b6389bcbae0a1283fd1f51881",
+    "bundle_bytes": 196064,
+    "file_count": 90,
+    "status": "DDR_ONE_STEP_DIAGNOSTIC_ONLY_NOT_BENEFIT_ACCEPTANCE",
+    "measurements": [
+      {
+        "checkpoint": 0,
+        "pid": 1428225,
+        "initialization": {
+          "elapsed_seconds": 14.657534260768443,
+          "rss_bytes": 728817664,
+          "peak_rss_bytes": 915197952,
+          "rss_MiB": 695.0546875,
+          "peak_rss_MiB": 872.80078125,
+          "hugetlb_bytes": 0
+        },
+        "peak_reset": {
+          "available": true,
+          "method": "/proc/self/clear_refs=5"
+        },
+        "training_start": {
+          "rss_bytes": 728817664,
+          "peak_rss_bytes": 728817664,
+          "rss_MiB": 695.0546875,
+          "peak_rss_MiB": 695.0546875,
+          "hugetlb_bytes": 0
+        },
+        "training": {
+          "elapsed_seconds": 2.4526388668455184,
+          "rss_bytes": 3695017984,
+          "peak_rss_bytes": 6119497728,
+          "rss_MiB": 3523.84375,
+          "peak_rss_MiB": 5836.0078125,
+          "hugetlb_bytes": 0
+        },
+        "loss": 303.04705810546875,
+        "optimizer_steps": 1,
+        "cpu_checkpoints": 7,
+        "kml_calls": 149
+      },
+      {
+        "checkpoint": 1,
+        "pid": 1429732,
+        "initialization": {
+          "elapsed_seconds": 13.56830025697127,
+          "rss_bytes": 738398208,
+          "peak_rss_bytes": 946135040,
+          "rss_MiB": 704.19140625,
+          "peak_rss_MiB": 902.3046875,
+          "hugetlb_bytes": 0
+        },
+        "peak_reset": {
+          "available": true,
+          "method": "/proc/self/clear_refs=5"
+        },
+        "training_start": {
+          "rss_bytes": 738398208,
+          "peak_rss_bytes": 738398208,
+          "rss_MiB": 704.19140625,
+          "peak_rss_MiB": 704.19140625,
+          "hugetlb_bytes": 0
+        },
+        "training": {
+          "elapsed_seconds": 3.3435222790576518,
+          "rss_bytes": 4142383104,
+          "peak_rss_bytes": 4523429888,
+          "rss_MiB": 3950.484375,
+          "peak_rss_MiB": 4313.87890625,
+          "hugetlb_bytes": 0
+        },
+        "loss": 303.04705810546875,
+        "optimizer_steps": 1,
+        "cpu_checkpoints": 7,
+        "kml_calls": 197
+      }
+    ]
+  },
+  "new_jobs": 2,
+  "retries": 0,
+  "real_HBM": false,
+  "UBSan_retry": false,
+  "formal_training": false,
+  "scientific_memory_benefit_acceptance": false,
+  "production_integration": false,
+  "old_protected_evidence_unchanged": true,
+  "node_seconds_this_round": 281.0,
+  "clean_terminal_pids": true
+}

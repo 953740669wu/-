@@ -1,0 +1,139 @@
+--- run_s03_r2_c_job.py
++++ run_s03_r2_ubsan_recovery.py
+@@ -1,4 +1,4 @@
+-"""One clean CPU36 round2 C/UBSan bounds job. No real HBM or model."""
++"""One bounded existing-UBSan recovery and conditional round2 C job."""
+ from pathlib import Path
+ import hashlib
+ import json
+@@ -12,7 +12,7 @@
+ from cpu36_contract import discover_contracts
+ 
+ root = Path(sys.argv[1]).resolve()
+-assert root.parent.name.startswith('S03_R2_C_') and root.name == 'payload'
++assert root.parent.name.startswith('S03_R2_UBSAN_') and root.name == 'payload'
+ assert sys.platform == 'linux' and not socket.gethostname().startswith('login')
+ assert os.environ.get('CCS_JOB_ID')
+ assert all(not os.environ.get(key) for key in ('LD_PRELOAD', 'LD_LIBRARY_PATH', 'PYTHONPATH', 'KML_BLAS_LIB', 'HBM_NODE'))
+@@ -23,6 +23,7 @@
+ receipt = discover_contracts(sorted(os.sched_getaffinity(0)), 1)
+ assert len(receipt) == 1
+ node, contract = next(iter(receipt.items()))
++assert contract['allocated'] == sorted(os.sched_getaffinity(0))
+ os.sched_setaffinity(0, contract['selected'])
+ (out / 'cpu_receipt.json').write_text(json.dumps(dict(job_id=os.environ['CCS_JOB_ID'], host=socket.gethostname(), node=node, contract=contract, actual_affinity=sorted(os.sched_getaffinity(0)), clean_environment=True), indent=2) + '\n')
+ steps = []
+@@ -62,6 +63,77 @@
+     run('source_sha', ['sha256sum', '-c', 'ARTIFACT_SHA256.txt'])
+     run('package_integrity', ['/usr/bin/python3', '-B', 'tests/verify_delivery.py', '--json', str(out / 'package_integrity.json')])
+     flags = ['-std=gnu11', '-O1', '-g', '-Wall', '-Wextra', '-pthread', '-fsanitize=undefined', '-fno-sanitize-recover=all']
++    # Only existing compiler-reported paths and bounded, known system directories.
++    compiler_real = Path(cc).resolve()
++    def digest(path):
++        h = hashlib.sha256()
++        with Path(path).open('rb') as stream:
++            for block in iter(lambda: stream.read(1024 * 1024), b''):
++                h.update(block)
++        return h.hexdigest()
++    run('compiler_elf', ['readelf', '-h', str(compiler_real)])
++    run('compiler_target', [cc, '-dumpmachine'])
++    locations = []
++    for name in ('libubsan.so', 'libubsan.so.1', 'libgcc_s.so.1'):
++        run('compiler_path_' + name.replace('.', '_'), [cc, '-print-file-name=' + name])
++        value = (out / ('compiler_path_' + name.replace('.', '_') + '.txt')).read_text().strip()
++        if Path(value).is_absolute():
++            if name.startswith('libubsan'):
++                locations.append(Path(value))
++            else:
++                locations.extend(sorted(Path(value).parent.glob('libubsan.so*')))
++    known = ['/usr/lib64', '/lib64', '/usr/lib/aarch64-linux-gnu', '/lib/aarch64-linux-gnu']
++    for directory in known:
++        locations.extend(sorted(Path(directory).glob('libubsan.so*')))
++    checked = []
++    found = []
++    for path in dict.fromkeys(locations):
++        checked.append(dict(path=str(path), exists=path.is_file(), resolved=str(path.resolve())))
++        if path.is_file() and path.resolve() not in found:
++            found.append(path.resolve())
++    (out / 'runtime_locations.json').write_text(json.dumps(dict(known_directories=known, checked=checked), indent=2) + '\n')
++    if not found:
++        summary['blocker'] = 'NO_EXISTING_UBSAN_RUNTIME_IN_FINITE_ALLOWED_LOCATIONS'
++        raise RuntimeError(summary['blocker'])
++    # First existing compiler-reported/system runtime; no automatic alternate retry.
++    runtime = found[0]
++    run('ubsan_elf', ['readelf', '-h', str(runtime)])
++    run('ubsan_dynamic', ['readelf', '-d', str(runtime)])
++    run('ubsan_ldd', ['ldd', str(runtime)])
++    assert 'AArch64' in (out / 'compiler_elf.txt').read_text()
++    assert 'AArch64' in (out / 'ubsan_elf.txt').read_text()
++    assert 'ELF64' in (out / 'ubsan_elf.txt').read_text()
++    assert 'not found' not in (out / 'ubsan_ldd.txt').read_text()
++    links = root.parent / 'ubsan_link'
++    links.mkdir()
++    (links / 'libubsan.so').symlink_to(runtime)
++    # SONAME lookup is local too; the resolved file is the same unchanged runtime.
++    (links / 'libubsan.so.1').symlink_to(runtime)
++    flags += ['-L' + str(links), '-Wl,-rpath,' + str(links)]
++    identity = dict(compiler=str(compiler_real), compiler_sha256=digest(compiler_real),
++                    runtime=str(runtime), runtime_sha256=digest(runtime), runtime_bytes=runtime.stat().st_size,
++                    runtime_mtime_ns=runtime.stat().st_mtime_ns, link_directory=str(links), flags=flags,
++                    library_installed=False, global_environment_modified=False)
++    (out / 'toolchain_identity.json').write_text(json.dumps(identity, indent=2) + '\n')
++    positive = root.parent / 'ubsan_positive.c'
++    negative = root.parent / 'ubsan_negative.c'
++    positive.write_text('int main(void) { volatile int a=1, b=2; return a+b == 3 ? 0 : 1; }\n')
++    negative.write_text('#include <limits.h>\nint main(void) { volatile int a=INT_MAX, b=1; volatile int c=a+b; return c; }\n')
++    for name, source, expected_exit in [('positive', positive, 0), ('negative', negative, 1)]:
++        binary = root / 'build' / ('ubsan_' + name)
++        run('build_control_' + name, [cc, *flags, str(source), '-o', str(binary)])
++        run('control_' + name + '_ldd', ['ldd', str(binary)])
++        loaded = (out / ('control_' + name + '_ldd.txt')).read_text()
++        assert 'libubsan' in loaded and 'not found' not in loaded
++        run('control_' + name, [str(binary)], allowed=(expected_exit,), limit=10)
++        messages = (out / ('control_' + name + '.txt')).read_text()
++        if name == 'negative':
++            assert 'runtime error: signed integer overflow:' in messages
++        else:
++            assert 'runtime error:' not in messages
++    summary.update(ubsan_controls='PASS_NORMAL_EXIT0_INTENTIONAL_UB_EXIT1_WITH_DIAGNOSTIC',
++                   compiler_sha256=identity['compiler_sha256'], runtime_sha256=identity['runtime_sha256'])
++
+     (out / 'harness_flags.txt').write_text(' '.join(flags) + '\n')
+     run('build_previous', [cc, *flags, '-DS03_SOURCE="../frozen/hbm_alloc.c"', 'tests/bounds_harness.c', '-o', 'build/bounds_previous'])
+     run('previous_harness_ldd', ['ldd', 'build/bounds_previous'])
+@@ -91,9 +163,10 @@
+     (out / 'built_sha256.json').write_text(json.dumps(built, indent=2) + '\n')
+     summary.update(status='PASS_NEW_50_C_UBSAN_CASES_AND_ISOLATED_LIBRARY_ONLY', library_sha256=built['build/libhbm_alloc_s03_round2.so']['sha256'])
+ except Exception as exc:
+-    summary.update(status='FAIL_C_OR_INFRASTRUCTURE', error=repr(exc))
++    summary.update(status='BLOCKED_UBSAN_OR_C_FAILURE', error=repr(exc))
+ finally:
+     summary['steps'] = steps
++    summary['finished_affinity'] = sorted(os.sched_getaffinity(0))
+     (out / 'SUMMARY.json').write_text(json.dumps(summary, indent=2) + '\n')
+ print(json.dumps({k: v for k, v in summary.items() if k != 'steps'}))
+ raise SystemExit(0 if summary['status'].startswith('PASS_') else 1)
+--- run_s03_r2_c_job.sh
++++ run_s03_r2_ubsan_recovery.sh
+@@ -2,4 +2,4 @@
+ set -euo pipefail
+ HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
+ : "${CCS_JOB_ID:?requires the independent allocated job}"
+-exec env -i PATH=/usr/bin:/bin HOME=/home/share/dengqingtian USER=dengqingtian LC_ALL=C PYTHONUTF8=1 PYTHONDONTWRITEBYTECODE=1 CCS_JOB_ID="$CCS_JOB_ID" /usr/bin/python3 -B "$HERE/run_s03_r2_c_job.py" "$HERE/payload"
++exec env -i PATH=/usr/bin:/bin HOME=/home/share/dengqingtian USER=dengqingtian LC_ALL=C PYTHONUTF8=1 PYTHONDONTWRITEBYTECODE=1 CCS_JOB_ID="$CCS_JOB_ID" OMP_NUM_THREADS=36 MKL_NUM_THREADS=36 OPENBLAS_NUM_THREADS=1 /usr/bin/python3 -B "$HERE/run_s03_r2_ubsan_recovery.py" "$HERE/payload"
+--- prepare_memory_ubsan_round_before_stream_fix.py
++++ prepare_memory_ubsan_round.py
+@@ -18,7 +18,12 @@
+ archive_name = 'S02_CKPT64_R6_CODE.zip' if kind == 'memory' else 'S03_ROUND2_C_VALIDATION.zip'
+ expected = ('26e542430f024f60277bdbbbc699b41a203ee74270022806074040a531ac166f' if kind == 'memory'
+             else '0fe3eeb3a7ad7fe2fb34eea220f3147edba5b72cdc44f5c7db4fd46d98ea872a')
+-sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
++def sha(p):
++    digest = hashlib.sha256()
++    with p.open('rb') as stream:
++        for block in iter(lambda: stream.read(1024 * 1024), b''):
++            digest.update(block)
++    return digest.hexdigest()
+ assert root.is_dir() and not (root / 'payload').exists()
+ assert sha(old / archive_name) == expected
+ shutil.copyfile(old / archive_name, root / archive_name)

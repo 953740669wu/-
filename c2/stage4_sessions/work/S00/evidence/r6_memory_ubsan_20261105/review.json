@@ -1,0 +1,126 @@
+{
+  "status": "COMPLETE_MEMORY_DIAGNOSTIC_UBSAN_RECOVERY_BLOCKED",
+  "jobs": {
+    "S02": {
+      "job_id": "2037434",
+      "state": "SUCCEEDED",
+      "exit_code": 0,
+      "start_utc": "2026-11-05T06:48:38Z",
+      "end_utc": "2026-11-05T06:49:16Z",
+      "elapsed_wall_seconds": 38.0,
+      "host": "cn21339",
+      "allocated_cores": 38,
+      "selected_cores": 36,
+      "memory_MB": 24576,
+      "bundle_sha256": "d2dd91be74c2bba01f529f926d07ab38b184d88b6389bcbae0a1283fd1f51881",
+      "bundle_bytes": 196064,
+      "file_count": 90,
+      "status": "DDR_ONE_STEP_DIAGNOSTIC_ONLY_NOT_BENEFIT_ACCEPTANCE",
+      "measurements": [
+        {
+          "checkpoint": 0,
+          "pid": 1428225,
+          "initialization": {
+            "elapsed_seconds": 14.657534260768443,
+            "rss_bytes": 728817664,
+            "peak_rss_bytes": 915197952,
+            "rss_MiB": 695.0546875,
+            "peak_rss_MiB": 872.80078125,
+            "hugetlb_bytes": 0
+          },
+          "peak_reset": {
+            "available": true,
+            "method": "/proc/self/clear_refs=5"
+          },
+          "training_start": {
+            "rss_bytes": 728817664,
+            "peak_rss_bytes": 728817664,
+            "rss_MiB": 695.0546875,
+            "peak_rss_MiB": 695.0546875,
+            "hugetlb_bytes": 0
+          },
+          "training": {
+            "elapsed_seconds": 2.4526388668455184,
+            "rss_bytes": 3695017984,
+            "peak_rss_bytes": 6119497728,
+            "rss_MiB": 3523.84375,
+            "peak_rss_MiB": 5836.0078125,
+            "hugetlb_bytes": 0
+          },
+          "loss": 303.04705810546875,
+          "optimizer_steps": 1,
+          "cpu_checkpoints": 7,
+          "kml_calls": 149
+        },
+        {
+          "checkpoint": 1,
+          "pid": 1429732,
+          "initialization": {
+            "elapsed_seconds": 13.56830025697127,
+            "rss_bytes": 738398208,
+            "peak_rss_bytes": 946135040,
+            "rss_MiB": 704.19140625,
+            "peak_rss_MiB": 902.3046875,
+            "hugetlb_bytes": 0
+          },
+          "peak_reset": {
+            "available": true,
+            "method": "/proc/self/clear_refs=5"
+          },
+          "training_start": {
+            "rss_bytes": 738398208,
+            "peak_rss_bytes": 738398208,
+            "rss_MiB": 704.19140625,
+            "peak_rss_MiB": 704.19140625,
+            "hugetlb_bytes": 0
+          },
+          "training": {
+            "elapsed_seconds": 3.3435222790576518,
+            "rss_bytes": 4142383104,
+            "peak_rss_bytes": 4523429888,
+            "rss_MiB": 3950.484375,
+            "peak_rss_MiB": 4313.87890625,
+            "hugetlb_bytes": 0
+          },
+          "loss": 303.04705810546875,
+          "optimizer_steps": 1,
+          "cpu_checkpoints": 7,
+          "kml_calls": 197
+        }
+      ]
+    },
+    "S03": {
+      "job_id": "2037491",
+      "state": "FAILED",
+      "exit_code": 1,
+      "start_utc": "2026-11-05T06:51:41Z",
+      "end_utc": "2026-11-05T06:51:43Z",
+      "elapsed_wall_seconds": 2.0,
+      "host": "cn21339",
+      "allocated_cores": 38,
+      "selected_cores": 36,
+      "memory_MB": 24576,
+      "bundle_sha256": "08410627941e6249cb10fed875c9204891f6ad9cdc93364880051ae3b9a22754",
+      "bundle_bytes": 55539,
+      "file_count": 49,
+      "status": "BLOCKED_UBSAN_OR_C_FAILURE",
+      "blocker": "NO_EXISTING_UBSAN_RUNTIME_IN_FINITE_ALLOWED_LOCATIONS",
+      "ubsan_controls": "NOT_RUN_NO_RUNTIME",
+      "previous_50": "NOT_RUN",
+      "candidate_50": "NOT_RUN",
+      "independent_library": "NOT_RUN",
+      "compiler_sha256": "NOT_CAPTURED_EARLY_NO_RUNTIME_BLOCK",
+      "runtime_sha256": "NOT_AVAILABLE_NO_RUNTIME"
+    }
+  },
+  "new_jobs": 2,
+  "retries": 0,
+  "real_HBM": false,
+  "S06_S07_probes": false,
+  "old_protected_evidence_unchanged": true,
+  "node_seconds_this_round": 40.0,
+  "scientific_memory_benefit_acceptance": false,
+  "production_integration": false,
+  "presubmit_helper_fix": "Streaming hash only; preserved original mismatch; no job retry or candidate edit",
+  "clean_terminal_pids": true
+}

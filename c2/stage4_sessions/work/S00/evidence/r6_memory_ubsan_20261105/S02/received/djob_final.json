@@ -1,0 +1,183 @@
+{
+  "data": {
+    "successData": [
+      {
+        "jobId": "2037434",
+        "jobName": "default",
+        "description": "",
+        "priority": 1,
+        "exclusive": true,
+        "interactionMode": "DEFAULT",
+        "state": "SUCCEEDED",
+        "currentOperation": "EMPTY",
+        "createTime": "2026-11-05T06:48:35Z",
+        "startTime": "2026-11-05T06:48:38Z",
+        "lastModifiedTime": "-",
+        "endTime": "2026-11-05T06:49:16Z",
+        "queue": "q_hpcai",
+        "account": "common",
+        "reserveRes": "-",
+        "backfillRes": "-",
+        "backfilledRes": "-",
+        "startTimeEstimated": "-",
+        "jobType": "COSCHED",
+        "mpiType": "DEFAULT",
+        "assistJob": "DEFAULT",
+        "pmiType": "OTHER",
+        "scheduledTime": "-",
+        "jobWallClockLimit": 900,
+        "retryPolicy": {
+          "maxRetryCnt": 0,
+          "currentRetryTimes": 0
+        },
+        "user": "dengqingtian",
+        "execPath": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_R6_MEMORY_20261105T064800Z/payload",
+        "submitNode": "login02",
+        "traceMessages": [
+          "2026-11-05T06:48:35Z   :    [JOB_ADD] Job 2037434 is submitted by dengqingtian, job state is PENDING.",
+          "2026-11-05T06:48:38Z   :    [JOB_START] Job 2037434 start message has been sent.",
+          "2026-11-05T06:48:38Z   :    [JOB_START_ACK] Job 2037434 start message has been received by agent cn21339.",
+          "2026-11-05T06:48:38Z   :    [JOB_EXECUTION] Job 2037434 state is from PENDING to RUNNING, execution path: /home/share/dengqingtian/opt/stage4_sessions/S00/S02_R6_MEMORY_20261105T064800Z/payload.",
+          "2026-11-05T06:49:16Z   :    [JOB_FINISH] Job 2037434 state is from RUNNING to SUCCEEDED."
+        ],
+        "resGroups": [
+          {
+            "taskGroupName": "rg0",
+            "replica": 1,
+            "preferNodes": "-",
+            "nodeSelectPolicyReq": "-",
+            "nodeSelectPolicyEff": "SEQUENCE",
+            "affinityRequest": [
+              "numa[count=1, distribution=pack]"
+            ],
+            "taskLabels": "queue_q_hpcai aarch64",
+            "resReq": {
+              "cpu": 38,
+              "mem": 24576,
+              "gpu": {
+                "amount": 0,
+                "type": "gpu"
+              },
+              "npu": {
+                "count": 0,
+                "name": "npu"
+              },
+              "license": {}
+            },
+            "resLimit": {
+              "mem": 24576,
+              "license": {}
+            },
+            "resAlloc": {
+              "cpu": 38,
+              "mem": 24576,
+              "gpu": {
+                "amount": 0,
+                "type": "gpu"
+              },
+              "npu": {
+                "count": 0,
+                "name": "npu"
+              },
+              "license": {}
+            },
+            "nodeResUsages": [
+              {
+                "tPreCheckRunTime": 0,
+                "execNode": "cn21339",
+                "resIndex": "0/1",
+                "userCpuTime": 267,
+                "systemCpuTime": 41,
+                "memswMax": 5741,
+                "memMax": 5741,
+                "memAvg": 1,
+                "memReal": 0,
+                "rss": 0,
+                "cache": 0,
+                "preHookRunTime": 0,
+                "postHookRunTime": 0,
+                "hostPreHookRunTime": 0,
+                "hostPostHookRunTime": 0,
+                "swap": 0,
+                "swapMax": 0,
+                "wallclockDuration": 37,
+                "sstoppedTime": 0,
+                "cpuUtilAvg": 830,
+                "cpuUtilRecent": 830,
+                "gpuUtilAvg": [],
+                "gpuUtilRecent": [],
+                "npuUtilRecent": [],
+                "pids": "-",
+                "hwThreads": "0-37",
+                "gpuIds": "-",
+                "npuIds": "-"
+              }
+            ]
+          }
+        ],
+        "adminPriority": -1,
+        "taskExecNodes": "cn21339",
+        "taskExecNodesCount": 1,
+        "totalResUsage": {
+          "userCpuTimeTotal": 267,
+          "systemCpuTimeTotal": 41,
+          "memswMaxTotal": 0,
+          "memMaxTotal": 0,
+          "wallclockDurationTotal": 37,
+          "sstoppedTimeTotal": 0,
+          "preHookRunTime": 0,
+          "postHookRunTime": 0,
+          "hostPreHookRunTime": 0,
+          "hostPostHookRunTime": 0,
+          "coreHours": 22496
+        },
+        "jobResReq": {
+          "license": {}
+        },
+        "jobResAlloc": {
+          "license": {}
+        },
+        "transferInfo": {
+          "transferType": "LOCAL",
+          "forwardTime": "-",
+          "recallTime": "-"
+        },
+        "logRedirectPath": {
+          "stderrRedirectPath": "",
+          "stdoutRedirectPath": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_R6_MEMORY_20261105T064800Z/job.log",
+          "stderrRedirectType": "append",
+          "stdoutRedirectType": "override"
+        },
+        "cmd": "env S02_CASE_FILE=/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CPU36_R5_20261105T034705Z/fixed_16_pre.pt S02_EQUIVALENCE_RESULT=/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CKPT64_R6_20261105T060434Z/payload/evidence/c2_2037034_checkpoint_strict/result.json bash /home/share/dengqingtian/opt/stage4_sessions/S00/S02_R6_MEMORY_20261105T064800Z/payload/run_s00_job.sh memory",
+        "preHook": {},
+        "postHook": {},
+        "hostPreHook": {},
+        "hostPostHook": {},
+        "exitCode": 0,
+        "exitMessage": "Job execution succeeded",
+        "jobExitCode": 0,
+        "isX11ForwardEnabled": false,
+        "logRedirectOutputPath": {
+          "stderrRedirectOutputPath": "",
+          "stdoutRedirectOutputPath": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_R6_MEMORY_20261105T064800Z/job.log"
+        },
+        "isAutoResizable": false,
+        "resizeNotifyCmd": "",
+        "execUsages": {
+          "cn21339": {
+            "tgName": "rg0",
+            "numTimeUsage": ""
+          }
+        },
+        "hasResourceAffinityReq": false
+      }
+    ],
+    "errorData": {}
+  },
+  "message": "List job detail infos successfully.",
+  "code": "success",
+  "requestId": "req-137d9765-2d53-4e51-a279-412acb5188e0",
+  "totalElements": 1,
+  "pageNumber": 1,
+  "pageSize": 1
+}

@@ -1,0 +1,10 @@
+{
+  "status": "PRE_SUBMIT_ONLY_FIXED_NO_JOB_RETRY",
+  "failure": "one-shot hashlib of full case returned different digest; assertion prevented submission",
+  "first_helper_sha256": "a7062efccf1813a1b8c8af3fdeb3fc794da625e43605360a487880a14294b2f3",
+  "fixed_helper_sha256": "0abe3cd9c1887b80e86632bcba4148c3b024df2a3c43a162c905b29a6a55680c",
+  "verification": "GNU sha256sum and 1MiB streaming SHA match frozen case; unchanged bytes and mtime_ns; original payload diagnostic_common.sha_file already streams",
+  "action": "use existing accepted streaming method only; preserve failed helper, failure JSON and payload; no case or candidate edit",
+  "no_job_before_repair": true,
+  "root_cause": "NOT_ESTABLISHED; do not infer case mutation"
+}

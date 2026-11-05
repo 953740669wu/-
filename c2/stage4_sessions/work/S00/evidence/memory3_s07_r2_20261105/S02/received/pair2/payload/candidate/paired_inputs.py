@@ -1,0 +1,75 @@
+"""S02_PAIRED_BELT_V1: read one belt's hash-frozen units, never write sources.
+
+Descriptors require path, npz_sha256 and sidecar_sha256 from a trusted snapshot.
+This is a preparation helper, not an accepted corpus loader or timing entry.
+"""
+import hashlib
+import io
+import json
+from pathlib import Path
+import numpy as np
+
+PROTOCOL = 'S02_PAIRED_BELT_V1'
+
+
+def load_belt_inputs(sources, belt):
+    if belt not in ('16_adjacent', '32_skip4') or not sources:
+        raise ValueError('provide a supported belt and nonempty frozen sources')
+    L, skip = (16, 1) if belt == '16_adjacent' else (32, 5)
+    drives = np.array([(i, (i + skip) % L) for i in range(L)], dtype=np.int16)
+    meas = np.array([(i, j) for i, d in enumerate(drives) for j, m in enumerate(drives)
+                     if not (set(d) & set(m))], dtype=np.int16)
+    vs, targets, frame_ids, identities = [], [], [], []
+    seen_hashes, seen_units = set(), set()
+    for source in sources:
+        path = Path(source['path']).resolve()
+        raw, sidecar = path.read_bytes(), path.with_suffix('.json').read_bytes()
+        digest, meta_digest = hashlib.sha256(raw).hexdigest(), hashlib.sha256(sidecar).hexdigest()
+        if digest != source['npz_sha256'] or meta_digest != source['sidecar_sha256']:
+            raise ValueError('source/sidecar SHA256 differs from frozen descriptor')
+        meta = json.loads(sidecar)
+        if meta['belt'] != belt or meta['L'] != L:
+            raise ValueError('source belt differs from requested belt')
+        if meta['unit'] != path.stem:
+            raise ValueError('source unit identity differs from filename')
+        key = (meta['case'], meta['placement'], belt, meta['contact'], meta['unit'])
+        if key in seen_units or (digest, meta_digest) in seen_hashes:
+            raise ValueError('duplicate source unit')
+        seen_units.add(key)
+        seen_hashes.add((digest, meta_digest))
+        with np.load(io.BytesIO(raw), allow_pickle=False) as z:
+            ref, cur, images, base = (z[k] for k in ('v_ref', 'v_cur', 'images', 'base_of_pair'))
+            if not np.array_equal(z['drives'], drives) or not np.array_equal(z['meas'], meas):
+                raise ValueError('ordered electrode protocol differs from frozen model')
+        n = len(cur)
+        if ref.ndim != 2 or ref.shape[1] != len(meas) or cur.shape != (n, len(meas)):
+            raise ValueError('voltage shape mismatch')
+        if images.shape != (n, 64, 64) or base.shape != (n,) or n == 0 or meta['n_pairs'] != n:
+            raise ValueError('frame shape/count mismatch')
+        if ref.dtype != np.float32 or cur.dtype != np.float32 or images.dtype not in (np.float16, np.float32):
+            raise ValueError('unexpected source value dtype')
+        if not all(np.isfinite(a).all() for a in (ref, cur, images)):
+            raise ValueError('source values must be finite')
+        if not np.issubdtype(base.dtype, np.integer) or (base < 0).any() or (base >= len(ref)).any():
+            raise ValueError('invalid baseline reference index')
+        if len(meta['states']) != n or [s['baseline'] for s in meta['states']] != base.tolist():
+            raise ValueError('sidecar frame order differs from base_of_pair')
+        expanded = ref[base]
+        denominator = np.abs(expanded).mean(1, keepdims=True)
+        if not np.isfinite(denominator).all() or (denominator <= 0).any():
+            raise ValueError('reference denominator must be finite and positive')
+        v = ((cur - expanded) / denominator * np.float32(100)).astype(np.float32)
+        if not np.isfinite(v).all():
+            raise ValueError('normalized voltage must be finite')
+        vs.append(v)
+        targets.append(images.astype(np.float32))
+        frame_ids.extend((digest, meta_digest) + key + (i, int(base[i])) for i in range(n))
+        identities.append(dict(path=str(path), npz_sha256=digest, sidecar_sha256=meta_digest,
+                               unit=meta['unit'], code_hash=meta['code_hash'], config_hash=meta['config_hash']))
+    targets = np.concatenate(targets)
+    scale = np.abs(targets).max()
+    if not np.isfinite(scale) or scale <= 0:
+        raise ValueError('target cohort scale must be finite and positive')
+    return dict(protocol=PROTOCOL, belt=belt, v=np.concatenate(vs),
+                y0=(targets / scale)[:, None], scale=float(scale), frame_ids=frame_ids,
+                sources=identities, normalization='per_belt_frozen_cohort_absmax')
