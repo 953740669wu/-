@@ -1,0 +1,35 @@
+--- frozen/hbm_alloc.c
++++ candidate/hbm_alloc.c
+@@ -48,17 +48,27 @@
+     char fn[128]; long nfree = -1;
+     snprintf(fn, sizeof fn, "/sys/devices/system/node/node%d/hugepages/hugepages-2048kB/free_hugepages", node);
+     FILE *f = fopen(fn, "r"); if (f) { if (fscanf(f, "%ld", &nfree) != 1) nfree = -1; fclose(f); }
+-    if (nfree >= 0 && (size_t)(nfree - 16) * 2 < mb) mb = nfree > 16 ? (nfree - 16) * 2 : 0;
++    if (nfree < 0) { fprintf(stderr, "hbm_alloc: cannot read free hugepages on node %d, arena off\n", node); return; }
++    size_t available_mb = nfree > 16 ? (size_t)(nfree - 16) * 2 : 0;
++    if (available_mb < mb) mb = available_mb;
+     if (mb < 64) { fprintf(stderr, "hbm_alloc: node %d has %ld free hugepages, arena off\n", node, nfree); return; }
+     size_t len = mb << 20;
+     unsigned long mask[2] = {0, 0}, old[16] = {0};
+     int oldmode = 0;
+     mask[node / 64] = 1ul << (node % 64);
+-    int saved = syscall(SYS_get_mempolicy, &oldmode, old, 1024, 0, 0) == 0;
+-    if (saved) syscall(SYS_set_mempolicy, 2 /* MPOL_BIND */, mask, 128);
+-    void *p = mmap(0, len, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_HUGETLB, -1, 0);
++    if (syscall(SYS_get_mempolicy, &oldmode, old, 1024, 0, 0) != 0) {
++        fprintf(stderr, "hbm_alloc: get_mempolicy failed: %s, arena off\n", strerror(errno)); return;
++    }
++    int bound = syscall(SYS_set_mempolicy, 2 /* MPOL_BIND */, mask, 128) == 0;
++    void *p = bound ? mmap(0, len, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_HUGETLB, -1, 0) : MAP_FAILED;
+     int err = errno;
+-    if (saved) syscall(SYS_set_mempolicy, oldmode, oldmode ? old : 0, oldmode ? 1024 : 0);
++    if (syscall(SYS_set_mempolicy, oldmode, oldmode ? old : 0, oldmode ? 1024 : 0) != 0) {
++        int restore_err = errno;
++        if (p != MAP_FAILED) munmap(p, len);
++        fprintf(stderr, "hbm_alloc: fatal: restore mempolicy failed: %s\n", strerror(restore_err));
++        _exit(EXIT_FAILURE);
++    }
++    if (!bound) { fprintf(stderr, "hbm_alloc: set_mempolicy node %d failed: %s, arena off\n", node, strerror(err)); return; }
+     if (p == MAP_FAILED) { fprintf(stderr, "hbm_alloc: mmap %zu MB on node %d failed: %s\n", mb, node, strerror(err)); return; }
+     if (syscall(SYS_mbind, p, len, 2 /* MPOL_BIND */, mask, 128, 0) != 0) {
+         fprintf(stderr, "hbm_alloc: mbind node %d failed: %s\n", node, strerror(errno)); munmap(p, len); return;

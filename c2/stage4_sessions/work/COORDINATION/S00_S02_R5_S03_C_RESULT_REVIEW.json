@@ -1,0 +1,55 @@
+{
+  "review": "COORDINATOR_INDEPENDENT_FROZEN_EVIDENCE_AUDIT",
+  "records": {
+    "S02": {
+      "job_id": "2034953",
+      "host": "cn21338",
+      "files_verified": 41,
+      "bundle_sha256": "dc36ad1896eb54484588a11992c6c42d3fc20167e52ac8a05abb6bf6c99bd636",
+      "job_exit": 1,
+      "job_state": "FAILED",
+      "start_utc": "2026-11-05T03:50:49Z",
+      "end_utc": "2026-11-05T03:51:18Z",
+      "decision": "ACCEPTED_COMPLETE_EVIDENCE_OF_NUMERICAL_FAIL_NOT_OPTIMIZATION_ACCEPTANCE",
+      "metrics": 1063,
+      "failures": 95,
+      "failure_families": {
+        "grad": 9,
+        "state": 16,
+        "param": 18,
+        "delta": 52
+      },
+      "cpu_checkpoints": 7,
+      "KML_GEMM_calls": 447,
+      "training_memory": "NOT_ACCEPTED"
+    },
+    "S03": {
+      "job_id": "2034987",
+      "host": "cn21338",
+      "files_verified": 54,
+      "bundle_sha256": "891b4f80884537e4b536bf27724c40539653c93fcbf3efc97a591fe266964521",
+      "job_exit": 0,
+      "job_state": "SUCCEEDED",
+      "start_utc": "2026-11-05T03:54:58Z",
+      "end_utc": "2026-11-05T03:55:00Z",
+      "decision": "ACCEPTED_LIMITED_LINUX_C_FAULT_TESTS_AND_ISOLATED_BUILD",
+      "cases": {
+        "frozen": {
+          "passed": 15,
+          "failed": 10
+        },
+        "candidate": {
+          "passed": 25,
+          "failed": 0
+        }
+      },
+      "library_sha256": "bb0af32c6f34e3fa877dfc35655c2a64a65bf120e3fdcac3a900a0e7299e5643",
+      "real_HBM": "NOT_RUN",
+      "shared_integration": "NOT_ACCEPTED"
+    }
+  },
+  "new_jobs_in_this_review": 0,
+  "total_evidence_files_verified": 95,
+  "next": "S02 analyze failed microbatch and prepare existing full-batch checkpoint alternative; S03 extend remaining allocator API checks before real HBM",
+  "git_reminder": "Reviewed evidence including numerical FAIL may be committed with exact acceptance scope; no automatic git operation"
+}

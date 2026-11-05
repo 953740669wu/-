@@ -1,0 +1,25 @@
+PASS no_node: exit=0, mismatches={}
+FAIL pages_0: exit=0, mismatches={'get': {'expected': 0, 'observed': '1'}, 'bind': {'expected': 0, 'observed': '1'}, 'map': {'expected': 0, 'observed': '1'}, 'restore': {'expected': 0, 'observed': '1'}, 'mbind': {'expected': 0, 'observed': '1'}, 'arena': {'expected': 0, 'observed': '1'}}
+FAIL pages_15: exit=0, mismatches={'get': {'expected': 0, 'observed': '1'}, 'bind': {'expected': 0, 'observed': '1'}, 'map': {'expected': 0, 'observed': '1'}, 'restore': {'expected': 0, 'observed': '1'}, 'mbind': {'expected': 0, 'observed': '1'}, 'arena': {'expected': 0, 'observed': '1'}}
+PASS pages_16: exit=0, mismatches={}
+PASS pages_17: exit=0, mismatches={}
+PASS pages_47: exit=0, mismatches={}
+FAIL read_open_fail: exit=0, mismatches={'get': {'expected': 0, 'observed': '1'}, 'bind': {'expected': 0, 'observed': '1'}, 'map': {'expected': 0, 'observed': '1'}, 'restore': {'expected': 0, 'observed': '1'}, 'mbind': {'expected': 0, 'observed': '1'}, 'arena': {'expected': 0, 'observed': '1'}}
+FAIL read_parse_fail: exit=0, mismatches={'get': {'expected': 0, 'observed': '1'}, 'bind': {'expected': 0, 'observed': '1'}, 'map': {'expected': 0, 'observed': '1'}, 'restore': {'expected': 0, 'observed': '1'}, 'mbind': {'expected': 0, 'observed': '1'}, 'arena': {'expected': 0, 'observed': '1'}}
+FAIL read_negative: exit=0, mismatches={'get': {'expected': 0, 'observed': '1'}, 'bind': {'expected': 0, 'observed': '1'}, 'map': {'expected': 0, 'observed': '1'}, 'restore': {'expected': 0, 'observed': '1'}, 'mbind': {'expected': 0, 'observed': '1'}, 'arena': {'expected': 0, 'observed': '1'}}
+PASS below_min: exit=0, mismatches={}
+PASS pages_48: exit=0, mismatches={}
+PASS pages_49: exit=0, mismatches={}
+PASS pages_2020: exit=0, mismatches={}
+PASS cap_9000: exit=0, mismatches={}
+PASS cap_64: exit=0, mismatches={}
+PASS old_default: exit=0, mismatches={}
+PASS old_local: exit=0, mismatches={}
+PASS old_preferred: exit=0, mismatches={}
+FAIL get_fail: exit=0, mismatches={'map': {'expected': 0, 'observed': '1'}, 'mbind': {'expected': 0, 'observed': '1'}, 'arena': {'expected': 0, 'observed': '1'}}
+FAIL set_fail: exit=0, mismatches={'map': {'expected': 0, 'observed': '1'}, 'mbind': {'expected': 0, 'observed': '1'}, 'arena': {'expected': 0, 'observed': '1'}}
+PASS map_fail: exit=0, mismatches={}
+PASS mbind_fail: exit=0, mismatches={}
+FAIL restore_fail: exit=0, mismatches={'mbind': {'expected': 0, 'observed': '1'}, 'unmap': {'expected': 1, 'observed': '0'}, 'arena': {'expected': 0, 'observed': '1'}}
+FAIL map_restore_fail: exit=0, mismatches={}
+FAIL set_restore_fail: exit=0, mismatches={'map': {'expected': 0, 'observed': '1'}, 'mbind': {'expected': 0, 'observed': '1'}, 'arena': {'expected': 0, 'observed': '1'}}

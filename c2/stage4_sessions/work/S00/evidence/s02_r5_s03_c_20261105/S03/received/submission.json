@@ -1,0 +1,28 @@
+{
+  "submitted_utc": "2026-11-05T03:54:55.327384+00:00",
+  "command": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "300",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S03_C_20261105T035154Z",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S03_C_20261105T035154Z/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S03_C_20261105T035154Z/run_s03_c_job.sh"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"data\":{\"jobId\":\"2034987\"},\"message\":\"Submit job successfully.\",\"code\":\"success\",\"requestId\":\"req-6353fc85-5c8b-4b74-964a-3a331a57ecd5\"}\n",
+  "stderr": ""
+}

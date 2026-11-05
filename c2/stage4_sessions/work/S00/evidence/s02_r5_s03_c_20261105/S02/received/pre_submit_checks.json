@@ -1,0 +1,66 @@
+{
+  "status": "PASS_REMOTE_SHA_CASE_LF_LINUX_SYNTAX",
+  "captured_utc": "2026-11-05T03:50:23.728650+00:00",
+  "package_sha256": "64605deb9a08de087a42f9026272a18bfed1d1896acdd449852ed2837aa43003",
+  "payload_files": {
+    "C2_HANDOFF.md": "fa5f412769d62e67d7a5882ed9aa4eca19b843031ec17763ab393d9c02c92848",
+    "CASE_MANIFEST.json": "baf5d7f8a8b3e119a56ae0a2831912d08407de9b312231c71cdd08887f8ae81a",
+    "INPUT_PAIRING_PROTOCOL.md": "dd5ae2863171af822c52ff9f3d566d07f327a697bc296543018a7f2cf4d85cab",
+    "SOURCE_SHA256.json": "0c9defec5346afec22bacd0ca7309797c0c37abc77122d14e14eb403d8ec825c",
+    "VALIDATION_PLAN.md": "24a1648ea000037818c5f174ca1fb71790f4032f5647127e559d067758034d86",
+    "baseline/kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "baseline/s4_models.py": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+    "candidate/paired_inputs.py": "51d44bd85cdd9e730c9bc455dc796e9c7d6849f33326df7372c95227f24087b1",
+    "candidate/training_step.py": "524e35817080a3f28a0bc0cda8ecce9c8264b15d73edebe05c5d9d8b9632a0aa",
+    "cpu36_contract.py": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+    "cpu36_guard.py": "06d7f621fc4bda303ef5025cd1151e5b26da89746c17c7544e9c9a3525ee6d92",
+    "diagnose_update.py": "d2e8e02298e7aaab7af90267c768282d53e02325e72e4c915eadf3c923d5402d",
+    "diagnostic_common.py": "e3683f15e907c8a041795ccd4b775c78b235cc20bb09492108db4e950da7e705",
+    "interfaces/cluster_runtime.env": "32248af7857b7fd1616b19899c1411a4a59f9378c9231f0ec56f6c922ec2866d",
+    "projection_trace.py": "6c54b1270674797f0b9e858e7a4a976196be3fcc600a7d1b4f4761993b0fe624",
+    "run_c2_diagnostic.sh": "2ed4bf0da0fdd18157a2259c156174a2e63d171265232e179ea4fc39e086f174",
+    "run_s00_job.sh": "7857a36c615c1e9bbe2a0f4b87e5d5b532cf44abce4c63a0e35107afd43e6a07",
+    "tests/check_equivalence.py": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e",
+    "tests/paired_fixture.py": "7b438c839eefc2d2726bb55d9082df57e5db3e8127336d654203cd9880c35c00",
+    "tests/test_cpu36_guard.py": "3b122bb67de114f4c874f3efe74fe0c53fe859b05aa930ea0b9d59addafca7eb"
+  },
+  "shell_checks": [
+    {
+      "file": "interfaces/cluster_runtime.env",
+      "sha256": "32248af7857b7fd1616b19899c1411a4a59f9378c9231f0ec56f6c922ec2866d",
+      "cr_bytes": 0,
+      "bash_n_exit": 0
+    },
+    {
+      "file": "run_c2_diagnostic.sh",
+      "sha256": "2ed4bf0da0fdd18157a2259c156174a2e63d171265232e179ea4fc39e086f174",
+      "cr_bytes": 0,
+      "bash_n_exit": 0
+    },
+    {
+      "file": "run_s00_job.sh",
+      "sha256": "7857a36c615c1e9bbe2a0f4b87e5d5b532cf44abce4c63a0e35107afd43e6a07",
+      "cr_bytes": 0,
+      "bash_n_exit": 0
+    }
+  ],
+  "python_syntax": [
+    "baseline/kml_ops.py",
+    "baseline/s4_models.py",
+    "candidate/paired_inputs.py",
+    "candidate/training_step.py",
+    "cpu36_contract.py",
+    "cpu36_guard.py",
+    "diagnose_update.py",
+    "diagnostic_common.py",
+    "projection_trace.py",
+    "tests/check_equivalence.py",
+    "tests/paired_fixture.py",
+    "tests/test_cpu36_guard.py"
+  ],
+  "python_version": "3.9.9 (main, Jul 29 2025, 11:26:21) \n[GCC 10.3.1]",
+  "case_sha256": "4de1fb40eb1c4b43a8747586399f336bf9e37184592d66fdbf711abad8469846",
+  "case_bytes": 271979513,
+  "case_path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CPU36_R5_20261105T034705Z/fixed_16_pre.pt",
+  "case_mtime_ns": 1793850592308132590
+}

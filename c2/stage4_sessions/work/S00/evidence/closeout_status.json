@@ -3,7 +3,7 @@
   "timezone": "Asia/Shanghai",
   "acceptance": "EVIDENCE_HANDOVER_ACCEPTED",
   "acceptance_source": "User explicitly confirmed that the coordinator accepted the S00 evidence handover in this chat.",
-  "current_work": "R7_BOUNDED_STARTUP_PASS_EVIDENCE_DELIVERED_REVIEW_PENDING",
+  "current_work": "S02_R5_NUMERICAL_FAIL_S03_C_PASS_FULL_EVIDENCE_DELIVERED",
   "performance_baseline": "NOT_ACCEPTED",
   "retest": "WAIT_FOR_S01_RUNNER_ACCEPTANCE_AND_COORDINATED_RESOURCES",
   "retest_order": [
@@ -42,9 +42,9 @@
   "pilot_plan": "CLUSTER_EXECUTION_PLAN.md",
   "pilot_packages": "execution_packages/PACKAGE_MANIFEST.json",
   "s01_full_model": "16_PRE_DEC_THREE_ROUNDS_FORWARD_BACKWARD_ADAMW_EXECUTED",
-  "s02_c2_equivalence": "NOT_SUBMITTED_EXPLICIT_USER_HOLD",
+  "s02_c2_equivalence": "EXECUTED_KML_STRICT_NUMERICAL_FAIL",
   "s02_windows_equivalence": "FAIL_STRICT_THRESHOLDS",
-  "s02_memory": "NOT_READY",
+  "s02_memory": "NOT_READY_NUMERICAL_GATE_NOT_PASSED",
   "supplement_job_ids": [
     2026157,
     2026164,
@@ -75,9 +75,11 @@
     2026356,
     2026450,
     2026725,
-    2034247
+    2034247,
+    2034953,
+    2034987
   ],
-  "total_s00_node_seconds": 377,
+  "total_s00_node_seconds": 408,
   "s01_job_exit_code": 0,
   "s01_child_exit_code": 0,
   "s01_lf_restart_report": "S01_LF_RESTART_REPORT.md",
@@ -119,5 +121,15 @@
   "ssh_host_key_change": "USER_CONFIRMED_NEW_FINGERPRINT_SAVED_SEPARATELY",
   "cpu36_model_revision_scope": "R7_ACCEPTED_LOCAL_CANDIDATE_FOR_BOUNDED_STARTUP_ONLY",
   "cpu36_ready_scope": "FURTHER_EXECUTION_REQUIRES_REVIEW_NOT_AUTOMATIC",
-  "current_submission_authorization": "User authorized exactly one new R7 CPU36 startup; completed once, no automatic retry"
+  "current_submission_authorization": "User authorized exactly one new R7 CPU36 startup; completed once, no automatic retry",
+  "s01_startup_evidence_acceptance": "ACCEPTED_BY_COORDINATOR_AND_S01",
+  "S02_current_job": 2034953,
+  "S02_current_result": "FAIL_ORIGINAL_CRITERIA_95_FAILURES",
+  "S02_current_report": "S02_R5_C2_STRICT_REPORT.md",
+  "S03_current_job": 2034987,
+  "S03_current_result": "PASS_25_C_CASES_AND_INDEPENDENT_SO_ONLY",
+  "S03_current_report": "S03_C_SAFETY_REPORT.md",
+  "real_HBM_this_turn": false,
+  "new_jobs_this_combined_turn": 2,
+  "retries_this_combined_turn": 0
 }

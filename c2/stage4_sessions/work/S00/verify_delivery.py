@@ -17,10 +17,20 @@ for row in before['files']:
 known = {row['path'] for row in before['files']}
 added = [p.relative_to(ROOT).as_posix() for p in ROOT.rglob('*')
          if p.is_file() and not p.is_relative_to(ROOT / 'c2/stage4_sessions/work')
+         and not p.is_relative_to(ROOT / '.git')
          and p.relative_to(ROOT).as_posix() not in known]
+external_review = json.loads((WORK / 'evidence/workspace_git_additions_20261105.json').read_text(encoding='utf-8'))
+reviewed_additions = [name for name in added
+    if name in external_review['reviewed_project_additions']
+    and hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
+        == external_review['reviewed_project_additions'][name]['sha256']]
+unexpected_additions = [name for name in added if name not in reviewed_additions]
 integrity = dict(captured_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
     original_file_count=len(before['files']), changed_or_missing=changed,
-    added_outside_session_work=added, status='PASS' if not changed and not added else 'FAIL',
+    added_outside_session_work=added, externally_reviewed_additions=reviewed_additions,
+    unexpected_additions=unexpected_additions, git_metadata_excluded=True,
+    external_additions_review='evidence/workspace_git_additions_20261105.json',
+    status='PASS' if not changed and not unexpected_additions else 'FAIL',
     data_note='Remote manifest metadata and selected production source SHA verified; corpus payload integrity NOT_ESTABLISHED')
 (WORK / 'evidence/source_integrity.json').write_text(json.dumps(integrity, indent=2) + '\n', encoding='utf-8')
 assert integrity['status'] == 'PASS', integrity
@@ -102,6 +112,23 @@ validation.update(cpu36_registration='R7_BOUNDED_STARTUP_PASS_REVIEW_PENDING',
     offline_max_mtime_rounding_ns=r7['offline_max_mtime_rounding_ns'],
     latest_turn_scope='R7_SINGLE_DOMAIN_STARTUP_ONLY_NO_S02_OR_TRAINING_MEMORY',
     numerical_and_performance_acceptance='NOT_ESTABLISHED', production_model_config='NOT_DEPLOYED')
+pair = json.loads((WORK / 'evidence/s02_r5_s03_c_20261105/review.json').read_text(encoding='utf-8'))
+assert pair['status'] == 'COMPLETE_EVIDENCE_DELIVERY_S02_NUMERICAL_FAIL_S03_C_PASS'
+assert pair['new_jobs'] == 2 and pair['retries'] == 0
+validation.update(latest_model_job=pair['records']['S02']['job_id'],
+    latest_model_review='evidence/s02_r5_s03_c_20261105/S02/review.json',
+    latest_c_job=pair['records']['S03']['job_id'],
+    latest_c_review='evidence/s02_r5_s03_c_20261105/S03/review.json',
+    latest_turn_scope='ONE_S02_R5_KML_STRICT_THEN_ONE_S03_C_SAFETY_JOB',
+    s02_model_pilot='EXECUTED_FAIL_ORIGINAL_CRITERIA_95_OF_1063',
+    s02_affinity_fix='R5_ACTUAL_SAME_PID_SEVEN_CPU36_CHECKPOINTS_PASS',
+    s02_training_memory='NOT_RUN_NUMERICAL_GATE_NOT_PASSED',
+    full_model_evidence_files=pair['records']['S02']['full_evidence_files'],
+    s03_c_safety='FROZEN_EXPECTED_FAILURE_CANDIDATE_25_PASS_ISOLATED_SO_PASS',
+    s03_evidence_files=pair['records']['S03']['full_evidence_files'],
+    s03_real_HBM='NOT_RUN', r7_offline_summary='PASS',
+    offline_summary='R7_HISTORICAL_PASS_CURRENT_PAIR_METRIC_AND_C_EVIDENCE_AUDIT_COMPLETE',
+    numerical_and_performance_acceptance='S02_NUMERICAL_FAIL_NO_FORMAL_PERFORMANCE_ACCEPTANCE')
 (WORK / 'evidence/delivery_validation.json').write_text(json.dumps(validation, indent=2) + '\n', encoding='utf-8')
 index = WORK / 'ARTIFACT_SHA256.txt'
 paths = [p for p in sorted(WORK.rglob('*')) if p.is_file() and p != index

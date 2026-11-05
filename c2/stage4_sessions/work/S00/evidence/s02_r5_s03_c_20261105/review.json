@@ -1,0 +1,154 @@
+{
+  "status": "COMPLETE_EVIDENCE_DELIVERY_S02_NUMERICAL_FAIL_S03_C_PASS",
+  "records": {
+    "S02": {
+      "job_id": "2034953",
+      "host": "cn21338",
+      "scheduler_state": "FAILED",
+      "job_exit_code": 1,
+      "start_utc": "2026-11-05T03:50:49Z",
+      "end_utc": "2026-11-05T03:51:18Z",
+      "node_seconds": 29.0,
+      "memory_MB": 24576,
+      "wall_limit_s": 900,
+      "bundle_sha256": "dc36ad1896eb54484588a11992c6c42d3fc20167e52ac8a05abb6bf6c99bd636",
+      "full_evidence_files": 41,
+      "source_payload_unchanged": true,
+      "original_mtime_ns_preserved": true,
+      "prior_evidence_unchanged": true,
+      "conclusion": "FAIL_ORIGINAL_CRITERIA_NUMERICAL_NOT_RUNTIME",
+      "checker_exit_code": 1,
+      "compared_metrics": 1063,
+      "comparison_failures": 95,
+      "failure_families": {
+        "loss": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 0.0,
+          "max_relative": 0.0
+        },
+        "input_v": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 1.382431946694851e-07,
+          "max_relative": 4.179096148810191e-07
+        },
+        "input_y0": {
+          "tensors": 1,
+          "failed": 0,
+          "max_abs": 6.548361852765083e-11,
+          "max_relative": 2.8609867451409697e-07
+        },
+        "output": {
+          "tensors": 3,
+          "failed": 0,
+          "max_abs": 1.52587890625e-05,
+          "max_relative": 7.875146207521992e-07
+        },
+        "grad": {
+          "tensors": 153,
+          "failed": 9,
+          "max_abs": 0.010223388671875,
+          "max_relative": 1.1895939199681503e-05
+        },
+        "param": {
+          "tensors": 299,
+          "failed": 18,
+          "max_abs": 0.0001951503727468662,
+          "max_relative": 0.7193930062887589
+        },
+        "delta": {
+          "tensors": 299,
+          "failed": 52,
+          "max_abs": 0.0001951503727468662,
+          "max_relative": 0.7193930062887589
+        },
+        "state": {
+          "tensors": 306,
+          "failed": 16,
+          "max_abs": 0.015625,
+          "max_relative": 2.3033846397013784e-05
+        }
+      },
+      "cpu_checkpoints": 7,
+      "same_pid": 2081719,
+      "actual_torch_threads": 36,
+      "kml_gemm_calls": 447,
+      "kml_shape_count": 34,
+      "kml_libraries": [
+        {
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+          "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+        },
+        {
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so",
+          "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a"
+        },
+        {
+          "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so",
+          "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f"
+        },
+        {
+          "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+          "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+        },
+        {
+          "path": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+          "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c"
+        }
+      ],
+      "case_sha256": "4de1fb40eb1c4b43a8747586399f336bf9e37184592d66fdbf711abad8469846",
+      "fixed_case_not_downloaded": true,
+      "numerical_tolerances_unchanged": true
+    },
+    "S03": {
+      "job_id": "2034987",
+      "host": "cn21338",
+      "scheduler_state": "SUCCEEDED",
+      "job_exit_code": 0,
+      "start_utc": "2026-11-05T03:54:58Z",
+      "end_utc": "2026-11-05T03:55:00Z",
+      "node_seconds": 2.0,
+      "memory_MB": 24576,
+      "wall_limit_s": 300,
+      "bundle_sha256": "891b4f80884537e4b536bf27724c40539653c93fcbf3efc97a591fe266964521",
+      "full_evidence_files": 54,
+      "source_payload_unchanged": true,
+      "original_mtime_ns_preserved": true,
+      "prior_evidence_unchanged": true,
+      "conclusion": "PASS_CANDIDATE_25_C_CASES_AND_INDEPENDENT_SO_ONLY",
+      "frozen_passed": 15,
+      "frozen_failed": 10,
+      "frozen_expected_failure_runner_exit": 1,
+      "frozen_failure_cases": [
+        "pages_0",
+        "pages_15",
+        "read_open_fail",
+        "read_parse_fail",
+        "read_negative",
+        "get_fail",
+        "set_fail",
+        "restore_fail",
+        "map_restore_fail",
+        "set_restore_fail"
+      ],
+      "candidate_passed": 25,
+      "compiler": "cc (GCC) 10.3.1",
+      "glibc": "glibc 2.34",
+      "library_sha256": "bb0af32c6f34e3fa877dfc35655c2a64a65bf120e3fdcac3a900a0e7299e5643",
+      "library_bytes": 72136,
+      "real_HBM": false,
+      "real_kernel_mempolicy": false,
+      "policy_probe": false,
+      "model_training": false
+    }
+  },
+  "node_seconds_this_turn": 31.0,
+  "cumulative_s00_node_seconds": 408.0,
+  "new_jobs": 2,
+  "retries": 0,
+  "numerical_thresholds_changed": false,
+  "real_HBM_run": false,
+  "training_memory_test_run": false,
+  "original_source_integrity_report": "evidence/source_integrity.json"
+}

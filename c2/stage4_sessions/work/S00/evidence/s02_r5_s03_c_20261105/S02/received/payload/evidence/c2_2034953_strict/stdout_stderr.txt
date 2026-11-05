@@ -1,0 +1,57 @@
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+{
+  "status": "FAIL_ORIGINAL_CRITERIA",
+  "mode": "strict",
+  "comparison_failures": 95,
+  "summary": {
+    "loss": {
+      "tensors": 1,
+      "failed": 0,
+      "max_abs": 0.0,
+      "max_relative": 0.0
+    },
+    "input_v": {
+      "tensors": 1,
+      "failed": 0,
+      "max_abs": 1.382431946694851e-07,
+      "max_relative": 4.179096148810191e-07
+    },
+    "input_y0": {
+      "tensors": 1,
+      "failed": 0,
+      "max_abs": 6.548361852765083e-11,
+      "max_relative": 2.8609867451409697e-07
+    },
+    "output": {
+      "tensors": 3,
+      "failed": 0,
+      "max_abs": 1.52587890625e-05,
+      "max_relative": 7.875146207521992e-07
+    },
+    "grad": {
+      "tensors": 153,
+      "failed": 9,
+      "max_abs": 0.010223388671875,
+      "max_relative": 1.1895939199681503e-05
+    },
+    "param": {
+      "tensors": 299,
+      "failed": 18,
+      "max_abs": 0.0001951503727468662,
+      "max_relative": 0.7193930062887589
+    },
+    "delta": {
+      "tensors": 299,
+      "failed": 52,
+      "max_abs": 0.0001951503727468662,
+      "max_relative": 0.7193930062887589
+    },
+    "state": {
+      "tensors": 306,
+      "failed": 16,
+      "max_abs": 0.015625,
+      "max_relative": 2.3033846397013784e-05
+    }
+  }
+}

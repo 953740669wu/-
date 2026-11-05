@@ -1,26 +1,25 @@
-# S00：建立阶段四可复现基线
+# S00：阶段四基线与限定集群执行回传
 
-最新执行回传（2026-11-05）：R7新包经远端SHA/LF/Linux语法门槛后，仅提交一次新job2034247/cn21340，11:00:01–11:01:52+08。分配38核/实际36核/预留2核、24576MB及同值限制、900秒；16电极pre/dec、B32、HBM0/CKPT0、三轮REPS1全部完成。新鲜同job预检PASS_IMPORT_ONLY，三轮模型child0，实际Torch36、18项checkpoint及1683份父监测快照均满足合同，远端summary PASS、job exit0；独立副本按真实mtime恢复后离线汇总也PASS。启动/合同证据交S01及总协调审核，正式数值/性能/生产接受仍未建立；本轮无S02或训练内存。完整54文件见CPU36_R7_STARTUP_REPORT.md及对应证据包。下方R6/38核失败和等待描述保留各历史时点，最新状态以本段为准。
+日期：2026-11-05（Asia/Shanghai；历史冻结/作业时点保留）。
+状态：**READY_FOR_REVIEW / S02_R5_NUMERICAL_FAIL / S03_C_SAFETY_PASS / BOTH_TERMINAL**。
+首次交接证据范围：REMOTE_VERIFIED / HISTORICAL_RECOMPUTED / NEW_CLUSTER_BENCHMARK_NOT_RUN。该标记只描述首次交接，不覆盖后续实际执行。
 
-最新执行约定（2026-11-04）：后续S01/S02模型及算子每域实际36个物理核心，在38核域留末2核；24GiB/15分钟及数值阈值不变。当前旧38核/4核包仅作历史证据，禁止后续执行；按CPU36_POLICY先等S01接受的诊断/修订，再统一换36核包。该停止记录指36核初次登记；后续本轮已按明确授权执行一次R6有限诊断，不恢复模型，详见CPU36_R6_DIAGNOSTIC_REPORT.md及CPU36_READINESS.md及execution_packages/NEXT_CPU36_EXECUTION.json。下方38/4核记录与命令保留历史身份，不是当前执行入口。
+本轮按S00_NEXT_S02_R5_S03_C_20261105顺序完成两项，均使用新目录/新job、分配38核/实际36留2核、24576MB及同值限制：
 
-日期：2026-11-05（Asia/Shanghai；原始冻结/历史证据时点保留）。
-状态：**READY_FOR_REVIEW / R7_BOUNDED_STARTUP_PASS / REMOTE_AND_OFFLINE_PASS / STOPPED**。
-首次交接证据范围：REMOTE_VERIFIED / HISTORICAL_RECOMPUTED / NEW_CLUSTER_BENCHMARK_NOT_RUN。该标记仅描述首次交接；本轮已新增真实模型诊断计时，因绑定合同失败未验收。
+- S02 job2034953/cn21338，11:50:49–11:51:18+08，900秒上限，checker/job exit1，FAIL_ORIGINAL_CRITERIA；1063项指标中95项失败，7同PID checkpoint及447次真实KML GEMM证据完整，未改阈值/重试。
+- S03 job2034987/cn21338，11:54:58–11:55:00+08，300秒上限，job exit0；冻结源25项15通过/10预期失败、runner exit1，候选25/25及独立.so/ELF/依赖构建通过。清除S02预加载，未启用真实HBM或模型。
 
-收尾确认：总协调已接受本次证据交接（依据用户在本聊天的明确确认）。待补资料已整理至PENDING_ITEMS.md；S01负责运行器修复/验收，S02负责输入适配与内存优化。新的性能基线等待S01运行器验收，再按单域→四域→整节点推进。按用户后续要求，S00另补计算节点环境实测及S01/S02有限小试准备；环境报告见COMPUTE_ENVIRONMENT_REPORT.md，命令/资源/停止条件见CLUSTER_EXECUTION_PLAN.md。旧job2026356包装器失败证据保持不变（PILOT_EXECUTION_REPORT.md）；按本轮新授权，在新目录恢复一次LF小试job2026450，完整第1轮模型完成但CPU affinity合同失败，已停止。最新结果与完整日志见S01_LF_RESTART_REPORT.md；S02及训练内存均未提交/运行。
+完整证据分别41/54文件，SHA/bytes/原始mtime_ns已核对，两项终态PID均为空，无重试。报告入口S02_R5_C2_STRICT_REPORT.md、S03_C_SAFETY_REPORT.md。本轮共31节点秒（含数值失败），累计S00十作业408秒。历史R7/R6/2026356证据未变。S02数值门槛和训练内存/HBM仍未通过；S03有限C通过不替代它们。
 
-最新有限诊断（本轮授权）：S01 R6原样包经远端SHA/LF/Linux语法门槛后仅提交一次job2026725，cn21338，22:55:23–22:56:33+08，分配38核/实际选36核/预留末2核、24576MB及300秒上限。五组小算子worker均exit0，job SUCCEEDED/exit0，SUMMARY=DIAGNOSTIC_DATA_COMPLETE；回传完整54文件及原始mtime_ns，2737行样本/30阶段未记录CPU越界。A的Torch intra-op=1，B–E=36；数据交S01/总协调分析，不表示36核模型/生产接受。未重跑完整模型、S02或训练内存。最新报告CPU36_R6_DIAGNOSTIC_REPORT.md；累计S00七作业266秒。
+R7完整启动此前已由S01及总协调接受，无S01阻塞；本轮没有重复R7或Windows模型实验，没有生产部署或共享改动。下方原始baseline和过往测试保留各时点，最新状态以本段及新报告为准。
 
 ## 1. 结论
 
-已完成S00的源码冻结、远程版本核对、输入契约审查和历史性能证据交接，总协调已接受该交接；运行环境、输入来源和数据划分的剩余缺项及完成标准见PENDING_ITEMS.md。**没有优化集成；本轮新增的第1轮真实训练诊断计时因绑定合同失败不被接受，性能与数值基线尚未正式验收，未修改生产默认或数据。**
+S00初始源码/远程/输入/历史结果交接已被总协调接受；R7三轮36核完整启动证据已被总协调及S01复核通过。本轮继续获准的一次S02严格数值和一次独立S03 C安全检查，结论分别为**数值FAIL**与**限定C检查/独立构建PASS**，不能互相替代。未修改生产默认、阶段二/三、冻结输入或数值阈值。
 
-本次补充实测：job **2026223 / cn21417**，隔离venv真正导入**torch2.7.1+cpu、numpy1.26.4**并通过S01原样导入/输入/库预检；实际授权**1 CPU、4096MB**，作业已结束。四次环境作业合计34秒约0.00944节点小时（含两次失败）。环境补充后另有S01 job2026356（cn21338，38核/24576MB/900秒）在S00包装器阶段失败，完整模型未到达；累计5个S00作业35秒。当前修正版已通过真实Linux语法检查；S02精确4核/同checker进程守卫已修正并更新包哈希，但因S01未过而未提交。S02已有Windows严格数值FAIL，内存阶段NOT_READY。新性能/数值基线仍未验收。
+S02与S03完整结果、范围、资源和退出见各自新报告；CASE固定文件未重新生成或本地复制，源包原样。原始108个项目文件终态SHA复核不变。
 
-本轮LF恢复实测：**2026450 / cn21340 / 22:03:41–22:06:22 +08**，实际38 CPU/24576MB、同值mem限制、900秒。提交前远端18文件SHA、4项LF/bash -n均通过并在提交时复核；导入预检PASS；模型子进程exit0、无超时，完成16-pre/dec首轮。运行器发现期望CPU0–37与结果记录的调用线程affinity=[0]不符，summary FAIL、job exit1，未运行第2/3轮。OMP记录38而Torch描述1线程，需S01核对线程/绑定口径，S00不猜测全线程实际放置、不弱化检查。完整19文件已回传并逐文件验SHA；源码/原2026356证据未变。累计S00 6作业196秒，约0.054444独占节点小时。
-
-关键结论：
+关键结论（初始基线历史证据，不冒充本轮新性能）：
 
 - 成功登录dengqingtian@10.44.9.4，落点login10；共享项目可读不可写。当前账号的既有作业不能当作S00分配资源。项目拥有者作业查询返回Permission denied，不能声明服务器无作业。
 - 远程模型/KML/HBM/shim源码、生产冻结s2/s3/s6与本地归档SHA256一致；s1在指定远程位置缺失或不可读。manifest核实为11,900单元、1,190,000对、119个case，全部记录同一代码/配置标识；未独立遍历所有样本，真实subject split仍缺。
@@ -32,7 +31,7 @@
 
 ## 2. 前置条件与执行范围
 
-读取阶段四sessions README、S00任务卡、REPORT_TEMPLATE、根README、STAGE4_HANDOVER、STAGE4_C2_PLAN、C2_OPTIMIZATION_REPORT及相关生产/源码文件。仅写本任务work/S00；原始108个本地文件终态SHA复核不变。无Git仓库，使用25个逐字节副本和显式哈希清单。共享源码、生产数据、manifest、其他任务目录未改；首次证据交接没有创建远程文件；本次补充仅在当前账号S00/ENV_*及PILOT_*独立目录落探针、隔离NumPy/venv、S01原样预检包与本轮恢复包，未覆盖共享部署或S01/S02目录。
+读取阶段四sessions README、S00任务卡、REPORT_TEMPLATE、根README、STAGE4_HANDOVER、STAGE4_C2_PLAN、C2_OPTIMIZATION_REPORT及相关生产/源码文件。仅写本任务work/S00；原始108个本地文件终态SHA复核不变。初次冻结时无Git仓库，使用25个逐字节副本和显式哈希清单；本轮共享目录外部新增Git及5个快照说明，已单独登记，S00未操作Git。共享源码、生产数据、manifest、其他任务目录未改；首次证据交接没有创建远程文件；本次补充仅在当前账号S00/ENV_*及PILOT_*独立目录落探针、隔离NumPy/venv、S01原样预检包与本轮恢复包，未覆盖共享部署或S01/S02目录。
 
 本地任务根：`E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00`。
 
@@ -91,6 +90,8 @@ python -B 'E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\verify_d
 
 首次交接没有新增作业；本次补充实际提交4个环境作业，均已结束，调度壁时合计34秒≈0.00944独占节点小时，含两次失败；GPU小时0；该环境补充阶段没有完整模型计时。环境输入副本/实际加载预检已执行；后续S01小试另有一次包装器早退1秒（job2026356），累计35秒≈0.00972节点小时，其后本轮授权的LF小试job2026450新增161秒，模型单域第1轮已完整执行但绑定FAIL，累计196秒；未扩大四域/整节点。CLUSTER_EXECUTION_PLAN给出S01/S02各最多15分钟的有限模型小试命令及停止条件，其中S01两次独立申请均终态失败（2026356包装器；2026450绑定合同），S02仍未提交；未预留后续资源。历史CKPT+HBM两轮runner wall为5401+5402秒，约3小时等待，不等于已核实的计费节点小时。RUNBOOK旧7.5节点小时预算仅为协调建议。
 
+本轮实际成本：S02 29秒、S03 2秒，共31秒≈0.008611独占节点小时，失败计入；累计408秒≈0.113333节点小时。前项终态清理后才提交后项。两项Donau资源/源码/命令/退出原件均在各自完整证据包；S02已按审查补充在runtime重置PATH后重新加载Donau，原包不改。
+
 ## 4. 正确性
 
 | 检查 | 预定度量/容差 | 结果 | 证据 | 状态 |
@@ -104,6 +105,8 @@ python -B 'E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\verify_d
 | 当前汇总行为 | 与归档Python段精确比较 | 17:00及17:09快照均相同，归档的合成缺域/旧JSON误报仍适用 | 两个diff；remote_tests_after | 缺陷证据，运行器未修 |
 | 计算节点环境和S01原样导入预检 | 实际import、tiny autograd、numpy桥接、源码/输入/加载库身份 | job2026223/cn21417通过；1CPU/4096MB，完整模型未运行 | compute_environment_verified.json、compute_env_job_2026223.json | 实测通过，范围有限 |
 | S01真实模型启动与绑定 | 原38核集合/实际记录一致，逐域状态完整 | child0、job1，期望0–37/记录[0]，首轮FAIL后停止 | S01_LF_RESTART_REPORT及完整证据包 | **FAIL，不能接受计时** |
+| S02 R5固定case严格对照 | 原比较器/阈值不变 | 1063指标/95失败；447实际KML调用；7同PID CPU checkpoint通过 | S02_R5_C2_STRICT_REPORT | **数值FAIL，非运行前提错误** |
+| S03实际Linux C与独立库 | 冻结源预期失败、候选25项与独立构建 | 冻结源15通过10失败；候选25/25，.so/ELF/依赖通过 | S03_C_SAFETY_REPORT | PASS，仅C替身边界，无真实HBM |
 | 输出/loss/输入与参数梯度 | 同权重/输入/mask/t/noise；max_abs、L2差/max(ref范数,1e-12)，实现前固定容差 | 真实模型已运行，但未做同权重参考/候选数值对照，不填零差；约1e-6仅历史fp32参考 | INPUT_CONTRACT/MEASUREMENT_REVIEW | 未运行 |
 | optimizer一步/state_dict/dtype/NaN/缺失梯度 | 逐预期参数及状态检查；不能只拼接非None梯度 | 本轮完整模型pre/dec前反向和AdamW已执行；没有参考/候选数值等价断言，S02已有独立Windows数值FAIL | S01_LF_RESTART_REPORT及CLUSTER_EXECUTION_PLAN | 已运行训练，数值对照未运行 |
 
@@ -134,14 +137,17 @@ python -B 'E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\verify_d
 
 ## 6. 接受条件与限制
 
+本轮两项执行/完整回传已完成：S02数值FAIL需S02分析，S03限定C通过供S03/总协调审核；未扩大配置或修阈值、未做训练内存/HBM。此前R7的有限启动证据已接受，无须再次等待/重跑R7；以下旧历史接受边界以本段更新为准。
+
 本地冻结、远程身份/权限/源码/输入/manifest、历史JSON完整性和重计算、版本漂移及输入语义问题已形成证据交接，**总协调已接受该交接；现有历史包仍不属于性能/科学正确性已验收结果。** 环境补充解决E01实际导入/解释器来源，E02/E03/E04/E05部分完成；输入来源、真实划分与模型验收仍待补。
 
 没有生产集成或需要回退的共享改动。保留原始fp32、模型架构与数据字节；旧隔离shell保留路径准备用途；本次另提供S01/S02准备包及环境包装器，未修改其接受源码，模型正式运行前仍须按CLUSTER_EXECUTION_PLAN核查资源和门槛。17:09快照并不承诺之后共享文件不变。
 
 | 后续任务 | 可直接使用 | 必须补齐 |
 |---|---|---|
-| S01 | 两个远程启动器快照及diff；同哈希HBM/shim源码；135份历史JSON、失败摘要、缺域/慢域证据 | 逐PID退出/超时/过期处理及barrier；输入/库冻结；CKPT+HBM复测和第二主机；不用目录名当版本 |
-| S02 | 同哈希模型/KML源码；B32与独立B64配置；4帧legacy输入SHA；mask分母、共享optimizer语义 | 明确16电极图像目标协议；固定随机变量的一步检查；有效batch一致；使用S01运行器；无本轮实测内存分解 |
+| S01 | R7已接受的三轮完整启动、CPU/线程/库及离线汇总证据；旧快照/失败仍保留 | 扩大规模/CKPT+HBM/第二主机另排期；本轮不重复R7 |
+| S02 | R5固定case C2/KML严格对照41文件，原阈值1063指标/95失败，CPU/后端身份完整 | 分析95失败；不改阈值；数值/独立测量门槛未过，不开展训练内存/HBM |
+| S03 | 实际Linux C原源缺陷/候选25场景/独立.so与完整54文件 | 真实内核/HBM、完整API/并发及生产集成仍未接受，另按后续范围安排 |
 | S06 | U-Net架构与fp32原生conv/SDPA基线，历史工具限制 | 可复用S00实测NumPy/torch环境与库加载指纹；仍需对应算子/工具链实测及内存阶段评审 |
 
 已明确分工：运行器修复/验收由S01负责，输入适配与内存优化由S02负责。环境、输入来源与权威subject split仍缺的资料、提供方和适用门槛已在PENDING_ITEMS.md列为15个跟踪项（E01已完成，其余14项OPEN/PARTIAL/条件待补）；资料提供由总协调协调，不由S00推定现有账号或文件即已获验收。
@@ -156,6 +162,11 @@ python -B 'E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\verify_d
 
 | 证据 | 绝对路径 |
 |---|---|
+| S02 R5严格数值执行报告 | E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\S02_R5_C2_STRICT_REPORT.md |
+| S02完整41文件证据 | E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\evidence\s02_r5_s03_c_20261105\JOB_2034953_full_evidence.zip |
+| S03有限C安全/独立构建报告 | E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\S03_C_SAFETY_REPORT.md |
+| S03完整54文件证据 | E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\evidence\s02_r5_s03_c_20261105\JOB_2034987_full_evidence.zip |
+| 两项独立复核及实际消耗 | E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\evidence\s02_r5_s03_c_20261105\review.json |
 | R7完整启动与离线复核报告 | E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\CPU36_R7_STARTUP_REPORT.md |
 | R7完整模型/线程/退出证据包 | E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\evidence\r7_cpu36_2034247\full_evidence.zip |
 | R7三轮独立复核结果 | E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\evidence\r7_cpu36_2034247\review.json |

@@ -1,5 +1,5 @@
 {
-  "status": "R7_BOUNDED_STARTUP_PASS_WAITING_REVIEW",
+  "status": "S02_R5_NUMERICAL_FAIL_S03_C_PASS_WAIT_ANALYSIS",
   "registered_utc": "2026-11-04T14:27:30.474104+00:00",
   "policy_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\CPU36_POLICY.md",
   "policy_sha256": "295f32fc3454c328f413073b76ccc7228cf84e29bae035d7c8fd736c08d67825",
@@ -11,7 +11,7 @@
   "s01_worker_omp_num_threads": 36,
   "s02_checker_threads": 36,
   "s02_selected_cpus": 36,
-  "thread_environment": "NOT_FINAL_UNTIL_ACCEPTED_S01_DIAGNOSIS",
+  "thread_environment": "R7_C_GROUP_USED_BY_ACCEPTED_R5_WRAPPER",
   "thread_affinity_contract": "Every compute TID stays within selected36; pinned single-core masks allowed; actual thread counts also verified",
   "memory_limit_MB": 24576,
   "wall_limit_s": 900,
@@ -47,5 +47,14 @@
     "offline_summary": "PASS",
     "report": "CPU36_R7_STARTUP_REPORT.md",
     "scope": "THREE_REPS1_ROUNDS_SINGLE_DOMAIN_STARTUP_ONLY"
+  },
+  "S02_R5": {
+    "job_id": "2034953",
+    "status": "FAIL_ORIGINAL_CRITERIA",
+    "failures": 95
+  },
+  "S03_C": {
+    "job_id": "2034987",
+    "status": "PASS_25_CASES_AND_SO_ONLY"
   }
 }

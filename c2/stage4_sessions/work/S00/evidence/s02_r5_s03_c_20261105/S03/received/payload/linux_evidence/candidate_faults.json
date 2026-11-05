@@ -1,0 +1,232 @@
+{
+  "scope": "C_IMPLEMENTATION_WITH_OS_SUBSTITUTES_ONLY",
+  "real_hbm": false,
+  "real_mempolicy": false,
+  "cases": [
+    {
+      "case": "no_node",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=0 bind=0 map=0 restore=0 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": ""
+    },
+    {
+      "case": "pages_0",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=0 bind=0 map=0 restore=0 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: node 16 has 0 free hugepages, arena off\n"
+    },
+    {
+      "case": "pages_15",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=0 bind=0 map=0 restore=0 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: node 16 has 15 free hugepages, arena off\n"
+    },
+    {
+      "case": "pages_16",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=0 bind=0 map=0 restore=0 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: node 16 has 16 free hugepages, arena off\n"
+    },
+    {
+      "case": "pages_17",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=0 bind=0 map=0 restore=0 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: node 16 has 17 free hugepages, arena off\n"
+    },
+    {
+      "case": "pages_47",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=0 bind=0 map=0 restore=0 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: node 16 has 47 free hugepages, arena off\n"
+    },
+    {
+      "case": "read_open_fail",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=0 bind=0 map=0 restore=0 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: cannot read free hugepages on node 16, arena off\n"
+    },
+    {
+      "case": "read_parse_fail",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=0 bind=0 map=0 restore=0 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: cannot read free hugepages on node 16, arena off\n"
+    },
+    {
+      "case": "read_negative",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=0 bind=0 map=0 restore=0 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: cannot read free hugepages on node 16, arena off\n"
+    },
+    {
+      "case": "below_min",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=0 bind=0 map=0 restore=0 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: node 16 has 2020 free hugepages, arena off\n"
+    },
+    {
+      "case": "pages_48",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=1 restore=1 mbind=1 unmap=0 mb=64 mode=2 policy_ok=1 map_hbm=1 mbind_restored=1 arena=1\nRESULT returned_and_allocation_ok\n",
+      "stderr": ""
+    },
+    {
+      "case": "pages_49",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=1 restore=1 mbind=1 unmap=0 mb=66 mode=2 policy_ok=1 map_hbm=1 mbind_restored=1 arena=1\nRESULT returned_and_allocation_ok\n",
+      "stderr": ""
+    },
+    {
+      "case": "pages_2020",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=1 restore=1 mbind=1 unmap=0 mb=3800 mode=2 policy_ok=1 map_hbm=1 mbind_restored=1 arena=1\nRESULT returned_and_allocation_ok\n",
+      "stderr": ""
+    },
+    {
+      "case": "cap_9000",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=1 restore=1 mbind=1 unmap=0 mb=4008 mode=2 policy_ok=1 map_hbm=1 mbind_restored=1 arena=1\nRESULT returned_and_allocation_ok\n",
+      "stderr": ""
+    },
+    {
+      "case": "cap_64",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=1 restore=1 mbind=1 unmap=0 mb=64 mode=2 policy_ok=1 map_hbm=1 mbind_restored=1 arena=1\nRESULT returned_and_allocation_ok\n",
+      "stderr": ""
+    },
+    {
+      "case": "old_default",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=1 restore=1 mbind=1 unmap=0 mb=3800 mode=0 policy_ok=1 map_hbm=1 mbind_restored=1 arena=1\nRESULT returned_and_allocation_ok\n",
+      "stderr": ""
+    },
+    {
+      "case": "old_local",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=1 restore=1 mbind=1 unmap=0 mb=3800 mode=4 policy_ok=1 map_hbm=1 mbind_restored=1 arena=1\nRESULT returned_and_allocation_ok\n",
+      "stderr": ""
+    },
+    {
+      "case": "old_preferred",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=1 restore=1 mbind=1 unmap=0 mb=3800 mode=1 policy_ok=1 map_hbm=1 mbind_restored=1 arena=1\nRESULT returned_and_allocation_ok\n",
+      "stderr": ""
+    },
+    {
+      "case": "get_fail",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=0 map=0 restore=0 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: get_mempolicy failed: Operation not permitted, arena off\n"
+    },
+    {
+      "case": "set_fail",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=0 restore=1 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: set_mempolicy node 16 failed: Invalid argument, arena off\n"
+    },
+    {
+      "case": "map_fail",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=1 restore=1 mbind=0 unmap=0 mb=3800 mode=2 policy_ok=1 map_hbm=1 mbind_restored=0 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: mmap 3800 MB on node 16 failed: Cannot allocate memory\n"
+    },
+    {
+      "case": "mbind_fail",
+      "passed": true,
+      "expected_exit": 0,
+      "exitcode": 0,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=1 restore=1 mbind=1 unmap=1 mb=3800 mode=2 policy_ok=1 map_hbm=1 mbind_restored=1 arena=0\nRESULT returned_and_allocation_ok\n",
+      "stderr": "hbm_alloc: mbind node 16 failed: Input/output error\n"
+    },
+    {
+      "case": "restore_fail",
+      "passed": true,
+      "expected_exit": 1,
+      "exitcode": 1,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=1 restore=1 mbind=0 unmap=1 mb=3800 mode=2 policy_ok=0 map_hbm=1 mbind_restored=0 arena=0\n",
+      "stderr": "hbm_alloc: fatal: restore mempolicy failed: Input/output error\n"
+    },
+    {
+      "case": "map_restore_fail",
+      "passed": true,
+      "expected_exit": 1,
+      "exitcode": 1,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=1 restore=1 mbind=0 unmap=0 mb=3800 mode=2 policy_ok=0 map_hbm=1 mbind_restored=0 arena=0\n",
+      "stderr": "hbm_alloc: fatal: restore mempolicy failed: Input/output error\n"
+    },
+    {
+      "case": "set_restore_fail",
+      "passed": true,
+      "expected_exit": 1,
+      "exitcode": 1,
+      "mismatches": {},
+      "stdout": "TRACE get=1 bind=1 map=0 restore=1 mbind=0 unmap=0 mb=0 mode=2 policy_ok=1 map_hbm=0 mbind_restored=0 arena=0\n",
+      "stderr": "hbm_alloc: fatal: restore mempolicy failed: Input/output error\n"
+    }
+  ]
+}

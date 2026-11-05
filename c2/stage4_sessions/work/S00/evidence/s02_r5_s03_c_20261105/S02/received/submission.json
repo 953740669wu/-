@@ -1,0 +1,32 @@
+{
+  "submitted_utc": "2026-11-05T03:50:47.875819+00:00",
+  "command": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "900",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CPU36_R5_20261105T034705Z/payload",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CPU36_R5_20261105T034705Z/job.log",
+    "env",
+    "S02_CASE_FILE=/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CPU36_R5_20261105T034705Z/fixed_16_pre.pt",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CPU36_R5_20261105T034705Z/payload/run_s00_job.sh"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"data\":{\"jobId\":\"2034953\"},\"message\":\"Submit job successfully.\",\"code\":\"success\",\"requestId\":\"req-a14edac2-cb7f-4028-8334-7e8868a4049a\"}\n",
+  "stderr": "",
+  "donau_profile_reloaded_after_runtime": true,
+  "dsub_path": "/opt/batch/cli/bin/dsub"
+}
