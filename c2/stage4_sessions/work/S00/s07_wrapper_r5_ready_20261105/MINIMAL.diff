@@ -1,0 +1,433 @@
+--- wrapper_R4/prepare.py
++++ wrapper_R5/prepare.py
+@@ -1,4 +1,4 @@
+-"""Pin the new diagnostic inner package; never import frameworks or submit jobs."""
++"""Pin the new readiness inner package; never import frameworks or submit jobs."""
+ import ast
+ import hashlib
+ import json
+@@ -6,10 +6,10 @@
+ import subprocess
+ import zipfile
+ 
+-ARCHIVE = 'S07_INIT_DIAGNOSTIC_R3.zip'
+-INNER_SHA = 'af2725e24d0bd8b2183f1d7bc8b6aae79f801b7b83b640b41645e822e0c23f45'
++ARCHIVE = 'S07_READY_SYNC_R4.zip'
++INNER_SHA = 'd39ae26f2b29d53f733bdef937832edeeec4bf4a468adf2d0eff0dbe5fb39c45'
+ BASE = Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
+-PREFIX = 'S07_INIT_DIAG_R4_'
++PREFIX = 'S07_READY_WRAP_R5_'
+ 
+ 
+ def sha(path):
+@@ -20,11 +20,11 @@
+     entries = archive.infolist()
+     delivery = manifest['delivery_files']
+     expected = {x['path'] for x in delivery} | {'SOURCE_MANIFEST.json', 'evidence/'}
+-    if (len(delivery) != 11 or len(entries) != 13 or len(expected) != 13
++    if (len(delivery) != 12 or len(entries) != 14 or len(expected) != 14
+             or set(archive.namelist()) != expected
+-            or sum(not x.is_dir() for x in entries) != 12
++            or sum(not x.is_dir() for x in entries) != 13
+             or sum(x.is_dir() for x in entries) != 1):
+-        raise ValueError('require exactly 12 diagnostic files, 11 manifest entries and evidence/')
++        raise ValueError('require exactly 13 readiness files, 12 manifest entries and evidence/')
+     if any(Path(n).is_absolute() or '..' in Path(n).parts or '\\' in n for n in archive.namelist()):
+         raise ValueError('unsafe inner package path')
+     for item in delivery:
+@@ -40,8 +40,8 @@
+ 
+ def unpack(root):
+     archive = root / ARCHIVE
+-    if archive.stat().st_size != 31262 or sha(archive) != INNER_SHA:
+-        raise ValueError('wrong diagnostic package bytes/SHA; old R2 is not accepted')
++    if archive.stat().st_size != 34295 or sha(archive) != INNER_SHA:
++        raise ValueError('wrong diagnostic package bytes/SHA; older inner packages are not accepted')
+     with zipfile.ZipFile(archive) as z:
+         manifest = json.loads(z.read('SOURCE_MANIFEST.json'))
+         check_members(z, manifest)
+@@ -51,7 +51,7 @@
+ 
+ def main(root):
+     if root.parent != BASE or not root.name.startswith(PREFIX):
+-        raise ValueError('new S00 diagnostic R4 staging directory required')
++        raise ValueError('new S00 readiness R5 staging directory required')
+     unpack(root)
+     payload = root / 'payload'
+     for p in list(payload.rglob('*.py')) + list(root.glob('*.py')) + list(root.glob('*.sh')):
+@@ -59,7 +59,7 @@
+         if p.suffix == '.py': ast.parse(p.read_text(), filename=str(p), feature_version=(3, 9))
+         else: subprocess.run(['bash', '-n', str(p)], check=True)
+     pre = dict(status='PASS_NEW_INNER_SHA_MANIFEST_AND_SYNTAX_ONLY', package_name=ARCHIVE,
+-        package_sha256=INNER_SHA, package_bytes=31262, package_files=12, manifest_entries=11,
++        package_sha256=INNER_SHA, package_bytes=34295, package_files=13, manifest_entries=12,
+         payload_files={p.relative_to(root).as_posix(): sha(p) for p in payload.rglob('*') if p.is_file()},
+         wrapper_files={p.name: sha(p) for p in root.iterdir() if p.is_file() and p.suffix in ('.py', '.sh')})
+     (root / 'pre_submit_checks.json').write_text(json.dumps(pre, indent=2) + '\n')
+--- wrapper_R4/run_s07_diag_job.py
++++ wrapper_R5/run_s07_diag_job.py
+@@ -14,14 +14,15 @@
+ 
+ 
+ CONSUMER_SECONDS = 270
+-CHECKS = [('diagnostic_tests', 'test_diagnostics.py', 6, 30),
++CHECKS = [('readiness_tests', 'test_readiness.py', 16, 30),
++          ('diagnostic_tests', 'test_diagnostics.py', 6, 30),
+           ('job_identity_tests', 'test_job_identity.py', 6, 45),
+           ('probe_tests', 'test_probe.py', 16, 45)]
+ 
+ 
+ def main(root):
+     assert root.parent == Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
+-    assert root.name.startswith('S07_INIT_DIAG_R4_') and os.environ.get('CCS_JOB_ID')
++    assert root.name.startswith('S07_READY_WRAP_R5_') and os.environ.get('CCS_JOB_ID')
+     assert not socket.gethostname().startswith('login')
+     assert not os.environ.get('LD_PRELOAD') and not os.environ.get('KML_BLAS_LIB')
+     out = root / 'job_evidence'
+@@ -35,7 +36,7 @@
+     try:
+         pre = json.loads((root / 'pre_submit_checks.json').read_text())
+         assert pre['package_name'] == ARCHIVE and pre['package_sha256'] == INNER_SHA
+-        assert sha(root / ARCHIVE) == INNER_SHA and len(pre['payload_files']) == 12
++        assert sha(root / ARCHIVE) == INNER_SHA and len(pre['payload_files']) == 13
+         assert all(sha(root / name) == h for name, h in pre['payload_files'].items())
+         context = live_context()
+         request = create_request(root, context)
+@@ -62,7 +63,7 @@
+             log = (out / (label + '.txt')).read_text()
+             assert re.search(r'Ran ' + str(count) + r' tests?', log) and 'OK' in log
+             assert 'skipped=' not in log and '... skipped' not in log
+-        summary['standard_library_tests'] = dict(passed=28, skipped=0, linux_group_cleanup='PASSED')
++        summary['standard_library_tests'] = dict(passed=44, skipped=0, linux_group_cleanup='PASSED')
+         summary['steps'].append(run_step(out, 'environment', [py, '-B', str(payload / 'candidate/comm_probe.py'),
+             'environment', '--output', str(payload / 'environment_current.json')], deadline, limit=60))
+         env = json.loads((payload / 'environment_current.json').read_text())
+@@ -75,7 +76,7 @@
+         checks = json.loads((payload / 'checks_current_job/checks.json').read_text())
+         assert checks['status'] == 'PASS_PROBE_CHECKS_ONLY' and [c['case'] for c in checks['cases']] == [
+             'normal', 'crash', 'collective-timeout', 'watchdog']
+-        summary.update(status='PASS_S07_DIAGNOSTIC_FIXED_TWO_RANK_TENSOR_PROBE_ONLY', cases=checks['cases'])
++        summary.update(status='PASS_S07_READY_FIXED_TWO_RANK_TENSOR_PROBE_ONLY', cases=checks['cases'])
+         return 0
+     except BaseException as exc:
+         summary.update(status='FAIL_STOP_NO_RETRY', error=repr(exc), traceback=traceback.format_exc())
+--- wrapper_R4/collect_evidence.py
++++ wrapper_R5/collect_evidence.py
+@@ -8,10 +8,11 @@
+ 
+ from prepare import BASE, PREFIX, sha
+ from trace_inventory import inspect
++from readiness_inventory import inspect as inspect_readiness
+ 
+ 
+ def collect(root):
+-    if root.parent != BASE or not root.name.startswith(PREFIX): raise ValueError('new S00 R4 directory required')
++    if root.parent != BASE or not root.name.startswith(PREFIX): raise ValueError('new S00 readiness R5 directory required')
+     job_id = (root / 'job_id.txt').read_text().strip()
+     bundle = root / ('JOB_' + job_id + '_full_evidence.zip')
+     if bundle.exists() or (root / 'COLLECTION_S00.json').exists(): raise FileExistsError('evidence already collected')
+@@ -27,6 +28,8 @@
+     (root / 'djob_final.stderr').write_bytes(query.stderr)
+     inventory = inspect(root)
+     (root / 'DIAGNOSTIC_INVENTORY.json').write_text(json.dumps(inventory, indent=2) + '\n')
++    readiness = inspect_readiness(root)
++    (root / 'READINESS_INVENTORY.json').write_text(json.dumps(readiness, indent=2) + '\n')
+     pre = json.loads((root / 'pre_submit_checks.json').read_text())
+     changed = [name for name, digest in dict(pre['payload_files'], **pre['wrapper_files']).items()
+                if not (root / name).is_file() or sha(root / name) != digest]
+@@ -41,7 +44,7 @@
+     start, end = [datetime.datetime.fromisoformat(job[k].replace('Z', '+00:00')) for k in ('startTime', 'endTime')]
+     index = root / 'COLLECTION_S00.json'
+     index.write_text(json.dumps(dict(job_id=job_id, state=job['state'], job_exit_code=job.get('jobExitCode'),
+-        query_command=command, files=metadata, changed_source_files=changed, diagnostics=inventory,
++        query_command=command, files=metadata, changed_source_files=changed, diagnostics=inventory, readiness=readiness,
+         node_seconds=(end-start).total_seconds(), communication_verdict_not_reinterpreted=True,
+         retries=0, real_HBM=False, formal_training=False), indent=2) + '\n')
+     paths.append(index)
+--- wrapper_R4/submit_once.py
++++ wrapper_R5/submit_once.py
+@@ -10,7 +10,7 @@
+ 
+ 
+ def submit(root):
+-    if root.parent != BASE or not root.name.startswith(PREFIX): raise ValueError('new S00 R4 directory required')
++    if root.parent != BASE or not root.name.startswith(PREFIX): raise ValueError('new S00 readiness R5 directory required')
+     if sha(root / ARCHIVE) != INNER_SHA: raise ValueError('diagnostic inner changed')
+     if not (root / 'pre_submit_checks.json').is_file(): raise ValueError('prepare must pass first')
+     if (root / 'submission.json').exists(): raise FileExistsError('submission already exists')
+--- wrapper_R4/tests/test_deployment.py
++++ wrapper_R5/tests/test_deployment.py
+@@ -29,21 +29,21 @@
+     def test_exact_new_inner_and_manifest(self):
+         shutil.copyfile(ROOT / prepare.ARCHIVE, self.root / prepare.ARCHIVE)
+         prepare.unpack(self.root)
+-        self.assertEqual(len(list(p for p in (self.root / 'payload').rglob('*') if p.is_file())), 12)
+-        self.assertEqual(len(json.loads((self.root / 'payload/SOURCE_MANIFEST.json').read_bytes())['delivery_files']), 11)
++        self.assertEqual(len(list(p for p in (self.root / 'payload').rglob('*') if p.is_file())), 13)
++        self.assertEqual(len(json.loads((self.root / 'payload/SOURCE_MANIFEST.json').read_bytes())['delivery_files']), 12)
+ 
+     def test_old_or_changed_bytes_rejected_before_extraction(self):
+         (self.root / prepare.ARCHIVE).write_bytes(b'old R2 bytes')
+         with self.assertRaises(ValueError): prepare.unpack(self.root)
+         self.assertFalse((self.root / 'payload').exists())
+ 
+-    def test_prepare_writes_new_identity_and_twelve_source_entries(self):
++    def test_prepare_writes_new_identity_and_thirteen_source_entries(self):
+         shutil.copyfile(ROOT / prepare.ARCHIVE, self.root / prepare.ARCHIVE)
+         with mock.patch.object(prepare, 'BASE', self.root.parent), mock.patch.object(prepare, 'PREFIX', self.root.name):
+             prepare.main(self.root)
+         pre = json.loads((self.root / 'pre_submit_checks.json').read_bytes())
+         self.assertEqual((pre['package_name'], pre['package_sha256']), (prepare.ARCHIVE, prepare.INNER_SHA))
+-        self.assertEqual((len(pre['payload_files']), pre['manifest_entries']), (12, 11))
++        self.assertEqual((len(pre['payload_files']), pre['manifest_entries']), (13, 12))
+         self.assertFalse((self.root / 'job_id.txt').exists())
+ 
+     def test_manifest_changed_or_missing_member_rejected(self):
+@@ -59,12 +59,13 @@
+                     with zipfile.ZipFile(data) as altered:
+                         with self.assertRaises(ValueError): prepare.check_members(altered, manifest)
+ 
+-    def test_checks_are_6_6_16_and_share_one_budget(self):
+-        self.assertEqual(job.CHECKS, [('diagnostic_tests', 'test_diagnostics.py', 6, 30),
++    def test_checks_are_16_6_6_16_and_share_one_budget(self):
++        self.assertEqual(job.CHECKS, [('readiness_tests', 'test_readiness.py', 16, 30),
++                                    ('diagnostic_tests', 'test_diagnostics.py', 6, 30),
+                                     ('job_identity_tests', 'test_job_identity.py', 6, 45),
+                                     ('probe_tests', 'test_probe.py', 16, 45)])
+         self.assertEqual(job.CONSUMER_SECONDS, 270)
+-        self.assertEqual(sum(x[2] for x in job.CHECKS), 28)
++        self.assertEqual(sum(x[2] for x in job.CHECKS), 44)
+         self.assertEqual(hashlib.sha256((ROOT / 'scheduler_handoff.py').read_bytes()).hexdigest(), 'f907cbf8286f7bc9035c9e58f986c3b342b2a6f6f5a1c60f97834915f2a7065c')
+         self.assertEqual(hashlib.sha256((ROOT / 'bounded_round_step.py').read_bytes()).hexdigest(), 'b9fa564e89edcdaaf9e597f6511e84fb8b845cddd6c065ae489ba61d1f2dc697')
+ 
+--- /dev/null
++++ wrapper_R5/readiness_inventory.py
+@@ -0,0 +1,105 @@
++"""Read-only terminal readiness consistency; never create or repair protocol files."""
++import hashlib
++import json
++from pathlib import Path
++
++from trace_inventory import CASES
++
++
++def events(path, issues):
++    try:
++        raw = path.read_bytes()
++        if not raw.endswith(b'\n'): issues.append(path.name + ': truncated event tail')
++        rows = [json.loads(line) for line in raw.splitlines()]
++        clocks = [row['monotonic_ns'] for row in rows]
++        if any(type(t) is not int for t in clocks) or clocks != sorted(clocks):
++            raise ValueError('invalid event clock order')
++        return rows
++    except (OSError, UnicodeError, ValueError, KeyError, TypeError) as exc:
++        issues.append(path.name + ': incomplete event evidence: ' + str(exc)); return []
++
++
++def inspect(root):
++    root = Path(root)
++    result = dict(status='NOT_RUN', complete=False, cases={}, not_run=[], issues=[],
++        scope='archived readiness consistency only; no communication verdict or cross-rank publication-time inference')
++    for name in CASES:
++        directory = root / 'payload/checks_current_job' / name
++        if not directory.is_dir(): result['not_run'].append(name); continue
++        issues, files, values = [], {}, {}
++        verified_context = None
++        temporary = sorted(p.name for p in directory.glob('*.tmp*') if p.is_file())
++        for filename in ['participants.json', 'ready_rank0.json', 'ready_rank1.json'] + temporary:
++            path = directory / filename
++            if not path.is_file(): issues.append(filename + ': missing'); continue
++            raw = path.read_bytes()
++            files[filename] = dict(bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest(), mtime_ns=path.stat().st_mtime_ns)
++            try: values[filename] = json.loads(raw)
++            except (UnicodeError, ValueError):
++                files[filename]['parse_error'] = True; issues.append(filename + ': invalid JSON retained')
++        if temporary: issues.append('publication temporary residuals retained')
++        try:
++            manifest = json.loads((directory / 'manifest.json').read_bytes())
++            summary = json.loads((directory / 'summary.json').read_bytes())
++            identity = {k:manifest[k] for k in ('run_id', 'job_id', 'ready_token')}
++            if any(type(v) is not str or not v.strip() for v in identity.values()):
++                raise ValueError('missing manifest identity/token')
++            if identity['job_id'] != (root / 'job_id.txt').read_text().strip():
++                raise ValueError('manifest job differs from collected scheduler job')
++            parent = events(directory / 'supervisor.events.jsonl', issues)
++            context = values['participants.json']
++            pids, stop = context['pids'], context['deadline_ns']
++            if (type(pids) is not list or len(pids) != 2 or len(set(pids)) != 2
++                    or any(type(pid) is not int or pid <= 0 for pid in pids) or type(stop) is not int
++                    or context != dict(identity, pids=pids, deadline_ns=stop)):
++                raise ValueError('invalid participants run/job/token/PID/deadline')
++            actual_pids = summary['supervisor']['pids']
++            if pids != actual_pids or any(type(pid) is not int for pid in actual_pids):
++                raise ValueError('participants differ from actual supervisor PIDs')
++            spawned = [row for row in parent if row['event'] == 'spawned']
++            if (len(spawned) != 2 or any(type(row['rank']) is not int or type(row['child_pid']) is not int for row in spawned)
++                    or {row['rank']:row['child_pid'] for row in spawned} != dict(enumerate(pids))):
++                raise ValueError('participants differ from parent spawn events')
++            begin = next(row for row in parent if row['event'] == 'supervisor_begin')
++            if (manifest['pg_timeout'] != 5 or manifest['deadline'] != 30 or begin['deadline_seconds'] != 30
++                    or not 0 < stop-begin['monotonic_ns'] <= 30_000_000_000):
++                raise ValueError('deadline not derived from the original supervisor boundary')
++            own_times = {}
++            for rank in (0, 1):
++                ready = values['ready_rank' + str(rank) + '.json']
++                if (type(ready.get('rank')) is not int or type(ready.get('pid')) is not int
++                        or ready != dict(identity, rank=rank, pid=pids[rank])):
++                    raise ValueError('wrong ready run/job/token/rank/PID for rank' + str(rank))
++                rows = events(directory / ('rank' + str(rank) + '.events.jsonl'), issues)
++                ordered, times = [], {}
++                required = ['after_framework', 'preparation_complete', 'ready_published', 'both_ready', 'init_process_group_begin']
++                for event in required:
++                    if event == 'after_framework':
++                        matches = [(i, row) for i, row in enumerate(rows)
++                                   if row['event'] == 'checkpoint_end' and row.get('stage') == 'after_framework']
++                    else:
++                        matches = [(i, row) for i, row in enumerate(rows) if row['event'] == event]
++                    if len(matches) != 1: raise ValueError('rank' + str(rank) + ': missing/duplicate own event ' + event)
++                    index, row = matches[0]; ordered.append(index)
++                    times[event] = row['monotonic_ns']
++                    if row['pid'] != pids[rank]: raise ValueError('worker event PID mismatch')
++                    if event == 'ready_published' and any(row.get(k) != v for k, v in dict(identity, rank=rank).items()):
++                        raise ValueError('ready_published identity mismatch')
++                    if event == 'both_ready' and row.get('pids') != pids: raise ValueError('both_ready PID mismatch')
++                    if event in ('both_ready', 'init_process_group_begin') and row['monotonic_ns'] >= stop:
++                        raise ValueError('both-ready/init attempt outside original deadline')
++                if ordered != sorted(ordered): raise ValueError('worker own readiness event order mismatch')
++                own_times[str(rank)] = times
++                # Never compare peer ready_published clocks: file replacement precedes that log.
++            verified_context = dict(identity, pids=pids, deadline_ns=stop,
++                                    supervisor_begin_ns=begin['monotonic_ns'], worker_event_ns=own_times)
++        except (OSError, UnicodeError, ValueError, KeyError, IndexError, TypeError, AttributeError, StopIteration) as exc:
++            issues.append('readiness evidence incomplete: ' + str(exc))
++        case = dict(complete=not issues, files=files, temporary_files=temporary,
++                    verified_context=verified_context, issues=issues)
++        result['cases'][name] = case
++        result['issues'].extend(name + ': ' + text for text in issues)
++    if result['cases']:
++        result['complete'] = not result['issues']
++        result['status'] = 'CONSISTENT_AVAILABLE_READINESS_ONLY' if result['complete'] else 'READINESS_EVIDENCE_INCOMPLETE'
++    return result
+--- /dev/null
++++ wrapper_R5/tests/test_readiness_collection.py
+@@ -0,0 +1,120 @@
++"""Synthetic post-terminal artifacts only; no workers, framework or scheduler job."""
++import io
++import json
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++from unittest import mock
++import subprocess
++import zipfile
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT))
++import readiness_inventory
++import collect_evidence
++
++
++class ReadinessCollectionTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory(dir=ROOT / 'evidence')
++        self.addCleanup(self.temp.cleanup)
++        self.root = Path(self.temp.name)
++
++    def fixture(self, root=None):
++        root = root or self.root
++        case = root / 'payload/checks_current_job/normal'; case.mkdir(parents=True)
++        identity = dict(run_id='normal', job_id='new-job', ready_token='a' * 32)
++        (root / 'job_id.txt').write_text('new-job\n')
++        (case / 'manifest.json').write_text(json.dumps(dict(identity, pg_timeout=5, deadline=30)))
++        (case / 'summary.json').write_text(json.dumps(dict(supervisor=dict(pids=[11, 12], all_reaped=True))))
++        (case / 'participants.json').write_text(json.dumps(dict(identity, pids=[11, 12], deadline_ns=31_000_000_000)))
++        self.write(case / 'supervisor.events.jsonl', 10, [dict(event='supervisor_begin', deadline_seconds=30, monotonic_ns=1_000_000_000),
++            dict(event='spawned', rank=0, child_pid=11, monotonic_ns=1_100_000_000),
++            dict(event='spawned', rank=1, child_pid=12, monotonic_ns=1_200_000_000)])
++        for rank in (0, 1):
++            (case / ('ready_rank' + str(rank) + '.json')).write_text(json.dumps(dict(identity, rank=rank, pid=11+rank)))
++            # rank1 can observe rank0's file before rank0 logs ready_published.
++            own_ready = 4_000_000_000 if rank == 0 else 2_000_000_000
++            self.write(case / ('rank' + str(rank) + '.events.jsonl'), 11+rank,
++                [dict(event='checkpoint_end', stage='after_framework', monotonic_ns=1_400_000_000),
++                 dict(event='preparation_complete', rank=rank, monotonic_ns=1_500_000_000),
++                 dict(event='ready_published', rank=rank, **identity, monotonic_ns=own_ready),
++                 dict(event='both_ready', rank=rank, pids=[11, 12], monotonic_ns=own_ready+100_000_000),
++                 dict(event='init_process_group_begin', rank=rank, monotonic_ns=own_ready+200_000_000)])
++        return case
++
++    def write(self, path, pid, rows):
++        path.write_text(''.join(json.dumps(dict(row, pid=pid, time_ns=row['monotonic_ns']))+'\n' for row in rows))
++
++    def inspect(self, root=None): return readiness_inventory.inspect(root or self.root)
++
++    def test_valid_participants_and_ready_are_read_only(self):
++        case = self.fixture(); before = {p.name:p.read_bytes() for p in case.iterdir()}
++        result = self.inspect()
++        self.assertTrue(result['complete'], result)
++        self.assertEqual(result['cases']['normal']['verified_context']['deadline_ns'],31_000_000_000)
++        self.assertEqual(before, {p.name:p.read_bytes() for p in case.iterdir()})
++        self.assertEqual(set(result['cases']['normal']['files']), {'participants.json','ready_rank0.json','ready_rank1.json'})
++
++    def test_cross_rank_ready_log_order_is_not_publication_order(self):
++        self.fixture(); self.assertTrue(self.inspect()['complete'])
++
++    def test_bad_ready_identity_types_and_partial_json(self):
++        for index, change in enumerate([dict(run_id='old'), dict(job_id='old'), dict(ready_token='old'),
++                dict(rank=0), dict(rank=True), dict(pid=99), dict(pid=12.0), None]):
++            with self.subTest(change=change):
++                root=self.root/str(index);case=self.fixture(root);p=case/'ready_rank1.json'
++                if change is None:p.write_bytes(b'{partial')
++                else:
++                    d=json.loads(p.read_bytes());d.update(change);p.write_text(json.dumps(d))
++                self.assertFalse(self.inspect(root)['complete'])
++
++    def test_wrong_participant_pids_or_deadline_rejected(self):
++        for index, change in enumerate([dict(pids=[12,11]),dict(pids=[11,11]),dict(deadline_ns=31e9),
++                                       dict(deadline_ns=41_000_000_000),dict(ready_token='old')]):
++            root=self.root/str(index);case=self.fixture(root);p=case/'participants.json'
++            d=json.loads(p.read_bytes());d.update(change);p.write_text(json.dumps(d))
++            self.assertFalse(self.inspect(root)['complete'])
++
++    def test_parent_spawn_pids_must_match(self):
++        case=self.fixture();p=case/'supervisor.events.jsonl';p.write_text(p.read_text().replace('"child_pid": 12','"child_pid": 99'))
++        self.assertFalse(self.inspect()['complete'])
++
++    def test_init_attempt_at_deadline_is_flagged(self):
++        case=self.fixture();p=case/'rank1.events.jsonl';rows=[json.loads(x) for x in p.read_text().splitlines()]
++        rows[-1]['monotonic_ns']=31_000_000_000;self.write(p,12,rows)
++        self.assertFalse(self.inspect()['complete'])
++
++    def test_missing_own_preparation_or_both_ready_is_flagged(self):
++        for index,event in enumerate(['preparation_complete','ready_published','both_ready']):
++            root=self.root/str(index);case=self.fixture(root);p=case/'rank0.events.jsonl'
++            p.write_text(''.join(x for x in p.read_text().splitlines(True) if '"event": "'+event+'"' not in x))
++            self.assertFalse(self.inspect(root)['complete'])
++
++    def test_missing_participants_still_indexes_ready_and_temporary_files(self):
++        case=self.fixture();(case/'participants.json').unlink();(case/'participants.json.tmp').write_bytes(b'{partial')
++        result=self.inspect();self.assertFalse(result['complete'])
++        self.assertIn('ready_rank0.json',result['cases']['normal']['files'])
++        self.assertIn('participants.json.tmp',result['cases']['normal']['temporary_files'])
++
++    def test_temporary_bytes_preserved_even_if_json_is_invalid(self):
++        case=self.fixture();p=case/'ready_rank1.json.tmp';p.write_bytes(b'{partial')
++        result=self.inspect();self.assertFalse(result['complete']);self.assertEqual(p.read_bytes(),b'{partial')
++
++    def test_terminal_collector_keeps_all_readiness_files_and_residuals(self):
++        case=self.fixture();(case/'ready_rank1.json.tmp').write_bytes(b'{partial')
++        originals={p.name:p.read_bytes() for p in case.glob('*') if p.name.startswith(('participants','ready_rank'))}
++        (self.root/'pre_submit_checks.json').write_text(json.dumps(dict(payload_files={},wrapper_files={})))
++        terminal=dict(jobId='new-job',state='FAILED',jobExitCode=1,resGroups=[dict(nodeResUsages=[dict(pids='-')])],
++                      startTime='2026-11-05T00:00:00Z',endTime='2026-11-05T00:00:01Z')
++        answer=subprocess.CompletedProcess([],0,json.dumps(dict(data=dict(successData=[terminal]))).encode(),b'')
++        with mock.patch.object(collect_evidence,'BASE',self.root.parent),mock.patch.object(collect_evidence,'PREFIX',self.root.name),\
++             mock.patch.object(collect_evidence.subprocess,'run',return_value=answer),mock.patch('sys.stdout',new=io.StringIO()):
++            collect_evidence.collect(self.root)
++        with zipfile.ZipFile(self.root/'JOB_new-job_full_evidence.zip') as z:
++            for name,data in originals.items():self.assertEqual(z.read('payload/checks_current_job/normal/'+name),data)
++            self.assertFalse(json.loads(z.read('READINESS_INVENTORY.json'))['complete'])
++
++
++if __name__ == '__main__': unittest.main(verbosity=2)

@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_INIT_DIAG_R4_20261105T104153Z/payload/candidate/comm_probe.py", line 251, in worker
+    dist.init_process_group('gloo', init_method=(directory / 'rendezvous').as_uri(),
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/distributed/c10d_logger.py", line 81, in wrapper
+    return func(*args, **kwargs)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/distributed/c10d_logger.py", line 95, in wrapper
+    func_return = func(*args, **kwargs)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/distributed/distributed_c10d.py", line 1717, in init_process_group
+    default_pg, _ = _new_process_group_helper(
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/distributed/distributed_c10d.py", line 1942, in _new_process_group_helper
+    backend_class = ProcessGroupGloo(
+RuntimeError: Wait timeout

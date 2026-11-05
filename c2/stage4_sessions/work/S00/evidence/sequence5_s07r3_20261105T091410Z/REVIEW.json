@@ -1,0 +1,149 @@
+{
+  "status": "PASS_ARCHIVED_EVIDENCE_AUDIT",
+  "task_results": {
+    "S02": {
+      "job_id": "2040203",
+      "state": "SUCCEEDED",
+      "exit_code": 0,
+      "host": "cn21339",
+      "scheduler_pids": "-",
+      "source_unchanged": true,
+      "original_mtime_preserved_as_metadata": true,
+      "archive_files": 66,
+      "metadata_entries": 65,
+      "bundle": {
+        "task": "S02",
+        "job_id": "2040203",
+        "state": "SUCCEEDED",
+        "job_exit_code": 0,
+        "bundle": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_SEQUENCE5_R7_20261105T091410Z/JOB_2040203_full_evidence.zip",
+        "bytes": 229688,
+        "sha256": "19e54562b321f160099d8edc1c398a369b6dadb6cbc6ec389fc7c9fd0bea0259",
+        "file_count": 66,
+        "actual_node_seconds_from_utc": 72.0
+      },
+      "wall_seconds_from_utc": 72.0,
+      "scheduler_wallclock_seconds": [
+        71
+      ],
+      "metrics_passed": 5315,
+      "metrics_per_step": [
+        1063,
+        1063,
+        1063,
+        1063,
+        1063
+      ],
+      "cpu36_ordered_checkpoints": 24,
+      "KML_each_step": {
+        "reference": 149,
+        "candidate": 197
+      },
+      "optimizer_steps": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "remote_original_gate_exit": 0,
+      "local_original_gate_exit": 0,
+      "strict_checker_RSS_is_not_training_memory": true,
+      "compiler_readonly": {
+        "job_id": "2040203",
+        "host": "cn21339",
+        "original_PATH": null,
+        "lookup": {
+          "g++": null,
+          "c++": null,
+          "clang++": null,
+          "gcc": "/bin/gcc"
+        },
+        "identities": [],
+        "queries": [
+          {
+            "label": "gcc_reports_gpp",
+            "command": [
+              "/bin/gcc",
+              "-print-prog-name=g++"
+            ],
+            "exit_code": 0,
+            "timeout_seconds": 5
+          },
+          {
+            "label": "gcc_reports_cc1plus",
+            "command": [
+              "/bin/gcc",
+              "-print-prog-name=cc1plus"
+            ],
+            "exit_code": 0,
+            "timeout_seconds": 5
+          }
+        ],
+        "compiled": false,
+        "installed": false,
+        "environment_changed": false
+      }
+    },
+    "S07": {
+      "job_id": "2040233",
+      "state": "FAILED",
+      "exit_code": 1,
+      "host": "cn21339",
+      "scheduler_pids": "-",
+      "source_unchanged": true,
+      "original_mtime_preserved_as_metadata": true,
+      "archive_files": 101,
+      "metadata_entries": 100,
+      "bundle": {
+        "task": "S07",
+        "job_id": "2040233",
+        "state": "FAILED",
+        "job_exit_code": 1,
+        "bundle": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_R2_TWODOMAIN_R3_20261105T091410Z/JOB_2040233_full_evidence.zip",
+        "bytes": 249710,
+        "sha256": "82a82866ad2572113d6b85f13995009d8948c8d3bca66b23e3b3d413546dbc7d",
+        "file_count": 101,
+        "actual_node_seconds_from_utc": 60.0
+      },
+      "wall_seconds_from_utc": 60.0,
+      "scheduler_wallclock_seconds": [
+        59
+      ],
+      "standard_library_passed": 22,
+      "standard_library_skipped": 0,
+      "scheduler_handoff": "PASS_SINGLE_ACTUAL_JOB",
+      "actual_torch36_ranks": [
+        1
+      ],
+      "rank0_torch36_measured": false,
+      "normal_case": "FAIL_AT_PROCESS_GROUP_INITIALIZATION",
+      "rank1_error": "RuntimeError: Wait timeout",
+      "rank0_last_recorded_stage": "before_framework",
+      "normal_exit_codes": [
+        -15,
+        1
+      ],
+      "direct_workers_reaped": true,
+      "outer_remaining_live": [],
+      "broadcast_and_all_reduce_reached": false,
+      "not_run": [
+        "crash",
+        "collective-timeout",
+        "watchdog"
+      ],
+      "communication_accepted": false
+    }
+  },
+  "retries": 0,
+  "five_step_memory_run": false,
+  "S06_run": false,
+  "formal_training": false,
+  "real_HBM": false,
+  "sequential_no_overlap": true,
+  "actual_node_seconds": 132,
+  "cumulative_known_S00_jobs": 19,
+  "cumulative_node_seconds_from_utc": 898,
+  "active_S00_jobs": [],
+  "SSH_and_SCP_closed": true
+}

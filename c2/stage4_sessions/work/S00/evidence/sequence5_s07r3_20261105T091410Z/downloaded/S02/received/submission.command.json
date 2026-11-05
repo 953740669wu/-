@@ -1,0 +1,25 @@
+{
+  "command": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "900",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_SEQUENCE5_R7_20261105T091410Z",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_SEQUENCE5_R7_20261105T091410Z/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_SEQUENCE5_R7_20261105T091410Z/run_s02_strict_once.sh"
+  ],
+  "exit_code": 0
+}

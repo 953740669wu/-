@@ -1,0 +1,35 @@
+{
+  "job_id": "2040203",
+  "host": "cn21339",
+  "original_PATH": null,
+  "lookup": {
+    "g++": null,
+    "c++": null,
+    "clang++": null,
+    "gcc": "/bin/gcc"
+  },
+  "identities": [],
+  "queries": [
+    {
+      "label": "gcc_reports_gpp",
+      "command": [
+        "/bin/gcc",
+        "-print-prog-name=g++"
+      ],
+      "exit_code": 0,
+      "timeout_seconds": 5
+    },
+    {
+      "label": "gcc_reports_cc1plus",
+      "command": [
+        "/bin/gcc",
+        "-print-prog-name=cc1plus"
+      ],
+      "exit_code": 0,
+      "timeout_seconds": 5
+    }
+  ],
+  "compiled": false,
+  "installed": false,
+  "environment_changed": false
+}

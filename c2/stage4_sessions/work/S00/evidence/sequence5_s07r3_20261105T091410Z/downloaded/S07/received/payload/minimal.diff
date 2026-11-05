@@ -1,0 +1,45 @@
+--- a/candidate/comm_probe.py
++++ b/candidate/comm_probe.py
+@@ -56,12 +56,21 @@
+         raise ValueError('require two distinct, disjoint authorized domains')
+ 
+ 
++def validate_current_job(job_id):
++    current = os.environ.get('CCS_JOB_ID')
++    if not current or not current.strip():
++        raise ValueError('missing current CCS_JOB_ID')
++    if job_id != current:
++        raise ValueError('configured job_id does not match current CCS_JOB_ID')
++
++
+ def load_allocation(path):
+     if sys.platform != 'linux':
+         raise ValueError('CPU36 live probe requires Linux sysfs and affinity APIs')
+     data = json.loads(path.read_text(encoding='utf-8'))
+-    if not str(data.get('job_id', '')).strip() or set(data['ranks']) != {'0', '1'}:
+-        raise ValueError('actual job_id and exactly rank0/rank1 required')
++    validate_current_job(data.get('job_id'))
++    if set(data['ranks']) != {'0', '1'}:
++        raise ValueError('exactly rank0/rank1 required')
+     evidence = Path(data['scheduler_evidence'])
+     if not evidence.is_absolute() or not evidence.is_file():
+         raise ValueError('absolute raw scheduler allocation evidence required')
+@@ -155,6 +164,8 @@
+ 
+ def worker(directory, rank):
+     spec = json.loads((directory / 'manifest.json').read_text(encoding='utf-8'))
++    validate_current_job(spec.get('job_id'))
++    validate_current_job(spec['allocation'].get('job_id'))
+     receipt = spec['allocation']['ranks'][rank]
+     cpu36.validate_receipt(receipt)
+     if not set(receipt['selected']) <= set(os.sched_getaffinity(0)):
+--- a/tests/test_probe.py
++++ b/tests/test_probe.py
+@@ -58,6 +58,7 @@
+             return name.split('/cpu')[-1].split('/')[0]
+ 
+         with patch.object(probe.sys, 'platform', 'linux'), \
++                patch.dict(os.environ, {'CCS_JOB_ID': 'synthetic'}), \
+                 patch.object(probe.os, 'sched_getaffinity', create=True, return_value=set(range(76))), \
+                 patch.object(Path, 'read_text', read), \
+                 patch.object(Path, 'is_absolute', return_value=True), \

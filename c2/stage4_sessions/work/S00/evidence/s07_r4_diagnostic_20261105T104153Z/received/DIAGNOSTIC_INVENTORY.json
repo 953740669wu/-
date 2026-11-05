@@ -1,0 +1,63 @@
+{
+  "status": "DIAGNOSTIC_EVIDENCE_INCOMPLETE",
+  "complete": false,
+  "cases": {
+    "normal": {
+      "complete": false,
+      "files": {
+        "supervisor.events.jsonl": {
+          "bytes": 1406,
+          "sha256": "cdfbc5f529271a21f504f29ae486a3613056a564d11a57b208657a00fa7d2410",
+          "mtime_ns": 1793876714902034000,
+          "valid_rows": 10,
+          "open_intervals": []
+        },
+        "rank0.events.jsonl": {
+          "bytes": 2390,
+          "sha256": "77d51893946cd0db744c0be4ffe290707fc077c1a8944679339f3624de7763e5",
+          "mtime_ns": 1793876714673766000,
+          "valid_rows": 15,
+          "open_intervals": [
+            [
+              "runtime_metadata",
+              null,
+              null
+            ],
+            [
+              "library_sha",
+              null,
+              "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"
+            ]
+          ]
+        },
+        "rank1.events.jsonl": {
+          "bytes": 4304,
+          "sha256": "bd4552217714714a8fe4fa9df66cebe9e15d837f7fcf2236291c420097dcad0d",
+          "mtime_ns": 1793876714184941000,
+          "valid_rows": 25,
+          "open_intervals": [
+            [
+              "init_process_group",
+              null,
+              null
+            ]
+          ]
+        }
+      },
+      "issues": [
+        "rank0.events.jsonl: unclosed intervals [('library_sha', None, '/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so'), ('runtime_metadata', None, None)]",
+        "rank1.events.jsonl: unclosed intervals [('init_process_group', None, None)]"
+      ]
+    }
+  },
+  "not_run": [
+    "crash",
+    "collective-timeout",
+    "watchdog"
+  ],
+  "issues": [
+    "normal: rank0.events.jsonl: unclosed intervals [('library_sha', None, '/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so'), ('runtime_metadata', None, None)]",
+    "normal: rank1.events.jsonl: unclosed intervals [('init_process_group', None, None)]"
+  ],
+  "scope": "trace completeness only; I/O included; no root-cause or communication verdict"
+}

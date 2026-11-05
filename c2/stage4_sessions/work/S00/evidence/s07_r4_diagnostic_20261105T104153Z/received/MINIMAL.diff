@@ -1,0 +1,529 @@
+--- wrapper_R3/prepare.py
++++ wrapper_R4/prepare.py
+@@ -1,4 +1,4 @@
+-"""Stage the exact accepted S07 R2 payload; no submission, import or workers."""
++"""Pin the new diagnostic inner package; never import frameworks or submit jobs."""
+ import ast
+ import hashlib
+ import json
+@@ -6,28 +6,63 @@
+ import subprocess
+ import zipfile
+ 
+-root = Path(__file__).resolve().parent
+-assert root.parent == Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
+-assert root.name.startswith('S07_R2_TWODOMAIN_R3_')
+-archive = root / 'S07_R2_VALIDATION.zip'
+-assert archive.stat().st_size == 59801
+-assert hashlib.sha256(archive.read_bytes()).hexdigest() == '9a95a23c14c9b6c65191bc9883abefb0ce0cf52c637ec370a357a02f56f27367'
+-payload = root / 'payload'
+-payload.mkdir(exist_ok=False)
+-with zipfile.ZipFile(archive) as z:
+-    assert len(z.namelist()) == 34
+-    assert all(not Path(n).is_absolute() and '..' not in Path(n).parts for n in z.namelist())
+-    z.extractall(payload)
+-manifest = json.loads((payload / 'SOURCE_MANIFEST.json').read_text())
+-sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+-assert all(sha(payload / x['path']) == x['sha256'] for x in manifest['delivery_files'])
+-for p in list(payload.rglob('*.py')) + list(root.glob('*.py')) + list(root.glob('*.sh')):
+-    assert b'\r' not in p.read_bytes(), str(p)
+-    if p.suffix == '.py':
+-        ast.parse(p.read_text(), filename=str(p), feature_version=(3, 9))
+-    else:
+-        subprocess.run(['bash', '-n', str(p)], check=True)
+-pre = dict(status='PASS_ORIGINAL_R2_AND_NEW_WRAPPER_SYNTAX_ONLY',
+-    package_sha256=sha(archive), payload_files={str(p.relative_to(root)): sha(p) for p in payload.rglob('*') if p.is_file()},
+-    wrapper_files={p.name: sha(p) for p in root.iterdir() if p.is_file() and p.suffix in ('.py', '.sh')})
+-(root / 'pre_submit_checks.json').write_text(json.dumps(pre, indent=2) + '\n')
++ARCHIVE = 'S07_INIT_DIAGNOSTIC_R3.zip'
++INNER_SHA = 'af2725e24d0bd8b2183f1d7bc8b6aae79f801b7b83b640b41645e822e0c23f45'
++BASE = Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
++PREFIX = 'S07_INIT_DIAG_R4_'
++
++
++def sha(path):
++    return hashlib.sha256(path.read_bytes()).hexdigest()
++
++
++def check_members(archive, manifest):
++    entries = archive.infolist()
++    delivery = manifest['delivery_files']
++    expected = {x['path'] for x in delivery} | {'SOURCE_MANIFEST.json', 'evidence/'}
++    if (len(delivery) != 11 or len(entries) != 13 or len(expected) != 13
++            or set(archive.namelist()) != expected
++            or sum(not x.is_dir() for x in entries) != 12
++            or sum(x.is_dir() for x in entries) != 1):
++        raise ValueError('require exactly 12 diagnostic files, 11 manifest entries and evidence/')
++    if any(Path(n).is_absolute() or '..' in Path(n).parts or '\\' in n for n in archive.namelist()):
++        raise ValueError('unsafe inner package path')
++    for item in delivery:
++        data = archive.read(item['path'])
++        if len(data) != item['bytes'] or hashlib.sha256(data).hexdigest() != item['sha256']:
++            raise ValueError('inner manifest mismatch: ' + item['path'])
++    if (manifest['pg_timeout_seconds'], manifest['deadline_seconds'], manifest['consumer_budget_seconds'],
++            manifest['job_proposal_seconds']) != (5, 30, 270, 300):
++        raise ValueError('changed original timeout/budget contract')
++    if manifest['case_order'] != ['normal', 'crash', 'collective-timeout', 'watchdog']:
++        raise ValueError('changed original four-case contract')
++
++
++def unpack(root):
++    archive = root / ARCHIVE
++    if archive.stat().st_size != 31262 or sha(archive) != INNER_SHA:
++        raise ValueError('wrong diagnostic package bytes/SHA; old R2 is not accepted')
++    with zipfile.ZipFile(archive) as z:
++        manifest = json.loads(z.read('SOURCE_MANIFEST.json'))
++        check_members(z, manifest)
++        payload = root / 'payload'; payload.mkdir(exist_ok=False)
++        z.extractall(payload)
++
++
++def main(root):
++    if root.parent != BASE or not root.name.startswith(PREFIX):
++        raise ValueError('new S00 diagnostic R4 staging directory required')
++    unpack(root)
++    payload = root / 'payload'
++    for p in list(payload.rglob('*.py')) + list(root.glob('*.py')) + list(root.glob('*.sh')):
++        if b'\r' in p.read_bytes(): raise ValueError('non-LF execution source: ' + str(p))
++        if p.suffix == '.py': ast.parse(p.read_text(), filename=str(p), feature_version=(3, 9))
++        else: subprocess.run(['bash', '-n', str(p)], check=True)
++    pre = dict(status='PASS_NEW_INNER_SHA_MANIFEST_AND_SYNTAX_ONLY', package_name=ARCHIVE,
++        package_sha256=INNER_SHA, package_bytes=31262, package_files=12, manifest_entries=11,
++        payload_files={p.relative_to(root).as_posix(): sha(p) for p in payload.rglob('*') if p.is_file()},
++        wrapper_files={p.name: sha(p) for p in root.iterdir() if p.is_file() and p.suffix in ('.py', '.sh')})
++    (root / 'pre_submit_checks.json').write_text(json.dumps(pre, indent=2) + '\n')
++
++
++if __name__ == '__main__': main(Path(__file__).resolve().parent)
+--- wrapper_R3/run_s07_r2_job.py
++++ wrapper_R4/run_s07_diag_job.py
+@@ -1,4 +1,4 @@
+-"""One authorized two-domain R2 probe job, using unchanged candidates/tests."""
++"""One authorized diagnostic-only two-domain probe, preserving original case verdicts."""
+ import json
+ import os
+ from pathlib import Path
+@@ -10,11 +10,18 @@
+ import traceback
+ from bounded_round_step import run_step, save, sha
+ from scheduler_handoff import live_context, create_request, await_handoff
++from prepare import ARCHIVE, INNER_SHA
++
++
++CONSUMER_SECONDS = 270
++CHECKS = [('diagnostic_tests', 'test_diagnostics.py', 6, 30),
++          ('job_identity_tests', 'test_job_identity.py', 6, 45),
++          ('probe_tests', 'test_probe.py', 16, 45)]
+ 
+ 
+ def main(root):
+     assert root.parent == Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
+-    assert root.name.startswith('S07_R2_TWODOMAIN_') and os.environ.get('CCS_JOB_ID')
++    assert root.name.startswith('S07_INIT_DIAG_R4_') and os.environ.get('CCS_JOB_ID')
+     assert not socket.gethostname().startswith('login')
+     assert not os.environ.get('LD_PRELOAD') and not os.environ.get('KML_BLAS_LIB')
+     out = root / 'job_evidence'
+@@ -22,11 +29,13 @@
+     payload = root / 'payload'
+     sys.path.insert(0, str(payload / 'candidate'))
+     import cpu36_contract as cpu36
+-    deadline = time.monotonic() + 270
++    deadline = time.monotonic() + CONSUMER_SECONDS
+     summary = dict(status='STARTED', job_id=os.environ['CCS_JOB_ID'], host=socket.gethostname(),
+         inherited_affinity=sorted(os.sched_getaffinity(0)), real_HBM=False, formal_training=False, steps=[])
+     try:
+         pre = json.loads((root / 'pre_submit_checks.json').read_text())
++        assert pre['package_name'] == ARCHIVE and pre['package_sha256'] == INNER_SHA
++        assert sha(root / ARCHIVE) == INNER_SHA and len(pre['payload_files']) == 12
+         assert all(sha(root / name) == h for name, h in pre['payload_files'].items())
+         context = live_context()
+         request = create_request(root, context)
+@@ -48,12 +57,12 @@
+         receipt = comm_probe.load_allocation(payload / 'allocation.json')
+         save(out / 'verified_allocation.json', receipt)
+         py = os.environ['S07_PY']
+-        for label, script, count in [('job_identity_tests', 'test_job_identity.py', 6), ('probe_tests', 'test_probe.py', 16)]:
+-            summary['steps'].append(run_step(out, label, [py, '-B', str(payload / 'tests' / script)], deadline, limit=45))
++        for label, script, count, limit in CHECKS:
++            summary['steps'].append(run_step(out, label, [py, '-B', str(payload / 'tests' / script)], deadline, limit=limit))
+             log = (out / (label + '.txt')).read_text()
+             assert re.search(r'Ran ' + str(count) + r' tests?', log) and 'OK' in log
+             assert 'skipped=' not in log and '... skipped' not in log
+-        summary['standard_library_tests'] = dict(passed=22, skipped=0, linux_group_cleanup='PASSED')
++        summary['standard_library_tests'] = dict(passed=28, skipped=0, linux_group_cleanup='PASSED')
+         summary['steps'].append(run_step(out, 'environment', [py, '-B', str(payload / 'candidate/comm_probe.py'),
+             'environment', '--output', str(payload / 'environment_current.json')], deadline, limit=60))
+         env = json.loads((payload / 'environment_current.json').read_text())
+@@ -66,7 +75,7 @@
+         checks = json.loads((payload / 'checks_current_job/checks.json').read_text())
+         assert checks['status'] == 'PASS_PROBE_CHECKS_ONLY' and [c['case'] for c in checks['cases']] == [
+             'normal', 'crash', 'collective-timeout', 'watchdog']
+-        summary.update(status='PASS_S07_R2_FIXED_TWO_RANK_TENSOR_PROBE_ONLY', cases=checks['cases'])
++        summary.update(status='PASS_S07_DIAGNOSTIC_FIXED_TWO_RANK_TENSOR_PROBE_ONLY', cases=checks['cases'])
+         return 0
+     except BaseException as exc:
+         summary.update(status='FAIL_STOP_NO_RETRY', error=repr(exc), traceback=traceback.format_exc())
+--- wrapper_R3/run_s07_r2_job.sh
++++ wrapper_R4/run_s07_diag_job.sh
+@@ -2,4 +2,4 @@
+ set -euo pipefail
+ HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
+ : "${CCS_JOB_ID:?requires real two-domain scheduler identity}"
+-exec env -i PATH=/usr/bin:/bin HOME=/home/share/dengqingtian USER=dengqingtian LC_ALL=C PYTHONUTF8=1 PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 CCS_JOB_ID="$CCS_JOB_ID" HBM=0 S07_PY=/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3 PYTHONPATH=/home/share/songzhenlong/eitfm/sw/torch_kml LD_LIBRARY_PATH=/opt/HPCKit/kml-lib/sme/kblas/multi:/opt/HPCKit/kml-lib:/opt/HPCKit/bisheng-lib /usr/bin/python3 -B "$HERE/run_s07_r2_job.py" "$HERE"
++exec env -i PATH=/usr/bin:/bin HOME=/home/share/dengqingtian USER=dengqingtian LC_ALL=C PYTHONUTF8=1 PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 CCS_JOB_ID="$CCS_JOB_ID" HBM=0 S07_PY=/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3 PYTHONPATH=/home/share/songzhenlong/eitfm/sw/torch_kml LD_LIBRARY_PATH=/opt/HPCKit/kml-lib/sme/kblas/multi:/opt/HPCKit/kml-lib:/opt/HPCKit/bisheng-lib /usr/bin/python3 -B "$HERE/run_s07_diag_job.py" "$HERE"
+--- /dev/null
++++ wrapper_R4/trace_inventory.py
+@@ -0,0 +1,78 @@
++"""Describe archived diagnostic completeness without changing communication verdicts."""
++import hashlib
++import json
++from pathlib import Path
++
++CASES = ['normal', 'crash', 'collective-timeout', 'watchdog']
++
++
++def read_events(path, expected_pid, issues):
++    if not path.is_file():
++        issues.append(path.name + ': missing stream'); return [], {}
++    raw = path.read_bytes()
++    info = dict(bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest(), mtime_ns=path.stat().st_mtime_ns)
++    rows, pending = [], set()
++    if not raw or not raw.endswith(b'\n'): issues.append(path.name + ': empty or truncated final line')
++    for number, line in enumerate(raw.splitlines(), 1):
++        try:
++            row = json.loads(line.decode('utf-8'))
++            if (not isinstance(row['event'], str) or row['pid'] != expected_pid
++                    or any(type(row[k]) is not int or row[k] <= 0 for k in ('time_ns', 'monotonic_ns', 'pid'))):
++                raise ValueError('invalid event/PID/clock')
++            if rows and row['monotonic_ns'] < rows[-1]['monotonic_ns']:
++                raise ValueError('monotonic clock moved backwards')
++            event = row['event']
++            if event.endswith(('_begin', '_end')) and event not in ('supervisor_begin', 'supervisor_end', 'cleanup_begin', 'spawn_begin'):
++                key = (event.rsplit('_', 1)[0], row.get('stage'), row.get('library'))
++                if event.endswith('_begin'):
++                    if key in pending: issues.append(path.name + ': duplicate begin')
++                    pending.add(key)
++                elif key not in pending: issues.append(path.name + ': end without begin')
++                else: pending.remove(key)
++            rows.append(row)
++        except (UnicodeError, ValueError, KeyError, TypeError) as exc:
++            issues.append(path.name + ': invalid line ' + str(number) + ': ' + str(exc))
++    if pending: issues.append(path.name + ': unclosed intervals ' + repr(sorted(pending)))
++    info.update(valid_rows=len(rows), open_intervals=[list(x) for x in pending])
++    return rows, info
++
++
++def inspect(root):
++    root = Path(root); checks = root / 'payload/checks_current_job'
++    result = dict(status='NOT_RUN', complete=False, cases={}, not_run=[], issues=[],
++                  scope='trace completeness only; I/O included; no root-cause or communication verdict')
++    for case in CASES:
++        directory = checks / case
++        if not directory.is_dir(): result['not_run'].append(case); continue
++        issues, files = [], {}
++        try:
++            manifest = json.loads((directory / 'manifest.json').read_bytes())
++            state = json.loads((directory / 'summary.json').read_bytes())['supervisor']
++            parent_path = directory / 'supervisor.events.jsonl'
++            parent_first = json.loads(parent_path.read_bytes().splitlines()[0])
++            parent, files[parent_path.name] = read_events(parent_path, parent_first['pid'], issues)
++            if not parent or parent[0]['event'] != 'supervisor_begin' or parent[-1]['event'] != 'supervisor_end':
++                issues.append('missing supervisor boundary rows')
++            if ([x['child_pid'] for x in parent if x['event'] == 'spawned'] != state['pids']
++                    or [x['child_pid'] for x in parent if x['event'] == 'child_reaped'] != state['pids']
++                    or not any(x['event'] == 'cleanup_begin' for x in parent) or not state['all_reaped']):
++                issues.append('missing spawn/cleanup/reap rows')
++            if len(state['pids']) != 2: issues.append('missing worker PID identity')
++            for rank in range(2):
++                path = directory / ('rank' + str(rank) + '.events.jsonl')
++                rows, files[path.name] = read_events(path, state['pids'][rank], issues)
++                if not rows or any(rows[0].get(k) != v for k, v in dict(event='worker_ready', rank=rank,
++                        job_id=manifest['job_id'], run_id=manifest['run_id']).items()):
++                    issues.append(path.name + ': missing/wrong worker identity row')
++        except (OSError, UnicodeError, ValueError, KeyError, IndexError, TypeError) as exc:
++            issues.append('missing or malformed case/parent evidence: ' + repr(exc))
++        for p in directory.glob('rank*.log'):
++            if b'TRACE_WRITE_ERROR' in p.read_bytes(): issues.append(p.name + ': TRACE_WRITE_ERROR')
++        result['cases'][case] = dict(complete=not issues, files=files, issues=issues)
++        result['issues'].extend(case + ': ' + item for item in issues)
++    for p in (root / 'job.log', root / 'job_evidence/run_checks.txt'):
++        if p.is_file() and b'TRACE_WRITE_ERROR' in p.read_bytes(): result['issues'].append(str(p.relative_to(root)) + ': TRACE_WRITE_ERROR')
++    if result['cases']:
++        result['complete'] = not result['issues']
++        result['status'] = 'COMPLETE_AVAILABLE_TRACES_ONLY' if result['complete'] else 'DIAGNOSTIC_EVIDENCE_INCOMPLETE'
++    return result
+--- /dev/null
++++ wrapper_R4/collect_evidence.py
+@@ -0,0 +1,55 @@
++"""Login-side terminal collection: retain every raw file even for incomplete traces."""
++import datetime
++import json
++from pathlib import Path
++import subprocess
++import sys
++import zipfile
++
++from prepare import BASE, PREFIX, sha
++from trace_inventory import inspect
++
++
++def collect(root):
++    if root.parent != BASE or not root.name.startswith(PREFIX): raise ValueError('new S00 R4 directory required')
++    job_id = (root / 'job_id.txt').read_text().strip()
++    bundle = root / ('JOB_' + job_id + '_full_evidence.zip')
++    if bundle.exists() or (root / 'COLLECTION_S00.json').exists(): raise FileExistsError('evidence already collected')
++    command = ['djob', '-J', '-l', job_id]
++    query = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
++    if query.returncode: raise RuntimeError('terminal scheduler query failed')
++    job = json.loads(query.stdout)['data']['successData'][0]
++    if str(job['jobId']) != job_id or job['state'] not in ('SUCCEEDED', 'FAILED', 'CANCELLED'):
++        raise ValueError('exact current job must be terminal')
++    if any(n['pids'] != '-' for g in job['resGroups'] for n in g['nodeResUsages']):
++        raise ValueError('job PID fields are not cleared')
++    (root / 'djob_final.json').write_bytes(query.stdout)
++    (root / 'djob_final.stderr').write_bytes(query.stderr)
++    inventory = inspect(root)
++    (root / 'DIAGNOSTIC_INVENTORY.json').write_text(json.dumps(inventory, indent=2) + '\n')
++    pre = json.loads((root / 'pre_submit_checks.json').read_text())
++    changed = [name for name, digest in dict(pre['payload_files'], **pre['wrapper_files']).items()
++               if not (root / name).is_file() or sha(root / name) != digest]
++    # Do not reject/discard failure evidence when candidate or log integrity is incomplete.
++    paths = sorted(p for p in root.rglob('*') if p.is_file() and p.name != 'bundle_receipt.json')
++    metadata = {}
++    for p in paths:
++        before = p.stat(); digest = sha(p); after = p.stat()
++        if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
++            raise RuntimeError('file changed during terminal collection: ' + str(p))
++        metadata[p.relative_to(root).as_posix()] = dict(bytes=after.st_size, mtime_ns=after.st_mtime_ns, sha256=digest)
++    start, end = [datetime.datetime.fromisoformat(job[k].replace('Z', '+00:00')) for k in ('startTime', 'endTime')]
++    index = root / 'COLLECTION_S00.json'
++    index.write_text(json.dumps(dict(job_id=job_id, state=job['state'], job_exit_code=job.get('jobExitCode'),
++        query_command=command, files=metadata, changed_source_files=changed, diagnostics=inventory,
++        node_seconds=(end-start).total_seconds(), communication_verdict_not_reinterpreted=True,
++        retries=0, real_HBM=False, formal_training=False), indent=2) + '\n')
++    paths.append(index)
++    with zipfile.ZipFile(bundle, 'x', zipfile.ZIP_DEFLATED) as z:
++        for p in paths: z.write(p, p.relative_to(root).as_posix())
++    receipt = dict(bundle=str(bundle), bytes=bundle.stat().st_size, sha256=sha(bundle), file_count=len(paths))
++    (root / 'bundle_receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
++    print(json.dumps(receipt))
++
++
++if __name__ == '__main__': collect(Path(sys.argv[1]).resolve())
+--- /dev/null
++++ wrapper_R4/submit_once.py
+@@ -0,0 +1,43 @@
++"""Future login-only one-shot submission, after separate review and scheduling."""
++import json
++from pathlib import Path
++import subprocess
++import sys
++import time
++
++from prepare import BASE, PREFIX, ARCHIVE, INNER_SHA, sha
++from scheduler_handoff import publish
++
++
++def submit(root):
++    if root.parent != BASE or not root.name.startswith(PREFIX): raise ValueError('new S00 R4 directory required')
++    if sha(root / ARCHIVE) != INNER_SHA: raise ValueError('diagnostic inner changed')
++    if not (root / 'pre_submit_checks.json').is_file(): raise ValueError('prepare must pass first')
++    if (root / 'submission.json').exists(): raise FileExistsError('submission already exists')
++    with (root / 'submit_once.marker').open('x') as f: f.write('one separately arranged R4 diagnostic job; no retries\n')
++    command = ['dsub', '-J', '-q', 'q_hpcai', '-x', 'job', '-R', 'cpu=76,mem=24576MB',
++        '-RL', 'mem=24576MB', '-a', 'numa[count=2,distribution=pack]', '-T', '300', '--env', 'none',
++        '--cwd', str(root), '-oo', str(root / 'job.log'), 'bash', str(root / 'run_s07_diag_job.sh')]
++    p = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
++    (root / 'submission.json').write_bytes(p.stdout)
++    (root / 'submission.stderr').write_bytes(p.stderr)
++    (root / 'submission.command.json').write_text(json.dumps(dict(command=command, exit_code=p.returncode), indent=2) + '\n')
++    if p.returncode: raise RuntimeError('submission failed; do not retry')
++    job = str(json.loads(p.stdout)['data']['jobId']); (root / 'job_id.txt').write_text(job + '\n')
++    while True:
++        p = subprocess.run(['djob', '-J', '-l', job], stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=5)
++        (root / 'scheduler_observed.json').write_bytes(p.stdout)
++        (root / 'scheduler_observed.stderr').write_bytes(p.stderr)
++        if p.returncode: raise RuntimeError('queue observation failed; no second submission')
++        observed = json.loads(p.stdout)['data']['successData'][0]
++        if str(observed['jobId']) != job: raise ValueError('wrong job in scheduler observation')
++        state = observed['state']
++        if state == 'RUNNING':
++            publish(root, job)  # Original helper: one query, atomic raw/ready, no publication retry.
++            print('PUBLISHED_ONCE', job, flush=True); return
++        if state in ('SUCCEEDED', 'FAILED', 'CANCELLED'):
++            raise RuntimeError('job became terminal before publication; collect without retry')
++        time.sleep(1)
++
++
++if __name__ == '__main__': submit(Path(sys.argv[1]).resolve())
+--- /dev/null
++++ wrapper_R4/tests/test_deployment.py
+@@ -0,0 +1,168 @@
++"""Deployment contracts and synthetic evidence only; never submit or import Torch."""
++import io
++import hashlib
++import json
++from pathlib import Path
++import shutil
++import sys
++import tempfile
++import subprocess
++import unittest
++from unittest import mock
++import zipfile
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT))
++import prepare
++import trace_inventory
++import run_s07_diag_job as job
++import collect_evidence
++import submit_once
++
++
++class DeploymentTests(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory(dir=ROOT / 'evidence')
++        self.addCleanup(self.tmp.cleanup)
++        self.root = Path(self.tmp.name)
++
++    def test_exact_new_inner_and_manifest(self):
++        shutil.copyfile(ROOT / prepare.ARCHIVE, self.root / prepare.ARCHIVE)
++        prepare.unpack(self.root)
++        self.assertEqual(len(list(p for p in (self.root / 'payload').rglob('*') if p.is_file())), 12)
++        self.assertEqual(len(json.loads((self.root / 'payload/SOURCE_MANIFEST.json').read_bytes())['delivery_files']), 11)
++
++    def test_old_or_changed_bytes_rejected_before_extraction(self):
++        (self.root / prepare.ARCHIVE).write_bytes(b'old R2 bytes')
++        with self.assertRaises(ValueError): prepare.unpack(self.root)
++        self.assertFalse((self.root / 'payload').exists())
++
++    def test_prepare_writes_new_identity_and_twelve_source_entries(self):
++        shutil.copyfile(ROOT / prepare.ARCHIVE, self.root / prepare.ARCHIVE)
++        with mock.patch.object(prepare, 'BASE', self.root.parent), mock.patch.object(prepare, 'PREFIX', self.root.name):
++            prepare.main(self.root)
++        pre = json.loads((self.root / 'pre_submit_checks.json').read_bytes())
++        self.assertEqual((pre['package_name'], pre['package_sha256']), (prepare.ARCHIVE, prepare.INNER_SHA))
++        self.assertEqual((len(pre['payload_files']), pre['manifest_entries']), (12, 11))
++        self.assertFalse((self.root / 'job_id.txt').exists())
++
++    def test_manifest_changed_or_missing_member_rejected(self):
++        with zipfile.ZipFile(ROOT / prepare.ARCHIVE) as original:
++            manifest = json.loads(original.read('SOURCE_MANIFEST.json'))
++            for kind in ('changed', 'missing'):
++                with self.subTest(kind=kind):
++                    data = io.BytesIO()
++                    with zipfile.ZipFile(data, 'w') as z:
++                        for name in original.namelist():
++                            if kind == 'missing' and name == 'candidate/comm_probe.py': continue
++                            z.writestr(name, b'changed' if kind == 'changed' and name == 'candidate/comm_probe.py' else original.read(name))
++                    with zipfile.ZipFile(data) as altered:
++                        with self.assertRaises(ValueError): prepare.check_members(altered, manifest)
++
++    def test_checks_are_6_6_16_and_share_one_budget(self):
++        self.assertEqual(job.CHECKS, [('diagnostic_tests', 'test_diagnostics.py', 6, 30),
++                                    ('job_identity_tests', 'test_job_identity.py', 6, 45),
++                                    ('probe_tests', 'test_probe.py', 16, 45)])
++        self.assertEqual(job.CONSUMER_SECONDS, 270)
++        self.assertEqual(sum(x[2] for x in job.CHECKS), 28)
++        self.assertEqual(hashlib.sha256((ROOT / 'scheduler_handoff.py').read_bytes()).hexdigest(), 'f907cbf8286f7bc9035c9e58f986c3b342b2a6f6f5a1c60f97834915f2a7065c')
++        self.assertEqual(hashlib.sha256((ROOT / 'bounded_round_step.py').read_bytes()).hexdigest(), 'b9fa564e89edcdaaf9e597f6511e84fb8b845cddd6c065ae489ba61d1f2dc697')
++
++    def fixture(self):
++        case = self.root / 'payload/checks_current_job/normal'; case.mkdir(parents=True)
++        (case / 'manifest.json').write_text(json.dumps(dict(job_id='new-job', run_id='normal')))
++        (case / 'summary.json').write_text(json.dumps(dict(supervisor=dict(pids=[11, 12], all_reaped=True))))
++        def write(name, pid, rows):
++            with (case / name).open('w') as f:
++                for index, row in enumerate(rows, 1):
++                    f.write(json.dumps(dict(time_ns=index, monotonic_ns=index, pid=pid, **row)) + '\n')
++        for rank in (0, 1):
++            write('rank' + str(rank) + '.events.jsonl', 11 + rank,
++                  [dict(event='worker_ready', rank=rank, job_id='new-job', run_id='normal'),
++                   dict(event='torch_import_begin'), dict(event='torch_import_end'), dict(event='worker_exit', exit_code=0)])
++        write('supervisor.events.jsonl', 10, [dict(event='supervisor_begin'),
++            dict(event='spawned', rank=0, child_pid=11), dict(event='spawned', rank=1, child_pid=12),
++            dict(event='cleanup_begin'), dict(event='child_reaped', child_pid=11),
++            dict(event='child_reaped', child_pid=12), dict(event='supervisor_end')])
++        return case
++
++    def test_three_streams_valid_and_original_bytes_retained(self):
++        case = self.fixture(); paths = list(case.glob('*.jsonl'))
++        before = {p.name: p.read_bytes() for p in paths}
++        receipt = trace_inventory.inspect(self.root)
++        self.assertTrue(receipt['complete'])
++        self.assertEqual(set(receipt['cases']['normal']['files']), set(before))
++        self.assertEqual(before, {p.name: p.read_bytes() for p in paths})
++
++    def test_missing_stream_is_incomplete(self):
++        case = self.fixture(); (case / 'rank0.events.jsonl').unlink()
++        self.assertFalse(trace_inventory.inspect(self.root)['complete'])
++
++    def test_truncated_or_missing_event_end_is_incomplete(self):
++        case = self.fixture(); path = case / 'rank0.events.jsonl'
++        path.write_bytes(path.read_bytes().rstrip(b'\n'))
++        self.assertFalse(trace_inventory.inspect(self.root)['complete'])
++        path.write_text(json.dumps(dict(event='torch_import_begin', time_ns=1, monotonic_ns=1, pid=11)) + '\n')
++        receipt = trace_inventory.inspect(self.root)
++        self.assertFalse(receipt['complete'])
++        self.assertNotIn('hang', json.dumps(receipt).lower())
++
++    def test_trace_write_error_is_incomplete(self):
++        case = self.fixture(); (case / 'rank1.log').write_text('TRACE_WRITE_ERROR fsync failed\n')
++        self.assertFalse(trace_inventory.inspect(self.root)['complete'])
++
++    def test_wrong_identity_or_missing_supervisor_row_is_incomplete(self):
++        case = self.fixture(); path = case / 'rank1.events.jsonl'
++        path.write_text(path.read_text().replace('new-job', 'old-job'))
++        self.assertFalse(trace_inventory.inspect(self.root)['complete'])
++
++    def test_missing_supervisor_reap_is_incomplete(self):
++        case = self.fixture(); path = case / 'supervisor.events.jsonl'
++        path.write_text(''.join(line for line in path.read_text().splitlines(True) if 'child_reaped' not in line))
++        self.assertFalse(trace_inventory.inspect(self.root)['complete'])
++
++    def test_unreached_cases_are_not_tested(self):
++        self.fixture(); receipt = trace_inventory.inspect(self.root)
++        self.assertEqual(receipt['not_run'], ['crash', 'collective-timeout', 'watchdog'])
++        self.assertEqual(trace_inventory.inspect(self.root / 'missing')['status'], 'NOT_RUN')
++
++    def test_terminal_collector_retains_incomplete_raw_streams(self):
++        case = self.fixture(); damaged = case / 'rank0.events.jsonl'
++        damaged.write_bytes(damaged.read_bytes() + b'{partial')
++        raw = {p.name: p.read_bytes() for p in case.glob('*.jsonl')}
++        (self.root / 'job_id.txt').write_text('new-job\n')
++        (self.root / 'pre_submit_checks.json').write_text(json.dumps(dict(payload_files={}, wrapper_files={})))
++        terminal = dict(jobId='new-job', state='FAILED', jobExitCode=1,
++            resGroups=[dict(nodeResUsages=[dict(pids='-')])],
++            startTime='2026-11-05T00:00:00Z', endTime='2026-11-05T00:00:01Z')
++        result = subprocess.CompletedProcess([], 0, json.dumps(dict(data=dict(successData=[terminal]))).encode(), b'')
++        with mock.patch.object(collect_evidence, 'BASE', self.root.parent), \
++                mock.patch.object(collect_evidence, 'PREFIX', self.root.name), \
++                mock.patch.object(collect_evidence.subprocess, 'run', return_value=result), \
++                mock.patch('sys.stdout', new=io.StringIO()):
++            collect_evidence.collect(self.root)
++        with zipfile.ZipFile(self.root / 'JOB_new-job_full_evidence.zip') as z:
++            for name, data in raw.items():
++                self.assertEqual(z.read('payload/checks_current_job/normal/' + name), data)
++            self.assertFalse(json.loads(z.read('DIAGNOSTIC_INVENTORY.json'))['complete'])
++
++    def test_mock_submission_is_once_and_publishes_after_running(self):
++        shutil.copyfile(ROOT / prepare.ARCHIVE, self.root / prepare.ARCHIVE)
++        (self.root / 'pre_submit_checks.json').write_text('{}')
++        results = [subprocess.CompletedProcess([], 0, b'{"data":{"jobId":"new-job"}}', b''),
++                   subprocess.CompletedProcess([], 0, b'{"data":{"successData":[{"jobId":"new-job","state":"RUNNING"}]}}', b'')]
++        with mock.patch.object(submit_once, 'BASE', self.root.parent), \
++                mock.patch.object(submit_once, 'PREFIX', self.root.name), \
++                mock.patch.object(submit_once.subprocess, 'run', side_effect=results) as run, \
++                mock.patch.object(submit_once, 'publish') as publish, \
++                mock.patch('sys.stdout', new=io.StringIO()):
++            submit_once.submit(self.root)
++            with self.assertRaises(FileExistsError): submit_once.submit(self.root)
++        self.assertEqual(sum(call.args[0][0] == 'dsub' for call in run.call_args_list), 1)
++        publish.assert_called_once_with(self.root, 'new-job')
++        command = run.call_args_list[0].args[0]
++        self.assertIn('cpu=76,mem=24576MB', command)
++        self.assertEqual(command[command.index('-T')+1], '300')
++
++
++if __name__ == '__main__': unittest.main(verbosity=2)

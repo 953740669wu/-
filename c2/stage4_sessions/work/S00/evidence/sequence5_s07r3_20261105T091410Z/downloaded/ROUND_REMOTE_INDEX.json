@@ -1,0 +1,46 @@
+{
+  "jobs": [
+    {
+      "task": "S02",
+      "receipt": {
+        "task": "S02",
+        "job_id": "2040203",
+        "state": "SUCCEEDED",
+        "job_exit_code": 0,
+        "bundle": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_SEQUENCE5_R7_20261105T091410Z/JOB_2040203_full_evidence.zip",
+        "bytes": 229688,
+        "sha256": "19e54562b321f160099d8edc1c398a369b6dadb6cbc6ec389fc7c9fd0bea0259",
+        "file_count": 66,
+        "actual_node_seconds_from_utc": 72.0
+      },
+      "startTime": "2026-11-05T09:17:17Z",
+      "endTime": "2026-11-05T09:18:29Z",
+      "host": "cn21339"
+    },
+    {
+      "task": "S07",
+      "receipt": {
+        "task": "S07",
+        "job_id": "2040233",
+        "state": "FAILED",
+        "job_exit_code": 1,
+        "bundle": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_R2_TWODOMAIN_R3_20261105T091410Z/JOB_2040233_full_evidence.zip",
+        "bytes": 249710,
+        "sha256": "82a82866ad2572113d6b85f13995009d8948c8d3bca66b23e3b3d413546dbc7d",
+        "file_count": 101,
+        "actual_node_seconds_from_utc": 60.0
+      },
+      "startTime": "2026-11-05T09:19:03Z",
+      "endTime": "2026-11-05T09:20:03Z",
+      "host": "cn21339"
+    }
+  ],
+  "submission_order": [
+    "S02",
+    "S07"
+  ],
+  "overlap": false,
+  "retries": 0,
+  "S02_memory": false,
+  "S06": false
+}

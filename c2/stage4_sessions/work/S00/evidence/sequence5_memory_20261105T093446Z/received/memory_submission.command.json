@@ -1,0 +1,29 @@
+{
+  "command": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "900",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_SEQUENCE5_R7_MEMORY_20261105T093446Z/payload",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_SEQUENCE5_R7_MEMORY_20261105T093446Z/job.log",
+    "env",
+    "S02_CASE_FILE=/home/share/dengqingtian/opt/stage4_sessions/S00/S02_CPU36_R5_20261105T034705Z/fixed_16_pre.pt",
+    "S02_SEQUENCE5_RESULT=/home/share/dengqingtian/opt/stage4_sessions/S00/S02_SEQUENCE5_R7_20261105T091410Z/payload/evidence/sequence5_2040203_strict/checker/result.json",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_SEQUENCE5_R7_MEMORY_20261105T093446Z/payload/run_s00_seq5_job.sh",
+    "memory"
+  ],
+  "exit_code": 0
+}

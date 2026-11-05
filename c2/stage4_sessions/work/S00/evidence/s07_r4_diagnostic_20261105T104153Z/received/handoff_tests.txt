@@ -1,0 +1,30 @@
+test_atomic_publish_preserves_exact_bytes (__main__.HandoffTests) ... ok
+test_blank_live_identity_rejected (__main__.HandoffTests) ... ok
+test_corrupt_raw_rejected (__main__.HandoffTests) ... ok
+test_empty_raw_rejected (__main__.HandoffTests) ... ok
+test_incomplete_committed_file_rejected (__main__.HandoffTests) ... ok
+test_live_context_mismatch_rejected (__main__.HandoffTests) ... ok
+test_missing_raw_after_commit_rejected (__main__.HandoffTests) ... ok
+test_missing_timeout (__main__.HandoffTests) ... ok
+test_native_identity_is_required_and_not_overwritten (__main__.HandoffTests) ... ok
+test_nonrunning_or_nonexclusive_rejected (__main__.HandoffTests) ... ok
+test_normal_atomic_receipt (__main__.HandoffTests) ... ok
+test_old_job_rejected (__main__.HandoffTests) ... ok
+test_old_or_future_receipt_rejected (__main__.HandoffTests) ... ok
+test_other_cpu_authority_rejected (__main__.HandoffTests) ... ok
+test_other_host_rejected (__main__.HandoffTests) ... ok
+test_other_request_nonce_rejected (__main__.HandoffTests) ... ok
+test_partial_temporary_file_is_not_committed (__main__.HandoffTests) ... ok
+test_publisher_preserves_raw_and_exact_bounded_command (__main__.HandoffTests) ... ok
+test_publisher_rejects_old_job_before_query (__main__.HandoffTests) ... ok
+test_query_failure_keeps_original_without_ready (__main__.HandoffTests) ... ok
+test_query_timeout_keeps_partial_output_without_ready (__main__.HandoffTests) ... ok
+test_raw_without_commit_times_out (__main__.HandoffTests) ... ok
+test_request_digest_mismatch_rejected (__main__.HandoffTests) ... ok
+test_wrong_cpu_memory_wall_or_multiple_nodes_rejected (__main__.HandoffTests) ... ok
+test_wrong_resource_limits_rejected (__main__.HandoffTests) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.548s
+
+OK

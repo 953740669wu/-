@@ -1,0 +1,189 @@
+--- a/candidate/comm_probe.py
++++ b/candidate/comm_probe.py
+@@ -22,10 +22,35 @@
+     path.write_text(json.dumps(data, indent=2, allow_nan=False) + '\n', encoding='utf-8')
+ 
+ 
+-def backend_info():
+-    try:
++def record_event(path, event, **fields):
++    if path is None:
++        return True
++    row = dict(event=event, time_ns=time.time_ns(), monotonic_ns=time.monotonic_ns(),
++               pid=os.getpid(), **fields)
++    try:
++        with path.open('a', encoding='utf-8') as stream:
++            stream.write(json.dumps(row, allow_nan=False) + '\n')
++            stream.flush()
++            os.fsync(stream.fileno())
++        return True
++    except OSError as exc:
++        # Diagnostics must not interrupt the existing child/session cleanup.
++        try:
++            print(f'TRACE_WRITE_ERROR {path}: {exc}', file=sys.stderr, flush=True)
++        except OSError:
++            pass
++        return False
++
++
++def backend_info(event_path=None):
++    try:
++        record_event(event_path, 'torch_import_begin')
+         import torch
++        record_event(event_path, 'torch_import_end')
++        record_event(event_path, 'distributed_import_begin')
+         import torch.distributed as dist
++        record_event(event_path, 'distributed_import_end')
++        record_event(event_path, 'runtime_metadata_begin')
+         available = dist.is_available()
+         gloo = available and dist.is_gloo_available()
+         libraries = {}
+@@ -33,8 +58,12 @@
+             paths = {line.split()[-1] for line in Path('/proc/self/maps').read_text().splitlines()
+                      if '/' in line and any(name in line for name in
+                                              ('libtorch', 'libc10', 'libgloo', 'torch/_C.'))}
+-            libraries = {path: cpu36.sha(path) for path in sorted(paths) if Path(path).is_file()}
+-        return dict(status='AVAILABLE_BUILT_NOT_COMM_TESTED' if gloo else 'UNAVAILABLE',
++            for path in sorted(paths):
++                if Path(path).is_file():
++                    record_event(event_path, 'library_sha_begin', library=path)
++                    libraries[path] = cpu36.sha(path)
++                    record_event(event_path, 'library_sha_end', library=path)
++        info = dict(status='AVAILABLE_BUILT_NOT_COMM_TESTED' if gloo else 'UNAVAILABLE',
+                     python=sys.version, executable=sys.executable, host=socket.gethostname(),
+                     torch_version=torch.__version__, torch_path=torch.__file__,
+                     torch_sha256=cpu36.sha(torch.__file__), distributed=available, gloo=gloo,
+@@ -44,7 +73,10 @@
+                                  (*ENVIRONMENT, 'PYTHONPATH', 'LD_LIBRARY_PATH', 'LD_PRELOAD',
+                                   'GLOO_SOCKET_IFNAME')},
+                     loaded_torch_libraries=libraries, communication='NOT_RUN')
++        record_event(event_path, 'runtime_metadata_end')
++        return info
+     except Exception as exc:
++        record_event(event_path, 'backend_info_error', error=f'{type(exc).__name__}: {exc}')
+         return dict(status='UNAVAILABLE', executable=sys.executable, python=sys.version,
+                     host=socket.gethostname(), error=f'{type(exc).__name__}: {exc}',
+                     communication='NOT_RUN')
+@@ -113,12 +145,16 @@
+     processes, logs = [], []
+     state = dict(reason='complete', errors=[])
+     started = time.monotonic()
++    event_path = directory / 'supervisor.events.jsonl'
++    record_event(event_path, 'supervisor_begin', deadline_seconds=deadline)
+     try:
+         for rank, command in enumerate(commands):
++            record_event(event_path, 'spawn_begin', rank=rank)
+             log = (directory / f'rank{rank}.log').open('w', encoding='utf-8')
+             logs.append(log)
+             processes.append(subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT,
+                                                env=environment, start_new_session=(os.name == 'posix')))
++            record_event(event_path, 'spawned', rank=rank, child_pid=processes[-1].pid)
+         while True:
+             codes = [process.poll() for process in processes]
+             if any(code is not None and code != 0 for code in codes):
+@@ -133,15 +169,19 @@
+     except Exception as exc:
+         state.update(reason='launch_failed', errors=[str(exc)])
+     finally:
++        record_event(event_path, 'cleanup_begin', reason=state['reason'],
++                     exit_codes=[p.poll() for p in processes])
+         # Only the sessions created here are signalled. Always reap direct children.
+         for process in processes:
+             if os.name == 'posix':
+                 try:
+                     os.killpg(process.pid, signal.SIGTERM)
++                    record_event(event_path, 'signal_sent', child_pid=process.pid, signal=int(signal.SIGTERM))
+                 except ProcessLookupError:
+                     pass
+             elif process.poll() is None:
+                 process.terminate()
++                record_event(event_path, 'child_terminate', child_pid=process.pid)
+         grace = time.monotonic() + 2
+         while any(process.poll() is None for process in processes) and time.monotonic() < grace:
+             time.sleep(0.05)
+@@ -149,16 +189,21 @@
+             if os.name == 'posix':
+                 try:
+                     os.killpg(process.pid, signal.SIGKILL)
++                    record_event(event_path, 'signal_sent', child_pid=process.pid, signal=int(signal.SIGKILL))
+                 except ProcessLookupError:
+                     pass
+             elif process.poll() is None:
+                 process.kill()
++                record_event(event_path, 'child_kill', child_pid=process.pid)
+             process.wait(timeout=2)
++            record_event(event_path, 'child_reaped', child_pid=process.pid, exit_code=process.returncode)
+         for log in logs:
+             log.close()
+     state.update(pids=[p.pid for p in processes], exit_codes=[p.returncode for p in processes],
+                  all_reaped=all(p.returncode is not None for p in processes),
+                  wall_seconds=time.monotonic() - started)
++    record_event(event_path, 'supervisor_end', reason=state['reason'], exit_codes=state['exit_codes'],
++                 all_reaped=state['all_reaped'])
+     return state
+ 
+ 
+@@ -173,20 +218,24 @@
+     os.sched_setaffinity(0, receipt['selected'])
+     record = dict(status='FAIL', rank=rank, pid=os.getpid(), run_id=spec['run_id'],
+                   world_size=2, host=socket.gethostname(), cpu_receipt=receipt, checkpoints=[])
++    event_path = directory / f'rank{rank}.events.jsonl'
+ 
+     def checkpoint(stage):
++        record_event(event_path, 'checkpoint_begin', stage=stage)
+         record['stage'] = stage
+         snapshot = cpu36.snapshot_threads(os.getpid())
+         cpu36.validate_snapshot(receipt['selected'], snapshot)
+         record['checkpoints'].append(dict(stage=stage, snapshot=snapshot))
+         write_json(directory / f'rank{rank}.json', record)
+-
+-    try:
++        record_event(event_path, 'checkpoint_end', stage=stage)
++
++    try:
++        record_event(event_path, 'worker_ready', rank=rank, job_id=spec['job_id'], run_id=spec['run_id'])
+         checkpoint('before_framework')
+         record['environment'] = {key: os.environ.get(key) for key in ENVIRONMENT}
+         if record['environment'] != ENVIRONMENT:
+             raise ValueError('CPU36 environment mismatch')
+-        info = backend_info()
++        info = backend_info(event_path)
+         record['runtime'] = info
+         if info['status'] != 'AVAILABLE_BUILT_NOT_COMM_TESTED':
+             raise RuntimeError('Gloo backend unavailable: ' + json.dumps(info))
+@@ -197,9 +246,12 @@
+         if record['torch_intraop'] != 36:
+             raise ValueError('actual torch intraop must be36')
+         checkpoint('init_process_group')
++        record_event(event_path, 'init_process_group_begin', pg_timeout_seconds=spec['pg_timeout'],
++                     rank=rank, world_size=2, backend='gloo', init_method=(directory / 'rendezvous').as_uri())
+         dist.init_process_group('gloo', init_method=(directory / 'rendezvous').as_uri(),
+                                 rank=rank, world_size=2,
+                                 timeout=timedelta(seconds=spec['pg_timeout']))
++        record_event(event_path, 'init_process_group_end')
+         record.update(backend=str(dist.get_backend()), actual_rank=dist.get_rank(),
+                       actual_world_size=dist.get_world_size())
+         if record['actual_rank'] != rank or record['actual_world_size'] != 2:
+@@ -235,9 +287,11 @@
+         checkpoint('finished')
+         record['status'] = 'PASS'
+         write_json(directory / f'rank{rank}.json', record)
++        record_event(event_path, 'worker_exit', exit_code=0)
+         return 0
+     except Exception as exc:
+         record['error'] = f'{type(exc).__name__}: {exc}'
++        record_event(event_path, 'worker_error', stage=record.get('stage'), error=record['error'])
+         write_json(directory / f'rank{rank}.json', record)
+         traceback.print_exc()
+         return 1
+--- a/tests/test_job_identity.py
++++ b/tests/test_job_identity.py
+@@ -98,7 +98,7 @@
+                     allocation=dict(job_id='current', ranks=[dict(selected=[0])] * 2)))
+                 with contextlib.redirect_stderr(io.StringIO()):
+                     self.assertEqual(probe.worker(directory, rank), 1)
+-                framework.assert_called_once_with()
++                framework.assert_called_once_with(directory / f'rank{rank}.events.jsonl')
+                 bind.assert_called_once_with(0, [0])
+                 report = json.loads((directory / f'rank{rank}.json').read_text(encoding='utf-8'))
+                 self.assertEqual(report['error'], 'RuntimeError: framework sentinel')
