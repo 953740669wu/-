@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S06\candidate\probe.py", line 156, in main
+    isolate(options.package_root)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S06\candidate\probe.py", line 37, in isolate
+    path = Path(root).resolve(strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 993, in resolve
+    s = os.path.realpath(self, strict=strict)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen ntpath>", line 696, in realpath
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S06\\baseline'

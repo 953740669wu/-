@@ -1,0 +1,719 @@
+--- R1/candidate/probe.py
++++ R2/candidate/probe.py
+@@ -2,6 +2,7 @@
+ import argparse
+ import hashlib
+ import importlib
++import importlib.util
+ import json
+ import os
+ from pathlib import Path
+@@ -14,6 +15,27 @@
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+ STAGES = ('imports', 'pointwise', 'conv', 'block', 'kml-explain', 'kml')
++_spec = importlib.util.spec_from_file_location('s06_cpu36', ROOT / 'candidate' / 'cpu36_contract.py')
++CPU36 = importlib.util.module_from_spec(_spec)
++_spec.loader.exec_module(CPU36)
++
++
++def thread_checkpoint(torch, report, name, selected):
++    record = dict(name=name, pid=os.getpid(), selected36=selected, validation='FAILED',
++                  environment={key: os.environ.get(key) for key in CPU36.ENVIRONMENT})
++    report.setdefault('thread_checkpoints', []).append(record)
++    if torch is not None:
++        record.update(torch_intraop=torch.get_num_threads(), torch_interop=torch.get_num_interop_threads(),
++                      parallel_info=torch.__config__.parallel_info())
++    record['snapshot'] = CPU36.snapshot_threads(os.getpid())
++    if len(selected) != 36 or len(set(selected)) != 36 or any(type(cpu) is not int or cpu < 0 for cpu in selected):
++        raise ValueError('require the S00 selected36 CPU set')
++    CPU36.validate_snapshot(selected, record['snapshot'])
++    if record['environment'] != CPU36.ENVIRONMENT:
++        raise ValueError('conflicting CPU36 environment')
++    if torch is not None and (type(record['torch_intraop']) is not int or record['torch_intraop'] != 36):
++        raise ValueError('actual PyTorch intra-op threads must be36')
++    record['validation'] = 'PASS'
+ 
+ 
+ def sha256(path):
+@@ -154,14 +176,19 @@
+               'flags': str(sys.flags), 'rtol': 1e-6, 'atol': 1e-6, 'pid': os.getpid(),
+               'started_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
+     step = 'isolation'
++    torch, selected = None, []
+     try:
+         isolate(options.package_root)
+         report['sys_path'] = list(sys.path)
+         report['environment'] = {k: os.environ.get(k) for k in (
+             'PYTHONPATH', 'LD_LIBRARY_PATH', 'LD_PRELOAD', 'KML_BLAS_LIB', 'CXX',
+-            'OMP_NUM_THREADS', 'OMP_PLACES', 'OMP_PROC_BIND', 'TORCHINDUCTOR_CACHE_DIR',
++            'OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'S06_CPUSET',
++            'OMP_PLACES', 'OMP_PROC_BIND', 'TORCHINDUCTOR_CACHE_DIR',
+             'TORCHINDUCTOR_COMPILE_THREADS', 'MAX_JOBS', 'DEVICE', 'AMP', 'KML_LINEAR', 'LINEAR_DTYPE')}
+         report['cpu_affinity'] = sorted(os.sched_getaffinity(0)) if hasattr(os, 'sched_getaffinity') else None
++        step = 'thread_contract_before_framework'
++        selected = CPU36.cpu_list(os.environ['S06_CPUSET'])
++        thread_checkpoint(None, report, 'before_framework', selected)
+         step = 'source_identity'
+         sources = json.loads((ROOT / 'source_identity.json').read_text())['baseline_sha256']
+         for name, digest in sources.items():
+@@ -171,8 +198,9 @@
+         import torch
+         report['torch'] = module_identity('torch')
+         report['torch_config'] = torch.__config__.show()
+-        torch.set_num_threads(int(os.environ.get('OMP_NUM_THREADS', '1')))
+         report['threads'] = torch.get_num_threads()
++        step = 'thread_contract_after_framework'
++        thread_checkpoint(torch, report, 'after_framework', selected)
+         step = 'numpy_import'
+         report['numpy'] = module_identity('numpy')
+         step = 'environment_identity'
+@@ -209,6 +237,13 @@
+         traceback.print_exc()
+     finally:
+         try:
++            thread_checkpoint(torch, report, 'before_exit', selected)
++        except Exception as error:
++            report.setdefault('thread_errors', []).append(traceback.format_exc())
++            if report['status'] == 'PASS_DIAGNOSTIC_ONLY':
++                report.update(status='FAILED', blocked_at='thread_contract_before_exit',
++                              exception=dict(type=type(error).__name__, message=str(error)))
++        try:
+             paths = set()
+             for line in Path('/proc/self/maps').read_text().splitlines():
+                 fields = line.split()
+--- R1/candidate/run_probe.py
++++ R2/candidate/run_probe.py
+@@ -7,28 +7,108 @@
+ import subprocess
+ import sys
+ import time
++import traceback
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+ STAGES = ('imports', 'pointwise', 'conv', 'block', 'kml-explain', 'kml')
++
++
++class ParentInterrupted(BaseException):
++    def __init__(self, signum):
++        self.signum = signum
++
++
++def parent_signal(signum, frame):
++    raise ParentInterrupted(signum)
++
++
++def cleanup_child(process):
++    """Only the session created by run_child; every direct-child wait is bounded."""
++    receipt = dict(scope='owned_process_group' if os.name == 'posix' else 'direct_child_only',
++                   pid=process.pid, status='FAILED', direct_child_reaped=False, errors=[])
++    try:
++        if os.name == 'posix':
++            os.killpg(process.pid, signal.SIGTERM)
++        elif process.poll() is None:
++            process.terminate()
++    except ProcessLookupError:
++        pass
++    except OSError as error:
++        receipt['errors'].append(str(error))
++    try:
++        process.wait(timeout=0.5)
++    except subprocess.TimeoutExpired:
++        pass
++    except Exception as error:
++        receipt['errors'].append(str(error))
++    # The leader can exit while a compiler descendant ignores TERM. Kill the owned
++    # group even after its leader has exited; Windows only guarantees the direct child.
++    try:
++        if os.name == 'posix':
++            os.killpg(process.pid, signal.SIGKILL)
++        elif process.poll() is None:
++            process.kill()
++    except ProcessLookupError:
++        pass
++    except OSError as error:
++        receipt['errors'].append(str(error))
++    try:
++        receipt['returncode'] = process.wait(timeout=1.0)
++        receipt['direct_child_reaped'] = True
++    except Exception as error:
++        receipt['errors'].append(str(error))
++    if receipt['direct_child_reaped'] and not receipt['errors']:
++        receipt['status'] = 'REAPED'
++    return receipt
+ 
+ 
+ def run_child(command, folder, timeout):
+     folder.mkdir(parents=True, exist_ok=True)
+     start = time.monotonic()
+     with (folder / 'stdout.txt').open('w') as out, (folder / 'stderr.txt').open('w') as err:
+-        process = subprocess.Popen(command, stdout=out, stderr=err, start_new_session=os.name == 'posix')
++        process, handlers = None, {}
++        pending = []
++        result = dict(status='ERROR', exit_code=1, command=command)
++
++        def handle_signal(signum, frame):
++            # Defer during Popen construction until its owned handle is available.
++            # Do not block the OS signal mask, which the child would inherit.
++            if process is None:
++                pending.append(signum)
++            else:
++                parent_signal(signum, frame)
++
+         try:
++            for sig in (signal.SIGTERM, signal.SIGINT):
++                handlers[sig] = signal.signal(sig, handle_signal)
++            process = subprocess.Popen(command, stdout=out, stderr=err, start_new_session=os.name == 'posix')
++            if pending:
++                raise ParentInterrupted(pending[0])
+             code = process.wait(timeout=timeout)
+-            status = 'PASS' if code == 0 else 'FAILED'
++            result.update(status='PASS' if code == 0 else 'FAILED', exit_code=code)
+         except subprocess.TimeoutExpired:
+-            if os.name == 'posix':
+-                os.killpg(process.pid, signal.SIGKILL)
+-            else:
+-                process.kill()
+-            process.wait()
+-            code, status = 124, 'TIMEOUT'
+-    return {'status': status, 'exit_code': code, 'elapsed_s': time.monotonic() - start,
+-            'command': command, 'process_group_cleanup': os.name == 'posix'}
++            result.update(status='TIMEOUT', exit_code=124)
++        except ParentInterrupted as error:
++            result.update(status='INTERRUPTED', exit_code=128 + error.signum, signal=error.signum)
++        except KeyboardInterrupt:
++            result.update(status='INTERRUPTED', exit_code=130, signal=int(signal.SIGINT))
++        except Exception:
++            result['exception'] = traceback.format_exc()
++        finally:
++            # A second external interrupt must not abort the bounded recovery.
++            for sig in handlers:
++                signal.signal(sig, signal.SIG_IGN)
++            try:
++                if process is not None:
++                    result['cleanup'] = cleanup_child(process)
++                    if result['cleanup']['status'] != 'REAPED':
++                        result.update(status='CLEANUP_FAILED', exit_code=1)
++            finally:
++                for sig, handler in handlers.items():
++                    signal.signal(sig, handler)
++    result['elapsed_s'] = time.monotonic() - start
++    (folder / 'execution.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
++    return result
+ 
+ 
+ def main():
+@@ -73,12 +153,13 @@
+         (out / 'summary.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
+         if result['status'] != 'PASS':
+             summary['status'] = result['status']
++            summary['exit_code'] = result['exit_code']
+             break
+     else:
+         summary['status'] = 'PASS_DIAGNOSTIC_ONLY'
+     (out / 'summary.json').write_text(json.dumps(summary, indent=2), encoding='utf-8')
+     print(json.dumps(summary, ensure_ascii=False))
+-    return 0 if summary['status'] == 'PASS_DIAGNOSTIC_ONLY' else 1
++    return 0 if summary['status'] == 'PASS_DIAGNOSTIC_ONLY' else summary.get('exit_code', 1)
+ 
+ 
+ if __name__ == '__main__':
+--- R1/candidate/run_linux.sh
++++ R2/candidate/run_linux.sh
+@@ -7,7 +7,7 @@
+ : "${S06_CPUSET:?S00 must choose 36 allocated CPUs in one domain}"
+ : "${S06_MEMNODE:?S00 must verify the corresponding DDR NUMA node}"
+ source "$TASK/baseline/cluster_runtime_reference.env"
+-export OMP_NUM_THREADS=36 OPENBLAS_NUM_THREADS=36 MKL_NUM_THREADS=36
++export OMP_NUM_THREADS=36 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=36
+ export CXX="${S06_CXX:-/usr/bin/g++}"
+ test -x "$CXX"
+ test -x "$C2_PYTHON"
+--- R1/tests/test_probe.py
++++ R2/tests/test_probe.py
+@@ -19,6 +19,7 @@
+ def fixture_dir():
+     # Keep all fixtures and bounded cleanup inside this task's evidence directory.
+     path = ROOT / 'evidence' / ('test_' + uuid.uuid4().hex)
++    path.parent.mkdir(exist_ok=True)
+     path.mkdir()
+     try:
+         yield str(path)
+@@ -82,12 +83,13 @@
+             self.assertEqual(result['status'], 'TIMEOUT')
+             self.assertNotEqual(result['exit_code'], 0)
+ 
+-    def test_frozen_sources_match_current_sources(self):
++    def test_frozen_sources_match_identity_and_optional_project(self):
+         expected = json.loads((ROOT / 'source_identity.json').read_text())
+-        project = ROOT.parents[3]
++        project = Path(os.environ['S06_PROJECT_ROOT']) if os.environ.get('S06_PROJECT_ROOT') else None
+         for name, digest in expected['baseline_sha256'].items():
+             probe.verify_source(ROOT / 'baseline' / name, digest)
+-            probe.verify_source(project / name, digest)
++            if project is not None:
++                probe.verify_source(project / name, digest)
+ 
+ 
+ if __name__ == '__main__':
+--- /dev/null
++++ R2/candidate/cpu36_contract.py
+@@ -0,0 +1,213 @@
++"""CPU36_MODEL_V1: allocation, per-TID boundaries and actual framework evidence."""
++import ctypes
++import hashlib
++import json
++import math
++import os
++from pathlib import Path
++import re
++import sys
++
++VERSION = 'CPU36_MODEL_V1'
++ENVIRONMENT = dict(OMP_NUM_THREADS='36', MKL_NUM_THREADS='36', OPENBLAS_NUM_THREADS='1',
++                   OMP_PLACES='cores', OMP_PROC_BIND='close')
++_HASHES = {}
++
++
++def sha(path):
++    digest = hashlib.sha256()
++    with open(path, 'rb') as stream:
++        for block in iter(lambda: stream.read(1024 * 1024), b''):
++            digest.update(block)
++    return digest.hexdigest()
++
++
++def cpu_list(text):
++    values = []
++    for item in text.strip().split(','):
++        if item:
++            a, sep, b = item.partition('-')
++            values.extend(range(int(a), int(b) + 1) if sep else [int(a)])
++    return values
++
++
++def select_cpus(allocated, domain, siblings):
++    siblings = {str(key): value for key, value in siblings.items()}
++    if any(type(cpu) is not int or cpu < 0 for cpu in [*allocated, *domain]):
++        raise ValueError('invalid CPU identifiers')
++    allocated, domain = sorted(set(allocated)), sorted(set(domain))
++    if len(domain) != 38 or len(allocated) not in (36, 38) or not set(allocated) <= set(domain):
++        raise ValueError('require an authorized 38-core domain or its exact first36')
++    groups = [tuple(sorted(siblings[str(cpu)])) for cpu in domain]
++    if any(cpu not in group for cpu, group in zip(domain, groups)) or len(set(groups)) != 38:
++        raise ValueError('38 distinct physical cores required')
++    selected, reserved = domain[:-2], domain[-2:]
++    if not set(selected) <= set(allocated):
++        raise ValueError('cannot select first36 and reserve last2 from this allocation')
++    return dict(allocated=allocated, domain_cpus=domain, selected=selected, reserved=reserved,
++                physical_siblings={str(cpu): list(group) for cpu, group in zip(domain, groups)})
++
++
++def discover_contracts(allowed, count):
++    contracts = {}
++    for node in sorted(Path('/sys/devices/system/node').glob('node[0-9]*'), key=lambda p: int(p.name[4:])):
++        domain = cpu_list((node / 'cpulist').read_text())
++        allocated = sorted(set(domain) & set(allowed))
++        if allocated:
++            siblings = {str(cpu): cpu_list(Path(f'/sys/devices/system/cpu/cpu{cpu}/topology/thread_siblings_list').read_text())
++                        for cpu in domain}
++            receipt = select_cpus(allocated, domain, siblings)
++            receipt['node'] = int(node.name[4:])
++            contracts[receipt['node']] = receipt
++            if len(contracts) == count:
++                break
++    if len(contracts) != count:
++        raise ValueError(f'expected {count} authorized CPU36 domains, found {len(contracts)}')
++    return contracts
++
++
++def validate_receipt(receipt):
++    rebuilt = select_cpus(receipt['allocated'], receipt['domain_cpus'], receipt['physical_siblings'])
++    if receipt['selected'] != rebuilt['selected'] or receipt['reserved'] != rebuilt['reserved']:
++        raise ValueError('selected36/reserved2 receipt mismatch')
++
++
++def snapshot_threads(pid):
++    result = dict(complete=True, threads=[], vanished=[], errors=[])
++    try:
++        entries = list(Path(f'/proc/{pid}/task').iterdir())
++    except OSError as exc:
++        return dict(complete=False, threads=[], vanished=[], errors=[str(exc)])
++    for entry in entries:
++        try:
++            stat = (entry / 'stat').read_text()
++            fields = stat[stat.rfind(')') + 2:].split()
++            result['threads'].append(dict(tid=int(entry.name), affinity=sorted(os.sched_getaffinity(int(entry.name))),
++                                          ticks=int(fields[11]) + int(fields[12]), start_ticks=int(fields[19]),
++                                          last_cpu=int(fields[36]), state=fields[0]))
++        except (FileNotFoundError, ProcessLookupError):
++            result['complete'] = False
++            result['vanished'].append(int(entry.name))
++        except (OSError, ValueError, IndexError) as exc:
++            result['complete'] = False
++            result['errors'].append(f'{entry.name}: {exc}')
++    return result
++
++
++def validate_snapshot(selected, snapshot):
++    rows = snapshot['threads']
++    if snapshot.get('complete') is not True or snapshot.get('vanished') or snapshot.get('errors') or not rows:
++        raise ValueError('missing/incomplete all-TID evidence')
++    tids = []
++    for row in rows:
++        tids.append(row['tid'])
++        mask = row['affinity']
++        if not isinstance(mask, list) or not mask or any(type(cpu) is not int for cpu in mask) or not set(mask) <= set(selected):
++            raise ValueError(f'TID {row["tid"]} outside selected36 boundary')
++    if len(set(tids)) != len(tids) or any(type(tid) is not int or tid <= 0 for tid in tids):
++        raise ValueError('invalid/duplicate TID evidence')
++
++
++def runtime_info():
++    modules = {}
++    for name in ('torch', 'numpy', 'kml_ops'):
++        module = sys.modules.get(name)
++        if module is not None:
++            modules[name] = dict(version=getattr(module, '__version__', None), path=str(Path(module.__file__).resolve()))
++    paths = sorted({line.split()[-1] for line in Path('/proc/self/maps').read_text().splitlines()
++                    if re.search(r'kml|blas|libomp|libgomp|hbm', line, re.I) and line.split()[-1].startswith('/')})
++    libraries = {}
++    for path in paths:
++        if path not in _HASHES:
++            _HASHES[path] = sha(path)
++        info = dict(sha256=_HASHES[path])
++        lib = ctypes.CDLL(path, mode=os.RTLD_NOLOAD | os.RTLD_LOCAL)
++        for name in ('omp_get_max_threads', 'omp_get_dynamic', 'omp_get_proc_bind', 'omp_get_num_places',
++                     'openblas_get_num_threads', 'openblas_get_num_threads64_', 'openblas_get_num_threads_64_'):
++            if hasattr(lib, name):
++                fn = getattr(lib, name)
++                fn.argtypes, fn.restype = [], ctypes.c_int
++                info[name] = fn()
++        libraries[path] = info
++    return dict(modules=modules, libraries=libraries)
++
++
++def required_checkpoints(spec):
++    names = ['before_framework', 'after_framework']
++    for belt in spec['belts']:
++        names += [f'{belt}_after_warmup'] + [f'{belt}_after_{part}' for part in spec['parts']]
++    return names + ['publish']
++
++
++def validate_checkpoint(record, receipt):
++    validate_snapshot(receipt['selected'], record['snapshot'])
++    caller = next((row for row in record['snapshot']['threads'] if row['tid'] == record['calling_tid']), None)
++    if caller is None or caller['affinity'] != record['calling_affinity']:
++        raise ValueError('calling TID mask does not match all-TID snapshot')
++    if record['environment'] != ENVIRONMENT:
++        raise ValueError('conflicting CPU36 worker environment')
++    if record['name'] != 'before_framework':
++        if type(record['torch_intraop']) is not int or record['torch_intraop'] != 36:
++            raise ValueError('actual PyTorch intra-op threads must be36')
++        if type(record['torch_interop']) is not int or record['torch_interop'] <= 0 or not record['parallel_info']:
++            raise ValueError('missing actual PyTorch thread metadata')
++        omp = [entry for entry in record['runtime']['libraries'].values() if 'omp_get_max_threads' in entry]
++        if not omp or any(entry['omp_get_max_threads'] != 36 for entry in omp):
++            raise ValueError('missing/conflicting loaded OpenMP thread API')
++
++
++def validate_result(spec, data, state, round_id, rank):
++    if spec['cpu36_version'] != VERSION or spec['worker_environment'] != ENVIRONMENT:
++        raise ValueError('CPU36 manifest contract missing/conflicting')
++    receipt = spec['cpu_contracts'][str(rank)]
++    validate_receipt(receipt)
++    if spec['cpus'][str(round_id)][str(rank)] != receipt['selected']:
++        raise ValueError('manifest selected36 mismatch')
++    evidence = data['run']['cpu36']
++    if evidence.get('errors'):
++        raise ValueError('worker retained a failed CPU36 checkpoint')
++    expected_context = dict(version=VERSION, run_id=spec['run_id'], host=spec['host'], job_id=spec['job_id'],
++                            round=round_id, rank=rank, receipt=receipt)
++    if (evidence['version'] != VERSION
++            or json.dumps(evidence['context'], sort_keys=True) != json.dumps(expected_context, sort_keys=True)
++            or json.dumps(evidence['context'], sort_keys=True) != json.dumps(spec['cpu_contexts'][str(round_id)][str(rank)], sort_keys=True)):
++        raise ValueError('CPU36 worker context identity mismatch')
++    names = [item['name'] for item in evidence['checkpoints']]
++    if len(set(names)) != len(names) or not set(required_checkpoints(spec)) <= set(names):
++        raise ValueError('missing/duplicate CPU36 checkpoints')
++    order = [names.index(name) for name in required_checkpoints(spec)]
++    if order != sorted(order) or names[:2] != ['before_framework', 'after_framework']:
++        raise ValueError('CPU36 checkpoint order mismatch')
++    for item in evidence['checkpoints']:
++        if (type(item['time']) not in (int, float) or not math.isfinite(item['time'])
++                or not data['run']['started'] <= item['time'] <= data['run']['finished']):
++            raise ValueError('CPU36 checkpoint outside worker time window')
++        if item['pid'] != data['run']['pid'] or item['calling_tid'] not in [row['tid'] for row in item['snapshot']['threads']]:
++            raise ValueError('checkpoint PID/TID identity mismatch')
++        validate_checkpoint(item, receipt)
++        if item['name'] == 'before_framework':
++            continue
++        actual, reference = item['runtime'], spec['runtime_reference']
++        for name, expected in reference['modules'].items():
++            if name == 'kml_ops' and item['name'] == 'after_framework':
++                continue
++            if actual['modules'].get(name) != expected:
++                raise ValueError(f'actual module identity mismatch: {name}')
++        for path, info in actual['libraries'].items():
++            if reference['libraries'].get(path, {}).get('sha256') != info['sha256']:
++                raise ValueError(f'unfrozen/changed runtime library: {path}')
++        if item['name'] != 'after_framework' and not set(reference['libraries']) <= set(actual['libraries']):
++            raise ValueError('required runtime library mapping missing')
++    last = evidence['checkpoints'][-1]
++    if last['name'] != 'publish' or data['run']['affinity'] != last['calling_affinity']:
++        raise ValueError('publication calling-thread metadata mismatch')
++    monitor = state['thread_monitor']
++    if monitor['pid'] != state['pid'] or type(monitor['snapshots']) is not int or monitor['snapshots'] < 1:
++        raise ValueError('missing parent thread monitor evidence')
++    if monitor['incomplete_samples'] or monitor['violations'] or not monitor['threads']:
++        raise ValueError('incomplete/out-of-bound parent thread evidence')
++    for thread in monitor['threads']:
++        if not thread['masks']:
++            raise ValueError('missing monitored TID mask')
++        for mask in thread['masks']:
++            validate_snapshot(receipt['selected'], dict(complete=True, threads=[dict(tid=thread['tid'], affinity=mask)]))
+--- /dev/null
++++ R2/tests/test_revision.py
+@@ -0,0 +1,242 @@
++"""Targeted R2 checks; Linux process-group integration remains explicitly conditional."""
++import json
++import os
++from pathlib import Path
++import signal
++import subprocess
++import sys
++import time
++from types import SimpleNamespace
++import unittest
++from unittest import mock
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT / 'candidate'))
++import probe
++import run_probe
++from test_probe import fixture_dir
++
++SELECTED = list(range(36))
++
++
++def snapshot(mask=None, complete=True):
++    return dict(complete=complete, threads=[dict(tid=1, affinity=SELECTED if mask is None else mask)],
++                vanished=[], errors=[])
++
++
++def fake_torch(intraop=36):
++    return SimpleNamespace(get_num_threads=lambda: intraop, get_num_interop_threads=lambda: 2,
++                           __config__=SimpleNamespace(parallel_info=lambda: 'observed parallel info'))
++
++
++class ThreadChecks(unittest.TestCase):
++    def observe(self, torch, snap, environment=None, selected=None):
++        report = {}
++        with mock.patch.dict(os.environ, environment or probe.CPU36.ENVIRONMENT, clear=True), \
++                mock.patch.object(probe.CPU36, 'snapshot_threads', return_value=snap):
++            probe.thread_checkpoint(torch, report, 'after_framework', SELECTED if selected is None else selected)
++        return report
++
++    def test_actual_36_passes_without_setter(self):
++        report = self.observe(fake_torch(), snapshot())
++        self.assertEqual(report['thread_checkpoints'][0]['torch_intraop'], 36)
++        self.assertEqual(report['thread_checkpoints'][0]['validation'], 'PASS')
++
++    def test_actual_35_rejected_despite_env_36(self):
++        with self.assertRaisesRegex(ValueError, 'actual.*36'):
++            self.observe(fake_torch(35), snapshot())
++
++    def test_openblas_36_rejected(self):
++        env = dict(probe.CPU36.ENVIRONMENT, OPENBLAS_NUM_THREADS='36')
++        with self.assertRaisesRegex(ValueError, 'environment'):
++            self.observe(fake_torch(), snapshot(), env)
++
++    def test_one_thread_pinned_inside_boundary_is_valid(self):
++        self.observe(fake_torch(), snapshot([17]))
++
++    def test_any_tid_outside_selected_rejected(self):
++        snap = snapshot()
++        snap['threads'].append(dict(tid=2, affinity=[36]))
++        with self.assertRaisesRegex(ValueError, 'outside selected36'):
++            self.observe(fake_torch(), snap)
++
++    def test_incomplete_snapshot_rejected(self):
++        with self.assertRaisesRegex(ValueError, 'incomplete'):
++            self.observe(fake_torch(), snapshot(complete=False))
++
++    def test_duplicate_selected_rejected(self):
++        with self.assertRaisesRegex(ValueError, 'selected36'):
++            self.observe(fake_torch(), snapshot(), selected=[0] * 36)
++
++    def test_failed_observation_retained(self):
++        report = {}
++        with mock.patch.dict(os.environ, probe.CPU36.ENVIRONMENT, clear=True), \
++                mock.patch.object(probe.CPU36, 'snapshot_threads', return_value=snapshot([999])):
++            with self.assertRaises(ValueError):
++                probe.thread_checkpoint(fake_torch(), report, 'before_exit', SELECTED)
++        self.assertEqual(report['thread_checkpoints'][0]['snapshot']['threads'][0]['affinity'], [999])
++        self.assertEqual(report['thread_checkpoints'][0]['validation'], 'FAILED')
++
++
++class CleanupChecks(unittest.TestCase):
++    def exercise(self, error, cleanup_error=None):
++        child = mock.Mock(pid=43210, returncode=None)
++        child.poll.return_value = None
++        child.wait.side_effect = [error, cleanup_error or 0, 0]
++        with fixture_dir() as td, mock.patch.object(run_probe.subprocess, 'Popen', return_value=child), \
++                mock.patch.object(run_probe.signal, 'signal') as handlers, \
++                mock.patch.object(run_probe.os, 'killpg', create=True):
++            result = run_probe.run_child(['owned-probe'], Path(td), 0.1)
++            receipt = json.loads((Path(td) / 'execution.json').read_text())
++        self.assertEqual(receipt['status'], result['status'])
++        for call in child.wait.call_args_list:
++            self.assertGreater(call.kwargs['timeout'], 0)
++        self.assertEqual(result['cleanup']['status'], 'REAPED')
++        return result, child, handlers
++
++    def test_timeout_bounded_cleanup(self):
++        result, _, _ = self.exercise(subprocess.TimeoutExpired('owned-probe', 0.1))
++        self.assertEqual(result['status'], 'TIMEOUT')
++        self.assertEqual(result['exit_code'], 124)
++
++    def test_keyboard_interrupt_bounded_cleanup(self):
++        result, _, _ = self.exercise(KeyboardInterrupt())
++        self.assertEqual(result['status'], 'INTERRUPTED')
++        self.assertEqual(result['exit_code'], 130)
++
++    def test_term_bounded_cleanup(self):
++        result, _, _ = self.exercise(run_probe.ParentInterrupted(signal.SIGTERM))
++        self.assertEqual(result['status'], 'INTERRUPTED')
++        self.assertEqual(result['exit_code'], 143)
++
++    def test_wait_exception_bounded_cleanup(self):
++        result, _, _ = self.exercise(RuntimeError('injected wait exception'))
++        self.assertEqual(result['status'], 'ERROR')
++        self.assertIn('injected wait exception', result['exception'])
++
++    def test_term_handler_routes_to_cleanup(self):
++        with self.assertRaises(run_probe.ParentInterrupted) as ctx:
++            run_probe.parent_signal(signal.SIGTERM, None)
++        self.assertEqual(ctx.exception.signum, signal.SIGTERM)
++
++    def test_term_during_spawn_is_deferred_until_handle_exists(self):
++        child = mock.Mock(pid=43210, returncode=None)
++        child.poll.return_value = None
++        child.wait.return_value = 0
++        installed = {}
++
++        def register(sig, handler):
++            installed[sig] = handler
++            return signal.SIG_DFL
++
++        def spawn(*args, **kwargs):
++            self.assertEqual(kwargs['start_new_session'], os.name == 'posix')
++            installed[signal.SIGTERM](signal.SIGTERM, None)
++            return child
++
++        with fixture_dir() as td, mock.patch.object(run_probe.subprocess, 'Popen', side_effect=spawn), \
++                mock.patch.object(run_probe.signal, 'signal', side_effect=register), \
++                mock.patch.object(run_probe.os, 'killpg', create=True):
++            result = run_probe.run_child(['owned-probe'], Path(td), 0.1)
++        self.assertEqual(result['status'], 'INTERRUPTED')
++        self.assertEqual(result['cleanup']['status'], 'REAPED')
++        self.assertEqual(installed[signal.SIGTERM], signal.SIG_DFL)
++        self.assertEqual(installed[signal.SIGINT], signal.SIG_DFL)
++
++    def test_posix_cleanup_targets_only_owned_group(self):
++        child = mock.Mock(pid=43210, returncode=None)
++        child.wait.return_value = 0
++        with mock.patch.object(run_probe.os, 'name', 'posix'), \
++                mock.patch.object(run_probe.signal, 'SIGKILL', 9, create=True), \
++                mock.patch.object(run_probe.os, 'killpg', create=True) as killpg:
++            receipt = run_probe.cleanup_child(child)
++        self.assertEqual(killpg.call_args_list[:2], [mock.call(43210, signal.SIGTERM),
++                                                    mock.call(43210, 9)])
++        self.assertEqual(receipt['scope'], 'owned_process_group')
++        self.assertTrue(receipt['direct_child_reaped'])
++
++    def test_cleanup_failure_cannot_pass(self):
++        child = mock.Mock(pid=43210, returncode=None)
++        child.poll.return_value = None
++        child.wait.side_effect = [0, subprocess.TimeoutExpired('owned-probe', 1),
++                                  subprocess.TimeoutExpired('owned-probe', 1)]
++        with fixture_dir() as td, mock.patch.object(run_probe.subprocess, 'Popen', return_value=child), \
++                mock.patch.object(run_probe.signal, 'signal'), \
++                mock.patch.object(run_probe.os, 'killpg', create=True):
++            result = run_probe.run_child(['owned-probe'], Path(td), 0.1)
++        self.assertEqual(result['status'], 'CLEANUP_FAILED')
++        self.assertNotEqual(result['exit_code'], 0)
++
++
++@unittest.skipUnless(sys.platform.startswith('linux'), 'Linux process groups NOT_RUN on this host')
++class LinuxGroupChecks(unittest.TestCase):
++    def test_linux_child_does_not_inherit_blocked_term_or_int(self):
++        code = ('import signal; mask=signal.pthread_sigmask(signal.SIG_BLOCK,set()); '
++                'assert not {signal.SIGTERM,signal.SIGINT} & mask, mask')
++        with fixture_dir() as td:
++            result = run_probe.run_child([sys.executable, '-c', code], Path(td), 5)
++        self.assertEqual(result['status'], 'PASS')
++
++    def exercise(self, sig):
++        with fixture_dir() as td:
++            folder = Path(td)
++            pidfile = folder / 'owned_pids.json'
++            child_code = ('import json,os,pathlib,signal,subprocess,sys,time; '
++                          'signal.signal(signal.SIGTERM,signal.SIG_IGN); '
++                          'p=subprocess.Popen([sys.executable,"-c",'
++                          '"import signal,time; signal.signal(signal.SIGTERM,signal.SIG_IGN); time.sleep(30)"]); '
++                          'pathlib.Path(sys.argv[1]).write_text(json.dumps([os.getpid(),p.pid])); time.sleep(30)')
++            driver = folder / 'driver.py'
++            driver.write_text('import json,pathlib,sys\nsys.path.insert(0,sys.argv[1])\nimport run_probe\n'
++                              'r=run_probe.run_child([sys.executable,"-c",sys.argv[3],sys.argv[4]],'
++                              'pathlib.Path(sys.argv[2]),10)\n'
++                              'pathlib.Path(sys.argv[2],"driver_result.json").write_text(json.dumps(r))\n'
++                              'sys.exit(r["exit_code"])\n')
++            sentinel = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(30)'], start_new_session=True)
++            parent = subprocess.Popen([sys.executable, '-B', str(driver), str(ROOT / 'candidate'), td,
++                                       child_code, str(pidfile)])
++            owned = []
++            try:
++                deadline = time.monotonic() + 5
++                while not pidfile.exists() and time.monotonic() < deadline:
++                    time.sleep(0.02)
++                self.assertTrue(pidfile.exists())
++                owned = json.loads(pidfile.read_text())
++                parent.send_signal(sig)
++                self.assertEqual(parent.wait(timeout=5), 128 + sig)
++                result = json.loads((folder / 'driver_result.json').read_text())
++                self.assertEqual(result['cleanup']['status'], 'REAPED')
++                self.assertIsNone(sentinel.poll(), 'unrelated session must survive')
++                for pid in owned:
++                    path = Path('/proc') / str(pid) / 'stat'
++                    deadline = time.monotonic() + 2
++                    while path.exists():
++                        try:
++                            state = path.read_text().split(')')[-1].strip().split()[0]
++                        except FileNotFoundError:
++                            break
++                        if state in ('Z', 'X'):
++                            break
++                        self.assertLess(time.monotonic(), deadline, 'live owned descendant remains')
++                        time.sleep(0.02)
++            finally:
++                if parent.poll() is None:
++                    parent.kill()
++                parent.wait(timeout=2)
++                if owned:
++                    try:
++                        os.killpg(owned[0], signal.SIGKILL)
++                    except ProcessLookupError:
++                        pass
++                sentinel.terminate()
++                sentinel.wait(timeout=2)
++
++    def test_linux_term_cleans_ignoring_descendants_and_preserves_other_session(self):
++        self.exercise(signal.SIGTERM)
++
++    def test_linux_sigint_cleans_ignoring_descendants_and_preserves_other_session(self):
++        self.exercise(signal.SIGINT)
++
++
++if __name__ == '__main__':
++    unittest.main(verbosity=2)

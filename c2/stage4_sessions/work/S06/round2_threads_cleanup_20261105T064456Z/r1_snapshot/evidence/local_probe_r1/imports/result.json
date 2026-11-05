@@ -1,0 +1,20 @@
+{
+  "status": "FAILED",
+  "stage": "imports",
+  "host": "DESKTOP-54BJCD6",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "executable": "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+  "flags": "sys.flags(debug=0, inspect=0, interactive=0, optimize=0, dont_write_bytecode=1, no_user_site=1, no_site=1, ignore_environment=1, verbose=0, bytes_warning=0, quiet=0, hash_randomization=1, isolated=1, dev_mode=False, utf8_mode=0, warn_default_encoding=0, safe_path=True, int_max_str_digits=-1)",
+  "rtol": 1e-06,
+  "atol": 1e-06,
+  "pid": 86840,
+  "started_utc": "2026-11-05T06:17:10Z",
+  "blocked_at": "isolation",
+  "exception": {
+    "type": "PermissionError",
+    "message": "[WinError 5] 拒绝访问。: 'E:\\\\eitfm_c2_stages2-4_2026-11-03\\\\c2\\\\stage4_sessions\\\\work\\\\S06\\\\baseline'",
+    "traceback": "Traceback (most recent call last):\n  File \"E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S06\\candidate\\probe.py\", line 156, in main\n    isolate(options.package_root)\n  File \"E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S06\\candidate\\probe.py\", line 37, in isolate\n    path = Path(root).resolve(strict=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\pathlib.py\", line 993, in resolve\n    s = os.path.realpath(self, strict=strict)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen ntpath>\", line 696, in realpath\nPermissionError: [WinError 5] 拒绝访问。: 'E:\\\\eitfm_c2_stages2-4_2026-11-03\\\\c2\\\\stage4_sessions\\\\work\\\\S06\\\\baseline'\n"
+  },
+  "loaded_libraries_unavailable": "[Errno 2] No such file or directory: '\\\\proc\\\\self\\\\maps'"
+}

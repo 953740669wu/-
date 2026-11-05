@@ -1,0 +1,30 @@
+test_child_failure_is_not_pass (__main__.ProbeChecks.test_child_failure_is_not_pass) ... ok
+test_frozen_sources_match_current_sources (__main__.ProbeChecks.test_frozen_sources_match_current_sources) ... ok
+test_isolated_bootstrap_ignores_pythonpath_and_pth (__main__.ProbeChecks.test_isolated_bootstrap_ignores_pythonpath_and_pth) ... FAIL
+test_isolation_requires_I_and_S (__main__.ProbeChecks.test_isolation_requires_I_and_S) ... ok
+test_nonexistent_package_root_fails (__main__.ProbeChecks.test_nonexistent_package_root_fails) ... ok
+test_source_identity_detects_change (__main__.ProbeChecks.test_source_identity_detects_change) ... ok
+test_timeout_is_not_pass (__main__.ProbeChecks.test_timeout_is_not_pass) ... ok
+
+======================================================================
+FAIL: test_isolated_bootstrap_ignores_pythonpath_and_pth (__main__.ProbeChecks.test_isolated_bootstrap_ignores_pythonpath_and_pth)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S06\tests\test_probe.py", line 33, in test_isolated_bootstrap_ignores_pythonpath_and_pth
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S06\candidate\probe.py", line 37, in isolate
+    path = Path(root).resolve(strict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 993, in resolve
+    s = os.path.realpath(self, strict=strict)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen ntpath>", line 696, in realpath
+PermissionError: [WinError 5] �ܾ����ʡ�: 'E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S06\\evidence\\tmph2fge849'
+
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.402s
+
+FAILED (failures=1)

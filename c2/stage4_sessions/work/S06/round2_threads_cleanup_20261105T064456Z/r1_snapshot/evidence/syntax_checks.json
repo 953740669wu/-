@@ -1,0 +1,23 @@
+{
+  "python": [
+    {
+      "file": "candidate/probe.py",
+      "sha256": "3024a96dd4b24c270d887cc19a7176d42b742a6c849a4e94d84de2319cb6a64a",
+      "python_3_9_grammar": "PASS"
+    },
+    {
+      "file": "candidate/run_probe.py",
+      "sha256": "fdfdb52b508c41f91c1c01ef6288ed964070343f2d78779d81c4bbdcbdc399b4",
+      "python_3_9_grammar": "PASS"
+    }
+  ],
+  "bash_n": {
+    "restricted_attempt": "FAILED_MSYS_NTCREATE_ACCESS_DENIED",
+    "actual_linux_runtime": "NOT_RUN",
+    "outside_restricted_process": {
+      "command": "C:/Program Files/Git/bin/bash.exe -n c2/stage4_sessions/work/S06/candidate/run_linux.sh",
+      "exit_code": 0,
+      "scope": "Windows Git Bash syntax only; script NOT executed"
+    }
+  }
+}

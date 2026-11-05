@@ -1,0 +1,45 @@
+{
+  "runs": [
+    {
+      "mode": "ordinary",
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S06\\round3_isolation_test_20261105T072404Z\\payload",
+      "exit_code": 0,
+      "tests": 26,
+      "passed": 23,
+      "Linux_skipped": 3
+    },
+    {
+      "mode": "isolated",
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-I",
+        "-S",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S06\\round3_isolation_test_20261105T072404Z\\payload",
+      "exit_code": 0,
+      "tests": 26,
+      "passed": 23,
+      "Linux_skipped": 3
+    }
+  ],
+  "changed_test_python39_grammar": "PASS",
+  "Linux_runtime": "NOT_RUN",
+  "C2": "NOT_RUN"
+}

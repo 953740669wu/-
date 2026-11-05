@@ -1,0 +1,20 @@
+{
+  "source_evidence": "c2\\stage4_sessions\\work\\S00\\evidence\\compute_environment_verified.json",
+  "historical_validation_job": "2026223",
+  "historical_validation_end_utc": "2026-11-04T13:09:53Z",
+  "torch": {
+    "version": "2.7.1+cpu",
+    "file": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py"
+  },
+  "numpy": {
+    "version": "1.26.4",
+    "file": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib64/python3.9/site-packages/numpy/__init__.py"
+  },
+  "library_sha256": {
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so": "eee755641450652e0c08aeb5d3436f39bd9d3ff89e501a4262b3b0ca5862ac7a",
+    "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac",
+    "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c"
+  },
+  "boundary": "Historical S00 identity; S06 has not run on C2"
+}

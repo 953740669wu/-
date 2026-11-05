@@ -1,0 +1,64 @@
+{
+  "syntax": [
+    {
+      "path": "baseline/kml_ops.py",
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+      "python39_grammar": "PASS"
+    },
+    {
+      "path": "baseline/s4_models.py",
+      "sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+      "python39_grammar": "PASS"
+    },
+    {
+      "path": "candidate/cpu36_contract.py",
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+      "python39_grammar": "PASS"
+    },
+    {
+      "path": "candidate/probe.py",
+      "sha256": "a7506d75c06840aa19f3486123b3b87c2701518d2d355952fa18665ad32a9fc9",
+      "python39_grammar": "PASS"
+    },
+    {
+      "path": "candidate/run_probe.py",
+      "sha256": "326f39cca6a18015a2f41615e18a81aa59baaec3c90788d6e4756c2517dc962e",
+      "python39_grammar": "PASS"
+    },
+    {
+      "path": "tests/test_probe.py",
+      "sha256": "7e66e346b79607a31fd90785401342a1fa3db577b728ea19fb0f912443d7717e",
+      "python39_grammar": "PASS"
+    },
+    {
+      "path": "tests/test_revision.py",
+      "sha256": "bd4621eb840bd30ab53860f9e790b91a027897bf7a0a64aab05b227f6e3fa50d",
+      "python39_grammar": "PASS"
+    }
+  ],
+  "relocated_suite_exit": 0,
+  "relocated_payload": "c2\\stage4_sessions\\work\\S06\\round2_threads_cleanup_20261105T064456Z\\evidence\\flat_relocated_payload",
+  "hardcoded_ancestor_not_used": true,
+  "frozen_contract": {
+    "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+    "S01_R7_source_sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+    "equal": true
+  },
+  "Linux_runtime": "NOT_RUN",
+  "C2": "NOT_RUN",
+  "local_suite": {
+    "total": 26,
+    "passed": 23,
+    "Linux_skipped": 3
+  },
+  "bash_n": {
+    "exit_code": 0,
+    "runtime": "Windows Git Bash syntax only; script not executed"
+  },
+  "environment": {
+    "executable": "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "torch_spec": "None",
+    "numpy_spec": "None"
+  }
+}

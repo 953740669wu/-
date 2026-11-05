@@ -1,0 +1,31 @@
+test_child_failure_is_not_pass (test_probe.ProbeChecks.test_child_failure_is_not_pass) ... ok
+test_frozen_sources_match_identity_and_optional_project (test_probe.ProbeChecks.test_frozen_sources_match_identity_and_optional_project) ... ok
+test_isolated_bootstrap_ignores_pythonpath_and_pth (test_probe.ProbeChecks.test_isolated_bootstrap_ignores_pythonpath_and_pth) ... ok
+test_isolation_requires_I_and_S (test_probe.ProbeChecks.test_isolation_requires_I_and_S) ... ok
+test_nonexistent_package_root_fails (test_probe.ProbeChecks.test_nonexistent_package_root_fails) ... ok
+test_source_identity_detects_change (test_probe.ProbeChecks.test_source_identity_detects_change) ... ok
+test_timeout_is_not_pass (test_probe.ProbeChecks.test_timeout_is_not_pass) ... ok
+test_cleanup_failure_cannot_pass (test_revision.CleanupChecks.test_cleanup_failure_cannot_pass) ... ok
+test_keyboard_interrupt_bounded_cleanup (test_revision.CleanupChecks.test_keyboard_interrupt_bounded_cleanup) ... ok
+test_posix_cleanup_targets_only_owned_group (test_revision.CleanupChecks.test_posix_cleanup_targets_only_owned_group) ... ok
+test_term_bounded_cleanup (test_revision.CleanupChecks.test_term_bounded_cleanup) ... ok
+test_term_during_spawn_is_deferred_until_handle_exists (test_revision.CleanupChecks.test_term_during_spawn_is_deferred_until_handle_exists) ... ok
+test_term_handler_routes_to_cleanup (test_revision.CleanupChecks.test_term_handler_routes_to_cleanup) ... ok
+test_timeout_bounded_cleanup (test_revision.CleanupChecks.test_timeout_bounded_cleanup) ... ok
+test_wait_exception_bounded_cleanup (test_revision.CleanupChecks.test_wait_exception_bounded_cleanup) ... ok
+test_linux_child_does_not_inherit_blocked_term_or_int (test_revision.LinuxGroupChecks.test_linux_child_does_not_inherit_blocked_term_or_int) ... skipped 'Linux process groups NOT_RUN on this host'
+test_linux_sigint_cleans_ignoring_descendants_and_preserves_other_session (test_revision.LinuxGroupChecks.test_linux_sigint_cleans_ignoring_descendants_and_preserves_other_session) ... skipped 'Linux process groups NOT_RUN on this host'
+test_linux_term_cleans_ignoring_descendants_and_preserves_other_session (test_revision.LinuxGroupChecks.test_linux_term_cleans_ignoring_descendants_and_preserves_other_session) ... skipped 'Linux process groups NOT_RUN on this host'
+test_actual_35_rejected_despite_env_36 (test_revision.ThreadChecks.test_actual_35_rejected_despite_env_36) ... ok
+test_actual_36_passes_without_setter (test_revision.ThreadChecks.test_actual_36_passes_without_setter) ... ok
+test_any_tid_outside_selected_rejected (test_revision.ThreadChecks.test_any_tid_outside_selected_rejected) ... ok
+test_duplicate_selected_rejected (test_revision.ThreadChecks.test_duplicate_selected_rejected) ... ok
+test_failed_observation_retained (test_revision.ThreadChecks.test_failed_observation_retained) ... ok
+test_incomplete_snapshot_rejected (test_revision.ThreadChecks.test_incomplete_snapshot_rejected) ... ok
+test_one_thread_pinned_inside_boundary_is_valid (test_revision.ThreadChecks.test_one_thread_pinned_inside_boundary_is_valid) ... ok
+test_openblas_36_rejected (test_revision.ThreadChecks.test_openblas_36_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.660s
+
+OK (skipped=3)

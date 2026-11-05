@@ -1,0 +1,35 @@
+{
+  "scope": "PREP_ONLY",
+  "status": "FAILED",
+  "stages": [
+    {
+      "status": "FAILED",
+      "exit_code": 1,
+      "elapsed_s": 0.17199999999138527,
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-I",
+        "-S",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S06\\candidate\\probe.py",
+        "--stage",
+        "imports",
+        "--out",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S06\\evidence\\local_probe_r1\\imports\\result.json",
+        "--package-root",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S06\\baseline"
+      ],
+      "process_group_cleanup": false,
+      "stage": "imports"
+    }
+  ],
+  "not_run": [
+    "pointwise",
+    "conv",
+    "block",
+    "kml-explain",
+    "kml"
+  ],
+  "budget_s": 600,
+  "full_model": "NOT_RUN"
+}
