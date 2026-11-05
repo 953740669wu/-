@@ -1,0 +1,355 @@
+test_atomic_publish_preserves_exact_bytes (__main__.HandoffTests.test_atomic_publish_preserves_exact_bytes) ... ERROR
+test_blank_live_identity_rejected (__main__.HandoffTests.test_blank_live_identity_rejected) ... ERROR
+test_corrupt_raw_rejected (__main__.HandoffTests.test_corrupt_raw_rejected) ... ERROR
+test_empty_raw_rejected (__main__.HandoffTests.test_empty_raw_rejected) ... ERROR
+test_incomplete_committed_file_rejected (__main__.HandoffTests.test_incomplete_committed_file_rejected) ... ERROR
+test_live_context_mismatch_rejected (__main__.HandoffTests.test_live_context_mismatch_rejected) ... ERROR
+test_missing_raw_after_commit_rejected (__main__.HandoffTests.test_missing_raw_after_commit_rejected) ... ERROR
+test_missing_timeout (__main__.HandoffTests.test_missing_timeout) ... ERROR
+test_native_identity_is_required_and_not_overwritten (__main__.HandoffTests.test_native_identity_is_required_and_not_overwritten) ... ERROR
+test_nonrunning_or_nonexclusive_rejected (__main__.HandoffTests.test_nonrunning_or_nonexclusive_rejected) ... ERROR
+test_normal_atomic_receipt (__main__.HandoffTests.test_normal_atomic_receipt) ... ERROR
+test_old_job_rejected (__main__.HandoffTests.test_old_job_rejected) ... ERROR
+test_old_or_future_receipt_rejected (__main__.HandoffTests.test_old_or_future_receipt_rejected) ... ERROR
+test_other_cpu_authority_rejected (__main__.HandoffTests.test_other_cpu_authority_rejected) ... ERROR
+test_other_host_rejected (__main__.HandoffTests.test_other_host_rejected) ... ERROR
+test_other_request_nonce_rejected (__main__.HandoffTests.test_other_request_nonce_rejected) ... ERROR
+test_partial_temporary_file_is_not_committed (__main__.HandoffTests.test_partial_temporary_file_is_not_committed) ... ERROR
+test_publisher_preserves_raw_and_exact_bounded_command (__main__.HandoffTests.test_publisher_preserves_raw_and_exact_bounded_command) ... ERROR
+test_publisher_rejects_old_job_before_query (__main__.HandoffTests.test_publisher_rejects_old_job_before_query) ... ERROR
+test_query_failure_keeps_original_without_ready (__main__.HandoffTests.test_query_failure_keeps_original_without_ready) ... ERROR
+test_query_timeout_keeps_partial_output_without_ready (__main__.HandoffTests.test_query_timeout_keeps_partial_output_without_ready) ... ERROR
+test_raw_without_commit_times_out (__main__.HandoffTests.test_raw_without_commit_times_out) ... ERROR
+test_request_digest_mismatch_rejected (__main__.HandoffTests.test_request_digest_mismatch_rejected) ... ERROR
+test_wrong_cpu_memory_wall_or_multiple_nodes_rejected (__main__.HandoffTests.test_wrong_cpu_memory_wall_or_multiple_nodes_rejected) ... ERROR
+test_wrong_resource_limits_rejected (__main__.HandoffTests.test_wrong_resource_limits_rejected) ... ERROR
+
+======================================================================
+ERROR: test_atomic_publish_preserves_exact_bytes (__main__.HandoffTests.test_atomic_publish_preserves_exact_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpo5ix8xd7\\.scheduler_request.json.partial.24605e1e1c3e4a28bf0b6e3ff6c5a1fc' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpo5ix8xd7\\scheduler_request.json'
+
+======================================================================
+ERROR: test_blank_live_identity_rejected (__main__.HandoffTests.test_blank_live_identity_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp25f4xmpe\\.scheduler_request.json.partial.d8e4869b017141acaa5124e0f7166ea7' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp25f4xmpe\\scheduler_request.json'
+
+======================================================================
+ERROR: test_corrupt_raw_rejected (__main__.HandoffTests.test_corrupt_raw_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmptcxgt038\\.scheduler_request.json.partial.7108d2248e3740f6a613c68cb0f54316' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmptcxgt038\\scheduler_request.json'
+
+======================================================================
+ERROR: test_empty_raw_rejected (__main__.HandoffTests.test_empty_raw_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmppyztdeso\\.scheduler_request.json.partial.cbcf408cb7d646818d06e026b0005754' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmppyztdeso\\scheduler_request.json'
+
+======================================================================
+ERROR: test_incomplete_committed_file_rejected (__main__.HandoffTests.test_incomplete_committed_file_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp8xtrtq1a\\.scheduler_request.json.partial.e2ea7bc0591542659d9856e42da14bbe' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp8xtrtq1a\\scheduler_request.json'
+
+======================================================================
+ERROR: test_live_context_mismatch_rejected (__main__.HandoffTests.test_live_context_mismatch_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpuhy4q5kg\\.scheduler_request.json.partial.a619099c08b94293bd731210645827ae' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpuhy4q5kg\\scheduler_request.json'
+
+======================================================================
+ERROR: test_missing_raw_after_commit_rejected (__main__.HandoffTests.test_missing_raw_after_commit_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpyi48e67a\\.scheduler_request.json.partial.3266533279f0442f9bb0911d3aa536a8' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpyi48e67a\\scheduler_request.json'
+
+======================================================================
+ERROR: test_missing_timeout (__main__.HandoffTests.test_missing_timeout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpslcosxuu\\.scheduler_request.json.partial.f93fd607f01445d4baf9b0e7d905b841' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpslcosxuu\\scheduler_request.json'
+
+======================================================================
+ERROR: test_native_identity_is_required_and_not_overwritten (__main__.HandoffTests.test_native_identity_is_required_and_not_overwritten)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpzj5bbvna\\.scheduler_request.json.partial.f26c8b8f54d445c5921639fc64d18bec' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpzj5bbvna\\scheduler_request.json'
+
+======================================================================
+ERROR: test_nonrunning_or_nonexclusive_rejected (__main__.HandoffTests.test_nonrunning_or_nonexclusive_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpwbpqc37q\\.scheduler_request.json.partial.0b2a77aae8b9497bacd3c80bdf22ded8' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpwbpqc37q\\scheduler_request.json'
+
+======================================================================
+ERROR: test_normal_atomic_receipt (__main__.HandoffTests.test_normal_atomic_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpu5ne7kzd\\.scheduler_request.json.partial.c060dafb172140b28a92e4174e458ebc' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpu5ne7kzd\\scheduler_request.json'
+
+======================================================================
+ERROR: test_old_job_rejected (__main__.HandoffTests.test_old_job_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpu5z5lsxz\\.scheduler_request.json.partial.6a8ad9bc7ec14ec289b998deb4cdcaae' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpu5z5lsxz\\scheduler_request.json'
+
+======================================================================
+ERROR: test_old_or_future_receipt_rejected (__main__.HandoffTests.test_old_or_future_receipt_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmppel80bh2\\.scheduler_request.json.partial.3fd14251d2684025a145969dc3396cb1' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmppel80bh2\\scheduler_request.json'
+
+======================================================================
+ERROR: test_other_cpu_authority_rejected (__main__.HandoffTests.test_other_cpu_authority_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpi49b_552\\.scheduler_request.json.partial.ea6d8bfbc4c442fd89f092833fcae630' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpi49b_552\\scheduler_request.json'
+
+======================================================================
+ERROR: test_other_host_rejected (__main__.HandoffTests.test_other_host_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpwm99vnl0\\.scheduler_request.json.partial.884cf00fa8024c7eb272a3f8f6e7d4a0' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpwm99vnl0\\scheduler_request.json'
+
+======================================================================
+ERROR: test_other_request_nonce_rejected (__main__.HandoffTests.test_other_request_nonce_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp9asrj8h_\\.scheduler_request.json.partial.b69543a821974f13a4ecf61b2af7b571' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp9asrj8h_\\scheduler_request.json'
+
+======================================================================
+ERROR: test_partial_temporary_file_is_not_committed (__main__.HandoffTests.test_partial_temporary_file_is_not_committed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpcw168tn5\\.scheduler_request.json.partial.c55a308d9f1c4f3c8485811442557961' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpcw168tn5\\scheduler_request.json'
+
+======================================================================
+ERROR: test_publisher_preserves_raw_and_exact_bounded_command (__main__.HandoffTests.test_publisher_preserves_raw_and_exact_bounded_command)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp5ue47mq0\\.scheduler_request.json.partial.4febb0e5be844f9a8907d9d15bd03d5c' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp5ue47mq0\\scheduler_request.json'
+
+======================================================================
+ERROR: test_publisher_rejects_old_job_before_query (__main__.HandoffTests.test_publisher_rejects_old_job_before_query)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpu5jrv083\\.scheduler_request.json.partial.0453f0f5dca74a10872f0499b1942a33' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpu5jrv083\\scheduler_request.json'
+
+======================================================================
+ERROR: test_query_failure_keeps_original_without_ready (__main__.HandoffTests.test_query_failure_keeps_original_without_ready)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp2p6lfyek\\.scheduler_request.json.partial.8ac1e47a46aa4b84bd907b2cdfe97a41' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp2p6lfyek\\scheduler_request.json'
+
+======================================================================
+ERROR: test_query_timeout_keeps_partial_output_without_ready (__main__.HandoffTests.test_query_timeout_keeps_partial_output_without_ready)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpdyfogdu4\\.scheduler_request.json.partial.63672c0ec6de43b78f512b1839881770' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpdyfogdu4\\scheduler_request.json'
+
+======================================================================
+ERROR: test_raw_without_commit_times_out (__main__.HandoffTests.test_raw_without_commit_times_out)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp5skiamsg\\.scheduler_request.json.partial.701816f5eeb54f9699f36d9fe7b48d85' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp5skiamsg\\scheduler_request.json'
+
+======================================================================
+ERROR: test_request_digest_mismatch_rejected (__main__.HandoffTests.test_request_digest_mismatch_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpcnp7h17x\\.scheduler_request.json.partial.bda3cb66136740d8afcc5f18fc657b99' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpcnp7h17x\\scheduler_request.json'
+
+======================================================================
+ERROR: test_wrong_cpu_memory_wall_or_multiple_nodes_rejected (__main__.HandoffTests.test_wrong_cpu_memory_wall_or_multiple_nodes_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp7ukt6g32\\.scheduler_request.json.partial.75a541950a7d4f6ba23194644752eb18' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmp7ukt6g32\\scheduler_request.json'
+
+======================================================================
+ERROR: test_wrong_resource_limits_rejected (__main__.HandoffTests.test_wrong_resource_limits_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\tests\test_scheduler_handoff.py", line 23, in setUp
+    self.req = h.create_request(self.root, self.ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 45, in create_request
+    atomic_write(root / 'scheduler_request.json', encode(request))
+  File "C:\Users\A\AppData\Local\Packages\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\AC\Temp\S07_WRAPPER_R3_review_kk1twtnv\payload\scheduler_handoff.py", line 31, in atomic_write
+    os.replace(str(temporary), str(path))
+PermissionError: [WinError 5] ¾Ü¾ø·ÃÎÊ¡£: 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpd5mza7qo\\.scheduler_request.json.partial.048af4b6726144508ee126e5e2755230' -> 'C:\\Users\\A\\AppData\\Local\\Packages\\sandbox.{b94cd3b5-3f04-4987-bb84-7271e246eff3}\\AC\\Temp\\S07_WRAPPER_R3_review_kk1twtnv\\payload\\evidence\\tmpd5mza7qo\\scheduler_request.json'
+
+----------------------------------------------------------------------
+Ran 25 tests in 0.077s
+
+FAILED (errors=25)

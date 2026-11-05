@@ -1,0 +1,60 @@
+{
+  "indexes": {
+    "S02_R7": 58,
+    "S00_resume": 126,
+    "S07_wrapper": 9
+  },
+  "packages": {
+    "S02_R7": {
+      "sha256": "bb405ccde523e63ea5db98aa3ab2b5ab622ded3e0f1711ec312ac8d29c014092",
+      "bytes": 55378,
+      "files": 24
+    },
+    "S07_wrapper_R3": {
+      "sha256": "08e0c921e33631c9e98ac1465cf854a74c1a353a08ecbc13f480b42f296da821",
+      "bytes": 71154,
+      "files": 10
+    }
+  },
+  "local_tests": {
+    "S02_protocol": {
+      "pass": 11
+    },
+    "S02_small_native_torch36": {
+      "pass": 3
+    },
+    "S07_handoff_workspace_copy": {
+      "pass": 25
+    },
+    "S07_handoff_system_temp_copy": "25 setup errors: Windows os.replace access denied; workspace copy passed unchanged"
+  },
+  "acceptance": {
+    "S02_R7": "local five-update preparation accepted for one bounded strict C2 comparison; memory remains gated",
+    "S07_wrapper_R3": "local wrapper accepted for one bounded two-domain tiny communication run; real Linux handoff/communication not run",
+    "S06_terminal": "fixed /usr/bin/g++ dependency preflight failed; candidate not reached; no retry authorized"
+  },
+  "S02_byte_identical_R6": [
+    "CASE_MANIFEST.json",
+    "INPUT_PAIRING_PROTOCOL.md",
+    "VALIDATION_PLAN.md",
+    "baseline/kml_ops.py",
+    "baseline/s4_models.py",
+    "candidate/full_batch_step.py",
+    "candidate/training_step.py",
+    "cpu36_contract.py",
+    "cpu36_guard.py",
+    "diagnostic_common.py",
+    "interfaces/cluster_runtime.env",
+    "memory_metrics.py",
+    "tests/check_equivalence.py"
+  ],
+  "S06_terminal": {
+    "state": "FAILED",
+    "exit": 1,
+    "indexed_files": 46,
+    "archive_files": 47,
+    "sha256": "5437e40a591cdccf5013b0d39f433cb2975a9fdd9593debc7ce36bd69a1a6e1c",
+    "failure": "AssertionError('required executable: /usr/bin/g++')",
+    "six_stages": "NOT_RUN"
+  }
+}
