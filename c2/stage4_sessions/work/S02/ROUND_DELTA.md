@@ -1,6 +1,6 @@
-任务/轮次：S02 / R7_SEQUENCE5_PREPARED_20261105
-状态变化：三组首步评估完成，建议保留实验候选、暂不集成；五步严格/内存入口已准备，新C2与五步计量未运行。
-本轮改动：连续承接同一模型/AdamW五步、逐步完整指标/摘要链、清梯度和失败停止；独立HWM计量及拒绝旧一步PASS的门禁，修订包/SHA/命令和短状态。
-验证增量：3项小型真实Torch36+11项标准库协议通过；真实旧R6单步PASS拒绝；7份保存result身份/49项旧CPU检查复核、语法/LF/包核验通过；新job=0。
-证据：SESSION_STATUS.md / ROUND_DELTA.md / round7_seq5_20261105T082315Z/REPORT.md、package/PACKAGE_MANIFEST.json、C2_HANDOFF.md及evidence。
-阻塞与下一步：无本地代码阻塞；待协调核包及S00五步严格对照，通过后另排独立五步内存。原算法/阈值保持，五步不称稳态，不自动集成或上集群。
+任务/轮次：S02 / CHECKPOINT_CLOSEOUT_20261105。
+状态变化：五步数值5315/5315通过、独立五步内存完成；checkpoint保留可选实验方案，暂不默认集成。
+本轮改动：仅更新SESSION_STATUS.md和ROUND_DELTA.md；记录第2—5步中位峰值降13.03%/耗时增36.22%、峰值仍上升；候选及旧失败证据保留，生产默认和代码未改。
+验证增量：本轮无新增实验、模型检查或集群job；依据协调交接与S00的2040203/2040363摘要记录已完成结果，仅检查两份文档内容/格式，不称独立重审原始数据。
+证据：SESSION_STATUS.md / ROUND_DELTA.md / ../S00/SEQUENCE5_MEMORY_REPORT.md、../S00/SEQUENCE5_S07_R3_REPORT.md及各自保存的六行摘要。
+阻塞与下一步：本评估收尾后待命；后续对照基线fp32/CKPT0，仅固定case五步短序列证据，不称稳态，不新增长跑/集群任务或默认集成。
