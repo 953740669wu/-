@@ -1,5 +1,7 @@
 # 阶段四独立 session 执行计划
 
+日常交接先读[短交接约定](HANDOFF_PROTOCOL.md)、[当前总任务表](work/COORDINATION/STATUS.md)及自己任务的SESSION_STATUS.md/ROUND_DELTA.md。以下保留原始计划背景；仅在本轮目标、验收或排查需要时展开相应章节，不反复通读历史。
+
 日期：2026-11-04。状态：仅完成任务拆分，尚未开始优化、连接集群或提交作业。
 
 项目根目录：`E:\eitfm_c2_stages2-4_2026-11-03`。
