@@ -1,0 +1,124 @@
+{
+  "name": "S04_BF16_BLOCK_R1.zip",
+  "sha256": "323fecc6f477465ab6f418e4ee4cb6eade91e4c852b2d3f27d1dd0f03fbeab84",
+  "bytes": 57341,
+  "files": {
+    "ARTIFACT_SHA256.txt": {
+      "sha256": "59bc55b8f593023489661643f9895ec9f3c1f7809037e2a95271d770769732f8",
+      "bytes": 2446
+    },
+    "baseline/kml_ops.py": {
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+      "bytes": 10255
+    },
+    "baseline/s4_models.py": {
+      "sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+      "bytes": 14121
+    },
+    "candidate/kml_ops.py": {
+      "sha256": "dcf4ea59ea0d393baa90da7e2fa761b7ccb260749e934752c1e6ee88bb374b78",
+      "bytes": 12432
+    },
+    "candidate/s4_models.py": {
+      "sha256": "0cbb53448da98d8249d496d197b1d44c9d8d894f0f4e5439c36f15139b2354ea",
+      "bytes": 15966
+    },
+    "diff/S04_BF16_BLOCK.patch": {
+      "sha256": "1b120fe6eb6e5b21427ff0fd48e73eda2eda71460bc910220b6bc2ecbcefe037",
+      "bytes": 4550
+    },
+    "DTYPE_INTERFACE.md": {
+      "sha256": "58a697a0aeb2bc5f26c04f4ec82e6c99b3417fac6c44491ab2b7b1e05f6ca31f",
+      "bytes": 3895
+    },
+    "evidence/attention_fp32_control.json": {
+      "sha256": "06a465ceaba0cce15694aa494abd31f96c3d31f1249b4c309387f3d69b2b4701",
+      "bytes": 1615
+    },
+    "evidence/block_numeric.json": {
+      "sha256": "894faf757275e65aaa20e9bc9b37b7cd5abdbb6ef44aba717d873c7376d2c91b",
+      "bytes": 28089
+    },
+    "evidence/block_numeric.stdout.txt": {
+      "sha256": "2a34cc3a036c7d9316fdda744af653ee29607aacfad9ecb9000b19a0e972aeea",
+      "bytes": 423
+    },
+    "evidence/local_environment.json": {
+      "sha256": "8b896e0c188e27b2f014ab42370358650da9c3a420d4414429475893a8ac9d57",
+      "bytes": 2473
+    },
+    "evidence/numeric_summary.json": {
+      "sha256": "78452259d81bcdb320a5a0a87d18517542712b2573dff2afaceb1d7f808357b9",
+      "bytes": 921
+    },
+    "evidence/PRE_IMPLEMENTATION_FREEZE.json": {
+      "sha256": "24abcaff290791cf5ab678cee1c0f4d051235409143157639e4352fc8b758298",
+      "bytes": 472
+    },
+    "evidence/reference_weights_check.json": {
+      "sha256": "5022c7a1637ff9fe3a7f5c6a9adb03b45043eeba4cc0336969a62dd984626faf",
+      "bytes": 5719
+    },
+    "evidence/tests_after.txt": {
+      "sha256": "4b192cb1932ff09157b4e857a132ac74852ec7d74386b2f42c1b0efe9b2355f5",
+      "bytes": 1383
+    },
+    "evidence/tests_before.txt": {
+      "sha256": "5a795fd9ee0f46f1439bb1cbdd5806f5c135a70f5ce28a2932a1a50de20913e4",
+      "bytes": 5213
+    },
+    "evidence/tests_final.txt": {
+      "sha256": "cc17ca549152bb1662e296874fa587ca41bad1c61c92a1c74fc615282c5829dd",
+      "bytes": 1513
+    },
+    "NUMERICAL_PLAN.md": {
+      "sha256": "f906d2119cb42d44aee5009a0c6c6b53c66ab38964a8229ff2972780f3ff2f7a",
+      "bytes": 3902
+    },
+    "REPORT.md": {
+      "sha256": "c9a72f6c531c641fceb183976cb99d12a7c810efd10ed1a1a87c88a9ab551dd9",
+      "bytes": 7173
+    },
+    "ROUND_DELTA.md": {
+      "sha256": "d96d962da56235801c8c64af5be05bf0a4cbc281a38e9a3b7363d5c1af9518e9",
+      "bytes": 770
+    },
+    "SESSION_STATUS.md": {
+      "sha256": "c3534b5c52578f0b693834e2044c6c23fd611bd4f3cefdd15d7a04fe20b62ce8",
+      "bytes": 1802
+    },
+    "SMALL_TRIAL_PROPOSAL.md": {
+      "sha256": "eb3a1e5d4ad0a6931f67e8e418b3d2ee6b209908dea2b1c6d53f3912e044846d",
+      "bytes": 3832
+    },
+    "SOURCE_MANIFEST.json": {
+      "sha256": "c4d4c9bc6aa28637df046d2d5c648b13abc443cc234f3adf572bbc24ff7b1e50",
+      "bytes": 3604
+    },
+    "tests/check_block.py": {
+      "sha256": "168e495407a2550400566960ef98c2a928bb0c38fd5cc03de1054c2fe07ac127",
+      "bytes": 4036
+    },
+    "tests/common.py": {
+      "sha256": "adfb085a14ea30a50076680a51c865dc7a6d6e48502b047cf5a5c001fd99a6b6",
+      "bytes": 2170
+    },
+    "tests/test_attention_boundary.py": {
+      "sha256": "9e33a3fd83c52807a381cf9db75e5626f8af459ad118e5888f9a513a1cdb8020",
+      "bytes": 1806
+    },
+    "tests/test_contract.py": {
+      "sha256": "52a2f0c7e9b6c613f6bfe9f5bb9be05104fdc8cccda05b7c6dd418c35473a840",
+      "bytes": 4244
+    },
+    "verify_delivery.py": {
+      "sha256": "a8a8c38c8b30ce6ad385e7f163eba5662b6fdf282fb0b154f9ff347734cbd210",
+      "bytes": 2768
+    }
+  },
+  "scope": "LOCAL_ONLY_NUMERICAL_FAIL_NO_DEPLOYMENT_ACCEPTANCE",
+  "excluded": [
+    "package/*",
+    "evidence/delivery_verification.json"
+  ]
+}

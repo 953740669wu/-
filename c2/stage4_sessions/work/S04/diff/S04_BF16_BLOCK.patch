@@ -1,0 +1,97 @@
+--- baseline/s4_models.py
++++ candidate/s4_models.py
+@@ -275,6 +275,40 @@
+     print(json.dumps(out, indent=1, default=float))
+ 
+ 
++class BF16EncoderBlock(nn.TransformerEncoderLayer):
++    """One original encoder block; explicit bf16 boundary, fp32 stable islands."""
++    def __init__(self, backend):
++        super().__init__(512, 8, 2048, 0.0, batch_first=True, norm_first=True)
++        if backend not in ('torch_reference', 'kml'):
++            raise ValueError('explicit backend required')
++        self.backend = backend
++
++    def _attention(self, qkv):
++        # Keep the original SDPA kernel, fp32 score/softmax/backward path.
++        B, M, _ = qkv.shape
++        q, k, v = (t.view(B, M, 8, 64).transpose(1, 2) for t in qkv.chunk(3, -1))
++        return F.scaled_dot_product_attention(q, k, v, dropout_p=0.0).transpose(
++            1, 2).contiguous().view(B, M, 512)
++
++    def forward(self, src, src_mask=None, src_key_padding_mask=None, is_causal=False):
++        if (src.dtype != torch.bfloat16 or src.device.type != 'cpu' or src.ndim != 3
++                or src.shape[-1] != 512 or not src.is_contiguous()
++                or src_mask is not None or src_key_padding_mask is not None or is_causal):
++            raise ValueError('contiguous CPU bf16 [B,M,512], no masks/causal required')
++        from kml_ops import chain_bf16_linear
++        linear = lambda x, w, b: chain_bf16_linear(x, w, b, self.backend)
++        residual = src.float()
++        n = self.norm1(residual).bfloat16()
++        qkv = linear(n, self.self_attn.in_proj_weight, self.self_attn.in_proj_bias)
++        a = self._attention(qkv.float()).bfloat16()
++        a = linear(a, self.self_attn.out_proj.weight, self.self_attn.out_proj.bias)
++        residual = residual + a.float()
++        f = self.norm2(residual).bfloat16()
++        f = self.activation(linear(f, self.linear1.weight, self.linear1.bias))
++        f = linear(f, self.linear2.weight, self.linear2.bias)
++        return (residual + f.float()).bfloat16()
++
++
+ if __name__ == '__main__':
+     os.makedirs(os.path.join(O, 'reports'), exist_ok=True)
+     main()
+--- baseline/kml_ops.py
++++ candidate/kml_ops.py
+@@ -200,3 +200,51 @@
+ def patch_linear():
+     """Route every F.linear call (nn.Linear, nn.MultiheadAttention projections) through KML."""
+     F.linear = kml_linear
++
++
++# S04 isolated candidate: no global patch, persistent bf16 activation interface.
++def _chain_gemm(a, b, backend, ta=False, tb=False):
++    if backend == 'torch_reference':
++        # Quantization oracle only: deliberately NOT native bf16/KML performance.
++        a, b = a.float(), b.float()
++        return (a.t() if ta else a) @ (b.t() if tb else b)
++    if backend != 'kml':
++        raise ValueError('explicit torch_reference or kml backend required')
++    import sys
++    if sys.platform != 'linux' or _lib is None:
++        raise RuntimeError('actual Linux KML required; no torch fallback')
++    # bf16 forward/dX use fp32 C; dW operands are already fp32 -> SGEMM.
++    return gemm(a, b, ta=ta, tb=tb, acc32=a.dtype == torch.bfloat16)
++
++
++class _ChainBF16LinearFn(torch.autograd.Function):
++    @staticmethod
++    def forward(ctx, x, w, b, backend):
++        x2 = x.reshape(-1, x.shape[-1]).contiguous()
++        wc = w.bfloat16().contiguous()
++        y = _chain_gemm(x2, wc, backend, tb=True)
++        if b is not None:
++            y.add_(b)
++        ctx.save_for_backward(x2, wc)
++        ctx.shape, ctx.hasb, ctx.backend = x.shape, b is not None, backend
++        return y.bfloat16().view(*x.shape[:-1], w.shape[0])
++
++    @staticmethod
++    def backward(ctx, gy):
++        x2, wc = ctx.saved_tensors
++        g = gy.reshape(-1, gy.shape[-1]).contiguous()
++        gx = (_chain_gemm(g, wc, ctx.backend).bfloat16().view(ctx.shape)
++              if ctx.needs_input_grad[0] else None)
++        # Long token reduction always uses fp32 SGEMM, never bf16 bgemm dW.
++        gw = (_chain_gemm(g.float(), x2.float(), ctx.backend, ta=True)
++              if ctx.needs_input_grad[1] else None)
++        gb = g.float().sum(0) if ctx.hasb and ctx.needs_input_grad[2] else None
++        return gx, gw, gb, None
++
++
++def chain_bf16_linear(x, w, b, backend):
++    if (x.device.type != 'cpu' or w.device.type != 'cpu' or x.dtype != torch.bfloat16
++            or w.dtype != torch.float32 or (b is not None and
++            (b.dtype != torch.float32 or b.device.type != 'cpu'))):
++        raise ValueError('CPU bf16 activation / fp32 master weights and bias required')
++    return _ChainBF16LinearFn.apply(x, w, b, backend)

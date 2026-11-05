@@ -1,0 +1,29 @@
+{
+  "status": "PASS_SOURCE_PACKAGE_EVIDENCE_AUDIT_ONLY",
+  "round": "S04_R3",
+  "protected_prior_files": 71,
+  "fp32_checks": 83,
+  "fp32_fail": 0,
+  "old_seven_resolved": 7,
+  "new_failures": 0,
+  "bf16_fail": 28,
+  "alignment_attempts": 1,
+  "proposals": 1,
+  "proposal_implemented": false,
+  "syntax": [
+    "baseline/kml_ops.py",
+    "baseline/s4_models.py",
+    "candidate/kml_ops.py",
+    "candidate/s4_models.py",
+    "tests/check_alignment.py",
+    "tests/common.py",
+    "tests/test_alignment.py",
+    "verify_delivery.py"
+  ],
+  "package_files": 30,
+  "package_sha256": "15395381bc94d6dcdf773eaf33313ef861cc6174c17cd6dc8ad16dd33cfbe295",
+  "package_bytes": 58205,
+  "cluster_jobs": 0,
+  "performance": "NOT_RUN",
+  "full_model_runs": 0
+}

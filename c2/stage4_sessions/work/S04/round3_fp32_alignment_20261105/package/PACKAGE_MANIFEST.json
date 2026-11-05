@@ -1,0 +1,132 @@
+{
+  "name": "S04_R3_FP32_ALIGNMENT.zip",
+  "sha256": "15395381bc94d6dcdf773eaf33313ef861cc6174c17cd6dc8ad16dd33cfbe295",
+  "bytes": 58205,
+  "files": {
+    "ALIGNMENT_PLAN.md": {
+      "sha256": "418fdc2ccdd5653b6af020f0e2f7b62fe0553a64aa917ef6460a77c6574ce392",
+      "bytes": 2252
+    },
+    "ARTIFACT_SHA256.txt": {
+      "sha256": "376c5e3aaf74d32056edf0c58cb876addc353ef5a42ef81513191f808aee360d",
+      "bytes": 2671
+    },
+    "baseline/kml_ops.py": {
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+      "bytes": 10255
+    },
+    "baseline/s4_models.py": {
+      "sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+      "bytes": 14121
+    },
+    "candidate/kml_ops.py": {
+      "sha256": "53af9f59015f51fdf892a2d33ed37bd358348ee5b75c9662e6d0e285841ba4fc",
+      "bytes": 12690
+    },
+    "candidate/s4_models.py": {
+      "sha256": "b55001585b846fcd2183de99b2f31d6a5888ea70c9cc43ac116019b4a18f1d1c",
+      "bytes": 16873
+    },
+    "diff/R2_TO_R3_FP32_ALIGNMENT.patch": {
+      "sha256": "77ccc0e5c3393dfda6ceb74cef59c122e85e90eb4797f817d5595bb86ef176c3",
+      "bytes": 2587
+    },
+    "evidence/alignment.stdout.txt": {
+      "sha256": "0105d06b4c4ac699ec6852a333e80fab91e069041d509d370e655cb51e8a4523",
+      "bytes": 1263
+    },
+    "evidence/bf16_unchanged.json": {
+      "sha256": "7d52c63ec09728a65804bb31bb9547b375cf94efc16aa318ea5041d6147b82e2",
+      "bytes": 25450
+    },
+    "evidence/failure_transitions.json": {
+      "sha256": "8324551145e706ce55af93e6f7e1576d5aea1aa04fa2896cb30234d07b1a6581",
+      "bytes": 13693
+    },
+    "evidence/fp32_aligned.json": {
+      "sha256": "826ff372f466ff2f3a16857a4cc10a969882323a818d1dea8517933f999e75e0",
+      "bytes": 23692
+    },
+    "evidence/library_identity.json": {
+      "sha256": "a5bfb9d6aecb02d36cd4b8cf8a4753344645221946f9b0316fd06e60aa2248c9",
+      "bytes": 1063
+    },
+    "evidence/PRE_IMPLEMENTATION_FREEZE.json": {
+      "sha256": "523f7c9b4203ee3ac04ba61ff3be5be9022a3ca605dc66db29d9f3c86575426f",
+      "bytes": 285
+    },
+    "evidence/R1_R2_PROTECTED_SHA256.json": {
+      "sha256": "d381991279b661d9e4fa2a11a9bc1fcade3aebbefdcb03abe9a5d552ad953ffe",
+      "bytes": 8559
+    },
+    "evidence/ROOT_R2_ROUND_DELTA.md": {
+      "sha256": "b7dc8bc7947d982aac147f9762a3e5b6699b51c1358b84dcb3bf59691625732a",
+      "bytes": 925
+    },
+    "evidence/ROOT_R2_SESSION_STATUS.md": {
+      "sha256": "f95b26d4842e02b8aa6c836bf17a4cf89a26cff58043679ecbccdafb675cc056",
+      "bytes": 1810
+    },
+    "evidence/summary.json": {
+      "sha256": "bd9c17d00d91b2cce6dcc0de5848e7d6f1b09fd4642cb67292c1df7987c277dd",
+      "bytes": 977
+    },
+    "evidence/tests_after.txt": {
+      "sha256": "6fe70a4d3e57c5740d424a6b2de1589158ab762678e0ec9cb4ae1435fd3634d3",
+      "bytes": 661
+    },
+    "evidence/tests_before.txt": {
+      "sha256": "31f07dfbae79b4ddb83f15fac9e4b39e50fa7ec47a7aacfe1ff229cf36751766",
+      "bytes": 1922
+    },
+    "evidence/torch_source_identity.json": {
+      "sha256": "e3e9ffa1535e242d2bf07a343cff0caffa6d26cb4938c28619b0f5b40ad04bf0",
+      "bytes": 1910
+    },
+    "evidence/unchanged_components.json": {
+      "sha256": "57720bf746b1e0bd47ea15f17278d116c716df2dbc3879c9611a5631352eeb0f",
+      "bytes": 153
+    },
+    "PRECISION_BOUNDARY_PROPOSAL.md": {
+      "sha256": "78735370d907238cc00f54a58b880eefc2cb7183de0aa90801fbe22bec3f0b15",
+      "bytes": 4330
+    },
+    "REPORT.md": {
+      "sha256": "42e0867894df2f78f74ed8a3a704e0d65b4d111c580f53c47b87e3693a167c2c",
+      "bytes": 6950
+    },
+    "ROUND_DELTA.md": {
+      "sha256": "6b2d17f057d8c77436f5b0d40d337f31ad0e547adf0923ccf73b2b728aa67d92",
+      "bytes": 733
+    },
+    "SESSION_STATUS.md": {
+      "sha256": "3dbf954b4a56c26f9c7d9c4b13728e3b99c4d14387007a7cb94b9b81214e862b",
+      "bytes": 1404
+    },
+    "SOURCE_MANIFEST.json": {
+      "sha256": "aa922bbf898524e878e369a500dff1c1ae7d18e005871926605e28f70c3b1ce5",
+      "bytes": 3165
+    },
+    "tests/check_alignment.py": {
+      "sha256": "14e11fecb189556f8c7941f1ca65da84ec4ff7aae14fc94f3110aef7d89f1d81",
+      "bytes": 7506
+    },
+    "tests/common.py": {
+      "sha256": "adfb085a14ea30a50076680a51c865dc7a6d6e48502b047cf5a5c001fd99a6b6",
+      "bytes": 2170
+    },
+    "tests/test_alignment.py": {
+      "sha256": "98341e114aa118ab444d7b029aa55b29a6dc4eb893cef68cfa3b1b25a8c13d44",
+      "bytes": 2311
+    },
+    "verify_delivery.py": {
+      "sha256": "6147131eb3b1782727a25e1f464fadf583f94a2e2620e515b89a1c28802b6bcd",
+      "bytes": 3831
+    }
+  },
+  "scope": "LOCAL_FP32_CONTROL_PASS_ONLY_BF16_FAIL_P1_NOT_IMPLEMENTED",
+  "excluded": [
+    "package/*",
+    "evidence/delivery_verification.json"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "original_F_linear_matches_addmm": true,
+  "split_mm_add_matches_original": false,
+  "split_vs_fused": {
+    "name": "linear1.split_vs_fused",
+    "reference_norm": 152.86737438566755,
+    "max_abs": 2.384185791015625e-07,
+    "rms_abs": 3.128625982602649e-08,
+    "l2_relative": 5.400615718261777e-08,
+    "limit": 2e-06,
+    "passed": true
+  },
+  "changed_relu_gates": 0,
+  "conclusion": "Same operands; only fp32 fused vs split bias epilogue differs."
+}

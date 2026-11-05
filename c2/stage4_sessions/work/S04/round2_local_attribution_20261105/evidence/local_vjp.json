@@ -1,0 +1,194 @@
+[
+  {
+    "name": "block.linear1.weight",
+    "reference_reconstruction": {
+      "name": "block.linear1.weight",
+      "reference_norm": 2.766408939505429,
+      "max_abs": 0.0,
+      "rms_abs": 0.0,
+      "l2_relative": 0.0,
+      "limit": 2e-06,
+      "passed": true
+    },
+    "bf16_reconstruction": {
+      "name": "block.linear1.weight",
+      "reference_norm": 2.7680928666742717,
+      "max_abs": 0.0,
+      "rms_abs": 0.0,
+      "l2_relative": 0.0,
+      "limit": 2e-06,
+      "passed": true
+    },
+    "gate_only_error": {
+      "name": "block.linear1.weight",
+      "reference_norm": 2.766408939505429,
+      "max_abs": 0.010080594103783369,
+      "rms_abs": 0.00012596895010552706,
+      "l2_relative": 0.04662803212713718,
+      "limit": 0.02,
+      "passed": false
+    },
+    "actual_bf16_error": {
+      "name": "block.linear1.weight",
+      "reference_norm": 2.766408939505429,
+      "max_abs": 0.010079849977046251,
+      "rms_abs": 0.00012649353889452418,
+      "l2_relative": 0.04682221127117043,
+      "limit": 0.02,
+      "passed": false
+    },
+    "gate_only_vs_actual_delta": {
+      "name": "block.linear1.weight",
+      "reference_norm": 0.12952938372829487,
+      "max_abs": 0.00014784373342990875,
+      "rms_abs": 1.1139462643578158e-05,
+      "l2_relative": 0.08806349122257406,
+      "limit": 0.02,
+      "passed": false
+    }
+  },
+  {
+    "name": "block.linear1.bias",
+    "reference_reconstruction": {
+      "name": "block.linear1.bias",
+      "reference_norm": 0.12726694071037103,
+      "max_abs": 0.0,
+      "rms_abs": 0.0,
+      "l2_relative": 0.0,
+      "limit": 2e-06,
+      "passed": true
+    },
+    "bf16_reconstruction": {
+      "name": "block.linear1.bias",
+      "reference_norm": 0.12736229281321212,
+      "max_abs": 0.0,
+      "rms_abs": 0.0,
+      "l2_relative": 0.0,
+      "limit": 2e-06,
+      "passed": true
+    },
+    "gate_only_error": {
+      "name": "block.linear1.bias",
+      "reference_norm": 0.12726694071037103,
+      "max_abs": 0.0024166004732251167,
+      "rms_abs": 0.0001259695534143812,
+      "l2_relative": 0.04479349622526003,
+      "limit": 0.02,
+      "passed": false
+    },
+    "actual_bf16_error": {
+      "name": "block.linear1.bias",
+      "reference_norm": 0.12726694071037103,
+      "max_abs": 0.002420975361019373,
+      "rms_abs": 0.00012623845493538996,
+      "l2_relative": 0.044889114880242866,
+      "limit": 0.02,
+      "passed": false
+    },
+    "gate_only_vs_actual_delta": {
+      "name": "block.linear1.bias",
+      "reference_norm": 0.0057129003398336195,
+      "max_abs": 4.0736282244324684e-05,
+      "rms_abs": 8.453266793910835e-06,
+      "l2_relative": 0.0669626919297808,
+      "limit": 0.02,
+      "passed": false
+    }
+  },
+  {
+    "name": "block.norm2.weight",
+    "reference_reconstruction": {
+      "name": "block.norm2.weight",
+      "reference_norm": 0.07151217450672834,
+      "max_abs": 0.0,
+      "rms_abs": 0.0,
+      "l2_relative": 0.0,
+      "limit": 2e-06,
+      "passed": true
+    },
+    "bf16_reconstruction": {
+      "name": "block.norm2.weight",
+      "reference_norm": 0.07133822390371428,
+      "max_abs": 0.0,
+      "rms_abs": 0.0,
+      "l2_relative": 0.0,
+      "limit": 2e-06,
+      "passed": true
+    },
+    "gate_only_error": {
+      "name": "block.norm2.weight",
+      "reference_norm": 0.07151217450672834,
+      "max_abs": 0.0007715579122304916,
+      "rms_abs": 0.00014623872667294112,
+      "l2_relative": 0.04627190646215622,
+      "limit": 0.02,
+      "passed": false
+    },
+    "actual_bf16_error": {
+      "name": "block.norm2.weight",
+      "reference_norm": 0.07151217450672834,
+      "max_abs": 0.0007314453832805157,
+      "rms_abs": 0.00014641964133248436,
+      "l2_relative": 0.04632915030169498,
+      "limit": 0.02,
+      "passed": false
+    },
+    "gate_only_vs_actual_delta": {
+      "name": "block.norm2.weight",
+      "reference_norm": 0.0033130982814040737,
+      "max_abs": 5.3095631301403046e-05,
+      "rms_abs": 1.4671607760397018e-05,
+      "l2_relative": 0.10020245662149732,
+      "limit": 0.02,
+      "passed": false
+    }
+  },
+  {
+    "name": "block.norm2.bias",
+    "reference_reconstruction": {
+      "name": "block.norm2.bias",
+      "reference_norm": 0.07193611692867974,
+      "max_abs": 0.0,
+      "rms_abs": 0.0,
+      "l2_relative": 0.0,
+      "limit": 2e-06,
+      "passed": true
+    },
+    "bf16_reconstruction": {
+      "name": "block.norm2.bias",
+      "reference_norm": 0.07192701993505984,
+      "max_abs": 0.0,
+      "rms_abs": 0.0,
+      "l2_relative": 0.0,
+      "limit": 2e-06,
+      "passed": true
+    },
+    "gate_only_error": {
+      "name": "block.norm2.bias",
+      "reference_norm": 0.07193611692867974,
+      "max_abs": 0.0004512726154644042,
+      "rms_abs": 0.00015148046739146606,
+      "l2_relative": 0.04764799448533334,
+      "limit": 0.02,
+      "passed": false
+    },
+    "actual_bf16_error": {
+      "name": "block.norm2.bias",
+      "reference_norm": 0.07193611692867974,
+      "max_abs": 0.00046126270899549127,
+      "rms_abs": 0.0001530745461332155,
+      "l2_relative": 0.048149409990606226,
+      "limit": 0.02,
+      "passed": false
+    },
+    "gate_only_vs_actual_delta": {
+      "name": "block.norm2.bias",
+      "reference_norm": 0.0034636815871311897,
+      "max_abs": 4.1632913053035736e-05,
+      "rms_abs": 1.2316275360874756e-05,
+      "l2_relative": 0.08045932960112341,
+      "limit": 0.02,
+      "passed": false
+    }
+  }
+]

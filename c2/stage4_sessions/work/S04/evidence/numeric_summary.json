@@ -1,0 +1,45 @@
+{
+  "status": "FAIL_LOCAL_QUANTIZATION_GATE",
+  "groups": {
+    "output": {
+      "checks": 1,
+      "failed": 0,
+      "max_rel": 0.0025562291991418438
+    },
+    "loss": {
+      "checks": 1,
+      "failed": 0,
+      "max_rel": 0.0002661401683809691
+    },
+    "input_gradient": {
+      "checks": 1,
+      "failed": 0,
+      "max_rel": 0.01127504632568781
+    },
+    "gradient": {
+      "checks": 16,
+      "failed": 4,
+      "max_rel": 0.048149409990606226
+    },
+    "parameter": {
+      "checks": 16,
+      "failed": 4,
+      "max_rel": 0.7008436874202123
+    },
+    "update": {
+      "checks": 16,
+      "failed": 12,
+      "max_rel": 0.7008436874202123
+    },
+    "exp_avg": {
+      "checks": 16,
+      "failed": 4,
+      "max_rel": 0.048149409483855474
+    },
+    "exp_avg_sq": {
+      "checks": 16,
+      "failed": 4,
+      "max_rel": 0.056510126172646905
+    }
+  }
+}

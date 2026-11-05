@@ -1,0 +1,84 @@
+--- R1/candidate/s4_models.py
++++ R2/candidate/s4_models.py
+@@ -279,7 +279,7 @@
+     """One original encoder block; explicit bf16 boundary, fp32 stable islands."""
+     def __init__(self, backend):
+         super().__init__(512, 8, 2048, 0.0, batch_first=True, norm_first=True)
+-        if backend not in ('torch_reference', 'kml'):
++        if backend not in ('torch_reference', 'torch_fp32_control', 'kml'):
+             raise ValueError('explicit backend required')
+         self.backend = backend
+ 
+@@ -291,22 +291,23 @@
+             1, 2).contiguous().view(B, M, 512)
+ 
+     def forward(self, src, src_mask=None, src_key_padding_mask=None, is_causal=False):
+-        if (src.dtype != torch.bfloat16 or src.device.type != 'cpu' or src.ndim != 3
++        dtype = torch.float32 if self.backend == 'torch_fp32_control' else torch.bfloat16
++        if (src.dtype != dtype or src.device.type != 'cpu' or src.ndim != 3
+                 or src.shape[-1] != 512 or not src.is_contiguous()
+                 or src_mask is not None or src_key_padding_mask is not None or is_causal):
+             raise ValueError('contiguous CPU bf16 [B,M,512], no masks/causal required')
+         from kml_ops import chain_bf16_linear
+         linear = lambda x, w, b: chain_bf16_linear(x, w, b, self.backend)
+         residual = src.float()
+-        n = self.norm1(residual).bfloat16()
++        n = self.norm1(residual).to(dtype)
+         qkv = linear(n, self.self_attn.in_proj_weight, self.self_attn.in_proj_bias)
+-        a = self._attention(qkv.float()).bfloat16()
++        a = self._attention(qkv.float()).to(dtype)
+         a = linear(a, self.self_attn.out_proj.weight, self.self_attn.out_proj.bias)
+         residual = residual + a.float()
+-        f = self.norm2(residual).bfloat16()
++        f = self.norm2(residual).to(dtype)
+         f = self.activation(linear(f, self.linear1.weight, self.linear1.bias))
+         f = linear(f, self.linear2.weight, self.linear2.bias)
+-        return (residual + f.float()).bfloat16()
++        return (residual + f.float()).to(dtype)
+ 
+ 
+ if __name__ == '__main__':
+--- R1/candidate/kml_ops.py
++++ R2/candidate/kml_ops.py
+@@ -204,7 +204,7 @@
+ 
+ # S04 isolated candidate: no global patch, persistent bf16 activation interface.
+ def _chain_gemm(a, b, backend, ta=False, tb=False):
+-    if backend == 'torch_reference':
++    if backend in ('torch_reference', 'torch_fp32_control'):
+         # Quantization oracle only: deliberately NOT native bf16/KML performance.
+         a, b = a.float(), b.float()
+         return (a.t() if ta else a) @ (b.t() if tb else b)
+@@ -221,19 +221,19 @@
+     @staticmethod
+     def forward(ctx, x, w, b, backend):
+         x2 = x.reshape(-1, x.shape[-1]).contiguous()
+-        wc = w.bfloat16().contiguous()
++        wc = w.to(x.dtype).contiguous()
+         y = _chain_gemm(x2, wc, backend, tb=True)
+         if b is not None:
+             y.add_(b)
+         ctx.save_for_backward(x2, wc)
+         ctx.shape, ctx.hasb, ctx.backend = x.shape, b is not None, backend
+-        return y.bfloat16().view(*x.shape[:-1], w.shape[0])
++        return y.to(x.dtype).view(*x.shape[:-1], w.shape[0])
+ 
+     @staticmethod
+     def backward(ctx, gy):
+         x2, wc = ctx.saved_tensors
+         g = gy.reshape(-1, gy.shape[-1]).contiguous()
+-        gx = (_chain_gemm(g, wc, ctx.backend).bfloat16().view(ctx.shape)
++        gx = (_chain_gemm(g, wc, ctx.backend).to(x2.dtype).view(ctx.shape)
+               if ctx.needs_input_grad[0] else None)
+         # Long token reduction always uses fp32 SGEMM, never bf16 bgemm dW.
+         gw = (_chain_gemm(g.float(), x2.float(), ctx.backend, ta=True)
+@@ -243,7 +243,8 @@
+ 
+ 
+ def chain_bf16_linear(x, w, b, backend):
+-    if (x.device.type != 'cpu' or w.device.type != 'cpu' or x.dtype != torch.bfloat16
++    dtype = torch.float32 if backend == 'torch_fp32_control' else torch.bfloat16
++    if (x.device.type != 'cpu' or w.device.type != 'cpu' or x.dtype != dtype
+             or w.dtype != torch.float32 or (b is not None and
+             (b.dtype != torch.float32 or b.device.type != 'cpu'))):
+         raise ValueError('CPU bf16 activation / fp32 master weights and bias required')

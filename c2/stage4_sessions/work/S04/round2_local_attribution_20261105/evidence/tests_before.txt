@@ -1,0 +1,19 @@
+test_same_rewrite_without_quantization (test_r2_mode.R2Mode.test_same_rewrite_without_quantization) ... E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round2_20261104T114949Z\.venv\Lib\site-packages\torch\nn\modules\transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+ERROR
+
+======================================================================
+ERROR: test_same_rewrite_without_quantization (test_r2_mode.R2Mode.test_same_rewrite_without_quantization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S04\round2_local_attribution_20261105\tests\test_r2_mode.py", line 13, in test_same_rewrite_without_quantization
+    block = cls('torch_fp32_control')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S04\round2_local_attribution_20261105\candidate\s4_models.py", line 283, in __init__
+    raise ValueError('explicit backend required')
+ValueError: explicit backend required
+
+----------------------------------------------------------------------
+Ran 1 test in 0.131s
+
+FAILED (errors=1)

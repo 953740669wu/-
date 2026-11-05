@@ -1,0 +1,75 @@
+test_block_rejects_unsupported_inputs (test_contract.Contract.test_block_rejects_unsupported_inputs) ... FAIL
+test_comparator_negative_controls (test_contract.Contract.test_comparator_negative_controls) ... ok
+test_fp32_control (test_contract.Contract.test_fp32_control) ... E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round2_20261104T114949Z\.venv\Lib\site-packages\torch\nn\modules\transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+ok
+test_kml_no_silent_fallback (test_contract.Contract.test_kml_no_silent_fallback) ... ERROR
+test_linear_fp32_dw_oracle (test_contract.Contract.test_linear_fp32_dw_oracle) ... ERROR
+test_linear_rejects_wrong_precision (test_contract.Contract.test_linear_rejects_wrong_precision) ... ERROR
+test_new_symbols (test_contract.Contract.test_new_symbols) ... ERROR
+test_state_and_boundary (test_contract.Contract.test_state_and_boundary) ... FAIL
+
+======================================================================
+ERROR: test_kml_no_silent_fallback (test_contract.Contract.test_kml_no_silent_fallback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S04\tests\test_contract.py", line 51, in test_kml_no_silent_fallback
+    kml_ops.chain_bf16_linear(torch.ones(2, 7).bfloat16(), torch.ones(5, 7), None, 'kml')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'kml_ops' has no attribute 'chain_bf16_linear'
+
+======================================================================
+ERROR: test_linear_fp32_dw_oracle (test_contract.Contract.test_linear_fp32_dw_oracle)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S04\tests\test_contract.py", line 34, in test_linear_fp32_dw_oracle
+    y = kml_ops.chain_bf16_linear(x, w, b, 'torch_reference')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'kml_ops' has no attribute 'chain_bf16_linear'
+
+======================================================================
+ERROR: test_linear_rejects_wrong_precision (test_contract.Contract.test_linear_rejects_wrong_precision)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S04\tests\test_contract.py", line 45, in test_linear_rejects_wrong_precision
+    kml_ops.chain_bf16_linear(torch.ones(2, 7), torch.ones(5, 7), None, 'torch_reference')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'kml_ops' has no attribute 'chain_bf16_linear'
+
+======================================================================
+ERROR: test_new_symbols (test_contract.Contract.test_new_symbols)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S04\tests\test_contract.py", line 18, in test_new_symbols
+    self.assertTrue(callable(kml_ops.chain_bf16_linear))
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'kml_ops' has no attribute 'chain_bf16_linear'
+
+======================================================================
+FAIL: test_block_rejects_unsupported_inputs (test_contract.Contract.test_block_rejects_unsupported_inputs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S04\tests\test_contract.py", line 69, in test_block_rejects_unsupported_inputs
+    cls = definitions('candidate', ['BF16EncoderBlock'])['BF16EncoderBlock']
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S04\tests\common.py", line 17, in definitions
+    assert {n.name for n in nodes} == set(names), 'missing original/candidate definitions'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: missing original/candidate definitions
+
+======================================================================
+FAIL: test_state_and_boundary (test_contract.Contract.test_state_and_boundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S04\tests\test_contract.py", line 55, in test_state_and_boundary
+    cls = definitions('candidate', ['BF16EncoderBlock'])['BF16EncoderBlock']
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S04\tests\common.py", line 17, in definitions
+    assert {n.name for n in nodes} == set(names), 'missing original/candidate definitions'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: missing original/candidate definitions
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.277s
+
+FAILED (failures=2, errors=4)

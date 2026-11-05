@@ -1,0 +1,597 @@
+{
+  "original_seven": [
+    {
+      "name": "update.block.self_attn.in_proj_weight",
+      "previous": {
+        "name": "update.block.self_attn.in_proj_weight",
+        "reference_norm": 0.08867254625130093,
+        "max_abs": 9.834766387939453e-07,
+        "rms_abs": 2.2198909292944642e-09,
+        "l2_relative": 2.2201026001239488e-05,
+        "limit": 2e-06,
+        "passed": false,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      },
+      "current": {
+        "name": "update.block.self_attn.in_proj_weight",
+        "reference_norm": 0.08867254625130093,
+        "max_abs": 0.0,
+        "rms_abs": 0.0,
+        "l2_relative": 0.0,
+        "limit": 2e-06,
+        "passed": true,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      }
+    },
+    {
+      "name": "parameter.block.self_attn.in_proj_bias",
+      "previous": {
+        "name": "parameter.block.self_attn.in_proj_bias",
+        "reference_norm": 0.0032004391496462297,
+        "max_abs": 8.83236680238042e-06,
+        "rms_abs": 1.2353241783980833e-06,
+        "l2_relative": 0.015127493509546102,
+        "limit": 2e-06,
+        "passed": false,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      },
+      "current": {
+        "name": "parameter.block.self_attn.in_proj_bias",
+        "reference_norm": 0.0032004391496462297,
+        "max_abs": 0.0,
+        "rms_abs": 0.0,
+        "l2_relative": 0.0,
+        "limit": 2e-06,
+        "passed": true,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      }
+    },
+    {
+      "name": "update.block.self_attn.in_proj_bias",
+      "previous": {
+        "name": "update.block.self_attn.in_proj_bias",
+        "reference_norm": 0.0032004391496462297,
+        "max_abs": 8.83236680238042e-06,
+        "rms_abs": 1.2353241783980833e-06,
+        "l2_relative": 0.015127493509546102,
+        "limit": 2e-06,
+        "passed": false,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      },
+      "current": {
+        "name": "update.block.self_attn.in_proj_bias",
+        "reference_norm": 0.0032004391496462297,
+        "max_abs": 0.0,
+        "rms_abs": 0.0,
+        "l2_relative": 0.0,
+        "limit": 2e-06,
+        "passed": true,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      }
+    },
+    {
+      "name": "update.block.self_attn.out_proj.weight",
+      "previous": {
+        "name": "update.block.self_attn.out_proj.weight",
+        "reference_norm": 0.051197400881002296,
+        "max_abs": 2.1420419216156006e-07,
+        "rms_abs": 6.694637342483521e-10,
+        "l2_relative": 6.6949772065938116e-06,
+        "limit": 2e-06,
+        "passed": false,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      },
+      "current": {
+        "name": "update.block.self_attn.out_proj.weight",
+        "reference_norm": 0.051197400881002296,
+        "max_abs": 0.0,
+        "rms_abs": 0.0,
+        "l2_relative": 0.0,
+        "limit": 2e-06,
+        "passed": true,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      }
+    },
+    {
+      "name": "update.block.linear1.weight",
+      "previous": {
+        "name": "update.block.linear1.weight",
+        "reference_norm": 0.10238823353147228,
+        "max_abs": 3.086403012275696e-06,
+        "rms_abs": 4.985538498659516e-09,
+        "l2_relative": 4.9861114373636514e-05,
+        "limit": 2e-06,
+        "passed": false,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      },
+      "current": {
+        "name": "update.block.linear1.weight",
+        "reference_norm": 0.10238823353147228,
+        "max_abs": 0.0,
+        "rms_abs": 0.0,
+        "l2_relative": 0.0,
+        "limit": 2e-06,
+        "passed": true,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      }
+    },
+    {
+      "name": "update.block.linear2.weight",
+      "previous": {
+        "name": "update.block.linear2.weight",
+        "reference_norm": 0.10239530983259895,
+        "max_abs": 7.217749953269958e-07,
+        "rms_abs": 7.957021870540749e-10,
+        "l2_relative": 7.957386338060283e-06,
+        "limit": 2e-06,
+        "passed": false,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      },
+      "current": {
+        "name": "update.block.linear2.weight",
+        "reference_norm": 0.10239530983259895,
+        "max_abs": 0.0,
+        "rms_abs": 0.0,
+        "l2_relative": 0.0,
+        "limit": 2e-06,
+        "passed": true,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      }
+    },
+    {
+      "name": "update.head_coarse.weight",
+      "previous": {
+        "name": "update.head_coarse.weight",
+        "reference_norm": 0.036194778145570254,
+        "max_abs": 2.598389983177185e-07,
+        "rms_abs": 9.684757048702916e-10,
+        "l2_relative": 9.68718903632657e-06,
+        "limit": 2e-06,
+        "passed": false,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      },
+      "current": {
+        "name": "update.head_coarse.weight",
+        "reference_norm": 0.036194778145570254,
+        "max_abs": 0.0,
+        "rms_abs": 0.0,
+        "l2_relative": 0.0,
+        "limit": 2e-06,
+        "passed": true,
+        "max_abs_limit": 2e-05,
+        "same_dtype": true
+      }
+    }
+  ],
+  "newly_failed": [],
+  "all_83_statuses": [
+    {
+      "name": "output",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "loss",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "input_gradient",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.block.self_attn.in_proj_weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.block.self_attn.in_proj_bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.block.self_attn.out_proj.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.block.self_attn.out_proj.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.block.linear1.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.block.linear1.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.block.linear2.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.block.linear2.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.block.norm1.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.block.norm1.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.block.norm2.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.block.norm2.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.head_v.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.head_v.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.head_coarse.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "gradient.head_coarse.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.block.self_attn.in_proj_weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.block.self_attn.in_proj_weight",
+      "R2": false,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.block.self_attn.in_proj_weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.block.self_attn.in_proj_weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.block.self_attn.in_proj_bias",
+      "R2": false,
+      "R3": true
+    },
+    {
+      "name": "update.block.self_attn.in_proj_bias",
+      "R2": false,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.block.self_attn.in_proj_bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.block.self_attn.in_proj_bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.block.self_attn.out_proj.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.block.self_attn.out_proj.weight",
+      "R2": false,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.block.self_attn.out_proj.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.block.self_attn.out_proj.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.block.self_attn.out_proj.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.block.self_attn.out_proj.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.block.self_attn.out_proj.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.block.self_attn.out_proj.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.block.linear1.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.block.linear1.weight",
+      "R2": false,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.block.linear1.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.block.linear1.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.block.linear1.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.block.linear1.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.block.linear1.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.block.linear1.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.block.linear2.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.block.linear2.weight",
+      "R2": false,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.block.linear2.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.block.linear2.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.block.linear2.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.block.linear2.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.block.linear2.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.block.linear2.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.block.norm1.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.block.norm1.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.block.norm1.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.block.norm1.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.block.norm1.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.block.norm1.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.block.norm1.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.block.norm1.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.block.norm2.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.block.norm2.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.block.norm2.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.block.norm2.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.block.norm2.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.block.norm2.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.block.norm2.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.block.norm2.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.head_v.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.head_v.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.head_v.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.head_v.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.head_v.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.head_v.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.head_v.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.head_v.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.head_coarse.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.head_coarse.weight",
+      "R2": false,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.head_coarse.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.head_coarse.weight",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "parameter.head_coarse.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "update.head_coarse.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg.head_coarse.bias",
+      "R2": true,
+      "R3": true
+    },
+    {
+      "name": "exp_avg_sq.head_coarse.bias",
+      "R2": true,
+      "R3": true
+    }
+  ]
+}

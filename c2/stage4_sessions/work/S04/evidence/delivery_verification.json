@@ -1,0 +1,24 @@
+{
+  "status": "PASS_SYNTAX_SOURCE_PACKAGE_ONLY",
+  "syntax": [
+    "baseline/kml_ops.py",
+    "baseline/s4_models.py",
+    "candidate/kml_ops.py",
+    "candidate/s4_models.py",
+    "tests/check_block.py",
+    "tests/common.py",
+    "tests/test_attention_boundary.py",
+    "tests/test_contract.py",
+    "verify_delivery.py"
+  ],
+  "protected_sources_unchanged": 17,
+  "package_files": 28,
+  "package_sha256": "323fecc6f477465ab6f418e4ee4cb6eade91e4c852b2d3f27d1dd0f03fbeab84",
+  "package_bytes": 57341,
+  "numerical_status": "FAIL_LOCAL_QUANTIZATION_GATE",
+  "numeric_pass": 55,
+  "numeric_fail": 28,
+  "cluster_jobs": 0,
+  "full_model_runs": 0,
+  "performance": "NOT_RUN"
+}

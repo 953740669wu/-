@@ -1,0 +1,25 @@
+test_explicit_candidate_graph_without_whole_reference_calls (test_alignment.Alignment.test_explicit_candidate_graph_without_whole_reference_calls) ... E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round2_20261104T114949Z\.venv\Lib\site-packages\torch\nn\modules\transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+FAIL
+test_native_linear_epilogue_and_autograd (test_alignment.Alignment.test_native_linear_epilogue_and_autograd) ... FAIL
+
+======================================================================
+FAIL: test_explicit_candidate_graph_without_whole_reference_calls (test_alignment.Alignment.test_explicit_candidate_graph_without_whole_reference_calls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S04\round3_fp32_alignment_20261105\tests\test_alignment.py", line 43, in test_explicit_candidate_graph_without_whole_reference_calls
+    self.assertEqual(projection.call_count, 1)
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_native_linear_epilogue_and_autograd (test_alignment.Alignment.test_native_linear_epilogue_and_autograd)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S04\round3_fp32_alignment_20261105\tests\test_alignment.py", line 25, in test_native_linear_epilogue_and_autograd
+    self.assertNotIn('ChainBF16Linear', type(got.grad_fn).__name__)
+AssertionError: 'ChainBF16Linear' unexpectedly found in '_ChainBF16LinearFnBackward'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.246s
+
+FAILED (failures=2)

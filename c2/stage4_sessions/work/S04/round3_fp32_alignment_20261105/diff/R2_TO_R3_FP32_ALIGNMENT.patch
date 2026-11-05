@@ -1,0 +1,48 @@
+--- R2/candidate/s4_models.py
++++ R3/candidate/s4_models.py
+@@ -290,6 +290,19 @@
+         return F.scaled_dot_product_attention(q, k, v, dropout_p=0.0).transpose(
+             1, 2).contiguous().view(B, M, 512)
+ 
++    def _aligned_fp32_attention(self, n):
++        # Match the original native MHA primitive graph, not its whole forward.
++        B, M, _ = n.shape
++        n = n.transpose(1, 0)
++        q, k, v = F._in_projection_packed(
++            n, n, n, self.self_attn.in_proj_weight, self.self_attn.in_proj_bias)
++        q, k, v = (t.view(M, B * 8, 64).transpose(0, 1).view(B, 8, M, 64)
++                   for t in (q, k, v))
++        a = F.scaled_dot_product_attention(q, k, v, None, 0.0, False)
++        a = a.permute(2, 0, 1, 3).contiguous().view(B * M, 512)
++        a = F.linear(a, self.self_attn.out_proj.weight, self.self_attn.out_proj.bias)
++        return a.view(M, B, 512).transpose(1, 0)
++
+     def forward(self, src, src_mask=None, src_key_padding_mask=None, is_causal=False):
+         dtype = torch.float32 if self.backend == 'torch_fp32_control' else torch.bfloat16
+         if (src.dtype != dtype or src.device.type != 'cpu' or src.ndim != 3
+@@ -300,9 +313,12 @@
+         linear = lambda x, w, b: chain_bf16_linear(x, w, b, self.backend)
+         residual = src.float()
+         n = self.norm1(residual).to(dtype)
+-        qkv = linear(n, self.self_attn.in_proj_weight, self.self_attn.in_proj_bias)
+-        a = self._attention(qkv.float()).to(dtype)
+-        a = linear(a, self.self_attn.out_proj.weight, self.self_attn.out_proj.bias)
++        if self.backend == 'torch_fp32_control':
++            a = self._aligned_fp32_attention(n)
++        else:
++            qkv = linear(n, self.self_attn.in_proj_weight, self.self_attn.in_proj_bias)
++            a = self._attention(qkv.float()).to(dtype)
++            a = linear(a, self.self_attn.out_proj.weight, self.self_attn.out_proj.bias)
+         residual = residual + a.float()
+         f = self.norm2(residual).to(dtype)
+         f = self.activation(linear(f, self.linear1.weight, self.linear1.bias))
+--- R2/candidate/kml_ops.py
++++ R3/candidate/kml_ops.py
+@@ -248,4 +248,7 @@
+             or w.dtype != torch.float32 or (b is not None and
+             (b.dtype != torch.float32 or b.device.type != 'cpu'))):
+         raise ValueError('CPU bf16 activation / fp32 master weights and bias required')
++    if backend == 'torch_fp32_control':
++        # Diagnostic alignment: native bias epilogue and native autograd reductions.
++        return F.linear(x, w, b)
+     return _ChainBF16LinearFn.apply(x, w, b, backend)
