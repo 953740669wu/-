@@ -151,3 +151,33 @@ S01本地诊断复核已完成，有限接受但新DDP/清理时序未闭合；0
 用户确认上次99份Git指令之后无其它Git动作；HEAD仍05ded1b，后续提案/审核/协调增量未提交。02已完成本地支持包但B01_UNBOUND_INSTALLED_NATIVE_VJP阻断，未发PREPARATION_READY；14夹具/2CLI及909.1553MiB条件性估算非实际C2验证。原模型/阈值/FAIL保持。
 
 新GIT_SUBMIT_STATIC_SPEC_20261106.md/.tsv仅纳入已闭合02静态提案/01审核规格和协调记录，02定位准备完整目录单列暂缓；946历史余项保留。本批冻结01当前状态，用户先发唯一Git完成提交，再发原01按REAL_DUAL_DDP_PREPARATION_BLOCKER_REVIEW_20261106.md核B01，给具体离线依据或最小缺源/操作规格，不重复旧提案或盲目重做。未确认接收/启动；02/07/00/08待命，不追加模型/集群作业。
+
+## 最新接续：37份归档核验及B01审核完成（2026-11-06）
+
+用户确认Git/01完成。总协调核37份/731746bytes Git原始对象及4scope无遗漏额外；本地HEAD/origin-main和成功实时远端查询均51ef5e93aed4dbefcd7f3a51640381e0f971fe3c，暂存空，详GIT_STATIC_SPEC_37_POST_PUSH_REVIEW_20261106.json。旧99/268批保持。
+
+01 BLOCKER_REVIEW SHA=a3cd69328af79dfb4d4e7cbc658455b5545d6024c1f870dcc9e7d3bdedd22d82，ACCEPT_BLOCKED；缺实际C2 native VJP/attention绑定证据，不是实现不可能。协调核67文件bytes/SHA，见S01_PREPARATION_BLOCKER_ACCEPTANCE_20261106.json。02当前准备23文件及01审核已可保留限制归档，但尚未新提交；524历史待核/422排除、8旧快照替代处置保持。Git目前待命，下一精确冻结时提醒用户。
+
+唯一下一步交原00：REAL_DUAL_DDP_C2_SOURCE_BINDING_R1_20261106.md。总协调明确安排已有目标六份源码与身份定向补源，允许必要一次有界只读SSH、60秒读取截止/2MiB文本；不得导入Torch、执行模型/夹具/autograd/DDP或申请job，不改运行时/原包。先看是否已有确切离线原件，失败保留部分并停，不重试/换源/扩大扫描。
+
+卡内明确方法增补：现有专用非叶输入边的局部dX仅在实际目标源码和冻结调用点证明独占Linear消费时可用；不减少dX、不用共享v/h叶梯度、不造代理、不猜槽位、不加反向；不主张内部Node槽位/内核指令定位。原规格文件原字节不改。此为后续设计审核方法，不是02实施或实际执行许可。
+
+00必须交SOURCE_BINDING_PACKET.json、六份原文、identity/SHA/NOT_RUN/报告/归档清单和六行摘要；齐包及冻结锚相符后再交原01静态核目标API/输入边/attention布局，再据结果决定02新准备。02/07/08待命，01当前轮次已完。卡发布不代表00已接收/启动。用户应只复制00提示词，返回材料后协调继续，不让用户同时派重复工作。原FAIL/阈值和不追加集群约束保持。
+
+## 最新接续：00补源验收完成，交01独立静态审核（2026-11-06）
+
+用户报告00完成。最新SOURCE_BINDING_PACKET SHA=b0a0c1e11fb0ba26987f69cfc13b24eb15dc97820f141cfa835857af56edd93f。协调核49本地文件绑定、六源432651bytes与原始NDJSON解码原字节一致、冻结Python/__init__锚首尾匹配、6核心身份记录一致；详情S00_C2_SOURCE_BINDING_RECEIPT_20261106.json。00一次SSH、0重试、共同0.364120212秒/60秒、0模型/autograd/Torch/夹具/DDP/job；协调未新增SSH。核心SHA是本次首次采集元数据，不追溯旧job；本验收不等于目标API可行或B01解除。
+
+现在用户仅需发原01：REAL_DUAL_DDP_C2_BINDING_REVIEW_R1_20261106.md。核目标API与冻结val/head_coarse专用输入边、attention逻辑样本映射及覆盖；沿用已明确方法增补，不改原规格/阈值/FAIL。只读静态、无实现或运行。交SOURCE_BINDING_REVIEW.json及通过时PREPARATION_REQUIREMENTS.json，或具体REMAINING_GAP.json；明确仅ACCEPT_FOR_LOCAL_PREPARATION/BLOCKED_WITH_SPECIFIC_GAP，不发布READY或执行PASS。卡发布不代表01已收到/启动。
+
+00/02/07/08待命，Git暂待命。01结果到后协调决定02新的本地准备或最小缺项，并将已闭合阻断/补源/审核材料合并新精确Git批，提醒用户执行；当前尚无该批提交许可或动作。作者归档清单须审去重，不全量加入重复inputs/原始传输副本；原件本地保留、既有524待核/422排除与8旧快照替代处置保持。不重复补源、不重复相同缺源准备、不追加集群job。
+
+## 最新接续：设计证据接受，02准备R2与90份归档（2026-11-07）
+
+用户报告01完成。协调核71唯一文件bytes/SHA；SOURCE_BINDING_REVIEW SHA9296833a48c0485a42b6b05600688d088d2d16510f260d618bda134b3bbddbff，PREPARATION_REQUIREMENTS SHA913e268fc424d30b56bf95f1023d919b39188985d6e022ee53c53c43ca269c01。01 ACCEPT_FOR_LOCAL_PREPARATION仅解除B01设计证据，原R1 BLOCKED/原数值FAIL保留。actual autograd/KML/数值/峰值/退出未测。验收见S01_C2_BINDING_ACCEPTANCE_20261107.json。
+
+给原02 REAL_DUAL_DDP_LOCALIZATION_PREPARE_R2_20261107.md：新目录real_dual_ddp_localization_prepare_r2_20261107，仅具体观察器/零更新入口源代码、文档及针对性标准库替身/AST/SHA检查。实际F.linear及KML返回、val/mean专用边、token-major布局、32MiB工作区/流式哈希与有界退出要求已明确，不重复缺源或未知Node槽位探索。0Torch/模型/autograd/DDP/SSH/job。交PREPARATION_READY（仅待独立审代码）或具体BLOCKED、包SHA及六行摘要；不自动运行、部署或安排00。
+
+现在提醒用户唯一Git执行GIT_SUBMIT_C2_BINDING_20261107.md/.tsv，89行+TSV90份，5scope：S02 22/S01 18/S00 28/COORD20/GIT2；基点51ef5e9。原23准备暂缓有限归档释放；10输入副本核原件一致后明确排除、本地保留，known_hosts排除。524历史待核/422排除及8旧快照替代处置保持。原始SSH传输与六源保留为采集凭据和目标复核原文，不扩环境/二进制/raw张量。旧37/99/268批不改。
+
+精确清单核对后可并行发Git和02（替代冻结前顺序执行的初步安排）：02根短状态与已提交版未变，未重复入本批；R2及其根状态变化均不在TSV。02不得改R1/参考/作者原件，Git不得追加R2或根状态新变化，记NEW_AFTER_SNAPSHOT。两卡未确认接收，不能记已启动。回收Git90对象/远端回执及02准备交付后分别核验；后续01代码审核须另发卡。当前不追加集群作业，无共享Git写操作。

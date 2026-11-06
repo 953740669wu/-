@@ -1,15 +1,14 @@
 # 总协调简短状态
 
-- 当前轮次：STATIC_SPEC_ARCHIVE_READY_PREPARATION_BLOCKED，2026-11-06。
-- 用户明确只执行过上次99份Git指令；核HEAD/origin-main仍05ded1bfd2b9339dcb5cd0c6708ec0b29dfa44a5，暂存空；未将后续材料误记为已提交。
-- 02本地准备已完成阻断交付：BLOCKED_PREPARATION_WITH_REASON/B01_UNBOUND_INSTALLED_NATIVE_VJP，未发PREPARATION_READY，无模型/部署入口。
-- 阻断依据：已保存C2来源不能绑定native Linear backward节点/逐算子dX槽位及attention逻辑布局；Windows文档/标准库夹具不代替实际C2证明。
-- 作者本地结果：14 LOCAL_FIXTURE与2 CLI元数据检查；条件性保留量909.1553MiB，非实测。0Torch/模型/收缩/DDP/SSH/job；原FAIL/数值阈值保持。
-- 协调本轮：核阻断交付及来源bytes/SHA，仅身份验收；技术结论待01。见GIT_STATIC_SPEC_BATCH_20261106/BLOCKED_DELIVERY_IDENTITY_REVIEW.json。
-- Git现在应归档：02已闭合静态NO_JUSTIFIED_CANDIDATE提案、01独立审核/最小规格、对应索引和当前状态、协调验收任务卡/交接、Git上次结束状态。
-- 本批入口：GIT_SUBMIT_STATIC_SPEC_20261106.md/.tsv。新的02定位准备完整目录单列暂缓；原524历史待核/422明确排除仍保持，逐路径见本批REMAINDER_DISPOSITION。
-- 执行顺序：用户先发唯一Git窗口精确提交并等待回执，再发原01阻断审核，避免01修改本批已冻结短状态。当前两窗口均未确认接收新任务。
-- 01新卡：REAL_DUAL_DDP_PREPARATION_BLOCKER_REVIEW_20261106.md。只读审核B01和最小缺源/观察条件；不重复旧静态提案、不要求02盲目重做、不改规格/阈值。
-- 01交BLOCKER_REVIEW.json及必要MISSING_BINDING_SPEC.json：现有离线来源若足够给精确依据；不足则明确最少材料或必要具体操作/授权边界，避免相同静态检查循环。
-- 02/07/00/08待命，无新模型/DDP/SSH/集群授权。实际训练仍NOT_RUN，原数值FAIL不变。
-- Git回执后协调核新批；01结论到后再决定补源/规格修订/必要最小执行请求。当前不追加集群作业，协调无共享Git写操作或后台服务。
+- 当前轮次：C2_BINDING_ACCEPTED_LOCAL_PREPARE_R2_AND_ARCHIVE_READY，2026-11-07。
+- 01完成ACCEPT_FOR_LOCAL_PREPARATION，B01设计证据阻断解除；原R1 BLOCKED历史结论保留，实际autograd/数值/内存/退出没有通过证据。
+- 协调核71份关联文件bytes/SHA；SOURCE_BINDING_REVIEW SHA=9296833a48c0485a42b6b05600688d088d2d16510f260d618bda134b3bbddbff；PREPARATION_REQUIREMENTS SHA=913e268fc424d30b56bf95f1023d919b39188985d6e022ee53c53c43ca269c01。
+- 验收见S01_C2_BINDING_ACCEPTANCE_20261107.json；六源/方法增补/原规格/原FAIL绑定保持，核心身份首次记录不回溯旧job，静态PathFinder不是Torch实际加载证明。
+- 新卡REAL_DUAL_DDP_LOCALIZATION_PREPARE_R2_20261107.md交原02：具体F.linear/原KML返回被动观察、专用输入边、token-major布局、流式哈希/预算与退出门禁；只新目录代码/文档及针对性标准库替身检查。
+- 禁止Torch导入/模型/autograd/张量加载/DDP/新SSH/部署/job，原153参数、B64原mean、顺序32+32全局分母/系数1、compare阈值与原FAIL不变。300秒/CPU36/24GiB仅未来上限。
+- Git现在提醒执行新精确批：GIT_SUBMIT_C2_BINDING_20261107.md/.tsv，89行+TSV共90份；scope为S02 22/S01 18/S00 28/COORDINATION 20/GIT 2。基点HEAD51ef5e93aed4dbefcd7f3a51640381e0f971fe3c，暂存空，无新提交。
+- 归档范围：原02准备23项暂缓经审核释放，其中SPEC副本排除；00补源及01两轮独立审核、协调记录和Git旧结束状态。10个重复输入均核原件一致后排除但本地保留；known_hosts明确排除。原始SSH导出作为采集凭据和六源码作为复核原文同时保留，非全环境入库。
+- 原524历史待核/422明确排除继续保留，8条旧快照新版替代/原SHA未保留处置不变；旧37/99/268批不修改。新台账逐路径记录，不全量加入未提交文件。
+- 可同时发送Git与02：02当前根状态已在旧批归档且未变，本批不重复纳入；02只改R2新目录和根状态，不改TSV内R1档案。新R2和状态变化记NEW_AFTER_SNAPSHOT，不能追补本批。两卡已发布，均未确认接收/启动。
+- 等Git回传90对象/范围/提交ID/实时远端结果；等02交PREPARATION_READY或具体BLOCKED、包SHA和六行摘要；分别验收，准备包到后再交01代码审核。01/00/07/08待命，无自动执行许可。
+- 协调未进行暂存/commit/push、模型或集群操作。当前远端沿用上轮已核事实，本轮只核本地HEAD；Git执行时重核实时远端。

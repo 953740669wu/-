@@ -1,6 +1,6 @@
-任务/轮次：COORDINATION / STATIC_SPEC_ARCHIVE_READY_PREPARATION_BLOCKED，2026-11-06。
-状态变化：02完成B01阻断交付，未发布可运行READY；确认99批之后尚无新Git提交，已闭合静态材料待归档。
-本轮改动：新增精确Git说明/清单/逐项暂缓台账/阻断身份核查和01定向审核卡，更新总表与交接；作者原件不改。
-验证增量：读最新短状态、核HEAD/origin-main与空暂存；核02阻断绑定SHA及归档作者清单/当前状态，不重跑夹具/模型/SSH/job。
-证据：GIT_SUBMIT_STATIC_SPEC_20261106.md/.tsv、GIT_STATIC_SPEC_BATCH_20261106/、REAL_DUAL_DDP_PREPARATION_BLOCKER_REVIEW_20261106.md。
-阻塞与下一步：用户先发唯一Git精确提交，再发01只读核B01与最小缺源条件；02准备目录暂缓，原946余项保持，无新job授权或未确认启动记录。
+任务/轮次：COORDINATION / C2_BINDING_ACCEPTED_LOCAL_PREPARE_R2_AND_ARCHIVE_READY，2026-11-07。
+状态变化：01设计审核接受，B01设计证据解除；原FAIL及实际未测边界保持，02新R2未确认启动。
+本轮改动：新增71文件绑定验收、02具体本地准备R2卡及90份精确Git清单/去重/余项台账，更新总表交接。
+验证增量：审核/要求/原规格/六源/原FAIL SHA通过；23旧暂缓处置明确、10重复输入对原件一致；冻结路径逐项核bytes/SHA，暂存空。
+证据：S01_C2_BINDING_ACCEPTANCE_20261107.json；REAL_DUAL_DDP_LOCALIZATION_PREPARE_R2_20261107.md；GIT_SUBMIT_C2_BINDING_20261107.md/.tsv及GIT_C2_BINDING_BATCH_20261107/。
+阻塞与下一步：用户可并行发唯一Git和原02，02写入不与冻结清单重叠；回传Git对象/远端和02准备包再验收，不导入Torch或新增job。
