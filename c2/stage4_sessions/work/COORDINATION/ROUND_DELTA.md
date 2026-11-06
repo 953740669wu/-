@@ -1,6 +1,6 @@
-任务/轮次：COORDINATION / GIT_DUAL_DDP_EXACT_BATCH_20261106。
-状态变化：S01诊断R1复核已完成但有限接受；双域准备/拒绝终态可归档，诊断两目录未闭合暂缓。
-本轮改动：新增精确Git说明/TSV、来源核验/逐项余项/历史替代台账，更新总表及自身交接；作者原件不改。
-验证增量：核作者冻结索引及当前状态，绑定S01诊断审核；逐项刷新待提交库存，8旧记录新版替代、12迁移原字节，最终批准文件逐项bytes/SHA复核。
-证据：GIT_SUBMIT_DUAL_DDP_NO_RUN_20261106.md/.tsv；GIT_DUAL_DDP_BATCH_20261106/；原补漏审计报告。
-阻塞与下一步：用户将本轮提示词发唯一Git窗口精确提交/普通推送；诊断材料单列暂缓，历史未核验项保持待核，重复副本明确排除；无训练/新job授权，协调未操作Git暂存。
+任务/轮次：COORDINATION / DIAG_CLOSEOUT_ACCEPTED_AND_ARCHIVE_READY，2026-11-06。
+状态变化：01/07收尾完成，有限档案可归档；历史补齐0、清理UNKNOWN、原数值FAIL不变。
+本轮改动：新增收尾验收/55项转归档台账/精确Git新批和02静态最小候选提案卡，更新总表与交接；作者原件/旧268清单不改。
+验证增量：核01收尾审核绑定原件bytes/SHA及作者归档清单，复核新批准范围和当前文件SHA，无模型/测试/DDP/集群执行。
+证据：GIT_DIAG_CLOSEOUT_BATCH_20261106/；GIT_SUBMIT_DIAG_CLOSEOUT_20261106.md/.tsv；REAL_DUAL_DDP_MINIMAL_CANDIDATE_PROPOSAL_20261106.md。
+阻塞与下一步：用户可同时发唯一Git窗口精确归档与原02静态提案；原01/07/00/08待命。收Git回执和02 PROPOSAL_READY后继续决策，未确认启动，无新运行授权。

@@ -1,18 +1,16 @@
 # 总协调简短状态
 
-- 当前轮次：GIT_DUAL_DDP_EXACT_BATCH_20261106，补漏检查后精确归档交接。
-- 原真实双域训练：07本地13项梯度指标3失败→01最终FAIL→00未提交；0新增job/更新/节点秒，08未运行终态摘要完成。原门槛/原FAIL不改。
-- S01最新：诊断R1独立复核已完成，ACCEPT_PARTIAL_DIAGNOSIS_NOT_TRAINING_ACCEPTANCE；34指标复算、原13误差复现（作者审核）。
-- 诊断有限结论：同一full/sequence样本支持fp32收缩分组累计精度敏感；新DDP影响、具体内核、历史身份及实际worker/后代15秒内清理时序等仍有限或未知。
-- 协调本轮核：S01审核的任务卡/原FAIL/07 READY/证据复核/报告/当前PID检查六项bytes/SHA；详情DIAGNOSIS_DISPOSITION.json。
-- 提交范围：02参考、07原候选与正式FAIL、01原最终FAIL审核、00部署准备/未提交终态、08摘要、协调新卡/验收/交接/六份历史状态、Git两份结束状态、补漏审计及本批控制文件。
-- 暂缓：07和01的real_dual_ddp_numeric_diagnosis_r1_20261106两个完整目录，55文件；S01复核完成不等于所有证据缺口闭合。仅当前短状态进入快照。
-- 历史：8条旧S00汇总记录已由合并新版替代、原SHA未保留；12条迁移已找到相同已提交原字节，旧TSV不改，不补造。
-- 余项：REMAINDER_DISPOSITION.json逐路径列归属/原因/动作；历史未核验项待核，重复副本和本机文件明确排除并保留本地，不为清空工作区添加。
-- 批入口：GIT_SUBMIT_DUAL_DDP_NO_RUN_20261106.md及同名TSV；GIT_DUAL_DDP_BATCH_20261106含核验/诊断暂缓/历史与余项台账。
-- Git授权：恢复按计划正常提交；本轮已到提交节点，用户将明确提示词发唯一Git窗口；范围仅TSV逐行+TSV自身。禁止git add .、全量加入、强推或更改旧清单。
-- 动态状态：作者旧索引中的当前状态漂移单列记录，本批冻结当前SHA；Git执行前有任何漂移停对应scope，不自行刷新批准版本。
-- 本协调无暂存/commit/push、无SSH/job、无模型或作者测试执行；仅生成清单/文档及读取Git库存/对象，暂存区核为空。
-- 当前操作：向唯一Git窗口发送精确提交提示词，等分scope commit/原字节验证/普通push及实时远端结果，再验收本批。没有确认已接收或执行。
-- 诊断后续：本轮不新增实验；需要已有进程原件补证时另给定向任务，不以重新运行补造历史清理证据。
-- 固定汇报末尾：用户现在动作、目标窗口具体复制提示词、等待交付与推进条件。归档不代表训练/数值/科学/性能接受。
+- 当前轮次：DIAG_CLOSEOUT_ACCEPTED_AND_ARCHIVE_READY，2026-11-06。
+- 01/07本轮收尾均完成；01结论ACCEPT_ARCHIVE_WITH_PRESERVED_LIMITATIONS、review_complete=true、execution_authorized=false。
+- 历史证据补齐0，E01–E06限制已如实定稿；5支持/4不支持/6未记录，不是运行通过数量。
+- 07将回收声明收窄为5个直接Popen句柄；实际compute/后代15秒清理仍UNKNOWN，不能由晚时PID不存在证明。
+- 原DDP未完成、具体内核/旧初态与中间向量/fp64实际线程等限制保留；原数值3/13 FAIL与最终训练FAIL不改，无训练许可。
+- 归档处置：原55份暂缓诊断可连同本次收尾记录作为有限档案归档。新GIT_SUBMIT_DIAG_CLOSEOUT_20261106.md/.tsv，旧268批次不改。
+- 核验记录：GIT_DIAG_CLOSEOUT_BATCH_20261106/CLOSEOUT_ACCEPTANCE.json；包括01审核引用原件的bytes/SHA，未运行作者测试/模型。
+- 台账：DEFERRED_55_RELEASE.json逐项转为新批批准归档；524历史待核和422明确排除仍保留，8旧替代/12迁移边界保持。
+- 原268批已验收，HEAD基线f84281cb27be72fd9a4b8fb7ddb7654a338be1f5；本轮协调无暂存/commit/push，Git仅由唯一窗口执行。
+- 下一任务：REAL_DUAL_DDP_MINIMAL_CANDIDATE_PROPOSAL_20261106.md，给原02静态核Tiny归因与完整Encoder/KML反向路径是否对应，最多一个最小候选提案或NO_JUSTIFIED_CANDIDATE。
+- 02只写新提案目录与自身状态，0模型/收缩/DDP/测试/SSH/job，无实现授权；原B64/fp32/compare/阈值等保持，不能用改参考/换精度回避门槛。
+- 原07/01/00/08待命；02提案到后协调决定01方案审核及是否制作独立候选。用户可同时发唯一Git窗口和原02，二者无依赖。
+- 当前卡已发布，尚未确认窗口接收或启动；无后台监视。本次协调新增材料纳入新批，冻结后更新留下一批。
+- 用户回传Git提交/原字节核验/实时远端结果，以及02六行摘要/PROPOSAL_READY路径；到提交节点主动提醒，不能把归档等同训练接受。
