@@ -1,34 +1,25 @@
 # GIT简短状态
 
-- 更新/轮次：2026-11-06T16:35:20+08:00；R9_R12_S07R7_ARCHIVE_PUSH_20261106；本窗口维护。
-- 项目/分支：E:\eitfm_c2_stages2-4_2026-11-03；main跟踪origin/main；HEAD cb342a1f3f9fc0b2bea66f342138f68acc2950e6。
-- 目标与进度：1422行精确清单及TSV自身共1423文件，按六scope提交并普通推送GitHub成功；起点f1ed9f2保留，无重复提交。
-- 提交 S00：3512c982415f654f8cea571d9edcfe8cba7cac72；952文件、24085431字节。
-- 提交 S01：c018f86bf5398f5921389225f1ac18ab608592c7；78文件、500722字节。
-- 提交 S02：ccb0c47349c67dd482f977795d350ade54adc87d；196文件、1270315字节。
-- 提交 S07：2a748b60cfd08bfbc6ed026ba57b6a898ed5dc11；78文件、435518字节。
-- 提交 S08：029485efff93f962edd75c7ccd9292917c0b183d；70文件、3318889字节。
-- 提交 COORDINATION：cb342a1f3f9fc0b2bea66f342138f68acc2950e6；49文件、407704字节。
-- 核验：1422项大小/SHA全匹配、初始漂移0；1423份Git对象原始字节、每批及总范围与清单完全一致。认证扫描12处匹配为任务授权说明文字，无凭据材料；未强制纳入忽略文件，暂存区空。
-- 原件：57份空文件原字节保留，R6 crash/rank0.json及SOURCE_METADATA_RECHECK.json在Git中均0bytes；故障/残缺JSON未修补或重写，未运行作者审计/测试/模型/集群。
-- R9/R10/R11：有限工程采样，不称纯KML微内核或稳态收益；R10只复用view、CLOSED_NOT_SELECTED_LOW_BENEFIT，非数值FAIL、未做实际KML/完整A-B。
-- R12：job2049894 fixed strict3895项差0，两侧perf各25；后20步中位4.510239/4.628061秒，候选本次慢2.6123%；CLOSED_NO_TRAINING_GAIN，不集成/搜tile，不称稳定回退或加速接受。
-- S07：R6/2050433 normal过但crash空rank0令整组FAIL，后两case/取栈NOT_RUN；R7/2051116原子报告修复、Linux88零skip及同job原四case通过，只接受固定张量/故障协议。
-- 栈/DDP边界：R7 Python timer在init_end合法取消，kernel stack2字段权限拒绝；full_stack_capture_complete=false，未证明原初始化永久修复；真实模型DDP/性能未接受。
-- 科学边界：原工程subject/split UNKNOWN、无正式val/test/科学或生产接受；历史LOCAL_ONLY/NOT_RUN不重写成当前PASS，未更新生产默认。
-- 远端：GitHub https://github.com/953740669wu/-.git；普通push成功（f1ed9f2..cb342a1），实时远端main、本地HEAD和origin/main均为cb342a1f3f9fc0b2bea66f342138f68acc2950e6；未强推/切分支/改远端或全局配置。
-- 依据：c2/stage4_sessions/work/COORDINATION/GIT_SUBMIT_R9_R12_S07R7_20261106.md及同名TSV；TSV随COORDINATION批提交。
-- 遗漏/漂移：清单遗漏0；推送后已核作者文件漂移0项；Git两份结束状态留下一批，不追加第7次提交。
-- 余项：共873项（核验时快照，含Git两份交接）；范围外旧R8/初始语料审计/S00 R5/S04 P1/S05/S06/S07旧根准备、S01 frozen重复副本、未列FileStore/known_hosts/isolated副本等均保留原位。
-- 剩余任务分组：
-  - c2/stage4_sessions/work/COORDINATION/：16项。
-  - c2/stage4_sessions/work/GIT/：2项。
-  - c2/stage4_sessions/work/S00/：258项。
-  - c2/stage4_sessions/work/S01/：318项。
-  - c2/stage4_sessions/work/S02/：61项。
-  - c2/stage4_sessions/work/S04/：38项。
-  - c2/stage4_sessions/work/S05/：38项。
-  - c2/stage4_sessions/work/S06/：26项。
-  - c2/stage4_sessions/work/S07/：116项。
-- 完整核验及逐文件余项：E:/Codex/home/visualizations/2026/11/05/01a1a9d7-f74b-7e30-b951-571b11c51ea1/r9_r12_s07r7_20261106/final_verification.json及remaining_files.json。
-- 活动/下一步：本Git会话所有进程结束，其它任务job未查询；后续只按新精确清单提交/普通推送，不以清空工作区为目标。
+- 更新/轮次：2026-11-06T20:01:41+08:00；DUAL_DDP_NO_RUN_ARCHIVE_PUSH_20261106；本窗口维护。
+- 项目/分支：E:\eitfm_c2_stages2-4_2026-11-03；main跟踪origin/main；HEAD f84281cb27be72fd9a4b8fb7ddb7654a338be1f5。
+- 目标与进度：267行批准清单加TSV自身268份，按7个scope提交并普通推送GitHub成功；起点cb342a1保留，无重复提交。
+- 提交 S00：d74fe32351f02fe4643570b920f093180d9ad33b；88文件、677080字节。
+- 提交 S01：cbc17daaa18244b4061b2e96f5b511d6552f3593；25文件、180178字节。
+- 提交 S02：7b606ad9499bef8bb9180a1f7bae9b3295f8a1e3；35文件、297802字节。
+- 提交 S07：a8ca51cadf99b7515e61f36243ef2af45adb0666；60文件、268141字节。
+- 提交 S08：0b82d00ad8ad7a6136cb43714730415766d37d7b；29文件、109119字节。
+- 提交 COORDINATION：26f39dc322a920382aaa16f1206da67b846f05eb；29文件、2298170字节。
+- 提交 GIT：f84281cb27be72fd9a4b8fb7ddb7654a338be1f5；2文件、5000字节。
+- 核验：267项大小/SHA均匹配；268份Git对象原始bytes/SHA、每批和总差异范围完全一致，共3835490字节；无遗漏/额外文件，暂存区空，未强制加入忽略项或转换换行。
+- TSV批准/实际对象SHA256：6c1f32b31ee2708beb54478281c043efc4a10b102528192415509d5a8039aaad；原清单和台账未刷新，build_manifest.py未执行。
+- 验收边界：冻结双域参考/候选及部署准备；最终数值FAIL（原13指标含3项失败），门禁拒绝提交，job_id=null/new_jobs0、实际更新/训练帧0。未提交终态不等于训练成功、集成或性能接受。
+- 诊断暂缓：01/07两个numeric_diagnosis_r1完整目录共55份均未提交、仍在余项。当前短状态的ACCEPT_PARTIAL_DIAGNOSIS_NOT_TRAINING_ACCEPTANCE不扩大归档；DDP影响和真实计算PID/后代15秒清理等证据未闭合。
+- 历史：8条SUPERSEDED_OLD_SUMMARY_ORIGINAL_SHA_NOT_RETAINED按原台账保留，不补造旧快照/改旧TSV；12条MIGRATED_EXACT_BYTES_ALREADY_ARCHIVED已只读核到HEAD相同bytes/SHA，不重复加文件。
+- 余项台账：原1001项逐路径均保留，524历史待核/422明确排除/55诊断暂缓；推送后、结束状态更新前新增0项、台账项不再pending0项；详最终核验记录。
+- 推送：GitHub https://github.com/953740669wu/-.git，普通push成功（cb342a1..f84281c）；实时远端main、本地HEAD、origin/main均为f84281cb27be72fd9a4b8fb7ddb7654a338be1f5；未改remote/分支、未强推/reset/clean或覆盖工作区。
+- 异常/漂移：初始清单漂移0，推送后已核作者文件漂移0项；本轮未运行训练/诊断/作者审计/测试/集群或重跑编表脚本。
+- 不纳入：范围外历史准备、数据/权重/ZIP/环境/known_hosts、作者排除副本；不为清空工作区加入。原空FINAL_prepare.log保持0bytes。
+- 本轮结束更新：仅自己的SESSION_STATUS.md、ROUND_DELTA.md在批准冻结后更新，是下一批余项，不自动追加第8次提交。
+- 依据：c2/stage4_sessions/work/COORDINATION/GIT_SUBMIT_DUAL_DDP_NO_RUN_20261106.md及同名TSV；原处置台账位于同目录GIT_DUAL_DDP_BATCH_20261106/。
+- 完整核验、逐项余项及NEW_AFTER_SNAPSHOT：E:/Codex/home/visualizations/2026/11/05/01a1a9d7-f74b-7e30-b951-571b11c51ea1/dual_ddp_no_run_20261106/final_verification.json、remaining_files.json、final_ledger_reconciliation.json。
+- 活动/下一步：本Git会话进程已结束，其它任务job未查询；后续只按新的批准清单提交/普通推送，不追补未授权诊断和历史缺口。
