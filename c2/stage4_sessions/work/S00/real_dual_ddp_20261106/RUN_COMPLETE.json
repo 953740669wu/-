@@ -1,0 +1,223 @@
+{
+  "active_job": null,
+  "actual_C2_numeric_acceptance": false,
+  "actual_updates": {
+    "full_model_updates": 0,
+    "global_updates": 0,
+    "physical_rank_updates": 0,
+    "reference_corpus_observation_frames": 0,
+    "reference_updates": 0,
+    "unique_training_frames": 0
+  },
+  "added_node_seconds": 0,
+  "all24_review_bindings_resources_workload_match": true,
+  "analysis_inputs": {
+    "actual_cluster_results": "NOT_RUN_NO_SUBMISSION",
+    "checkpoint_indices": [],
+    "deployment_dir": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106",
+    "evidence_dir": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence",
+    "exposure_ledgers": [],
+    "not_run_stages": {
+      "C2_native_resource_environment_gate": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+      "C2_small_DDP": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+      "DDP_continuation_to25": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+      "Linux26_preflight": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+      "actual_KML_and_CPU_training_evidence": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+      "checkpoint_restore": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+      "full_B64_strict5": "NOT_RUN_S01_FAIL_BEFORE_JOB"
+    },
+    "preparation_file_index": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\linux_preparation_received\\PRE_SUBMISSION_INDEX.json",
+    "preparation_originals_dir": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\linux_preparation_received",
+    "preparation_receipt": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\FINAL_PREPARATION_RECEIPT.json",
+    "queue_final": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\NO_SUBMISSION_FINAL_CHECK.json",
+    "raw_model_metrics": [],
+    "raw_model_reports": [],
+    "release_rejection": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\RELEASE_REJECTED_BY_GATE.json",
+    "review_file": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\S01_REVIEW.json",
+    "upstream_local_failed_metrics": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\S07_LOCAL_STRICT_PAIR_METRICS.json"
+  },
+  "bindings": {
+    "baseline_kml_sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "comparator_sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e",
+    "corpus_manifest_sha256": "bdd146040bddf2ddd47fb9d571d5d2f40e5fa20fbd30d0c0d11239893e647032",
+    "deployment_package_sha256": "8d4fb023b99109850919b904561b0b228cdce50c607b9c26408adf90ce711434",
+    "deployment_source_manifest_sha256": "e4b4111046457c6926681692a846202e9cfb6567601612d99fb8a36780294cba",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "engineering_interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+    "installed_ddp_sha256": "480213c6546cf6c2d522357a59065d38afbaa16196dc8eabaadf752b5bdcae43",
+    "model_sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+    "reference_binding_sha256": "2cf2226fb554df7a4d0180798f603828bddbe1c1c6e45aa1debe6e7a30c3925b",
+    "reference_epoch25_sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8",
+    "reference_package_sha256": "df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5",
+    "reference_ready_sha256": "924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3",
+    "reference_source_manifest_sha256": "6b9cd186d27a5130f22cd2e58a2c6cb231be31c70d5df98dce4c40e92008b757",
+    "runtime_contract_sha256": "029fddfc7bc31158dc63589eb087c794cd8536282c4d8cecae452805344e8bb0",
+    "task_card_sha256": "ebabda929df06e0c1366563af0d16ac360c0fdf3cc16b330f3bf2804a088a1ec",
+    "training_config_sha256": "c7f0e948e6f16a6ecd02df8a881eabbc6f4836c2f1191646e06452adbda31ffa",
+    "training_entry_sha256": "6a8b3cd69051f149f3b3e6ee786b0ff32a8c3bdf951dfcc635b051df51084e94",
+    "training_package_sha256": "d032d67cd76eddbc372ab6f9dd51c8355c4bb1ef3e7469254c2549a3481623a9",
+    "training_ready_sha256": "da83cf560c04b663c8c4b1e0fb89d1e56aa9d696ffe88a1a58d3c211428f4bef",
+    "training_source_manifest_sha256": "9a124291713f0798df8b4d783f2f8cb36cbeb6f13c0dbe400f9767e1d37db739",
+    "upstream_local_checks_sha256": "ca520646002fcffd2de25b34c82a2c6acb135f3933da4ada3e137b9d1331933f",
+    "upstream_local_failed_metrics_sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+  },
+  "checkpoints": "NONE_NO_COMPUTE_MODEL",
+  "cleanup": "NOT_APPLICABLE_NO_COMPUTE_WORKERS; all login commands finished",
+  "deployment_acceptance": "NOT_GRANTED_SNAPSHOT_ONLY_FINAL_READY_NOT_REVIEWED",
+  "deployment_ready": {
+    "bytes": 10199,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\S00_DEPLOYMENT_READY.json",
+    "sha256": "acc2d1e14423a14b94867ff1eeb62459167541cafd753697e267468b91afe706"
+  },
+  "engineering_only": true,
+  "evidence": {
+    "final_queue": {
+      "bytes": 29983,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\NO_SUBMISSION_FINAL_CHECK.json",
+      "sha256": "1ee65d7d0bcdeba1f7c2e37d47fe1856fbbdc71cf10a34ce66695168f7cd3387"
+    },
+    "protected_history": {
+      "bytes": 2036,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\PROTECTED_FINAL_RECHECK.json",
+      "sha256": "f1bbe8466c329ddaa98df430898d57e2b32e5ade50cb360d12573e975edec0c5"
+    },
+    "release_gate_rejection": {
+      "bytes": 333,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\RELEASE_REJECTED_BY_GATE.json",
+      "sha256": "1b8c6bb84a30b5ee8b92567c847b7857d46b001de3673eb41cfe8a985b9e4f08"
+    },
+    "upstream_local_metrics": {
+      "bytes": 2224,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\S07_LOCAL_STRICT_PAIR_METRICS.json",
+      "sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+    }
+  },
+  "execution_authorized": false,
+  "finished_utc": "2026-11-06T09:43:54.246456+00:00",
+  "formal_split_status": "UNKNOWN",
+  "job_id": null,
+  "job_state": "NOT_SUBMITTED",
+  "new_jobs": 0,
+  "next_step": "Current candidate release stopped. Coordination must define any new diagnosis/revision; no retry, threshold relaxation, new job or edits to S02/S07 payload by S00.",
+  "not_run_stages": {
+    "C2_native_resource_environment_gate": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+    "C2_small_DDP": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+    "DDP_continuation_to25": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+    "Linux26_preflight": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+    "actual_KML_and_CPU_training_evidence": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+    "checkpoint_restore": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+    "full_B64_strict5": "NOT_RUN_S01_FAIL_BEFORE_JOB"
+  },
+  "owned_compute_processes": "NONE_CREATED_NO_JOB",
+  "preparation": {
+    "final_frozen_package_receipt": {
+      "bytes": 4040,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\FINAL_PREPARATION_RECEIPT.json",
+      "sha256": "e3d963c20f396ab037b209cccc48f4d81f92670666483856a5753f0d77d993a0"
+    },
+    "final_linux_wrapper_methods": 10,
+    "initial_linux_wrapper_methods": 10,
+    "local_wrapper_methods": 10,
+    "numeric_acceptance": false,
+    "original_bundle": {
+      "bytes": 6339,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\PRE_SUBMISSION_EVIDENCE.zip",
+      "sha256": "c3f25b3f1786cc3952c2f4729bf95cb30234e70781b1c49d53bb8a86bd6a11dc"
+    },
+    "original_bundle_verified": true,
+    "skipped": 0,
+    "source_and_cli_checks_only": true
+  },
+  "rejection": [
+    {
+      "code": "B01_LOCAL_STRICT_NUMERICAL_FAILURE",
+      "evidence": {
+        "bytes": 2224,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\evidence\\tiny_ddp_192181562000000\\strict_pair_metrics.json",
+        "sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+      },
+      "failed_metrics": [
+        {
+          "l2_relative": 9.410191088070238e-05,
+          "max_abs": 1.9147992134094238e-05,
+          "name": "val.weight",
+          "passed": false,
+          "reference_norm": 0.2131539446846441
+        },
+        {
+          "l2_relative": 9.410191088070238e-05,
+          "max_abs": 1.9147992134094238e-05,
+          "name": "pos.weight",
+          "passed": false,
+          "reference_norm": 0.4263078893692882
+        },
+        {
+          "l2_relative": 0.0001142869133502608,
+          "max_abs": 3.723800182342529e-05,
+          "name": "tf.weight",
+          "passed": false,
+          "reference_norm": 0.5284964778141917
+        }
+      ],
+      "message": "Frozen necessary small B64/two-rank gradient control fails 3/13 original-threshold metrics; fail-stop, no waiver."
+    }
+  ],
+  "resources_proposed_only": {
+    "HBM": 0,
+    "actual_per_domain": 36,
+    "actual_physical_cores": 72,
+    "allocated_cores": 76,
+    "allocated_per_domain": 38,
+    "cleanup_seconds": 30,
+    "closing_seconds": 30,
+    "domains": 2,
+    "exclusive": true,
+    "job_seconds": 900,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "pg_timeout_seconds": 120,
+    "reserved_cores": 4,
+    "reserved_per_domain": 2,
+    "whole_entry_timeout": 840
+  },
+  "retries": 0,
+  "review": {
+    "bytes": 6152,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\S01_REVIEW.json",
+    "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+  },
+  "review_complete": true,
+  "review_decision": "FAIL",
+  "round": "REAL_DUAL_DDP_20261106",
+  "schema_version": 1,
+  "speedup": "NOT_MEASURED",
+  "status": "NOT_RUN_S01_REVIEW_FAIL_NO_JOB",
+  "subject_mapping_status": "UNKNOWN",
+  "task": "S00",
+  "training_acceptance": false,
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "workload_proposed_only": {
+    "comparator": "ORIGINAL_UNCHANGED",
+    "extra_reference_frames": 320,
+    "formal_split_status": "UNKNOWN",
+    "global_batch": 64,
+    "linux_preflight_methods": 26,
+    "linux_preflight_skipped": 0,
+    "local_batch": 32,
+    "max_full_encoder_updates": 55,
+    "max_global_updates": 25,
+    "max_rank_updates": 50,
+    "max_reference_updates": 5,
+    "optimizer_restore_updates": 0,
+    "stage_order": [
+      "strict5",
+      "continue_same_state_to25",
+      "checkpoint",
+      "zero_update_restore"
+    ],
+    "strict_reference_updates": 5,
+    "unique_training_frames": 1600,
+    "upstream_local_numerical_gate": "FAIL_ORIGINAL_THRESHOLDS_PRESERVED"
+  }
+}

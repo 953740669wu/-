@@ -1,0 +1,200 @@
+{
+  "collection": {
+    "acceptance": "exit0 alone is not numerical/synchronization/restore acceptance; no formal split, val/test, speedup or scientific claim",
+    "raw": "all events, steps, frame/mask/exposure, partial/empty/corrupt/hidden JSON, source and schedule, owned cleanup",
+    "weights": "remote-only .pt/.pt.tmp/.pth/.npz, including partials; paths/bytes/SHA indexed"
+  },
+  "evidence": {
+    "commands": {
+      "bytes": 4058,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\COMMANDS.md",
+      "sha256": "8f297951f0a312c501c028633048443f9874a7c5a6eee058b59b4ca3d09d577a"
+    },
+    "common_reuse": {
+      "bytes": 874,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\REUSED_COMPONENTS.json",
+      "sha256": "593d4dc6fd407095fe2815a4a00e660b00f372b728c757a9db44e8736174ef26"
+    },
+    "diff": {
+      "bytes": 45332,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\MINIMAL.diff",
+      "sha256": "78f6b1a137d140c25e65d6415b7bade6c1e6608508e29d978932eccc8530a712"
+    },
+    "fixed_original_anchors": {
+      "bytes": 794,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\LOCAL_ORIGINAL_ANCHORS.json",
+      "sha256": "4099f6da11eb1431ac21bc9ef0e7cdf8fc596bf345a473397d6e0d2147dd9c4e"
+    },
+    "installed_ddp_source": {
+      "bytes": 108544,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\C2_INSTALLED_DDP.py",
+      "sha256": "480213c6546cf6c2d522357a59065d38afbaa16196dc8eabaadf752b5bdcae43"
+    },
+    "readonly_resume": {
+      "bytes": 20510,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\READONLY_RESUME.json",
+      "sha256": "e4d6ffa9d801a2c8598ff2b5396e7aeeab6fffbe046debbada43a94cb5c05339"
+    },
+    "runtime_contract": {
+      "bytes": 3344,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\RUNTIME_CONTRACT.json",
+      "sha256": "029fddfc7bc31158dc63589eb087c794cd8536282c4d8cecae452805344e8bb0"
+    }
+  },
+  "execution_gate": {
+    "active_job": null,
+    "all_bindings_resources_workload_must_match": true,
+    "automatic_retry": false,
+    "decision": "PASS_FOR_REAL_DUAL_DDP",
+    "live_deduplication_before_marker": true,
+    "local_failure_must_be_explicitly_reviewed": true,
+    "new_jobs": 0,
+    "review_complete": true,
+    "review_file": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_review_20261106\\S01_REVIEW.json"
+  },
+  "execution_released": false,
+  "immutable_after_publish": true,
+  "linux_required_before_full_model": {
+    "all_inside_common_840_seconds": true,
+    "real_training_fault_cases": "NONE; small owned lifecycle fixtures only; no R7 four-case rerun",
+    "reference_check_binding": "numactl rank0 selected36/DDR before Python imports Torch; original test2-thread fixture is separate, actual training36 unchanged",
+    "s02_methods": 7,
+    "s07_methods": 19,
+    "skipped": 0,
+    "stop_on_first_failed_group": true,
+    "total": 26
+  },
+  "local_and_linux_wrapper_checks": {
+    "actual_caller_cli_parse": "PASS_NO_FRAMEWORK_EXECUTION",
+    "linux_frozen_package_receipt": {
+      "bytes": 4040,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\FINAL_PREPARATION_RECEIPT.json",
+      "sha256": "e3d963c20f396ab037b209cccc48f4d81f92670666483856a5753f0d77d993a0"
+    },
+    "methods_each": 10,
+    "model_training": false,
+    "skipped": 0,
+    "source_syntax": "LF_AST39_bash_n"
+  },
+  "package": {
+    "bytes": 232024,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\S00_REAL_DUAL_DDP_DEPLOYMENT.zip",
+    "sha256": "8d4fb023b99109850919b904561b0b228cdce50c607b9c26408adf90ce711434"
+  },
+  "published_utc": "2026-11-06T09:37:53.588442+00:00",
+  "ready_for_s01_review": true,
+  "reference_package": {
+    "bytes": 62170,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\S02_REAL_DUAL_DDP_REFERENCE.zip",
+    "sha256": "df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5"
+  },
+  "reference_ready": {
+    "bytes": 6655,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\REFERENCE_READY.json",
+    "sha256": "924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3"
+  },
+  "remote_staging_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/REAL_DUAL_DDP_20261106T085703Z",
+  "required_review_bindings": {
+    "baseline_kml_sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "comparator_sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e",
+    "corpus_manifest_sha256": "bdd146040bddf2ddd47fb9d571d5d2f40e5fa20fbd30d0c0d11239893e647032",
+    "deployment_package_sha256": "8d4fb023b99109850919b904561b0b228cdce50c607b9c26408adf90ce711434",
+    "deployment_source_manifest_sha256": "e4b4111046457c6926681692a846202e9cfb6567601612d99fb8a36780294cba",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "engineering_interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+    "installed_ddp_sha256": "480213c6546cf6c2d522357a59065d38afbaa16196dc8eabaadf752b5bdcae43",
+    "model_sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+    "reference_binding_sha256": "2cf2226fb554df7a4d0180798f603828bddbe1c1c6e45aa1debe6e7a30c3925b",
+    "reference_epoch25_sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8",
+    "reference_package_sha256": "df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5",
+    "reference_ready_sha256": "924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3",
+    "reference_source_manifest_sha256": "6b9cd186d27a5130f22cd2e58a2c6cb231be31c70d5df98dce4c40e92008b757",
+    "runtime_contract_sha256": "029fddfc7bc31158dc63589eb087c794cd8536282c4d8cecae452805344e8bb0",
+    "task_card_sha256": "ebabda929df06e0c1366563af0d16ac360c0fdf3cc16b330f3bf2804a088a1ec",
+    "training_config_sha256": "c7f0e948e6f16a6ecd02df8a881eabbc6f4836c2f1191646e06452adbda31ffa",
+    "training_entry_sha256": "6a8b3cd69051f149f3b3e6ee786b0ff32a8c3bdf951dfcc635b051df51084e94",
+    "training_package_sha256": "d032d67cd76eddbc372ab6f9dd51c8355c4bb1ef3e7469254c2549a3481623a9",
+    "training_ready_sha256": "da83cf560c04b663c8c4b1e0fb89d1e56aa9d696ffe88a1a58d3c211428f4bef",
+    "training_source_manifest_sha256": "9a124291713f0798df8b4d783f2f8cb36cbeb6f13c0dbe400f9767e1d37db739",
+    "upstream_local_checks_sha256": "ca520646002fcffd2de25b34c82a2c6acb135f3933da4ada3e137b9d1331933f",
+    "upstream_local_failed_metrics_sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_per_domain": 36,
+    "actual_physical_cores": 72,
+    "allocated_cores": 76,
+    "allocated_per_domain": 38,
+    "cleanup_seconds": 30,
+    "closing_seconds": 30,
+    "domains": 2,
+    "exclusive": true,
+    "job_seconds": 900,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "pg_timeout_seconds": 120,
+    "reserved_cores": 4,
+    "reserved_per_domain": 2,
+    "whole_entry_timeout": 840
+  },
+  "round": "REAL_DUAL_DDP_20261106",
+  "schema_version": 1,
+  "source_manifest": {
+    "bytes": 3507,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\ARTIFACT_SHA256.json",
+    "sha256": "e4b4111046457c6926681692a846202e9cfb6567601612d99fb8a36780294cba"
+  },
+  "status": "DEPLOYMENT_FROZEN_FOR_S01_REVIEW_UPSTREAM_LOCAL_NUMERICAL_FAIL",
+  "task": "S00",
+  "training_package": {
+    "bytes": 59416,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\S07_REAL_DUAL_DDP.zip",
+    "sha256": "d032d67cd76eddbc372ab6f9dd51c8355c4bb1ef3e7469254c2549a3481623a9"
+  },
+  "training_ready": {
+    "bytes": 13266,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\TRAINING_READY.json",
+    "sha256": "da83cf560c04b663c8c4b1e0fb89d1e56aa9d696ffe88a1a58d3c211428f4bef"
+  },
+  "upstream_failure_metrics": {
+    "bytes": 2224,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\S07_LOCAL_STRICT_PAIR_METRICS.json",
+    "sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+  },
+  "upstream_local_check_counts": {
+    "failed": 1,
+    "passed": 17,
+    "skipped": 1,
+    "total": 19
+  },
+  "upstream_local_checks": {
+    "bytes": 2021,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\S07_LOCAL_CHECKS.json",
+    "sha256": "ca520646002fcffd2de25b34c82a2c6acb135f3933da4ada3e137b9d1331933f"
+  },
+  "upstream_local_numerical_gate": "FAIL_ORIGINAL_THRESHOLDS_PRESERVED",
+  "workload": {
+    "comparator": "ORIGINAL_UNCHANGED",
+    "extra_reference_frames": 320,
+    "formal_split_status": "UNKNOWN",
+    "global_batch": 64,
+    "linux_preflight_methods": 26,
+    "linux_preflight_skipped": 0,
+    "local_batch": 32,
+    "max_full_encoder_updates": 55,
+    "max_global_updates": 25,
+    "max_rank_updates": 50,
+    "max_reference_updates": 5,
+    "optimizer_restore_updates": 0,
+    "stage_order": [
+      "strict5",
+      "continue_same_state_to25",
+      "checkpoint",
+      "zero_update_restore"
+    ],
+    "strict_reference_updates": 5,
+    "unique_training_frames": 1600,
+    "upstream_local_numerical_gate": "FAIL_ORIGINAL_THRESHOLDS_PRESERVED"
+  }
+}

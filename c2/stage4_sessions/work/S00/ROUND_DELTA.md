@@ -1,6 +1,6 @@
-任务/轮次：S00 / S07_R7_ATOMIC_20261106。
-状态变化：01同12项SHA/资源/原判据专项PASS后，唯一2051116/cn21348 SUCCEEDED/exit0；完整四case被原checker接受（0/1/1/124），新增163节点秒/usage163，0重试、无活动job。
-本轮改动：新P1部署、16文件15delivery/88检查、正式rank与隐藏tmp分开收集；发布S00_DEPLOYMENT_READY/RUN_COMPLETE及OBSERVATION_REVIEW。原reader/observer/CPU/判据不改，旧R6空报告/失败和发布前草稿保留。
-验证增量：15本地+15 Linux登录包装夹具及实际88 Linux零skip/环境通过；八正式JSON完整，crash rank0=10595bytes/error已提交，原四case/48 worker CPU快照及timer-helper绑核、源码库/授权/所属22PID清理通过，原子tmp残件0。
-证据：s07_r7_atomic_20261106/{RUN_COMPLETE.json,RUN_AUDIT.json,RUN_REPORT.md,OBSERVATION_REVIEW.json,SHA256_INDEX.json,ARCHIVE_FILES.txt}；ZIP390914bytes/175文件，SHAfc4ebaa826668fe3f72186e2bdf9b67e0998db52f7c86502bce6cbe0dde38b4b。
-阻塞与下一步：通信整组通过；Python取栈因init_end合法提前取消，空栈不称捕获；proc8字段6 OK/2 kernel stack权限拒绝，完整栈捕获仍false。交协调/S07定向复核，不补采/提权/重试，不称永久根因解决或同步模型/性能接受；保持原fp32基线，无共享Git暂存操作。
+任务/轮次：S00 / REAL_DUAL_DDP_20261106。
+状态变化：01同24 SHA/资源/阶段完整最终FAIL（本地严格小B64控制3/13失败）；提交前停止，0新job/0重试/0节点秒，无活动job。
+本轮改动：完成原样02/07新部署、S00_DEPLOYMENT_READY/精确命令/最小diff与完整收集层；外包232024bytes SHA8d4fb023b99109850919b904561b0b228cdce50c607b9c26408adf90ce711434，冻结原件未改。
+验证增量：原固定16单元36文件与原模型/两参考SHA、10 Windows及初始/最终各10 Linux包装检查、LF/AST39/bash-n/真实CLI连线通过；最终真实队列/系列marker无尝试或活动job，8份旧保护原件不变。
+证据：real_dual_ddp_20261106/{RUN_COMPLETE.json,NO_JOB_HANDOFF.json,RUN_REPORT.md,S00_DEPLOYMENT_READY.json,S01_REVIEW.json,ARCHIVE_FILES.txt,SHA256_INDEX.json}；准备原件ZIP6339bytes/9成员逐项核验通过，原数值失败和门禁拒绝均保存。
+阻塞与下一步：计算环境/26现场检查/完整模型strict5和25步/恢复/性能全NOT_RUN，真实训练/参考曝光0；当前候选发布停止，交协调定义新诊断，唯一Git窗口按清单归档证据，不重试/放阈值/扩资源或操作共享Git暂存。

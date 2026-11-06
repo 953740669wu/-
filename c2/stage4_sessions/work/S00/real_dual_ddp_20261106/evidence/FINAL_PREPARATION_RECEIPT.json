@@ -1,0 +1,100 @@
+{
+  "status": "PASS_FROZEN_SHA_MANIFEST_LF_AST39_BASH_N_10_WRAPPER_FIXTURES_CLI_ONLY",
+  "observed_utc": "2026-11-06T09:37:04.498643+00:00",
+  "outer_sha256": "8d4fb023b99109850919b904561b0b228cdce50c607b9c26408adf90ce711434",
+  "commands": [
+    {
+      "label": "prepare",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/REAL_DUAL_DDP_20261106T085703Z/prepare.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "wrapper_tests",
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/REAL_DUAL_DDP_20261106T085703Z/tests/test_deployment.py"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "actual_caller_cli_help",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/REAL_DUAL_DDP_20261106T085703Z/payload/training/candidate/train_ddp.py",
+        "run",
+        "--config",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/REAL_DUAL_DDP_20261106T085703Z/payload/training/training_config.json",
+        "--allocation",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/REAL_DUAL_DDP_20261106T085703Z/allocation.json",
+        "--reference-root",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/REAL_DUAL_DDP_20261106T085703Z/payload/reference",
+        "--reference-ready",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/REAL_DUAL_DDP_20261106T085703Z/REFERENCE_READY.json",
+        "--descriptor",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/REAL_DUAL_DDP_20261106T085703Z/ENGINEERING_DESCRIPTOR.json",
+        "--output",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/REAL_DUAL_DDP_20261106T085703Z/training_output",
+        "--job-start-ns",
+        "1442518524824049",
+        "--help"
+      ],
+      "returncode": 0
+    }
+  ],
+  "framework_model_requested": false,
+  "new_jobs": 0,
+  "source_manifest_sha256": "e4b4111046457c6926681692a846202e9cfb6567601612d99fb8a36780294cba",
+  "pre_submit_checks": {
+    "checked": [
+      "prepare.py",
+      "gate.py",
+      "run_job.py",
+      "review_gate.py",
+      "submit_once.py",
+      "collect_evidence.py",
+      "owned_processes.py",
+      "scheduler_handoff.py",
+      "validate_release.py",
+      "run_job.sh",
+      "R4_RUNTIME.env",
+      "tests/test_deployment.py",
+      "payload/reference/cpu36_contract.py",
+      "payload/reference/diagnostic_common.py",
+      "payload/reference/dual_reference.py",
+      "payload/reference/engineering_training.py",
+      "payload/reference/profile_contract.py",
+      "payload/reference/real_data.py",
+      "payload/reference/baseline/kml_ops.py",
+      "payload/reference/baseline/s4_models.py",
+      "payload/reference/data_gate/engineering_data.py",
+      "payload/reference/tests/check_equivalence.py",
+      "payload/reference/tests/test_dual_reference.py",
+      "payload/training/candidate/cpu36_contract.py",
+      "payload/training/candidate/loss_contract.py",
+      "payload/training/candidate/runtime_guard.py",
+      "payload/training/candidate/supervisor.py",
+      "payload/training/candidate/train_ddp.py",
+      "payload/training/candidate/training_graph.py",
+      "payload/training/candidate/training_support.py",
+      "payload/training/tests/test_contracts.py",
+      "payload/training/tests/test_lifecycle.py",
+      "payload/training/tests/test_result_identity.py",
+      "payload/training/tests/test_training_torch.py",
+      "payload/training/tests/torch_checks_worker.py"
+    ],
+    "package_file_counts": {
+      "reference": 18,
+      "training": 20
+    },
+    "status": "SHA_AST39_LF_BASH_N_ONLY_NO_MODEL"
+  },
+  "upstream_local_numerical_gate": "FAIL_ORIGINAL_THRESHOLDS_PRESERVED",
+  "numeric_acceptance": false,
+  "standard_library_only": true
+}

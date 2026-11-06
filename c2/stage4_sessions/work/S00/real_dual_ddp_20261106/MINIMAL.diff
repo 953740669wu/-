@@ -1,0 +1,741 @@
+--- R12/prepare.py
++++ REAL_DUAL_DDP/prepare.py
+@@ -1,75 +1,100 @@
+-"""Pinned engineering deployment; no models or scheduler submission."""
++"""Frozen two-package deployment verification; never import a framework."""
+ import ast
+ import hashlib
+ import json
+ from pathlib import Path
++import stat
+ import subprocess
+ import zipfile
+ 
+-BASE=Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
+-PREFIX='S02_DW_R12_'
+-DEPLOYMENT='S00_R12_DW_AB_DEPLOYMENT.zip'
+-RESOURCES=dict(allocated_cores=38,actual_physical_cores=36,reserved_cores=2,memory_MB=24576,
+- memory_limit_MB=24576,exclusive=True,job_seconds=900,whole_entry_timeout=840,cleanup_seconds=30,closing_seconds=30,stop_new_update_after_seconds=720,HBM=0,whole_chain_seconds=840)
++BASE = Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
++PREFIX = 'REAL_DUAL_DDP_'
++DEPLOYMENT = 'S00_REAL_DUAL_DDP_DEPLOYMENT.zip'
++RESOURCES = dict(domains=2, allocated_per_domain=38, actual_per_domain=36, reserved_per_domain=2,
++                 allocated_cores=76, actual_physical_cores=72, reserved_cores=4, memory_MB=24576,
++                 memory_limit_MB=24576, exclusive=True, HBM=0, job_seconds=900,
++                 whole_entry_timeout=840, cleanup_seconds=30, closing_seconds=30, pg_timeout_seconds=120)
++WORKLOAD = dict(local_batch=32, global_batch=64, strict_reference_updates=5, max_global_updates=25,
++                max_rank_updates=50, max_reference_updates=5, max_full_encoder_updates=55,
++                unique_training_frames=1600, extra_reference_frames=320, optimizer_restore_updates=0,
++                stage_order=['strict5', 'continue_same_state_to25', 'checkpoint', 'zero_update_restore'],
++                comparator='ORIGINAL_UNCHANGED', formal_split_status='UNKNOWN',
++                linux_preflight_methods=26, linux_preflight_skipped=0,
++                upstream_local_numerical_gate='FAIL_ORIGINAL_THRESHOLDS_PRESERVED')
+ 
+ 
+ def sha(path):
+-    h=hashlib.sha256()
+-    with Path(path).open('rb') as f:
+-        for block in iter(lambda:f.read(1024*1024),b''):h.update(block)
++    h = hashlib.sha256()
++    with Path(path).open('rb') as stream:
++        for block in iter(lambda: stream.read(1024*1024), b''): h.update(block)
+     return h.hexdigest()
+ 
+ 
+-def save(path,value):
+-    Path(path).write_text(json.dumps(value,indent=2,sort_keys=True)+'\n',encoding='utf-8')
++def save(path, value):
++    Path(path).write_text(json.dumps(value, indent=2, sort_keys=True, allow_nan=False)+'\n', encoding='utf-8')
+ 
+ 
+ def check_root(root):
+-    if root.parent!=BASE or not root.name.startswith(PREFIX):raise ValueError('new unique S00 engineering directory required')
++    if root.parent != BASE or not root.name.startswith(PREFIX):
++        raise ValueError('fresh owned REAL_DUAL_DDP directory required')
+ 
+ 
+-def pinned(root):return json.loads((root/'PINNED_INPUTS.json').read_text(encoding='utf-8'))
++def pinned(root):
++    return json.loads((root/'PINNED_INPUTS.json').read_text(encoding='utf-8'))
++
++
++def check_archive(path, files):
++    with zipfile.ZipFile(path) as z:
++        names = z.namelist()
++        if len(names) != len(set(names)) or any(
++                name.startswith('/') or '..' in Path(name).parts or '\\' in name or ':' in name
++                for name in names):
++            raise ValueError('unsafe/duplicate package entry')
++        if any(stat.S_ISLNK(info.external_attr >> 16) for info in z.infolist()):
++            raise ValueError('package symlinks forbidden')
++        actual = {name: hashlib.sha256(z.read(name)).hexdigest()
++                  for name in names if not name.endswith('/')}
++        if actual != files: raise ValueError('package file set or bytes differ from pinned source index')
++        return actual
+ 
+ 
+ def verify_prepared(root):
+-    pins=pinned(root)
+-    index=json.loads((root/'ARTIFACT_SHA256.json').read_text(encoding='utf-8'))
+-    for name,digest in index.items():
+-        if sha(root/name)!=digest:raise ValueError('deployment source drift: '+name)
+-    for name,digest in json.loads((root/'pre_submit_checks.json').read_text())['payload_files'].items():
+-        if sha(root/name)!=digest:raise ValueError('code source drift: '+name)
+-    for name,digest in [('ENGINEERING_DESCRIPTOR.json',pins['descriptor_sha256']),('R12_CONTRACT.json',pins['contract_sha256']),
+-                        (pins['code_archive'],pins['code_package_sha256'])]:
+-        if sha(root/name)!=digest:raise ValueError('pinned input drift: '+name)
++    for name, digest in json.loads((root/'ARTIFACT_SHA256.json').read_text(encoding='utf-8')).items():
++        if sha(root/name) != digest: raise ValueError('deployment source drift: '+name)
++    pins = pinned(root)
++    for package in pins['packages']:
++        if sha(root/package['archive']) != package['sha256']: raise ValueError('inner ZIP drift')
++        for name, digest in package['files'].items():
++            if sha(root/'payload'/package['destination']/name) != digest:
++                raise ValueError('unpacked source drift: '+name)
+     return pins
+ 
+ 
+ def prepare(root):
+     check_root(root)
+-    if (root/'pre_submit_checks.json').exists():raise FileExistsError('prepared directory is not reusable')
+-    pins=pinned(root)
+-    index=json.loads((root/'ARTIFACT_SHA256.json').read_text(encoding='utf-8'))
+-    for name,digest in index.items():
+-        if sha(root/name)!=digest:raise ValueError('deployment SHA mismatch: '+name)
+-    if sha(root/pins['code_archive'])!=pins['code_package_sha256']:raise ValueError('S02 code ZIP drift')
+-    with zipfile.ZipFile(root/pins['code_archive']) as z:
+-        names=z.namelist()
+-        if len(names)!=len(set(names)) or any(Path(n).is_absolute() or '..' in Path(n).parts or '\\' in n or ':' in n for n in names):raise ValueError('unsafe/duplicate code ZIP entry')
+-        payload=root/'payload';payload.mkdir(exist_ok=False);z.extractall(payload)
+-    manifest=payload/pins['code_source_manifest_name']
+-    if sha(manifest)!=pins['code_source_manifest_sha256']:raise ValueError('S02 source manifest drift')
+-    source=json.loads(manifest.read_text(encoding='utf-8'))
+-    for name,digest in source.items():
+-        if sha(payload/name)!=digest:raise ValueError('S02 source differs: '+name)
+-    for path in [*root.glob('*.py'),*root.glob('*.sh'),*root.glob('payload/**/*.py'),*root.glob('payload/**/*.sh')]:
+-        raw=path.read_bytes()
+-        if b'\r' in raw:raise ValueError('non-LF execution source: '+str(path))
+-        if path.suffix=='.py':ast.parse(raw.decode('utf-8'),feature_version=(3,9))
+-        if path.suffix=='.sh':subprocess.run(['bash','-n',str(path)],check=True,timeout=5)
+-    (payload/'outputs').mkdir(exist_ok=True)
+-    save(root/'pre_submit_checks.json',dict(status='SHA_SYNTAX_ONLY_NO_MODEL',
+-      payload_files={p.relative_to(root).as_posix():sha(p) for p in payload.rglob('*') if p.is_file()}))
++    if (root/'payload').exists(): raise FileExistsError('deployment is not reusable')
++    pins = pinned(root)
++    for name, digest in json.loads((root/'ARTIFACT_SHA256.json').read_text(encoding='utf-8')).items():
++        if sha(root/name) != digest: raise ValueError('outer source drift: '+name)
++    for package in pins['packages']:
++        path = root/package['archive']
++        if sha(path) != package['sha256']: raise ValueError('inner package SHA mismatch')
++        check_archive(path, package['files'])
++        destination = root/'payload'/package['destination']
++        destination.mkdir(parents=True, exist_ok=False)
++        with zipfile.ZipFile(path) as z: z.extractall(destination)
++        (destination/'evidence').mkdir(exist_ok=True)
++    checked = []
++    for path in [*root.glob('*.py'), *root.glob('*.sh'), *root.glob('*.env'), *root.glob('tests/*.py'),
++                 *root.glob('payload/**/*.py'), *root.glob('payload/**/*.sh')]:
++        raw = path.read_bytes()
++        if b'\r' in raw: raise ValueError('non-LF executable source: '+str(path))
++        if path.suffix == '.py': ast.parse(raw.decode('utf-8'), feature_version=(3,9))
++        else: subprocess.run(['bash', '-n', str(path)], check=True, timeout=5)
++        checked.append(path.relative_to(root).as_posix())
+     verify_prepared(root)
++    save(root/'pre_submit_checks.json', dict(status='SHA_AST39_LF_BASH_N_ONLY_NO_MODEL',
++         checked=checked, package_file_counts={p['destination']: len(p['files']) for p in pins['packages']}))
+ 
+ 
+-if __name__=='__main__':prepare(Path(__file__).resolve().parent)
++if __name__ == '__main__': prepare(Path(__file__).resolve().parent)
+--- R12/gate.py
++++ REAL_DUAL_DDP/gate.py
+@@ -1,4 +1,4 @@
+-"""Live native job/resource gate; bounded30s, consumed inside whole-entry840."""
++"""Native two-domain/DDR authority before framework import, within shared840s."""
+ import json
+ import os
+ from pathlib import Path
+@@ -6,42 +6,67 @@
+ import socket
+ import sys
+ import time
+-from prepare import check_root,verify_prepared,save
++from prepare import check_root, verify_prepared, save, sha
+ from review_gate import check_review
+-from scheduler_handoff import live_context,create_request,await_handoff
+-from cpu36_contract import discover_contracts,validate_receipt
++from scheduler_handoff import live_context, create_request, await_handoff
+ 
+ 
+-def gate(root,deadline):
+-    check_root(root);verify_prepared(root)
+-    check_review(root,os.environ['S00_REVIEW_SHA'])
+-    if socket.gethostname().startswith('login') or os.environ.get('HBM')!='0':raise ValueError('compute/HBM0 required')
+-    context=live_context();request=create_request(root,context)
+-    remaining=deadline-time.monotonic()
+-    if remaining<=0:raise TimeoutError('preflight budget exhausted')
+-    authority=await_handoff(root,request,context,38,24576,900,timeout=remaining)
+-    if live_context()!=context:raise ValueError('native context changed')
+-    out=root/'job_evidence';save(out/'scheduler_handoff_receipt.json',authority)
+-    raw=json.loads((root/'scheduler_allocation.json').read_bytes())['data']['successData'][0]
+-    if raw['retryPolicy']!=dict(maxRetryCnt=0,currentRetryTimes=0):raise ValueError('scheduler retries forbidden')
+-    alloc=raw['resGroups'][0]['resAlloc']
+-    if alloc['cpu']!=38 or alloc['mem']!=24576:raise ValueError('actual allocation differs')
+-    contracts=discover_contracts(context['allowed'],1);node,contract=next(iter(contracts.items()));validate_receipt(contract)
+-    if contract['allocated']!=context['allowed'] or len(contract['allocated'])!=38:raise ValueError('complete authorized38 domain required')
+-    physical={}
+-    for cpu in contract['allocated']:
+-        base=Path('/sys/devices/system/cpu/cpu'+str(cpu))
+-        if sorted(p.name for p in base.glob('node[0-9]*'))!=['node'+str(node)]:raise ValueError('per-core NUMA mismatch')
+-        physical[str(cpu)]=[(base/'topology'/f).read_text().strip() for f in ('physical_package_id','core_id')]
+-    if len({tuple(v) for v in physical.values()})!=38:raise ValueError('38 physical cores required')
+-    mem=Path('/sys/devices/system/node/node'+str(node)+'/meminfo').read_text();(out/'selected_ddr_node_meminfo.txt').write_text(mem)
+-    if int(re.search(r'MemTotal:\s+(\d+)\s+kB',mem).group(1))<24576*1024:raise ValueError('CPU-bearing DDR insufficient')
+-    for exe in ['/usr/bin/numactl','/usr/bin/timeout','/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3']:
+-        if not os.access(exe,os.X_OK):raise ValueError('missing existing executable: '+exe)
+-    save(out/'cpu_ddr_receipt.json',dict(**context,contract=contract,DDR_node=node,physical_ids=physical,
+-        allocation_mem_MB=24576,limit_mem_MB=24576,HBM=0,
+-        note='launcher inherits38; original S02 same-PID guard binds first36 before framework import; no setter or login profile here'))
+-    if time.monotonic()>deadline:raise TimeoutError('preflight budget exhausted')
++def gate(root, deadline):
++    check_root(root)
++    pins = verify_prepared(root)
++    check_review(root, os.environ['S00_REVIEW_SHA'])
++    if socket.gethostname().startswith('login') or os.environ.get('HBM') != '0':
++        raise ValueError('native compute/HBM0 required')
++    context = live_context()
++    request = create_request(root, context)
++    remaining = deadline-time.monotonic()
++    if remaining <= 0: raise TimeoutError('preflight budget exhausted')
++    authority = await_handoff(root, request, context, 76, 24576, 900, timeout=remaining)
++    if live_context() != context: raise ValueError('native job context changed')
++    out = root/'job_evidence'
++    save(out/'scheduler_handoff_receipt.json', authority)
++    row = json.loads((root/'scheduler_allocation.json').read_bytes())['data']['successData'][0]
++    if row['retryPolicy'] != dict(maxRetryCnt=0, currentRetryTimes=0): raise ValueError('retries forbidden')
++    allocated = row['resGroups'][0]['resAlloc']
++    if allocated['cpu'] != 76 or allocated['mem'] != 24576: raise ValueError('actual allocation differs')
++    sys.path.insert(0, str(root/'payload/training/candidate'))
++    import cpu36_contract as cpu36
++    import runtime_guard
++    contracts = cpu36.discover_contracts(context['allowed'], 2)
++    if set(context['allowed']) != set().union(*(set(c['allocated']) for c in contracts.values())):
++        raise ValueError('two complete authorized domains required')
++    physical = {}
++    total_ddr_kb = 0
++    for node, contract in contracts.items():
++        cpu36.validate_receipt(contract)
++        if len(contract['allocated']) != 38: raise ValueError('38 allocated physical CPUs per domain required')
++        for cpu in contract['allocated']:
++            base = Path('/sys/devices/system/cpu/cpu'+str(cpu))
++            if sorted(p.name for p in base.glob('node[0-9]*')) != ['node'+str(node)]:
++                raise ValueError('CPU NUMA mismatch')
++            physical[str(cpu)] = [(base/'topology'/name).read_text().strip()
++                                 for name in ('physical_package_id', 'core_id')]
++        mem = Path('/sys/devices/system/node/node'+str(node)+'/meminfo').read_text()
++        (out/('ddr_node'+str(node)+'_meminfo.txt')).write_text(mem)
++        total_ddr_kb += int(re.search(r'MemTotal:\s+(\d+)\s+kB', mem).group(1))
++    if len({tuple(v) for v in physical.values()}) != 76: raise ValueError('76 distinct physical CPUs required')
++    if total_ddr_kb < 24576*1024: raise ValueError('CPU-bearing DDR insufficient')
++    allocation = root/'allocation.json'
++    save(allocation, dict(job_id=context['job_id'], scheduler_evidence=authority['scheduler_evidence'],
++         ranks={str(rank): dict(node=node, allocated=receipt['allocated'])
++                for rank, (node, receipt) in enumerate(contracts.items())}))
++    save(out/'verified_allocation.json', runtime_guard.load_allocation(allocation))
++    libraries = []
++    for path, digest in pins['runtime_sha256'].items():
++        actual = sha(path)
++        if actual != digest: raise ValueError('runtime library drift: '+path)
++        p = Path(path)
++        libraries.append(dict(path=path, realpath=str(p.resolve()), bytes=p.stat().st_size, sha256=actual))
++    for exe in ['/usr/bin/numactl', '/usr/bin/timeout', pins['python']]:
++        if not os.access(exe, os.X_OK): raise ValueError('missing existing executable: '+exe)
++    save(out/'cpu_ddr_library_receipt.json', dict(**context, contracts=contracts, physical_ids=physical,
++         libraries=libraries, memory_MB=24576, memory_limit_MB=24576, HBM=0))
++    if time.monotonic() > deadline: raise TimeoutError('preflight budget exhausted')
+ 
+ 
+-if __name__=='__main__':gate(Path(sys.argv[1]).resolve(),float(sys.argv[2]))
++if __name__ == '__main__': gate(Path(sys.argv[1]).resolve(), float(sys.argv[2]))
+--- R12/run_job.py
++++ REAL_DUAL_DDP/run_job.py
+@@ -1,58 +1,115 @@
+-"""Exactly one engineering entry: gate+training<=840, cleanup<=30, closing30."""
++"""One real DDP entry: common840s execution, bounded30s cleanup,30s closing."""
+ import time
+-START=time.monotonic()
++START_NS = time.monotonic_ns()
++START = START_NS/1e9
+ import ctypes
+ import json
+ import os
+ from pathlib import Path
++import re
+ import signal
++import socket
+ import sys
+ import traceback
+-from prepare import check_root,save,sha,verify_prepared
++from prepare import check_root, verify_prepared, save
+ from review_gate import check_review
+-from owned_processes import Owned,run_phase,cleanup
+-from r12_outcome import inspect,SUCCESS
++from owned_processes import Owned, run_phase, cleanup
+ 
+ 
+-def interrupted(signum,frame):raise InterruptedError('outer signal '+str(signum))
++def interrupted(signum, frame):
++    raise InterruptedError('outer signal '+str(signum))
++
++
++def application_command(root, pins):
++    training = root/'payload/training'
++    return [pins['python'], '-B', str(training/'candidate/train_ddp.py'), 'run',
++            '--config', str(training/'training_config.json'), '--allocation', str(root/'allocation.json'),
++            '--reference-root', str(root/'payload/reference'), '--reference-ready', str(root/'REFERENCE_READY.json'),
++            '--descriptor', str(root/'ENGINEERING_DESCRIPTOR.json'), '--output', str(root/'training_output'),
++            '--job-start-ns', str(START_NS)]
++
++
++def ddr_command(root, argv, reference_check=False):
++    allocation = json.loads((root/'job_evidence/verified_allocation.json').read_text(encoding='utf-8'))
++    nodes = sorted({receipt['node'] for receipt in allocation['ranks']})
++    if len(nodes) != 2: raise ValueError('two current CPU-bearing DDR nodes required')
++    if reference_check:
++        rank0 = allocation['ranks'][0]
++        return ['/usr/bin/numactl', '--physcpubind='+','.join(map(str,rank0['selected'])),
++                '--membind='+str(rank0['node']), *argv]
++    return ['/usr/bin/numactl', '--membind='+','.join(map(str,nodes)), *argv]
+ 
+ 
+ def main(root):
+-    check_root(root);out=root/'job_evidence';out.mkdir(exist_ok=False)
+-    owner=Owned(os.getpid());code=2
+-    summary=dict(status='FAIL_STOP_NO_RETRY',engineering_only=True,protocol='ENGINEERING_DW_TILES_R12_AB_V1',
+-        formal_split_status='UNKNOWN',validation_status='NOT_RUN_NO_FORMAL_SPLIT',subject_mapping_status='UNKNOWN',
+-        job_id=os.environ.get('CCS_JOB_ID'),started=START,execution_seconds=840,cleanup_seconds=30,closing_seconds=30,job_seconds=900,attempts=1)
++    check_root(root)
++    out = root/'job_evidence'
++    out.mkdir(exist_ok=False)
++    owner = Owned(os.getpid())
++    code = 1
++    summary = dict(status='FAIL_STOP_NO_RETRY', job_id=os.environ.get('CCS_JOB_ID'), host=socket.gethostname(),
++                   common_start_ns=START_NS, execution_deadline_ns=START_NS+840_000_000_000,
++                   cleanup_deadline_ns=START_NS+870_000_000_000, job_deadline_ns=START_NS+900_000_000_000,
++                   attempts=1, engineering_only=True, formal_split_status='UNKNOWN', subject_mapping_status='UNKNOWN',
++                   training_started=False, stages=[])
+     try:
+-        if sys.platform!='linux' or not os.environ.get('CCS_JOB_ID'):raise ValueError('native Linux compute job required')
+-        if sys.flags.optimize or os.environ.get('PYTHONOPTIMIZE'):raise ValueError('non-optimized Python assertions required')
+-        libc=ctypes.CDLL(None,use_errno=True)
+-        if libc.prctl(36,1,0,0,0)!=0:raise OSError(ctypes.get_errno(),'cannot own orphaned descendants')
+-        for sig in (signal.SIGTERM,signal.SIGINT,signal.SIGALRM):signal.signal(sig,interrupted)
+-        signal.setitimer(signal.ITIMER_REAL,max(.001,START+840-time.monotonic()))
+-        check_review(root,os.environ['S00_REVIEW_SHA']);pins=verify_prepared(root)
+-        run_phase(root,owner,'gate',['/usr/bin/python3','-B',str(root/'gate.py'),str(root),str(START+30)],START+30)
+-        os.environ.update(S02_ENGINEERING_DESCRIPTOR=str(root/'ENGINEERING_DESCRIPTOR.json'),S02_ENGINEERING_DESCRIPTOR_SHA256=pins['descriptor_sha256'])
+-        record=run_phase(root,owner,'chain',['/bin/bash',str(root/'payload'/pins['entrypoint'])],START+840,allowed=(0,2,3,124,137,143))
+-        outcome=inspect(root,os.environ['CCS_JOB_ID']);summary['r12_outcome']=outcome
+-        code=record['returncode']
+-        if code==0:
+-            if not outcome['complete']:raise ValueError('R12 chain evidence incomplete: '+repr(outcome))
+-            summary['status']=SUCCESS
+-        else:
+-            summary['status']='INCOMPLETE_STOP_NO_RETRY' if code in (3,124,137,143) else 'FAIL_STOP_NO_RETRY'
++        if sys.platform != 'linux' or not os.environ.get('CCS_JOB_ID') or socket.gethostname().startswith('login'):
++            raise ValueError('native Linux compute job required')
++        if sys.flags.optimize or os.environ.get('PYTHONOPTIMIZE'): raise ValueError('assertions must remain active')
++        libc = ctypes.CDLL(None, use_errno=True)
++        if libc.prctl(36,1,0,0,0) != 0: raise OSError(ctypes.get_errno(), 'cannot own orphaned descendants')
++        for sig in (signal.SIGTERM, signal.SIGINT, signal.SIGALRM): signal.signal(sig, interrupted)
++        signal.setitimer(signal.ITIMER_REAL, max(.001, START+840-time.monotonic()))
++        check_review(root, os.environ['S00_REVIEW_SHA'])
++        pins = verify_prepared(root)
++        summary['stages'].append(run_phase(root, owner, 'gate', ['/usr/bin/python3', '-B', str(root/'gate.py'),
++                                                               str(root), str(START+30)], START+30))
++        # This environment is set only after native authority and actual runtime
++        # library identities pass. No Torch/model imports occur in this launcher.
++        os.environ.update(pins['training_environment'])
++        os.environ.update(S07_PY=pins['python'], S07_RUN=str(root/'payload/training'),
++                          S07_ALLOCATION=str(root/'allocation.json'), S02_REFERENCE_ROOT=str(root/'payload/reference'),
++                          S02_REFERENCE_READY=str(root/'REFERENCE_READY.json'),
++                          S02_ENGINEERING_DESCRIPTOR=str(root/'ENGINEERING_DESCRIPTOR.json'),
++                          S02_ENGINEERING_DESCRIPTOR_SHA256=pins['descriptor_sha256'],
++                          S07_OUTPUT=str(root/'training_output'), JOB_START_MONOTONIC_NS=str(START_NS),
++                          S07_TEST_ALLOCATION=str(root/'allocation.json'),
++                          S07_REFERENCE_ROOT=str(root/'payload/reference'), S07_REFERENCE_READY=str(root/'REFERENCE_READY.json'))
++        for check in pins['linux_checks']:
++            label = Path(check['path']).stem
++            summary['stages'].append(run_phase(root, owner, label,
++                ddr_command(root, [pins['python'], '-B', str(root/'payload'/check['package']/check['path'])],
++                            reference_check=check['package']=='reference'), START+840))
++            log = (out/(label+'.log')).read_text()
++            if (not re.search(r'Ran '+str(check['methods'])+r' tests?\b', log) or
++                    not re.search(r'^OK\s*$', log, re.MULTILINE) or 'skipped=' in log or '... skipped' in log):
++                raise ValueError('exact Linux test methods/no skips required: '+label)
++        summary['training_started'] = True
++        save(out/'SUMMARY.json', summary)
++        record = run_phase(root, owner, 'training', ddr_command(root, application_command(root, pins)), START+840,
++                           allowed=(0,1,2,3,124,137,143))
++        summary['stages'].append(record)
++        code = record['returncode']
++        summary['status'] = 'APPLICATION_EXIT0_PENDING_RESULT_AUDIT' if code == 0 else 'FAIL_STOP_NO_RETRY'
+         verify_prepared(root)
+     except BaseException as exc:
+-        summary.update(status='INCOMPLETE_STOP_NO_RETRY' if isinstance(exc,(TimeoutError,InterruptedError)) else 'FAIL_STOP_NO_RETRY',error=repr(exc),traceback=traceback.format_exc());code=3 if isinstance(exc,(TimeoutError,InterruptedError)) else 2
++        summary.update(status='INCOMPLETE_STOP_NO_RETRY' if isinstance(exc, (TimeoutError,InterruptedError))
++                       else 'FAIL_STOP_NO_RETRY', error=repr(exc), traceback=traceback.format_exc())
++        code = 124 if isinstance(exc, (TimeoutError,InterruptedError)) else 1
+     finally:
+-        signal.setitimer(signal.ITIMER_REAL,0)
+-        for sig in (signal.SIGTERM,signal.SIGINT):signal.signal(sig,signal.SIG_IGN)
++        signal.setitimer(signal.ITIMER_REAL, 0)
++        for sig in (signal.SIGTERM, signal.SIGINT): signal.signal(sig, signal.SIG_IGN)
+         try:
+-            clean=cleanup(owner,min(time.monotonic()+30,START+870));save(out/'cleanup.json',clean)
+-            if not clean['all_reaped']:summary.update(status='FAIL_STOP_NO_RETRY',cleanup_incomplete=True);code=2
+-        except BaseException as exc:summary.update(status='FAIL_STOP_NO_RETRY',cleanup_error=repr(exc));code=2
+-        summary.update(finished=time.monotonic(),exit_code=code);save(out/'SUMMARY.json',summary)
++            clean = cleanup(owner, min(time.monotonic()+30, START+870))
++            save(out/'cleanup.json', clean)
++            if not clean['all_reaped']:
++                summary.update(status='FAIL_STOP_NO_RETRY', cleanup_incomplete=True)
++                code = 1
++        except BaseException as exc:
++            summary.update(status='FAIL_STOP_NO_RETRY', cleanup_error=repr(exc))
++            code = 1
++        summary.update(finished_ns=time.monotonic_ns(), exit_code=code)
++        save(out/'SUMMARY.json', summary)
+     return code
+ 
+ 
+-if __name__=='__main__':raise SystemExit(main(Path(sys.argv[1]).resolve()))
++if __name__ == '__main__': raise SystemExit(main(Path(sys.argv[1]).resolve()))
+--- R12/review_gate.py
++++ REAL_DUAL_DDP/review_gate.py
+@@ -1,34 +1,27 @@
+-"""Require S01's explicit complete decision and every concrete frozen identity."""
++"""Only a complete current S01 review for this frozen workload releases one job."""
+ import json
+-from prepare import sha,pinned,RESOURCES,DEPLOYMENT
+-
+-BINDING_KEYS=('code_package_sha256','code_source_manifest_sha256','deployment_package_sha256',
+-              'descriptor_sha256','candidate_sha256','r12_contract_sha256','reference_first5_sha256','reference_epoch25_sha256','task_card_sha256','deployment_source_manifest_sha256')
++from prepare import sha, pinned, RESOURCES, WORKLOAD, DEPLOYMENT
+ 
+ 
+ def expected(root):
+-    pins=pinned(root)
+-    return dict(code_package_sha256=pins['code_package_sha256'],code_source_manifest_sha256=pins['code_source_manifest_sha256'],
+-      deployment_package_sha256=sha(root/DEPLOYMENT),descriptor_sha256=sha(root/'ENGINEERING_DESCRIPTOR.json'),
+-      candidate_sha256=pins['candidate_sha256'],r12_contract_sha256=sha(root/'R12_CONTRACT.json'),reference_epoch25_sha256=sha(root/'REFERENCE_EPOCH25.json'),task_card_sha256=sha(root/'TASK_CARD.md'),
+-      reference_first5_sha256=sha(root/'REFERENCE_FIRST5.json'),deployment_source_manifest_sha256=sha(root/'ARTIFACT_SHA256.json'))
++    pins = pinned(root)
++    return dict(pins['bindings'], deployment_package_sha256=sha(root/DEPLOYMENT),
++                deployment_source_manifest_sha256=sha(root/'ARTIFACT_SHA256.json'),
++                descriptor_sha256=sha(root/'ENGINEERING_DESCRIPTOR.json'), task_card_sha256=sha(root/'TASK_CARD.md'))
+ 
+ 
+-WORKLOAD=dict(strict_updates_each=5,perf_updates_each=25,max_full_encoder_updates=60,performance_pairs=1,warmup_updates=5,observed_updates=20,stage_order=['target','strict','perf_baseline','perf_candidate'])
+-
+-def validate(review,bindings):
+-    if review.get('decision')!='PASS_FOR_ENGINEERING_R12_AB' or review.get('review_complete') is not True:
+-        raise ValueError('S01 explicit complete PASS required; fail/blocked is not approval')
+-    if any(review.get('bindings',{}).get(k)!=bindings[k] for k in BINDING_KEYS):
+-        raise ValueError('S01 concrete SHA bindings mismatch')
+-    if any(review.get('resources',{}).get(k)!=v for k,v in RESOURCES.items()):
+-        raise ValueError('S01 resource/budget binding mismatch')
++def validate(review, bindings):
++    if review.get('decision') != 'PASS_FOR_REAL_DUAL_DDP' or review.get('review_complete') is not True:
++        raise ValueError('complete PASS_FOR_REAL_DUAL_DDP required; old probe review cannot release training')
++    for section, wanted in [('bindings', bindings), ('resources', RESOURCES), ('workload', WORKLOAD)]:
++        if any(review.get(section, {}).get(key) != value for key, value in wanted.items()):
++            raise ValueError('S01 exact '+section+' binding mismatch')
+ 
+ 
+-    if any(review.get('workload',{}).get(k)!=v for k,v in WORKLOAD.items()):raise ValueError('S01 exact ordered workload binding mismatch')
+-
+-def check_review(root,expected_review_sha=None):
+-    path=root/'S01_REVIEW.json';digest=sha(path)
+-    if expected_review_sha is not None and digest!=expected_review_sha:raise ValueError('S01 review itself changed')
+-    validate(json.loads(path.read_text(encoding='utf-8')),expected(root))
++def check_review(root, expected_review_sha=None):
++    path = root/'S01_REVIEW.json'
++    digest = sha(path)
++    if expected_review_sha is not None and digest != expected_review_sha:
++        raise ValueError('S01 review itself changed')
++    validate(json.loads(path.read_text(encoding='utf-8')), expected(root))
+     return digest
+--- R12/submit_once.py
++++ REAL_DUAL_DDP/submit_once.py
+@@ -1,45 +1,106 @@
+-"""Login only: S01 bound review then durable single attempt; no automatic retry."""
++"""Login-only current review + live deduplication + one durable submission."""
++import datetime
+ import json
+ from pathlib import Path
+ import subprocess
+ import sys
+ import time
+-from prepare import check_root,verify_prepared,save
++from prepare import BASE, PREFIX, check_root, verify_prepared, save
+ from review_gate import check_review
+ from scheduler_handoff import publish
+ 
+ 
+-def command(root,review_sha):
+-    return ['dsub','-J','-q','q_hpcai','-x','job','-R','cpu=38,mem=24576MB','-RL','mem=24576MB',
+-      '-a','numa[count=1,distribution=pack]','-T','900','--env','none','--cwd',str(root),
+-      '-oo',str(root/'job.log'),'bash',str(root/'run_job.sh'),review_sha]
++def documents(text):
++    decoder = json.JSONDecoder()
++    while text.strip():
++        value, end = decoder.raw_decode(text.lstrip())
++        yield value
++        text = text.lstrip()[end:]
++
++
++def query(argv):
++    result = subprocess.run(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
++    record = dict(command=argv, returncode=result.returncode, stdout=result.stdout.decode(), stderr=result.stderr.decode())
++    if result.returncode: raise RuntimeError('live query failed: '+repr(record))
++    return record
++
++
++def deduplicate(root):
++    series = []
++    for directory in sorted(BASE.glob(PREFIX+'*')):
++        for name in ('submit_once.marker', 'job_id.txt', 'submission.result.json'):
++            path = directory/name
++            if path.exists(): series.append(dict(path=str(path), raw=path.read_text()))
++    listing = query(['djob', '-J'])
++    details = []
++    matched = []
++    for document in documents(listing['stdout']):
++        if document.get('code') != 'success': raise ValueError('invalid live queue result')
++        rows = document.get('data', [])
++        if not isinstance(rows, list): raise ValueError('unexpected queue schema')
++        if document.get('totalElements') != len(rows): raise ValueError('queue pagination incomplete')
++        for row in rows:
++            if row['state'] not in ('RUNNING', 'PENDING'): raise ValueError('unexpected active queue state')
++            raw = query(['djob', '-J', '-l', str(row['jobId'])])
++            details.append(raw)
++            jobs = json.loads(raw['stdout'])['data']['successData']
++            if len(jobs) != 1 or str(jobs[0]['jobId']) != str(row['jobId']): raise ValueError('ambiguous job identity')
++            job = jobs[0]
++            execution = Path(job['execPath'])
++            if execution.parent == BASE and execution.name.startswith(PREFIX): matched.append(job)
++    evidence = dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(), series=series,
++                    queue=listing, details=details, matched=matched)
++    save(root/'pre_submit_deduplication.json', evidence)
++    if series or matched: raise RuntimeError('existing series attempt/job: monitor or collect it, never resubmit')
++
++
++def command(root, review_sha):
++    return ['dsub', '-J', '-q', 'q_hpcai', '-x', 'job', '-R', 'cpu=76,mem=24576MB',
++            '-RL', 'mem=24576MB', '-a', 'numa[count=2,distribution=pack]', '-T', '900',
++            '--env', 'none', '--cwd', str(root), '-oo', str(root/'job.log'),
++            'bash', str(root/'run_job.sh'), review_sha]
+ 
+ 
+ def submit(root):
+-    check_root(root);verify_prepared(root);review_sha=check_review(root)
+-    with (root/'submit_once.marker').open('x') as f:f.write('one engineering job attempt including ambiguous failures; no retry\n')
+-    argv=command(root,review_sha);save(root/'submission.command.json',dict(command=argv,review_sha256=review_sha,attempts=1))
+-    try:p=subprocess.run(argv,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=10)
++    check_root(root)
++    verify_prepared(root)
++    review_sha = check_review(root)
++    deduplicate(root)
++    # Created before dsub, including failed/ambiguous submissions. Never remove.
++    with (root/'submit_once.marker').open('x') as stream:
++        stream.write('one real dual DDP attempt; no automatic retry, including ambiguous submission\n')
++    argv = command(root, review_sha)
++    save(root/'submission.command.json', dict(command=argv, review_sha256=review_sha, attempts=1))
++    try:
++        result = subprocess.run(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
+     except subprocess.TimeoutExpired as exc:
+-        (root/'submission.stdout').write_bytes(exc.stdout or b'');(root/'submission.stderr').write_bytes(exc.stderr or b'')
+-        save(root/'submission.result.json',dict(timed_out=True,ambiguous_job_id=True,retry=False));raise
+-    (root/'submission.stdout').write_bytes(p.stdout);(root/'submission.stderr').write_bytes(p.stderr)
+-    save(root/'submission.result.json',dict(returncode=p.returncode,timed_out=False,retry=False))
+-    if p.returncode:raise RuntimeError('submission failed; do not retry')
+-    job=str(json.loads(p.stdout)['data']['jobId']);(root/'job_id.txt').write_text(job+'\n')
+-    began=time.monotonic()
++        (root/'submission.stdout').write_bytes(exc.stdout or b'')
++        (root/'submission.stderr').write_bytes(exc.stderr or b'')
++        save(root/'submission.result.json', dict(timed_out=True, ambiguous_job_id=True, retry=False))
++        raise
++    (root/'submission.stdout').write_bytes(result.stdout)
++    (root/'submission.stderr').write_bytes(result.stderr)
++    save(root/'submission.result.json', dict(returncode=result.returncode, timed_out=False, retry=False))
++    if result.returncode: raise RuntimeError('submission failed; never retry')
++    job = str(json.loads(result.stdout)['data']['jobId'])
++    (root/'job_id.txt').write_text(job+'\n')
++    print('SUBMITTED_ONCE', job, flush=True)
++    began = time.monotonic()
+     while True:
+-        q=subprocess.run(['djob','-J','-l',job],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=5)
+-        (root/'scheduler_observed.json').write_bytes(q.stdout);(root/'scheduler_observed.stderr').write_bytes(q.stderr)
+-        if q.returncode:raise RuntimeError('observation failed; monitor same job, never resubmit')
+-        row=json.loads(q.stdout)['data']['successData'][0]
+-        if str(row['jobId'])!=job:raise ValueError('wrong observed job')
+-        if row['state']=='RUNNING':publish(root,job);print('PUBLISHED_ONCE',job,flush=True);return
+-        if row['state'] in ('SUCCEEDED','FAILED','CANCELLED'):raise RuntimeError('terminal before publication; collect')
+-        if time.monotonic()-began>=3600:
+-            # Caller may cancel ONLY this own not-started job after rechecking state.
+-            raise TimeoutError('own job queued60min; verify still not RUNNING then cancel only it; no retry')
++        record = query(['djob', '-J', '-l', job])
++        save(root/'scheduler_observed_raw.json', record)
++        rows = json.loads(record['stdout'])['data']['successData']
++        if len(rows) != 1 or str(rows[0]['jobId']) != job: raise ValueError('wrong observed job')
++        row = rows[0]
++        if row['state'] == 'RUNNING':
++            publish(root, job)
++            print('PUBLISHED_ONCE', job, flush=True)
++            return
++        if row['state'] in ('SUCCEEDED', 'FAILED', 'CANCELLED'):
++            raise RuntimeError('terminal before authority publication; collect same job')
++        if time.monotonic()-began >= 3600:
++            raise TimeoutError('queued60min; recheck this job before any cancellation; never resubmit')
+         time.sleep(0.5)
+ 
+ 
+-if __name__=='__main__':submit(Path(sys.argv[1]).resolve())
++if __name__ == '__main__': submit(Path(sys.argv[1]).resolve())
+--- R12/collect_evidence.py
++++ REAL_DUAL_DDP/collect_evidence.py
+@@ -1,64 +1,81 @@
+-"""Terminal logs/source/data identities; checkpoint stays remote with bytes/SHA."""
++"""Collect terminal raw evidence, including corrupt reports; leave weights remote."""
+ import json
+ from pathlib import Path
+ import subprocess
+ import sys
+ import zipfile
+-from prepare import check_root,sha,save,verify_prepared
+-from r12_outcome import inspect
++from prepare import check_root, verify_prepared, sha, save
+ 
+ 
+-def exposure(root):
+-    job=(root/'job_id.txt').read_text().strip()
+-    ledgers={}
+-    for phase in ('strict','perf_baseline','perf_candidate'):
+-        path=root/'payload/outputs'/(phase+'_'+job)/'EXPOSURE_LEDGER.json'
+-        if path.is_file():
+-            try:ledgers[phase]=dict(path=str(path),sha256=sha(path),raw=json.loads(path.read_text()))
+-            except ValueError as exc:ledgers[phase]=dict(path=str(path),error=repr(exc),status='INVALID_RAW_PRESERVED')
+-    initial=json.loads((root/'EXPOSURE_LEDGER_INITIAL.json').read_text())
+-    return dict(status='RAW_PHASE_LEDGERS_OR_ABSENCE_PRESERVED',ledgers=ledgers,initial_selected_units=initial['units'],
+-        future_test_exclusion_review_required=True,note='Target has no corpus use; missing phase ledger is not proof of no exposure if chain/phase start is ambiguous. Preserve each in_flight and confirmed record; do not fabricate consumption.')
++def remote_weight(path):
++    # Includes interrupted .checkpoint.pt.tmp files. Raw bytes stay remote;
++    # their size/SHA and residue path are still indexed.
++    return bool(set(path.suffixes) & {'.pt', '.pth', '.npz'})
+ 
+ 
+ def collect(root):
+-    check_root(root);job=(root/'job_id.txt').read_text().strip();bundle=root/('JOB_'+job+'_evidence.zip')
+-    if bundle.exists() or (root/'COLLECTION_S00.json').exists():raise FileExistsError('already collected')
+-    command=['djob','-J','-l',job]
+-    q=subprocess.run(command,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=10)
+-    (root/'djob_final.json').write_bytes(q.stdout);(root/'djob_final.stderr').write_bytes(q.stderr)
+-    if q.returncode:raise RuntimeError('raw query saved; terminal query failed')
+-    rows=json.loads(q.stdout)['data']['successData']
+-    if len(rows)!=1 or str(rows[0]['jobId'])!=job or rows[0]['state'] not in ('SUCCEEDED','FAILED','CANCELLED'):raise ValueError('exact terminal job required')
+-    row=rows[0]
+-    try:verify_prepared(root);source_status='UNCHANGED'
+-    except Exception as exc:source_status=repr(exc)
+-    recon=exposure(root);save(root/'EXPOSURE_RECONCILIATION.json',recon)
+-    files=sorted(p for p in root.rglob('*') if p.is_file() and p.name not in ('bundle_receipt.json',bundle.name))
+-    metadata={};archived=[];remote_only=[]
+-    for p in files:
+-        before=p.stat();digest=sha(p);after=p.stat()
+-        if (before.st_size,before.st_mtime_ns)!=(after.st_size,after.st_mtime_ns):raise RuntimeError('terminal file changing: '+str(p))
+-        name=p.relative_to(root).as_posix();omit=p.suffix.lower() in ('.pt','.pth','.npz')
+-        metadata[name]=dict(path=str(p),bytes=after.st_size,mtime_ns=after.st_mtime_ns,sha256=digest,archive_payload=not omit)
+-        if omit:remote_only.append(name)
+-        else:archived.append(p)
+-    outcome=inspect(root,job)
+-    missing=[]
+-    for name in ('job.log','scheduler_allocation.json','job_evidence/cleanup.json','job_evidence/SUMMARY.json'):
+-        if not (root/name).is_file():missing.append(name)
+-    index=root/'COLLECTION_S00.json'
+-    save(index,dict(job_id=job,state=row['state'],job_exit_code=row.get('jobExitCode'),query_command=command,
+-      scheduler_pids_cleared=all(n['pids']=='-' for g in row['resGroups'] for n in g['nodeResUsages']),
+-      source_status=source_status,files=metadata,remote_only=remote_only,missing=missing,
+-      application_status=outcome['phase_status'],r12_outcome=outcome,exposure_reconciliation=recon,
+-      start_time=row.get('startTime'),end_time=row.get('endTime'),engineering_only=True,
+-      formal_split_status='UNKNOWN',validation_status='NOT_RUN_NO_FORMAL_SPLIT',retries=0))
+-    archived.append(index)
+-    with zipfile.ZipFile(bundle,'x',zipfile.ZIP_DEFLATED) as z:
+-        for p in archived:z.write(p,p.relative_to(root).as_posix())
+-    receipt=dict(bundle=str(bundle),bytes=bundle.stat().st_size,sha256=sha(bundle),archived_files=len(archived),remote_only=remote_only)
+-    save(root/'bundle_receipt.json',receipt);print(json.dumps(receipt));return receipt
++    check_root(root)
++    job = (root/'job_id.txt').read_text().strip()
++    bundle = root/('JOB_'+job+'_full_evidence.zip')
++    if bundle.exists() or (root/'COLLECTION_S00.json').exists(): raise FileExistsError('already collected')
++    command = ['djob', '-J', '-l', job]
++    query = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
++    (root/'djob_final.json').write_bytes(query.stdout)
++    (root/'djob_final.stderr').write_bytes(query.stderr)
++    if query.returncode: raise RuntimeError('terminal scheduler query failed; originals saved')
++    rows = json.loads(query.stdout)['data']['successData']
++    if len(rows) != 1 or str(rows[0]['jobId']) != job or rows[0]['state'] not in ('SUCCEEDED','FAILED','CANCELLED'):
++        raise ValueError('exact terminal job required; monitor existing job')
++    row = rows[0]
++    try:
++        verify_prepared(root)
++        source_status = 'UNCHANGED'
++    except Exception as exc:
++        source_status = repr(exc)
++    files = sorted(p for p in root.rglob('*') if p.is_file() and p.name not in (bundle.name, 'bundle_receipt.json'))
++    metadata = {}
++    remote_only = []
++    archived = []
++    # Snapshot each small file once, hash those exact bytes, then write those
++    # bytes to ZIP. A partial/empty report is preserved, never repaired here.
++    with zipfile.ZipFile(bundle, 'x', zipfile.ZIP_DEFLATED) as z:
++        for path in files:
++            name = path.relative_to(root).as_posix()
++            omit = remote_weight(path)
++            try:
++                before = path.stat()
++                if omit:
++                    digest = sha(path)
++                    remote_only.append(name)
++                else:
++                    data = path.read_bytes()
++                    import hashlib
++                    digest = hashlib.sha256(data).hexdigest()
++                after = path.stat()
++                metadata[name] = dict(path=str(path), bytes=after.st_size, mtime_ns=after.st_mtime_ns,
++                    sha256=digest, archive_payload=not omit,
++                    changed_during_read=(before.st_size,before.st_mtime_ns)!=(after.st_size,after.st_mtime_ns))
++                if not omit:
++                    z.writestr(name, data)
++                    archived.append(name)
++            except OSError as exc:
++                metadata[name] = dict(path=str(path), archive_payload=False, error=repr(exc))
++        missing = [name for name in ('job.log','scheduler_allocation.json','job_evidence/cleanup.json',
++                   'job_evidence/SUMMARY.json','training_output/summary.json','training_output/rank0.json',
++                   'training_output/rank1.json') if not (root/name).is_file()]
++        index = dict(job_id=job, state=row['state'], job_exit_code=row.get('jobExitCode'), query_command=command,
++            scheduler_pids_cleared=all(n['pids']=='-' for g in row['resGroups'] for n in g['nodeResUsages']),
++            source_status=source_status, files=metadata, remote_only=remote_only, missing=missing,
++            start_time=row.get('startTime'), end_time=row.get('endTime'), engineering_only=True,
++            formal_split_status='UNKNOWN', subject_mapping_status='UNKNOWN', retries=0,
++            note='Raw partial/missing/in-flight evidence is not proof of no exposure; no reconstructed reports.')
++        save(root/'COLLECTION_S00.json', index)
++        z.write(root/'COLLECTION_S00.json', 'COLLECTION_S00.json')
++        archived.append('COLLECTION_S00.json')
++    receipt = dict(bundle=str(bundle), bytes=bundle.stat().st_size, sha256=sha(bundle),
++                   archived_files=len(archived), remote_only=remote_only)
++    save(root/'bundle_receipt.json', receipt)
++    print(json.dumps(receipt), flush=True)
+ 
+ 
+-if __name__=='__main__':collect(Path(sys.argv[1]).resolve())
++if __name__ == '__main__': collect(Path(sys.argv[1]).resolve())

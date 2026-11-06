@@ -1,0 +1,32 @@
+{
+  "active_job": null,
+  "code_prepared": [
+    "prepare",
+    "gate",
+    "run_job common840+30+30",
+    "native scheduler_handoff unchanged",
+    "owned_processes unchanged",
+    "exact review_gate",
+    "single submit/dedup",
+    "raw collector incl partial weight remote-only"
+  ],
+  "dependency_deadline_utc": "2026-11-06T10:27:03.973166+00:00",
+  "deployment_ready": "S00_DEPLOYMENT_READY.json",
+  "finished_utc": "2026-11-06T09:45:11.923872+00:00",
+  "local_deployment_checks": 10,
+  "new_jobs": 0,
+  "next_step": "coordination defines new diagnosis/revision; no retry",
+  "observed_utc": "2026-11-06T09:22:42.313556+00:00",
+  "published_utc": "2026-11-06T09:38:44.393119+00:00",
+  "ready_for_release": false,
+  "reference_package_sha256": "df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5",
+  "review_complete": true,
+  "review_decision": "FAIL",
+  "run_complete": "RUN_COMPLETE.json",
+  "runtime_boundary": "compute-only HPCKit identity checked in gate, no login fallback",
+  "runtime_contract": "RUNTIME_CONTRACT.json",
+  "shared_runtime_source": "evidence/C2_INSTALLED_DDP.py",
+  "status": "NOT_RUN_S01_REVIEW_FAIL_NO_JOB",
+  "upstream_local_numerical_gate": "FAIL_ORIGINAL_THRESHOLDS_PRESERVED",
+  "waiting_for": null
+}

@@ -1,0 +1,44 @@
+{
+  "python": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+  "torch": "2.7.1+cpu",
+  "torch_file": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+  "numpy": "1.26.4",
+  "numpy_file": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib64/python3.9/site-packages/numpy/__init__.py",
+  "sha256": {
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f",
+    "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac",
+    "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py": "9801e75447c7f585545f989f8a21940b60e0c4cc888effb2f08e739664b4b904",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/parallel/distributed.py": "480213c6546cf6c2d522357a59065d38afbaa16196dc8eabaadf752b5bdcae43",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib64/python3.9/site-packages/numpy/__init__.py": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3": "41ed40932add50d0a953bbe92ba15a9e60a2ee476ce68cfd4798cf814647c383"
+  },
+  "source_evidence": {
+    "original_r4_runtime": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\received\\payload\\outputs\\perf_baseline_2049894\\result.json",
+      "bytes": 1635949,
+      "sha256": "74e26d905d917f6fa9ad4e096023db9d79ebf08f719e6215e323127413ad415e",
+      "job_id": "2049894",
+      "status": "PERF25_EXPLORATORY_NOT_SPEEDUP_ACCEPTANCE"
+    },
+    "current_shared_modules": "evidence/SHARED_RUNTIME_IDENTITIES.json",
+    "installed_ddp_source": "evidence/C2_INSTALLED_DDP.py"
+  },
+  "compute_gate": "Hash exact files in current native compute job; login /opt absence never waived",
+  "threading": {
+    "OMP_NUM_THREADS": "36",
+    "MKL_NUM_THREADS": "36",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_PLACES": "cores",
+    "OMP_PROC_BIND": "close"
+  },
+  "memory_policy": "current two CPU-bearing DDR nodes only; numactl membind inherited by rank workers; no static NUMA ids",
+  "actual_libraries_and_calls": "Each real rank records loaded maps and actual KML calls; training/reference counted separately, no baseline149 shortcut",
+  "environment_source": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\interfaces\\cluster_runtime.env",
+    "bytes": 786,
+    "sha256": "32248af7857b7fd1616b19899c1411a4a59f9378c9231f0ec56f6c922ec2866d"
+  }
+}
