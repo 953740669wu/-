@@ -1,0 +1,38 @@
+{
+  "scope": "CONDITIONAL_STATIC_BYTE_ENVELOPE_NOT_MEASURED",
+  "categories": {
+    "initial_snapshot": 151983108,
+    "reference_gradients": 151983108,
+    "sequential_gradients": 151983108,
+    "reference_values": 28483596,
+    "sequential_values": 28483596,
+    "compare_workspace": 268435456,
+    "hash_workspace": 33554432,
+    "retained_inputs": 67108864,
+    "text_and_indices": 67108864,
+    "buffers": 4194304
+  },
+  "parameter_fp32_bytes": 151983108,
+  "retained_bytes_bound": 953318436,
+  "extra_limit": 1073741824,
+  "raw_reference_value_bytes": 180466704,
+  "raw_limit": 536870912,
+  "image_shape_bound": [
+    64,
+    1,
+    64,
+    64
+  ],
+  "largest_compare_tensor_elements": 6815744,
+  "double_compare_four_copies_bytes": 218103808,
+  "conditions": [
+    "one initial snapshot, one reference set, one sequential transient set",
+    "compare serially; no all-layer X/G snapshots; bounded streaming hash",
+    "reject image/buffer/temporary growth or unaccounted copies",
+    "base model/autograd/library workspace and actual24GiB peak unmeasured"
+  ],
+  "retained_MiB": 909.1553077697754,
+  "extra_headroom_bytes": 120423388,
+  "raw_text_note": "raw512MiB and text64MiB are separate output quotas; initial weights/all-layer XG never serialized",
+  "implementation_limit": "Integer envelope and admission checker only; no actual tensor storage, hash streaming, comparator workspace or serializer measured/implemented"
+}

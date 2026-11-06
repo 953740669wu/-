@@ -1,0 +1,16 @@
+[
+  {
+    "scope": "LOCAL_FIXTURE",
+    "label": "local_fixture",
+    "exit": 0,
+    "stdout": "{\"status\": \"LOCAL_FIXTURE_VALID\", \"actual_runtime\": false}",
+    "actual_runtime": false
+  },
+  {
+    "scope": "LOCAL_FIXTURE",
+    "label": "actual_claim_rejected",
+    "exit": 2,
+    "stdout": "{\"status\": \"LOCAL_FIXTURE_REJECTED\", \"error\": \"fixture scope or frozen spec identity differs\"}",
+    "actual_runtime": false
+  }
+]

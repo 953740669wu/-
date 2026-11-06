@@ -1,0 +1,37 @@
+{
+  "protocol": "S02_LOCALIZATION_PREPARATION_R1",
+  "status": "INTERFACE_READY_CONTRACT_HELPERS_ONLY_VJP_BLOCKED",
+  "published_at": "2026-11-06T22:15:39.248547+08:00",
+  "scope": "LOCAL_FIXTURE_ONLY_NO_MODEL_EXECUTABLE",
+  "spec": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_proposal_review_20261106\\MINIMAL_EVIDENCE_SPEC.json",
+    "sha256": "d1da482f2971281996ac70e9133606933277bb31bfead1a48ed64fbbddaf67c2"
+  },
+  "input": "JSON metadata fixture with scope LOCAL_FIXTURE/spec_sha256; no tensor files or runtime execution input",
+  "cli": "python -B candidate/contracts.py --fixture FILE.json --report NEW_REPORT.json",
+  "future_compute_cli": null,
+  "exit_codes": {
+    "0": "LOCAL_FIXTURE metadata accepted only",
+    "2": "contract/identity/report rejection; no runtime validation"
+  },
+  "results": [
+    "LOCAL_FIXTURE result/spec SHA/false actual-runtime claims",
+    "PREPARATION_BLOCKED.json with B01 evidence and required next action",
+    "SOURCE_SHA256.json, blocked-support package SHA, minimal diff, retention proof and local fixture logs"
+  ],
+  "collection": [
+    "INTERFACE_READY.json",
+    "PREPARATION_BLOCKED.json",
+    "REPORT.md",
+    "RETENTION_PROOF.json",
+    "LOCAL_CHECKS.json",
+    "package/index/source/diff",
+    "evidence/source/API inventory/fixture logs"
+  ],
+  "blocking_requirement": "Actual per-operation native F.linear VJP and attention logical-layout binding on installed C2 2.7.1 is not available from saved sources; no merged leaf-gradient substitution",
+  "preparation_ready_will_be_published": false,
+  "execution_authorized": false,
+  "training_authorized": false,
+  "model_runs": 0,
+  "tests_scope": "Standard-library metadata fixtures only; Torch import forbidden"
+}

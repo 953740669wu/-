@@ -1,0 +1,38 @@
+{
+  "status": "PASS_LOCAL_FIXTURE_ONLY_PREPARATION_BLOCKED",
+  "scope": "LOCAL_FIXTURE",
+  "observed_at": "2026-11-06T22:20:28.938339+08:00",
+  "standard_library_fixtures": 14,
+  "failed": 0,
+  "cli_cases": [
+    {
+      "scope": "LOCAL_FIXTURE",
+      "label": "local_fixture",
+      "exit": 0,
+      "stdout": "{\"status\": \"LOCAL_FIXTURE_VALID\", \"actual_runtime\": false}",
+      "actual_runtime": false
+    },
+    {
+      "scope": "LOCAL_FIXTURE",
+      "label": "actual_claim_rejected",
+      "exit": 2,
+      "stdout": "{\"status\": \"LOCAL_FIXTURE_REJECTED\", \"error\": \"fixture scope or frozen spec identity differs\"}",
+      "actual_runtime": false
+    }
+  ],
+  "source_text_files": 29,
+  "Python39_AST": true,
+  "source_LF": true,
+  "imports_torch_numpy": false,
+  "actual_autograd": false,
+  "actual_KML": false,
+  "actual_Linux_exit": false,
+  "actual_model": false,
+  "actual_contractions": false,
+  "candidate_implemented": false,
+  "new_jobs": 0,
+  "preparation_blocker": "B01_UNBOUND_INSTALLED_NATIVE_VJP",
+  "platform_result": "No Linux/C2/API runtime check; synthetic proc and lifecycle metadata only",
+  "test_command": "python -I -S -B tests/test_contracts.py",
+  "python": "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe"
+}

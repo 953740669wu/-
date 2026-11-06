@@ -1,0 +1,34 @@
+{
+  "status": "BLOCKED_UNBOUND_NATIVE_LINEAR_VJP",
+  "scope": "STATIC_READ_ONLY_API_INVENTORY_NO_TORCH_IMPORT",
+  "primary_blocker": "B01_UNBOUND_INSTALLED_NATIVE_VJP",
+  "recorded_C2_files": [
+    {
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+      "sha256": "9801e75447c7f585545f989f8a21940b60e0c4cc888effb2f08e739664b4b904"
+    },
+    {
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/parallel/distributed.py",
+      "sha256": "480213c6546cf6c2d522357a59065d38afbaa16196dc8eabaadf752b5bdcae43"
+    },
+    {
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib64/python3.9/site-packages/numpy/__init__.py",
+      "sha256": "22cd1535fa14d74ef6f457cca149ffdc80875f460be313b8f895273f78bc402e"
+    }
+  ],
+  "recorded_C2_DDP_source_sha256": "480213c6546cf6c2d522357a59065d38afbaa16196dc8eabaadf752b5bdcae43",
+  "required_not_bound_by_recorded_C2_sources": [
+    "Node hook grad_inputs/grad_outputs API and native Linear backward node identity/slot binding",
+    "Tensor/view/storage correspondence proving one native operator input VJP instead of merged leaf gradient",
+    "Attention QKV/out_proj logical sample provenance on installed C2 frontend"
+  ],
+  "local_2_7_1_text_only": {
+    "node_hook": "autograd/graph.py83-107: passive returnNone possible, not native F.linear node/slot guarantee",
+    "attention": "nn/functional.py5614,6414-6418 token-major QKV/out flatten examples; not current C2 fileSHA"
+  },
+  "direct_KML": "Frozen _LinearFn.backward179-188 returns individualgx/gw/gb; passive node/return observation is design-feasible, C2 hook binding still unverified",
+  "native_failure_risk": "val input v also participates as voltage target: leaf v.grad combines branches, cannot substitute for actual val VJP. head_coarse remains native as well.",
+  "scope_limit": "Missing within these enumerated saved records; no global irrecoverability claim and no claim passive Node observation is universally impossible",
+  "coverage_preserved": true,
+  "contract_conflict": false
+}

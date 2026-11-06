@@ -1,0 +1,18 @@
+{
+  "scope": "NOT_RUN_THIS_PREPARATION_ROUND",
+  "items": [
+    "Torch import/autograd Node hook installation",
+    "Actual per-linear dX/X/G/Y/storage mapping or native VJP capture",
+    "Complete Encoder forward/backward or Tiny rerun",
+    "Any tensor/GEMM/contraction/numerical comparison or tensor deserialization",
+    "Actual first64 inputs/mask/scale/init validation on runtime",
+    "Linux compute launch/PID/proc-tree/all-TID/runtime-library capture",
+    "TERM/KILL/reap/descendant lifecycle timings",
+    "Actual extra retention/24GiB peak/hash workspace or raw serializer size",
+    "DDP/PG/optimizer step/AdamW gate/checkpoint recovery",
+    "SSH/upload/deployment/queue/job/install/elevation"
+  ],
+  "model_entrypoint": "NOT_IMPLEMENTED_BLOCKED",
+  "PREPARATION_READY": "NOT_PUBLISHED",
+  "actual_execution_authorized": false
+}
