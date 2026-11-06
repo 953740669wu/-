@@ -1,0 +1,181 @@
+{
+  "R12": "CLOSED_NO_TRAINING_GAIN_KEEP_ORIGINAL_BASELINE_NO_MORE_TILES_OR_AB",
+  "acceptance": "Original frozen run_checks.py: all four cases once in order; watchdog requires injected_hang on both workers. Communication, event/readiness and Python/proc completeness reported independently.",
+  "authorization": "This task card and current user; original R6 cluster_job_submitted/old authorization fields retained unchanged",
+  "candidate_check_groups": [
+    {
+      "count": 27,
+      "label": "stack_observer",
+      "max_seconds": 30
+    },
+    {
+      "count": 16,
+      "label": "readiness",
+      "max_seconds": 30
+    },
+    {
+      "count": 6,
+      "label": "diagnostics",
+      "max_seconds": 30
+    },
+    {
+      "count": 6,
+      "label": "job_identity",
+      "max_seconds": 45
+    },
+    {
+      "count": 16,
+      "label": "probe",
+      "max_seconds": 45
+    }
+  ],
+  "checks": {
+    "bytes": 457,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\DEPLOYMENT_CHECKS.json",
+    "sha256": "0331f06106ddc2c4a3ee8da704011699300f6da391ede06aa063224d2a6eecdc"
+  },
+  "collection": "All raw files/empty/truncated/permission/MISSED/temporary/store retained; snapshot bytes/SHA/remote mtime and changed_during_read; parent helper PID/kill/reap/returncode plus two rank stacks/source/proc receipts",
+  "commands": {
+    "bytes": 4664,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\COMMANDS.md",
+    "sha256": "052b0a8d06307687ed6e91eeb7ed970ec126f52b7813e6054eca3a4db011511b"
+  },
+  "deadlines": "Single START before consumer imports: all authorization/71 checks/environment/four cases/observation share START+270. Each cleanup and final cleanup capped START+285, original wrapper TERM2/KILL10<=15, closing15 within scheduler300. Frozen worker TERM/helper stop order and original grace unchanged; no per-helper/stage budget reset.",
+  "deployment_package": {
+    "bytes": 104603,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\S00_S07_R6_DIAGNOSTIC_DEPLOYMENT.zip",
+    "sha256": "82efe84bc36c34db71e107b64f9ff74641b44495d65452d3ec1a535ad5436dc1"
+  },
+  "deployment_source_manifest": {
+    "bytes": 2348,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\ARTIFACT_SHA256.json",
+    "sha256": "b55408714ac60709467e1b94c67741d664341a720d678cf0e4c2d49e043fce75"
+  },
+  "formal_training": false,
+  "immutable_after_publish": true,
+  "initial_remote_check": {
+    "bytes": 680,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\INITIAL_REMOTE_READONLY.txt",
+    "sha256": "86380f86abcd2df1d1ec8792686834d9875b11ee38674340b1e4cc5445d2ccca"
+  },
+  "inner_actual_files": 15,
+  "inner_delivery_files": 14,
+  "inner_manifest": {
+    "bytes": 3354,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\SOURCE_MANIFEST.json",
+    "sha256": "1b2dec1148d74844ca826e21244069a54a009d8935242fd325fc0ad744083f46"
+  },
+  "inner_package": {
+    "bytes": 43727,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\S07_ALIGNED_STACK_R6.zip",
+    "sha256": "32740dcbbce682ee6b245dbb563e7d6ff7a22a11e78d4279db57c4c5b122e7a1"
+  },
+  "inner_package_name": "S07_ALIGNED_STACK_R6.zip",
+  "inner_zip_members": 16,
+  "linux_login_log": {
+    "bytes": 2346,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\LOGIN_DEPLOYMENT_CHECKS.txt",
+    "sha256": "6743b507a6b3dbfdc68e5a2d237128349535efe654e511e24acdcfa32ce52ebe"
+  },
+  "local_fixture_log": {
+    "bytes": 2119,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\tests_after.txt",
+    "sha256": "3c5e2f9a75dc4d3cf705aaf8c16fd1b28da70ae9a5a583c422413fe456458014"
+  },
+  "login_scope": "No real Torch import, Gloo or model; preparation fixtures only. Linux71 and actual communication/observer pending the one approved job.",
+  "max_retry_count": 0,
+  "native_identity": "Original scheduler_handoff byte-identical: actual CCS_JOB_ID/host/affinity -> nonce/request -> login djob raw/ready fresh30s; no generated fake PID/job or candidate S07_PROC_TASK/deadline environment",
+  "new_jobs": 0,
+  "observation_contract": {
+    "bytes": 4755,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\OBSERVATION_CONTRACT.md",
+    "sha256": "448cad1a857165c74d0cb241e32b18480d1495ec995704f9f6c5de2208712dde"
+  },
+  "ownership": "PR_SET_CHILD_SUBREAPER and sampled PID/start_ticks descendants across independent sessions; identity recheck before signalling; bounded cleanup, residuals recorded",
+  "pre_deploy_check": {
+    "bytes": 963,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\PRE_DEPLOY_CHECK.txt",
+    "sha256": "2fbc4d9df2a99bf5e0f893930eb8d1048265e76fca50f27d04464fd51d4df615"
+  },
+  "protocol": "S07_R6_ALIGNED_STACK_DIAGNOSTIC_V1",
+  "published_utc": "2026-11-06T06:37:01.673635+00:00",
+  "real_HBM": false,
+  "remote_staging_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z",
+  "required_review": {
+    "bindings_object_required": true,
+    "decision": "PASS_FOR_S07_R6_DIAGNOSTIC",
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\s07_r6_resume_review_20261106\\S01_REVIEW.json",
+    "resources_object_required": true,
+    "review_complete": true,
+    "workload_object_required": true
+  },
+  "required_review_bindings": {
+    "comm_probe_sha256": "c9efa0c9d4ba05c8fb4501ce75f2dd60e6268d732c707cc3beef133330a356dd",
+    "deployment_package_sha256": "82efe84bc36c34db71e107b64f9ff74641b44495d65452d3ec1a535ad5436dc1",
+    "deployment_source_manifest_sha256": "b55408714ac60709467e1b94c67741d664341a720d678cf0e4c2d49e043fce75",
+    "inner_manifest_sha256": "1b2dec1148d74844ca826e21244069a54a009d8935242fd325fc0ad744083f46",
+    "inner_package_sha256": "32740dcbbce682ee6b245dbb563e7d6ff7a22a11e78d4279db57c4c5b122e7a1",
+    "observation_contract_sha256": "448cad1a857165c74d0cb241e32b18480d1495ec995704f9f6c5de2208712dde",
+    "observer_sha256": "5b3ad54e675a293e3eb51d292b149c6939bbdc52b68322f340eb76be3b02b875",
+    "task_card_sha256": "9a2c41f21f6f5be38ece42e082e3c221bb5593dbbbc84dbb302ce66ae33fff36"
+  },
+  "required_review_workload": {
+    "case_deadline_seconds": 30,
+    "case_order": [
+      "normal",
+      "crash",
+      "collective-timeout",
+      "watchdog"
+    ],
+    "communication_criterion": "original candidate/run_checks.py check_case unchanged; watchdog requires both injected_hang",
+    "exit": false,
+    "linux_checks": 71,
+    "max_jobs": 1,
+    "pg_timeout_seconds": 5,
+    "proc_shared_window_seconds": 2,
+    "python_dump_before_deadline_seconds": 5,
+    "repeat": false,
+    "retry": false,
+    "skipped_checks": 0
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_cores_per_domain": 36,
+    "actual_physical_cores": 72,
+    "allocated_cores": 76,
+    "cleanup_seconds": 15,
+    "closing_seconds": 15,
+    "consumer_seconds": 270,
+    "domains": 2,
+    "exclusive": true,
+    "job_seconds": 300,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 4
+  },
+  "status": "S00_DEPLOYMENT_READY",
+  "task_card": {
+    "bytes": 10213,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\TASK_CARD.md",
+    "sha256": "9a2c41f21f6f5be38ece42e082e3c221bb5593dbbbc84dbb302ce66ae33fff36"
+  },
+  "workload": {
+    "case_deadline_seconds": 30,
+    "case_order": [
+      "normal",
+      "crash",
+      "collective-timeout",
+      "watchdog"
+    ],
+    "communication_criterion": "original candidate/run_checks.py check_case unchanged; watchdog requires both injected_hang",
+    "exit": false,
+    "linux_checks": 71,
+    "max_jobs": 1,
+    "pg_timeout_seconds": 5,
+    "proc_shared_window_seconds": 2,
+    "python_dump_before_deadline_seconds": 5,
+    "repeat": false,
+    "retry": false,
+    "skipped_checks": 0
+  }
+}

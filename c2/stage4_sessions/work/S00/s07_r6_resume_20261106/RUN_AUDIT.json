@@ -1,0 +1,399 @@
+{
+  "active_s00_job": null,
+  "actual_libraries_unchanged": {
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so": "0098ec8982bc60ae9511ee3a636d9b9c8f9d3decceb4b44c7e1d446d8b74ab0b",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so": "34370e00fc38fe83b82685b113358b12afe6959286b8f5fc8125682ce9e0af10",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so": "340a49fc5a0ed13f02b67f08f62bc1a7e9636a0f277950ef00c8da0ff896a646",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so": "eee755641450652e0c08aeb5d3436f39bd9d3ff89e501a4262b3b0ca5862ac7a",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so": "2cbf6ab7259b743b02eb75babb72548784b1503b280f934eeceefec0fb1816e4",
+    "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so": "c26b39e44ea1b339ab2828f492dfc8d6ddf854c3da3f5c5f5cf4aa3d06e47912"
+  },
+  "actual_torch_intraop_available_reports": 36,
+  "all_owned_processes_reaped": true,
+  "allocated_cores": 76,
+  "archive": {
+    "bundle": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/JOB_2050433_full_evidence.zip",
+    "bytes": 321066,
+    "file_count": 125,
+    "sha256": "2b0dfd047aed0a17e745aefd79a0b150358e499eac1b51c52a7bdc1e6d306b7d"
+  },
+  "available_readiness_inventory": {
+    "cases": {
+      "crash": {
+        "complete": true,
+        "files": {
+          "participants.json": {
+            "bytes": 153,
+            "mtime_ns": 1793947508506306160,
+            "sha256": "28c9627e396782875dc1163da338508cf2a81e905968c7f7a6ac024294af577c"
+          },
+          "ready_rank0.json": {
+            "bytes": 119,
+            "mtime_ns": 1793947525888025000,
+            "sha256": "6dd57505a153dd93ad3b7f75e5f90c3f2c0be2b07d3385f163f71c2a9b8bd50c"
+          },
+          "ready_rank1.json": {
+            "bytes": 119,
+            "mtime_ns": 1793947517622192000,
+            "sha256": "c669ec2c5d2678ef76b042715934d99b3e56162b0900ccbea1be4072a736765f"
+          }
+        },
+        "issues": [],
+        "temporary_files": [],
+        "verified_context": {
+          "deadline_ns": 3968913492755767,
+          "job_id": "2050433",
+          "pids": [
+            2432590,
+            2432591
+          ],
+          "ready_token": "597df62241d3a97a6a0a8936fde847ea",
+          "run_id": "crash",
+          "supervisor_begin_ns": 3968883492839668,
+          "worker_event_ns": {
+            "0": {
+              "after_framework": 3968900963406647,
+              "both_ready": 3968900996646113,
+              "init_process_group_begin": 3968901006307036,
+              "preparation_complete": 3968900965000189,
+              "ready_published": 3968900989978683
+            },
+            "1": {
+              "after_framework": 3968892706305225,
+              "both_ready": 3968901009877111,
+              "init_process_group_begin": 3968901017939352,
+              "preparation_complete": 3968892707311576,
+              "ready_published": 3968892718369002
+            }
+          }
+        }
+      },
+      "normal": {
+        "complete": true,
+        "files": {
+          "participants.json": {
+            "bytes": 154,
+            "mtime_ns": 1793947488219444000,
+            "sha256": "a2076103b66d35779e198be64955efb9549002cfc41920f58fbc8c97031de588"
+          },
+          "ready_rank0.json": {
+            "bytes": 120,
+            "mtime_ns": 1793947505605970000,
+            "sha256": "b37734194077f40452bc79a3c0bb72da857ca3f4a1487b8716b86075375d927c"
+          },
+          "ready_rank1.json": {
+            "bytes": 120,
+            "mtime_ns": 1793947496796052000,
+            "sha256": "81101e2dc551ca3122ccb37b3452d94225442c0599b6036584707b5efda24812"
+          }
+        },
+        "issues": [],
+        "temporary_files": [],
+        "verified_context": {
+          "deadline_ns": 3968893229029655,
+          "job_id": "2050433",
+          "pids": [
+            2430758,
+            2430759
+          ],
+          "ready_token": "286d026e5f205849791d16e33ac5e4f6",
+          "run_id": "normal",
+          "supervisor_begin_ns": 3968863229122345,
+          "worker_event_ns": {
+            "0": {
+              "after_framework": 3968880704041287,
+              "both_ready": 3968880723912074,
+              "init_process_group_begin": 3968880732296865,
+              "preparation_complete": 3968880705541479,
+              "ready_published": 3968880717293965
+            },
+            "1": {
+              "after_framework": 3968871899345019,
+              "both_ready": 3968880758021590,
+              "init_process_group_begin": 3968880765484480,
+              "preparation_complete": 3968871900416220,
+              "ready_published": 3968871911217675
+            }
+          }
+        }
+      }
+    },
+    "complete": true,
+    "issues": [],
+    "not_run": [
+      "collective-timeout",
+      "watchdog"
+    ],
+    "scope": "archived readiness consistency only; no communication verdict or cross-rank publication-time inference",
+    "status": "CONSISTENT_AVAILABLE_READINESS_ONLY"
+  },
+  "available_trace_inventory": {
+    "cases": {
+      "crash": {
+        "complete": true,
+        "files": {
+          "rank0.events.jsonl": {
+            "bytes": 6095,
+            "mtime_ns": 1793947526626214000,
+            "open_intervals": [],
+            "sha256": "dd7fc0ff8f244d5762efc8a2761f9dd0a5e2d036a802436a710e06a5b0a4e3b9",
+            "valid_rows": 37
+          },
+          "rank1.events.jsonl": {
+            "bytes": 5835,
+            "mtime_ns": 1793947526726789000,
+            "open_intervals": [],
+            "sha256": "2da48959e5ad8af43a66cfbf2800c5aea4349d8826c72c35410a0cfe2297cce9",
+            "valid_rows": 36
+          },
+          "supervisor.events.jsonl": {
+            "bytes": 1424,
+            "mtime_ns": 1793947526809498000,
+            "open_intervals": [],
+            "sha256": "e267e5ddcd246ec1a3e1d8b4f4a2c5a91461041f672a2aaebe49cf9ffbc41bab",
+            "valid_rows": 10
+          }
+        },
+        "issues": []
+      },
+      "normal": {
+        "complete": true,
+        "files": {
+          "rank0.events.jsonl": {
+            "bytes": 7055,
+            "mtime_ns": 1793947506631609000,
+            "open_intervals": [],
+            "sha256": "070dbfe119beac9801ad7fff03589837703c5e38abbed072b88c12339bb93493",
+            "valid_rows": 45
+          },
+          "rank1.events.jsonl": {
+            "bytes": 7055,
+            "mtime_ns": 1793947506615218000,
+            "open_intervals": [],
+            "sha256": "8a794cf2be51de54e1722e411530e041e3e0bb0f8c79663d3ea5866b1db13202",
+            "valid_rows": 45
+          },
+          "supervisor.events.jsonl": {
+            "bytes": 1263,
+            "mtime_ns": 1793947507732480000,
+            "open_intervals": [],
+            "sha256": "0c7d5b208d6d8353dd13a6550927ee5ffa8f7b5a9b869383befa8c6577482356",
+            "valid_rows": 9
+          }
+        },
+        "issues": []
+      }
+    },
+    "complete": true,
+    "issues": [],
+    "not_run": [
+      "collective-timeout",
+      "watchdog"
+    ],
+    "scope": "trace completeness only; I/O included; no root-cause or communication verdict",
+    "status": "COMPLETE_AVAILABLE_TRACES_ONLY"
+  },
+  "cases": {
+    "crash": {
+      "rank_reports": {
+        "0": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "1": {
+          "bytes": 10544,
+          "cpu_snapshot_count": 5,
+          "error": null,
+          "pid": 2432591,
+          "sha256": "fde4dba34eb8f9baacf3f8fd2cd890865ef4c14d7ecc109d4eac3c6b28af7289",
+          "stage": "injected_crash",
+          "status": "FAIL",
+          "torch_intraop": 36
+        }
+      },
+      "supervisor": {
+        "all_reaped": true,
+        "errors": [],
+        "exit_codes": [
+          -15,
+          17
+        ],
+        "pids": [
+          2432590,
+          2432591
+        ],
+        "reason": "child_failed",
+        "wall_seconds": 18.429070972837508
+      }
+    },
+    "normal": {
+      "rank_reports": {
+        "0": {
+          "bytes": 14241,
+          "cpu_snapshot_count": 9,
+          "error": null,
+          "pid": 2430758,
+          "sha256": "204296c37f51aba49b7605ee51c83739dd6774dbb3082584c62a8dff412166e6",
+          "stage": "finished",
+          "status": "PASS",
+          "torch_intraop": 36
+        },
+        "1": {
+          "bytes": 14348,
+          "cpu_snapshot_count": 9,
+          "error": null,
+          "pid": 2430759,
+          "sha256": "3d3aed2c8742504813039927db0c56cd449ff8c03c64f82305dfa7875ffd42d6",
+          "stage": "finished",
+          "status": "PASS",
+          "torch_intraop": 36
+        }
+      },
+      "supervisor": {
+        "all_reaped": true,
+        "errors": [],
+        "exit_codes": [
+          0,
+          0
+        ],
+        "pids": [
+          2430758,
+          2430759
+        ],
+        "reason": "complete",
+        "wall_seconds": 19.627162976190448
+      }
+    }
+  },
+  "communication_suite_passed": false,
+  "diagnostic_task_complete": false,
+  "failed_case": "crash",
+  "formal_training": false,
+  "host": "cn21338",
+  "inference_boundary": "Empty JSON and nearby worker_error/parent TERM are consistent with interrupted direct JSON rewrite; exact cause not proven here. No payload repair, regenerated report or extra watchdog run.",
+  "job_exit_code": 1,
+  "job_id": "2050433",
+  "linux_tests_passed": 71,
+  "linux_tests_skipped": 0,
+  "missing_serialized_cpu_reports": [
+    "crash/rank0"
+  ],
+  "new_jobs": 1,
+  "node_seconds": 105.0,
+  "normal_fixed_tensor_passed": true,
+  "not_run": [
+    "collective-timeout",
+    "watchdog"
+  ],
+  "observed_stop": "crash rank0.json empty at original case result reader; rank1 reached injected_crash/exit17; parent reaped both",
+  "original_checks_error": "Expecting value: line 1 column 1 (char 0)",
+  "outer_cleanup_signal_actions": [],
+  "owned_pid_count": 14,
+  "performance_acceptance": false,
+  "protected_local_old_originals_unchanged": true,
+  "reserved_cores": [
+    [
+      36,
+      37
+    ],
+    [
+      74,
+      75
+    ]
+  ],
+  "retries": 0,
+  "scheduler_pids_cleared": true,
+  "scheduler_state": "FAILED",
+  "scheduler_usage_seconds": 104,
+  "selected_cores": [
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    [
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73
+    ]
+  ],
+  "source_status": "UNCHANGED",
+  "stack_inventory": {
+    "complete": false,
+    "files": {},
+    "issues": [
+      "watchdog not reached"
+    ],
+    "scope": "watchdog Python/proc evidence only; ARMED/EXITED alone never imply complete; no communication verdict",
+    "status": "NOT_RUN"
+  },
+  "status": "FAILED_SUITE_RAW_EVIDENCE_VERIFIED_NO_RETRY",
+  "validated_serialized_cpu_snapshots": 23,
+  "watchdog_observation_status": "NOT_RUN"
+}

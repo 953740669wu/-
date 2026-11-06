@@ -1,0 +1,282 @@
+{
+  "R12": "CLOSED_NO_TRAINING_GAIN_KEEP_ORIGINAL_FP32_BASELINE",
+  "active_s00_job": null,
+  "all_owned_processes_reaped": true,
+  "analysis_inputs": {
+    "available_cases": [
+      "normal",
+      "crash"
+    ],
+    "evidence_dir": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job",
+    "not_run_cases": [
+      "collective-timeout",
+      "watchdog"
+    ]
+  },
+  "archive": {
+    "bytes": 321066,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\JOB_2050433_full_evidence.zip",
+    "sha256": "2b0dfd047aed0a17e745aefd79a0b150358e499eac1b51c52a7bdc1e6d306b7d"
+  },
+  "audit": {
+    "bytes": 11872,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\RUN_AUDIT.json",
+    "sha256": "433eb44b2dda4dfd09d47ee704825021160f274e110e770044856be82fc5ee84"
+  },
+  "available_readiness_inventory_status": "CONSISTENT_AVAILABLE_READINESS_ONLY",
+  "available_trace_inventory_status": "COMPLETE_AVAILABLE_TRACES_ONLY",
+  "case_results": {
+    "crash": {
+      "accepted_by_original_suite": false,
+      "events": [
+        {
+          "bytes": 6095,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\rank0.events.jsonl",
+          "sha256": "dd7fc0ff8f244d5762efc8a2761f9dd0a5e2d036a802436a710e06a5b0a4e3b9"
+        },
+        {
+          "bytes": 5835,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\rank1.events.jsonl",
+          "sha256": "2da48959e5ad8af43a66cfbf2800c5aea4349d8826c72c35410a0cfe2297cce9"
+        },
+        {
+          "bytes": 1424,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\supervisor.events.jsonl",
+          "sha256": "e267e5ddcd246ec1a3e1d8b4f4a2c5a91461041f672a2aaebe49cf9ffbc41bab"
+        }
+      ],
+      "manifest": {
+        "bytes": 8944,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\manifest.json",
+        "sha256": "0720aaf7110a9b83d22b53055476980cc968f23bd95fecc1cf2465a91437521c"
+      },
+      "participants": {
+        "bytes": 153,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\participants.json",
+        "sha256": "28c9627e396782875dc1163da338508cf2a81e905968c7f7a6ac024294af577c"
+      },
+      "rank_reports": [
+        {
+          "bytes": 0,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\rank0.json",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 10544,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\rank1.json",
+          "sha256": "fde4dba34eb8f9baacf3f8fd2cd890865ef4c14d7ecc109d4eac3c6b28af7289"
+        }
+      ],
+      "ready": [
+        {
+          "bytes": 119,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\ready_rank0.json",
+          "sha256": "6dd57505a153dd93ad3b7f75e5f90c3f2c0be2b07d3385f163f71c2a9b8bd50c"
+        },
+        {
+          "bytes": 119,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\ready_rank1.json",
+          "sha256": "c669ec2c5d2678ef76b042715934d99b3e56162b0900ccbea1be4072a736765f"
+        }
+      ],
+      "summary": {
+        "bytes": 366,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\summary.json",
+        "sha256": "966eabcc75932b1134eb3b752886257e815d94c7a2eb15f0a96a1a4fb5b25642"
+      }
+    },
+    "normal": {
+      "accepted_by_original_suite": true,
+      "events": [
+        {
+          "bytes": 7055,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\rank0.events.jsonl",
+          "sha256": "070dbfe119beac9801ad7fff03589837703c5e38abbed072b88c12339bb93493"
+        },
+        {
+          "bytes": 7055,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\rank1.events.jsonl",
+          "sha256": "8a794cf2be51de54e1722e411530e041e3e0bb0f8c79663d3ea5866b1db13202"
+        },
+        {
+          "bytes": 1263,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\supervisor.events.jsonl",
+          "sha256": "0c7d5b208d6d8353dd13a6550927ee5ffa8f7b5a9b869383befa8c6577482356"
+        }
+      ],
+      "manifest": {
+        "bytes": 8946,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\manifest.json",
+        "sha256": "47d82237b479e886271653c0de6c3301208e250601ac93098412fef9a594533a"
+      },
+      "participants": {
+        "bytes": 154,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\participants.json",
+        "sha256": "a2076103b66d35779e198be64955efb9549002cfc41920f58fbc8c97031de588"
+      },
+      "rank_reports": [
+        {
+          "bytes": 14241,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\rank0.json",
+          "sha256": "204296c37f51aba49b7605ee51c83739dd6774dbb3082584c62a8dff412166e6"
+        },
+        {
+          "bytes": 14348,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\rank1.json",
+          "sha256": "3d3aed2c8742504813039927db0c56cd449ff8c03c64f82305dfa7875ffd42d6"
+        }
+      ],
+      "ready": [
+        {
+          "bytes": 120,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\ready_rank0.json",
+          "sha256": "b37734194077f40452bc79a3c0bb72da857ca3f4a1487b8716b86075375d927c"
+        },
+        {
+          "bytes": 120,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\ready_rank1.json",
+          "sha256": "81101e2dc551ca3122ccb37b3452d94225442c0599b6036584707b5efda24812"
+        }
+      ],
+      "summary": {
+        "bytes": 314,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\summary.json",
+        "sha256": "27ea3bd003b51386362c691257909aa7efed5e71ed87763946b0347140b913ca"
+      }
+    }
+  },
+  "cleanup": {
+    "bytes": 682,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\job_evidence\\cleanup.json",
+    "sha256": "e92c2b82b4858f1f079b456e731ef29e633bcebddb55e34051b49f0cb643ab9e"
+  },
+  "communication_suite_passed": false,
+  "deployment_ready": {
+    "bytes": 8435,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\S00_DEPLOYMENT_READY.json",
+    "sha256": "a855ea804999138339bda1cfc9d07951be0c824cdc1c5741f0dc1c82eb24ff77"
+  },
+  "diagnostic_task_complete": false,
+  "evidence_directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received",
+  "evidence_index": {
+    "bytes": 61194,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\COLLECTION_S00.json",
+    "sha256": "e0a5c5cf960be2fe6a0453f8845f399496ac8b6d8590ad5374e6bb1b2e0a88ae"
+  },
+  "failed_case": "crash",
+  "failure_evidence": "crash/rank0.json is zero bytes; rank1 reached injected_crash/exit17; supervisor child_failed with [-15,17], both reaped; original reader stopped on JSON parse.",
+  "formal_training": false,
+  "host": "cn21338",
+  "immutable_after_publish": true,
+  "inference_boundary": "Empty JSON and nearby worker_error/parent TERM are consistent with interrupted direct JSON rewrite; exact cause not proven here. No payload repair, regenerated report or extra watchdog run.",
+  "job_exit_code": 1,
+  "job_id": "2050433",
+  "linux_checks_passed": 71,
+  "linux_checks_skipped": 0,
+  "missing_serialized_cpu_reports": [
+    "crash/rank0"
+  ],
+  "new_jobs": 1,
+  "next_action": "S07/coordinator inspect exact crash JSON reader/write/TERM sequence. Preserve original criteria/package. No retry or watchdog-only run under this task card.",
+  "node_seconds": 105.0,
+  "normal_fixed_tensor_passed": true,
+  "not_run": [
+    "collective-timeout",
+    "watchdog"
+  ],
+  "original_checks": {
+    "bytes": 630,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\checks.json",
+    "sha256": "d6d75a9cd23b13debc4a8b21fdaae24657de73396d25403d4f2c23640756d689"
+  },
+  "original_checks_error": "Expecting value: line 1 column 1 (char 0)",
+  "outer_cleanup_signal_actions": [],
+  "performance_acceptance": false,
+  "protocol": "S07_R6_ALIGNED_STACK_DIAGNOSTIC_V1",
+  "published_utc": "2026-11-06T06:51:41.625498+00:00",
+  "raw_existing_files_collected_and_verified": true,
+  "readiness_inventory": {
+    "bytes": 3521,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\READINESS_INVENTORY.json",
+    "sha256": "ac42f603c8bd794291271c96fca1453d4a0b9ab7458da33a2369518795ce7b8e"
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_cores_per_domain": 36,
+    "actual_physical_cores": 72,
+    "allocated_cores": 76,
+    "cleanup_seconds": 15,
+    "closing_seconds": 15,
+    "consumer_seconds": 270,
+    "domains": 2,
+    "exclusive": true,
+    "job_seconds": 300,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 4
+  },
+  "retries": 0,
+  "review": {
+    "bytes": 4922,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\S01_REVIEW.json",
+    "sha256": "b9082f2385df26e05ff6ccd9b11f421db38e2e597d643bff81b2d9859e09b250"
+  },
+  "scheduler_pids_cleared": true,
+  "scheduler_state": "FAILED",
+  "scheduler_usage_seconds": 104,
+  "source_bindings": {
+    "comm_probe_sha256": "c9efa0c9d4ba05c8fb4501ce75f2dd60e6268d732c707cc3beef133330a356dd",
+    "deployment_package_sha256": "82efe84bc36c34db71e107b64f9ff74641b44495d65452d3ec1a535ad5436dc1",
+    "deployment_source_manifest_sha256": "b55408714ac60709467e1b94c67741d664341a720d678cf0e4c2d49e043fce75",
+    "inner_manifest_sha256": "1b2dec1148d74844ca826e21244069a54a009d8935242fd325fc0ad744083f46",
+    "inner_package_sha256": "32740dcbbce682ee6b245dbb563e7d6ff7a22a11e78d4279db57c4c5b122e7a1",
+    "observation_contract_sha256": "448cad1a857165c74d0cb241e32b18480d1495ec995704f9f6c5de2208712dde",
+    "observer_sha256": "5b3ad54e675a293e3eb51d292b149c6939bbdc52b68322f340eb76be3b02b875",
+    "task_card_sha256": "9a2c41f21f6f5be38ece42e082e3c221bb5593dbbbc84dbb302ce66ae33fff36"
+  },
+  "source_status": "UNCHANGED",
+  "stack_inventory": {
+    "bytes": 224,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\STACK_INVENTORY.json",
+    "sha256": "51f4b69ee81d66b32c552766de5cb9fb219e9ff809ce52fa37b05070237c204b"
+  },
+  "status": "RUN_TERMINAL_FAILED",
+  "trace_inventory": {
+    "bytes": 1993,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\DIAGNOSTIC_INVENTORY.json",
+    "sha256": "8b8654b32c4431806fa95e2b1054fa6bfd6c28e7712b91c408795e5411f34a98"
+  },
+  "validated_serialized_cpu_snapshots": 23,
+  "watchdog_observation_status": "NOT_RUN",
+  "watchdog_required_files_not_generated": [
+    "watchdog/rank0.python_stack.txt",
+    "watchdog/rank0.stack_status.json",
+    "watchdog/rank0.installed_python.json",
+    "watchdog/rank1.python_stack.txt",
+    "watchdog/rank1.stack_status.json",
+    "watchdog/rank1.installed_python.json",
+    "watchdog/proc_identity.json",
+    "watchdog/proc_fields.jsonl",
+    "watchdog/proc_summary.json",
+    "watchdog/proc_helper.log"
+  ],
+  "workload": {
+    "case_deadline_seconds": 30,
+    "case_order": [
+      "normal",
+      "crash",
+      "collective-timeout",
+      "watchdog"
+    ],
+    "communication_criterion": "original candidate/run_checks.py check_case unchanged; watchdog requires both injected_hang",
+    "exit": false,
+    "linux_checks": 71,
+    "max_jobs": 1,
+    "pg_timeout_seconds": 5,
+    "proc_shared_window_seconds": 2,
+    "python_dump_before_deadline_seconds": 5,
+    "repeat": false,
+    "retry": false,
+    "skipped_checks": 0
+  }
+}

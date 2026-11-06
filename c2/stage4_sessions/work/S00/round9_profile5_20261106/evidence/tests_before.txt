@@ -1,0 +1,21 @@
+test_profile_deployment (unittest.loader._FailedTest.test_profile_deployment) ... ERROR
+
+======================================================================
+ERROR: test_profile_deployment (unittest.loader._FailedTest.test_profile_deployment)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_profile_deployment
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\round9_profile5_20261106\tests\test_profile_deployment.py", line 10, in <module>
+    import profile_outcome as p
+ModuleNotFoundError: No module named 'profile_outcome'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

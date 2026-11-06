@@ -1,0 +1,434 @@
+--- c2\stage4_sessions\work\S00\overnight_engineering_20261105\collect_evidence.py
++++ S00/round9_profile5_20261106/collect_evidence.py
+@@ -5,10 +5,12 @@
+ import sys
+ import zipfile
+ from prepare import check_root,sha,save,verify_prepared
++from profile_outcome import inspect
+ 
+ 
+ def exposure(root):
+-    path=root/'payload/outputs/EXPOSURE_LEDGER.json'
++    job=(root/'job_id.txt').read_text().strip()
++    path=root/'payload/outputs'/('profile_'+job)/'EXPOSURE_LEDGER.json'
+     if path.is_file():
+         try:return dict(status='RAW_RUNTIME_LEDGER_PRESERVED',path=str(path),sha256=sha(path),raw=json.loads(path.read_text()))
+         except ValueError as exc:return dict(status='INVALID_RAW_RUNTIME_LEDGER_PRESERVED',path=str(path),error=repr(exc),future_test_exclusion_review_required=True)
+@@ -42,20 +44,20 @@
+         metadata[name]=dict(path=str(p),bytes=after.st_size,mtime_ns=after.st_mtime_ns,sha256=digest,archive_payload=not omit)
+         if omit:remote_only.append(name)
+         else:archived.append(p)
+-    results=list((root/'payload/outputs').glob('*/result.json'))
++    results=list((root/'payload/outputs').glob('profile_*/result.json'))
+     app=None
+     if len(results)==1:
+         try:app=json.loads(results[0].read_text())
+         except ValueError:pass
+     missing=[]
+     if len(results)!=1:missing.append('exactly_one_application_result')
+-    for name in ('job.log','scheduler_allocation.json','job_evidence/cleanup.json','job_evidence/SUMMARY.json','payload/outputs/EXPOSURE_LEDGER.json'):
++    for name in ('job.log','scheduler_allocation.json','job_evidence/cleanup.json','job_evidence/SUMMARY.json','payload/outputs/profile_'+job+'/EXPOSURE_LEDGER.json'):
+         if not (root/name).is_file():missing.append(name)
+     index=root/'COLLECTION_S00.json'
+     save(index,dict(job_id=job,state=row['state'],job_exit_code=row.get('jobExitCode'),query_command=command,
+       scheduler_pids_cleared=all(n['pids']=='-' for g in row['resGroups'] for n in g['nodeResUsages']),
+       source_status=source_status,files=metadata,remote_only=remote_only,missing=missing,
+-      application_status=app.get('status') if app else None,exposure_reconciliation=recon,
++      application_status=app.get('status') if app else None,profile_outcome=inspect(root,job),exposure_reconciliation=recon,
+       start_time=row.get('startTime'),end_time=row.get('endTime'),engineering_only=True,
+       formal_split_status='UNKNOWN',validation_status='NOT_RUN_NO_FORMAL_SPLIT',retries=0))
+     archived.append(index)
+--- c2\stage4_sessions\work\S00\overnight_engineering_20261105\COMMANDS.md
++++ S00/round9_profile5_20261106/COMMANDS.md
+@@ -1,92 +1,95 @@
+-# S00 夜间工程部署/执行约定
++# S00 R9 PROFILE5独立部署
+ 
+-仅 ENGINEERING_REAL_CORPUS_PILOT_V1；旧REALDATA_SOURCE_AUDIT.json仍DATA_NOT_READY。
+-固定16个单元/1600帧只用于工程训练，case不等于subject，不产生正式val/test或效果结论。
+-固定descriptor和初始暴露清单在DATA_READY.json中绑定；应用运行暴露清单独立写到payload/outputs。
+-源manifest必须为任务卡14300版SHA，不接受第三个版本。
++只接受ENGINEERING_REAL_CORPUS_PROFILE5_V1及新S02_PROFILE5_*/payload目录；
++旧job2043445、旧marker、旧PILOT成功状态都不能复用。
++原descriptor完整字节SHA必须为b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6。
++不改descriptor内的旧账本路径，它仅为来源元数据；R9只写新profile_JOB目录的EXPOSURE_LEDGER.json。
+ 
+-## S01专项审核记录约定
++## 新部署和元数据检查
+ 
+-执行器review_gate.py要求S01_REVIEW.json中：
+-
+-- decision=PASS_FOR_ENGINEERING_PILOT、review_complete=true。
+-- bindings对象中的code_package_sha256、code_source_manifest_sha256、deployment_package_sha256、
+-  descriptor_sha256、interface_sha256与S00_DEPLOYMENT_READY.json的required_review_bindings逐项一致。
+-- resources对象至少包含S00_DEPLOYMENT_READY.json.resources所有键且值相同，
+-  即38/36/2核、24576MB同limit/exclusive、job900/whole_entry840/cleanup30。
+-
+-FAIL/BLOCKED或未绑定实物的摘要都不能放行。S01可以另加现场待验项和不含科研/性能接受的说明。
+-该约定用于精确校验本任务卡要求的四类身份，不授权S00自行改变S01结论。
+-
+-## 部署与必要登录检查（不启动模型）
+-
+-固定远端目录为DATA_READY.json.remote_staging_root；不得新换目录隐藏已有提交。
+-先实际djob -J、核S00已有ENGINEERING/PILOT目录及marker/job_id，再核当前manifest SHA。
+-只有目录不存在且无本轮任务提交，才新建此S00目录；上传核准部署ZIP和同名.sha256。
++本轮固定RUN由WORK_STARTED.json/PINNED_INPUTS.json给出。
++先查实际djob队列、所有S02_PROFILE5目录/marker/job_id，不因新目录推定未提交。
++新根不存在且没有本轮已提交任务后，才创建一次、上传部署ZIP和同名.sha256：
+ 
+ ```bash
+ set -euo pipefail
+ source /etc/profile.d/donaukit_scheduler.sh
+-RUN=/home/share/dengqingtian/opt/stage4_sessions/S00/ENGINEERING_PILOT_20261105T154333Z
++RUN=/home/share/dengqingtian/opt/stage4_sessions/S00/S02_PROFILE5_20261106T030149Z
+ djob -J
+-# 确认已有记录不含本轮提交后新建一次；目录存在时先检查，不覆盖。
+ test ! -e "$RUN"
+ mkdir "$RUN"
+-# 上传S00_OVERNIGHT_ENGINEERING_DEPLOYMENT.zip及.sha256到RUN后：
++# 上传S00_R9_PROFILE5_DEPLOYMENT.zip及.sha256，先核准其旁DEPLOYMENT_RECEIPT.json的bytes/SHA。
+ cd "$RUN"
+-sha256sum -c S00_OVERNIGHT_ENGINEERING_DEPLOYMENT.zip.sha256
+-unzip -q S00_OVERNIGHT_ENGINEERING_DEPLOYMENT.zip
++sha256sum -c S00_R9_PROFILE5_DEPLOYMENT.zip.sha256
++unzip -q S00_R9_PROFILE5_DEPLOYMENT.zip
+ sha256sum -c ARTIFACT_SHA256.txt
+ /usr/bin/python3 -B prepare.py
+ /usr/bin/python3 -B -m unittest discover -s tests -v > login_wrapper_tests.log 2>&1
+-# 用固定R4解释器只运行S02工程metadata入口；不运行模型或旧正式CLI，不安装依赖。
++env -u LD_PRELOAD PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 \
++ PYTHONPATH=/home/share/songzhenlong/eitfm/sw/torch_kml \
++ /home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3 -B \
++ payload/inspect_engineering.py --descriptor "$RUN/ENGINEERING_DESCRIPTOR.json" \
++ --descriptor-sha256 b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6 \
++ --output LOGIN_METADATA_CHECK.json
+ ```
+ 
+-prepare核全部外层源及内包/源码清单SHA，拒绝已有payload/pre_submit_checks；LF、AST3.9、
+-Linux bash-n均检查。工程metadata检查命令随已发布的S02具体包路径在READY记录中给出。
+-计算端仍重新核包、原生job/nonce/raw/ready、主机、38实际物理核/NUMA/DDR、无重试。
+-计算端不source登录profile、不检查g++。保持38核入口授权，原S02守卫在同PID框架导入前绑前36，
+-观察实际Torch36/KML/全部TID，不添加线程setter冒充现场证据。
++登录端只核源码/LF/AST3.9/bash-n/SHA及真实选样元数据，不跑模型、profiler、数组运算或编译。
++保留原R4环境；计算端无登录profile依赖、不要求g++、不加线程setter。
++数据16单元/1600帧全部用于原工程scale，只有原seed0前320帧接受5次更新；
++不新选数据、不读旧checkpoint、不扩为完整epoch。
+ 
+-## 唯一提交（只在S01明确通过且全部身份一致后）
++## S01审核及唯一提交
+ 
+-把S01确切审核原件复制到RUN/S01_REVIEW.json；复制不改字节。
+-本地和登录端均用review_gate核本条审核SHA及所有binding。
++发布S00_DEPLOYMENT_READY.json后包/源码冻结。S01_REVIEW.json必须满足：
++
++- decision=PASS_FOR_ENGINEERING_PROFILE5且review_complete=true。
++- bindings逐项匹配required_review_bindings中的代码包、源码清单、部署包、部署索引、
++  profile_contract、reference_first5、descriptor、原interface八份SHA。
++- resources匹配38授权/实际36留2、24576MB同limit/exclusive、job900/whole840/cleanup30/closing30/stop_new720。
++
++旧PASS_FOR_ENGINEERING_PILOT或FAIL/BLOCKED不能放行。
++将01审核原件原字节上传RUN/S01_REVIEW.json，提交前再次核审核SHA、全部实物、实际队列及唯一标记。
+ 
+ ```bash
+ cd "$RUN"
+ /usr/bin/python3 -B submit_once.py "$RUN" > login_submit_publish.log 2>&1
+ ```
+ 
+-submit_once先核SHA和S01专项审核，独占创建submit_once.marker，再只调用一次：
++程序独占写新submit_once.marker，仅调用一次：
+ 
+ ```bash
+ dsub -J -q q_hpcai -x job -R 'cpu=38,mem=24576MB' -RL 'mem=24576MB' \
+  -a 'numa[count=1,distribution=pack]' -T 900 --env none --cwd "$RUN" \
+- -oo "$RUN/job.log" bash "$RUN/run_job.sh" '<实际S01_REVIEW原件SHA256>'
++ -oo "$RUN/job.log" bash "$RUN/run_job.sh" '<实际新S01_REVIEW原件SHA>'
+ ```
+ 
+-不可在脚本提交后再手工执行同一dsub。提交超时/返回ID不明亦保留marker，不重提；
+-先查实际队列/原stdout。PENDING轮询不算新实验；RUNNING立即单次publisher。
+-只有自己本轮作业尚未运行且排队超过60分钟，复核当前状态后才可取消它，不能重提或取消其它任务。
+-网络中断先保存job ID与已观测状态；恢复只查原job。
++该行供核命令，不能在submit_once后手工再执行。
++超时/返回ID不明同样不重提，保存原stdout/stderr并核原目录/队列；RUNNING后单次publisher。
++只有自己本轮尚未启动且排队超60分钟，复核未RUNNING后可取消它，不重提、不动其它任务。
++整个门禁和应用共享入口840秒；child-subreaper/PID-start_ticks追踪全部所属后代，
++统一TERM15/KILL15合计最多30秒、最晚870秒清理，留30秒收尾，调度硬限900秒。
++本地mock不等于Linux信号故障清理已验；现场自然退出与实际信号路径分别记录。
+ 
+-外层从Python模块入口起全840秒，包括30秒以内的授权门禁、包检查及原工程入口所有步骤；
+-原S02内部840秒超时也消耗此共同截止，不能从启动训练时重新给外层840秒。
+-Linux child-subreaper记录并接管另起session的全部本任务后代；统一TERM15/KILL15总30秒，
+-最晚870秒结束清理，留30秒收尾，调度硬限900秒。共享盘/不可中断内核I/O的实际异常照实记录。
+-1epoch/200更新先到即停；多步loss波动不调参。任意来源/配对/资源/状态/数值/运行错误停止，不重试。
++## 五步判据、停止和完整收集
+ 
+-## 原始终态收集
++仅1—2预热无采样，3—5各一次CPU capture，连续AdamW1..5、B64/320帧。
++成功只接受PROFILE5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE且全部原loss比较、来源、CPU/KML、恢复证据齐全。
++profile_outcome.py核5条记录/原3分量比较、2+3时序、3trace/3events的bytes/SHA/事件阶段/KML标记与上限；
++旧PILOT成功或缺文件不能PASS。UNSUPPORTED_PROFILER、PROFILE_LIMIT_EXCEEDED、SOURCE_CHANGED、
++DATA_NOT_READY、ERROR_RUNTIME_OR_STATE和INCOMPLETE保留原状态与非零退出，不转backend、不截断、不补跑。
++任何数值/身份/资源/预算异常即停，checkpoint只留远端、只收路径/bytes/SHA/零更新恢复。
++
++每采样结束后核<=50000事件、<=256 KML包裹标记；每trace<=8MiB、每events<=1MiB，3+3合计<=27MiB。
++不是实时逐事件截断。KML包裹含Python/分配/ctypes/native，不能当精确原生内核时间；
++不叠加嵌套inclusive，不以跨线程CPU和除wall作占比，不把三步当稳态吞吐或收益。
+ 
+ ```bash
+ cd "$RUN"
+ /usr/bin/python3 -B collect_evidence.py "$RUN"
+ ```
+ 
+-回传JOB_<job>_evidence.zip和bundle_receipt.json；收集日志不要写入正在索引的RUN。
+-归档原调度/授权/命令/退出/清理、源内外包/接口/descriptor/暴露原件、steps/result/恢复记录及线程/库。
+-每个文件含远端path/bytes/SHA/mtime_ns。checkpoint留原远端路径，只回传完整大小/SHA和恢复结果；
+-不下载/加载权重做额外更新，不把数据/权重加入Git。失败/缺result/ledger也保留，不能当作PASS。
+-暴露不明时另写EXPOSURE_RECONCILIATION.json，保留原initial/runtime账本，不补造已消费帧。
+-RUN_COMPLETE.json在本地完整回传和核对后发布，供S08直接读取；失败终态也用同样入口明确标记。
++回传JOB_<job>_evidence.zip/bundle_receipt.json，收集输出不要重定向到正被索引目录。
++保留新profile_JOB全目录，包括失败/缺失/超限原件及所有trace/events、steps/result/新ledger/CPU/库/退出，
++原始调度、授权、命令、后代清理和完整源包；逐项远端path/bytes/SHA/mtime_ns索引。
++旧descriptor指向的运行账本及checkpoint只读，运行后再核其SHA不变。
++RUN_COMPLETE.json在本地回传核验后发布，明确完整/unsupported/limit/失败/未完成状态，不缺失即PASS。
+--- c2\stage4_sessions\work\S00\overnight_engineering_20261105\prepare.py
++++ S00/round9_profile5_20261106/prepare.py
+@@ -7,10 +7,10 @@
+ import zipfile
+ 
+ BASE=Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
+-PREFIX='ENGINEERING_PILOT_'
+-DEPLOYMENT='S00_OVERNIGHT_ENGINEERING_DEPLOYMENT.zip'
++PREFIX='S02_PROFILE5_'
++DEPLOYMENT='S00_R9_PROFILE5_DEPLOYMENT.zip'
+ RESOURCES=dict(allocated_cores=38,actual_physical_cores=36,reserved_cores=2,memory_MB=24576,
+- memory_limit_MB=24576,exclusive=True,job_seconds=900,whole_entry_timeout=840,cleanup_seconds=30)
++ memory_limit_MB=24576,exclusive=True,job_seconds=900,whole_entry_timeout=840,cleanup_seconds=30,closing_seconds=30,stop_new_update_after_seconds=720)
+ 
+ 
+ def sha(path):
+--- /dev/null
++++ S00/round9_profile5_20261106/profile_outcome.py
+@@ -0,0 +1,61 @@
++"""Read-only PROFILE5 completion evidence; preserve unsupported/limit/failure states."""
++import hashlib
++import json
++
++PROTOCOL='ENGINEERING_REAL_CORPUS_PROFILE5_V1'
++SUCCESS='PROFILE5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE'
++PHASES=('zero_grad_before','forward_loss','zero_grad_after','backward','optimizer')
++
++
++def inspect(root,job):
++    run=root/'payload/outputs'/('profile_'+str(job))
++    result=dict(application_status=None,profile5_complete=False,errors=[],missing_outputs=[],captures=[])
++    names=['result.json','steps.jsonl','EXPOSURE_LEDGER.json']
++    names += [prefix+'_step_'+str(i)+'.json' for prefix in ('trace','events') for i in (3,4,5)]
++    result['missing_outputs']=[n for n in names if not (run/n).is_file()]
++    try:
++        app=json.loads((run/'result.json').read_text(encoding='utf-8'))
++        result.update(application_status=app.get('status'),application_error=app.get('error'))
++        if app.get('status')!=SUCCESS:return result
++        def require(ok,message):
++            if not ok:raise ValueError(message)
++        require(app.get('protocol')==PROTOCOL and app.get('engineering_only') is True,'new PROFILE5 protocol required')
++        require(app.get('completed_updates')==app.get('planned_updates')==5 and app.get('consumed_frames')==320,'five updates/320 frames required')
++        recovery=app.get('recovery',{})
++        require(recovery.get('status')=='PASS_NO_EXTRA_UPDATE' and recovery.get('extra_updates')==0,'restore/no-extra-update evidence missing')
++        for key in ('parameters_exact','optimizer_exact','rng_exact','cursor_exact','identity_exact'):
++            require(recovery.get(key) is True,'recovery state missing: '+key)
++        require(app.get('source_and_data_after')=='PASS_SAME_FROZEN_IDENTITIES','final source/data evidence missing')
++        require(app.get('cpu36',{}).get('errors')==[] and len(app.get('cpu36',{}).get('checkpoints',[]))==19,'19 original CPU checkpoints required')
++        require(app.get('runtime',{}).get('kml_gemm_calls',0)>0 and app.get('checkpoint',{}).get('sha256'),'KML/checkpoint identity missing')
++        steps=[json.loads(x) for x in (run/'steps.jsonl').read_text(encoding='utf-8').splitlines()]
++        require(len(steps)==5,'exactly five step records required')
++        require(len(list(run.glob('trace_step_*.json')))==len(list(run.glob('events_step_*.json')))==3,'exactly three traces/events required')
++        require(not result['missing_outputs'],'required output missing')
++        for i,step in enumerate(steps,1):
++            require(step.get('step')==step.get('adamw_step')==i and step.get('cursor')==i*64 and step.get('batch_size')==64,'continuous state/B64 required')
++            metrics=step.get('baseline_loss_metrics',[])
++            require(len(metrics)==3 and all(x.get('passed') is True for x in metrics),'original three loss comparisons required')
++            profile=step['profile'];sampled=i>=3
++            require(profile.get('sampled') is sampled and profile.get('step')==i,'warmup/sample order changed')
++            require(profile.get('status')==('CAPTURED' if sampled else 'WARMUP_NO_CPU_CAPTURE'),'capture status missing')
++            if not sampled:continue
++            count=profile.get('events',0);markers=profile.get('kml_markers',0)
++            require(0<count<=50000 and 0<markers<=256 and markers==step.get('kml_calls'),'event/KML count limit or identity mismatch')
++            capture=dict(step=i,events=count,kml_markers=markers)
++            objects={}
++            for key,prefix,limit in [('trace','trace',8388608),('summary','events',1048576)]:
++                path=run/(prefix+'_step_'+str(i)+'.json');size=path.stat().st_size
++                require(size<=limit,'raw output exceeds byte limit: '+path.name)
++                raw=path.read_bytes();asset=profile[key]
++                require(asset['bytes']==size and asset['sha256']==hashlib.sha256(raw).hexdigest(),'profile output SHA/bytes mismatch')
++                objects[key]=json.loads(raw);capture[key]=dict(bytes=size,sha256=asset['sha256'])
++            events=objects['trace']['traceEvents'];event_names=[x['name'] for x in events]
++            require(len(events)==count and all('S02/'+n in event_names for n in PHASES),'required phase events missing')
++            require(event_names.count('S02/KML_python_gemm_envelope')==markers,'KML envelope events missing')
++            summary=objects['summary']
++            require(summary['events']==count and len(summary['top_self_cpu'])<=80,'event summary identity/limit mismatch')
++            result['captures'].append(capture)
++        result['profile5_complete']=True
++    except (OSError,ValueError,KeyError,TypeError) as exc:result['errors'].append(repr(exc))
++    return result
+--- c2\stage4_sessions\work\S00\overnight_engineering_20261105\review_gate.py
++++ S00/round9_profile5_20261106/review_gate.py
+@@ -3,18 +3,19 @@
+ from prepare import sha,pinned,RESOURCES,DEPLOYMENT
+ 
+ BINDING_KEYS=('code_package_sha256','code_source_manifest_sha256','deployment_package_sha256',
+-              'descriptor_sha256','interface_sha256')
++              'descriptor_sha256','interface_sha256','profile_contract_sha256','reference_first5_sha256','deployment_source_manifest_sha256')
+ 
+ 
+ def expected(root):
+     pins=pinned(root)
+     return dict(code_package_sha256=pins['code_package_sha256'],code_source_manifest_sha256=pins['code_source_manifest_sha256'],
+       deployment_package_sha256=sha(root/DEPLOYMENT),descriptor_sha256=sha(root/'ENGINEERING_DESCRIPTOR.json'),
+-      interface_sha256=sha(root/'INTERFACE.json'))
++      interface_sha256=sha(root/'INTERFACE.json'),profile_contract_sha256=sha(root/'PROFILE_CONTRACT.json'),
++      reference_first5_sha256=sha(root/'REFERENCE_FIRST5.json'),deployment_source_manifest_sha256=sha(root/'ARTIFACT_SHA256.json'))
+ 
+ 
+ def validate(review,bindings):
+-    if review.get('decision')!='PASS_FOR_ENGINEERING_PILOT' or review.get('review_complete') is not True:
++    if review.get('decision')!='PASS_FOR_ENGINEERING_PROFILE5' or review.get('review_complete') is not True:
+         raise ValueError('S01 explicit complete PASS required; fail/blocked is not approval')
+     if any(review.get('bindings',{}).get(k)!=bindings[k] for k in BINDING_KEYS):
+         raise ValueError('S01 concrete SHA bindings mismatch')
+--- c2\stage4_sessions\work\S00\overnight_engineering_20261105\run_job.py
++++ S00/round9_profile5_20261106/run_job.py
+@@ -11,6 +11,7 @@
+ from prepare import check_root,save,sha,verify_prepared
+ from review_gate import check_review
+ from owned_processes import Owned,run_phase,cleanup
++from profile_outcome import inspect,SUCCESS
+ 
+ 
+ def interrupted(signum,frame):raise InterruptedError('outer signal '+str(signum))
+@@ -19,7 +20,7 @@
+ def main(root):
+     check_root(root);out=root/'job_evidence';out.mkdir(exist_ok=False)
+     owner=Owned(os.getpid());code=2
+-    summary=dict(status='FAIL_STOP_NO_RETRY',engineering_only=True,protocol='ENGINEERING_REAL_CORPUS_PILOT_V1',
++    summary=dict(status='FAIL_STOP_NO_RETRY',engineering_only=True,protocol='ENGINEERING_REAL_CORPUS_PROFILE5_V1',
+         formal_split_status='UNKNOWN',validation_status='NOT_RUN_NO_FORMAL_SPLIT',subject_mapping_status='UNKNOWN',
+         job_id=os.environ.get('CCS_JOB_ID'),started=START,execution_seconds=840,cleanup_seconds=30,closing_seconds=30,job_seconds=900,attempts=1)
+     try:
+@@ -31,18 +32,22 @@
+         check_review(root,os.environ['S00_REVIEW_SHA']);pins=verify_prepared(root)
+         run_phase(root,owner,'gate',['/usr/bin/python3','-B',str(root/'gate.py'),str(root),str(START+30)],START+30)
+         os.environ.update(S02_ENGINEERING_DESCRIPTOR=str(root/'ENGINEERING_DESCRIPTOR.json'),S02_ENGINEERING_DESCRIPTOR_SHA256=pins['descriptor_sha256'])
+-        record=run_phase(root,owner,'training',['/bin/bash',str(root/'payload'/pins['entrypoint'])],START+840,allowed=(0,3))
+-        result_paths=list((root/'payload/outputs').glob('*/result.json'))
+-        if len(result_paths)!=1:raise ValueError('one original engineering result required')
++        record=run_phase(root,owner,'training',['/bin/bash',str(root/'payload'/pins['entrypoint'])],START+840,allowed=(0,2,3))
++        result_paths=list((root/'payload/outputs').glob('profile_*/result.json'))
++        if len(result_paths)!=1:raise ValueError('one original profile result required')
+         app=json.loads(result_paths[0].read_text());summary['application_result']=str(result_paths[0]);summary['application_status']=app.get('status')
+-        if app.get('protocol')!='ENGINEERING_REAL_CORPUS_PILOT_V1' or app.get('engineering_only') is not True:raise ValueError('application scope drift')
+-        if record['returncode']==0:
+-            if app.get('status')!='ENGINEERING_PILOT_COMPLETE_NOT_SCIENTIFIC_ACCEPTANCE':raise ValueError('missing original engineering completion')
+-            if app.get('completed_updates',0)<2:raise ValueError('multiple real optimizer batches required')
+-            summary['status']=app['status'];code=0
+-        else:summary['status']='INCOMPLETE';code=3
++        if app.get('protocol')!='ENGINEERING_REAL_CORPUS_PROFILE5_V1' or app.get('engineering_only') is not True:raise ValueError('profile application scope drift')
++        outcome=inspect(root,os.environ['CCS_JOB_ID']);summary['profile_outcome']=outcome
++        code=record['returncode']
++        if code==0:
++            if not outcome['profile5_complete']:raise ValueError('PROFILE5 evidence incomplete: '+repr(outcome))
++            summary['status']=SUCCESS
++        else:
++            if app.get('status')==SUCCESS:raise ValueError('nonzero exit conflicts with application completion')
++            summary['status']=app.get('status','FAIL_STOP_NO_RETRY')
+         verify_prepared(root)
+-    except BaseException as exc:summary.update(error=repr(exc),traceback=traceback.format_exc())
++    except BaseException as exc:
++        summary.update(status='FAIL_STOP_NO_RETRY',error=repr(exc),traceback=traceback.format_exc());code=2
+     finally:
+         signal.setitimer(signal.ITIMER_REAL,0)
+         for sig in (signal.SIGTERM,signal.SIGINT):signal.signal(sig,signal.SIG_IGN)
+--- /dev/null
++++ S00/round9_profile5_20261106/tests/test_profile_deployment.py
+@@ -0,0 +1,82 @@
++"""LOCAL_FIXTURE only: new protocol verdicts, captures and exact review bindings."""
++import hashlib
++import json
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++from unittest import mock
++sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
++import profile_outcome as p
++import review_gate as g
++from prepare import RESOURCES
++import collect_evidence as c
++
++
++class ProfileDeploymentTests(unittest.TestCase):
++    def setUp(self):
++        self.tmp=tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]/'evidence');self.addCleanup(self.tmp.cleanup)
++        self.root=Path(self.tmp.name);self.run=self.root/'payload/outputs/profile_42';self.run.mkdir(parents=True)
++
++    def fixture(self):
++        steps=[]
++        for i in range(1,6):
++            profile=dict(step=i,sampled=i>=3,status='CAPTURED' if i>=3 else 'WARMUP_NO_CPU_CAPTURE',kml_markers=149 if i>=3 else 0)
++            if i>=3:
++                events=[dict(name='S02/'+n) for n in p.PHASES]+[dict(name='S02/KML_python_gemm_envelope')]*149
++                for kind,value in [('trace',dict(traceEvents=events)),('summary',dict(events=len(events),top_self_cpu=[]))]:
++                    path=self.run/('trace_step_'+str(i)+'.json' if kind=='trace' else 'events_step_'+str(i)+'.json')
++                    path.write_text(json.dumps(value));profile[kind]=dict(path=str(path),bytes=path.stat().st_size,sha256=hashlib.sha256(path.read_bytes()).hexdigest())
++                profile['events']=len(events)
++            steps.append(dict(step=i,adamw_step=i,batch_size=64,cursor=64*i,frame_indices=list(range((i-1)*64,i*64)),
++               baseline_loss_metrics=[dict(name=n,passed=True) for n in ('total','voltage','coarse')],kml_calls=149,profile=profile))
++        (self.run/'steps.jsonl').write_text(''.join(json.dumps(s)+'\n' for s in steps))
++        app=dict(protocol=p.PROTOCOL,status=p.SUCCESS,completed_updates=5,planned_updates=5,consumed_frames=320,
++                 engineering_only=True,source_and_data_after='PASS_SAME_FROZEN_IDENTITIES',cpu36=dict(errors=[],checkpoints=[{}]*19),runtime=dict(kml_gemm_calls=745),checkpoint=dict(sha256='a'*64),
++                 recovery=dict(status='PASS_NO_EXTRA_UPDATE',extra_updates=0,parameters_exact=True,optimizer_exact=True,rng_exact=True,cursor_exact=True,identity_exact=True))
++        (self.run/'result.json').write_text(json.dumps(app));(self.run/'EXPOSURE_LEDGER.json').write_text('{}');return app
++
++    def test_new_profile_success_and_2plus3(self):
++        self.fixture();result=p.inspect(self.root,'42');self.assertEqual(result['errors'],[]);self.assertTrue(result['profile5_complete'])
++
++    def test_missing_trace_never_passes(self):
++        self.fixture();(self.run/'trace_step_4.json').unlink();self.assertFalse(p.inspect(self.root,'42')['profile5_complete'])
++
++    def test_missing_phase_events_never_passes(self):
++        self.fixture();path=self.run/'trace_step_3.json';value=json.loads(path.read_text());value['traceEvents']=[];path.write_text(json.dumps(value))
++        self.assertFalse(p.inspect(self.root,'42')['profile5_complete'])
++
++    def test_oversized_raw_trace_not_truncated_or_accepted(self):
++        self.fixture();path=self.run/'trace_step_5.json';path.write_bytes(b'x'*(8*1024*1024+1))
++        self.assertFalse(p.inspect(self.root,'42')['profile5_complete']);self.assertEqual(path.stat().st_size,8*1024*1024+1)
++
++    def test_unsupported_limit_incomplete_keep_original_status(self):
++        for status in ['UNSUPPORTED_PROFILER','PROFILE_LIMIT_EXCEEDED','INCOMPLETE','SOURCE_CHANGED']:
++            (self.run/'result.json').write_text(json.dumps(dict(protocol=p.PROTOCOL,status=status,error='original')))
++            result=p.inspect(self.root,'42');self.assertEqual(result['application_status'],status);self.assertFalse(result['profile5_complete'])
++
++    def test_old_success_and_failed_numeric_metrics_rejected(self):
++        app=self.fixture();app['status']='ENGINEERING_PILOT_COMPLETE_NOT_SCIENTIFIC_ACCEPTANCE';(self.run/'result.json').write_text(json.dumps(app))
++        self.assertFalse(p.inspect(self.root,'42')['profile5_complete'])
++        self.fixture();steps=[json.loads(s) for s in (self.run/'steps.jsonl').read_text().splitlines()];steps[4]['baseline_loss_metrics'][0]['passed']=False
++        (self.run/'steps.jsonl').write_text(''.join(json.dumps(s)+'\n' for s in steps));self.assertFalse(p.inspect(self.root,'42')['profile5_complete'])
++
++    def test_only_new_specific_decision_and_all_bindings(self):
++        bindings={k:'a'*64 for k in g.BINDING_KEYS};review=dict(decision='PASS_FOR_ENGINEERING_PROFILE5',review_complete=True,bindings=bindings,resources=RESOURCES)
++        g.validate(review,bindings)
++        for key in g.BINDING_KEYS:
++            bad=dict(bindings);bad[key]='b'*64
++            with self.assertRaises(ValueError):g.validate(review,bad)
++        review['decision']='PASS_FOR_ENGINEERING_PILOT'
++        with self.assertRaises(ValueError):g.validate(review,bindings)
++
++    def test_new_profile_ledger_selected_without_touching_old_location(self):
++        (self.root/'job_id.txt').write_text('42')
++        old=self.root/'payload/outputs/EXPOSURE_LEDGER.json';old.write_text('{"sentinel":"old_not_output"}')
++        new=self.run/'EXPOSURE_LEDGER.json';new.write_text('{"in_flight":{"step":3},"confirmed_updates":[]}')
++        result=c.exposure(self.root)
++        self.assertEqual(result['raw']['in_flight']['step'],3)
++        self.assertEqual(old.read_text(),'{"sentinel":"old_not_output"}')
++
++
++if __name__=='__main__':unittest.main(verbosity=2)

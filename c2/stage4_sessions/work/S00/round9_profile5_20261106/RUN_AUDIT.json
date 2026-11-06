@@ -1,0 +1,194 @@
+{
+  "actual_torch_interop": 608,
+  "actual_torch_intraop": 36,
+  "actual_train_frames": 320,
+  "all_owned_processes_reaped": true,
+  "all_sampled_TIDs_within_selected36": true,
+  "archive": {
+    "archived_files": 105,
+    "bundle": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_PROFILE5_20261106T030149Z/JOB_2048959_evidence.zip",
+    "bytes": 1066705,
+    "remote_only": [
+      "payload/outputs/profile_2048959/checkpoints/final.pt"
+    ],
+    "sha256": "bb17a1ff559ffe328ae95f23db9f3126158a771052e3350ef435166755a88f5c"
+  },
+  "capture_bytes": 4673700,
+  "captures": [
+    {
+      "events": 10845,
+      "kml_markers": 149,
+      "step": 3,
+      "summary": {
+        "bytes": 9122,
+        "sha256": "631dd754e956431e880748d50805f6a9a76a95cba15133c124fca4cd24cfc2d4"
+      },
+      "trace": {
+        "bytes": 1533488,
+        "sha256": "2b93ca1d5975a7f90db90bbdcabc92b6b97e933b006a27a5c8f460957482fcf7"
+      }
+    },
+    {
+      "events": 10845,
+      "kml_markers": 149,
+      "step": 4,
+      "summary": {
+        "bytes": 9119,
+        "sha256": "75280ced547b37733da594e5a0ca164a467227d2fbee3f289d06e35b289db545"
+      },
+      "trace": {
+        "bytes": 1556905,
+        "sha256": "dbb6c58dcdfd27e485eacc7a956cae70552a571a285b220fea8d096dd1cf3494"
+      }
+    },
+    {
+      "events": 10845,
+      "kml_markers": 149,
+      "step": 5,
+      "summary": {
+        "bytes": 9120,
+        "sha256": "dc0142e1dcd2b19c43ae6a47375f448f0bc5decf40dccd4e6867f8a9c08598a3"
+      },
+      "trace": {
+        "bytes": 1555946,
+        "sha256": "93742d26b4fe6a5faef0a082ee931b3a08b53a206b889726565a9b138c24e27b"
+      }
+    }
+  ],
+  "checkpoint": {
+    "bytes": 456134879,
+    "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_PROFILE5_20261106T030149Z/payload/outputs/profile_2048959/checkpoints/final.pt",
+    "sha256": "2d7dfb1ac8846f4101107924d7f4810b142285dd831b55628d55d686b6e6e64a"
+  },
+  "continuous_updates": 5,
+  "cpu_complete_snapshots": 19,
+  "engineering_only": true,
+  "exit_code": 0,
+  "exposure_in_flight": null,
+  "exposure_updates": 5,
+  "formal_split_status": "UNKNOWN",
+  "host": "cn21338",
+  "in_step_profiler_overhead": "UNKNOWN_WITHOUT_MATCHED_CONTROL",
+  "job_id": "2048959",
+  "max_observed_TIDs": 37,
+  "missing": [],
+  "native_kml_kernel_time": "UNKNOWN_PYTHON_ENVELOPES_ONLY",
+  "node_seconds": 94.0,
+  "normalization_frames": 1600,
+  "old_inputs_ledger_checkpoint_unchanged": true,
+  "original_loss_max_abs": 0.0,
+  "original_loss_max_l2_relative": 0.0,
+  "original_loss_metrics": 15,
+  "phase_wall_seconds": [
+    {
+      "backward": 3.348911221139133,
+      "forward_loss": 1.6913170646876097,
+      "optimizer": 0.15751958917826414,
+      "sampled": false,
+      "step": 1,
+      "zero_grad_after": 0.0004390450194478035,
+      "zero_grad_before": 0.0010582502000033855
+    },
+    {
+      "backward": 3.010924399830401,
+      "forward_loss": 1.5326100680977106,
+      "optimizer": 0.1419169306755066,
+      "sampled": false,
+      "step": 2,
+      "zero_grad_after": 0.0005487049929797649,
+      "zero_grad_before": 0.0010355589911341667
+    },
+    {
+      "backward": 3.480860590003431,
+      "forward_loss": 1.5710885282605886,
+      "optimizer": 0.17331215925514698,
+      "sampled": true,
+      "step": 3,
+      "zero_grad_after": 0.0004699951969087124,
+      "zero_grad_before": 0.04497191496193409
+    },
+    {
+      "backward": 3.485785650089383,
+      "forward_loss": 1.515942877624184,
+      "optimizer": 0.17393938312307,
+      "sampled": true,
+      "step": 4,
+      "zero_grad_after": 0.0004106638953089714,
+      "zero_grad_before": 0.0011066310107707977
+    },
+    {
+      "backward": 3.171817793045193,
+      "forward_loss": 1.400947863701731,
+      "optimizer": 0.17254156805574894,
+      "sampled": true,
+      "step": 5,
+      "zero_grad_after": 0.00046816421672701836,
+      "zero_grad_before": 0.0010444396175444126
+    }
+  ],
+  "recovery": {
+    "cursor_exact": true,
+    "extra_updates": 0,
+    "forward_metrics": [
+      {
+        "l2_relative": 0.0,
+        "max_abs": 0.0,
+        "name": "restore.h",
+        "passed": true,
+        "reference_norm": 2678.4932153407826
+      },
+      {
+        "l2_relative": 0.0,
+        "max_abs": 0.0,
+        "name": "restore.voltage",
+        "passed": true,
+        "reference_norm": 95.33803996838932
+      },
+      {
+        "l2_relative": 0.0,
+        "max_abs": 0.0,
+        "name": "restore.coarse",
+        "passed": true,
+        "reference_norm": 57.78741400894874
+      }
+    ],
+    "identity_exact": true,
+    "optimizer_exact": true,
+    "parameters_exact": true,
+    "rng_exact": true,
+    "status": "PASS_NO_EXTRA_UPDATE"
+  },
+  "runtime_kml_calls": 843,
+  "same_initialization_scale_frames_masks": true,
+  "sampled_steps": [
+    3,
+    4,
+    5
+  ],
+  "scheduler_pids_cleared": true,
+  "scheduler_state": "SUCCEEDED",
+  "scheduler_usage_seconds": 93,
+  "scientific_acceptance": false,
+  "signal_fault_cleanup_triggered": false,
+  "source_status": "UNCHANGED",
+  "status": "PASS_PROFILE5_ENGINEERING_EVIDENCE_ONLY",
+  "steady_state_performance_acceptance": false,
+  "subject_mapping_status": "UNKNOWN",
+  "timing": {
+    "batch_materialization_seconds": 0.005013276822865009,
+    "checkpoint_and_recovery_seconds": 7.453861414920539,
+    "data_loading_seconds": 1.0840862612240016,
+    "diagnostic_scope": "mask/exposure-before-update/CPU-before-and-after/state-validation; other setup/logging in unattributed",
+    "diagnostic_seconds": 2.180669743567705,
+    "profiler_outside_step_seconds": 16.014551293104887,
+    "training_step_seconds": 25.088422948494554,
+    "unattributed_seconds": 30.29827506095171,
+    "wall_seconds": 82.12487999908626
+  },
+  "training_kml_calls": 745,
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "warmup_steps": [
+    1,
+    2
+  ]
+}

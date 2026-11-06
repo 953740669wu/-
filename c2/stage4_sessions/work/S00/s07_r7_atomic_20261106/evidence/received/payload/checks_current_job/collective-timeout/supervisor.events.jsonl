@@ -1,0 +1,10 @@
+{"event": "supervisor_begin", "time_ns": 1793951872017313090, "monotonic_ns": 3973069367726115, "pid": 2879401, "deadline_seconds": 30}
+{"event": "spawn_begin", "time_ns": 1793951872020517061, "monotonic_ns": 3973069370930496, "pid": 2879401, "rank": 0}
+{"event": "spawned", "time_ns": 1793951872069920328, "monotonic_ns": 3973069420334853, "pid": 2879401, "rank": 0, "child_pid": 2879442}
+{"event": "spawn_begin", "time_ns": 1793951872071726622, "monotonic_ns": 3973069422140547, "pid": 2879401, "rank": 1}
+{"event": "spawned", "time_ns": 1793951872122345323, "monotonic_ns": 3973069472758468, "pid": 2879401, "rank": 1, "child_pid": 2879445}
+{"event": "cleanup_begin", "time_ns": 1793951897115254279, "monotonic_ns": 3973094465667804, "pid": 2879401, "reason": "child_failed", "exit_codes": [1, null]}
+{"event": "signal_sent", "time_ns": 1793951897117688815, "monotonic_ns": 3973094468102600, "pid": 2879401, "child_pid": 2879445, "signal": 15}
+{"event": "child_reaped", "time_ns": 1793951897169670537, "monotonic_ns": 3973094520083212, "pid": 2879401, "child_pid": 2879442, "exit_code": 1}
+{"event": "child_reaped", "time_ns": 1793951897171441600, "monotonic_ns": 3973094521854405, "pid": 2879401, "child_pid": 2879445, "exit_code": -15}
+{"event": "supervisor_end", "time_ns": 1793951897173015020, "monotonic_ns": 3973094523428005, "pid": 2879401, "reason": "child_failed", "exit_codes": [1, -15], "all_reaped": true}

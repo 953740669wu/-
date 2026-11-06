@@ -1,0 +1,20 @@
+{
+  "protocol": "ENGINEERING_REAL_CORPUS_PROFILE5_V1",
+  "data_protocol": "ENGINEERING_REAL_CORPUS_PILOT_V1",
+  "checkpoint_protocol": "ENGINEERING_REAL_CORPUS_PILOT_V1 (unchanged frozen save/restore helper; identity binds profile source/config)",
+  "status": "LOCAL_PREPARED_NOT_EXECUTION_AUTHORIZATION",
+  "baseline_job": "2043445",
+  "baseline_descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+  "original_interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+  "engineering_only": true,
+  "formal_split_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "subject_mapping_status": "UNKNOWN",
+  "data": {"units": 16, "frames": 1600, "cases": ["s0285", "s0593"], "selection_seed": 2026, "train_seed": 0, "batch_size": 64, "consumed_frames_if_complete": 320, "padding": false},
+  "updates": {"total": 5, "warmup": [1, 2], "cpu_samples": [3, 4, 5], "optimizer_reinitialized_between_steps": false, "checkpoint_restore_extra_updates": 0},
+  "profiling": {"activities": ["CPU"], "record_shapes": false, "profile_memory": false, "with_stack": false, "with_flops": false, "max_events_per_sample": 50000, "max_kml_markers_per_sample": 256, "max_traces": 3, "trace_bytes_each": 8388608, "max_event_summaries": 3, "summary_bytes_each": 1048576, "summary_top_self_cpu_keys": 80, "trace_and_summary_total_max_bytes": 28311552, "event_count_bound_scope": "Checked after each single CPU capture, before export; Torch has no incremental event-count cancellation API here. Capture duration is bounded by one update and the whole-entry timeout.", "over_limit": "FAIL_STOP_NO_RETRY_NO_TRUNCATION", "unsupported": "UNSUPPORTED_PROFILER_STOP_NO_INSTALL_NO_BACKEND_FALLBACK"},
+  "timing": {"phases": ["zero_grad_before", "forward_loss", "zero_grad_after", "backward", "optimizer"], "cpu_events": "microseconds; nested inclusive totals must not be added; self CPU is not program wall time", "profiler_overhead": "setup/start, stop, postprocess/export measured separately; internal instrumentation overhead is included in step and cannot be isolated without matched control", "kml": "bounded Python GEMM envelope includes Python/counter/alloc/ctypes/native; precise native kernel duration remains UNKNOWN", "acceptance": "No throughput, speedup, or steady-state performance acceptance"},
+  "resources": {"allocated_cores": 38, "actual_physical_cores": 36, "reserved_cores": 2, "memory_MB": 24576, "memory_limit_MB": 24576, "exclusive": true, "job_seconds": 900, "whole_entry_timeout": 840, "cleanup_seconds": 30, "closing_seconds": 30, "stop_new_update_after_seconds": 720},
+  "outputs": ["result.json", "steps.jsonl", "EXPOSURE_LEDGER.json", "trace_step_3.json", "trace_step_4.json", "trace_step_5.json", "events_step_3.json", "events_step_4.json", "events_step_5.json", "checkpoints/final.pt (remote only)", "CPU/allocation/backend/exit/timeout evidence"],
+  "new_execution_required": "Coordination review, new S01 SHA-bound review, then new S00 deployment/unique marker/explicit execution authorization. Original job2043445 authorization is consumed. This package submits no job."
+}

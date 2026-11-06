@@ -1,0 +1,29 @@
+{
+  "attempts": 1,
+  "command": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "900",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z/run_job.sh",
+    "f75a7030f76613d1126960d2d27ace9b8e327d41788a7a3301cd7105ea5723f1"
+  ],
+  "review_sha256": "f75a7030f76613d1126960d2d27ace9b8e327d41788a7a3301cd7105ea5723f1"
+}

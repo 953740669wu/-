@@ -1,0 +1,31 @@
+test_88_checks_share_original_consumer (test_r7_deployment.R7DeploymentTests.test_88_checks_share_original_consumer) ... ok
+test_armed_empty_dump_never_proves_stack_written (test_r7_deployment.R7DeploymentTests.test_armed_empty_dump_never_proves_stack_written) ... ok
+test_exited_helper_with_permission_error_is_incomplete (test_r7_deployment.R7DeploymentTests.test_exited_helper_with_permission_error_is_incomplete) ... ok
+test_frozen_r7_exact16_files15_delivery_and_observer (test_r7_deployment.R7DeploymentTests.test_frozen_r7_exact16_files15_delivery_and_observer) ... ok
+test_late_step_cannot_reset_shared_cleanup_deadline (test_r7_deployment.R7DeploymentTests.test_late_step_cannot_reset_shared_cleanup_deadline) ... ok
+test_missing_watchdog_or_wrong_shared_target_is_incomplete (test_r7_deployment.R7DeploymentTests.test_missing_watchdog_or_wrong_shared_target_is_incomplete) ... ok
+test_nonempty_stacks_and_actual_fields_can_be_complete_without_communication_pass (test_r7_deployment.R7DeploymentTests.test_nonempty_stacks_and_actual_fields_can_be_complete_without_communication_pass) ... ok
+test_old_inner_rejected_without_payload (test_r7_deployment.R7DeploymentTests.test_old_inner_rejected_without_payload) ... ok
+test_owned_helper_across_sessions_and_pid_reuse (test_r7_deployment.R7DeploymentTests.test_owned_helper_across_sessions_and_pid_reuse) ... ok
+test_review_requires_exact_sha_resources_and_original_criteria (test_r7_deployment.R7DeploymentTests.test_review_requires_exact_sha_resources_and_original_criteria) ... ERROR
+test_terminal_collection_preserves_empty_partial_and_uncleared_pid_evidence (test_r7_deployment.R7DeploymentTests.test_terminal_collection_preserves_empty_partial_and_uncleared_pid_evidence) ... ok
+test_missing_empty_partial_formal_rejected_despite_valid_temp (test_rank_report_collection.ReportCollectionTests.test_missing_empty_partial_formal_rejected_despite_valid_temp) ... ok
+test_rank_temp_not_readiness_temp_but_original_ready_residue_retained (test_rank_report_collection.ReportCollectionTests.test_rank_temp_not_readiness_temp_but_original_ready_residue_retained) ... ok
+test_valid_formal_report_and_partial_residue_remain_separate (test_rank_report_collection.ReportCollectionTests.test_valid_formal_report_and_partial_residue_remain_separate) ... ok
+
+======================================================================
+ERROR: test_review_requires_exact_sha_resources_and_original_criteria (test_r7_deployment.R7DeploymentTests.test_review_requires_exact_sha_resources_and_original_criteria)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_r7_atomic_20261106\tests\test_r7_deployment.py", line 78, in test_review_requires_exact_sha_resources_and_original_criteria
+    review.validate(value,bindings)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_r7_atomic_20261106\review_gate.py", line 12, in validate
+    if review.get('decision')!='PASS_FOR_S07_R7_ATOMIC' or review.get('review_complete') is not True:raise ValueError('explicit complete R7 diagnostic review required')
+                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+{"bundle": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\tmpds1msqpd\\JOB_42_full_evidence.zip", "bytes": 12520, "sha256": "28e5f7489e48384f92a3ded303f4b9042b6f65e972879a634b95537c95684ab1", "file_count": 25}
+ValueError: explicit complete R7 diagnostic review required
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.330s
+
+FAILED (errors=1)

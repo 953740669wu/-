@@ -1,0 +1,72 @@
+{
+  "status": "LOCAL_PREPARED_AWAITING_COORDINATOR_REVIEW",
+  "protocol": "ENGINEERING_REAL_CORPUS_PROFILE5_V1",
+  "published_utc": "2026-11-06T02:44:15.489388+00:00",
+  "immutable_after_publish": true,
+  "engineering_only": true,
+  "package": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round9_profile5_20261106T023240Z\\package\\S02_R9_PROFILE5_CODE.zip",
+    "bytes": 69674,
+    "sha256": "15621eaa3328e407059c352d86a0f49ee68bfea39f02a68503ded6f94099abe3"
+  },
+  "source_manifest": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round9_profile5_20261106T023240Z\\SOURCE_SHA256.json",
+    "bytes": 2269,
+    "sha256": "2a86fd01cab96a85cb2f0f4c8ed998edb956ef81255dfd5ceb950d41264de741"
+  },
+  "file_count": 25,
+  "contract": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round9_profile5_20261106T023240Z\\PROFILE_CONTRACT.json",
+    "bytes": 3156,
+    "sha256": "35878e1bfff4fab8f85ad84b540d927570fb09858e300ba664e605080fc8c978"
+  },
+  "reference": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round9_profile5_20261106T023240Z\\REFERENCE_FIRST5.json",
+    "bytes": 19052,
+    "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "checks": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round9_profile5_20261106T023240Z\\evidence\\local_validation.json",
+    "bytes": 3282,
+    "sha256": "a5de2d8ede62d8ac54af439c633bb5e5f5fa24959cbfb67fbb8a4ff1a3911643"
+  },
+  "report": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round9_profile5_20261106T023240Z\\REPORT.md",
+    "bytes": 7435,
+    "sha256": "54ae77c33c345c3c5f7522afea61b0d00695e4e35d6b2af99fd85480196548a6"
+  },
+  "commands": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round9_profile5_20261106T023240Z\\README.md",
+    "bytes": 7212,
+    "sha256": "59169a80eb95ddfb06997a7e4e816437e238e0c059763dfe4136a045b490c904"
+  },
+  "diff": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round9_profile5_20261106T023240Z\\diff\\FROZEN_TO_PROFILE5.patch",
+    "bytes": 33902,
+    "sha256": "26e88bbf464228117bf8479fa3d29895fdecd64a86ea450b0300bae3698e72b2"
+  },
+  "baseline_timing": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round9_profile5_20261106T023240Z\\evidence\\BASELINE_TIMING.json",
+    "bytes": 3775,
+    "sha256": "180968f0ad6a1df37516430114e931aaed61e0a501eaffe02ed86d66aa5b3a10"
+  },
+  "entrypoint": "run_profile5.sh",
+  "resources": {
+    "allocated_cores": 38,
+    "actual_physical_cores": 36,
+    "reserved_cores": 2,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "exclusive": true,
+    "job_seconds": 900,
+    "whole_entry_timeout": 840,
+    "cleanup_seconds": 30,
+    "closing_seconds": 30,
+    "stop_new_update_after_seconds": 720
+  },
+  "new_jobs": 0,
+  "C2_KML_profile_runs": 0,
+  "operator_hotspots": "UNKNOWN_NOT_PROFILED",
+  "execution_authorized": false,
+  "next_action": "Coordinator review, then new S01 specific-SHA review and S00 new deployment/marker/authorization; do not reuse job2043445"
+}

@@ -1,0 +1,101 @@
+
+{"cases": {}, "end_time": "-", "finished_steps": {"atomic_report_tests": {"error": null, "returncode": 0, "status": null}, "diagnostic_tests": {"error": null, "returncode": 0, "status": null}, "environment": {"error": null, "returncode": 0, "status": null}, "job_identity_tests": {"error": null, "returncode": 0, "status": null}, "probe_tests": {"error": null, "returncode": 0, "status": null}, "readiness_tests": {"error": null, "returncode": 0, "status": null}, "scheduler_handoff_receipt": {"error": null, "returncode": null, "status": null}, "stack_observer_tests": {"error": null, "returncode": 0, "status": null}, "verified_allocation": {"error": null, "returncode": null, "status": null}}, "job_exit_code": null, "job_id": "2051116", "nodes": "cn21348", "start_time": "2026-11-06T07:56:11Z", "state": "RUNNING", "utc": "2026-11-06T07:57:09.423203+00:00"}
+{"cases": {"crash": {"rank0_last": {"event": "torch_import_begin", "monotonic_ns": 3973050714772436, "stage": null}, "rank1_last": {"event": "torch_import_begin", "monotonic_ns": 3973050769095251, "stage": null}}, "normal": {"rank0_last": {"event": "worker_exit", "monotonic_ns": 3973048178445522, "stage": null}, "rank1_last": {"event": "worker_exit", "monotonic_ns": 3973048178581774, "stage": null}, "status": "PASS", "supervisor": {"all_reaped": true, "errors": [], "exit_codes": [0, 0], "pids": [2875748, 2875749], "reason": "complete", "wall_seconds": 19.648015270009637}}}, "end_time": "-", "finished_steps": {"atomic_report_tests": {"error": null, "returncode": 0, "status": null}, "diagnostic_tests": {"error": null, "returncode": 0, "status": null}, "environment": {"error": null, "returnco
+[23;80Hode": 0, "status": null}, "job_identity_tests": {"error": null, "returncode": 0, 
+[23;80H "status": null}, "probe_tests": {"error": null, "returncode": 0, "status": null}
+[23;80H}, "readiness_tests": {"error": null, "returncode": 0, "status": null}, "schedule
+[23;80Her_handoff_receipt": {"error": null, "returncode": null, "status": null}, "stack_
+[23;80H_observer_tests": {"error": null, "returncode": 0, "status": null}, "verified_all
+[23;80Hlocation": {"error": null, "returncode": null, "status": null}}, "job_exit_code":
+[23;80H: null, "job_id": "2051116", "nodes": "cn21348", "start_time": "2026-11-06T07:56:
+[23;80H:11Z", "state": "RUNNING", "utc": "2026-11-06T07:57:39.491186+00:00"}
+{"cases": {"collective-timeout": {"rank0_last": {"event": "library_sha_begin", "
+[23;80H"monotonic_ns": 3973086223551527, "stage": null}, "rank1_last": {"event": "peer_r
+[23;80Hready_wait", "monotonic_ns": 3973079575412811, "stage": null}}, "crash": {"rank0_
+[23;80H_last": {"event": "worker_error", "monotonic_ns": 3973068536530912, "stage": "bro
+[23;80Hoadcast"}, "rank1_last": {"event": "checkpoint_end", "monotonic_ns": 397306848763
+[23;80H30144, "stage": "injected_crash"}, "status": "FAIL", "supervisor": {"all_reaped":
+[23;80H: true, "errors": [], "exit_codes": [-15, 17], "pids": [2877626, 2877631], "reaso
+[23;80Hon": "child_failed", "wall_seconds": 18.72815605904907}}, "normal": {"rank0_last"
+[23;80H": {"event": "worker_exit", "monotonic_ns": 3973048178445522, "stage": null}, "ra
+[23;80Hank1_last": {"event": "worker_exit", "monotonic_ns": 3973048178581774, "stage": n
+[23;80Hnull}, "status": "PASS", "supervisor": {"all_reaped": true, "errors": [], "exit_c
+[23;80Hcodes": [0, 0], "pids": [2875748, 2875749], "reason": "complete", "wall_seconds":
+[23;80H: 19.648015270009637}}}, "end_time": "-", "finished_steps": {"atomic_report_tests
+[23;80Hs": {"error": null, "returncode": 0, "status": null}, "diagnostic_tests": {"error
+[23;80Hr": null, "returncode": 0, "status": null}, "environment": {"error": null, "retur
+[23;80Hrncode": 0, "status": null}, "job_identity_tests": {"error": null, "returncode": 
+[23;80H 0, "status": null}, "probe_tests": {"error": null, "returncode": 0, "status": nu
+[23;80Hull}, "readiness_tests": {"error": null, "returncode": 0, "status": null}, "sched
+[23;80Hduler_handoff_receipt": {"error": null, "returncode": null, "status": null}, "sta
+[23;80Hack_observer_tests": {"error": null, "returncode": 0, "status": null}, "verified_
+[23;80H_allocation": {"error": null, "returncode": null, "status": null}}, "job_exit_cod
+[23;80Hde": null, "job_id": "2051116", "nodes": "cn21348", "start_time": "2026-11-06T07:
+[23;80H:56:11Z", "state": "RUNNING", "utc": "2026-11-06T07:58:09.563447+00:00"}
+{"cases": {"collective-timeout": {"rank0_last": {"event": "worker_error", "monot
+[23;80Htonic_ns": 3973093251186963, "stage": "broadcast"}, "rank1_last": {"event": "chec
+[23;80Hckpoint_end", "monotonic_ns": 3973088245995905, "stage": "injected_hang"}, "statu
+[23;80Hus": "FAIL", "supervisor": {"all_reaped": true, "errors": [], "exit_codes": [1, -
+[23;80H-15], "pids": [2879442, 2879445], "reason": "child_failed", "wall_seconds": 25.15
+[23;80H5577024174854}}, "crash": {"rank0_last": {"event": "worker_error", "monotonic_ns"
+[23;80H": 3973068536530912, "stage": "broadcast"}, "rank1_last": {"event": "checkpoint_e
+[23;80Hend", "monotonic_ns": 3973068487630144, "stage": "injected_crash"}, "status": "FA
+[23;80HAIL", "supervisor": {"all_reaped": true, "errors": [], "exit_codes": [-15, 17], "
+[23;80H"pids": [2877626, 2877631], "reason": "child_failed", "wall_seconds": 18.72815605
+[23;80H5904907}}, "normal": {"rank0_last": {"event": "worker_exit", "monotonic_ns": 3973
+[23;80H3048178445522, "stage": null}, "rank1_last": {"event": "worker_exit", "monotonic_
+[23;80H_ns": 3973048178581774, "stage": null}, "status": "PASS", "supervisor": {"all_rea
+[23;80Haped": true, "errors": [], "exit_codes": [0, 0], "pids": [2875748, 2875749], "rea
+[23;80Hason": "complete", "wall_seconds": 19.648015270009637}}, "watchdog": {"rank0_last
+[23;80Ht": {"event": "checkpoint_end", "monotonic_ns": 3973114246121066, "stage": "injec
+[23;80Hcted_hang"}, "rank1_last": {"event": "checkpoint_end", "monotonic_ns": 3973114246
+[23;80H6240228, "stage": "injected_hang"}}}, "end_time": "-", "finished_steps": {"atomic
+[23;80Hc_report_tests": {"error": null, "returncode": 0, "status": null}, "diagnostic_te
+[23;80Hests": {"error": null, "returncode": 0, "status": null}, "environment": {"error":
+[23;80H: null, "returncode": 0, "status": null}, "job_identity_tests": {"error": null, "
+[23;80H"returncode": 0, "status": null}, "probe_tests": {"error": null, "returncode": 0,
+[23;80H, "status": null}, "readiness_tests": {"error": null, "returncode": 0, "status": 
+[23;80H null}, "scheduler_handoff_receipt": {"error": null, "returncode": null, "status"
+[23;80H": null}, "stack_observer_tests": {"error": null, "returncode": 0, "status": null
+[23;80Hl}, "verified_allocation": {"error": null, "returncode": null, "status": null}}, 
+[23;80H "job_exit_code": null, "job_id": "2051116", "nodes": "cn21348", "start_time": "2
+[23;80H2026-11-06T07:56:11Z", "state": "RUNNING", "utc": "2026-11-06T07:58:39.640852+00:
+[23;80H:00"}
+{"cases": {"collective-timeout": {"rank0_last": {"event": "worker_error", "monot
+[23;80Htonic_ns": 3973093251186963, "stage": "broadcast"}, "rank1_last": {"event": "chec
+[23;80Hckpoint_end", "monotonic_ns": 3973088245995905, "stage": "injected_hang"}, "statu
+[23;80Hus": "FAIL", "supervisor": {"all_reaped": true, "errors": [], "exit_codes": [1, -
+[23;80H-15], "pids": [2879442, 2879445], "reason": "child_failed", "wall_seconds": 25.15
+[23;80H5577024174854}}, "crash": {"rank0_last": {"event": "worker_error", "monotonic_ns"
+[23;80H": 3973068536530912, "stage": "broadcast"}, "rank1_last": {"event": "checkpoint_e
+[23;80Hend", "monotonic_ns": 3973068487630144, "stage": "injected_crash"}, "status": "FA
+[23;80HAIL", "supervisor": {"all_reaped": true, "errors": [], "exit_codes": [-15, 17], "
+[23;80H"pids": [2877626, 2877631], "reason": "child_failed", "wall_seconds": 18.72815605
+[23;80H5904907}}, "normal": {"rank0_last": {"event": "worker_exit", "monotonic_ns": 3973
+[23;80H3048178445522, "stage": null}, "rank1_last": {"event": "worker_exit", "monotonic_
+[23;80H_ns": 3973048178581774, "stage": null}, "status": "PASS", "supervisor": {"all_rea
+[23;80Haped": true, "errors": [], "exit_codes": [0, 0], "pids": [2875748, 2875749], "rea
+[23;80Hason": "complete", "wall_seconds": 19.648015270009637}}, "watchdog": {"rank0_last
+[23;80Ht": {"event": "checkpoint_end", "monotonic_ns": 3973114246121066, "stage": "injec
+[23;80Hcted_hang"}, "rank1_last": {"event": "checkpoint_end", "monotonic_ns": 3973114246
+[23;80H6240228, "stage": "injected_hang"}, "status": "FAIL", "supervisor": {"all_reaped"
+[23;80H": true, "errors": [], "exit_codes": [-15, -15], "pids": [2882120, 2882122], "rea
+[23;80Hason": "deadline", "stack_observation": {"helper_pid": 2882123, "reaped": true, "
+[23;80H"returncode": 0, "sample_stop_ns": 3973122092789588, "status": "EXITED", "target_
+[23;80H_ns": 3973120092789588}, "wall_seconds": 30.084034422878176}}}, "end_time": "2026
+[23;80H6-11-06T07:58:54Z", "finished_steps": {"SUMMARY": {"error": null, "returncode": n
+[23;80Hnull, "status": "PASS_S07_R7_FIXED_TWO_RANK_TENSOR_PROBE_ONLY"}, "atomic_report_t
+[23;80Htests": {"error": null, "returncode": 0, "status": null}, "cleanup": {"error": nu
+[23;80Hull, "returncode": null, "status": null}, "diagnostic_tests": {"error": null, "re
+[23;80Heturncode": 0, "status": null}, "environment": {"error": null, "returncode": 0, "
+[23;80H"status": null}, "job_identity_tests": {"error": null, "returncode": 0, "status":
+[23;80H: null}, "probe_tests": {"error": null, "returncode": 0, "status": null}, "readin
+[23;80Hness_tests": {"error": null, "returncode": 0, "status": null}, "run_checks": {"er
+[23;80Hrror": null, "returncode": 0, "status": null}, "scheduler_handoff_receipt": {"err
+[23;80Hror": null, "returncode": null, "status": null}, "stack_observer_tests": {"error"
+[23;80H": null, "returncode": 0, "status": null}, "verified_allocation": {"error": null,
+[23;80H, "returncode": null, "status": null}}, "job_exit_code": 0, "job_id": "2051116", 
+[23;80H "nodes": "cn21348", "start_time": "2026-11-06T07:56:11Z", "state": "SUCCEEDED", 
+[23;80H "utc": "2026-11-06T07:59:09.720293+00:00"}
+Connection to 10.44.9.4 closed.
+[?9001l[?1004l

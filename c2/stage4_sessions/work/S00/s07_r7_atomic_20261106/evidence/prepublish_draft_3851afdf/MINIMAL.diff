@@ -1,0 +1,368 @@
+--- R6/prepare.py
++++ R7/prepare.py
+@@ -6,11 +6,11 @@
+ import subprocess
+ import zipfile
+ 
+-ARCHIVE = 'S07_ALIGNED_STACK_R6.zip'
++ARCHIVE = 'S07_ATOMIC_REPORTS_R7.zip'
+ OBSERVER_SHA = '5b3ad54e675a293e3eb51d292b149c6939bbdc52b68322f340eb76be3b02b875'
+-INNER_SHA = '32740dcbbce682ee6b245dbb563e7d6ff7a22a11e78d4279db57c4c5b122e7a1'
++INNER_SHA = '57a1f4c530ce2c9a5edcfe9cc9741129fb1ba4f90459fde459803103a362382d'
+ BASE = Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
+-PREFIX = 'S07_STACK_R6_'
++PREFIX = 'S07_ATOMIC_R7_'
+ 
+ 
+ def sha(path):
+@@ -21,11 +21,11 @@
+     entries = archive.infolist()
+     delivery = manifest['delivery_files']
+     expected = {x['path'] for x in delivery} | {'SOURCE_MANIFEST.json', 'evidence/'}
+-    if (len(delivery) != 14 or len(entries) != 16 or len(expected) != 16
++    if (len(delivery) != 15 or len(entries) != 17 or len(expected) != 17
+             or set(archive.namelist()) != expected
+-            or sum(not x.is_dir() for x in entries) != 15
++            or sum(not x.is_dir() for x in entries) != 16
+             or sum(x.is_dir() for x in entries) != 1):
+-        raise ValueError('require exactly 15 R6 files, 14 manifest entries and evidence/')
++        raise ValueError('require exactly 16 R7 files, 15 manifest entries and evidence/')
+     if any(Path(n).is_absolute() or '..' in Path(n).parts or '\\' in n or ':' in n for n in archive.namelist()):
+         raise ValueError('unsafe inner package path')
+     for item in delivery:
+@@ -41,7 +41,7 @@
+ 
+ def unpack(root):
+     archive = root / ARCHIVE
+-    if archive.stat().st_size != 43727 or sha(archive) != INNER_SHA:
++    if archive.stat().st_size != 44414 or sha(archive) != INNER_SHA:
+         raise ValueError('wrong diagnostic package bytes/SHA; older inner packages are not accepted')
+     with zipfile.ZipFile(archive) as z:
+         manifest = json.loads(z.read('SOURCE_MANIFEST.json'))
+@@ -52,7 +52,7 @@
+ 
+ def main(root):
+     if root.parent != BASE or not root.name.startswith(PREFIX):
+-        raise ValueError('new S00 stack R6 staging directory required')
++        raise ValueError('new S00 atomic R7 staging directory required')
+     for name,digest in json.loads((root/'ARTIFACT_SHA256.json').read_text(encoding='utf-8')).items():
+         if sha(root/name)!=digest:raise ValueError('deployment source drift: '+name)
+     unpack(root)
+@@ -62,7 +62,7 @@
+         if p.suffix == '.py': ast.parse(p.read_text(), filename=str(p), feature_version=(3, 9))
+         else: subprocess.run(['bash', '-n', str(p)], check=True)
+     pre = dict(status='PASS_NEW_INNER_SHA_MANIFEST_AND_SYNTAX_ONLY', package_name=ARCHIVE,
+-        package_sha256=INNER_SHA, package_bytes=43727, package_files=15, manifest_entries=14,
++        package_sha256=INNER_SHA, package_bytes=44414, package_files=16, manifest_entries=15,
+         payload_files={p.relative_to(root).as_posix(): sha(p) for p in payload.rglob('*') if p.is_file()},
+         wrapper_files={p.name: sha(p) for p in root.iterdir() if p.is_file() and p.suffix in ('.py', '.sh')})
+     (root / 'pre_submit_checks.json').write_text(json.dumps(pre, indent=2) + '\n')
+@@ -76,12 +76,12 @@
+     for name,digest in json.loads((root/'ARTIFACT_SHA256.json').read_text(encoding='utf-8')).items():
+         if sha(root/name)!=digest:raise ValueError('deployment source drift: '+name)
+     pre=json.loads((root/'pre_submit_checks.json').read_text(encoding='utf-8'))
+-    if pre['package_files']!=15 or pre['manifest_entries']!=14 or len(pre['payload_files'])!=15:raise ValueError('R6 delivery count changed')
++    if pre['package_files']!=16 or pre['manifest_entries']!=15 or len(pre['payload_files'])!=16:raise ValueError('R7 delivery count changed')
+     for name,digest in pre['payload_files'].items():
+         if sha(root/name)!=digest:raise ValueError('payload source drift: '+name)
+     if sha(root/'payload/candidate/stack_observer.py')!=OBSERVER_SHA:raise ValueError('observer source changed')
+ 
+ def check_root(root):
+-    if root.parent!=BASE or not root.name.startswith(PREFIX):raise ValueError('new S00 R6 root required')
++    if root.parent!=BASE or not root.name.startswith(PREFIX):raise ValueError('new S00 R7 root required')
+ 
+ if __name__ == '__main__': main(Path(__file__).resolve().parent)
+--- R6/run_s07_diag_job.py
++++ R7/run_s07_diag_job.py
+@@ -1,4 +1,4 @@
+-"""One real two-domain R6 diagnostic; original frozen communication rules."""
++"""One real two-domain R7 diagnostic; original frozen communication rules."""
+ import time
+ START=time.monotonic()
+ import ctypes
+@@ -19,13 +19,13 @@
+ CONSUMER_SECONDS=270
+ CLEANUP_SECONDS=15
+ CLOSING_SECONDS=15
+-CHECKS=[('stack_observer_tests','test_stack_observer.py',27,30),('readiness_tests','test_readiness.py',16,30),('diagnostic_tests','test_diagnostics.py',6,30),('job_identity_tests','test_job_identity.py',6,45),('probe_tests','test_probe.py',16,45)]
++CHECKS=[('atomic_report_tests','test_atomic_reports.py',17,30),('stack_observer_tests','test_stack_observer.py',27,30),('readiness_tests','test_readiness.py',16,30),('diagnostic_tests','test_diagnostics.py',6,30),('job_identity_tests','test_job_identity.py',6,45),('probe_tests','test_probe.py',16,45)]
+ def interrupted(signum,_):raise InterruptedError('outer signal '+str(signum))
+ def main(root):
+     out=root/'job_evidence';out.mkdir(exist_ok=False);owner=Owned(os.getpid());code=1
+     summary=dict(status='FAIL_STOP_NO_RETRY',job_id=os.environ.get('CCS_JOB_ID'),host=socket.gethostname(),consumer_seconds=270,cleanup_seconds=15,closing_seconds=15,job_seconds=300,execution_deadline=START+270,real_HBM=False,formal_training=False,communication_passed=False,steps=[])
+     try:
+-        if root.parent!=Path('/home/share/dengqingtian/opt/stage4_sessions/S00') or not root.name.startswith('S07_STACK_R6_'):raise ValueError('fresh owned R6 deployment required')
++        if root.parent!=Path('/home/share/dengqingtian/opt/stage4_sessions/S00') or not root.name.startswith('S07_ATOMIC_R7_'):raise ValueError('fresh owned R7 deployment required')
+         if sys.platform!='linux' or not os.environ.get('CCS_JOB_ID') or socket.gethostname().startswith('login'):raise ValueError('native compute job required')
+         if sys.flags.optimize or os.environ.get('PYTHONOPTIMIZE') or os.environ.get('LD_PRELOAD') or os.environ.get('KML_BLAS_LIB'):raise ValueError('original non-optimized S07 environment required')
+         libc=ctypes.CDLL(None,use_errno=True)
+@@ -49,14 +49,14 @@
+             summary['steps'].append(run_step(root,owner,label,[py,'-B',str(payload/'tests'/script)],deadline,limit))
+             log=(out/(label+'.log')).read_text()
+             if not re.search(r'Ran '+str(count)+r' tests?',log) or 'OK' not in log or 'skipped=' in log or '... skipped' in log:raise ValueError('exact Linux test count/no skips required: '+label)
+-        summary['standard_library_tests']=dict(passed=71,skipped=0)
++        summary['standard_library_tests']=dict(passed=88,skipped=0)
+         summary['steps'].append(run_step(root,owner,'environment',[py,'-B',str(payload/'candidate/comm_probe.py'),'environment','--output',str(payload/'environment_current.json')],deadline,60))
+         env=json.loads((payload/'environment_current.json').read_text())
+         if not (env['status']=='AVAILABLE_BUILT_NOT_COMM_TESTED' and env['distributed'] and env['gloo'] and env['torch_version']=='2.7.1+cpu' and env['executable']==py and env['torch_path']=='/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py' and not env['environment']['LD_PRELOAD'] and env['loaded_torch_libraries']):raise ValueError('original Gloo environment identity mismatch')
+         summary['steps'].append(run_step(root,owner,'run_checks',[py,'-B',str(payload/'candidate/run_checks.py'),'--allocation',str(payload/'allocation.json'),'--output',str(payload/'checks_current_job')],deadline))
+         checks=json.loads((payload/'checks_current_job/checks.json').read_text())
+         if checks['status']!='PASS_PROBE_CHECKS_ONLY' or [c['case'] for c in checks['cases']]!=['normal','crash','collective-timeout','watchdog']:raise ValueError('original four-case gate failed')
+-        verify_prepared(root);summary.update(status='PASS_S07_R6_FIXED_TWO_RANK_TENSOR_PROBE_ONLY',communication_passed=True,cases=checks['cases']);code=0
++        verify_prepared(root);summary.update(status='PASS_S07_R7_FIXED_TWO_RANK_TENSOR_PROBE_ONLY',communication_passed=True,cases=checks['cases']);code=0
+     except BaseException as exc:summary.update(error=repr(exc),traceback=traceback.format_exc(),status='INCOMPLETE_STOP_NO_RETRY' if isinstance(exc,(TimeoutError,InterruptedError)) else 'FAIL_STOP_NO_RETRY')
+     finally:
+         signal.setitimer(signal.ITIMER_REAL,0)
+--- R6/collect_evidence.py
++++ R7/collect_evidence.py
+@@ -10,6 +10,7 @@
+ from trace_inventory import inspect
+ from readiness_inventory import inspect as readiness
+ from stack_inventory import inspect as stacks
++from rank_report_inventory import inspect as rank_reports
+ 
+ def collect(root):
+     check_root(root);job=(root/'job_id.txt').read_text().strip();bundle=root/('JOB_'+job+'_full_evidence.zip')
+@@ -19,8 +20,9 @@
+     if query.returncode:raise RuntimeError('raw terminal query saved; cannot establish terminal')
+     row=json.loads(query.stdout)['data']['successData'][0]
+     if str(row['jobId'])!=job or row['state'] not in ('SUCCEEDED','FAILED','CANCELLED'):raise ValueError('exact terminal job required')
+-    traces=inspect(root);ready=readiness(root);stack=stacks(root)
++    traces=inspect(root);ready=readiness(root);stack=stacks(root);reports=rank_reports(root)
+     save(root/'DIAGNOSTIC_INVENTORY.json',traces);save(root/'READINESS_INVENTORY.json',ready);save(root/'STACK_INVENTORY.json',stack)
++    save(root/'RANK_REPORT_INVENTORY.json',reports)
+     pre=json.loads((root/'pre_submit_checks.json').read_text(encoding='utf-8'))
+     source=dict(pre['payload_files'],**json.loads((root/'ARTIFACT_SHA256.json').read_text(encoding='utf-8')))
+     changed=[name for name,digest in source.items() if not (root/name).is_file() or sha(root/name)!=digest]
+@@ -34,7 +36,7 @@
+     try:communication=json.loads(checks_path.read_text(encoding='utf-8'))
+     except (OSError,ValueError) as exc:communication=dict(status='MISSING_OR_PARTIAL',error=repr(exc))
+     index=dict(job_id=job,state=row['state'],job_exit_code=row.get('jobExitCode'),query_command=command,files=metadata,changed_source_files=changed,
+-        scheduler_pids_cleared=all(n['pids']=='-' for g in row['resGroups'] for n in g['nodeResUsages']),diagnostics=traces,readiness=ready,stack_observation=stack,
++        scheduler_pids_cleared=all(n['pids']=='-' for g in row['resGroups'] for n in g['nodeResUsages']),diagnostics=traces,readiness=ready,stack_observation=stack,rank_reports=reports,
+         original_communication_result=communication,communication_passed=communication.get('status')=='PASS_PROBE_CHECKS_ONLY',node_seconds=(end-begin).total_seconds(),communication_verdict_not_reinterpreted=True,retries=0,real_HBM=False,formal_training=False)
+     save(root/'COLLECTION_S00.json',index)
+     with zipfile.ZipFile(bundle,'x',zipfile.ZIP_DEFLATED) as z:
+--- R6/readiness_inventory.py
++++ R7/readiness_inventory.py
+@@ -28,7 +28,8 @@
+         if not directory.is_dir(): result['not_run'].append(name); continue
+         issues, files, values = [], {}, {}
+         verified_context = None
+-        temporary = sorted(p.name for p in directory.glob('*.tmp*') if p.is_file())
++        temporary = sorted(p.name for p in directory.glob('*.tmp*') if p.is_file()
++                           and p.name.startswith(('participants.json.tmp', 'ready_rank0.json.tmp', 'ready_rank1.json.tmp')))
+         for filename in ['participants.json', 'ready_rank0.json', 'ready_rank1.json'] + temporary:
+             path = directory / filename
+             if not path.is_file(): issues.append(filename + ': missing'); continue
+--- /dev/null
++++ R7/review_gate.py
+@@ -0,0 +1,19 @@
++"""Exact R7 code/deployment/task/budget and original-criteria approval gate."""
++import json
++from prepare import sha
++DEPLOYMENT='S00_S07_R7_ATOMIC_DEPLOYMENT.zip'
++RESOURCES=dict(allocated_cores=76,actual_physical_cores=72,reserved_cores=4,domains=2,actual_cores_per_domain=36,memory_MB=24576,memory_limit_MB=24576,exclusive=True,HBM=0,job_seconds=300,consumer_seconds=270,cleanup_seconds=15,closing_seconds=15)
++WORKLOAD=dict(max_jobs=1,case_order=['normal','crash','collective-timeout','watchdog'],linux_checks=88,atomic_report_tests=17,skipped_checks=0,pg_timeout_seconds=5,case_deadline_seconds=30,python_dump_before_deadline_seconds=5,proc_shared_window_seconds=2,repeat=False,exit=False,retry=False,communication_criterion='original candidate/run_checks.py check_case unchanged; watchdog requires both injected_hang')
++BINDING_KEYS=('inner_package_sha256','inner_manifest_sha256','observer_sha256','reader_sha256','cpu_contract_sha256','atomic_tests_sha256','interface_ready_sha256','comm_probe_sha256','observation_contract_sha256','deployment_package_sha256','deployment_source_manifest_sha256','task_card_sha256')
++def expected(root):
++    manifest=json.loads((root/'SOURCE_MANIFEST.json').read_text(encoding='utf-8'));delivery={i['path']:i['sha256'] for i in manifest['delivery_files']}
++    return dict(inner_package_sha256=sha(root/'S07_ALIGNED_STACK_R7.zip'),inner_manifest_sha256=sha(root/'SOURCE_MANIFEST.json'),observer_sha256=delivery['candidate/stack_observer.py'],reader_sha256=delivery['candidate/run_checks.py'],cpu_contract_sha256=delivery['candidate/cpu36_contract.py'],atomic_tests_sha256=delivery['tests/test_atomic_reports.py'],interface_ready_sha256=sha(root/'S07_INTERFACE_READY.json'),comm_probe_sha256=delivery['candidate/comm_probe.py'],observation_contract_sha256=sha(root/'OBSERVATION_CONTRACT.md'),deployment_package_sha256=sha(root/DEPLOYMENT),deployment_source_manifest_sha256=sha(root/'ARTIFACT_SHA256.json'),task_card_sha256=sha(root/'TASK_CARD.md'))
++def validate(review,bindings):
++    if review.get('decision')!='PASS_FOR_S07_R7_ATOMIC' or review.get('review_complete') is not True:raise ValueError('explicit complete R7 diagnostic review required')
++    if any(review.get('bindings',{}).get(k)!=bindings[k] for k in BINDING_KEYS):raise ValueError('R7 exact SHA bindings mismatch')
++    if any(review.get('resources',{}).get(k)!=v for k,v in RESOURCES.items()):raise ValueError('R7 total resource/budget mismatch')
++    if any(review.get('workload',{}).get(k)!=v for k,v in WORKLOAD.items()):raise ValueError('R7 original cases/criteria/observation/workload mismatch')
++def check_review(root,expected_review_sha=None):
++    path=root/'S01_REVIEW.json';digest=sha(path)
++    if expected_review_sha is not None and digest!=expected_review_sha:raise ValueError('review itself changed')
++    validate(json.loads(path.read_text(encoding='utf-8')),expected(root));return digest
+--- /dev/null
++++ R7/rank_report_inventory.py
+@@ -0,0 +1,40 @@
++"""Describe terminal official rank checkpoints and atomic residues separately."""
++import json
++from pathlib import Path
++from prepare import sha
++CASES=('normal','crash','collective-timeout','watchdog')
++
++def inspect(root):
++    root=Path(root);output=dict(cases={},not_run=[],scope='terminal official JSON identity/checkpoint and raw residues only; not a communication verdict; no temp-to-formal recovery')
++    def meta(path):return dict(path=str(path),bytes=path.stat().st_size,sha256=sha(path),mtime_ns=path.stat().st_mtime_ns)
++    def events(path):
++        if not path.is_file():return [],'missing events'
++        try:return [json.loads(line) for line in path.read_bytes().splitlines()],None
++        except (ValueError,UnicodeError) as exc:return [],repr(exc)
++    for name in CASES:
++        directory=root/'payload/checks_current_job'/name
++        if not directory.is_dir():output['not_run'].append(name);continue
++        context_error=None;manifest={};pids=[]
++        try:
++            manifest=json.loads((directory/'manifest.json').read_text(encoding='utf-8'));pids=json.loads((directory/'summary.json').read_text(encoding='utf-8'))['supervisor']['pids']
++            if manifest['job_id']!=(root/'job_id.txt').read_text().strip() or len(pids)!=2:raise ValueError('current manifest/parent PID identity mismatch')
++        except (OSError,ValueError,KeyError,TypeError) as exc:context_error=repr(exc)
++        parent,parent_error=events(directory/'supervisor.events.jsonl');reports={}
++        for rank in (0,1):
++            path=directory/f'rank{rank}.json';row=dict(formal_report_valid=False,stage=None)
++            if path.is_file():row['file']=meta(path)
++            try:
++                value=json.loads(path.read_text(encoding='utf-8'))
++                if context_error or not isinstance(value,dict) or value.get('rank')!=rank or value.get('pid')!=pids[rank] or value.get('run_id')!=manifest['run_id'] or value.get('world_size')!=2:raise ValueError('formal rank identity incomplete/different')
++                checkpoints=value['checkpoints']
++                if not isinstance(value['stage'],str) or not value['stage'] or not isinstance(checkpoints,list) or not checkpoints:raise ValueError('formal stage/checkpoint missing')
++                row.update(formal_report_valid=True,stage=value['stage'],status=value.get('status'),last_published_checkpoint=checkpoints[-1]['stage'],error_present='error' in value,error=value.get('error'),pid=value['pid'])
++            except (OSError,ValueError,KeyError,TypeError,IndexError) as exc:row['formal_error']=repr(exc)
++            stream,error=events(directory/f'rank{rank}.events.jsonl');ends=[e for e in stream if e.get('event')=='checkpoint_end']
++            row.update(last_checkpoint_end_event=ends[-1] if ends else None,worker_error_events=[e for e in stream if e.get('event')=='worker_error'],event_parse_error=error,
++                parent_term_and_reap_events=[e for e in parent if e.get('event') in ('signal_sent','child_reaped') and rank<len(pids) and e.get('child_pid')==pids[rank]])
++            reports[str(rank)]=row
++        residuals=[dict(name=p.name,**meta(p)) for p in sorted(directory.glob('.rank[01].json.*.tmp')) if p.is_file()]
++        output['cases'][name]=dict(reports=reports,residuals=residuals,context_error=context_error,parent_event_parse_error=parent_error,
++            note='A terminal official report may be the last committed checkpoint; it does not prove the final error handler committed. Temporary bytes are archived, never parsed as official reports.')
++    return output
+--- /dev/null
++++ R7/tests/test_r7_deployment.py
+@@ -0,0 +1,101 @@
++"""LOCAL_FIXTURE: new R7 delivery, diagnostic semantics, ownership and release."""
++import copy
++import json
++from pathlib import Path
++import shutil
++import sys
++import tempfile
++import unittest
++from unittest import mock
++import subprocess
++import zipfile
++sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
++import prepare
++import run_s07_diag_job as job
++import stack_inventory as stacks
++import review_gate as review
++from owned_processes import Owned
++import bounded_round_step
++import collect_evidence
++
++class R7DeploymentTests(unittest.TestCase):
++    def setUp(self):
++        self.tmp=tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]/'evidence');self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name)
++
++    def test_frozen_r7_exact16_files15_delivery_and_observer(self):
++        source=Path(__file__).resolve().parents[1]/prepare.ARCHIVE;shutil.copyfile(source,self.root/prepare.ARCHIVE)
++        prepare.unpack(self.root);files=[p for p in (self.root/'payload').rglob('*') if p.is_file()]
++        self.assertEqual(len(files),16);manifest=json.loads((self.root/'payload/SOURCE_MANIFEST.json').read_text(encoding='utf-8'))
++        self.assertEqual(len(manifest['delivery_files']),15);self.assertEqual(prepare.sha(self.root/'payload/candidate/stack_observer.py'),prepare.OBSERVER_SHA)
++
++    def test_old_inner_rejected_without_payload(self):
++        (self.root/prepare.ARCHIVE).write_bytes(b'old package')
++        with self.assertRaises(ValueError):prepare.unpack(self.root)
++        self.assertFalse((self.root/'payload').exists())
++
++    def test_88_checks_share_original_consumer(self):
++        self.assertEqual([row[2] for row in job.CHECKS],[17,27,16,6,6,16]);self.assertEqual(sum(row[2] for row in job.CHECKS),88)
++        self.assertEqual((job.CONSUMER_SECONDS,job.CLEANUP_SECONDS,job.CLOSING_SECONDS),(270,15,15))
++
++    def fixture(self):
++        d=self.root/'payload/checks_current_job/watchdog';d.mkdir(parents=True,exist_ok=True)
++        selected=[list(range(36)),list(range(38,74))]
++        def guard(rank):return dict(calling_affinity=selected[rank],snapshot=dict(complete=True,errors=[],vanished=[],threads=[dict(affinity=selected[rank])]))
++        self.dump(d/'manifest.json',dict(allocation=dict(ranks=[dict(selected=s) for s in selected])))
++        (d/'supervisor.events.jsonl').write_text(json.dumps(dict(event='supervisor_begin',pid=10))+'\n'+json.dumps(dict(event='proc_helper_started',pid=10,helper_pid=13))+'\n',encoding='utf-8')
++        self.dump(d/'participants.json',dict(deadline_ns=30_000_000_000,pids=[11,12],job_id='42',run_id='watchdog',ready_token='x'))
++        self.dump(d/'summary.json',dict(supervisor=dict(stack_observation=dict(target_ns=25_000_000_000,sample_stop_ns=27_000_000_000,helper_pid=13,reaped=True,status='EXITED',returncode=0))))
++        for rank in (0,1):
++            (d/f'rank{rank}.python_stack.txt').write_text('Timeout (0:00:25)!\nThread 0x1:\n  File "x.py", line 10 in init_process_group\n',encoding='utf-8')
++            self.dump(d/f'rank{rank}.stack_status.json',dict(status='ARMED',rank=rank,pid=11+rank,job_id='42',run_id='watchdog',target_ns=25_000_000_000,armed_at_ns=1,before_timer_cpu=guard(rank),after_timer_cpu=guard(rank)))
++            self.dump(d/f'rank{rank}.installed_python.json',dict(status='RECORDED',files=[dict(module=m,path='/installed/'+m,bytes=10,mtime_ns=1,sha256='a'*64) for m in ('torch.distributed.distributed_c10d','torch.distributed.rendezvous')]))
++        self.dump(d/'proc_identity.json',dict(identity=dict(job_id='42',run_id='watchdog',ready_token='x'),targets=[dict(pid=11,ppid=10,sid=11,start_ticks=1),dict(pid=12,ppid=10,sid=12,start_ticks=2)],captured_ns=1))
++        self.dump(d/'proc_summary.json',dict(status='RECORDED_AVAILABLE_FIELDS_ONLY',helper_pid=13,target_ns=25_000_000_000,sample_stop_ns=27_000_000_000,sample_started_ns=25_000_000_001,finished_ns=25_000_000_100,ranks=[dict(rank=i,pid=11+i,status='RECORDED',target=dict(identity=dict(pid=11+i,ppid=10,sid=11+i,start_ticks=1+i),affinity=selected[i]),identity_after=dict(identity=dict(pid=11+i,ppid=10,sid=11+i,start_ticks=1+i),affinity=selected[i]),helper_cpu=guard(i)) for i in (0,1)]))
++        (d/'proc_fields.jsonl').write_text(''.join(json.dumps(dict(rank=rank,pid=11+rank,field=field,status='OK',text='available'))+'\n' for rank in (0,1) for field in ('wchan','syscall','stack','mountinfo')),encoding='utf-8');(d/'proc_helper.log').write_bytes(b'')
++        return d
++
++    def dump(self,path,value):path.write_text(json.dumps(value),encoding='utf-8')
++
++    def test_nonempty_stacks_and_actual_fields_can_be_complete_without_communication_pass(self):
++        self.fixture();result=stacks.inspect(self.root);self.assertTrue(result['complete']);self.assertNotIn('communication_passed',result)
++
++    def test_armed_empty_dump_never_proves_stack_written(self):
++        d=self.fixture();(d/'rank0.python_stack.txt').write_bytes(b'');self.assertFalse(stacks.inspect(self.root)['complete'])
++
++    def test_exited_helper_with_permission_error_is_incomplete(self):
++        d=self.fixture();(d/'proc_fields.jsonl').write_text(json.dumps(dict(rank=0,pid=11,field='stack',status='ERROR',error='PermissionError'))+'\n',encoding='utf-8')
++        self.assertFalse(stacks.inspect(self.root)['complete'])
++
++    def test_missing_watchdog_or_wrong_shared_target_is_incomplete(self):
++        self.assertFalse(stacks.inspect(self.root)['complete']);d=self.fixture();p=d/'rank1.stack_status.json';row=json.loads(p.read_text());row['target_ns']+=1;self.dump(p,row);self.assertFalse(stacks.inspect(self.root)['complete'])
++
++    def test_owned_helper_across_sessions_and_pid_reuse(self):
++        own=Owned(1);rows={2:dict(ppid=1,state='S',session=2,start=10),3:dict(ppid=2,state='S',session=3,start=20),4:dict(ppid=3,state='S',session=4,start=30)};own.update(rows)
++        self.assertEqual(own.live(rows),[2,3,4]);rows[4]['start']=31;self.assertEqual(own.live(rows),[2,3]);self.assertEqual(own.identities[4],30)
++
++    def test_review_requires_exact_sha_resources_and_original_criteria(self):
++        bindings={k:'a'*64 for k in review.BINDING_KEYS};value=dict(decision='PASS_FOR_S07_R7_ATOMIC',review_complete=True,bindings=bindings,resources=review.RESOURCES,workload=review.WORKLOAD)
++        review.validate(value,bindings)
++        for key in bindings:
++            wrong=dict(bindings);wrong[key]='b'*64
++            with self.assertRaises(ValueError):review.validate(value,wrong)
++        bad=copy.deepcopy(value);bad['workload']['pg_timeout_seconds']=10
++        with self.assertRaises(ValueError):review.validate(bad,bindings)
++
++    def test_late_step_cannot_reset_shared_cleanup_deadline(self):
++        (self.root/'job_evidence').mkdir()
++        with mock.patch.object(bounded_round_step.time,'monotonic',side_effect=[99.,200.]),mock.patch.object(bounded_round_step,'run_phase',return_value=dict(returncode=0)) as phase,mock.patch.object(bounded_round_step,'cleanup',return_value=dict(all_reaped=True)) as clean:
++            bounded_round_step.run_step(self.root,'owned','fixture',['python'],100.,30.)
++        self.assertEqual(phase.call_args.args[-1],100.);self.assertEqual(clean.call_args.args[-1],115.)
++
++    def test_terminal_collection_preserves_empty_partial_and_uncleared_pid_evidence(self):
++        self.fixture();directory=self.root/'payload/checks_current_job/watchdog';(directory/'rank0.python_stack.txt').write_bytes(b'');(directory/'ready_rank0.json.tmp').write_bytes(b'{partial')
++        (self.root/'job_id.txt').write_text('42\n');self.dump(self.root/'pre_submit_checks.json',dict(payload_files={}));self.dump(self.root/'ARTIFACT_SHA256.json',{})
++        row=dict(jobId='42',state='FAILED',jobExitCode=1,startTime='2026-11-06T00:00:00Z',endTime='2026-11-06T00:01:00Z',resGroups=[dict(nodeResUsages=[dict(pids='99')])])
++        response=subprocess.CompletedProcess([],0,json.dumps(dict(data=dict(successData=[row]))).encode(),b'')
++        with mock.patch.object(collect_evidence,'check_root'),mock.patch.object(collect_evidence.subprocess,'run',return_value=response):receipt=collect_evidence.collect(self.root)
++        with zipfile.ZipFile(receipt['bundle']) as z:
++            self.assertEqual(z.read('payload/checks_current_job/watchdog/ready_rank0.json.tmp'),b'{partial');self.assertEqual(z.read('payload/checks_current_job/watchdog/rank0.python_stack.txt'),b'')
++            index=json.loads(z.read('COLLECTION_S00.json'));self.assertFalse(index['scheduler_pids_cleared']);self.assertFalse(index['stack_observation']['complete'])
++
++if __name__=='__main__':unittest.main(verbosity=2)
+--- /dev/null
++++ R7/tests/test_rank_report_collection.py
+@@ -0,0 +1,39 @@
++"""LOCAL_FIXTURE: atomic residues never replace or invalidate protocol files."""
++import json
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
++import rank_report_inventory as reports
++import readiness_inventory
++
++class ReportCollectionTests(unittest.TestCase):
++    def setUp(self):
++        self.tmp=tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]/'evidence');self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name)
++        self.case=self.root/'payload/checks_current_job/crash';self.case.mkdir(parents=True);(self.root/'job_id.txt').write_text('42\n')
++        self.write('manifest.json',dict(job_id='42',run_id='crash'))
++        self.write('summary.json',dict(supervisor=dict(pids=[11,12],exit_codes=[-15,17],all_reaped=True)))
++        for rank in (0,1):self.write(f'rank{rank}.json',dict(rank=rank,pid=11+rank,run_id='crash',world_size=2,status='FAIL',stage='broadcast' if rank==0 else 'injected_crash',checkpoints=[dict(stage='broadcast' if rank==0 else 'injected_crash')]))
++
++    def write(self,name,value):(self.case/name).write_text(json.dumps(value),encoding='utf-8')
++
++    def test_valid_formal_report_and_partial_residue_remain_separate(self):
++        p=self.case/'.rank0.json.abcd.tmp';p.write_bytes(b'{partial');before=(self.case/'rank0.json').read_bytes()
++        value=reports.inspect(self.root)['cases']['crash'];self.assertTrue(value['reports']['0']['formal_report_valid']);self.assertEqual(value['reports']['0']['stage'],'broadcast');self.assertEqual(value['residuals'][0]['bytes'],8)
++        self.assertEqual((self.case/'rank0.json').read_bytes(),before);self.assertEqual(p.read_bytes(),b'{partial')
++
++    def test_missing_empty_partial_formal_rejected_despite_valid_temp(self):
++        for mode in ('missing','empty','partial'):
++            self.write('.rank0.json.valid.tmp',dict(stage='injected_crash'));p=self.case/'rank0.json'
++            if mode=='missing':p.unlink(missing_ok=True)
++            else:p.write_bytes(b'' if mode=='empty' else b'{partial')
++            row=reports.inspect(self.root)['cases']['crash']['reports']['0'];self.assertFalse(row['formal_report_valid']);self.assertIsNone(row.get('stage'))
++
++    def test_rank_temp_not_readiness_temp_but_original_ready_residue_retained(self):
++        (self.case/'.rank0.json.abcd.tmp').write_bytes(b'{partial')
++        first=readiness_inventory.inspect(self.root)['cases']['crash'];self.assertEqual(first['temporary_files'],[])
++        (self.case/'ready_rank0.json.tmp').write_bytes(b'{partial')
++        second=readiness_inventory.inspect(self.root)['cases']['crash'];self.assertEqual(second['temporary_files'],['ready_rank0.json.tmp']);self.assertFalse(second['complete'])
++
++if __name__=='__main__':unittest.main(verbosity=2)

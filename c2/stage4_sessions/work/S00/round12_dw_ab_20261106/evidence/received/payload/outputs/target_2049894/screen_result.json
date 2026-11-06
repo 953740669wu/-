@@ -1,0 +1,3978 @@
+{
+  "status": "PASS_ACTUAL_KML_TARGET_ONLY",
+  "pid": 2127377,
+  "argv": [
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/screen_target.py",
+    "--expected-cpus",
+    "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35",
+    "--cpu-contract",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/outputs/dw_ab_2049894/cpu_allocation.json",
+    "--output-dir",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/outputs/target_2049894"
+  ],
+  "protocol": "ENGINEERING_DW_TILES_R12_V1",
+  "phase": "target_screen",
+  "source_manifest_sha256": "f61b8db309b8dad5853c7916d371b4484af609bd7610c096846bb21a7ac866bd",
+  "host": "cn21338",
+  "job_id": "2049894",
+  "cpu36": {
+    "version": "CPU36_MODEL_V1",
+    "pid": 2127377,
+    "job_id": "2049894",
+    "host": "cn21338",
+    "receipt": {
+      "allocated": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "domain_cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "selected": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "reserved": [
+        36,
+        37
+      ],
+      "physical_siblings": {
+        "0": [
+          0
+        ],
+        "1": [
+          1
+        ],
+        "2": [
+          2
+        ],
+        "3": [
+          3
+        ],
+        "4": [
+          4
+        ],
+        "5": [
+          5
+        ],
+        "6": [
+          6
+        ],
+        "7": [
+          7
+        ],
+        "8": [
+          8
+        ],
+        "9": [
+          9
+        ],
+        "10": [
+          10
+        ],
+        "11": [
+          11
+        ],
+        "12": [
+          12
+        ],
+        "13": [
+          13
+        ],
+        "14": [
+          14
+        ],
+        "15": [
+          15
+        ],
+        "16": [
+          16
+        ],
+        "17": [
+          17
+        ],
+        "18": [
+          18
+        ],
+        "19": [
+          19
+        ],
+        "20": [
+          20
+        ],
+        "21": [
+          21
+        ],
+        "22": [
+          22
+        ],
+        "23": [
+          23
+        ],
+        "24": [
+          24
+        ],
+        "25": [
+          25
+        ],
+        "26": [
+          26
+        ],
+        "27": [
+          27
+        ],
+        "28": [
+          28
+        ],
+        "29": [
+          29
+        ],
+        "30": [
+          30
+        ],
+        "31": [
+          31
+        ],
+        "32": [
+          32
+        ],
+        "33": [
+          33
+        ],
+        "34": [
+          34
+        ],
+        "35": [
+          35
+        ],
+        "36": [
+          36
+        ],
+        "37": [
+          37
+        ]
+      },
+      "node": 0
+    },
+    "allocation_file_sha256": "0759ca16a20e5536a21f0d2d41183ea90fe8cbb0cddcda5b6ee912a91547f8fa",
+    "checkpoints": [
+      {
+        "name": "before_framework",
+        "pid": 2127377,
+        "time": 1793944206.0426488,
+        "calling_tid": 2127377,
+        "calling_affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "environment": {
+          "OMP_NUM_THREADS": "36",
+          "MKL_NUM_THREADS": "36",
+          "OPENBLAS_NUM_THREADS": "1",
+          "OMP_PLACES": "cores",
+          "OMP_PROC_BIND": "close"
+        },
+        "snapshot": {
+          "complete": true,
+          "threads": [
+            {
+              "tid": 2127377,
+              "affinity": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35
+              ],
+              "ticks": 24,
+              "start_ticks": 396558068,
+              "last_cpu": 0,
+              "state": "R"
+            }
+          ],
+          "vanished": [],
+          "errors": []
+        }
+      },
+      {
+        "name": "after_framework",
+        "pid": 2127377,
+        "time": 1793944222.6690402,
+        "calling_tid": 2127377,
+        "calling_affinity": [
+          0
+        ],
+        "environment": {
+          "OMP_NUM_THREADS": "36",
+          "MKL_NUM_THREADS": "36",
+          "OPENBLAS_NUM_THREADS": "1",
+          "OMP_PLACES": "cores",
+          "OMP_PROC_BIND": "close"
+        },
+        "snapshot": {
+          "complete": true,
+          "threads": [
+            {
+              "tid": 2127377,
+              "affinity": [
+                0
+              ],
+              "ticks": 809,
+              "start_ticks": 396558068,
+              "last_cpu": 0,
+              "state": "R"
+            }
+          ],
+          "vanished": [],
+          "errors": []
+        },
+        "torch_intraop": 36,
+        "torch_interop": 608,
+        "parallel_info": "ATen/Parallel:\n\tat::get_num_threads() : 36\n\tat::get_num_interop_threads() : 608\nOpenMP 201511 (a.k.a. OpenMP 4.5)\n\tomp_get_max_threads() : 36\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 608\nEnvironment variables:\n\tOMP_NUM_THREADS : 36\nATen parallel backend: OpenMP\n",
+        "runtime": {
+          "modules": {
+            "torch": {
+              "version": "2.7.1+cpu",
+              "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py"
+            },
+            "numpy": {
+              "version": "1.26.4",
+              "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/__init__.py"
+            }
+          },
+          "libraries": {
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so": {
+              "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+            },
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so": {
+              "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a",
+              "openblas_get_num_threads64_": 1,
+              "openblas_get_num_threads_64_": 1
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute-489746be.so": {
+              "sha256": "7f338493638c8b4f8ba0f3d6ef44e272d7ddfc67391282dbc0c25eaf4c82a9c2",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute_graph-17c2200a.so": {
+              "sha256": "1712d2c6eba7d87189788766fd56120cf1d1cb42ca53b7809ea14ee27ac7d238",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libgfortran-0b50f350.so.5.0.0": {
+              "sha256": "6e85b148428f0eeb8445270806f25deb8a9e749086157d47a5955bed23189642"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so": {
+              "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so": {
+              "sha256": "0098ec8982bc60ae9511ee3a636d9b9c8f9d3decceb4b44c7e1d446d8b74ab0b",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so": {
+              "sha256": "34370e00fc38fe83b82685b113358b12afe6959286b8f5fc8125682ce9e0af10"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libshm.so": {
+              "sha256": "0f3cef29d8ca21eaa84e547ce55a7913bf504a9530f00307caa6535a7db1d2c1",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so": {
+              "sha256": "340a49fc5a0ed13f02b67f08f62bc1a7e9636a0f277950ef00c8da0ff896a646",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so": {
+              "sha256": "eee755641450652e0c08aeb5d3436f39bd9d3ff89e501a4262b3b0ca5862ac7a",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so": {
+              "sha256": "2cbf6ab7259b743b02eb75babb72548784b1503b280f934eeceefec0fb1816e4"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so": {
+              "sha256": "c26b39e44ea1b339ab2828f492dfc8d6ddf854c3da3f5c5f5cf4aa3d06e47912",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so": {
+              "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            }
+          }
+        }
+      },
+      {
+        "name": "before_baseline",
+        "pid": 2127377,
+        "time": 1793944225.8269234,
+        "calling_tid": 2127377,
+        "calling_affinity": [
+          0
+        ],
+        "environment": {
+          "OMP_NUM_THREADS": "36",
+          "MKL_NUM_THREADS": "36",
+          "OPENBLAS_NUM_THREADS": "1",
+          "OMP_PLACES": "cores",
+          "OMP_PROC_BIND": "close"
+        },
+        "snapshot": {
+          "complete": true,
+          "threads": [
+            {
+              "tid": 2127377,
+              "affinity": [
+                0
+              ],
+              "ticks": 963,
+              "start_ticks": 396558068,
+              "last_cpu": 0,
+              "state": "R"
+            },
+            {
+              "tid": 2128977,
+              "affinity": [
+                1
+              ],
+              "ticks": 40,
+              "start_ticks": 396559910,
+              "last_cpu": 1,
+              "state": "R"
+            },
+            {
+              "tid": 2128978,
+              "affinity": [
+                2
+              ],
+              "ticks": 40,
+              "start_ticks": 396559910,
+              "last_cpu": 2,
+              "state": "R"
+            },
+            {
+              "tid": 2128979,
+              "affinity": [
+                3
+              ],
+              "ticks": 40,
+              "start_ticks": 396559910,
+              "last_cpu": 3,
+              "state": "R"
+            },
+            {
+              "tid": 2128980,
+              "affinity": [
+                4
+              ],
+              "ticks": 40,
+              "start_ticks": 396559910,
+              "last_cpu": 4,
+              "state": "R"
+            },
+            {
+              "tid": 2128981,
+              "affinity": [
+                5
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 5,
+              "state": "R"
+            },
+            {
+              "tid": 2128982,
+              "affinity": [
+                6
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 6,
+              "state": "R"
+            },
+            {
+              "tid": 2128983,
+              "affinity": [
+                7
+              ],
+              "ticks": 40,
+              "start_ticks": 396559910,
+              "last_cpu": 7,
+              "state": "R"
+            },
+            {
+              "tid": 2128984,
+              "affinity": [
+                8
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 8,
+              "state": "R"
+            },
+            {
+              "tid": 2128985,
+              "affinity": [
+                9
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 9,
+              "state": "R"
+            },
+            {
+              "tid": 2128986,
+              "affinity": [
+                10
+              ],
+              "ticks": 40,
+              "start_ticks": 396559910,
+              "last_cpu": 10,
+              "state": "R"
+            },
+            {
+              "tid": 2128987,
+              "affinity": [
+                11
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 11,
+              "state": "R"
+            },
+            {
+              "tid": 2128988,
+              "affinity": [
+                12
+              ],
+              "ticks": 40,
+              "start_ticks": 396559910,
+              "last_cpu": 12,
+              "state": "R"
+            },
+            {
+              "tid": 2128989,
+              "affinity": [
+                13
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 13,
+              "state": "R"
+            },
+            {
+              "tid": 2128990,
+              "affinity": [
+                14
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 14,
+              "state": "R"
+            },
+            {
+              "tid": 2128991,
+              "affinity": [
+                15
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 15,
+              "state": "R"
+            },
+            {
+              "tid": 2128992,
+              "affinity": [
+                16
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 16,
+              "state": "R"
+            },
+            {
+              "tid": 2128993,
+              "affinity": [
+                17
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 17,
+              "state": "R"
+            },
+            {
+              "tid": 2128994,
+              "affinity": [
+                18
+              ],
+              "ticks": 40,
+              "start_ticks": 396559910,
+              "last_cpu": 18,
+              "state": "R"
+            },
+            {
+              "tid": 2128995,
+              "affinity": [
+                19
+              ],
+              "ticks": 40,
+              "start_ticks": 396559910,
+              "last_cpu": 19,
+              "state": "R"
+            },
+            {
+              "tid": 2128996,
+              "affinity": [
+                20
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 20,
+              "state": "R"
+            },
+            {
+              "tid": 2128997,
+              "affinity": [
+                21
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 21,
+              "state": "R"
+            },
+            {
+              "tid": 2128998,
+              "affinity": [
+                22
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 22,
+              "state": "R"
+            },
+            {
+              "tid": 2128999,
+              "affinity": [
+                23
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 23,
+              "state": "R"
+            },
+            {
+              "tid": 2129000,
+              "affinity": [
+                24
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 24,
+              "state": "R"
+            },
+            {
+              "tid": 2129001,
+              "affinity": [
+                25
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 25,
+              "state": "R"
+            },
+            {
+              "tid": 2129002,
+              "affinity": [
+                26
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 26,
+              "state": "R"
+            },
+            {
+              "tid": 2129003,
+              "affinity": [
+                27
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 27,
+              "state": "R"
+            },
+            {
+              "tid": 2129004,
+              "affinity": [
+                28
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 28,
+              "state": "R"
+            },
+            {
+              "tid": 2129005,
+              "affinity": [
+                29
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 29,
+              "state": "R"
+            },
+            {
+              "tid": 2129006,
+              "affinity": [
+                30
+              ],
+              "ticks": 42,
+              "start_ticks": 396559910,
+              "last_cpu": 30,
+              "state": "R"
+            },
+            {
+              "tid": 2129007,
+              "affinity": [
+                31
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 31,
+              "state": "R"
+            },
+            {
+              "tid": 2129008,
+              "affinity": [
+                32
+              ],
+              "ticks": 41,
+              "start_ticks": 396559910,
+              "last_cpu": 32,
+              "state": "R"
+            },
+            {
+              "tid": 2129009,
+              "affinity": [
+                33
+              ],
+              "ticks": 42,
+              "start_ticks": 396559910,
+              "last_cpu": 33,
+              "state": "R"
+            },
+            {
+              "tid": 2129010,
+              "affinity": [
+                34
+              ],
+              "ticks": 42,
+              "start_ticks": 396559910,
+              "last_cpu": 34,
+              "state": "R"
+            },
+            {
+              "tid": 2129011,
+              "affinity": [
+                35
+              ],
+              "ticks": 42,
+              "start_ticks": 396559910,
+              "last_cpu": 35,
+              "state": "R"
+            }
+          ],
+          "vanished": [],
+          "errors": []
+        },
+        "torch_intraop": 36,
+        "torch_interop": 608,
+        "parallel_info": "ATen/Parallel:\n\tat::get_num_threads() : 36\n\tat::get_num_interop_threads() : 608\nOpenMP 201511 (a.k.a. OpenMP 4.5)\n\tomp_get_max_threads() : 36\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 608\nEnvironment variables:\n\tOMP_NUM_THREADS : 36\nATen parallel backend: OpenMP\n",
+        "runtime": {
+          "modules": {
+            "torch": {
+              "version": "2.7.1+cpu",
+              "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py"
+            },
+            "numpy": {
+              "version": "1.26.4",
+              "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/__init__.py"
+            },
+            "kml_ops": {
+              "version": null,
+              "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/baseline/kml_ops.py"
+            }
+          },
+          "libraries": {
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so": {
+              "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+            },
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so": {
+              "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a",
+              "openblas_get_num_threads64_": 1,
+              "openblas_get_num_threads_64_": 1
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute-489746be.so": {
+              "sha256": "7f338493638c8b4f8ba0f3d6ef44e272d7ddfc67391282dbc0c25eaf4c82a9c2",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute_graph-17c2200a.so": {
+              "sha256": "1712d2c6eba7d87189788766fd56120cf1d1cb42ca53b7809ea14ee27ac7d238",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libgfortran-0b50f350.so.5.0.0": {
+              "sha256": "6e85b148428f0eeb8445270806f25deb8a9e749086157d47a5955bed23189642"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so": {
+              "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so": {
+              "sha256": "0098ec8982bc60ae9511ee3a636d9b9c8f9d3decceb4b44c7e1d446d8b74ab0b",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so": {
+              "sha256": "34370e00fc38fe83b82685b113358b12afe6959286b8f5fc8125682ce9e0af10"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libshm.so": {
+              "sha256": "0f3cef29d8ca21eaa84e547ce55a7913bf504a9530f00307caa6535a7db1d2c1",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so": {
+              "sha256": "340a49fc5a0ed13f02b67f08f62bc1a7e9636a0f277950ef00c8da0ff896a646",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so": {
+              "sha256": "eee755641450652e0c08aeb5d3436f39bd9d3ff89e501a4262b3b0ca5862ac7a",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so": {
+              "sha256": "2cbf6ab7259b743b02eb75babb72548784b1503b280f934eeceefec0fb1816e4"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so": {
+              "sha256": "c26b39e44ea1b339ab2828f492dfc8d6ddf854c3da3f5c5f5cf4aa3d06e47912",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so": {
+              "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1": {
+              "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            }
+          }
+        }
+      },
+      {
+        "name": "after_baseline",
+        "pid": 2127377,
+        "time": 1793944225.9770029,
+        "calling_tid": 2127377,
+        "calling_affinity": [
+          0
+        ],
+        "environment": {
+          "OMP_NUM_THREADS": "36",
+          "MKL_NUM_THREADS": "36",
+          "OPENBLAS_NUM_THREADS": "1",
+          "OMP_PLACES": "cores",
+          "OMP_PROC_BIND": "close"
+        },
+        "snapshot": {
+          "complete": true,
+          "threads": [
+            {
+              "tid": 2127377,
+              "affinity": [
+                0
+              ],
+              "ticks": 970,
+              "start_ticks": 396558068,
+              "last_cpu": 0,
+              "state": "R"
+            },
+            {
+              "tid": 2128977,
+              "affinity": [
+                1
+              ],
+              "ticks": 55,
+              "start_ticks": 396559910,
+              "last_cpu": 1,
+              "state": "R"
+            },
+            {
+              "tid": 2128978,
+              "affinity": [
+                2
+              ],
+              "ticks": 55,
+              "start_ticks": 396559910,
+              "last_cpu": 2,
+              "state": "R"
+            },
+            {
+              "tid": 2128979,
+              "affinity": [
+                3
+              ],
+              "ticks": 55,
+              "start_ticks": 396559910,
+              "last_cpu": 3,
+              "state": "R"
+            },
+            {
+              "tid": 2128980,
+              "affinity": [
+                4
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 4,
+              "state": "R"
+            },
+            {
+              "tid": 2128981,
+              "affinity": [
+                5
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 5,
+              "state": "R"
+            },
+            {
+              "tid": 2128982,
+              "affinity": [
+                6
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 6,
+              "state": "R"
+            },
+            {
+              "tid": 2128983,
+              "affinity": [
+                7
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 7,
+              "state": "R"
+            },
+            {
+              "tid": 2128984,
+              "affinity": [
+                8
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 8,
+              "state": "R"
+            },
+            {
+              "tid": 2128985,
+              "affinity": [
+                9
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 9,
+              "state": "R"
+            },
+            {
+              "tid": 2128986,
+              "affinity": [
+                10
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 10,
+              "state": "R"
+            },
+            {
+              "tid": 2128987,
+              "affinity": [
+                11
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 11,
+              "state": "R"
+            },
+            {
+              "tid": 2128988,
+              "affinity": [
+                12
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 12,
+              "state": "R"
+            },
+            {
+              "tid": 2128989,
+              "affinity": [
+                13
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 13,
+              "state": "R"
+            },
+            {
+              "tid": 2128990,
+              "affinity": [
+                14
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 14,
+              "state": "R"
+            },
+            {
+              "tid": 2128991,
+              "affinity": [
+                15
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 15,
+              "state": "R"
+            },
+            {
+              "tid": 2128992,
+              "affinity": [
+                16
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 16,
+              "state": "R"
+            },
+            {
+              "tid": 2128993,
+              "affinity": [
+                17
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 17,
+              "state": "R"
+            },
+            {
+              "tid": 2128994,
+              "affinity": [
+                18
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 18,
+              "state": "R"
+            },
+            {
+              "tid": 2128995,
+              "affinity": [
+                19
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 19,
+              "state": "R"
+            },
+            {
+              "tid": 2128996,
+              "affinity": [
+                20
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 20,
+              "state": "R"
+            },
+            {
+              "tid": 2128997,
+              "affinity": [
+                21
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 21,
+              "state": "R"
+            },
+            {
+              "tid": 2128998,
+              "affinity": [
+                22
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 22,
+              "state": "R"
+            },
+            {
+              "tid": 2128999,
+              "affinity": [
+                23
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 23,
+              "state": "R"
+            },
+            {
+              "tid": 2129000,
+              "affinity": [
+                24
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 24,
+              "state": "R"
+            },
+            {
+              "tid": 2129001,
+              "affinity": [
+                25
+              ],
+              "ticks": 55,
+              "start_ticks": 396559910,
+              "last_cpu": 25,
+              "state": "R"
+            },
+            {
+              "tid": 2129002,
+              "affinity": [
+                26
+              ],
+              "ticks": 55,
+              "start_ticks": 396559910,
+              "last_cpu": 26,
+              "state": "R"
+            },
+            {
+              "tid": 2129003,
+              "affinity": [
+                27
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 27,
+              "state": "R"
+            },
+            {
+              "tid": 2129004,
+              "affinity": [
+                28
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 28,
+              "state": "R"
+            },
+            {
+              "tid": 2129005,
+              "affinity": [
+                29
+              ],
+              "ticks": 55,
+              "start_ticks": 396559910,
+              "last_cpu": 29,
+              "state": "R"
+            },
+            {
+              "tid": 2129006,
+              "affinity": [
+                30
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 30,
+              "state": "R"
+            },
+            {
+              "tid": 2129007,
+              "affinity": [
+                31
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 31,
+              "state": "R"
+            },
+            {
+              "tid": 2129008,
+              "affinity": [
+                32
+              ],
+              "ticks": 57,
+              "start_ticks": 396559910,
+              "last_cpu": 32,
+              "state": "R"
+            },
+            {
+              "tid": 2129009,
+              "affinity": [
+                33
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 33,
+              "state": "R"
+            },
+            {
+              "tid": 2129010,
+              "affinity": [
+                34
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 34,
+              "state": "R"
+            },
+            {
+              "tid": 2129011,
+              "affinity": [
+                35
+              ],
+              "ticks": 56,
+              "start_ticks": 396559910,
+              "last_cpu": 35,
+              "state": "R"
+            }
+          ],
+          "vanished": [],
+          "errors": []
+        },
+        "torch_intraop": 36,
+        "torch_interop": 608,
+        "parallel_info": "ATen/Parallel:\n\tat::get_num_threads() : 36\n\tat::get_num_interop_threads() : 608\nOpenMP 201511 (a.k.a. OpenMP 4.5)\n\tomp_get_max_threads() : 36\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 608\nEnvironment variables:\n\tOMP_NUM_THREADS : 36\nATen parallel backend: OpenMP\n",
+        "runtime": {
+          "modules": {
+            "torch": {
+              "version": "2.7.1+cpu",
+              "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py"
+            },
+            "numpy": {
+              "version": "1.26.4",
+              "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/__init__.py"
+            },
+            "kml_ops": {
+              "version": null,
+              "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/baseline/kml_ops.py"
+            }
+          },
+          "libraries": {
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so": {
+              "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+            },
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so": {
+              "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a",
+              "openblas_get_num_threads64_": 1,
+              "openblas_get_num_threads_64_": 1
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute-489746be.so": {
+              "sha256": "7f338493638c8b4f8ba0f3d6ef44e272d7ddfc67391282dbc0c25eaf4c82a9c2",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute_graph-17c2200a.so": {
+              "sha256": "1712d2c6eba7d87189788766fd56120cf1d1cb42ca53b7809ea14ee27ac7d238",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libgfortran-0b50f350.so.5.0.0": {
+              "sha256": "6e85b148428f0eeb8445270806f25deb8a9e749086157d47a5955bed23189642"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so": {
+              "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so": {
+              "sha256": "0098ec8982bc60ae9511ee3a636d9b9c8f9d3decceb4b44c7e1d446d8b74ab0b",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so": {
+              "sha256": "34370e00fc38fe83b82685b113358b12afe6959286b8f5fc8125682ce9e0af10"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libshm.so": {
+              "sha256": "0f3cef29d8ca21eaa84e547ce55a7913bf504a9530f00307caa6535a7db1d2c1",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so": {
+              "sha256": "340a49fc5a0ed13f02b67f08f62bc1a7e9636a0f277950ef00c8da0ff896a646",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so": {
+              "sha256": "eee755641450652e0c08aeb5d3436f39bd9d3ff89e501a4262b3b0ca5862ac7a",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so": {
+              "sha256": "2cbf6ab7259b743b02eb75babb72548784b1503b280f934eeceefec0fb1816e4"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so": {
+              "sha256": "c26b39e44ea1b339ab2828f492dfc8d6ddf854c3da3f5c5f5cf4aa3d06e47912",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so": {
+              "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1": {
+              "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            }
+          }
+        }
+      },
+      {
+        "name": "before_candidate",
+        "pid": 2127377,
+        "time": 1793944226.029124,
+        "calling_tid": 2127377,
+        "calling_affinity": [
+          0
+        ],
+        "environment": {
+          "OMP_NUM_THREADS": "36",
+          "MKL_NUM_THREADS": "36",
+          "OPENBLAS_NUM_THREADS": "1",
+          "OMP_PLACES": "cores",
+          "OMP_PROC_BIND": "close"
+        },
+        "snapshot": {
+          "complete": true,
+          "threads": [
+            {
+              "tid": 2127377,
+              "affinity": [
+                0
+              ],
+              "ticks": 973,
+              "start_ticks": 396558068,
+              "last_cpu": 0,
+              "state": "R"
+            },
+            {
+              "tid": 2128977,
+              "affinity": [
+                1
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 1,
+              "state": "R"
+            },
+            {
+              "tid": 2128978,
+              "affinity": [
+                2
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 2,
+              "state": "R"
+            },
+            {
+              "tid": 2128979,
+              "affinity": [
+                3
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 3,
+              "state": "R"
+            },
+            {
+              "tid": 2128980,
+              "affinity": [
+                4
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 4,
+              "state": "R"
+            },
+            {
+              "tid": 2128981,
+              "affinity": [
+                5
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 5,
+              "state": "R"
+            },
+            {
+              "tid": 2128982,
+              "affinity": [
+                6
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 6,
+              "state": "R"
+            },
+            {
+              "tid": 2128983,
+              "affinity": [
+                7
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 7,
+              "state": "R"
+            },
+            {
+              "tid": 2128984,
+              "affinity": [
+                8
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 8,
+              "state": "R"
+            },
+            {
+              "tid": 2128985,
+              "affinity": [
+                9
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 9,
+              "state": "R"
+            },
+            {
+              "tid": 2128986,
+              "affinity": [
+                10
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 10,
+              "state": "R"
+            },
+            {
+              "tid": 2128987,
+              "affinity": [
+                11
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 11,
+              "state": "R"
+            },
+            {
+              "tid": 2128988,
+              "affinity": [
+                12
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 12,
+              "state": "R"
+            },
+            {
+              "tid": 2128989,
+              "affinity": [
+                13
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 13,
+              "state": "R"
+            },
+            {
+              "tid": 2128990,
+              "affinity": [
+                14
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 14,
+              "state": "R"
+            },
+            {
+              "tid": 2128991,
+              "affinity": [
+                15
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 15,
+              "state": "R"
+            },
+            {
+              "tid": 2128992,
+              "affinity": [
+                16
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 16,
+              "state": "R"
+            },
+            {
+              "tid": 2128993,
+              "affinity": [
+                17
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 17,
+              "state": "R"
+            },
+            {
+              "tid": 2128994,
+              "affinity": [
+                18
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 18,
+              "state": "R"
+            },
+            {
+              "tid": 2128995,
+              "affinity": [
+                19
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 19,
+              "state": "R"
+            },
+            {
+              "tid": 2128996,
+              "affinity": [
+                20
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 20,
+              "state": "R"
+            },
+            {
+              "tid": 2128997,
+              "affinity": [
+                21
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 21,
+              "state": "R"
+            },
+            {
+              "tid": 2128998,
+              "affinity": [
+                22
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 22,
+              "state": "R"
+            },
+            {
+              "tid": 2128999,
+              "affinity": [
+                23
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 23,
+              "state": "R"
+            },
+            {
+              "tid": 2129000,
+              "affinity": [
+                24
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 24,
+              "state": "R"
+            },
+            {
+              "tid": 2129001,
+              "affinity": [
+                25
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 25,
+              "state": "R"
+            },
+            {
+              "tid": 2129002,
+              "affinity": [
+                26
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 26,
+              "state": "R"
+            },
+            {
+              "tid": 2129003,
+              "affinity": [
+                27
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 27,
+              "state": "R"
+            },
+            {
+              "tid": 2129004,
+              "affinity": [
+                28
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 28,
+              "state": "R"
+            },
+            {
+              "tid": 2129005,
+              "affinity": [
+                29
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 29,
+              "state": "R"
+            },
+            {
+              "tid": 2129006,
+              "affinity": [
+                30
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 30,
+              "state": "R"
+            },
+            {
+              "tid": 2129007,
+              "affinity": [
+                31
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 31,
+              "state": "R"
+            },
+            {
+              "tid": 2129008,
+              "affinity": [
+                32
+              ],
+              "ticks": 62,
+              "start_ticks": 396559910,
+              "last_cpu": 32,
+              "state": "R"
+            },
+            {
+              "tid": 2129009,
+              "affinity": [
+                33
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 33,
+              "state": "R"
+            },
+            {
+              "tid": 2129010,
+              "affinity": [
+                34
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 34,
+              "state": "R"
+            },
+            {
+              "tid": 2129011,
+              "affinity": [
+                35
+              ],
+              "ticks": 61,
+              "start_ticks": 396559910,
+              "last_cpu": 35,
+              "state": "R"
+            }
+          ],
+          "vanished": [],
+          "errors": []
+        },
+        "torch_intraop": 36,
+        "torch_interop": 608,
+        "parallel_info": "ATen/Parallel:\n\tat::get_num_threads() : 36\n\tat::get_num_interop_threads() : 608\nOpenMP 201511 (a.k.a. OpenMP 4.5)\n\tomp_get_max_threads() : 36\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 608\nEnvironment variables:\n\tOMP_NUM_THREADS : 36\nATen parallel backend: OpenMP\n",
+        "runtime": {
+          "modules": {
+            "torch": {
+              "version": "2.7.1+cpu",
+              "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py"
+            },
+            "numpy": {
+              "version": "1.26.4",
+              "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/__init__.py"
+            },
+            "kml_ops": {
+              "version": null,
+              "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/baseline/kml_ops.py"
+            }
+          },
+          "libraries": {
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so": {
+              "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+            },
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so": {
+              "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a",
+              "openblas_get_num_threads64_": 1,
+              "openblas_get_num_threads_64_": 1
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute-489746be.so": {
+              "sha256": "7f338493638c8b4f8ba0f3d6ef44e272d7ddfc67391282dbc0c25eaf4c82a9c2",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute_graph-17c2200a.so": {
+              "sha256": "1712d2c6eba7d87189788766fd56120cf1d1cb42ca53b7809ea14ee27ac7d238",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libgfortran-0b50f350.so.5.0.0": {
+              "sha256": "6e85b148428f0eeb8445270806f25deb8a9e749086157d47a5955bed23189642"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so": {
+              "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so": {
+              "sha256": "0098ec8982bc60ae9511ee3a636d9b9c8f9d3decceb4b44c7e1d446d8b74ab0b",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so": {
+              "sha256": "34370e00fc38fe83b82685b113358b12afe6959286b8f5fc8125682ce9e0af10"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libshm.so": {
+              "sha256": "0f3cef29d8ca21eaa84e547ce55a7913bf504a9530f00307caa6535a7db1d2c1",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so": {
+              "sha256": "340a49fc5a0ed13f02b67f08f62bc1a7e9636a0f277950ef00c8da0ff896a646",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so": {
+              "sha256": "eee755641450652e0c08aeb5d3436f39bd9d3ff89e501a4262b3b0ca5862ac7a",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so": {
+              "sha256": "2cbf6ab7259b743b02eb75babb72548784b1503b280f934eeceefec0fb1816e4"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so": {
+              "sha256": "c26b39e44ea1b339ab2828f492dfc8d6ddf854c3da3f5c5f5cf4aa3d06e47912",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so": {
+              "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1": {
+              "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            }
+          }
+        }
+      },
+      {
+        "name": "after_candidate",
+        "pid": 2127377,
+        "time": 1793944226.119738,
+        "calling_tid": 2127377,
+        "calling_affinity": [
+          0
+        ],
+        "environment": {
+          "OMP_NUM_THREADS": "36",
+          "MKL_NUM_THREADS": "36",
+          "OPENBLAS_NUM_THREADS": "1",
+          "OMP_PLACES": "cores",
+          "OMP_PROC_BIND": "close"
+        },
+        "snapshot": {
+          "complete": true,
+          "threads": [
+            {
+              "tid": 2127377,
+              "affinity": [
+                0
+              ],
+              "ticks": 977,
+              "start_ticks": 396558068,
+              "last_cpu": 0,
+              "state": "R"
+            },
+            {
+              "tid": 2128977,
+              "affinity": [
+                1
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 1,
+              "state": "R"
+            },
+            {
+              "tid": 2128978,
+              "affinity": [
+                2
+              ],
+              "ticks": 69,
+              "start_ticks": 396559910,
+              "last_cpu": 2,
+              "state": "R"
+            },
+            {
+              "tid": 2128979,
+              "affinity": [
+                3
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 3,
+              "state": "R"
+            },
+            {
+              "tid": 2128980,
+              "affinity": [
+                4
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 4,
+              "state": "R"
+            },
+            {
+              "tid": 2128981,
+              "affinity": [
+                5
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 5,
+              "state": "R"
+            },
+            {
+              "tid": 2128982,
+              "affinity": [
+                6
+              ],
+              "ticks": 69,
+              "start_ticks": 396559910,
+              "last_cpu": 6,
+              "state": "R"
+            },
+            {
+              "tid": 2128983,
+              "affinity": [
+                7
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 7,
+              "state": "R"
+            },
+            {
+              "tid": 2128984,
+              "affinity": [
+                8
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 8,
+              "state": "R"
+            },
+            {
+              "tid": 2128985,
+              "affinity": [
+                9
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 9,
+              "state": "R"
+            },
+            {
+              "tid": 2128986,
+              "affinity": [
+                10
+              ],
+              "ticks": 69,
+              "start_ticks": 396559910,
+              "last_cpu": 10,
+              "state": "R"
+            },
+            {
+              "tid": 2128987,
+              "affinity": [
+                11
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 11,
+              "state": "R"
+            },
+            {
+              "tid": 2128988,
+              "affinity": [
+                12
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 12,
+              "state": "R"
+            },
+            {
+              "tid": 2128989,
+              "affinity": [
+                13
+              ],
+              "ticks": 69,
+              "start_ticks": 396559910,
+              "last_cpu": 13,
+              "state": "R"
+            },
+            {
+              "tid": 2128990,
+              "affinity": [
+                14
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 14,
+              "state": "R"
+            },
+            {
+              "tid": 2128991,
+              "affinity": [
+                15
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 15,
+              "state": "R"
+            },
+            {
+              "tid": 2128992,
+              "affinity": [
+                16
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 16,
+              "state": "R"
+            },
+            {
+              "tid": 2128993,
+              "affinity": [
+                17
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 17,
+              "state": "R"
+            },
+            {
+              "tid": 2128994,
+              "affinity": [
+                18
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 18,
+              "state": "R"
+            },
+            {
+              "tid": 2128995,
+              "affinity": [
+                19
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 19,
+              "state": "R"
+            },
+            {
+              "tid": 2128996,
+              "affinity": [
+                20
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 20,
+              "state": "R"
+            },
+            {
+              "tid": 2128997,
+              "affinity": [
+                21
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 21,
+              "state": "R"
+            },
+            {
+              "tid": 2128998,
+              "affinity": [
+                22
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 22,
+              "state": "R"
+            },
+            {
+              "tid": 2128999,
+              "affinity": [
+                23
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 23,
+              "state": "R"
+            },
+            {
+              "tid": 2129000,
+              "affinity": [
+                24
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 24,
+              "state": "R"
+            },
+            {
+              "tid": 2129001,
+              "affinity": [
+                25
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 25,
+              "state": "R"
+            },
+            {
+              "tid": 2129002,
+              "affinity": [
+                26
+              ],
+              "ticks": 71,
+              "start_ticks": 396559910,
+              "last_cpu": 26,
+              "state": "R"
+            },
+            {
+              "tid": 2129003,
+              "affinity": [
+                27
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 27,
+              "state": "R"
+            },
+            {
+              "tid": 2129004,
+              "affinity": [
+                28
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 28,
+              "state": "R"
+            },
+            {
+              "tid": 2129005,
+              "affinity": [
+                29
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 29,
+              "state": "R"
+            },
+            {
+              "tid": 2129006,
+              "affinity": [
+                30
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 30,
+              "state": "R"
+            },
+            {
+              "tid": 2129007,
+              "affinity": [
+                31
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 31,
+              "state": "R"
+            },
+            {
+              "tid": 2129008,
+              "affinity": [
+                32
+              ],
+              "ticks": 71,
+              "start_ticks": 396559910,
+              "last_cpu": 32,
+              "state": "R"
+            },
+            {
+              "tid": 2129009,
+              "affinity": [
+                33
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 33,
+              "state": "R"
+            },
+            {
+              "tid": 2129010,
+              "affinity": [
+                34
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 34,
+              "state": "R"
+            },
+            {
+              "tid": 2129011,
+              "affinity": [
+                35
+              ],
+              "ticks": 70,
+              "start_ticks": 396559910,
+              "last_cpu": 35,
+              "state": "R"
+            }
+          ],
+          "vanished": [],
+          "errors": []
+        },
+        "torch_intraop": 36,
+        "torch_interop": 608,
+        "parallel_info": "ATen/Parallel:\n\tat::get_num_threads() : 36\n\tat::get_num_interop_threads() : 608\nOpenMP 201511 (a.k.a. OpenMP 4.5)\n\tomp_get_max_threads() : 36\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 608\nEnvironment variables:\n\tOMP_NUM_THREADS : 36\nATen parallel backend: OpenMP\n",
+        "runtime": {
+          "modules": {
+            "torch": {
+              "version": "2.7.1+cpu",
+              "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py"
+            },
+            "numpy": {
+              "version": "1.26.4",
+              "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/__init__.py"
+            },
+            "kml_ops": {
+              "version": null,
+              "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/baseline/kml_ops.py"
+            }
+          },
+          "libraries": {
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so": {
+              "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+            },
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so": {
+              "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a",
+              "openblas_get_num_threads64_": 1,
+              "openblas_get_num_threads_64_": 1
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute-489746be.so": {
+              "sha256": "7f338493638c8b4f8ba0f3d6ef44e272d7ddfc67391282dbc0c25eaf4c82a9c2",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute_graph-17c2200a.so": {
+              "sha256": "1712d2c6eba7d87189788766fd56120cf1d1cb42ca53b7809ea14ee27ac7d238",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libgfortran-0b50f350.so.5.0.0": {
+              "sha256": "6e85b148428f0eeb8445270806f25deb8a9e749086157d47a5955bed23189642"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so": {
+              "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so": {
+              "sha256": "0098ec8982bc60ae9511ee3a636d9b9c8f9d3decceb4b44c7e1d446d8b74ab0b",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so": {
+              "sha256": "34370e00fc38fe83b82685b113358b12afe6959286b8f5fc8125682ce9e0af10"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libshm.so": {
+              "sha256": "0f3cef29d8ca21eaa84e547ce55a7913bf504a9530f00307caa6535a7db1d2c1",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so": {
+              "sha256": "340a49fc5a0ed13f02b67f08f62bc1a7e9636a0f277950ef00c8da0ff896a646",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so": {
+              "sha256": "eee755641450652e0c08aeb5d3436f39bd9d3ff89e501a4262b3b0ca5862ac7a",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so": {
+              "sha256": "2cbf6ab7259b743b02eb75babb72548784b1503b280f934eeceefec0fb1816e4"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so": {
+              "sha256": "c26b39e44ea1b339ab2828f492dfc8d6ddf854c3da3f5c5f5cf4aa3d06e47912",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so": {
+              "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1": {
+              "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            }
+          }
+        }
+      },
+      {
+        "name": "publish",
+        "pid": 2127377,
+        "time": 1793944226.4214294,
+        "calling_tid": 2127377,
+        "calling_affinity": [
+          0
+        ],
+        "environment": {
+          "OMP_NUM_THREADS": "36",
+          "MKL_NUM_THREADS": "36",
+          "OPENBLAS_NUM_THREADS": "1",
+          "OMP_PLACES": "cores",
+          "OMP_PROC_BIND": "close"
+        },
+        "snapshot": {
+          "complete": true,
+          "threads": [
+            {
+              "tid": 2127377,
+              "affinity": [
+                0
+              ],
+              "ticks": 992,
+              "start_ticks": 396558068,
+              "last_cpu": 0,
+              "state": "R"
+            },
+            {
+              "tid": 2128977,
+              "affinity": [
+                1
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 1,
+              "state": "S"
+            },
+            {
+              "tid": 2128978,
+              "affinity": [
+                2
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 2,
+              "state": "S"
+            },
+            {
+              "tid": 2128979,
+              "affinity": [
+                3
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 3,
+              "state": "S"
+            },
+            {
+              "tid": 2128980,
+              "affinity": [
+                4
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 4,
+              "state": "S"
+            },
+            {
+              "tid": 2128981,
+              "affinity": [
+                5
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 5,
+              "state": "S"
+            },
+            {
+              "tid": 2128982,
+              "affinity": [
+                6
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 6,
+              "state": "S"
+            },
+            {
+              "tid": 2128983,
+              "affinity": [
+                7
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 7,
+              "state": "S"
+            },
+            {
+              "tid": 2128984,
+              "affinity": [
+                8
+              ],
+              "ticks": 97,
+              "start_ticks": 396559910,
+              "last_cpu": 8,
+              "state": "S"
+            },
+            {
+              "tid": 2128985,
+              "affinity": [
+                9
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 9,
+              "state": "S"
+            },
+            {
+              "tid": 2128986,
+              "affinity": [
+                10
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 10,
+              "state": "S"
+            },
+            {
+              "tid": 2128987,
+              "affinity": [
+                11
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 11,
+              "state": "S"
+            },
+            {
+              "tid": 2128988,
+              "affinity": [
+                12
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 12,
+              "state": "S"
+            },
+            {
+              "tid": 2128989,
+              "affinity": [
+                13
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 13,
+              "state": "S"
+            },
+            {
+              "tid": 2128990,
+              "affinity": [
+                14
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 14,
+              "state": "S"
+            },
+            {
+              "tid": 2128991,
+              "affinity": [
+                15
+              ],
+              "ticks": 97,
+              "start_ticks": 396559910,
+              "last_cpu": 15,
+              "state": "S"
+            },
+            {
+              "tid": 2128992,
+              "affinity": [
+                16
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 16,
+              "state": "S"
+            },
+            {
+              "tid": 2128993,
+              "affinity": [
+                17
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 17,
+              "state": "S"
+            },
+            {
+              "tid": 2128994,
+              "affinity": [
+                18
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 18,
+              "state": "S"
+            },
+            {
+              "tid": 2128995,
+              "affinity": [
+                19
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 19,
+              "state": "S"
+            },
+            {
+              "tid": 2128996,
+              "affinity": [
+                20
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 20,
+              "state": "S"
+            },
+            {
+              "tid": 2128997,
+              "affinity": [
+                21
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 21,
+              "state": "S"
+            },
+            {
+              "tid": 2128998,
+              "affinity": [
+                22
+              ],
+              "ticks": 97,
+              "start_ticks": 396559910,
+              "last_cpu": 22,
+              "state": "S"
+            },
+            {
+              "tid": 2128999,
+              "affinity": [
+                23
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 23,
+              "state": "S"
+            },
+            {
+              "tid": 2129000,
+              "affinity": [
+                24
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 24,
+              "state": "S"
+            },
+            {
+              "tid": 2129001,
+              "affinity": [
+                25
+              ],
+              "ticks": 97,
+              "start_ticks": 396559910,
+              "last_cpu": 25,
+              "state": "S"
+            },
+            {
+              "tid": 2129002,
+              "affinity": [
+                26
+              ],
+              "ticks": 97,
+              "start_ticks": 396559910,
+              "last_cpu": 26,
+              "state": "S"
+            },
+            {
+              "tid": 2129003,
+              "affinity": [
+                27
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 27,
+              "state": "S"
+            },
+            {
+              "tid": 2129004,
+              "affinity": [
+                28
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 28,
+              "state": "S"
+            },
+            {
+              "tid": 2129005,
+              "affinity": [
+                29
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 29,
+              "state": "S"
+            },
+            {
+              "tid": 2129006,
+              "affinity": [
+                30
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 30,
+              "state": "S"
+            },
+            {
+              "tid": 2129007,
+              "affinity": [
+                31
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 31,
+              "state": "S"
+            },
+            {
+              "tid": 2129008,
+              "affinity": [
+                32
+              ],
+              "ticks": 97,
+              "start_ticks": 396559910,
+              "last_cpu": 32,
+              "state": "S"
+            },
+            {
+              "tid": 2129009,
+              "affinity": [
+                33
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 33,
+              "state": "S"
+            },
+            {
+              "tid": 2129010,
+              "affinity": [
+                34
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 34,
+              "state": "S"
+            },
+            {
+              "tid": 2129011,
+              "affinity": [
+                35
+              ],
+              "ticks": 96,
+              "start_ticks": 396559910,
+              "last_cpu": 35,
+              "state": "S"
+            }
+          ],
+          "vanished": [],
+          "errors": []
+        },
+        "torch_intraop": 36,
+        "torch_interop": 608,
+        "parallel_info": "ATen/Parallel:\n\tat::get_num_threads() : 36\n\tat::get_num_interop_threads() : 608\nOpenMP 201511 (a.k.a. OpenMP 4.5)\n\tomp_get_max_threads() : 36\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 608\nEnvironment variables:\n\tOMP_NUM_THREADS : 36\nATen parallel backend: OpenMP\n",
+        "runtime": {
+          "modules": {
+            "torch": {
+              "version": "2.7.1+cpu",
+              "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py"
+            },
+            "numpy": {
+              "version": "1.26.4",
+              "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/__init__.py"
+            },
+            "kml_ops": {
+              "version": null,
+              "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/baseline/kml_ops.py"
+            }
+          },
+          "libraries": {
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so": {
+              "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+            },
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so": {
+              "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a",
+              "openblas_get_num_threads64_": 1,
+              "openblas_get_num_threads_64_": 1
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute-489746be.so": {
+              "sha256": "7f338493638c8b4f8ba0f3d6ef44e272d7ddfc67391282dbc0c25eaf4c82a9c2",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute_graph-17c2200a.so": {
+              "sha256": "1712d2c6eba7d87189788766fd56120cf1d1cb42ca53b7809ea14ee27ac7d238",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libgfortran-0b50f350.so.5.0.0": {
+              "sha256": "6e85b148428f0eeb8445270806f25deb8a9e749086157d47a5955bed23189642"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so": {
+              "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so": {
+              "sha256": "0098ec8982bc60ae9511ee3a636d9b9c8f9d3decceb4b44c7e1d446d8b74ab0b",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so": {
+              "sha256": "34370e00fc38fe83b82685b113358b12afe6959286b8f5fc8125682ce9e0af10"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libshm.so": {
+              "sha256": "0f3cef29d8ca21eaa84e547ce55a7913bf504a9530f00307caa6535a7db1d2c1",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so": {
+              "sha256": "340a49fc5a0ed13f02b67f08f62bc1a7e9636a0f277950ef00c8da0ff896a646",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so": {
+              "sha256": "eee755641450652e0c08aeb5d3436f39bd9d3ff89e501a4262b3b0ca5862ac7a",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so": {
+              "sha256": "2cbf6ab7259b743b02eb75babb72548784b1503b280f934eeceefec0fb1816e4"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so": {
+              "sha256": "c26b39e44ea1b339ab2828f492dfc8d6ddf854c3da3f5c5f5cf4aa3d06e47912",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so": {
+              "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1": {
+              "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            }
+          }
+        }
+      }
+    ],
+    "errors": []
+  },
+  "runtime": {
+    "backend": "kml",
+    "python": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+    "python_version": "3.9.9 (main, Jul 29 2025, 11:26:21) \n[GCC 10.3.1]",
+    "host": "cn21338",
+    "platform": "Linux-5.10.0-285.6.v2403.ky10p.aarch64-aarch64-with-glibc2.34",
+    "torch": "2.7.1+cpu",
+    "torch_file": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+    "numpy": "1.26.4",
+    "numpy_file": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib64/python3.9/site-packages/numpy/__init__.py",
+    "torch_threads": 36,
+    "interop_threads": 608,
+    "torch_config": "PyTorch built with:\n  - GCC 11.2\n  - C++ Version: 201703\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: DEFAULT\n  - Build settings: BLAS_INFO=open, BUILD_TYPE=Release, COMMIT_SHA=e2d141dbde55c2a4370fac5165b0561b6af4798b, CXX_COMPILER=/opt/rh/gcc-toolset-11/root/usr/bin/c++, CXX_FLAGS=-ffunction-sections -fdata-sections -D_GLIBCXX_USE_CXX11_ABI=1 -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_PYTORCH_QNNPACK -DAT_BUILD_ARM_VEC256_WITH_SLEEF -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=open, TORCH_VERSION=2.7.1, USE_CUDA=OFF, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, \n",
+    "env": {
+      "KML_BLAS_LIB": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+      "LINEAR_DTYPE": "fp32",
+      "LD_PRELOAD": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+      "OMP_NUM_THREADS": "36",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "36",
+      "OMP_PROC_BIND": "close",
+      "OMP_PLACES": "cores"
+    },
+    "affinity_before": {
+      "expected": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "actual": [
+        0
+      ],
+      "snapshot": {
+        "complete": true,
+        "threads": [
+          {
+            "tid": 2127377,
+            "affinity": [
+              0
+            ],
+            "ticks": 873,
+            "start_ticks": 396558068,
+            "last_cpu": 0,
+            "state": "R"
+          },
+          {
+            "tid": 2128977,
+            "affinity": [
+              1
+            ],
+            "ticks": 4,
+            "start_ticks": 396559910,
+            "last_cpu": 1,
+            "state": "R"
+          },
+          {
+            "tid": 2128978,
+            "affinity": [
+              2
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 2,
+            "state": "R"
+          },
+          {
+            "tid": 2128979,
+            "affinity": [
+              3
+            ],
+            "ticks": 4,
+            "start_ticks": 396559910,
+            "last_cpu": 3,
+            "state": "R"
+          },
+          {
+            "tid": 2128980,
+            "affinity": [
+              4
+            ],
+            "ticks": 4,
+            "start_ticks": 396559910,
+            "last_cpu": 4,
+            "state": "R"
+          },
+          {
+            "tid": 2128981,
+            "affinity": [
+              5
+            ],
+            "ticks": 4,
+            "start_ticks": 396559910,
+            "last_cpu": 5,
+            "state": "R"
+          },
+          {
+            "tid": 2128982,
+            "affinity": [
+              6
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 6,
+            "state": "R"
+          },
+          {
+            "tid": 2128983,
+            "affinity": [
+              7
+            ],
+            "ticks": 4,
+            "start_ticks": 396559910,
+            "last_cpu": 7,
+            "state": "R"
+          },
+          {
+            "tid": 2128984,
+            "affinity": [
+              8
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 8,
+            "state": "R"
+          },
+          {
+            "tid": 2128985,
+            "affinity": [
+              9
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 9,
+            "state": "R"
+          },
+          {
+            "tid": 2128986,
+            "affinity": [
+              10
+            ],
+            "ticks": 6,
+            "start_ticks": 396559910,
+            "last_cpu": 10,
+            "state": "R"
+          },
+          {
+            "tid": 2128987,
+            "affinity": [
+              11
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 11,
+            "state": "R"
+          },
+          {
+            "tid": 2128988,
+            "affinity": [
+              12
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 12,
+            "state": "R"
+          },
+          {
+            "tid": 2128989,
+            "affinity": [
+              13
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 13,
+            "state": "R"
+          },
+          {
+            "tid": 2128990,
+            "affinity": [
+              14
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 14,
+            "state": "R"
+          },
+          {
+            "tid": 2128991,
+            "affinity": [
+              15
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 15,
+            "state": "R"
+          },
+          {
+            "tid": 2128992,
+            "affinity": [
+              16
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 16,
+            "state": "R"
+          },
+          {
+            "tid": 2128993,
+            "affinity": [
+              17
+            ],
+            "ticks": 6,
+            "start_ticks": 396559910,
+            "last_cpu": 17,
+            "state": "R"
+          },
+          {
+            "tid": 2128994,
+            "affinity": [
+              18
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 18,
+            "state": "R"
+          },
+          {
+            "tid": 2128995,
+            "affinity": [
+              19
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 19,
+            "state": "R"
+          },
+          {
+            "tid": 2128996,
+            "affinity": [
+              20
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 20,
+            "state": "R"
+          },
+          {
+            "tid": 2128997,
+            "affinity": [
+              21
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 21,
+            "state": "R"
+          },
+          {
+            "tid": 2128998,
+            "affinity": [
+              22
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 22,
+            "state": "R"
+          },
+          {
+            "tid": 2128999,
+            "affinity": [
+              23
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 23,
+            "state": "R"
+          },
+          {
+            "tid": 2129000,
+            "affinity": [
+              24
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 24,
+            "state": "R"
+          },
+          {
+            "tid": 2129001,
+            "affinity": [
+              25
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 25,
+            "state": "R"
+          },
+          {
+            "tid": 2129002,
+            "affinity": [
+              26
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 26,
+            "state": "R"
+          },
+          {
+            "tid": 2129003,
+            "affinity": [
+              27
+            ],
+            "ticks": 6,
+            "start_ticks": 396559910,
+            "last_cpu": 27,
+            "state": "R"
+          },
+          {
+            "tid": 2129004,
+            "affinity": [
+              28
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 28,
+            "state": "R"
+          },
+          {
+            "tid": 2129005,
+            "affinity": [
+              29
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 29,
+            "state": "R"
+          },
+          {
+            "tid": 2129006,
+            "affinity": [
+              30
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 30,
+            "state": "R"
+          },
+          {
+            "tid": 2129007,
+            "affinity": [
+              31
+            ],
+            "ticks": 5,
+            "start_ticks": 396559910,
+            "last_cpu": 31,
+            "state": "R"
+          },
+          {
+            "tid": 2129008,
+            "affinity": [
+              32
+            ],
+            "ticks": 6,
+            "start_ticks": 396559910,
+            "last_cpu": 32,
+            "state": "R"
+          },
+          {
+            "tid": 2129009,
+            "affinity": [
+              33
+            ],
+            "ticks": 6,
+            "start_ticks": 396559910,
+            "last_cpu": 33,
+            "state": "R"
+          },
+          {
+            "tid": 2129010,
+            "affinity": [
+              34
+            ],
+            "ticks": 6,
+            "start_ticks": 396559910,
+            "last_cpu": 34,
+            "state": "R"
+          },
+          {
+            "tid": 2129011,
+            "affinity": [
+              35
+            ],
+            "ticks": 6,
+            "start_ticks": 396559910,
+            "last_cpu": 35,
+            "state": "R"
+          }
+        ],
+        "vanished": [],
+        "errors": []
+      }
+    },
+    "kml_ops_file": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/baseline/kml_ops.py",
+    "libraries": [
+      {
+        "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+        "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+      },
+      {
+        "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so",
+        "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a"
+      },
+      {
+        "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so",
+        "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f"
+      },
+      {
+        "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+        "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+      },
+      {
+        "path": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+        "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c"
+      }
+    ],
+    "kml_resolved": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+    "kml_gemm_calls": 1,
+    "kml_shapes": {
+      "([13312, 512], [13312, 2048], (), True, False)": 1
+    },
+    "affinity_after": {
+      "expected": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "actual": [
+        0
+      ],
+      "snapshot": {
+        "complete": true,
+        "threads": [
+          {
+            "tid": 2127377,
+            "affinity": [
+              0
+            ],
+            "ticks": 981,
+            "start_ticks": 396558068,
+            "last_cpu": 0,
+            "state": "R"
+          },
+          {
+            "tid": 2128977,
+            "affinity": [
+              1
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 1,
+            "state": "R"
+          },
+          {
+            "tid": 2128978,
+            "affinity": [
+              2
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 2,
+            "state": "R"
+          },
+          {
+            "tid": 2128979,
+            "affinity": [
+              3
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 3,
+            "state": "R"
+          },
+          {
+            "tid": 2128980,
+            "affinity": [
+              4
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 4,
+            "state": "R"
+          },
+          {
+            "tid": 2128981,
+            "affinity": [
+              5
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 5,
+            "state": "R"
+          },
+          {
+            "tid": 2128982,
+            "affinity": [
+              6
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 6,
+            "state": "R"
+          },
+          {
+            "tid": 2128983,
+            "affinity": [
+              7
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 7,
+            "state": "R"
+          },
+          {
+            "tid": 2128984,
+            "affinity": [
+              8
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 8,
+            "state": "R"
+          },
+          {
+            "tid": 2128985,
+            "affinity": [
+              9
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 9,
+            "state": "R"
+          },
+          {
+            "tid": 2128986,
+            "affinity": [
+              10
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 10,
+            "state": "R"
+          },
+          {
+            "tid": 2128987,
+            "affinity": [
+              11
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 11,
+            "state": "R"
+          },
+          {
+            "tid": 2128988,
+            "affinity": [
+              12
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 12,
+            "state": "R"
+          },
+          {
+            "tid": 2128989,
+            "affinity": [
+              13
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 13,
+            "state": "R"
+          },
+          {
+            "tid": 2128990,
+            "affinity": [
+              14
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 14,
+            "state": "R"
+          },
+          {
+            "tid": 2128991,
+            "affinity": [
+              15
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 15,
+            "state": "R"
+          },
+          {
+            "tid": 2128992,
+            "affinity": [
+              16
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 16,
+            "state": "R"
+          },
+          {
+            "tid": 2128993,
+            "affinity": [
+              17
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 17,
+            "state": "R"
+          },
+          {
+            "tid": 2128994,
+            "affinity": [
+              18
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 18,
+            "state": "R"
+          },
+          {
+            "tid": 2128995,
+            "affinity": [
+              19
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 19,
+            "state": "R"
+          },
+          {
+            "tid": 2128996,
+            "affinity": [
+              20
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 20,
+            "state": "R"
+          },
+          {
+            "tid": 2128997,
+            "affinity": [
+              21
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 21,
+            "state": "R"
+          },
+          {
+            "tid": 2128998,
+            "affinity": [
+              22
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 22,
+            "state": "R"
+          },
+          {
+            "tid": 2128999,
+            "affinity": [
+              23
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 23,
+            "state": "R"
+          },
+          {
+            "tid": 2129000,
+            "affinity": [
+              24
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 24,
+            "state": "R"
+          },
+          {
+            "tid": 2129001,
+            "affinity": [
+              25
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 25,
+            "state": "R"
+          },
+          {
+            "tid": 2129002,
+            "affinity": [
+              26
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 26,
+            "state": "R"
+          },
+          {
+            "tid": 2129003,
+            "affinity": [
+              27
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 27,
+            "state": "R"
+          },
+          {
+            "tid": 2129004,
+            "affinity": [
+              28
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 28,
+            "state": "R"
+          },
+          {
+            "tid": 2129005,
+            "affinity": [
+              29
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 29,
+            "state": "R"
+          },
+          {
+            "tid": 2129006,
+            "affinity": [
+              30
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 30,
+            "state": "R"
+          },
+          {
+            "tid": 2129007,
+            "affinity": [
+              31
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 31,
+            "state": "R"
+          },
+          {
+            "tid": 2129008,
+            "affinity": [
+              32
+            ],
+            "ticks": 79,
+            "start_ticks": 396559910,
+            "last_cpu": 32,
+            "state": "R"
+          },
+          {
+            "tid": 2129009,
+            "affinity": [
+              33
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 33,
+            "state": "R"
+          },
+          {
+            "tid": 2129010,
+            "affinity": [
+              34
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 34,
+            "state": "R"
+          },
+          {
+            "tid": 2129011,
+            "affinity": [
+              35
+            ],
+            "ticks": 78,
+            "start_ticks": 396559910,
+            "last_cpu": 35,
+            "state": "R"
+          }
+        ],
+        "vanished": [],
+        "errors": []
+      }
+    },
+    "libraries_after": [
+      {
+        "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+        "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+      },
+      {
+        "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so",
+        "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a"
+      },
+      {
+        "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so",
+        "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f"
+      },
+      {
+        "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+        "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+      },
+      {
+        "path": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+        "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c"
+      }
+    ]
+  },
+  "native": {
+    "baseline": {
+      "native_calls": 1,
+      "target_full": 1,
+      "target_tiles": 0,
+      "native_shapes": {
+        "(101, 112, 111, 512, 2048, 13312, 1.0, 512, 2048, 0.0, 2048)": 1
+      },
+      "captured_target": [
+        [
+          101,
+          112,
+          111,
+          512,
+          2048,
+          13312,
+          1.0,
+          70373009784896,
+          512,
+          70375920635968,
+          2048,
+          0.0,
+          187650320925696,
+          2048
+        ]
+      ],
+      "original_type": "_FuncPtr"
+    },
+    "candidate": {
+      "native_calls": 2,
+      "target_full": 0,
+      "target_tiles": 2,
+      "native_shapes": {
+        "(101, 112, 111, 512, 1024, 13312, 1.0, 512, 2048, 0.0, 2048)": 2
+      },
+      "captured_target": [
+        [
+          101,
+          112,
+          111,
+          512,
+          1024,
+          13312,
+          1.0,
+          70373009784896,
+          512,
+          70375920635968,
+          2048,
+          0.0,
+          187650325122112,
+          2048
+        ],
+        [
+          101,
+          112,
+          111,
+          512,
+          1024,
+          13312,
+          1.0,
+          70373009784896,
+          512,
+          70375920640064,
+          2048,
+          0.0,
+          187650325126208,
+          2048
+        ]
+      ],
+      "original_type": "_FuncPtr"
+    }
+  },
+  "metrics": [
+    {
+      "name": "actual_KML_target.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 11.81200524549626,
+      "passed": true
+    }
+  ],
+  "imports": {
+    "baseline": {
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/baseline/kml_ops.py",
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+    },
+    "candidate": {
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/candidate/kml_ops.py",
+      "sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea"
+    }
+  }
+}

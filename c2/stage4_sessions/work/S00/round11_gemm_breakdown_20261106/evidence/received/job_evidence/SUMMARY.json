@@ -1,0 +1,58 @@
+{
+  "application_result": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z/payload/outputs/gemm_2049454/result.json",
+  "application_status": "GEMM5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+  "attempts": 1,
+  "cleanup_seconds": 30,
+  "closing_seconds": 30,
+  "engineering_only": true,
+  "execution_seconds": 840,
+  "exit_code": 0,
+  "finished": 3961670.643285941,
+  "formal_split_status": "UNKNOWN",
+  "gemm_outcome": {
+    "application_error": null,
+    "application_status": "GEMM5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+    "errors": [],
+    "gemm5_complete": true,
+    "missing_outputs": [],
+    "samples": [
+      {
+        "bytes": 150035,
+        "native_calls": 149,
+        "records": 149,
+        "sha256": "ef3809752f62206c572e3864d185291af59ff10e7622e07594f2074556615f60",
+        "step": 3,
+        "thread_ids": [
+          1758130
+        ]
+      },
+      {
+        "bytes": 150044,
+        "native_calls": 149,
+        "records": 149,
+        "sha256": "94c99cde67845f7c467637c746a9368b8ad4484b3716b897809484b02d810923",
+        "step": 4,
+        "thread_ids": [
+          1758130
+        ]
+      },
+      {
+        "bytes": 150040,
+        "native_calls": 149,
+        "records": 149,
+        "sha256": "a0cb1925512fe4edf12e89cb310f964642ba65f61eb09070023cb52cdc1d2509",
+        "step": 5,
+        "thread_ids": [
+          1758130
+        ]
+      }
+    ]
+  },
+  "job_id": "2049454",
+  "job_seconds": 900,
+  "protocol": "ENGINEERING_REAL_CORPUS_GEMM5_V1",
+  "started": 3961594.484656103,
+  "status": "GEMM5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+  "subject_mapping_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT"
+}

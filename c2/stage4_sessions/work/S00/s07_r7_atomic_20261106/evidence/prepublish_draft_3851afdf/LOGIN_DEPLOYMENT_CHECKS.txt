@@ -1,0 +1,72 @@
+
+S00_S07_R7_ATOMIC_DEPLOYMENT.zip: OK
+COMMANDS.md: OK
+COMMON_REUSE_CHECK.json: OK
+INTERFACE_FOR_S00.md: OK
+MINIMAL.diff: OK
+OBSERVATION_CONTRACT.md: OK
+OWNERSHIP_FROM_R12.diff: OK
+OWNERSHIP_PROVENANCE.json: OK
+S07_ATOMIC_READY.json: OK
+S07_ATOMIC_REPORTS_R7.zip: OK
+S07_INTERFACE_READY.json: OK
+SOURCE_MANIFEST.json: OK
+TASK_CARD.md: OK
+UNCHANGED_HELPERS.json: OK
+WORK_STARTED.json: OK
+bounded_round_step.py: OK
+collect_evidence.py: OK
+freeze_deployment.py: OK
+owned_processes.py: OK
+prepare.py: OK
+rank_report_inventory.py: OK
+readiness_inventory.py: OK
+review_gate.py: OK
+run_s07_diag_job.py: OK
+run_s07_diag_job.sh: OK
+scheduler_handoff.py: OK
+stack_inventory.py: OK
+submit_once.py: OK
+tests/test_r7_deployment.py: OK
+tests/test_rank_report_collection.py: OK
+trace_inventory.py: OK
+test_88_checks_share_original_consumer (test_r7_deployment.R7DeploymentTests) ..
+[23;80H..[1Cok
+test_armed_empty_dump_never_proves_stack_written (test_r7_deployment.R7Deploymen
+[23;80HntTests) ...[1Cok
+test_exited_helper_with_permission_error_is_incomplete (test_r7_deployment.R7Dep
+[23;80HploymentTests) ...[1Cok
+test_frozen_r7_exact16_files15_delivery_and_observer (test_r7_deployment.R7Deplo
+[23;80HoymentTests) ...[1Cok
+test_late_step_cannot_reset_shared_cleanup_deadline (test_r7_deployment.R7Deploy
+[23;80HymentTests) ... ok
+test_missing_watchdog_or_wrong_shared_target_is_incomplete (test_r7_deployment.R
+[23;80HR7DeploymentTests) ...[1Cok
+test_nonempty_stacks_and_actual_fields_can_be_complete_without_communication_pas
+[23;80Hss (test_r7_deployment.R7DeploymentTests) ...[1Cok
+test_old_inner_rejected_without_payload (test_r7_deployment.R7DeploymentTests) .
+[23;80H... ok
+test_owned_helper_across_sessions_and_pid_reuse (test_r7_deployment.R7Deployment
+[23;80HtTests) ... ok
+test_review_requires_exact_sha_resources_and_original_criteria (test_r7_deployme
+[23;80Hent.R7DeploymentTests) ... ok
+test_terminal_collection_preserves_empty_partial_and_uncleared_pid_evidence (tes
+[23;80Hst_r7_deployment.R7DeploymentTests) ...[1C{"bundle": "/home/share/dengqingtian/opt/
+[23;80H/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z/evidence/tmpji48eck5/JOB_42_f
+[23;80Hfull_evidence.zip", "bytes": 12573, "sha256": "84d6b6fae3f55c9242f3128d56c6ccc97d
+[23;80Hd31ffdcf66ac81f51dcd60f35d8fe04", "file_count": 25}
+ok
+test_missing_empty_partial_formal_rejected_despite_valid_temp (test_rank_report_
+[23;80H_collection.ReportCollectionTests) ...[1Cok
+test_rank_temp_not_readiness_temp_but_original_ready_residue_retained (test_rank
+[23;80Hk_report_collection.ReportCollectionTests) ...[1Cok
+test_valid_formal_report_and_partial_residue_remain_separate (test_rank_report_c
+[23;80Hcollection.ReportCollectionTests) ...[1Cok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.575s
+
+OK
+S07_R7_LOGIN_DEPLOYMENT_PASS
+Connection to 10.44.9.4 closed.
+[?9001l[?1004l

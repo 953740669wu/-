@@ -1,0 +1,350 @@
+{
+  "status": "RECORDED_AVAILABLE_FIELDS_ONLY",
+  "target_ns": 3973120092789588,
+  "sample_stop_ns": 3973122092789588,
+  "helper_pid": 2882123,
+  "ranks": [
+    {
+      "rank": 0,
+      "pid": 2882120,
+      "sampled_ns": 3973120096375977,
+      "target": {
+        "identity": {
+          "pid": 2882120,
+          "ppid": 2882086,
+          "sid": 2882120,
+          "start_ticks": 397309510
+        },
+        "affinity": [
+          0
+        ]
+      },
+      "helper_cpu": {
+        "calling_affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "snapshot": {
+          "complete": true,
+          "threads": [
+            {
+              "tid": 2882123,
+              "affinity": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35
+              ],
+              "ticks": 21,
+              "start_ticks": 397309521,
+              "last_cpu": 0,
+              "state": "R"
+            }
+          ],
+          "vanished": [],
+          "errors": []
+        }
+      },
+      "fds_first16": [
+        {
+          "fd": 0,
+          "link": "/dev/null",
+          "dev": 5,
+          "inode": 5
+        },
+        {
+          "fd": 1,
+          "link": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/watchdog/rank0.log",
+          "dev": 60,
+          "inode": 63050618508337280
+        },
+        {
+          "fd": 2,
+          "link": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/watchdog/rank0.log",
+          "dev": 60,
+          "inode": 63050618508337280
+        },
+        {
+          "fd": 4,
+          "link": "pipe:[1322180032]",
+          "dev": 12,
+          "inode": 1322180032
+        },
+        {
+          "fd": 5,
+          "link": "pipe:[1322180032]",
+          "dev": 12,
+          "inode": 1322180032
+        },
+        {
+          "fd": 6,
+          "link": "anon_inode:[eventpoll]",
+          "dev": 13,
+          "inode": 17379
+        },
+        {
+          "fd": 7,
+          "link": "socket:[1322180033]",
+          "dev": 8,
+          "inode": 1322180033
+        },
+        {
+          "fd": 8,
+          "link": "socket:[1322180036]",
+          "dev": 8,
+          "inode": 1322180036
+        }
+      ],
+      "identity_after": {
+        "identity": {
+          "pid": 2882120,
+          "ppid": 2882086,
+          "sid": 2882120,
+          "start_ticks": 397309510
+        },
+        "affinity": [
+          0
+        ]
+      },
+      "status": "RECORDED"
+    },
+    {
+      "rank": 1,
+      "pid": 2882122,
+      "sampled_ns": 3973120099468175,
+      "target": {
+        "identity": {
+          "pid": 2882122,
+          "ppid": 2882086,
+          "sid": 2882122,
+          "start_ticks": 397309515
+        },
+        "affinity": [
+          38
+        ]
+      },
+      "helper_cpu": {
+        "calling_affinity": [
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73
+        ],
+        "snapshot": {
+          "complete": true,
+          "threads": [
+            {
+              "tid": 2882123,
+              "affinity": [
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73
+              ],
+              "ticks": 21,
+              "start_ticks": 397309521,
+              "last_cpu": 38,
+              "state": "R"
+            }
+          ],
+          "vanished": [],
+          "errors": []
+        }
+      },
+      "fds_first16": [
+        {
+          "fd": 0,
+          "link": "/dev/null",
+          "dev": 5,
+          "inode": 5
+        },
+        {
+          "fd": 1,
+          "link": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/watchdog/rank1.log",
+          "dev": 60,
+          "inode": 63050618508337344
+        },
+        {
+          "fd": 2,
+          "link": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/watchdog/rank1.log",
+          "dev": 60,
+          "inode": 63050618508337344
+        },
+        {
+          "fd": 4,
+          "link": "pipe:[1307152714]",
+          "dev": 12,
+          "inode": 1307152714
+        },
+        {
+          "fd": 5,
+          "link": "pipe:[1307152714]",
+          "dev": 12,
+          "inode": 1307152714
+        },
+        {
+          "fd": 6,
+          "link": "anon_inode:[eventpoll]",
+          "dev": 13,
+          "inode": 17379
+        },
+        {
+          "fd": 7,
+          "link": "socket:[1307152715]",
+          "dev": 8,
+          "inode": 1307152715
+        },
+        {
+          "fd": 8,
+          "link": "socket:[1307152718]",
+          "dev": 8,
+          "inode": 1307152718
+        }
+      ],
+      "identity_after": {
+        "identity": {
+          "pid": 2882122,
+          "ppid": 2882086,
+          "sid": 2882122,
+          "start_ticks": 397309515
+        },
+        "affinity": [
+          38
+        ]
+      },
+      "status": "RECORDED"
+    }
+  ],
+  "sample_started_ns": 3973120093117236,
+  "finished_ns": 3973120103921679
+}

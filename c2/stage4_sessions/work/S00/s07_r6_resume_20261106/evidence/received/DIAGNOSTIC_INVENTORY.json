@@ -1,0 +1,66 @@
+{
+  "cases": {
+    "crash": {
+      "complete": true,
+      "files": {
+        "rank0.events.jsonl": {
+          "bytes": 6095,
+          "mtime_ns": 1793947526626214000,
+          "open_intervals": [],
+          "sha256": "dd7fc0ff8f244d5762efc8a2761f9dd0a5e2d036a802436a710e06a5b0a4e3b9",
+          "valid_rows": 37
+        },
+        "rank1.events.jsonl": {
+          "bytes": 5835,
+          "mtime_ns": 1793947526726789000,
+          "open_intervals": [],
+          "sha256": "2da48959e5ad8af43a66cfbf2800c5aea4349d8826c72c35410a0cfe2297cce9",
+          "valid_rows": 36
+        },
+        "supervisor.events.jsonl": {
+          "bytes": 1424,
+          "mtime_ns": 1793947526809498000,
+          "open_intervals": [],
+          "sha256": "e267e5ddcd246ec1a3e1d8b4f4a2c5a91461041f672a2aaebe49cf9ffbc41bab",
+          "valid_rows": 10
+        }
+      },
+      "issues": []
+    },
+    "normal": {
+      "complete": true,
+      "files": {
+        "rank0.events.jsonl": {
+          "bytes": 7055,
+          "mtime_ns": 1793947506631609000,
+          "open_intervals": [],
+          "sha256": "070dbfe119beac9801ad7fff03589837703c5e38abbed072b88c12339bb93493",
+          "valid_rows": 45
+        },
+        "rank1.events.jsonl": {
+          "bytes": 7055,
+          "mtime_ns": 1793947506615218000,
+          "open_intervals": [],
+          "sha256": "8a794cf2be51de54e1722e411530e041e3e0bb0f8c79663d3ea5866b1db13202",
+          "valid_rows": 45
+        },
+        "supervisor.events.jsonl": {
+          "bytes": 1263,
+          "mtime_ns": 1793947507732480000,
+          "open_intervals": [],
+          "sha256": "0c7d5b208d6d8353dd13a6550927ee5ffa8f7b5a9b869383befa8c6577482356",
+          "valid_rows": 9
+        }
+      },
+      "issues": []
+    }
+  },
+  "complete": true,
+  "issues": [],
+  "not_run": [
+    "collective-timeout",
+    "watchdog"
+  ],
+  "scope": "trace completeness only; I/O included; no root-cause or communication verdict",
+  "status": "COMPLETE_AVAILABLE_TRACES_ONLY"
+}

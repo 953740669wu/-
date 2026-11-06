@@ -1,0 +1,204 @@
+{
+  "R12": "CLOSED_NO_TRAINING_GAIN_KEEP_ORIGINAL_BASELINE_NO_MORE_TILES_OR_AB",
+  "acceptance": "Original frozen run_checks.py: all four cases once in order; watchdog requires injected_hang on both workers. Communication, event/readiness and Python/proc completeness reported independently.",
+  "atomic_ready": {
+    "bytes": 13960,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\S07_ATOMIC_READY.json",
+    "sha256": "1c39805a36f5df33344aef04e2c977b23621ebc3da2f7ebc1bb884dcb821e766"
+  },
+  "authorization": "This task card and current user; original frozen cluster_job_submitted/old authorization fields retained unchanged",
+  "candidate_check_groups": [
+    {
+      "count": 17,
+      "label": "atomic_reports",
+      "max_seconds": 30
+    },
+    {
+      "count": 27,
+      "label": "stack_observer",
+      "max_seconds": 30
+    },
+    {
+      "count": 16,
+      "label": "readiness",
+      "max_seconds": 30
+    },
+    {
+      "count": 6,
+      "label": "diagnostics",
+      "max_seconds": 30
+    },
+    {
+      "count": 6,
+      "label": "job_identity",
+      "max_seconds": 45
+    },
+    {
+      "count": 16,
+      "label": "probe",
+      "max_seconds": 45
+    }
+  ],
+  "checks": {
+    "bytes": 457,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\DEPLOYMENT_CHECKS.json",
+    "sha256": "ab3b30f22cb8cf4e36d78c931f06715c0dde7b1cf31f0c765c7f1635f68012a0"
+  },
+  "collection": "All raw files/empty/truncated/permission/MISSED/temporary/store retained; snapshot bytes/SHA/remote mtime and changed_during_read; parent helper PID/kill/reap/returncode plus two rank stacks/source/proc receipts",
+  "commands": {
+    "bytes": 4628,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\COMMANDS.md",
+    "sha256": "a90dbe71720074f19a5659737a0ad6251c0c1030123c2817b07ff8fc8eb4bb62"
+  },
+  "deadlines": "Single START before consumer imports: all authorization/88 checks/environment/four cases/observation share START+270. Each cleanup and final cleanup capped START+285, original wrapper TERM2/KILL10<=15, closing15 within scheduler300. Frozen worker TERM/helper stop order and original grace unchanged; no per-helper/stage budget reset.",
+  "deployment_package": {
+    "bytes": 112105,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\S00_S07_R7_ATOMIC_DEPLOYMENT.zip",
+    "sha256": "963ad618d09c998764342f446207d07ee29fcb95818386503ffea6e232de42e4"
+  },
+  "deployment_source_manifest": {
+    "bytes": 3039,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\ARTIFACT_SHA256.json",
+    "sha256": "e7511b33e39f459bce6e0e56627bcce31d7db610a0f9ec00f0b4ab973915dd1e"
+  },
+  "formal_training": false,
+  "immutable_after_publish": true,
+  "initial_remote_check": {
+    "bytes": 5764,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\INITIAL_REMOTE_READONLY.txt",
+    "sha256": "8c85e7093a128a2d99932a3f5ca5b53c5ab1ace76a171b3200aa40d15d9582c6"
+  },
+  "inner_actual_files": 16,
+  "inner_delivery_files": 15,
+  "inner_manifest": {
+    "bytes": 5910,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\SOURCE_MANIFEST.json",
+    "sha256": "f9441fe47988dbb8a47365f230f2f0eb54ed59779e43fbab0d68562a19855196"
+  },
+  "inner_package": {
+    "bytes": 44414,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\S07_ATOMIC_REPORTS_R7.zip",
+    "sha256": "57a1f4c530ce2c9a5edcfe9cc9741129fb1ba4f90459fde459803103a362382d"
+  },
+  "inner_package_name": "S07_ATOMIC_REPORTS_R7.zip",
+  "inner_zip_members": 17,
+  "interface_ready": {
+    "bytes": 1686,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\S07_INTERFACE_READY.json",
+    "sha256": "d0f0fc25e226066803f1290696436afbfebc3ba81e945fa567cc4e9f0c62cbba"
+  },
+  "linux_login_log": {
+    "bytes": 3076,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\LOGIN_DEPLOYMENT_CHECKS.txt",
+    "sha256": "c246bf347f4d6d12517a3614c2bc59016aebe00ebf5619c7442c21d0ef85e434"
+  },
+  "local_fixture_log": {
+    "bytes": 2854,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\tests_after.txt",
+    "sha256": "22cca5dcf3b72b6dbec96e7f7a476023903b97bac70123b41196de64b75b562c"
+  },
+  "login_scope": "No real Torch import, Gloo or model; preparation fixtures only. Linux88 and actual communication/observer pending the one approved job.",
+  "max_retry_count": 0,
+  "native_identity": "Original scheduler_handoff byte-identical: actual CCS_JOB_ID/host/affinity -> nonce/request -> login djob raw/ready fresh30s; no generated fake PID/job or candidate S07_PROC_TASK/deadline environment",
+  "new_jobs": 0,
+  "observation_contract": {
+    "bytes": 4755,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\OBSERVATION_CONTRACT.md",
+    "sha256": "448cad1a857165c74d0cb241e32b18480d1495ec995704f9f6c5de2208712dde"
+  },
+  "official_report_scope": "Last atomically committed checkpoint, possibly broadcast without final error fields; original reader remains strict.",
+  "ownership": "PR_SET_CHILD_SUBREAPER and sampled PID/start_ticks descendants across independent sessions; identity recheck before signalling; bounded cleanup, residuals recorded",
+  "pre_deploy_check": {
+    "bytes": 1359,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\PRE_DEPLOY_CHECK.txt",
+    "sha256": "253524ee607b42e3277a0b439512453afd0cdf0b449fbf0a4d2c9b7961c416ff"
+  },
+  "protocol": "S07_R7_ATOMIC_REPORT_DIAGNOSTIC_V1",
+  "published_utc": "2026-11-06T07:47:38.152237+00:00",
+  "rank_report_residues": "Record .rank[01].json.*.tmp as raw metadata; formal reports only, no temp-to-formal fallback. Distinct from participants/ready publication residues.",
+  "real_HBM": false,
+  "remote_staging_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1",
+  "required_review": {
+    "bindings_object_required": true,
+    "decision": "PASS_FOR_S07_R7_ATOMIC",
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\s07_r7_atomic_review_20261106\\S01_REVIEW.json",
+    "resources_object_required": true,
+    "review_complete": true,
+    "workload_object_required": true
+  },
+  "required_review_bindings": {
+    "atomic_tests_sha256": "9ab4e1b49ce3a2a93ca59614753ee70d6de71c0c6cbd831ca311a495dcdd0e7f",
+    "comm_probe_sha256": "42424581db02b15ee8af0c65f85553dff61767979d9644b40fe954f779434608",
+    "cpu_contract_sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+    "deployment_package_sha256": "963ad618d09c998764342f446207d07ee29fcb95818386503ffea6e232de42e4",
+    "deployment_source_manifest_sha256": "e7511b33e39f459bce6e0e56627bcce31d7db610a0f9ec00f0b4ab973915dd1e",
+    "inner_manifest_sha256": "f9441fe47988dbb8a47365f230f2f0eb54ed59779e43fbab0d68562a19855196",
+    "inner_package_sha256": "57a1f4c530ce2c9a5edcfe9cc9741129fb1ba4f90459fde459803103a362382d",
+    "interface_ready_sha256": "d0f0fc25e226066803f1290696436afbfebc3ba81e945fa567cc4e9f0c62cbba",
+    "observation_contract_sha256": "448cad1a857165c74d0cb241e32b18480d1495ec995704f9f6c5de2208712dde",
+    "observer_sha256": "5b3ad54e675a293e3eb51d292b149c6939bbdc52b68322f340eb76be3b02b875",
+    "reader_sha256": "7b7cc96edd9401981a61db5122bf785e3e2348a41cda5363ba5d2ea4b0217d07",
+    "task_card_sha256": "a2bdce7fad12bc8ef8e0de985c6a25dc3316bf63009568138d58c2100bccf28e"
+  },
+  "required_review_workload": {
+    "atomic_report_tests": 17,
+    "case_deadline_seconds": 30,
+    "case_order": [
+      "normal",
+      "crash",
+      "collective-timeout",
+      "watchdog"
+    ],
+    "communication_criterion": "original candidate/run_checks.py check_case unchanged; watchdog requires both injected_hang",
+    "exit": false,
+    "linux_checks": 88,
+    "max_jobs": 1,
+    "pg_timeout_seconds": 5,
+    "proc_shared_window_seconds": 2,
+    "python_dump_before_deadline_seconds": 5,
+    "repeat": false,
+    "retry": false,
+    "skipped_checks": 0
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_cores_per_domain": 36,
+    "actual_physical_cores": 72,
+    "allocated_cores": 76,
+    "cleanup_seconds": 15,
+    "closing_seconds": 15,
+    "consumer_seconds": 270,
+    "domains": 2,
+    "exclusive": true,
+    "job_seconds": 300,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 4
+  },
+  "status": "S00_DEPLOYMENT_READY",
+  "task_card": {
+    "bytes": 10382,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\TASK_CARD.md",
+    "sha256": "a2bdce7fad12bc8ef8e0de985c6a25dc3316bf63009568138d58c2100bccf28e"
+  },
+  "workload": {
+    "atomic_report_tests": 17,
+    "case_deadline_seconds": 30,
+    "case_order": [
+      "normal",
+      "crash",
+      "collective-timeout",
+      "watchdog"
+    ],
+    "communication_criterion": "original candidate/run_checks.py check_case unchanged; watchdog requires both injected_hang",
+    "exit": false,
+    "linux_checks": 88,
+    "max_jobs": 1,
+    "pg_timeout_seconds": 5,
+    "proc_shared_window_seconds": 2,
+    "python_dump_before_deadline_seconds": 5,
+    "repeat": false,
+    "retry": false,
+    "skipped_checks": 0
+  }
+}

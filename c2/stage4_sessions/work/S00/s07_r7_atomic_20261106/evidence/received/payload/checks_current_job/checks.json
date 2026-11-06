@@ -1,0 +1,112 @@
+{
+  "status": "PASS_PROBE_CHECKS_ONLY",
+  "cases": [
+    {
+      "case": "normal",
+      "expected_behavior": "PASS",
+      "probe_exit": 0,
+      "summary": {
+        "status": "PASS",
+        "communication": "FIXED_TENSOR_2_RANK_ONLY",
+        "case": "normal",
+        "supervisor": {
+          "reason": "complete",
+          "errors": [],
+          "pids": [
+            2875748,
+            2875749
+          ],
+          "exit_codes": [
+            0,
+            0
+          ],
+          "all_reaped": true,
+          "wall_seconds": 19.648015270009637
+        }
+      }
+    },
+    {
+      "case": "crash",
+      "expected_behavior": "PASS",
+      "probe_exit": 1,
+      "summary": {
+        "status": "FAIL",
+        "communication": "NOT_PASSED",
+        "case": "crash",
+        "supervisor": {
+          "reason": "child_failed",
+          "errors": [],
+          "pids": [
+            2877626,
+            2877631
+          ],
+          "exit_codes": [
+            -15,
+            17
+          ],
+          "all_reaped": true,
+          "wall_seconds": 18.72815605904907
+        },
+        "error": "ValueError: workers did not complete normally"
+      }
+    },
+    {
+      "case": "collective-timeout",
+      "expected_behavior": "PASS",
+      "probe_exit": 1,
+      "summary": {
+        "status": "FAIL",
+        "communication": "NOT_PASSED",
+        "case": "collective-timeout",
+        "supervisor": {
+          "reason": "child_failed",
+          "errors": [],
+          "pids": [
+            2879442,
+            2879445
+          ],
+          "exit_codes": [
+            1,
+            -15
+          ],
+          "all_reaped": true,
+          "wall_seconds": 25.15577024174854
+        },
+        "error": "ValueError: workers did not complete normally"
+      }
+    },
+    {
+      "case": "watchdog",
+      "expected_behavior": "PASS",
+      "probe_exit": 124,
+      "summary": {
+        "status": "FAIL",
+        "communication": "NOT_PASSED",
+        "case": "watchdog",
+        "supervisor": {
+          "reason": "deadline",
+          "errors": [],
+          "pids": [
+            2882120,
+            2882122
+          ],
+          "exit_codes": [
+            -15,
+            -15
+          ],
+          "all_reaped": true,
+          "wall_seconds": 30.084034422878176,
+          "stack_observation": {
+            "status": "EXITED",
+            "target_ns": 3973120092789588,
+            "sample_stop_ns": 3973122092789588,
+            "helper_pid": 2882123,
+            "returncode": 0,
+            "reaped": true
+          }
+        },
+        "error": "ValueError: workers did not complete normally"
+      }
+    }
+  ]
+}

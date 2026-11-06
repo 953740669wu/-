@@ -1,0 +1,108 @@
+{
+  "task": "S01",
+  "round": "R12_DW_AB",
+  "decision": "PASS_FOR_ENGINEERING_R12_AB",
+  "review_complete": true,
+  "published_utc": "2026-11-06T05:47:43.639571+00:00",
+  "immutable_after_publish": true,
+  "blockers": [],
+  "bindings": {
+    "code_package_sha256": "44232f7627cfbcf59fb721acd23af46aed8fa790b20fe743a3c9886717ec4de4",
+    "code_source_manifest_sha256": "f61b8db309b8dad5853c7916d371b4484af609bd7610c096846bb21a7ac866bd",
+    "deployment_package_sha256": "a3f81b40e58e63bde612c95cd04fcb7a2d054746f5977371bc58310ca8beccc8",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "candidate_sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea",
+    "r12_contract_sha256": "16f19bab92e57e2730d801dab5fb012c32d53a37bf4011e516a5467fe5f378df",
+    "reference_epoch25_sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444",
+    "task_card_sha256": "bad48674eee0bfb41be0f5fbd2e2a0807e29dce31bc0e789263fc49665a5bec3",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8",
+    "deployment_source_manifest_sha256": "e51c425815ad7f3ae0a48b27adbae389271f1b2b0201e031c44ee11ff41c0189"
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_physical_cores": 36,
+    "allocated_cores": 38,
+    "cleanup_seconds": 30,
+    "closing_seconds": 30,
+    "exclusive": true,
+    "job_seconds": 900,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 2,
+    "stop_new_update_after_seconds": 720,
+    "whole_chain_seconds": 840,
+    "whole_entry_timeout": 840
+  },
+  "workload": {
+    "max_full_encoder_updates": 60,
+    "observed_updates": 20,
+    "perf_updates_each": 25,
+    "performance_pairs": 1,
+    "stage_order": [
+      "target",
+      "strict",
+      "perf_baseline",
+      "perf_candidate"
+    ],
+    "strict_updates_each": 5,
+    "warmup_updates": 5
+  },
+  "remote_staging_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z",
+  "baseline_sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+  "code_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\round12_dw_ab_review_20261106\\code_review.json",
+    "bytes": 13889,
+    "sha256": "bed9a6f8cb63e33763ff438f74ab1e7574401ec64067feb501979c841f23fef7"
+  },
+  "deployment_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\round12_dw_ab_review_20261106\\deployment_review.json",
+    "bytes": 15426,
+    "sha256": "1148de5b9ac88e09f0a51c121ed2b1fda6f2f366de1029ae7f4fd084b39a4173"
+  },
+  "frozen_inputs": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\round12_dw_ab_review_20261106\\FROZEN_INPUTS.json",
+    "bytes": 19991,
+    "sha256": "530ecbf54f72538a6e383be5beb3389532d8bc92d99ebd27f1b1989626b25178"
+  },
+  "authorization_scope": "Only the task-card unique same-node target -> strict5 each -> perf25 each chain. S00 rechecks same SHAs/live queue/new exclusive marker before submitting once; no user relay needed.",
+  "numerical_gate": "Original comparator retained: tensor max_abs<=2e-5, state<=2e-6, l2_relative<=2e-6 unless reference norm<=1e-8; finite/shape/dtype/exact step checks unchanged.",
+  "expected_counts_per_update": {
+    "baseline": {
+      "logical": 149,
+      "native": 149,
+      "target_logical": 12,
+      "target_full": 12,
+      "target_tiles": 0,
+      "dispatch": 0
+    },
+    "candidate": {
+      "logical": 149,
+      "native": 161,
+      "target_logical": 12,
+      "target_full": 0,
+      "target_tiles": 24,
+      "dispatch": 12
+    }
+  },
+  "S01_execution": {
+    "new_jobs": 0,
+    "full_model_runs": 0,
+    "actual_KML_runs": 0,
+    "remote_connections": 0
+  },
+  "actual_KML_target": "NOT_YET_VERIFIED_BY_THIS_REVIEW",
+  "full_encoder_strict": "NOT_YET_VERIFIED_BY_THIS_REVIEW",
+  "same_node_AB": "NOT_YET_VERIFIED_BY_THIS_REVIEW",
+  "signal_fault_cleanup": "NOT_RUN_THIS_ROUND",
+  "engineering_only": true,
+  "formal_split_status": "UNKNOWN",
+  "subject_mapping_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "stop_conditions": "Any numerical/ABI/source/library/CPU/dispatch failure stops later phases; timeout or insufficient budget INCOMPLETE; no retry, shorter25, changed tile/precision/backend/resources.",
+  "conclusion": "专项前置审核通过；00可按具体SHA执行本卡唯一有限R12工程作业。不是实际KML数值通过、加速或生产接受。",
+  "report": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\round12_dw_ab_review_20261106\\REPORT.md",
+    "bytes": 8058,
+    "sha256": "3ab25ebc635b9daf0b09316fc9b859df5a0e683d7dd4983adb2938f40077f25c"
+  }
+}

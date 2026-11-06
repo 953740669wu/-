@@ -1,0 +1,61 @@
+
+S00_S07_R6_DIAGNOSTIC_DEPLOYMENT.zip: OK
+COMMANDS.md: OK
+INTERFACE_FOR_S00.md: OK
+MINIMAL.diff: OK
+OBSERVATION_CONTRACT.md: OK
+OWNERSHIP_FROM_R12.diff: OK
+OWNERSHIP_PROVENANCE.json: OK
+S07_ALIGNED_STACK_R6.zip: OK
+SOURCE_MANIFEST.json: OK
+TASK_CARD.md: OK
+UNCHANGED_HELPERS.json: OK
+WORK_STARTED.json: OK
+bounded_round_step.py: OK
+collect_evidence.py: OK
+freeze_deployment.py: OK
+owned_processes.py: OK
+prepare.py: OK
+readiness_inventory.py: OK
+review_gate.py: OK
+run_s07_diag_job.py: OK
+run_s07_diag_job.sh: OK
+scheduler_handoff.py: OK
+stack_inventory.py: OK
+submit_once.py: OK
+tests/test_r6_deployment.py: OK
+trace_inventory.py: OK
+test_71_checks_share_original_consumer (test_r6_deployment.R6DeploymentTests) ..
+[23;80H..[1Cok
+test_armed_empty_dump_never_proves_stack_written (test_r6_deployment.R6Deploymen
+[23;80HntTests) ...[1Cok
+test_exited_helper_with_permission_error_is_incomplete (test_r6_deployment.R6Dep
+[23;80HploymentTests) ...[1Cok
+test_frozen_r6_exact15_files14_delivery_and_observer (test_r6_deployment.R6Deplo
+[23;80HoymentTests) ...[1Cok
+test_late_step_cannot_reset_shared_cleanup_deadline (test_r6_deployment.R6Deploy
+[23;80HymentTests) ... ok
+test_missing_watchdog_or_wrong_shared_target_is_incomplete (test_r6_deployment.R
+[23;80HR6DeploymentTests) ...[1Cok
+test_nonempty_stacks_and_actual_fields_can_be_complete_without_communication_pas
+[23;80Hss (test_r6_deployment.R6DeploymentTests) ...[1Cok
+test_old_inner_rejected_without_payload (test_r6_deployment.R6DeploymentTests) .
+[23;80H... ok
+test_owned_helper_across_sessions_and_pid_reuse (test_r6_deployment.R6Deployment
+[23;80HtTests) ... ok
+test_review_requires_exact_sha_resources_and_original_criteria (test_r6_deployme
+[23;80Hent.R6DeploymentTests) ... ok
+test_terminal_collection_preserves_empty_partial_and_uncleared_pid_evidence (tes
+[23;80Hst_r6_deployment.R6DeploymentTests) ...[1C{"bundle": "/home/share/dengqingtian/opt/
+[23;80H/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/evidence/tmppzbd33n5/JOB_42_fu
+[23;80Hull_evidence.zip", "bytes": 11583, "sha256": "8259cc1559679a6ce5b5a036270dbea43a7
+[23;80H7d2cfba1476f19673b131eb1336b92", "file_count": 24}
+ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.428s
+
+OK
+S07_R6_LOGIN_DEPLOYMENT_PASS
+Connection to 10.44.9.4 closed.
+[?9001l[?1004l

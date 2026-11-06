@@ -1,0 +1,126 @@
+{
+  "task": "S01",
+  "round": "S07_R7_ATOMIC",
+  "decision": "PASS_FOR_S07_R7_ATOMIC",
+  "review_complete": true,
+  "immutable_after_publish": true,
+  "published_utc": "2026-11-06T07:52:14.549338+00:00",
+  "blockers": [],
+  "bindings": {
+    "inner_package_sha256": "57a1f4c530ce2c9a5edcfe9cc9741129fb1ba4f90459fde459803103a362382d",
+    "inner_manifest_sha256": "f9441fe47988dbb8a47365f230f2f0eb54ed59779e43fbab0d68562a19855196",
+    "observer_sha256": "5b3ad54e675a293e3eb51d292b149c6939bbdc52b68322f340eb76be3b02b875",
+    "reader_sha256": "7b7cc96edd9401981a61db5122bf785e3e2348a41cda5363ba5d2ea4b0217d07",
+    "cpu_contract_sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+    "atomic_tests_sha256": "9ab4e1b49ce3a2a93ca59614753ee70d6de71c0c6cbd831ca311a495dcdd0e7f",
+    "interface_ready_sha256": "d0f0fc25e226066803f1290696436afbfebc3ba81e945fa567cc4e9f0c62cbba",
+    "comm_probe_sha256": "42424581db02b15ee8af0c65f85553dff61767979d9644b40fe954f779434608",
+    "observation_contract_sha256": "448cad1a857165c74d0cb241e32b18480d1495ec995704f9f6c5de2208712dde",
+    "deployment_package_sha256": "963ad618d09c998764342f446207d07ee29fcb95818386503ffea6e232de42e4",
+    "deployment_source_manifest_sha256": "e7511b33e39f459bce6e0e56627bcce31d7db610a0f9ec00f0b4ab973915dd1e",
+    "task_card_sha256": "a2bdce7fad12bc8ef8e0de985c6a25dc3316bf63009568138d58c2100bccf28e"
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_cores_per_domain": 36,
+    "actual_physical_cores": 72,
+    "allocated_cores": 76,
+    "cleanup_seconds": 15,
+    "closing_seconds": 15,
+    "consumer_seconds": 270,
+    "domains": 2,
+    "exclusive": true,
+    "job_seconds": 300,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 4
+  },
+  "workload": {
+    "atomic_report_tests": 17,
+    "case_deadline_seconds": 30,
+    "case_order": [
+      "normal",
+      "crash",
+      "collective-timeout",
+      "watchdog"
+    ],
+    "communication_criterion": "original candidate/run_checks.py check_case unchanged; watchdog requires both injected_hang",
+    "exit": false,
+    "linux_checks": 88,
+    "max_jobs": 1,
+    "pg_timeout_seconds": 5,
+    "proc_shared_window_seconds": 2,
+    "python_dump_before_deadline_seconds": 5,
+    "repeat": false,
+    "retry": false,
+    "skipped_checks": 0
+  },
+  "remote_staging_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1",
+  "baseline_failure": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\s07_r7_atomic_review_20261106\\BASELINE_FAILURE.json",
+    "bytes": 4366,
+    "sha256": "f865c7299ca5c2f4e9b7eb06537c59ad460ac88bd86b1d285776a03451fd4560"
+  },
+  "code_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\s07_r7_atomic_review_20261106\\code_review.json",
+    "bytes": 25619,
+    "sha256": "48e90c3508a9ded2623bb85d081736960d845ffc57baff77277ce48015babc89"
+  },
+  "deployment_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\s07_r7_atomic_review_20261106\\deployment_review.json",
+    "bytes": 15541,
+    "sha256": "5590cc75f00fbe752b14b81b189c6cb6643e9f4ba3bbdd9532b64690f8ef0473"
+  },
+  "frozen_inputs": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\s07_r7_atomic_review_20261106\\FROZEN_INPUTS.json",
+    "bytes": 39206,
+    "sha256": "42f81417e9a2c59569f53ebdb723fd0c82e3d2b12a4c29116483cbe7a96cbc6f"
+  },
+  "resolved_draft_finding": {
+    "record": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\s07_r7_atomic_review_20261106\\DRAFT_FINDING.json",
+      "bytes": 1086,
+      "sha256": "e2d10c07b2e3614af25644e3c04f1f9bb07cc7ba212d6f7fcd220514995d67a1"
+    },
+    "status": "RESOLVED_BEFORE_FIRST_READY_OR_JOB",
+    "fixed_review_gate_sha256": "8abb04c3f2ed6a615e7bd69a5c85bdecd630038052a9529a767fe7801df7e131"
+  },
+  "publication": {
+    "scope": "Only one writer plus tempfile import and three worker rank-report calls",
+    "method": "Same-directory exclusive NamedTemporaryFile -> complete JSON write -> flush/fsync/close -> os.replace",
+    "report_meaning": "Last fully committed checkpoint only; final error-handler update is not guaranteed after TERM",
+    "no_prior_report": "Missing formal report remains missing and original reader rejects it",
+    "temporary_reports": "Raw .rank[01].json.*.tmp only; never promote or read as official rank reports",
+    "old_reader_ready_observer_CPU_cases_deadlines_cleanup": "UNCHANGED"
+  },
+  "authorization_scope": "S00 may directly execute this task-card sole new full four-case job after rechecking all exact SHAs/live queue/new exclusive marker; no user relay, old-case patching or retries.",
+  "required_runtime_checks": {
+    "total": 88,
+    "atomic_reports": 17,
+    "original": 71,
+    "skipped": 0,
+    "budget": "same consumer270/job300"
+  },
+  "S01_execution": {
+    "new_jobs": 0,
+    "remote_connections": 0,
+    "Torch_Gloo_or_model_runs": 0,
+    "repeated_author_test_suites": 0,
+    "independent_extra_probe": "Read-only exact expected() AST reproduced the concrete draft basename failure; final real consumer verified"
+  },
+  "current_job_linux88": "NOT_RUN_BY_S01",
+  "actual_communication": "NOT_VERIFIED_BY_PRE_REVIEW",
+  "actual_diagnostic_complete": "NOT_VERIFIED_BY_PRE_REVIEW",
+  "signal_fault_cleanup": "NOT_RUN_FOR_R7_BY_S01",
+  "old_2050433": "FAIL_PRESERVED; rank0 empty original retained; last two cases NOT_RUN",
+  "R12": "CLOSED_NO_TRAINING_GAIN_KEEP_ORIGINAL_BASELINE_NO_FURTHER_TILE_AB",
+  "formal_training": false,
+  "performance_acceptance": false,
+  "stop_conditions": "Failed/missing/empty/partial formal report, check/environment/source/CPU/communication failure stops later cases. Budget exhausted INCOMPLETE. No retry, extra job, remaining-case splice, altered criteria/deadline, resource expansion or temp-to-formal recovery.",
+  "conclusion": "原子发布修复与P1新部署专项审核通过，无前置阻断；只放行本卡唯一有界整组诊断，不代表实际通信/观察已通过或同步训练/性能接受。",
+  "report": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\s07_r7_atomic_review_20261106\\REPORT.md",
+    "bytes": 9601,
+    "sha256": "3d0278fe19e553cf8fb2b96f4ba741dbde47cfe4cb9da9ec3a0386cb22181ccc"
+  }
+}

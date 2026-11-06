@@ -1,0 +1,179 @@
+{
+  "decision": "PASS_FOR_ENGINEERING_GEMM5",
+  "review_complete": true,
+  "immutable_after_publish": true,
+  "protocol": "ENGINEERING_REAL_CORPUS_GEMM5_V1",
+  "data_protocol": "ENGINEERING_REAL_CORPUS_PILOT_V1",
+  "published_utc": "2026-11-06T04:41:02.141915+00:00",
+  "authorization_task_card": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\R11_GEMM_BREAKDOWN_NEXT_20261106.md",
+    "sha256": "b1828392f6824b7c9158f2ff6d6e81c1536123dc8f93f1345cce3532b167a91e"
+  },
+  "bindings": {
+    "code_package_sha256": "d9bd138890e56c5fc6c1dba538c0c78112441849689a82782fdc6856a203e142",
+    "code_source_manifest_sha256": "bda3b37a35880c35bfcec65b80c53624e108de6387f4fa9fd377429b76afffa1",
+    "deployment_package_sha256": "64a45ae7444506984ebb65d7cb3a39930d088be4f1ac1f3fdcc2d89eeb095d3b",
+    "deployment_source_manifest_sha256": "2e825fb7663689aee5cf664b8fdcd4bd9a4809c41707352e1a8c8fd1f33075d9",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "gemm_contract_sha256": "a4876ab4a6b6a3c517fb95bc18183bc89015617cdb49a4f6eb5b3380967edeab",
+    "interface_sha256": "1477124f8b772226c76f8f50cee16c5d34ac34f7d8748d327c4402f82d074f76",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_physical_cores": 36,
+    "allocated_cores": 38,
+    "cleanup_seconds": 30,
+    "closing_seconds": 30,
+    "exclusive": true,
+    "job_seconds": 900,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 2,
+    "stop_new_update_after_seconds": 720,
+    "whole_entry_timeout": 840
+  },
+  "engineering_only": true,
+  "formal_split_status": "UNKNOWN",
+  "subject_mapping_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "max_jobs": 1,
+  "max_retry_count": 0,
+  "node_count": 1,
+  "numa_domains": 1,
+  "hbm": false,
+  "remote_staging_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z",
+  "workload": {
+    "actual_train_frames": 320,
+    "continuous_updates": 5,
+    "new_sample_selection": false,
+    "normalization_frames": 1600,
+    "old_checkpoint_loaded": false,
+    "sampled_steps": [
+      3,
+      4,
+      5
+    ],
+    "warmup_steps": [
+      1,
+      2
+    ]
+  },
+  "observation_limits": {
+    "detail_bytes_each": 1048576,
+    "expected_records_per_sample": 149,
+    "full_torch_profiler": false,
+    "max_detail_files": 3,
+    "max_records_per_sample": 256,
+    "over_limit": "FAIL_STOP_NO_RETRY_NO_TRUNCATION"
+  },
+  "entrypoint": "run_gemm5.sh",
+  "entry_environment": [
+    "S02_ENGINEERING_DESCRIPTOR",
+    "S02_ENGINEERING_DESCRIPTOR_SHA256"
+  ],
+  "gemm_ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\GEMM_READY.json",
+    "sha256": "800df62a563aeb9f211a46ed516b985670e182da20485f1d491f46cf550c05e0"
+  },
+  "deployment_ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\S00_DEPLOYMENT_READY.json",
+    "sha256": "b84f89f1968411faf4e72f92102c0e8d72813c7b08a0074aaca283c2ef26ebc6"
+  },
+  "artifacts": {
+    "code_package": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\package\\S02_R11_GEMM5_CODE.zip",
+      "bytes": 74859,
+      "sha256": "d9bd138890e56c5fc6c1dba538c0c78112441849689a82782fdc6856a203e142"
+    },
+    "code_source_manifest": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\SOURCE_SHA256.json",
+      "bytes": 2487,
+      "sha256": "bda3b37a35880c35bfcec65b80c53624e108de6387f4fa9fd377429b76afffa1"
+    },
+    "interface": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\INTERFACE.json",
+      "bytes": 5273,
+      "sha256": "1477124f8b772226c76f8f50cee16c5d34ac34f7d8748d327c4402f82d074f76"
+    },
+    "gemm_contract": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\GEMM_CONTRACT.json",
+      "bytes": 4335,
+      "sha256": "a4876ab4a6b6a3c517fb95bc18183bc89015617cdb49a4f6eb5b3380967edeab"
+    },
+    "reference_first5": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\REFERENCE_FIRST5.json",
+      "bytes": 19052,
+      "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+    },
+    "descriptor": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\ENGINEERING_DESCRIPTOR.json",
+      "bytes": 12222,
+      "sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6"
+    },
+    "baseline": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\baseline\\kml_ops.py",
+      "bytes": 10255,
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+    },
+    "observer": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\gemm_observer.py",
+      "bytes": 9579,
+      "sha256": "14ee30f47adbb0ddfecc01bd8bc2acfe0048a1c1596a0e32664762193143e67a"
+    },
+    "deployment_package": {
+      "bytes": 132033,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\S00_R11_GEMM5_DEPLOYMENT.zip",
+      "sha256": "64a45ae7444506984ebb65d7cb3a39930d088be4f1ac1f3fdcc2d89eeb095d3b"
+    },
+    "deployment_source_manifest": {
+      "bytes": 2415,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\ARTIFACT_SHA256.json",
+      "sha256": "2e825fb7663689aee5cf664b8fdcd4bd9a4809c41707352e1a8c8fd1f33075d9"
+    }
+  },
+  "input_index": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\round11_gemm_review_20261106\\FROZEN_INPUTS.json",
+    "sha256": "21eb86e584eb79a6d8e135d243611c3c9cf8280e46959e90816263831c8baa12"
+  },
+  "report": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\round11_gemm_review_20261106\\REPORT.md",
+    "sha256": "c33bd3189d0026bf60bf6d3ddfb508a28a6c4978bef1267c5f0f5328ce091ac5"
+  },
+  "blocking_findings": [],
+  "scientific_acceptance": false,
+  "speedup_acceptance": false,
+  "production_acceptance": false,
+  "actual_GEMM_capture_acceptance": "PENDING_UNIQUE_JOB",
+  "R10_AB_authorized": false,
+  "author_sources_modified": false,
+  "S01_cluster_submissions": 0,
+  "S01_model_KML_or_profiler_runs": 0,
+  "checks": {
+    "S02_fake_CBLAS_receipts": 9,
+    "S00_local_fixture_receipts": 9,
+    "S00_linux_fixture_receipts": 9,
+    "original_fixed_input_SHA_receipts": 36,
+    "S01_independent_matrix_or_model_runs": 0,
+    "S01_actual_review_gate_consumption": "PASS_CONCRETE_8_BINDINGS"
+  },
+  "timing_limits": [
+    "ctypes wall includes Python conversion/native packing/scheduling/compute; not microkernel time",
+    "outer-minus-ctypes includes counter/allocation/preparation/observer; excludes preparation before original GEMM",
+    "nested/cross-thread spans not summed as process wall; no same-host A/B or speedup claim"
+  ],
+  "runtime_acceptance_required": [
+    "actual C2 _sgemm ctypes and three149-record pairings",
+    "original first5 loss/actual CPU36/KML/TID/restore",
+    "native signal-fault cleanup this round and final job/PID termination",
+    "all3 files exactly149 original-to-native records and15 original loss checks",
+    "source/input/old ledger/checkpoint identities unchanged",
+    "final scheduler exit and all owned processes cleared"
+  ],
+  "execution_conditions": [
+    "S00 must recheck exact package/source/review/descriptor SHA, live queue and new unique marker immediately before one dsub",
+    "Only new S02_GEMM5 root; exactly5 updates,2warmup+3detailed; no R10 candidate or20-update AB",
+    "Stop on missing/duplicate/limit/unsupported/source/numerical/CPU/KML/budget failure; no retry/install/backend switch or resource/sample expansion",
+    "Current record is pre-submission engineering review only, not actual run/scientific/speedup/production acceptance"
+  ]
+}

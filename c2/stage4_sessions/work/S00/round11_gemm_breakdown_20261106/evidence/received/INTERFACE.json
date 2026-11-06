@@ -1,0 +1,193 @@
+{
+  "protocol": "ENGINEERING_REAL_CORPUS_GEMM5_V1",
+  "version": 1,
+  "engineering_only": true,
+  "formal_split_status": "UNKNOWN",
+  "subject_mapping_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "data_protocol": "ENGINEERING_REAL_CORPUS_PILOT_V1",
+  "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+  "baseline_kml_sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+  "entrypoint": "run_gemm5.sh",
+  "entry_environment": [
+    "S02_ENGINEERING_DESCRIPTOR",
+    "S02_ENGINEERING_DESCRIPTOR_SHA256"
+  ],
+  "remote_payload": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_<unique>/payload",
+  "output_subdir": "outputs/gemm_${CCS_JOB_ID}",
+  "results": {
+    "success_status": "GEMM5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+    "failure_statuses": [
+      "GEMM_OBSERVATION_ERROR",
+      "GEMM_LIMIT_EXCEEDED",
+      "UNSUPPORTED_GEMM_OBSERVATION",
+      "SOURCE_CHANGED",
+      "DATA_NOT_READY",
+      "ERROR_RUNTIME_OR_STATE",
+      "INCOMPLETE"
+    ],
+    "files": [
+      "result.json",
+      "steps.jsonl",
+      "EXPOSURE_LEDGER.json",
+      "gemm_step_3.json",
+      "gemm_step_4.json",
+      "gemm_step_5.json",
+      "checkpoints/final.pt (remote only)",
+      "CPU/allocation/command/exit/timeout files"
+    ],
+    "result_fields": [
+      "protocol",
+      "data_protocol",
+      "engineering_only",
+      "formal_split_status",
+      "subject_mapping_status",
+      "validation_status",
+      "source",
+      "data_identity",
+      "initialization",
+      "normalization",
+      "config",
+      "planned_updates",
+      "completed_updates",
+      "consumed_frames",
+      "stop_reason",
+      "steps",
+      "runtime",
+      "cpu36",
+      "gemm_observation",
+      "checkpoint",
+      "recovery",
+      "timing"
+    ],
+    "gemm_observation_fields": [
+      "baseline_kml_sha256",
+      "baseline_import",
+      "observer_source_sha256",
+      "detailed_steps",
+      "samples",
+      "timing_scope"
+    ],
+    "sample_summary_fields": [
+      "step",
+      "status",
+      "records",
+      "native_calls",
+      "path",
+      "bytes",
+      "sha256"
+    ],
+    "sample_file_fields": [
+      "protocol",
+      "step",
+      "status",
+      "clock",
+      "timing_scope",
+      "records",
+      "calls"
+    ],
+    "call_fields": [
+      "step",
+      "call_index",
+      "thread_id",
+      "parent_call_index",
+      "role",
+      "linear_context",
+      "a",
+      "b",
+      "ta",
+      "tb",
+      "beta",
+      "m",
+      "n",
+      "k",
+      "output",
+      "native_calls",
+      "gemm_start_ns",
+      "gemm_end_ns",
+      "gemm_wall_ns",
+      "ctypes_start_ns",
+      "ctypes_end_ns",
+      "ctypes_wall_ns",
+      "outer_minus_ctypes_ns",
+      "observer_before_ns",
+      "observer_after_ns",
+      "observer_sgemm_bookkeeping_ns"
+    ],
+    "tensor_metadata_fields": [
+      "shape",
+      "stride",
+      "dtype",
+      "contiguous"
+    ],
+    "output_alias_fields": [
+      "aliases_a_storage",
+      "aliases_b_storage",
+      "is_given_out"
+    ],
+    "role_values": [
+      "forward",
+      "dX",
+      "dW",
+      "UNKNOWN"
+    ],
+    "roles": "Confirmed only by active frozen _LinearFn forward/backward context plus transpose flags; other calls UNKNOWN",
+    "timing_scope": "perf_counter_ns monotonic, per thread/call; gemm wall wraps original counted GEMM; ctypes wall wraps exactly one original _sgemm(*same_args). Includes Python conversion/native packing/scheduling/compute, not pure microkernel. outer-minus-ctypes includes outer prep/counter/alloc and observer bookkeeping. Nested/concurrent spans must not be added as program wall."
+  },
+  "limits": {
+    "updates": 5,
+    "warmup_steps": [
+      1,
+      2
+    ],
+    "detailed_steps": [
+      3,
+      4,
+      5
+    ],
+    "expected_calls_per_sample": 149,
+    "max_records_per_sample": 256,
+    "max_detail_files": 3,
+    "max_bytes_per_detail_file": 1048576,
+    "batch_size": 64,
+    "statistics_frames": 1600,
+    "training_frames": 320,
+    "full_torch_profiler": false,
+    "no_tensor_value_copies_or_dumps": true
+  },
+  "resources": {
+    "allocated_cores": 38,
+    "actual_physical_cores": 36,
+    "reserved_cores": 2,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "exclusive": true,
+    "HBM": 0,
+    "job_seconds": 900,
+    "whole_entry_timeout": 840,
+    "cleanup_seconds": 30,
+    "closing_seconds": 30,
+    "stop_new_update_after_seconds": 720
+  },
+  "ready_record": {
+    "file": "GEMM_READY.json",
+    "fields": [
+      "status",
+      "protocol",
+      "package",
+      "source_manifest",
+      "interface",
+      "contract",
+      "reference",
+      "checks",
+      "report",
+      "commands",
+      "baseline",
+      "observer",
+      "diff",
+      "entrypoint"
+    ],
+    "assets": "Each asset uses absolute path/bytes/sha256; source manifest is flat relative path->SHA256; package ZIP root is payload root"
+  },
+  "handoff": "S00 new deployment + S01 SHA-bound PASS_FOR_ENGINEERING_GEMM5 before exactly one new authorized job; no R10 candidate or AB"
+}

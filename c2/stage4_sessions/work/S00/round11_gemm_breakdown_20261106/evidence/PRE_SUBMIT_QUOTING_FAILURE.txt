@@ -1,0 +1,8 @@
+
+[?25l{"data":[{"jobId":"2049241","jobName":"gllm5-four-fixed","user":"dengqingtian","state":"RUNNING","queue":"q_hpcai","assistJob":"DEFAULT","mpiType":"DEFAULT","jobType":"COSCHED","pmiType":"OTHER","account":"common","startTime":"2026-11-06T04:03:01Z","endTime":"-","createTime":"2026-11-06T04:02:59Z","submitNode":"login05","execNodes":"cn[21353,21362-21376]","execNodesCnt":16,"jobWallclockDuration":2280},{"jobId":"2048795","jobName":"b0-matrix-9b-bf16-mixed-samenodes-r1","user":"dengqingtian","state":"RUNNING","queue":"q_hpcai","assistJob":"DEFAULT","mpiType":"HMPI","jobType":"COSCHED:HMPI","pmiType":"OTHER","account":"common","startTime":"2026-11-06T02:58:17Z","endTime":"-","createTime":"2026-11-06T02:58:13Z","submitNode":"login06","execNodes":"cn[21380-21386,21390]","execNodesCnt":8,"jobWallclockDuration":6121}],"message":"List job brief infos successfully.","code":"success","requestId":"req-8f866375-8036-4a55-9452-5da34038dc40","totalElements":2,"pageNumber":1,"pageSize":2}[18;1H[?25hS00_R11_GEMM5_DEPLOYMENT.zip: OK
+  File "<string>", line 1
+    from pathlib import Path;from review_gate import check_review;from prepare import verify_prepared;r=Path.cwd();verify_prepared(r);print(check_review(r,\ f75a7030f76613d1126960d2d27ace9b8e327d41788a7a3301cd7105ea5723f1\))
+                                                                                                                                                            ^
+SyntaxError: unexpected character after line continuation character
+Connection to 10.44.9.4 closed.
+[?9001l[?1004l

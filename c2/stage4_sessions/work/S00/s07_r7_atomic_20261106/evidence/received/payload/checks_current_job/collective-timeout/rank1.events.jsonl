@@ -1,0 +1,36 @@
+{"event": "worker_ready", "time_ns": 1793951872815614676, "monotonic_ns": 3973070166029461, "pid": 2879445, "rank": 1, "job_id": "2051116", "run_id": "collective-timeout"}
+{"event": "checkpoint_begin", "time_ns": 1793951872818664403, "monotonic_ns": 3973070169077919, "pid": 2879445, "stage": "before_framework"}
+{"event": "checkpoint_end", "time_ns": 1793951872917021310, "monotonic_ns": 3973070267435755, "pid": 2879445, "stage": "before_framework"}
+{"event": "torch_import_begin", "time_ns": 1793951872919503857, "monotonic_ns": 3973070269918272, "pid": 2879445}
+{"event": "torch_import_end", "time_ns": 1793951881591880795, "monotonic_ns": 3973078942294400, "pid": 2879445}
+{"event": "distributed_import_begin", "time_ns": 1793951881618716733, "monotonic_ns": 3973078969129818, "pid": 2879445}
+{"event": "distributed_import_end", "time_ns": 1793951881619675091, "monotonic_ns": 3973078970088286, "pid": 2879445}
+{"event": "runtime_metadata_begin", "time_ns": 1793951881620625099, "monotonic_ns": 3973078971037634, "pid": 2879445}
+{"event": "library_sha_begin", "time_ns": 1793951881623944882, "monotonic_ns": 3973078974358277, "pid": 2879445, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so"}
+{"event": "library_sha_end", "time_ns": 1793951881626212115, "monotonic_ns": 3973078976626870, "pid": 2879445, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so"}
+{"event": "library_sha_begin", "time_ns": 1793951881627598392, "monotonic_ns": 3973078978012317, "pid": 2879445, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so"}
+{"event": "library_sha_end", "time_ns": 1793951881670484604, "monotonic_ns": 3973079020898539, "pid": 2879445, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so"}
+{"event": "library_sha_begin", "time_ns": 1793951881672321799, "monotonic_ns": 3973079022735664, "pid": 2879445, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so"}
+{"event": "library_sha_end", "time_ns": 1793951881674353587, "monotonic_ns": 3973079024768052, "pid": 2879445, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so"}
+{"event": "library_sha_begin", "time_ns": 1793951881675835365, "monotonic_ns": 3973079026248910, "pid": 2879445, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"}
+{"event": "library_sha_end", "time_ns": 1793951882056065137, "monotonic_ns": 3973079406480032, "pid": 2879445, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"}
+{"event": "library_sha_begin", "time_ns": 1793951882058018894, "monotonic_ns": 3973079408432029, "pid": 2879445, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so"}
+{"event": "library_sha_end", "time_ns": 1793951882059777957, "monotonic_ns": 3973079410191402, "pid": 2879445, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so"}
+{"event": "library_sha_begin", "time_ns": 1793951882060987580, "monotonic_ns": 3973079411401355, "pid": 2879445, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so"}
+{"event": "library_sha_end", "time_ns": 1793951882100436587, "monotonic_ns": 3973079450849942, "pid": 2879445, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so"}
+{"event": "runtime_metadata_end", "time_ns": 1793951882159290351, "monotonic_ns": 3973079509705427, "pid": 2879445}
+{"event": "checkpoint_begin", "time_ns": 1793951882161101966, "monotonic_ns": 3973079511515401, "pid": 2879445, "stage": "after_framework"}
+{"event": "checkpoint_end", "time_ns": 1793951882172827538, "monotonic_ns": 3973079523241223, "pid": 2879445, "stage": "after_framework"}
+{"event": "preparation_complete", "time_ns": 1793951882174118152, "monotonic_ns": 3973079524531727, "pid": 2879445, "rank": 1}
+{"event": "ready_context_wait", "time_ns": 1793951882175001699, "monotonic_ns": 3973079525414764, "pid": 2879445, "rank": 1}
+{"event": "ready_published", "time_ns": 1793951882223495187, "monotonic_ns": 3973079573908762, "pid": 2879445, "rank": 1, "job_id": "2051116", "run_id": "collective-timeout", "ready_token": "dae2e0c166a14f2e398fe59791b3c082"}
+{"event": "peer_ready_wait", "time_ns": 1793951882224999516, "monotonic_ns": 3973079575412811, "pid": 2879445, "rank": 1}
+{"event": "both_ready", "time_ns": 1793951889974924990, "monotonic_ns": 3973087325336775, "pid": 2879445, "rank": 1, "pids": [2879442, 2879445]}
+{"event": "checkpoint_begin", "time_ns": 1793951889976594572, "monotonic_ns": 3973087327007287, "pid": 2879445, "stage": "init_process_group"}
+{"event": "checkpoint_end", "time_ns": 1793951889988695141, "monotonic_ns": 3973087339110506, "pid": 2879445, "stage": "init_process_group"}
+{"event": "init_process_group_begin", "time_ns": 1793951889989960535, "monotonic_ns": 3973087340375030, "pid": 2879445, "pg_timeout_seconds": 5, "rank": 1, "world_size": 2, "backend": "gloo", "init_method": "file:///home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/collective-timeout/rendezvous"}
+{"event": "init_process_group_end", "time_ns": 1793951890843272081, "monotonic_ns": 3973088193685546, "pid": 2879445}
+{"event": "checkpoint_begin", "time_ns": 1793951890845567424, "monotonic_ns": 3973088195981509, "pid": 2879445, "stage": "all_gather_identity"}
+{"event": "checkpoint_end", "time_ns": 1793951890863294699, "monotonic_ns": 3973088213709574, "pid": 2879445, "stage": "all_gather_identity"}
+{"event": "checkpoint_begin", "time_ns": 1793951890873858599, "monotonic_ns": 3973088224272014, "pid": 2879445, "stage": "injected_hang"}
+{"event": "checkpoint_end", "time_ns": 1793951890895580910, "monotonic_ns": 3973088245995905, "pid": 2879445, "stage": "injected_hang"}

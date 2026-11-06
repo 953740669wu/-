@@ -1,0 +1,37 @@
+{"event": "worker_ready", "time_ns": 1793951853339277183, "monotonic_ns": 3973050689691549, "pid": 2877626, "rank": 0, "job_id": "2051116", "run_id": "crash"}
+{"event": "checkpoint_begin", "time_ns": 1793951853343168678, "monotonic_ns": 3973050693583623, "pid": 2877626, "stage": "before_framework"}
+{"event": "checkpoint_end", "time_ns": 1793951853362636968, "monotonic_ns": 3973050713050893, "pid": 2877626, "stage": "before_framework"}
+{"event": "torch_import_begin", "time_ns": 1793951853364358121, "monotonic_ns": 3973050714772436, "pid": 2877626}
+{"event": "torch_import_end", "time_ns": 1793951868957425684, "monotonic_ns": 3973066307839169, "pid": 2877626}
+{"event": "distributed_import_begin", "time_ns": 1793951868959836810, "monotonic_ns": 3973066310250655, "pid": 2877626}
+{"event": "distributed_import_end", "time_ns": 1793951868961222706, "monotonic_ns": 3973066311635471, "pid": 2877626}
+{"event": "runtime_metadata_begin", "time_ns": 1793951868962615633, "monotonic_ns": 3973066313028788, "pid": 2877626}
+{"event": "library_sha_begin", "time_ns": 1793951868966653649, "monotonic_ns": 3973066317067554, "pid": 2877626, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so"}
+{"event": "library_sha_end", "time_ns": 1793951868969339140, "monotonic_ns": 3973066319752885, "pid": 2877626, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so"}
+{"event": "library_sha_begin", "time_ns": 1793951868971343608, "monotonic_ns": 3973066321757423, "pid": 2877626, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so"}
+{"event": "library_sha_end", "time_ns": 1793951868985354764, "monotonic_ns": 3973066335770240, "pid": 2877626, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so"}
+{"event": "library_sha_begin", "time_ns": 1793951868987343072, "monotonic_ns": 3973066337756967, "pid": 2877626, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so"}
+{"event": "library_sha_end", "time_ns": 1793951868989782098, "monotonic_ns": 3973066340196184, "pid": 2877626, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so"}
+{"event": "library_sha_begin", "time_ns": 1793951868991416800, "monotonic_ns": 3973066341830055, "pid": 2877626, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"}
+{"event": "library_sha_end", "time_ns": 1793951869800692592, "monotonic_ns": 3973067151106847, "pid": 2877626, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"}
+{"event": "library_sha_begin", "time_ns": 1793951869815538144, "monotonic_ns": 3973067165951589, "pid": 2877626, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so"}
+{"event": "library_sha_end", "time_ns": 1793951869818170384, "monotonic_ns": 3973067168584049, "pid": 2877626, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so"}
+{"event": "library_sha_begin", "time_ns": 1793951869819991399, "monotonic_ns": 3973067170404404, "pid": 2877626, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so"}
+{"event": "library_sha_end", "time_ns": 1793951869895727086, "monotonic_ns": 3973067246141541, "pid": 2877626, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so"}
+{"event": "runtime_metadata_end", "time_ns": 1793951870016824495, "monotonic_ns": 3973067367239050, "pid": 2877626}
+{"event": "checkpoint_begin", "time_ns": 1793951870041857560, "monotonic_ns": 3973067392270745, "pid": 2877626, "stage": "after_framework"}
+{"event": "checkpoint_end", "time_ns": 1793951870054231595, "monotonic_ns": 3973067404644970, "pid": 2877626, "stage": "after_framework"}
+{"event": "preparation_complete", "time_ns": 1793951870055860166, "monotonic_ns": 3973067406274121, "pid": 2877626, "rank": 0}
+{"event": "ready_context_wait", "time_ns": 1793951870057298183, "monotonic_ns": 3973067407711318, "pid": 2877626, "rank": 0}
+{"event": "ready_published", "time_ns": 1793951870067085439, "monotonic_ns": 3973067417500414, "pid": 2877626, "rank": 0, "job_id": "2051116", "run_id": "crash", "ready_token": "660c46f45019cff864fbca2b747c9a26"}
+{"event": "peer_ready_wait", "time_ns": 1793951870068848353, "monotonic_ns": 3973067419263458, "pid": 2877626, "rank": 0}
+{"event": "both_ready", "time_ns": 1793951870072716376, "monotonic_ns": 3973067423128301, "pid": 2877626, "rank": 0, "pids": [2877626, 2877631]}
+{"event": "checkpoint_begin", "time_ns": 1793951870073975100, "monotonic_ns": 3973067424388885, "pid": 2877626, "stage": "init_process_group"}
+{"event": "checkpoint_end", "time_ns": 1793951870085454228, "monotonic_ns": 3973067435867933, "pid": 2877626, "stage": "init_process_group"}
+{"event": "init_process_group_begin", "time_ns": 1793951870086986547, "monotonic_ns": 3973067437400222, "pid": 2877626, "pg_timeout_seconds": 5, "rank": 0, "world_size": 2, "backend": "gloo", "init_method": "file:///home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/crash/rendezvous"}
+{"event": "init_process_group_end", "time_ns": 1793951871080779108, "monotonic_ns": 3973068431192473, "pid": 2877626}
+{"event": "checkpoint_begin", "time_ns": 1793951871088530395, "monotonic_ns": 3973068438944040, "pid": 2877626, "stage": "all_gather_identity"}
+{"event": "checkpoint_end", "time_ns": 1793951871100968791, "monotonic_ns": 3973068451382866, "pid": 2877626, "stage": "all_gather_identity"}
+{"event": "checkpoint_begin", "time_ns": 1793951871114530609, "monotonic_ns": 3973068464944334, "pid": 2877626, "stage": "broadcast"}
+{"event": "checkpoint_end", "time_ns": 1793951871137632527, "monotonic_ns": 3973068488046822, "pid": 2877626, "stage": "broadcast"}
+{"event": "worker_error", "time_ns": 1793951871186117717, "monotonic_ns": 3973068536530912, "pid": 2877626, "stage": "broadcast", "error": "RuntimeError: [/pytorch/third_party/gloo/gloo/transport/tcp/pair.cc:525] Read error [127.0.0.1]:19110: Connection reset by peer"}

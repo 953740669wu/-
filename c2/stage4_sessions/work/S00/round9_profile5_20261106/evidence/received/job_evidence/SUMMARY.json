@@ -1,0 +1,67 @@
+{
+  "application_result": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_PROFILE5_20261106T030149Z/payload/outputs/profile_2048959/result.json",
+  "application_status": "PROFILE5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+  "attempts": 1,
+  "cleanup_seconds": 30,
+  "closing_seconds": 30,
+  "engineering_only": true,
+  "execution_seconds": 840,
+  "exit_code": 0,
+  "finished": 3956751.021272461,
+  "formal_split_status": "UNKNOWN",
+  "job_id": "2048959",
+  "job_seconds": 900,
+  "profile_outcome": {
+    "application_error": null,
+    "application_status": "PROFILE5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+    "captures": [
+      {
+        "events": 10845,
+        "kml_markers": 149,
+        "step": 3,
+        "summary": {
+          "bytes": 9122,
+          "sha256": "631dd754e956431e880748d50805f6a9a76a95cba15133c124fca4cd24cfc2d4"
+        },
+        "trace": {
+          "bytes": 1533488,
+          "sha256": "2b93ca1d5975a7f90db90bbdcabc92b6b97e933b006a27a5c8f460957482fcf7"
+        }
+      },
+      {
+        "events": 10845,
+        "kml_markers": 149,
+        "step": 4,
+        "summary": {
+          "bytes": 9119,
+          "sha256": "75280ced547b37733da594e5a0ca164a467227d2fbee3f289d06e35b289db545"
+        },
+        "trace": {
+          "bytes": 1556905,
+          "sha256": "dbb6c58dcdfd27e485eacc7a956cae70552a571a285b220fea8d096dd1cf3494"
+        }
+      },
+      {
+        "events": 10845,
+        "kml_markers": 149,
+        "step": 5,
+        "summary": {
+          "bytes": 9120,
+          "sha256": "dc0142e1dcd2b19c43ae6a47375f448f0bc5decf40dccd4e6867f8a9c08598a3"
+        },
+        "trace": {
+          "bytes": 1555946,
+          "sha256": "93742d26b4fe6a5faef0a082ee931b3a08b53a206b889726565a9b138c24e27b"
+        }
+      }
+    ],
+    "errors": [],
+    "missing_outputs": [],
+    "profile5_complete": true
+  },
+  "protocol": "ENGINEERING_REAL_CORPUS_PROFILE5_V1",
+  "started": 3956658.248182313,
+  "status": "PROFILE5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+  "subject_mapping_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT"
+}

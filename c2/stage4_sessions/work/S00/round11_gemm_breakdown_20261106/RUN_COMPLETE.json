@@ -1,0 +1,143 @@
+{
+  "R10_disposition": "CLOSED_NOT_SELECTED_LOW_BENEFIT_NO_AB",
+  "active_s00_job": null,
+  "actual_train_frames": 320,
+  "all_owned_processes_reaped": true,
+  "analysis_inputs": {
+    "evidence_dir": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454",
+    "ledger_relative_path": "EXPOSURE_LEDGER.json",
+    "run_subdir": "."
+  },
+  "application_result": {
+    "bytes": 473373,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\result.json",
+    "sha256": "2e86bc8f23f45ccbb44086cba5be0ff48d3952e2c0465eede0eb61d0dc76a0ab"
+  },
+  "archive": {
+    "bytes": 471647,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\JOB_2049454_evidence.zip",
+    "sha256": "671305ef5915870820d0a8890bdf9050d5eff61f4f5e2f5fdd9e68b497220513"
+  },
+  "audit": {
+    "bytes": 6332,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\RUN_AUDIT.json",
+    "sha256": "8ce06a48cb08da5ca1d9cea6676b8eb6938d04355bf962da4d645ad84a2e34c6"
+  },
+  "checkpoint": {
+    "bytes": 456135071,
+    "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z/payload/outputs/gemm_2049454/checkpoints/final.pt",
+    "sha256": "19f445a0104d0cd95610989421a1d37add3e848667cf81140aaf475af4ef6cc7"
+  },
+  "checkpoint_transfer": "REMOTE_ONLY_NOT_DOWNLOADED",
+  "completed_updates": 5,
+  "data_protocol": "ENGINEERING_REAL_CORPUS_PILOT_V1",
+  "engineering_only": true,
+  "evidence_directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received",
+  "evidence_index": {
+    "bytes": 219027,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\COLLECTION_S00.json",
+    "sha256": "4c10fe77c98962077d4415b6264f7e1a1550de536ae8e40ff744255514e39567"
+  },
+  "exposure_ledger": {
+    "bytes": 163300,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\EXPOSURE_LEDGER.json",
+    "sha256": "8496346c353cad8953bba94fdcbf92b05f7658fc3e6d0af6fddd9d293499beaa"
+  },
+  "extra_optimizer_updates": 0,
+  "formal_split_status": "UNKNOWN",
+  "gemm_contract": {
+    "bytes": 4335,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\GEMM_CONTRACT.json",
+    "sha256": "a4876ab4a6b6a3c517fb95bc18183bc89015617cdb49a4f6eb5b3380967edeab"
+  },
+  "gemm_samples": [
+    {
+      "bytes": 150035,
+      "native_calls": 149,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\gemm_step_3.json",
+      "records": 149,
+      "sha256": "ef3809752f62206c572e3864d185291af59ff10e7622e07594f2074556615f60",
+      "step": 3
+    },
+    {
+      "bytes": 150044,
+      "native_calls": 149,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\gemm_step_4.json",
+      "records": 149,
+      "sha256": "94c99cde67845f7c467637c746a9368b8ad4484b3716b897809484b02d810923",
+      "step": 4
+    },
+    {
+      "bytes": 150040,
+      "native_calls": 149,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\gemm_step_5.json",
+      "records": 149,
+      "sha256": "a0cb1925512fe4edf12e89cb310f964642ba65f61eb09070023cb52cdc1d2509",
+      "step": 5
+    }
+  ],
+  "host": "cn21338",
+  "immutable_after_publish": true,
+  "in_step_observer_overhead": "UNKNOWN_WITHOUT_MATCHED_CONTROL",
+  "job_exit_code": 0,
+  "job_id": "2049454",
+  "missing_evidence": [],
+  "native_kml_kernel_time": "UNKNOWN_CTYPES_NOT_PURE_KERNEL",
+  "new_jobs": 1,
+  "node_seconds": 76.0,
+  "normalization_frames": 1600,
+  "old_inputs_ledger_checkpoint_unchanged": true,
+  "original_fixed36_path_bytes_sha_mtime_unchanged": true,
+  "original_loss_max_abs": 0.0,
+  "original_loss_metrics_passed": 15,
+  "outcome": "GEMM5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+  "protocol": "ENGINEERING_REAL_CORPUS_GEMM5_V1",
+  "published_utc": "2026-11-06T04:48:06.072490+00:00",
+  "recovery_status": "PASS_NO_EXTRA_UPDATE",
+  "reference_first5": {
+    "bytes": 19052,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\REFERENCE_FIRST5.json",
+    "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "retries": 0,
+  "review": {
+    "bytes": 8516,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\S01_REVIEW.json",
+    "sha256": "f75a7030f76613d1126960d2d27ace9b8e327d41788a7a3301cd7105ea5723f1"
+  },
+  "sample_total_bytes": 450119,
+  "sampled_steps": [
+    3,
+    4,
+    5
+  ],
+  "scheduler_pids_cleared": true,
+  "scheduler_state": "SUCCEEDED",
+  "scheduler_usage_seconds": 76,
+  "scientific_acceptance": false,
+  "source_bindings": {
+    "code_package_sha256": "d9bd138890e56c5fc6c1dba538c0c78112441849689a82782fdc6856a203e142",
+    "code_source_manifest_sha256": "bda3b37a35880c35bfcec65b80c53624e108de6387f4fa9fd377429b76afffa1",
+    "deployment_package_sha256": "64a45ae7444506984ebb65d7cb3a39930d088be4f1ac1f3fdcc2d89eeb095d3b",
+    "deployment_source_manifest_sha256": "2e825fb7663689aee5cf664b8fdcd4bd9a4809c41707352e1a8c8fd1f33075d9",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "gemm_contract_sha256": "a4876ab4a6b6a3c517fb95bc18183bc89015617cdb49a4f6eb5b3380967edeab",
+    "interface_sha256": "1477124f8b772226c76f8f50cee16c5d34ac34f7d8748d327c4402f82d074f76",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "source_status": "UNCHANGED",
+  "status": "RUN_COMPLETE",
+  "steady_state_performance_acceptance": false,
+  "steps": {
+    "bytes": 116123,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\steps.jsonl",
+    "sha256": "69184185ccf036968f591ffeeecd67d328cf5fd5917990d307ecefdfb1b73243"
+  },
+  "subject_mapping_status": "UNKNOWN",
+  "timing_scope": "same-call same-thread monotonic GEMM and ctypes boundaries; ctypes includes conversion and native packing/scheduling/compute; outer difference includes preparation/counters/alloc/observer; never sum overlap as program wall",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "warmup_steps": [
+    1,
+    2
+  ]
+}

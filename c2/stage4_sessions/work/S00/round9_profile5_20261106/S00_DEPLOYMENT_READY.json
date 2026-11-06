@@ -1,0 +1,167 @@
+{
+  "checks": {
+    "bytes": 629,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\DEPLOYMENT_CHECKS.json",
+    "sha256": "1ac9f70ff19cea1730afbba73d364c243ad0bd91499a59da09013f14b0b43142"
+  },
+  "code_source_manifest": {
+    "bytes": 2269,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\S02_SOURCE_SHA256.json",
+    "sha256": "2a86fd01cab96a85cb2f0f4c8ed998edb956ef81255dfd5ceb950d41264de741"
+  },
+  "collection": {
+    "all_profile_files": true,
+    "checkpoint": "REMOTE_ONLY_PATH_BYTES_SHA_RESTORE",
+    "command": "/usr/bin/python3 -B collect_evidence.py <fixed RUN>",
+    "raw_failures_preserved": true
+  },
+  "commands": {
+    "bytes": 5404,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\COMMANDS.md",
+    "sha256": "13734dbd8d7d6cff442d658e6abb3233810a6889bf275c4fdbcb44cbae8409f0"
+  },
+  "deployment_package": {
+    "bytes": 125441,
+    "entries": 27,
+    "files": 26,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\S00_R9_PROFILE5_DEPLOYMENT.zip",
+    "sha256": "e73c3def84745ce62981c0f17f097d3d8bd3aa270423083e32e49700116c96ee",
+    "source_index_sha256": "0b632e9ebb238317346ac7f74682d8f7f66f9ac0ec78cd8c1a446a5d9a43abc9"
+  },
+  "deployment_source_manifest": {
+    "bytes": 2210,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\ARTIFACT_SHA256.json",
+    "sha256": "0b632e9ebb238317346ac7f74682d8f7f66f9ac0ec78cd8c1a446a5d9a43abc9"
+  },
+  "descriptor": {
+    "bytes": 12222,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\ENGINEERING_DESCRIPTOR.json",
+    "sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6"
+  },
+  "engineering_only": true,
+  "entry_environment": [
+    "S02_ENGINEERING_DESCRIPTOR",
+    "S02_ENGINEERING_DESCRIPTOR_SHA256"
+  ],
+  "entrypoint": "run_profile5.sh",
+  "failure_states_preserved": [
+    "UNSUPPORTED_PROFILER",
+    "PROFILE_LIMIT_EXCEEDED",
+    "SOURCE_CHANGED",
+    "DATA_NOT_READY",
+    "ERROR_RUNTIME_OR_STATE",
+    "INCOMPLETE"
+  ],
+  "formal_split_status": "UNKNOWN",
+  "hbm": false,
+  "immutable_after_publish": true,
+  "initial_remote_check": {
+    "bytes": 2129,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\INITIAL_REMOTE_READONLY_CONFIRMED.txt",
+    "sha256": "6fe72417c69cba6525bac70b923c174805e0975bcdc4b916949c302dff35a20c"
+  },
+  "limits": {
+    "activities": [
+      "CPU"
+    ],
+    "event_count_bound_scope": "Checked after each single CPU capture, before export; Torch has no incremental event-count cancellation API here. Capture duration is bounded by one update and the whole-entry timeout.",
+    "max_event_summaries": 3,
+    "max_events_per_sample": 50000,
+    "max_kml_markers_per_sample": 256,
+    "max_traces": 3,
+    "over_limit": "FAIL_STOP_NO_RETRY_NO_TRUNCATION",
+    "profile_memory": false,
+    "record_shapes": false,
+    "summary_bytes_each": 1048576,
+    "summary_top_self_cpu_keys": 80,
+    "trace_and_summary_total_max_bytes": 28311552,
+    "trace_bytes_each": 8388608,
+    "unsupported": "UNSUPPORTED_PROFILER_STOP_NO_INSTALL_NO_BACKEND_FALLBACK",
+    "with_flops": false,
+    "with_stack": false
+  },
+  "linux_login_log": {
+    "bytes": 14570,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\LOGIN_DEPLOYMENT_CHECKS.txt",
+    "sha256": "7ee93d9139f6d09871206dd79ff6ba5fcee4709bd963be3b79e08ca93d6a0ff0"
+  },
+  "max_retry_count": 0,
+  "new_jobs": 0,
+  "node_count": 1,
+  "numa_domains": 1,
+  "old_outputs_and_formal_gates": "READ_ONLY_UNCHANGED",
+  "profile_contract": {
+    "bytes": 3156,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\PROFILE_CONTRACT.json",
+    "sha256": "35878e1bfff4fab8f85ad84b540d927570fb09858e300ba664e605080fc8c978"
+  },
+  "profile_ready": {
+    "bytes": 3314,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\S02_PROFILE_READY.json",
+    "sha256": "0841d7fa67b5384007b087dba28f74a92018db4e9f176e1cdd637dde9d8eb5f9"
+  },
+  "protocol": "ENGINEERING_REAL_CORPUS_PROFILE5_V1",
+  "published_utc": "2026-11-06T03:13:30.068958+00:00",
+  "reference_first5": {
+    "bytes": 19052,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\REFERENCE_FIRST5.json",
+    "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "remote_staging_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_PROFILE5_20261106T030149Z",
+  "required_review": {
+    "bindings_object_required": true,
+    "decision": "PASS_FOR_ENGINEERING_PROFILE5",
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\round9_profile5_review_20261106\\S01_REVIEW.json",
+    "resources_object_required": true,
+    "review_complete": true
+  },
+  "required_review_bindings": {
+    "code_package_sha256": "15621eaa3328e407059c352d86a0f49ee68bfea39f02a68503ded6f94099abe3",
+    "code_source_manifest_sha256": "2a86fd01cab96a85cb2f0f4c8ed998edb956ef81255dfd5ceb950d41264de741",
+    "deployment_package_sha256": "e73c3def84745ce62981c0f17f097d3d8bd3aa270423083e32e49700116c96ee",
+    "deployment_source_manifest_sha256": "0b632e9ebb238317346ac7f74682d8f7f66f9ac0ec78cd8c1a446a5d9a43abc9",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+    "profile_contract_sha256": "35878e1bfff4fab8f85ad84b540d927570fb09858e300ba664e605080fc8c978",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "resources": {
+    "actual_physical_cores": 36,
+    "allocated_cores": 38,
+    "cleanup_seconds": 30,
+    "closing_seconds": 30,
+    "exclusive": true,
+    "job_seconds": 900,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 2,
+    "stop_new_update_after_seconds": 720,
+    "whole_entry_timeout": 840
+  },
+  "source_manifest": {
+    "bytes": 2210,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\ARTIFACT_SHA256.json",
+    "sha256": "0b632e9ebb238317346ac7f74682d8f7f66f9ac0ec78cd8c1a446a5d9a43abc9"
+  },
+  "status": "S00_DEPLOYMENT_READY",
+  "subject_mapping_status": "UNKNOWN",
+  "submit_marker": "new exclusive submit_once.marker in new root",
+  "success": "PROFILE5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "workload": {
+    "actual_train_frames": 320,
+    "continuous_updates": 5,
+    "new_sample_selection": false,
+    "normalization_frames": 1600,
+    "old_checkpoint_loaded": false,
+    "sampled_steps": [
+      3,
+      4,
+      5
+    ],
+    "warmup_steps": [
+      1,
+      2
+    ]
+  }
+}

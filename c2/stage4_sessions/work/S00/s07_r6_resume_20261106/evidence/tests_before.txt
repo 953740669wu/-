@@ -1,0 +1,21 @@
+test_r6_deployment (unittest.loader._FailedTest.test_r6_deployment) ... ERROR
+
+======================================================================
+ERROR: test_r6_deployment (unittest.loader._FailedTest.test_r6_deployment)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_r6_deployment
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_r6_resume_20261106\tests\test_r6_deployment.py", line 11, in <module>
+    import run_s07_diag_job as job
+ModuleNotFoundError: No module named 'run_s07_diag_job'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

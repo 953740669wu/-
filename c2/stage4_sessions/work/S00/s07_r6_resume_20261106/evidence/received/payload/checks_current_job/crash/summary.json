@@ -1,0 +1,20 @@
+{
+  "status": "FAIL",
+  "communication": "NOT_PASSED",
+  "case": "crash",
+  "supervisor": {
+    "reason": "child_failed",
+    "errors": [],
+    "pids": [
+      2432590,
+      2432591
+    ],
+    "exit_codes": [
+      -15,
+      17
+    ],
+    "all_reaped": true,
+    "wall_seconds": 18.429070972837508
+  },
+  "error": "ValueError: workers did not complete normally"
+}

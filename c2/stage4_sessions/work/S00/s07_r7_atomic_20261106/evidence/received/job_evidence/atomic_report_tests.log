@@ -1,0 +1,22 @@
+test_atomic_interrupted_before_replace_preserves_previous (__main__.AtomicReportChecks) ... ok
+test_atomic_interrupted_partial_write_preserves_previous (__main__.AtomicReportChecks) ... ok
+test_atomic_interrupted_write_preserves_previous_checkpoint (__main__.AtomicReportChecks) ... ok
+test_exception_cleanup_only_removes_owned_temp (__main__.AtomicReportChecks) ... ok
+test_first_publication_matches_original_serialization (__main__.AtomicReportChecks) ... ok
+test_flush_failure_preserves_previous (__main__.AtomicReportChecks) ... ok
+test_fsync_failure_preserves_previous (__main__.AtomicReportChecks) ... ok
+test_old_interrupted_write_leaves_partial_json (__main__.AtomicReportChecks) ... ok
+test_old_interrupted_write_truncates_previous_to_empty (__main__.AtomicReportChecks) ... ok
+test_original_reader_rejects_missing_empty_partial_for_both_ranks (__main__.AtomicReportChecks) ... ok
+test_readiness_still_refuses_existing_publication (__main__.AtomicReportChecks) ... ok
+test_replace_failure_preserves_previous (__main__.AtomicReportChecks) ... ok
+test_same_directory_exclusive_temp_and_closed_before_commit (__main__.AtomicReportChecks) ... ok
+test_serialization_failures_preserve_previous (__main__.AtomicReportChecks) ... ok
+test_successful_replacement (__main__.AtomicReportChecks) ... ok
+test_uncommitted_first_publication_still_rejected (__main__.AtomicReportChecks) ... ok
+test_write_failure_preserves_previous (__main__.AtomicReportChecks) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 3.279s
+
+OK

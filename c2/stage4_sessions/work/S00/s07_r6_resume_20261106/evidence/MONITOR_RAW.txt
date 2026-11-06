@@ -1,0 +1,30 @@
+
+{"cases": {}, "end_time": "-", "finished_steps": {"diagnostic_tests": {"error": null, "returncode": 0, "status": null}, "job_identity_tests": {"error": null, "returncode": 0, "status": null}, "probe_tests": {"error": null, "returncode": 0, "status": null}, "readiness_tests": {"error": null, "returncode": 0, "status": null}, "scheduler_handoff_receipt": {"error": null, "returncode": null, "status": null}, "stack_observer_tests": {"error": null, "returncode": 0, "status": null}, "verified_allocation": {"error": null, "returncode": null, "status": null}}, "job_exit_code": null, "job_id": "2050433", "nodes": "cn21338", "start_time": "2026-11-06T06:43:49Z", "state": "RUNNING", "utc": "2026-11-06T06:44:36.622578+00:00"}
+{"cases": {"normal": {"rank0_last": {"event": "worker_exit", "monotonic_ns": 3968881721320628, "stage": null}, "rank1_last": {"event": "worker_exit", "monotonic_ns": 3968881714346559, "stage": null}}}, "end_time": "-", "finished_steps": {"diagnostic_tests": {"error": null, "returncode": 0, "status": null}, "environment": {"error": null, "returncode": 0, "status": null}, "job_identity_tests": {"error": null, "returncode": 0, "status": null}, "probe_tests": {"error": null, "returncode": 0, "status": null}, "readiness_tests": {"error": null, "returncode": 0, "status": null}, "scheduler_handoff_receipt": {"error": null, "returncode": null, "status": null}, "stack_observer_tests": {"error": null, "returncode": 0, "status": null}, "verified_allocation": {"error": null, "returncode": null, "status": null}}, "job_exit_code": null, "job_id": "2050433", "nodes": "cn21338", "sta
+[23;80Hart_time": "2026-11-06T06:43:49Z", "state": "RUNNING", "utc": "2026-11-06T06:45:0
+[23;80H06.664961+00:00"}
+{"cases": {"crash": {"rank0_last": {"event": "worker_error", "monotonic_ns": 396
+[23;80H68901856907871, "stage": "broadcast"}, "rank1_last": {"event": "checkpoint_end", 
+[23;80H "monotonic_ns": 3968901811273738, "stage": "injected_crash"}, "status": "FAIL", 
+[23;80H "supervisor": {"all_reaped": true, "errors": [], "exit_codes": [-15, 17], "pids"
+[23;80H": [2432590, 2432591], "reason": "child_failed", "wall_seconds": 18.4290709728375
+[23;80H508}}, "normal": {"rank0_last": {"event": "worker_exit", "monotonic_ns": 39688817
+[23;80H721320628, "stage": null}, "rank1_last": {"event": "worker_exit", "monotonic_ns":
+[23;80H: 3968881714346559, "stage": null}, "status": "PASS", "supervisor": {"all_reaped"
+[23;80H": true, "errors": [], "exit_codes": [0, 0], "pids": [2430758, 2430759], "reason"
+[23;80H": "complete", "wall_seconds": 19.627162976190448}}}, "end_time": "2026-11-06T06:
+[23;80H:45:34Z", "finished_steps": {"SUMMARY": {"error": "RuntimeError('run_checks faile
+[23;80Hed; no retry')", "returncode": null, "status": "FAIL_STOP_NO_RETRY"}, "cleanup": 
+[23;80H {"error": null, "returncode": null, "status": null}, "diagnostic_tests": {"error
+[23;80Hr": null, "returncode": 0, "status": null}, "environment": {"error": null, "retur
+[23;80Hrncode": 0, "status": null}, "job_identity_tests": {"error": null, "returncode": 
+[23;80H 0, "status": null}, "probe_tests": {"error": null, "returncode": 0, "status": nu
+[23;80Hull}, "readiness_tests": {"error": null, "returncode": 0, "status": null}, "run_c
+[23;80Hchecks": {"error": null, "returncode": 1, "status": null}, "scheduler_handoff_rec
+[23;80Hceipt": {"error": null, "returncode": null, "status": null}, "stack_observer_test
+[23;80Hts": {"error": null, "returncode": 0, "status": null}, "verified_allocation": {"e
+[23;80Herror": null, "returncode": null, "status": null}}, "job_exit_code": 1, "job_id":
+[23;80H: "2050433", "nodes": "cn21338", "start_time": "2026-11-06T06:43:49Z", "state": "
+[23;80H"FAILED", "utc": "2026-11-06T06:45:36.739671+00:00"}
+Connection to 10.44.9.4 closed.
+[?9001l[?1004l

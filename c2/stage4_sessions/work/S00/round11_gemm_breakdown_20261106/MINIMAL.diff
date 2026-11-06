@@ -1,0 +1,302 @@
+--- R9/prepare.py
++++ R11/prepare.py
+@@ -7,10 +7,10 @@
+ import zipfile
+ 
+ BASE=Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
+-PREFIX='S02_PROFILE5_'
+-DEPLOYMENT='S00_R9_PROFILE5_DEPLOYMENT.zip'
++PREFIX='S02_GEMM5_'
++DEPLOYMENT='S00_R11_GEMM5_DEPLOYMENT.zip'
+ RESOURCES=dict(allocated_cores=38,actual_physical_cores=36,reserved_cores=2,memory_MB=24576,
+- memory_limit_MB=24576,exclusive=True,job_seconds=900,whole_entry_timeout=840,cleanup_seconds=30,closing_seconds=30,stop_new_update_after_seconds=720)
++ memory_limit_MB=24576,exclusive=True,job_seconds=900,whole_entry_timeout=840,cleanup_seconds=30,closing_seconds=30,stop_new_update_after_seconds=720,HBM=0)
+ 
+ 
+ def sha(path):
+--- R9/review_gate.py
++++ R11/review_gate.py
+@@ -3,19 +3,19 @@
+ from prepare import sha,pinned,RESOURCES,DEPLOYMENT
+ 
+ BINDING_KEYS=('code_package_sha256','code_source_manifest_sha256','deployment_package_sha256',
+-              'descriptor_sha256','interface_sha256','profile_contract_sha256','reference_first5_sha256','deployment_source_manifest_sha256')
++              'descriptor_sha256','interface_sha256','gemm_contract_sha256','reference_first5_sha256','deployment_source_manifest_sha256')
+ 
+ 
+ def expected(root):
+     pins=pinned(root)
+     return dict(code_package_sha256=pins['code_package_sha256'],code_source_manifest_sha256=pins['code_source_manifest_sha256'],
+       deployment_package_sha256=sha(root/DEPLOYMENT),descriptor_sha256=sha(root/'ENGINEERING_DESCRIPTOR.json'),
+-      interface_sha256=sha(root/'INTERFACE.json'),profile_contract_sha256=sha(root/'PROFILE_CONTRACT.json'),
++      interface_sha256=sha(root/'INTERFACE.json'),gemm_contract_sha256=sha(root/'GEMM_CONTRACT.json'),
+       reference_first5_sha256=sha(root/'REFERENCE_FIRST5.json'),deployment_source_manifest_sha256=sha(root/'ARTIFACT_SHA256.json'))
+ 
+ 
+ def validate(review,bindings):
+-    if review.get('decision')!='PASS_FOR_ENGINEERING_PROFILE5' or review.get('review_complete') is not True:
++    if review.get('decision')!='PASS_FOR_ENGINEERING_GEMM5' or review.get('review_complete') is not True:
+         raise ValueError('S01 explicit complete PASS required; fail/blocked is not approval')
+     if any(review.get('bindings',{}).get(k)!=bindings[k] for k in BINDING_KEYS):
+         raise ValueError('S01 concrete SHA bindings mismatch')
+--- R9/run_job.py
++++ R11/run_job.py
+@@ -11,7 +11,7 @@
+ from prepare import check_root,save,sha,verify_prepared
+ from review_gate import check_review
+ from owned_processes import Owned,run_phase,cleanup
+-from profile_outcome import inspect,SUCCESS
++from gemm_outcome import inspect,SUCCESS
+ 
+ 
+ def interrupted(signum,frame):raise InterruptedError('outer signal '+str(signum))
+@@ -20,7 +20,7 @@
+ def main(root):
+     check_root(root);out=root/'job_evidence';out.mkdir(exist_ok=False)
+     owner=Owned(os.getpid());code=2
+-    summary=dict(status='FAIL_STOP_NO_RETRY',engineering_only=True,protocol='ENGINEERING_REAL_CORPUS_PROFILE5_V1',
++    summary=dict(status='FAIL_STOP_NO_RETRY',engineering_only=True,protocol='ENGINEERING_REAL_CORPUS_GEMM5_V1',
+         formal_split_status='UNKNOWN',validation_status='NOT_RUN_NO_FORMAL_SPLIT',subject_mapping_status='UNKNOWN',
+         job_id=os.environ.get('CCS_JOB_ID'),started=START,execution_seconds=840,cleanup_seconds=30,closing_seconds=30,job_seconds=900,attempts=1)
+     try:
+@@ -33,14 +33,14 @@
+         run_phase(root,owner,'gate',['/usr/bin/python3','-B',str(root/'gate.py'),str(root),str(START+30)],START+30)
+         os.environ.update(S02_ENGINEERING_DESCRIPTOR=str(root/'ENGINEERING_DESCRIPTOR.json'),S02_ENGINEERING_DESCRIPTOR_SHA256=pins['descriptor_sha256'])
+         record=run_phase(root,owner,'training',['/bin/bash',str(root/'payload'/pins['entrypoint'])],START+840,allowed=(0,2,3))
+-        result_paths=list((root/'payload/outputs').glob('profile_*/result.json'))
+-        if len(result_paths)!=1:raise ValueError('one original profile result required')
++        result_paths=list((root/'payload/outputs').glob('gemm_*/result.json'))
++        if len(result_paths)!=1:raise ValueError('one original GEMM5 result required')
+         app=json.loads(result_paths[0].read_text());summary['application_result']=str(result_paths[0]);summary['application_status']=app.get('status')
+-        if app.get('protocol')!='ENGINEERING_REAL_CORPUS_PROFILE5_V1' or app.get('engineering_only') is not True:raise ValueError('profile application scope drift')
+-        outcome=inspect(root,os.environ['CCS_JOB_ID']);summary['profile_outcome']=outcome
++        if app.get('protocol')!='ENGINEERING_REAL_CORPUS_GEMM5_V1' or app.get('engineering_only') is not True:raise ValueError('GEMM5 application scope drift')
++        outcome=inspect(root,os.environ['CCS_JOB_ID']);summary['gemm_outcome']=outcome
+         code=record['returncode']
+         if code==0:
+-            if not outcome['profile5_complete']:raise ValueError('PROFILE5 evidence incomplete: '+repr(outcome))
++            if not outcome['gemm5_complete']:raise ValueError('GEMM5 evidence incomplete: '+repr(outcome))
+             summary['status']=SUCCESS
+         else:
+             if app.get('status')==SUCCESS:raise ValueError('nonzero exit conflicts with application completion')
+--- R9/collect_evidence.py
++++ R11/collect_evidence.py
+@@ -5,12 +5,12 @@
+ import sys
+ import zipfile
+ from prepare import check_root,sha,save,verify_prepared
+-from profile_outcome import inspect
++from gemm_outcome import inspect
+ 
+ 
+ def exposure(root):
+     job=(root/'job_id.txt').read_text().strip()
+-    path=root/'payload/outputs'/('profile_'+job)/'EXPOSURE_LEDGER.json'
++    path=root/'payload/outputs'/('gemm_'+job)/'EXPOSURE_LEDGER.json'
+     if path.is_file():
+         try:return dict(status='RAW_RUNTIME_LEDGER_PRESERVED',path=str(path),sha256=sha(path),raw=json.loads(path.read_text()))
+         except ValueError as exc:return dict(status='INVALID_RAW_RUNTIME_LEDGER_PRESERVED',path=str(path),error=repr(exc),future_test_exclusion_review_required=True)
+@@ -44,20 +44,20 @@
+         metadata[name]=dict(path=str(p),bytes=after.st_size,mtime_ns=after.st_mtime_ns,sha256=digest,archive_payload=not omit)
+         if omit:remote_only.append(name)
+         else:archived.append(p)
+-    results=list((root/'payload/outputs').glob('profile_*/result.json'))
++    results=list((root/'payload/outputs').glob('gemm_*/result.json'))
+     app=None
+     if len(results)==1:
+         try:app=json.loads(results[0].read_text())
+         except ValueError:pass
+     missing=[]
+     if len(results)!=1:missing.append('exactly_one_application_result')
+-    for name in ('job.log','scheduler_allocation.json','job_evidence/cleanup.json','job_evidence/SUMMARY.json','payload/outputs/profile_'+job+'/EXPOSURE_LEDGER.json'):
++    for name in ('job.log','scheduler_allocation.json','job_evidence/cleanup.json','job_evidence/SUMMARY.json','payload/outputs/gemm_'+job+'/EXPOSURE_LEDGER.json'):
+         if not (root/name).is_file():missing.append(name)
+     index=root/'COLLECTION_S00.json'
+     save(index,dict(job_id=job,state=row['state'],job_exit_code=row.get('jobExitCode'),query_command=command,
+       scheduler_pids_cleared=all(n['pids']=='-' for g in row['resGroups'] for n in g['nodeResUsages']),
+       source_status=source_status,files=metadata,remote_only=remote_only,missing=missing,
+-      application_status=app.get('status') if app else None,profile_outcome=inspect(root,job),exposure_reconciliation=recon,
++      application_status=app.get('status') if app else None,gemm_outcome=inspect(root,job),exposure_reconciliation=recon,
+       start_time=row.get('startTime'),end_time=row.get('endTime'),engineering_only=True,
+       formal_split_status='UNKNOWN',validation_status='NOT_RUN_NO_FORMAL_SPLIT',retries=0))
+     archived.append(index)
+--- /dev/null
++++ R11/gemm_outcome.py
+@@ -0,0 +1,84 @@
++"""Read scalar GEMM5 evidence only; never mutate, truncate or replay an operation."""
++import hashlib
++import json
++import math
++
++PROTOCOL='ENGINEERING_REAL_CORPUS_GEMM5_V1'
++SUCCESS='GEMM5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE'
++BASELINE='e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26'
++
++
++def inspect(root,job):
++    run=root/'payload/outputs'/('gemm_'+str(job))
++    output=dict(application_status=None,gemm5_complete=False,errors=[],missing_outputs=[],samples=[])
++    required=['result.json','steps.jsonl','EXPOSURE_LEDGER.json']+['gemm_step_'+str(i)+'.json' for i in (3,4,5)]
++    output['missing_outputs']=[n for n in required if not (run/n).is_file()]
++    try:
++        app=json.loads((run/'result.json').read_text(encoding='utf-8'))
++        output.update(application_status=app.get('status'),application_error=app.get('error'))
++        if app.get('status')!=SUCCESS:return output
++        def require(ok,message):
++            if not ok:raise ValueError(message)
++        require(app.get('protocol')==PROTOCOL and app.get('engineering_only') is True,'new GEMM5 protocol required')
++        require(app.get('completed_updates')==app.get('planned_updates')==5 and app.get('consumed_frames')==320,'exactly five updates/320 frames required')
++        recovery=app.get('recovery',{})
++        require(recovery.get('status')=='PASS_NO_EXTRA_UPDATE' and recovery.get('extra_updates')==0,'restore evidence missing')
++        require(all(recovery.get(k) is True for k in ('parameters_exact','optimizer_exact','rng_exact','cursor_exact','identity_exact')),'recovery state mismatch')
++        require(app.get('source_and_data_after')=='PASS_SAME_FROZEN_IDENTITIES','final source gate missing')
++        require(app.get('cpu36',{}).get('errors')==[] and len(app.get('cpu36',{}).get('checkpoints',[]))==19,'19 CPU checkpoints required')
++        require(app.get('runtime',{}).get('kml_gemm_calls',0)>0 and app.get('checkpoint',{}).get('sha256'),'KML/checkpoint missing')
++        observation=app['gemm_observation']
++        require(observation['baseline_kml_sha256']==observation['baseline_import']['sha256']==BASELINE,'unmodified baseline import required; R10 forbidden')
++        samples=observation['samples'];require([s['step'] for s in samples]==[3,4,5] and observation['detailed_steps']==[3,4,5],'three detailed samples required')
++        steps=[json.loads(x) for x in (run/'steps.jsonl').read_text(encoding='utf-8').splitlines()]
++        require(len(steps)==5 and not output['missing_outputs'],'missing five-step/ledger evidence')
++        require(len(list(run.glob('gemm_step_*.json')))==3,'exactly three detail files required')
++        require(not list(run.glob('trace_step_*.json')) and not list(run.glob('events_step_*.json')),'R9 profiler captures are outside GEMM5 scope')
++        for step,item in enumerate(steps,1):
++            require(item['step']==item['adamw_step']==step and item['cursor']==64*step and item['batch_size']==64,'step/B64 continuity mismatch')
++            require(item['kml_calls']==149,'original149 calls per update required')
++            metrics=item.get('baseline_loss_metrics',[])
++            require(len(metrics)==3 and all(m.get('passed') is True for m in metrics),'original loss gate missing')
++            if step<=2:
++                require(item.get('gemm_sample') is None,'warmup must not record detail');continue
++            sample=samples[step-3]
++            require(item['gemm_sample']==sample and sample['status']=='COMPLETE' and sample['records']==sample['native_calls']==149,'native/outer sample summary mismatch')
++            path=run/('gemm_step_'+str(step)+'.json');size=path.stat().st_size
++            require(size<=1048576,'detail exceeds1MiB; do not truncate')
++            raw=path.read_bytes();digest=hashlib.sha256(raw).hexdigest()
++            require(sample['bytes']==size and sample['sha256']==digest,'detail bytes/SHA mismatch')
++            body=json.loads(raw)
++            require(body['protocol']==PROTOCOL and body['step']==step and body['status']=='COMPLETE' and body['records']==149,'detail identity/status mismatch')
++            calls=body['calls'];require(len(calls)==149 and len(calls)<=256,'record cap/count mismatch')
++            require([c['call_index'] for c in calls]==list(range(1,150)),'missing/duplicate call sequence')
++            by_index={c['call_index']:c for c in calls}
++            for call in calls:
++                require(call['step']==step and call['status']=='COMPLETE' and call['native_calls']==1,'GEMM must pair with one native call')
++                require(type(call['thread_id']) is int and call['thread_id']>0,'missing thread identity')
++                require(type(call['ta']) is bool and type(call['tb']) is bool and math.isfinite(call['beta']),'invalid transpose/beta metadata')
++                for name in ('a','b','output'):
++                    tensor=call[name]
++                    require(len(tensor['shape'])==len(tensor['stride'])==2 and all(type(x) is int and x>0 for x in tensor['shape']) and all(type(x) is int and x>=0 for x in tensor['stride']),'invalid scalar tensor metadata')
++                    require(tensor['dtype'] in ('torch.float32','float32') and tensor['contiguous'] is True,'original contiguous fp32 operands/output required')
++                a,b=call['a']['shape'],call['b']['shape'];m,k=(a[1],a[0]) if call['ta'] else a;n=b[0] if call['tb'] else b[1]
++                require(k==(b[1] if call['tb'] else b[0]) and [call['m'],call['n'],call['k']]==[m,n,k] and call['output']['shape']==[m,n],'actual m/n/k/output differs from shape/flags')
++                for name in ('aliases_a_storage','aliases_b_storage','is_given_out'):require(type(call['output'][name]) is bool,'output alias metadata missing')
++                native=dict(layout=101,transa=112 if call['ta'] else 111,transb=112 if call['tb'] else 111,m=m,n=n,k=k,
++                    alpha=1.,lda=a[1],ldb=b[1],beta=call['beta'] if call['output']['is_given_out'] else 0.,ldc=n)
++                require(call['sgemm']==native and call['ctypes_thread_id']==call['thread_id'],'actual native arguments/thread differ from outer contract')
++                require(call['role'] in ('forward','dX','dW','UNKNOWN'),'unknown role label')
++                if call['role']!='UNKNOWN':
++                    context,ta,tb={'forward':('forward',False,True),'dX':('backward',False,False),'dW':('backward',True,False)}[call['role']]
++                    require((call['linear_context'],call['ta'],call['tb'])==(context,ta,tb),'role not confirmed by context/flags')
++                gs,ge,cs,ce=[call[k] for k in ('gemm_start_ns','gemm_end_ns','ctypes_start_ns','ctypes_end_ns')]
++                require(all(type(x) is int for x in (gs,ge,cs,ce)) and gs<=cs<=ce<=ge,'same-call native/outer intervals do not nest')
++                require(call['gemm_wall_ns']==ge-gs and call['ctypes_wall_ns']==ce-cs and call['outer_minus_ctypes_ns']==(ge-gs)-(ce-cs),'duration/difference metadata mismatch')
++                require(all(type(call[k]) is int and call[k]>=0 for k in ('observer_before_ns','observer_after_ns','observer_sgemm_bookkeeping_ns')),'observer bookkeeping evidence missing')
++                parent=call['parent_call_index']
++                if parent is not None:
++                    require(parent in by_index and parent<call['call_index'],'invalid parent sequence')
++                    p=by_index[parent];require(p['thread_id']==call['thread_id'] and p['gemm_start_ns']<=gs<=ge<=p['gemm_end_ns'],'parent/thread interval mismatch')
++            output['samples'].append(dict(step=step,records=len(calls),native_calls=sum(c['native_calls'] for c in calls),bytes=size,sha256=digest,thread_ids=sorted({c['thread_id'] for c in calls})))
++        output['gemm5_complete']=True
++    except (OSError,ValueError,KeyError,TypeError) as exc:output['errors'].append(repr(exc))
++    return output
+--- /dev/null
++++ R11/tests/test_gemm_deployment.py
+@@ -0,0 +1,90 @@
++"""LOCAL_FIXTURE: new GEMM collection semantics and review decisions only."""
++import hashlib
++import json
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
++import gemm_outcome as g
++import review_gate as review
++from prepare import RESOURCES
++
++
++class GemmDeploymentTests(unittest.TestCase):
++    def setUp(self):
++        self.tmp=tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]/'evidence');self.addCleanup(self.tmp.cleanup)
++        self.root=Path(self.tmp.name);self.run=self.root/'payload/outputs/gemm_42';self.run.mkdir(parents=True)
++
++    def write(self,path,value):path.write_text(json.dumps(value),encoding='utf-8')
++
++    def fixture(self):
++        summaries=[];steps=[]
++        for step in range(1,6):
++            sample=None
++            if step>=3:
++                calls=[]
++                for i in range(1,150):
++                    start=1000*i
++                    calls.append(dict(step=step,call_index=i,thread_id=42,parent_call_index=None,role='forward',linear_context='forward',
++                        a=dict(shape=[2,4],stride=[4,1],dtype='torch.float32',contiguous=True),b=dict(shape=[3,4],stride=[4,1],dtype='torch.float32',contiguous=True),
++                        ta=False,tb=True,beta=1.,m=2,n=3,k=4,output=dict(shape=[2,3],stride=[3,1],dtype='torch.float32',contiguous=True,aliases_a_storage=False,aliases_b_storage=False,is_given_out=True),
++                        native_calls=1,ctypes_thread_id=42,sgemm=dict(layout=101,transa=111,transb=112,m=2,n=3,k=4,alpha=1.,lda=4,ldb=4,beta=1.,ldc=3),gemm_start_ns=start,gemm_end_ns=start+100,gemm_wall_ns=100,ctypes_start_ns=start+10,ctypes_end_ns=start+90,ctypes_wall_ns=80,outer_minus_ctypes_ns=20,
++                        observer_before_ns=2,observer_after_ns=2,observer_sgemm_bookkeeping_ns=2,status='COMPLETE'))
++                path=self.run/('gemm_step_'+str(step)+'.json');self.write(path,dict(protocol=g.PROTOCOL,step=step,status='COMPLETE',clock='time.perf_counter_ns monotonic',timing_scope='LOCAL_FIXTURE',records=149,calls=calls))
++                sample=dict(step=step,status='COMPLETE',records=149,native_calls=149,path=str(path),bytes=path.stat().st_size,sha256=hashlib.sha256(path.read_bytes()).hexdigest());summaries.append(sample)
++            steps.append(dict(step=step,adamw_step=step,batch_size=64,cursor=step*64,kml_calls=149,gemm_sample=sample,baseline_loss_metrics=[dict(name=n,passed=True) for n in ('total','voltage','coarse')]))
++        app=dict(protocol=g.PROTOCOL,status=g.SUCCESS,engineering_only=True,planned_updates=5,completed_updates=5,consumed_frames=320,
++            cpu36=dict(errors=[],checkpoints=[{}]*19),runtime=dict(kml_gemm_calls=843),source_and_data_after='PASS_SAME_FROZEN_IDENTITIES',checkpoint=dict(sha256='a'*64),
++            recovery=dict(status='PASS_NO_EXTRA_UPDATE',extra_updates=0,parameters_exact=True,optimizer_exact=True,rng_exact=True,cursor_exact=True,identity_exact=True),
++            gemm_observation=dict(baseline_kml_sha256=g.BASELINE,baseline_import=dict(sha256=g.BASELINE),detailed_steps=[3,4,5],samples=summaries))
++        self.write(self.run/'result.json',app);self.write(self.run/'EXPOSURE_LEDGER.json',{})
++        (self.run/'steps.jsonl').write_text(''.join(json.dumps(s)+'\n' for s in steps),encoding='utf-8')
++
++    def mutate(self,change):
++        path=self.run/'gemm_step_3.json';body=json.loads(path.read_text());change(body['calls'][0]);self.write(path,body)
++        app=json.loads((self.run/'result.json').read_text());sample=app['gemm_observation']['samples'][0];sample.update(bytes=path.stat().st_size,sha256=hashlib.sha256(path.read_bytes()).hexdigest());self.write(self.run/'result.json',app)
++        steps=[json.loads(s) for s in (self.run/'steps.jsonl').read_text().splitlines()];steps[2]['gemm_sample']=sample
++        (self.run/'steps.jsonl').write_text(''.join(json.dumps(s)+'\n' for s in steps))
++
++    def test_complete_three_files_without_profile_traces(self):
++        self.fixture();self.assertTrue(g.inspect(self.root,'42')['gemm5_complete'])
++
++    def test_r9_profile_captures_cannot_be_reused(self):
++        self.fixture();self.write(self.run/'trace_step_3.json',{})
++        self.assertFalse(g.inspect(self.root,'42')['gemm5_complete'])
++
++    def test_missing_or_unpaired_native_rejected_after_refreshing_sha(self):
++        self.fixture();self.mutate(lambda row:row.update(native_calls=2));self.assertFalse(g.inspect(self.root,'42')['gemm5_complete'])
++
++    def test_actual_dimensions_and_interval_mismatch_rejected(self):
++        for change in [lambda row:row.update(m=999),lambda row:row.update(ctypes_end_ns=row['gemm_end_ns']+1),lambda row:row.update(ctypes_thread_id=43)]:
++            self.fixture();self.mutate(change);self.assertFalse(g.inspect(self.root,'42')['gemm5_complete'])
++
++    def test_actual_sgemm_parameters_must_match_outer_metadata(self):
++        self.fixture();self.mutate(lambda row:row['sgemm'].update(lda=999))
++        self.assertFalse(g.inspect(self.root,'42')['gemm5_complete'])
++
++    def test_role_cannot_be_guessed_from_wrong_context(self):
++        self.fixture();self.mutate(lambda row:row.update(linear_context='backward'));self.assertFalse(g.inspect(self.root,'42')['gemm5_complete'])
++
++    def test_missing_or_oversized_detail_not_truncated(self):
++        self.fixture();p=self.run/'gemm_step_4.json';p.unlink();self.assertFalse(g.inspect(self.root,'42')['gemm5_complete'])
++        self.fixture();p.write_bytes(b'x'*(1048576+1));self.assertFalse(g.inspect(self.root,'42')['gemm5_complete']);self.assertEqual(p.stat().st_size,1048577)
++
++    def test_failed_states_and_old_profile_success_never_pass(self):
++        for status in ['GEMM_OBSERVATION_ERROR','GEMM_LIMIT_EXCEEDED','UNSUPPORTED_GEMM_OBSERVATION','INCOMPLETE','PROFILE5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE']:
++            self.write(self.run/'result.json',dict(protocol=g.PROTOCOL,status=status,error='original'))
++            result=g.inspect(self.root,'42');self.assertEqual(result['application_status'],status);self.assertFalse(result['gemm5_complete'])
++
++    def test_exact_new_review_binding_and_decision(self):
++        bindings={k:'a'*64 for k in review.BINDING_KEYS};value=dict(decision='PASS_FOR_ENGINEERING_GEMM5',review_complete=True,bindings=bindings,resources=RESOURCES)
++        review.validate(value,bindings)
++        for key in review.BINDING_KEYS:
++            bad=dict(bindings);bad[key]='b'*64
++            with self.assertRaises(ValueError):review.validate(value,bad)
++        value['decision']='PASS_FOR_ENGINEERING_PROFILE5'
++        with self.assertRaises(ValueError):review.validate(value,bindings)
++
++
++if __name__=='__main__':unittest.main(verbosity=2)

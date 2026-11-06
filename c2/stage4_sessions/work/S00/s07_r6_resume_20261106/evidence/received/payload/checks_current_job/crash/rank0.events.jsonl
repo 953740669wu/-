@@ -1,0 +1,37 @@
+{"event": "worker_ready", "time_ns": 1793947509078457109, "monotonic_ns": 3968884249636148, "pid": 2432590, "rank": 0, "job_id": "2050433", "run_id": "crash"}
+{"event": "checkpoint_begin", "time_ns": 1793947509082245304, "monotonic_ns": 3968884253424573, "pid": 2432590, "stage": "before_framework"}
+{"event": "checkpoint_end", "time_ns": 1793947509101011939, "monotonic_ns": 3968884272190388, "pid": 2432590, "stage": "before_framework"}
+{"event": "torch_import_begin", "time_ns": 1793947509102926622, "monotonic_ns": 3968884274105141, "pid": 2432590}
+{"event": "torch_import_end", "time_ns": 1793947524772817881, "monotonic_ns": 3968899943997050, "pid": 2432590}
+{"event": "distributed_import_begin", "time_ns": 1793947524786963190, "monotonic_ns": 3968899958141349, "pid": 2432590}
+{"event": "distributed_import_end", "time_ns": 1793947524788520673, "monotonic_ns": 3968899959698622, "pid": 2432590}
+{"event": "runtime_metadata_begin", "time_ns": 1793947524789916634, "monotonic_ns": 3968899961094343, "pid": 2432590}
+{"event": "library_sha_begin", "time_ns": 1793947524793956180, "monotonic_ns": 3968899965135079, "pid": 2432590, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so"}
+{"event": "library_sha_end", "time_ns": 1793947524796677264, "monotonic_ns": 3968899967855773, "pid": 2432590, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so"}
+{"event": "library_sha_begin", "time_ns": 1793947524798882047, "monotonic_ns": 3968899970061306, "pid": 2432590, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so"}
+{"event": "library_sha_end", "time_ns": 1793947524804555605, "monotonic_ns": 3968899975735024, "pid": 2432590, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so"}
+{"event": "library_sha_begin", "time_ns": 1793947524818701654, "monotonic_ns": 3968899989881543, "pid": 2432590, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so"}
+{"event": "library_sha_end", "time_ns": 1793947524821334978, "monotonic_ns": 3968899992515077, "pid": 2432590, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so"}
+{"event": "library_sha_begin", "time_ns": 1793947524823111810, "monotonic_ns": 3968899994289969, "pid": 2432590, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"}
+{"event": "library_sha_end", "time_ns": 1793947525550475694, "monotonic_ns": 3968900721653983, "pid": 2432590, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"}
+{"event": "library_sha_begin", "time_ns": 1793947525566702956, "monotonic_ns": 3968900737881205, "pid": 2432590, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so"}
+{"event": "library_sha_end", "time_ns": 1793947525569522260, "monotonic_ns": 3968900740701749, "pid": 2432590, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so"}
+{"event": "library_sha_begin", "time_ns": 1793947525571221233, "monotonic_ns": 3968900742400222, "pid": 2432590, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so"}
+{"event": "library_sha_end", "time_ns": 1793947525642960622, "monotonic_ns": 3968900814139101, "pid": 2432590, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so"}
+{"event": "runtime_metadata_end", "time_ns": 1793947525783947636, "monotonic_ns": 3968900955127285, "pid": 2432590}
+{"event": "checkpoint_begin", "time_ns": 1793947525786117429, "monotonic_ns": 3968900957295668, "pid": 2432590, "stage": "after_framework"}
+{"event": "checkpoint_end", "time_ns": 1793947525792227778, "monotonic_ns": 3968900963406647, "pid": 2432590, "stage": "after_framework"}
+{"event": "preparation_complete", "time_ns": 1793947525793821890, "monotonic_ns": 3968900965000189, "pid": 2432590, "rank": 0}
+{"event": "ready_context_wait", "time_ns": 1793947525806332207, "monotonic_ns": 3968900977510906, "pid": 2432590, "rank": 0}
+{"event": "ready_published", "time_ns": 1793947525818800074, "monotonic_ns": 3968900989978683, "pid": 2432590, "rank": 0, "job_id": "2050433", "run_id": "crash", "ready_token": "597df62241d3a97a6a0a8936fde847ea"}
+{"event": "peer_ready_wait", "time_ns": 1793947525821057047, "monotonic_ns": 3968900992236256, "pid": 2432590, "rank": 0}
+{"event": "both_ready", "time_ns": 1793947525825469094, "monotonic_ns": 3968900996646113, "pid": 2432590, "rank": 0, "pids": [2432590, 2432591]}
+{"event": "checkpoint_begin", "time_ns": 1793947525826805685, "monotonic_ns": 3968900997983564, "pid": 2432590, "stage": "init_process_group"}
+{"event": "checkpoint_end", "time_ns": 1793947525833618405, "monotonic_ns": 3968901004796544, "pid": 2432590, "stage": "init_process_group"}
+{"event": "init_process_group_begin", "time_ns": 1793947525835128597, "monotonic_ns": 3968901006307036, "pid": 2432590, "pg_timeout_seconds": 5, "rank": 0, "world_size": 2, "backend": "gloo", "init_method": "file:///home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/rendezvous"}
+{"event": "init_process_group_end", "time_ns": 1793947526599162002, "monotonic_ns": 3968901770340251, "pid": 2432590}
+{"event": "checkpoint_begin", "time_ns": 1793947526601545075, "monotonic_ns": 3968901772724494, "pid": 2432590, "stage": "all_gather_identity"}
+{"event": "checkpoint_end", "time_ns": 1793947526607420443, "monotonic_ns": 3968901778598442, "pid": 2432590, "stage": "all_gather_identity"}
+{"event": "checkpoint_begin", "time_ns": 1793947526634007460, "monotonic_ns": 3968901805186369, "pid": 2432590, "stage": "broadcast"}
+{"event": "checkpoint_end", "time_ns": 1793947526640084489, "monotonic_ns": 3968901811263338, "pid": 2432590, "stage": "broadcast"}
+{"event": "worker_error", "time_ns": 1793947526685730052, "monotonic_ns": 3968901856907871, "pid": 2432590, "stage": "broadcast", "error": "RuntimeError: [/pytorch/third_party/gloo/gloo/transport/tcp/pair.cc:525] Read error [127.0.0.1]:60118: Connection reset by peer"}

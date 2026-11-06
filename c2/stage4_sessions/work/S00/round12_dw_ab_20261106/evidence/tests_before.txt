@@ -1,0 +1,21 @@
+test_r12_deployment (unittest.loader._FailedTest.test_r12_deployment) ... ERROR
+
+======================================================================
+ERROR: test_r12_deployment (unittest.loader._FailedTest.test_r12_deployment)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_r12_deployment
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\round12_dw_ab_20261106\tests\test_r12_deployment.py", line 7, in <module>
+    import r12_outcome as outcome
+ModuleNotFoundError: No module named 'r12_outcome'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

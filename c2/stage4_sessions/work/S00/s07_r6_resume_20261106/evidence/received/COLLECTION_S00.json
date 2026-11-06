@@ -1,0 +1,1352 @@
+{
+  "changed_source_files": [],
+  "communication_passed": false,
+  "communication_verdict_not_reinterpreted": true,
+  "diagnostics": {
+    "cases": {
+      "crash": {
+        "complete": true,
+        "files": {
+          "rank0.events.jsonl": {
+            "bytes": 6095,
+            "mtime_ns": 1793947526626214000,
+            "open_intervals": [],
+            "sha256": "dd7fc0ff8f244d5762efc8a2761f9dd0a5e2d036a802436a710e06a5b0a4e3b9",
+            "valid_rows": 37
+          },
+          "rank1.events.jsonl": {
+            "bytes": 5835,
+            "mtime_ns": 1793947526726789000,
+            "open_intervals": [],
+            "sha256": "2da48959e5ad8af43a66cfbf2800c5aea4349d8826c72c35410a0cfe2297cce9",
+            "valid_rows": 36
+          },
+          "supervisor.events.jsonl": {
+            "bytes": 1424,
+            "mtime_ns": 1793947526809498000,
+            "open_intervals": [],
+            "sha256": "e267e5ddcd246ec1a3e1d8b4f4a2c5a91461041f672a2aaebe49cf9ffbc41bab",
+            "valid_rows": 10
+          }
+        },
+        "issues": []
+      },
+      "normal": {
+        "complete": true,
+        "files": {
+          "rank0.events.jsonl": {
+            "bytes": 7055,
+            "mtime_ns": 1793947506631609000,
+            "open_intervals": [],
+            "sha256": "070dbfe119beac9801ad7fff03589837703c5e38abbed072b88c12339bb93493",
+            "valid_rows": 45
+          },
+          "rank1.events.jsonl": {
+            "bytes": 7055,
+            "mtime_ns": 1793947506615218000,
+            "open_intervals": [],
+            "sha256": "8a794cf2be51de54e1722e411530e041e3e0bb0f8c79663d3ea5866b1db13202",
+            "valid_rows": 45
+          },
+          "supervisor.events.jsonl": {
+            "bytes": 1263,
+            "mtime_ns": 1793947507732480000,
+            "open_intervals": [],
+            "sha256": "0c7d5b208d6d8353dd13a6550927ee5ffa8f7b5a9b869383befa8c6577482356",
+            "valid_rows": 9
+          }
+        },
+        "issues": []
+      }
+    },
+    "complete": true,
+    "issues": [],
+    "not_run": [
+      "collective-timeout",
+      "watchdog"
+    ],
+    "scope": "trace completeness only; I/O included; no root-cause or communication verdict",
+    "status": "COMPLETE_AVAILABLE_TRACES_ONLY"
+  },
+  "files": {
+    "ARTIFACT_SHA256.json": {
+      "bytes": 2348,
+      "changed_during_read": false,
+      "mtime_ns": 1793946844000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/ARTIFACT_SHA256.json",
+      "sha256": "b55408714ac60709467e1b94c67741d664341a720d678cf0e4c2d49e043fce75",
+      "stat_after_bytes": 2348,
+      "stat_after_mtime_ns": 1793946844000000000
+    },
+    "ARTIFACT_SHA256.txt": {
+      "bytes": 2143,
+      "changed_during_read": false,
+      "mtime_ns": 1793946844000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/ARTIFACT_SHA256.txt",
+      "sha256": "857b4d4841003fc8194b107aa46fbd79dd39f4dcd3a584e62f9df56962faa272",
+      "stat_after_bytes": 2143,
+      "stat_after_mtime_ns": 1793946844000000000
+    },
+    "COMMANDS.md": {
+      "bytes": 4664,
+      "changed_during_read": false,
+      "mtime_ns": 1793946842000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/COMMANDS.md",
+      "sha256": "052b0a8d06307687ed6e91eeb7ed970ec126f52b7813e6054eca3a4db011511b",
+      "stat_after_bytes": 4664,
+      "stat_after_mtime_ns": 1793946842000000000
+    },
+    "DIAGNOSTIC_INVENTORY.json": {
+      "bytes": 1993,
+      "changed_during_read": false,
+      "mtime_ns": 1793947611651052430,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/DIAGNOSTIC_INVENTORY.json",
+      "sha256": "8b8654b32c4431806fa95e2b1054fa6bfd6c28e7712b91c408795e5411f34a98",
+      "stat_after_bytes": 1993,
+      "stat_after_mtime_ns": 1793947611651052430
+    },
+    "INTERFACE_FOR_S00.md": {
+      "bytes": 4408,
+      "changed_during_read": false,
+      "mtime_ns": 1793946422000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/INTERFACE_FOR_S00.md",
+      "sha256": "66bdf9936855c547c747d51bae828f4ab27640f6e740d140a9ef96ca3f1d43fa",
+      "stat_after_bytes": 4408,
+      "stat_after_mtime_ns": 1793946422000000000
+    },
+    "MINIMAL.diff": {
+      "bytes": 52411,
+      "changed_during_read": false,
+      "mtime_ns": 1793946844000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/MINIMAL.diff",
+      "sha256": "ed439820e0ab587b0f3dd3014a61e08f6cfab8f3c33401dada32e2c267dd801d",
+      "stat_after_bytes": 52411,
+      "stat_after_mtime_ns": 1793946844000000000
+    },
+    "OBSERVATION_CONTRACT.md": {
+      "bytes": 4755,
+      "changed_during_read": false,
+      "mtime_ns": 1793946422000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/OBSERVATION_CONTRACT.md",
+      "sha256": "448cad1a857165c74d0cb241e32b18480d1495ec995704f9f6c5de2208712dde",
+      "stat_after_bytes": 4755,
+      "stat_after_mtime_ns": 1793946422000000000
+    },
+    "OWNERSHIP_FROM_R12.diff": {
+      "bytes": 851,
+      "changed_during_read": false,
+      "mtime_ns": 1793946844000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/OWNERSHIP_FROM_R12.diff",
+      "sha256": "036819d315927901f935497650a933d9b789889d7fb05e7f4746f21ca7f37d7e",
+      "stat_after_bytes": 851,
+      "stat_after_mtime_ns": 1793946844000000000
+    },
+    "OWNERSHIP_PROVENANCE.json": {
+      "bytes": 484,
+      "changed_during_read": false,
+      "mtime_ns": 1793946844000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/OWNERSHIP_PROVENANCE.json",
+      "sha256": "f40992869b885b171b9944b40cd39a3bbe8dac4191071ff57af5760954f4cfa7",
+      "stat_after_bytes": 484,
+      "stat_after_mtime_ns": 1793946844000000000
+    },
+    "PRE_SUBMIT_QUEUE.raw": {
+      "bytes": 971,
+      "changed_during_read": false,
+      "mtime_ns": 1793947390219068000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/PRE_SUBMIT_QUEUE.raw",
+      "sha256": "f4a268ea72039c57edaa82daf8595ab1aec03636835f03aa03a57a722c78802b",
+      "stat_after_bytes": 971,
+      "stat_after_mtime_ns": 1793947390219068000
+    },
+    "READINESS_INVENTORY.json": {
+      "bytes": 3521,
+      "changed_during_read": false,
+      "mtime_ns": 1793947611677072000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/READINESS_INVENTORY.json",
+      "sha256": "ac42f603c8bd794291271c96fca1453d4a0b9ab7458da33a2369518795ce7b8e",
+      "stat_after_bytes": 3521,
+      "stat_after_mtime_ns": 1793947611677072000
+    },
+    "S00_S07_R6_DIAGNOSTIC_DEPLOYMENT.zip": {
+      "bytes": 104603,
+      "changed_during_read": false,
+      "mtime_ns": 1793946945747880800,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/S00_S07_R6_DIAGNOSTIC_DEPLOYMENT.zip",
+      "sha256": "82efe84bc36c34db71e107b64f9ff74641b44495d65452d3ec1a535ad5436dc1",
+      "stat_after_bytes": 104603,
+      "stat_after_mtime_ns": 1793946945747880800
+    },
+    "S00_S07_R6_DIAGNOSTIC_DEPLOYMENT.zip.sha256": {
+      "bytes": 103,
+      "changed_during_read": false,
+      "mtime_ns": 1793946946207366630,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/S00_S07_R6_DIAGNOSTIC_DEPLOYMENT.zip.sha256",
+      "sha256": "386a09d5baa2590a8d101b49631e66e37ccfdd1c7a25d5cc50187e9c9340c989",
+      "stat_after_bytes": 103,
+      "stat_after_mtime_ns": 1793946946207366630
+    },
+    "S01_REVIEW.json": {
+      "bytes": 4922,
+      "changed_during_read": false,
+      "mtime_ns": 1793947346687932410,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/S01_REVIEW.json",
+      "sha256": "b9082f2385df26e05ff6ccd9b11f421db38e2e597d643bff81b2d9859e09b250",
+      "stat_after_bytes": 4922,
+      "stat_after_mtime_ns": 1793947346687932410
+    },
+    "S07_ALIGNED_STACK_R6.zip": {
+      "bytes": 43727,
+      "changed_during_read": false,
+      "mtime_ns": 1793946422000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/S07_ALIGNED_STACK_R6.zip",
+      "sha256": "32740dcbbce682ee6b245dbb563e7d6ff7a22a11e78d4279db57c4c5b122e7a1",
+      "stat_after_bytes": 43727,
+      "stat_after_mtime_ns": 1793946422000000000
+    },
+    "SOURCE_MANIFEST.json": {
+      "bytes": 3354,
+      "changed_during_read": false,
+      "mtime_ns": 1793946422000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/SOURCE_MANIFEST.json",
+      "sha256": "1b2dec1148d74844ca826e21244069a54a009d8935242fd325fc0ad744083f46",
+      "stat_after_bytes": 3354,
+      "stat_after_mtime_ns": 1793946422000000000
+    },
+    "STACK_INVENTORY.json": {
+      "bytes": 224,
+      "changed_during_read": false,
+      "mtime_ns": 1793947611654825030,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/STACK_INVENTORY.json",
+      "sha256": "51f4b69ee81d66b32c552766de5cb9fb219e9ff809ce52fa37b05070237c204b",
+      "stat_after_bytes": 224,
+      "stat_after_mtime_ns": 1793947611654825030
+    },
+    "TASK_CARD.md": {
+      "bytes": 10213,
+      "changed_during_read": false,
+      "mtime_ns": 1793946422000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/TASK_CARD.md",
+      "sha256": "9a2c41f21f6f5be38ece42e082e3c221bb5593dbbbc84dbb302ce66ae33fff36",
+      "stat_after_bytes": 10213,
+      "stat_after_mtime_ns": 1793946422000000000
+    },
+    "UNCHANGED_HELPERS.json": {
+      "bytes": 565,
+      "changed_during_read": false,
+      "mtime_ns": 1793946844000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/UNCHANGED_HELPERS.json",
+      "sha256": "2df1c7e3459fd3f09c25fad7164997ed343b611b194cc6a4ce72ea13db457024",
+      "stat_after_bytes": 565,
+      "stat_after_mtime_ns": 1793946844000000000
+    },
+    "WORK_STARTED.json": {
+      "bytes": 251,
+      "changed_during_read": false,
+      "mtime_ns": 1793946232000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/WORK_STARTED.json",
+      "sha256": "a28369381196ee23696254baf9d6eda90a30da314fea76094a8af20cd287f0f9",
+      "stat_after_bytes": 251,
+      "stat_after_mtime_ns": 1793946232000000000
+    },
+    "bounded_round_step.py": {
+      "bytes": 675,
+      "changed_during_read": false,
+      "mtime_ns": 1793946422000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/bounded_round_step.py",
+      "sha256": "a8a53122c36bef163c2b90d243d197c146bebc2da9a40f6bf0b3ed9c3c7c66ed",
+      "stat_after_bytes": 675,
+      "stat_after_mtime_ns": 1793946422000000000
+    },
+    "collect_evidence.py": {
+      "bytes": 3655,
+      "changed_during_read": false,
+      "mtime_ns": 1793946600000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/collect_evidence.py",
+      "sha256": "895e11cbb168f794ff7524bd66436cf171369c50ea115adbe5836348561febe3",
+      "stat_after_bytes": 3655,
+      "stat_after_mtime_ns": 1793946600000000000
+    },
+    "djob_final.json": {
+      "bytes": 3892,
+      "changed_during_read": false,
+      "mtime_ns": 1793947611642353000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/djob_final.json",
+      "sha256": "7066b3f8c6498312eac1d14edb790b0a7c59bfcf05ce8a3bb8e4b051a1fd274c",
+      "stat_after_bytes": 3892,
+      "stat_after_mtime_ns": 1793947611642353000
+    },
+    "djob_final.stderr": {
+      "bytes": 0,
+      "changed_during_read": false,
+      "mtime_ns": 1793947611622320660,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/djob_final.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stat_after_bytes": 0,
+      "stat_after_mtime_ns": 1793947611622320660
+    },
+    "freeze_deployment.py": {
+      "bytes": 3801,
+      "changed_during_read": false,
+      "mtime_ns": 1793946842000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/freeze_deployment.py",
+      "sha256": "ba9cbe0758b0fcb65d1d11300f4fd6aa6b7e650b104d17030e0f3259e37a8e2e",
+      "stat_after_bytes": 3801,
+      "stat_after_mtime_ns": 1793946842000000000
+    },
+    "job.log": {
+      "bytes": 0,
+      "changed_during_read": false,
+      "mtime_ns": 1793947429981935286,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stat_after_bytes": 0,
+      "stat_after_mtime_ns": 1793947429981935286
+    },
+    "job_evidence/SUMMARY.json": {
+      "bytes": 5294,
+      "changed_during_read": false,
+      "mtime_ns": 1793947533635058865,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/SUMMARY.json",
+      "sha256": "d924255f2017ecb66355854b9f626f92ffca0e0072559a8815a92cc57e96bab9",
+      "stat_after_bytes": 5294,
+      "stat_after_mtime_ns": 1793947533635058865
+    },
+    "job_evidence/cleanup.json": {
+      "bytes": 682,
+      "changed_during_read": false,
+      "mtime_ns": 1793947533645549000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/cleanup.json",
+      "sha256": "e92c2b82b4858f1f079b456e731ef29e633bcebddb55e34051b49f0cb643ab9e",
+      "stat_after_bytes": 682,
+      "stat_after_mtime_ns": 1793947533645549000
+    },
+    "job_evidence/diagnostic_tests.json": {
+      "bytes": 475,
+      "changed_during_read": false,
+      "mtime_ns": 1793947448098493321,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/diagnostic_tests.json",
+      "sha256": "c9c927f7b5ba856bc8a32112c4585070f79cc1f694d9706742bfa783496c19d5",
+      "stat_after_bytes": 475,
+      "stat_after_mtime_ns": 1793947448098493321
+    },
+    "job_evidence/diagnostic_tests.log": {
+      "bytes": 607,
+      "changed_during_read": false,
+      "mtime_ns": 1793947447824923000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/diagnostic_tests.log",
+      "sha256": "39b3231a273d06c21beba0e2df233cdeaf5f69675702c1aff94778fc59b54dd3",
+      "stat_after_bytes": 607,
+      "stat_after_mtime_ns": 1793947447824923000
+    },
+    "job_evidence/diagnostic_tests_cleanup.json": {
+      "bytes": 394,
+      "changed_during_read": false,
+      "mtime_ns": 1793947451100191673,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/diagnostic_tests_cleanup.json",
+      "sha256": "a9658d7a674e28d4fa82bba0602f36438508ee93a07f97f3009410635aaab7dc",
+      "stat_after_bytes": 394,
+      "stat_after_mtime_ns": 1793947451100191673
+    },
+    "job_evidence/environment.json": {
+      "bytes": 626,
+      "changed_during_read": false,
+      "mtime_ns": 1793947484002983463,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/environment.json",
+      "sha256": "17840a5c714784ef3f837dc8535e9927807a757b12a7e2a06fe2731bb2e23966",
+      "stat_after_bytes": 626,
+      "stat_after_mtime_ns": 1793947484002983463
+    },
+    "job_evidence/environment.log": {
+      "bytes": 3288,
+      "changed_during_read": false,
+      "mtime_ns": 1793947483115176000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/environment.log",
+      "sha256": "de9ae5b34b41d6b35467913f0553f1b7c805c11fc608cfe6f416e09cda657a1b",
+      "stat_after_bytes": 3288,
+      "stat_after_mtime_ns": 1793947483115176000
+    },
+    "job_evidence/environment_cleanup.json": {
+      "bytes": 500,
+      "changed_during_read": false,
+      "mtime_ns": 1793947487075474043,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/environment_cleanup.json",
+      "sha256": "384720aa66b9bd48c57263048aa1310c2706423c0b2e8216156518dcd8fcd9de",
+      "stat_after_bytes": 500,
+      "stat_after_mtime_ns": 1793947487075474043
+    },
+    "job_evidence/job_identity_tests.json": {
+      "bytes": 476,
+      "changed_during_read": false,
+      "mtime_ns": 1793947453011711757,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/job_identity_tests.json",
+      "sha256": "30cf0e02f5052fef218f40d691845b7cc171391167ed4ca437791efc4c559d26",
+      "stat_after_bytes": 476,
+      "stat_after_mtime_ns": 1793947453011711757
+    },
+    "job_evidence/job_identity_tests.log": {
+      "bytes": 518,
+      "changed_during_read": false,
+      "mtime_ns": 1793947452870050000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/job_identity_tests.log",
+      "sha256": "d1323a392d722fee0e3324ab25cac4318718e4108381fcbe5edc40ffd1271043",
+      "stat_after_bytes": 518,
+      "stat_after_mtime_ns": 1793947452870050000
+    },
+    "job_evidence/job_identity_tests_cleanup.json": {
+      "bytes": 421,
+      "changed_during_read": false,
+      "mtime_ns": 1793947455985913705,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/job_identity_tests_cleanup.json",
+      "sha256": "cbb529ea636275dc5271663a2eca97076923dca40531f6341677223c0b54029d",
+      "stat_after_bytes": 421,
+      "stat_after_mtime_ns": 1793947455985913705
+    },
+    "job_evidence/probe_tests.json": {
+      "bytes": 469,
+      "changed_during_read": false,
+      "mtime_ns": 1793947460541369613,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/probe_tests.json",
+      "sha256": "44c8643f64f0737a85414b5a86118ce14e22dee54d02082e38596782464ee258",
+      "stat_after_bytes": 469,
+      "stat_after_mtime_ns": 1793947460541369613
+    },
+    "job_evidence/probe_tests.log": {
+      "bytes": 1154,
+      "changed_during_read": false,
+      "mtime_ns": 1793947459585280000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/probe_tests.log",
+      "sha256": "9e689679aba3ddad213aab66edeba127b1e1cb9b9ed64f022b4cf3fc7b9f2578",
+      "stat_after_bytes": 1154,
+      "stat_after_mtime_ns": 1793947459585280000
+    },
+    "job_evidence/probe_tests_cleanup.json": {
+      "bytes": 559,
+      "changed_during_read": false,
+      "mtime_ns": 1793947463732525212,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/probe_tests_cleanup.json",
+      "sha256": "dfdd7340b91e5ca05f9fd09bfeaef4129f7b5c58eb6f9bc03c645c231f73c97a",
+      "stat_after_bytes": 559,
+      "stat_after_mtime_ns": 1793947463732525212
+    },
+    "job_evidence/readiness_tests.json": {
+      "bytes": 473,
+      "changed_during_read": false,
+      "mtime_ns": 1793947442655437728,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/readiness_tests.json",
+      "sha256": "614ae0486f6b80f3184d69dd3045e23df90ff057f49d1d99e36301e3bf3fc3e5",
+      "stat_after_bytes": 473,
+      "stat_after_mtime_ns": 1793947442655437728
+    },
+    "job_evidence/readiness_tests.log": {
+      "bytes": 1355,
+      "changed_during_read": false,
+      "mtime_ns": 1793947442478732000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/readiness_tests.log",
+      "sha256": "dce852f9a4cdbd0ad99728ac86027dd7f64fb29920c0aecfdd4c5c105d707ec6",
+      "stat_after_bytes": 1355,
+      "stat_after_mtime_ns": 1793947442478732000
+    },
+    "job_evidence/readiness_tests_cleanup.json": {
+      "bytes": 370,
+      "changed_during_read": false,
+      "mtime_ns": 1793947445951111062,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/readiness_tests_cleanup.json",
+      "sha256": "2c58996c1592804292ee7c9e87b363680761f73e1c3af279f6dd90de5e3d9870",
+      "stat_after_bytes": 370,
+      "stat_after_mtime_ns": 1793947445951111062
+    },
+    "job_evidence/run_checks.json": {
+      "bytes": 731,
+      "changed_during_read": false,
+      "mtime_ns": 1793947527694259000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/run_checks.json",
+      "sha256": "4908f93825846a2d8cb7d6ee4f00b9afecc438b07f4f05866d84eb1722c184b0",
+      "stat_after_bytes": 731,
+      "stat_after_mtime_ns": 1793947527694259000
+    },
+    "job_evidence/run_checks.log": {
+      "bytes": 530,
+      "changed_during_read": false,
+      "mtime_ns": 1793947526833010000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/run_checks.log",
+      "sha256": "d756494cf126511d9b515fa614aef2b67ba3ce9f188c8b23ad7b5cd1093817ff",
+      "stat_after_bytes": 530,
+      "stat_after_mtime_ns": 1793947526833010000
+    },
+    "job_evidence/run_checks_cleanup.json": {
+      "bytes": 682,
+      "changed_during_read": false,
+      "mtime_ns": 1793947530716523000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/run_checks_cleanup.json",
+      "sha256": "d7f8de3d0ea9931fcec8367cdd6a411b102440c11814cbd1353a5bd34dd6b7c3",
+      "stat_after_bytes": 682,
+      "stat_after_mtime_ns": 1793947530716523000
+    },
+    "job_evidence/scheduler_handoff_receipt.json": {
+      "bytes": 1008,
+      "changed_during_read": false,
+      "mtime_ns": 1793947430485958000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/scheduler_handoff_receipt.json",
+      "sha256": "6e57fc229d5ec26f4b74ffb949f667a8bdfec9ad33c275b97c37eff721996e34",
+      "stat_after_bytes": 1008,
+      "stat_after_mtime_ns": 1793947430485958000
+    },
+    "job_evidence/stack_observer_tests.json": {
+      "bytes": 478,
+      "changed_during_read": false,
+      "mtime_ns": 1793947434870421231,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/stack_observer_tests.json",
+      "sha256": "ff8301eeb9d124f270a1ec3712a4d76ccfdc16e7ded72cbc9314c1ce51c6f17f",
+      "stat_after_bytes": 478,
+      "stat_after_mtime_ns": 1793947434870421231
+    },
+    "job_evidence/stack_observer_tests.log": {
+      "bytes": 2300,
+      "changed_during_read": false,
+      "mtime_ns": 1793947434004086000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/stack_observer_tests.log",
+      "sha256": "2c406eb6d34c2e16fc2125c0a70ef133d04551bc9a17baba1f852647391b4c6e",
+      "stat_after_bytes": 2300,
+      "stat_after_mtime_ns": 1793947434004086000
+    },
+    "job_evidence/stack_observer_tests_cleanup.json": {
+      "bytes": 344,
+      "changed_during_read": false,
+      "mtime_ns": 1793947438107577000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/stack_observer_tests_cleanup.json",
+      "sha256": "5a04f19b9f0d4803c76741c17beedb2bde586878c2e23e84954a1e26d919024e",
+      "stat_after_bytes": 344,
+      "stat_after_mtime_ns": 1793947438107577000
+    },
+    "job_evidence/verified_allocation.json": {
+      "bytes": 7073,
+      "changed_during_read": false,
+      "mtime_ns": 1793947430587921001,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_evidence/verified_allocation.json",
+      "sha256": "b0a209dbd06733e7a0504836821a9d5bf70bd3588bba82357bfd1a5a3cc79d33",
+      "stat_after_bytes": 7073,
+      "stat_after_mtime_ns": 1793947430587921001
+    },
+    "job_id.txt": {
+      "bytes": 8,
+      "changed_during_read": false,
+      "mtime_ns": 1793947425664739000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job_id.txt",
+      "sha256": "2c828c9d1c2ea0f45f741d5bdb7806046eb61f2029e8435c769ed8348c0bcbee",
+      "stat_after_bytes": 8,
+      "stat_after_mtime_ns": 1793947425664739000
+    },
+    "login_submit_publish.log": {
+      "bytes": 23,
+      "changed_during_read": false,
+      "mtime_ns": 1793947430481978000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/login_submit_publish.log",
+      "sha256": "5c5d6f7da6a90c4a78d285c00b5235e7d38291a12534932cde7b165f55f579d2",
+      "stat_after_bytes": 23,
+      "stat_after_mtime_ns": 1793947430481978000
+    },
+    "old_2041919_state.raw": {
+      "bytes": 3792,
+      "changed_during_read": false,
+      "mtime_ns": 1793946913237725010,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/old_2041919_state.raw",
+      "sha256": "7295aaadf500b9ccf8fc1592609c9f83a33db75c33a5a06c3a29804485488ad1",
+      "stat_after_bytes": 3792,
+      "stat_after_mtime_ns": 1793946913237725010
+    },
+    "owned_processes.py": {
+      "bytes": 4716,
+      "changed_during_read": false,
+      "mtime_ns": 1793946422000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/owned_processes.py",
+      "sha256": "4846cd782782ff76b261028c8a1b54e56a7fd9c247b95dce4294a5dfb35ccb63",
+      "stat_after_bytes": 4716,
+      "stat_after_mtime_ns": 1793946422000000000
+    },
+    "payload/INTERFACE_FOR_S00.md": {
+      "bytes": 4408,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977872759566,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/INTERFACE_FOR_S00.md",
+      "sha256": "66bdf9936855c547c747d51bae828f4ab27640f6e740d140a9ef96ca3f1d43fa",
+      "stat_after_bytes": 4408,
+      "stat_after_mtime_ns": 1793946977872759566
+    },
+    "payload/OBSERVATION_CONTRACT.md": {
+      "bytes": 4755,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977874943069,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/OBSERVATION_CONTRACT.md",
+      "sha256": "448cad1a857165c74d0cb241e32b18480d1495ec995704f9f6c5de2208712dde",
+      "stat_after_bytes": 4755,
+      "stat_after_mtime_ns": 1793946977874943069
+    },
+    "payload/REPORT.md": {
+      "bytes": 4496,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977870546224,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/REPORT.md",
+      "sha256": "ef759d09ad462099fd49116df3fbb17706600fa1a32b369f445e6780ec4ade60",
+      "stat_after_bytes": 4496,
+      "stat_after_mtime_ns": 1793946977870546224
+    },
+    "payload/SOURCE_MANIFEST.json": {
+      "bytes": 3354,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977879641361,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/SOURCE_MANIFEST.json",
+      "sha256": "1b2dec1148d74844ca826e21244069a54a009d8935242fd325fc0ad744083f46",
+      "stat_after_bytes": 3354,
+      "stat_after_mtime_ns": 1793946977879641361
+    },
+    "payload/allocation.json": {
+      "bytes": 1203,
+      "changed_during_read": false,
+      "mtime_ns": 1793947430504869000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/allocation.json",
+      "sha256": "ead233ee23c597948cc7f6e73a80ce95d993cd3c9091585ff715ec5ec6e2f575",
+      "stat_after_bytes": 1203,
+      "stat_after_mtime_ns": 1793947430504869000
+    },
+    "payload/allocation.template.json": {
+      "bytes": 148,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977870036000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/allocation.template.json",
+      "sha256": "2cb84d2ec9616ec33f491e6e4156c3c25b0cdcb795f48ffc7e085bb15ba8948c",
+      "stat_after_bytes": 148,
+      "stat_after_mtime_ns": 1793946977870036000
+    },
+    "payload/candidate/comm_probe.py": {
+      "bytes": 23318,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977864537000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/candidate/comm_probe.py",
+      "sha256": "c9efa0c9d4ba05c8fb4501ce75f2dd60e6268d732c707cc3beef133330a356dd",
+      "stat_after_bytes": 23318,
+      "stat_after_mtime_ns": 1793946977864537000
+    },
+    "payload/candidate/cpu36_contract.py": {
+      "bytes": 11171,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977872572000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/candidate/cpu36_contract.py",
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+      "stat_after_bytes": 11171,
+      "stat_after_mtime_ns": 1793946977872572000
+    },
+    "payload/candidate/run_checks.py": {
+      "bytes": 3161,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977874052000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/candidate/run_checks.py",
+      "sha256": "7b7cc96edd9401981a61db5122bf785e3e2348a41cda5363ba5d2ea4b0217d07",
+      "stat_after_bytes": 3161,
+      "stat_after_mtime_ns": 1793946977874052000
+    },
+    "payload/candidate/stack_observer.py": {
+      "bytes": 15749,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977874680000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/candidate/stack_observer.py",
+      "sha256": "5b3ad54e675a293e3eb51d292b149c6939bbdc52b68322f340eb76be3b02b875",
+      "stat_after_bytes": 15749,
+      "stat_after_mtime_ns": 1793946977874680000
+    },
+    "payload/checks_current_job/checks.json": {
+      "bytes": 630,
+      "changed_during_read": false,
+      "mtime_ns": 1793947526834862000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/checks.json",
+      "sha256": "d6d75a9cd23b13debc4a8b21fdaae24657de73396d25403d4f2c23640756d689",
+      "stat_after_bytes": 630,
+      "stat_after_mtime_ns": 1793947526834862000
+    },
+    "payload/checks_current_job/crash/commands.json": {
+      "bytes": 815,
+      "changed_during_read": false,
+      "mtime_ns": 1793947508392347800,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/commands.json",
+      "sha256": "2f31d0aad2332aeb3508bb38c90cdd5b0bb897cdcfceeabdeae698bf543467a5",
+      "stat_after_bytes": 815,
+      "stat_after_mtime_ns": 1793947508392347800
+    },
+    "payload/checks_current_job/crash/manifest.json": {
+      "bytes": 8944,
+      "changed_during_read": false,
+      "mtime_ns": 1793947508378769000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/manifest.json",
+      "sha256": "0720aaf7110a9b83d22b53055476980cc968f23bd95fecc1cf2465a91437521c",
+      "stat_after_bytes": 8944,
+      "stat_after_mtime_ns": 1793947508378769000
+    },
+    "payload/checks_current_job/crash/participants.json": {
+      "bytes": 153,
+      "changed_during_read": false,
+      "mtime_ns": 1793947508506306160,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/participants.json",
+      "sha256": "28c9627e396782875dc1163da338508cf2a81e905968c7f7a6ac024294af577c",
+      "stat_after_bytes": 153,
+      "stat_after_mtime_ns": 1793947508506306160
+    },
+    "payload/checks_current_job/crash/rank0.events.jsonl": {
+      "bytes": 6095,
+      "changed_during_read": false,
+      "mtime_ns": 1793947526626214000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/rank0.events.jsonl",
+      "sha256": "dd7fc0ff8f244d5762efc8a2761f9dd0a5e2d036a802436a710e06a5b0a4e3b9",
+      "stat_after_bytes": 6095,
+      "stat_after_mtime_ns": 1793947526626214000
+    },
+    "payload/checks_current_job/crash/rank0.json": {
+      "bytes": 0,
+      "changed_during_read": false,
+      "mtime_ns": 1793947526760090000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/rank0.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stat_after_bytes": 0,
+      "stat_after_mtime_ns": 1793947526760090000
+    },
+    "payload/checks_current_job/crash/rank0.log": {
+      "bytes": 0,
+      "changed_during_read": false,
+      "mtime_ns": 1793947508400210020,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/rank0.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stat_after_bytes": 0,
+      "stat_after_mtime_ns": 1793947508400210020
+    },
+    "payload/checks_current_job/crash/rank1.events.jsonl": {
+      "bytes": 5835,
+      "changed_during_read": false,
+      "mtime_ns": 1793947526726789000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/rank1.events.jsonl",
+      "sha256": "2da48959e5ad8af43a66cfbf2800c5aea4349d8826c72c35410a0cfe2297cce9",
+      "stat_after_bytes": 5835,
+      "stat_after_mtime_ns": 1793947526726789000
+    },
+    "payload/checks_current_job/crash/rank1.json": {
+      "bytes": 10544,
+      "changed_during_read": false,
+      "mtime_ns": 1793947526680535000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/rank1.json",
+      "sha256": "fde4dba34eb8f9baacf3f8fd2cd890865ef4c14d7ecc109d4eac3c6b28af7289",
+      "stat_after_bytes": 10544,
+      "stat_after_mtime_ns": 1793947526680535000
+    },
+    "payload/checks_current_job/crash/rank1.log": {
+      "bytes": 0,
+      "changed_during_read": false,
+      "mtime_ns": 1793947508450651040,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/rank1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stat_after_bytes": 0,
+      "stat_after_mtime_ns": 1793947508450651040
+    },
+    "payload/checks_current_job/crash/ready_rank0.json": {
+      "bytes": 119,
+      "changed_during_read": false,
+      "mtime_ns": 1793947525888025000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/ready_rank0.json",
+      "sha256": "6dd57505a153dd93ad3b7f75e5f90c3f2c0be2b07d3385f163f71c2a9b8bd50c",
+      "stat_after_bytes": 119,
+      "stat_after_mtime_ns": 1793947525888025000
+    },
+    "payload/checks_current_job/crash/ready_rank1.json": {
+      "bytes": 119,
+      "changed_during_read": false,
+      "mtime_ns": 1793947517622192000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/ready_rank1.json",
+      "sha256": "c669ec2c5d2678ef76b042715934d99b3e56162b0900ccbea1be4072a736765f",
+      "stat_after_bytes": 119,
+      "stat_after_mtime_ns": 1793947517622192000
+    },
+    "payload/checks_current_job/crash/rendezvous": {
+      "bytes": 448,
+      "changed_during_read": false,
+      "mtime_ns": 1793947526648483000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/rendezvous",
+      "sha256": "2b7b2290f10a237a32a5210ff6828b0446fcba456c3aec94a8e55d26bf91a4eb",
+      "stat_after_bytes": 448,
+      "stat_after_mtime_ns": 1793947526648483000
+    },
+    "payload/checks_current_job/crash/summary.json": {
+      "bytes": 366,
+      "changed_during_read": false,
+      "mtime_ns": 1793947526840999000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/summary.json",
+      "sha256": "966eabcc75932b1134eb3b752886257e815d94c7a2eb15f0a96a1a4fb5b25642",
+      "stat_after_bytes": 366,
+      "stat_after_mtime_ns": 1793947526840999000
+    },
+    "payload/checks_current_job/crash/supervisor.events.jsonl": {
+      "bytes": 1424,
+      "changed_during_read": false,
+      "mtime_ns": 1793947526809498000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/crash/supervisor.events.jsonl",
+      "sha256": "e267e5ddcd246ec1a3e1d8b4f4a2c5a91461041f672a2aaebe49cf9ffbc41bab",
+      "stat_after_bytes": 1424,
+      "stat_after_mtime_ns": 1793947526809498000
+    },
+    "payload/checks_current_job/normal/commands.json": {
+      "bytes": 817,
+      "changed_during_read": false,
+      "mtime_ns": 1793947488076229000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/commands.json",
+      "sha256": "51ef4dc8e5e0a48d53c48a66d3a4f0342363e286a0c398ac29ed53b77d59bfcb",
+      "stat_after_bytes": 817,
+      "stat_after_mtime_ns": 1793947488076229000
+    },
+    "payload/checks_current_job/normal/manifest.json": {
+      "bytes": 8946,
+      "changed_during_read": false,
+      "mtime_ns": 1793947488066221000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/manifest.json",
+      "sha256": "47d82237b479e886271653c0de6c3301208e250601ac93098412fef9a594533a",
+      "stat_after_bytes": 8946,
+      "stat_after_mtime_ns": 1793947488066221000
+    },
+    "payload/checks_current_job/normal/participants.json": {
+      "bytes": 154,
+      "changed_during_read": false,
+      "mtime_ns": 1793947488219444000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/participants.json",
+      "sha256": "a2076103b66d35779e198be64955efb9549002cfc41920f58fbc8c97031de588",
+      "stat_after_bytes": 154,
+      "stat_after_mtime_ns": 1793947488219444000
+    },
+    "payload/checks_current_job/normal/rank0.events.jsonl": {
+      "bytes": 7055,
+      "changed_during_read": false,
+      "mtime_ns": 1793947506631609000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/rank0.events.jsonl",
+      "sha256": "070dbfe119beac9801ad7fff03589837703c5e38abbed072b88c12339bb93493",
+      "stat_after_bytes": 7055,
+      "stat_after_mtime_ns": 1793947506631609000
+    },
+    "payload/checks_current_job/normal/rank0.json": {
+      "bytes": 14241,
+      "changed_during_read": false,
+      "mtime_ns": 1793947506547782000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/rank0.json",
+      "sha256": "204296c37f51aba49b7605ee51c83739dd6774dbb3082584c62a8dff412166e6",
+      "stat_after_bytes": 14241,
+      "stat_after_mtime_ns": 1793947506547782000
+    },
+    "payload/checks_current_job/normal/rank0.log": {
+      "bytes": 0,
+      "changed_during_read": false,
+      "mtime_ns": 1793947488076885148,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/rank0.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stat_after_bytes": 0,
+      "stat_after_mtime_ns": 1793947488076885148
+    },
+    "payload/checks_current_job/normal/rank1.events.jsonl": {
+      "bytes": 7055,
+      "changed_during_read": false,
+      "mtime_ns": 1793947506615218000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/rank1.events.jsonl",
+      "sha256": "8a794cf2be51de54e1722e411530e041e3e0bb0f8c79663d3ea5866b1db13202",
+      "stat_after_bytes": 7055,
+      "stat_after_mtime_ns": 1793947506615218000
+    },
+    "payload/checks_current_job/normal/rank1.json": {
+      "bytes": 14348,
+      "changed_during_read": false,
+      "mtime_ns": 1793947506635035000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/rank1.json",
+      "sha256": "3d3aed2c8742504813039927db0c56cd449ff8c03c64f82305dfa7875ffd42d6",
+      "stat_after_bytes": 14348,
+      "stat_after_mtime_ns": 1793947506635035000
+    },
+    "payload/checks_current_job/normal/rank1.log": {
+      "bytes": 0,
+      "changed_during_read": false,
+      "mtime_ns": 1793947488130597159,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/rank1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stat_after_bytes": 0,
+      "stat_after_mtime_ns": 1793947488130597159
+    },
+    "payload/checks_current_job/normal/ready_rank0.json": {
+      "bytes": 120,
+      "changed_during_read": false,
+      "mtime_ns": 1793947505605970000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/ready_rank0.json",
+      "sha256": "b37734194077f40452bc79a3c0bb72da857ca3f4a1487b8716b86075375d927c",
+      "stat_after_bytes": 120,
+      "stat_after_mtime_ns": 1793947505605970000
+    },
+    "payload/checks_current_job/normal/ready_rank1.json": {
+      "bytes": 120,
+      "changed_during_read": false,
+      "mtime_ns": 1793947496796052000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/ready_rank1.json",
+      "sha256": "81101e2dc551ca3122ccb37b3452d94225442c0599b6036584707b5efda24812",
+      "stat_after_bytes": 120,
+      "stat_after_mtime_ns": 1793947496796052000
+    },
+    "payload/checks_current_job/normal/summary.json": {
+      "bytes": 314,
+      "changed_during_read": false,
+      "mtime_ns": 1793947507772544000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/summary.json",
+      "sha256": "27ea3bd003b51386362c691257909aa7efed5e71ed87763946b0347140b913ca",
+      "stat_after_bytes": 314,
+      "stat_after_mtime_ns": 1793947507772544000
+    },
+    "payload/checks_current_job/normal/supervisor.events.jsonl": {
+      "bytes": 1263,
+      "changed_during_read": false,
+      "mtime_ns": 1793947507732480000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/checks_current_job/normal/supervisor.events.jsonl",
+      "sha256": "0c7d5b208d6d8353dd13a6550927ee5ffa8f7b5a9b869383befa8c6577482356",
+      "stat_after_bytes": 1263,
+      "stat_after_mtime_ns": 1793947507732480000
+    },
+    "payload/environment_current.json": {
+      "bytes": 3390,
+      "changed_during_read": false,
+      "mtime_ns": 1793947482101148000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/environment_current.json",
+      "sha256": "29743bc19f89b327c0dd6ed7c1702615689bb27844e828514691e2e78de19dda",
+      "stat_after_bytes": 3390,
+      "stat_after_mtime_ns": 1793947482101148000
+    },
+    "payload/minimal.diff": {
+      "bytes": 7218,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977887861000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/minimal.diff",
+      "sha256": "53622e7f9b52da424bf718075fddec0dc84c36caad73a527b485102e8a30d3f4",
+      "stat_after_bytes": 7218,
+      "stat_after_mtime_ns": 1793946977887861000
+    },
+    "payload/tests/test_diagnostics.py": {
+      "bytes": 7404,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977872249000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/tests/test_diagnostics.py",
+      "sha256": "9f3430ec82bb200a56c292754d47837b2e3989b12590b0adb1cd83efd6c4cc03",
+      "stat_after_bytes": 7404,
+      "stat_after_mtime_ns": 1793946977872249000
+    },
+    "payload/tests/test_job_identity.py": {
+      "bytes": 6012,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977880201000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/tests/test_job_identity.py",
+      "sha256": "4f1abca370e2c15ce843737f9883f48b6bcea510f3b8a56706e3fd1f1bb387d1",
+      "stat_after_bytes": 6012,
+      "stat_after_mtime_ns": 1793946977880201000
+    },
+    "payload/tests/test_probe.py": {
+      "bytes": 9383,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977881694000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/tests/test_probe.py",
+      "sha256": "00be905b4dd2b0aa17592edbc725d70611cf91f59ccbd7f9120664503685673f",
+      "stat_after_bytes": 9383,
+      "stat_after_mtime_ns": 1793946977881694000
+    },
+    "payload/tests/test_readiness.py": {
+      "bytes": 14382,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977882482000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/tests/test_readiness.py",
+      "sha256": "c4cee8e78621b05023303762b7c3a9c94f882db411b4effaa32763bcbff35c2f",
+      "stat_after_bytes": 14382,
+      "stat_after_mtime_ns": 1793946977882482000
+    },
+    "payload/tests/test_stack_observer.py": {
+      "bytes": 19121,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977878465560,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/payload/tests/test_stack_observer.py",
+      "sha256": "52d067d13ee76719090196b46b8bb39035bb4cd82e607cf4b5ceb5b121cfb300",
+      "stat_after_bytes": 19121,
+      "stat_after_mtime_ns": 1793946977878465560
+    },
+    "pre_submit_checks.json": {
+      "bytes": 3130,
+      "changed_during_read": false,
+      "mtime_ns": 1793946977972451690,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/pre_submit_checks.json",
+      "sha256": "d66312c26853122ac2e7a2711254158aea5550114c1adb5d401d81dfde2eacc9",
+      "stat_after_bytes": 3130,
+      "stat_after_mtime_ns": 1793946977972451690
+    },
+    "prepare.py": {
+      "bytes": 4560,
+      "changed_during_read": false,
+      "mtime_ns": 1793946600000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/prepare.py",
+      "sha256": "cd14c664901859e170008fd52c2d487536547fa45982188ef25aac4d5694bfa2",
+      "stat_after_bytes": 4560,
+      "stat_after_mtime_ns": 1793946600000000000
+    },
+    "queue_before_deploy.raw": {
+      "bytes": 573,
+      "changed_during_read": false,
+      "mtime_ns": 1793946913235587000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/queue_before_deploy.raw",
+      "sha256": "f8a6417a730f47ea09db8f379b3af1f4305aa34e90911cdb0d24b36f77b90b5f",
+      "stat_after_bytes": 573,
+      "stat_after_mtime_ns": 1793946913235587000
+    },
+    "readiness_inventory.py": {
+      "bytes": 7115,
+      "changed_during_read": false,
+      "mtime_ns": 1793946232000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/readiness_inventory.py",
+      "sha256": "29a89d817e21f1b6addd4cc2319b8fad8ba80a7d7ae77786dc179cf624f65bb1",
+      "stat_after_bytes": 7115,
+      "stat_after_mtime_ns": 1793946232000000000
+    },
+    "review_gate.py": {
+      "bytes": 2566,
+      "changed_during_read": false,
+      "mtime_ns": 1793946422000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/review_gate.py",
+      "sha256": "fc0c963e67ac0830d8ffa4aea0dc70371b022ac7ad1bf9beb4d3f3a3d1cc97df",
+      "stat_after_bytes": 2566,
+      "stat_after_mtime_ns": 1793946422000000000
+    },
+    "run_s07_diag_job.py": {
+      "bytes": 5987,
+      "changed_during_read": false,
+      "mtime_ns": 1793946422000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/run_s07_diag_job.py",
+      "sha256": "51137c7e1cee5a65c839f2acf2a2aaed541ef01b6203f376952ce5798d098f79",
+      "stat_after_bytes": 5987,
+      "stat_after_mtime_ns": 1793946422000000000
+    },
+    "run_s07_diag_job.sh": {
+      "bytes": 682,
+      "changed_during_read": false,
+      "mtime_ns": 1793946600000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/run_s07_diag_job.sh",
+      "sha256": "c063d060d2107d7794fe821447e11093904552eb70b52aeb48608034019ab1bb",
+      "stat_after_bytes": 682,
+      "stat_after_mtime_ns": 1793946600000000000
+    },
+    "scheduler_allocation.json": {
+      "bytes": 3661,
+      "changed_during_read": false,
+      "mtime_ns": 1793947430458430000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/scheduler_allocation.json",
+      "sha256": "103b8ccc66876efdefbec00a40a752bd1fb34250440323f70eff119edce5ba88",
+      "stat_after_bytes": 3661,
+      "stat_after_mtime_ns": 1793947430458430000
+    },
+    "scheduler_handoff.py": {
+      "bytes": 6367,
+      "changed_during_read": false,
+      "mtime_ns": 1793946232000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/scheduler_handoff.py",
+      "sha256": "f907cbf8286f7bc9035c9e58f986c3b342b2a6f6f5a1c60f97834915f2a7065c",
+      "stat_after_bytes": 6367,
+      "stat_after_mtime_ns": 1793946232000000000
+    },
+    "scheduler_observed.json": {
+      "bytes": 3387,
+      "changed_during_read": false,
+      "mtime_ns": 1793947430091905000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/scheduler_observed.json",
+      "sha256": "0ad416bcd64f7a773eb8f3cfbd640f88128f252eedef9da01f97cf28140ae1b3",
+      "stat_after_bytes": 3387,
+      "stat_after_mtime_ns": 1793947430091905000
+    },
+    "scheduler_observed.stderr": {
+      "bytes": 0,
+      "changed_during_read": false,
+      "mtime_ns": 1793947430127004640,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/scheduler_observed.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stat_after_bytes": 0,
+      "stat_after_mtime_ns": 1793947430127004640
+    },
+    "scheduler_query_receipt.json": {
+      "bytes": 106,
+      "changed_during_read": false,
+      "mtime_ns": 1793947430450495000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/scheduler_query_receipt.json",
+      "sha256": "e0f20ec7eb44ef12cfa59f047d18e1adf9560cb6386b0fc67c7445b91afa3c78",
+      "stat_after_bytes": 106,
+      "stat_after_mtime_ns": 1793947430450495000
+    },
+    "scheduler_query_stderr.txt": {
+      "bytes": 0,
+      "changed_during_read": false,
+      "mtime_ns": 1793947430441562980,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/scheduler_query_stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stat_after_bytes": 0,
+      "stat_after_mtime_ns": 1793947430441562980
+    },
+    "scheduler_ready.json": {
+      "bytes": 283,
+      "changed_during_read": false,
+      "mtime_ns": 1793947430455426040,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/scheduler_ready.json",
+      "sha256": "0076c6443ced5d63d22ca5e5ca69fa01935d2cc96e0a9809fcdf9544c1620a5c",
+      "stat_after_bytes": 283,
+      "stat_after_mtime_ns": 1793947430455426040
+    },
+    "scheduler_request.json": {
+      "bytes": 926,
+      "changed_during_read": false,
+      "mtime_ns": 1793947430387282000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/scheduler_request.json",
+      "sha256": "aeb1486b2701a5bba75c5c1238539ec403e7a8f8a30e2a59654d185a6c85c38b",
+      "stat_after_bytes": 926,
+      "stat_after_mtime_ns": 1793947430387282000
+    },
+    "stack_inventory.py": {
+      "bytes": 6300,
+      "changed_during_read": false,
+      "mtime_ns": 1793946730000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/stack_inventory.py",
+      "sha256": "1c80acc8636eca20ebfcd9a1efdd2251fe0de5b631ba9f1741b4aff104d867d4",
+      "stat_after_bytes": 6300,
+      "stat_after_mtime_ns": 1793946730000000000
+    },
+    "submission.command.json": {
+      "bytes": 749,
+      "changed_during_read": false,
+      "mtime_ns": 1793947425469924480,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/submission.command.json",
+      "sha256": "f47cc74e6299e0b2aef1eba466cd2af0ba47b33655007ddfdd5d45a93a4c9247",
+      "stat_after_bytes": 749,
+      "stat_after_mtime_ns": 1793947425469924480
+    },
+    "submission.result.json": {
+      "bytes": 62,
+      "changed_during_read": false,
+      "mtime_ns": 1793947425630243130,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/submission.result.json",
+      "sha256": "2e7f29a741e2cc0065d7c965a1670b66cff52b9019d79a25d4714bd8aaa77d9d",
+      "stat_after_bytes": 62,
+      "stat_after_mtime_ns": 1793947425630243130
+    },
+    "submission.stderr": {
+      "bytes": 0,
+      "changed_during_read": false,
+      "mtime_ns": 1793947425628856580,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/submission.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stat_after_bytes": 0,
+      "stat_after_mtime_ns": 1793947425628856580
+    },
+    "submission.stdout": {
+      "bytes": 138,
+      "changed_during_read": false,
+      "mtime_ns": 1793947425626829170,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/submission.stdout",
+      "sha256": "c5bc16a0a1149e90c8d411ea82d0b807050b59a3cc316e2fad68cb736942f8c0",
+      "stat_after_bytes": 138,
+      "stat_after_mtime_ns": 1793947425626829170
+    },
+    "submit_once.marker": {
+      "bytes": 67,
+      "changed_during_read": false,
+      "mtime_ns": 1793947425485225000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/submit_once.marker",
+      "sha256": "411fb3ccd6f449689ace9a5e7372ea8fadc628cfad3ea0a4d9357d6750a24422",
+      "stat_after_bytes": 67,
+      "stat_after_mtime_ns": 1793947425485225000
+    },
+    "submit_once.py": {
+      "bytes": 2712,
+      "changed_during_read": false,
+      "mtime_ns": 1793946600000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/submit_once.py",
+      "sha256": "40369e6e4209d65be678f464219942cbf849f338a8706acb04eadccdde3f8bf2",
+      "stat_after_bytes": 2712,
+      "stat_after_mtime_ns": 1793946600000000000
+    },
+    "tests/test_r6_deployment.py": {
+      "bytes": 8537,
+      "changed_during_read": false,
+      "mtime_ns": 1793946764000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/tests/test_r6_deployment.py",
+      "sha256": "d372e6c7eafa8fe252ab747e1e9ad4a40a45b0580bf69f45da7a841179d9f83b",
+      "stat_after_bytes": 8537,
+      "stat_after_mtime_ns": 1793946764000000000
+    },
+    "trace_inventory.py": {
+      "bytes": 4949,
+      "changed_during_read": false,
+      "mtime_ns": 1793946422000000000,
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/trace_inventory.py",
+      "sha256": "8c8897e735110a92c563b5637ec4ea57db9260e2efcccce08510316cbe43f0af",
+      "stat_after_bytes": 4949,
+      "stat_after_mtime_ns": 1793946422000000000
+    }
+  },
+  "formal_training": false,
+  "job_exit_code": 1,
+  "job_id": "2050433",
+  "node_seconds": 105.0,
+  "original_communication_result": {
+    "cases": [
+      {
+        "case": "normal",
+        "expected_behavior": "PASS",
+        "probe_exit": 0,
+        "summary": {
+          "case": "normal",
+          "communication": "FIXED_TENSOR_2_RANK_ONLY",
+          "status": "PASS",
+          "supervisor": {
+            "all_reaped": true,
+            "errors": [],
+            "exit_codes": [
+              0,
+              0
+            ],
+            "pids": [
+              2430758,
+              2430759
+            ],
+            "reason": "complete",
+            "wall_seconds": 19.627162976190448
+          }
+        }
+      }
+    ],
+    "error": "Expecting value: line 1 column 1 (char 0)",
+    "status": "FAIL"
+  },
+  "query_command": [
+    "djob",
+    "-J",
+    "-l",
+    "2050433"
+  ],
+  "readiness": {
+    "cases": {
+      "crash": {
+        "complete": true,
+        "files": {
+          "participants.json": {
+            "bytes": 153,
+            "mtime_ns": 1793947508506306160,
+            "sha256": "28c9627e396782875dc1163da338508cf2a81e905968c7f7a6ac024294af577c"
+          },
+          "ready_rank0.json": {
+            "bytes": 119,
+            "mtime_ns": 1793947525888025000,
+            "sha256": "6dd57505a153dd93ad3b7f75e5f90c3f2c0be2b07d3385f163f71c2a9b8bd50c"
+          },
+          "ready_rank1.json": {
+            "bytes": 119,
+            "mtime_ns": 1793947517622192000,
+            "sha256": "c669ec2c5d2678ef76b042715934d99b3e56162b0900ccbea1be4072a736765f"
+          }
+        },
+        "issues": [],
+        "temporary_files": [],
+        "verified_context": {
+          "deadline_ns": 3968913492755767,
+          "job_id": "2050433",
+          "pids": [
+            2432590,
+            2432591
+          ],
+          "ready_token": "597df62241d3a97a6a0a8936fde847ea",
+          "run_id": "crash",
+          "supervisor_begin_ns": 3968883492839668,
+          "worker_event_ns": {
+            "0": {
+              "after_framework": 3968900963406647,
+              "both_ready": 3968900996646113,
+              "init_process_group_begin": 3968901006307036,
+              "preparation_complete": 3968900965000189,
+              "ready_published": 3968900989978683
+            },
+            "1": {
+              "after_framework": 3968892706305225,
+              "both_ready": 3968901009877111,
+              "init_process_group_begin": 3968901017939352,
+              "preparation_complete": 3968892707311576,
+              "ready_published": 3968892718369002
+            }
+          }
+        }
+      },
+      "normal": {
+        "complete": true,
+        "files": {
+          "participants.json": {
+            "bytes": 154,
+            "mtime_ns": 1793947488219444000,
+            "sha256": "a2076103b66d35779e198be64955efb9549002cfc41920f58fbc8c97031de588"
+          },
+          "ready_rank0.json": {
+            "bytes": 120,
+            "mtime_ns": 1793947505605970000,
+            "sha256": "b37734194077f40452bc79a3c0bb72da857ca3f4a1487b8716b86075375d927c"
+          },
+          "ready_rank1.json": {
+            "bytes": 120,
+            "mtime_ns": 1793947496796052000,
+            "sha256": "81101e2dc551ca3122ccb37b3452d94225442c0599b6036584707b5efda24812"
+          }
+        },
+        "issues": [],
+        "temporary_files": [],
+        "verified_context": {
+          "deadline_ns": 3968893229029655,
+          "job_id": "2050433",
+          "pids": [
+            2430758,
+            2430759
+          ],
+          "ready_token": "286d026e5f205849791d16e33ac5e4f6",
+          "run_id": "normal",
+          "supervisor_begin_ns": 3968863229122345,
+          "worker_event_ns": {
+            "0": {
+              "after_framework": 3968880704041287,
+              "both_ready": 3968880723912074,
+              "init_process_group_begin": 3968880732296865,
+              "preparation_complete": 3968880705541479,
+              "ready_published": 3968880717293965
+            },
+            "1": {
+              "after_framework": 3968871899345019,
+              "both_ready": 3968880758021590,
+              "init_process_group_begin": 3968880765484480,
+              "preparation_complete": 3968871900416220,
+              "ready_published": 3968871911217675
+            }
+          }
+        }
+      }
+    },
+    "complete": true,
+    "issues": [],
+    "not_run": [
+      "collective-timeout",
+      "watchdog"
+    ],
+    "scope": "archived readiness consistency only; no communication verdict or cross-rank publication-time inference",
+    "status": "CONSISTENT_AVAILABLE_READINESS_ONLY"
+  },
+  "real_HBM": false,
+  "retries": 0,
+  "scheduler_pids_cleared": true,
+  "stack_observation": {
+    "complete": false,
+    "files": {},
+    "issues": [
+      "watchdog not reached"
+    ],
+    "scope": "watchdog Python/proc evidence only; ARMED/EXITED alone never imply complete; no communication verdict",
+    "status": "NOT_RUN"
+  },
+  "state": "FAILED"
+}

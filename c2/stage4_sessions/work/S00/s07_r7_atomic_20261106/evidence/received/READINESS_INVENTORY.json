@@ -1,0 +1,205 @@
+{
+  "cases": {
+    "collective-timeout": {
+      "complete": true,
+      "files": {
+        "participants.json": {
+          "bytes": 166,
+          "mtime_ns": 1793951872135039000,
+          "sha256": "5a050f20b450e1d29913d64ba5411b7d51f139765272eee217d010ce60b565de"
+        },
+        "ready_rank0.json": {
+          "bytes": 132,
+          "mtime_ns": 1793951889933062000,
+          "sha256": "13172fa48ff41a2a2b39c3799692ecf046609b0676f3728d5602c3a53225af1b"
+        },
+        "ready_rank1.json": {
+          "bytes": 132,
+          "mtime_ns": 1793951882132685000,
+          "sha256": "6cb4ede3426d81542dd3fa4f012cefec52fa3c618ff73fbcaa7d5e62382c6d4e"
+        }
+      },
+      "issues": [],
+      "temporary_files": [],
+      "verified_context": {
+        "deadline_ns": 3973099367640973,
+        "job_id": "2051116",
+        "pids": [
+          2879442,
+          2879445
+        ],
+        "ready_token": "dae2e0c166a14f2e398fe59791b3c082",
+        "run_id": "collective-timeout",
+        "supervisor_begin_ns": 3973069367726115,
+        "worker_event_ns": {
+          "0": {
+            "after_framework": 3973087309197650,
+            "both_ready": 3973087328245560,
+            "init_process_group_begin": 3973087348231118,
+            "preparation_complete": 3973087310718239,
+            "ready_published": 3973087323542642
+          },
+          "1": {
+            "after_framework": 3973079523241223,
+            "both_ready": 3973087325336775,
+            "init_process_group_begin": 3973087340375030,
+            "preparation_complete": 3973079524531727,
+            "ready_published": 3973079573908762
+          }
+        }
+      }
+    },
+    "crash": {
+      "complete": true,
+      "files": {
+        "participants.json": {
+          "bytes": 153,
+          "mtime_ns": 1793951852722763000,
+          "sha256": "2d0c8baa76ec837e527e32283a8eb1c7d76d8e5ec339d571c76cf349ded2febc"
+        },
+        "ready_rank0.json": {
+          "bytes": 119,
+          "mtime_ns": 1793951870027487000,
+          "sha256": "8cb73b4d5f7acc035bca18d264064ed7b721b59d5438648ca703e75e4c90d46e"
+        },
+        "ready_rank1.json": {
+          "bytes": 119,
+          "mtime_ns": 1793951861338804000,
+          "sha256": "d177666ac7bb4e5f76afdaf12bc88b105adea4a115d41e35e6f48cead8b35053"
+        }
+      },
+      "issues": [],
+      "temporary_files": [],
+      "verified_context": {
+        "deadline_ns": 3973079952118901,
+        "job_id": "2051116",
+        "pids": [
+          2877626,
+          2877631
+        ],
+        "ready_token": "660c46f45019cff864fbca2b747c9a26",
+        "run_id": "crash",
+        "supervisor_begin_ns": 3973049952203923,
+        "worker_event_ns": {
+          "0": {
+            "after_framework": 3973067404644970,
+            "both_ready": 3973067423128301,
+            "init_process_group_begin": 3973067437400222,
+            "preparation_complete": 3973067406274121,
+            "ready_published": 3973067417500414
+          },
+          "1": {
+            "after_framework": 3973058767612261,
+            "both_ready": 3973067450976010,
+            "init_process_group_begin": 3973067464208101,
+            "preparation_complete": 3973058769056098,
+            "ready_published": 3973058779128519
+          }
+        }
+      }
+    },
+    "normal": {
+      "complete": true,
+      "files": {
+        "participants.json": {
+          "bytes": 154,
+          "mtime_ns": 1793951832496326000,
+          "sha256": "80cf064b150e926873d3c5df8d503bbe23e95711ef497dea272024fa301a2eaa"
+        },
+        "ready_rank0.json": {
+          "bytes": 120,
+          "mtime_ns": 1793951849812186320,
+          "sha256": "5bc0a7a1874a553a4a37ea4bb1c575831d4fac7907b43871efc19d66231198a6"
+        },
+        "ready_rank1.json": {
+          "bytes": 120,
+          "mtime_ns": 1793951841589834100,
+          "sha256": "f2f3af095ccf6c18f3c2e369ae85a092d910ba2150a60d31a539705e6351de9c"
+        }
+      },
+      "issues": [],
+      "temporary_files": [],
+      "verified_context": {
+        "deadline_ns": 3973059684088311,
+        "job_id": "2051116",
+        "pids": [
+          2875748,
+          2875749
+        ],
+        "ready_token": "6b5f056f030c1069c1f4690148780ead",
+        "run_id": "normal",
+        "supervisor_begin_ns": 3973029684167093,
+        "worker_event_ns": {
+          "0": {
+            "after_framework": 3973047103106270,
+            "both_ready": 3973047128159387,
+            "init_process_group_begin": 3973047149202468,
+            "preparation_complete": 3973047104556527,
+            "ready_published": 3973047122296886
+          },
+          "1": {
+            "after_framework": 3973038880813172,
+            "both_ready": 3973047165904127,
+            "init_process_group_begin": 3973047181266569,
+            "preparation_complete": 3973038882083446,
+            "ready_published": 3973038893130607
+          }
+        }
+      }
+    },
+    "watchdog": {
+      "complete": true,
+      "files": {
+        "participants.json": {
+          "bytes": 156,
+          "mtime_ns": 1793951897861683000,
+          "sha256": "9807e48148a45bef8d9953a536584fc3022c71640929a8c07b03ff9085f1b9a9"
+        },
+        "ready_rank0.json": {
+          "bytes": 122,
+          "mtime_ns": 1793951915891327421,
+          "sha256": "c3d2b34434bbc87ef9b1df2702f35fae1f2f6266cb48b053fc7d4cf4d22ac6fa"
+        },
+        "ready_rank1.json": {
+          "bytes": 122,
+          "mtime_ns": 1793951907022567000,
+          "sha256": "f51d411b0445c7de7aa0680bec21bfd34d189e79ce53493f603d3d8dcb8823ee"
+        }
+      },
+      "issues": [],
+      "temporary_files": [],
+      "verified_context": {
+        "deadline_ns": 3973125092789588,
+        "job_id": "2051116",
+        "pids": [
+          2882120,
+          2882122
+        ],
+        "ready_token": "61013096af7ea7efe33d090019097aaf",
+        "run_id": "watchdog",
+        "supervisor_begin_ns": 3973095092872760,
+        "worker_event_ns": {
+          "0": {
+            "after_framework": 3973113242730285,
+            "both_ready": 3973113264564527,
+            "init_process_group_begin": 3973113279995217,
+            "preparation_complete": 3973113244523109,
+            "ready_published": 3973113257351901
+          },
+          "1": {
+            "after_framework": 3973104355302708,
+            "both_ready": 3973113304849815,
+            "init_process_group_begin": 3973113319990790,
+            "preparation_complete": 3973104356678064,
+            "ready_published": 3973104366539350
+          }
+        }
+      }
+    }
+  },
+  "complete": true,
+  "issues": [],
+  "not_run": [],
+  "scope": "archived readiness consistency only; no communication verdict or cross-rank publication-time inference",
+  "status": "CONSISTENT_AVAILABLE_READINESS_ONLY"
+}

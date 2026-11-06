@@ -1,0 +1,193 @@
+{
+  "actual_libraries_unchanged": [
+    {
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+      "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+    },
+    {
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so",
+      "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a"
+    },
+    {
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so",
+      "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f"
+    },
+    {
+      "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+      "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+    },
+    {
+      "path": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+      "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c"
+    }
+  ],
+  "actual_native_function_type": "_FuncPtr",
+  "actual_observer_import": {
+    "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z/payload/gemm_observer.py",
+    "sha256": "14ee30f47adbb0ddfecc01bd8bc2acfe0048a1c1596a0e32664762193143e67a"
+  },
+  "actual_torch_interop": 608,
+  "actual_torch_intraop": 36,
+  "actual_train_frames": 320,
+  "all_owned_processes_reaped": true,
+  "all_sampled_TIDs_within_selected36": true,
+  "archive": {
+    "archived_files": 106,
+    "bundle": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z/JOB_2049454_evidence.zip",
+    "bytes": 471647,
+    "remote_only": [
+      "payload/outputs/gemm_2049454/checkpoints/final.pt"
+    ],
+    "sha256": "671305ef5915870820d0a8890bdf9050d5eff61f4f5e2f5fdd9e68b497220513"
+  },
+  "capture_bytes": 450119,
+  "checkpoint": {
+    "bytes": 456135071,
+    "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z/payload/outputs/gemm_2049454/checkpoints/final.pt",
+    "sha256": "19f445a0104d0cd95610989421a1d37add3e848667cf81140aaf475af4ef6cc7"
+  },
+  "continuous_updates": 5,
+  "cpu_complete_snapshots": 19,
+  "engineering_only": true,
+  "exit_code": 0,
+  "exposure_in_flight": null,
+  "exposure_updates": 5,
+  "formal_split_status": "UNKNOWN",
+  "host": "cn21338",
+  "in_step_observer_overhead": "UNKNOWN_WITHOUT_MATCHED_CONTROL",
+  "job_id": "2049454",
+  "max_observed_TIDs": 36,
+  "missing": [],
+  "native_kml_kernel_time": "UNKNOWN_CTYPES_NOT_PURE_KERNEL",
+  "node_seconds": 76.0,
+  "normalization_frames": 1600,
+  "old_inputs_ledger_checkpoint_unchanged": true,
+  "original_fixed36_path_bytes_sha_mtime_unchanged": true,
+  "original_loss_max_abs": 0.0,
+  "original_loss_max_l2_relative": 0.0,
+  "original_loss_metrics": 15,
+  "recovery": {
+    "cursor_exact": true,
+    "extra_updates": 0,
+    "forward_metrics": [
+      {
+        "l2_relative": 0.0,
+        "max_abs": 0.0,
+        "name": "restore.h",
+        "passed": true,
+        "reference_norm": 2678.4932153407826
+      },
+      {
+        "l2_relative": 0.0,
+        "max_abs": 0.0,
+        "name": "restore.voltage",
+        "passed": true,
+        "reference_norm": 95.33803996838932
+      },
+      {
+        "l2_relative": 0.0,
+        "max_abs": 0.0,
+        "name": "restore.coarse",
+        "passed": true,
+        "reference_norm": 57.78741400894874
+      }
+    ],
+    "identity_exact": true,
+    "optimizer_exact": true,
+    "parameters_exact": true,
+    "rng_exact": true,
+    "status": "PASS_NO_EXTRA_UPDATE"
+  },
+  "runtime_kml_calls": 843,
+  "same_initialization_scale_frames_masks": true,
+  "sampled_steps": [
+    3,
+    4,
+    5
+  ],
+  "samples": [
+    {
+      "bytes": 150035,
+      "native_calls": 149,
+      "records": 149,
+      "sha256": "ef3809752f62206c572e3864d185291af59ff10e7622e07594f2074556615f60",
+      "step": 3,
+      "thread_ids": [
+        1758130
+      ]
+    },
+    {
+      "bytes": 150044,
+      "native_calls": 149,
+      "records": 149,
+      "sha256": "94c99cde67845f7c467637c746a9368b8ad4484b3716b897809484b02d810923",
+      "step": 4,
+      "thread_ids": [
+        1758130
+      ]
+    },
+    {
+      "bytes": 150040,
+      "native_calls": 149,
+      "records": 149,
+      "sha256": "a0cb1925512fe4edf12e89cb310f964642ba65f61eb09070023cb52cdc1d2509",
+      "step": 5,
+      "thread_ids": [
+        1758130
+      ]
+    }
+  ],
+  "scheduler_pids_cleared": true,
+  "scheduler_state": "SUCCEEDED",
+  "scheduler_usage_seconds": 76,
+  "scientific_acceptance": false,
+  "signal_fault_cleanup_triggered": false,
+  "source_status": "UNCHANGED",
+  "status": "PASS_GEMM5_ENGINEERING_EVIDENCE_ONLY",
+  "steady_state_performance_acceptance": false,
+  "step_wall_seconds": [
+    {
+      "observed_call_wall_seconds": 5.304256660863757,
+      "step": 1,
+      "step_seconds": 5.304256660863757
+    },
+    {
+      "observed_call_wall_seconds": 4.5844255750998855,
+      "step": 2,
+      "step_seconds": 4.5844255750998855
+    },
+    {
+      "observed_call_wall_seconds": 4.714210655074567,
+      "step": 3,
+      "step_seconds": 4.684121499303728
+    },
+    {
+      "observed_call_wall_seconds": 4.721322827972472,
+      "step": 4,
+      "step_seconds": 4.693295422941446
+    },
+    {
+      "observed_call_wall_seconds": 4.597311663907021,
+      "step": 5,
+      "step_seconds": 4.567671652883291
+    }
+  ],
+  "subject_mapping_status": "UNKNOWN",
+  "timing": {
+    "batch_materialization_seconds": 0.004999240860342979,
+    "checkpoint_and_recovery_seconds": 7.873084742110223,
+    "data_loading_seconds": 1.0400216728448868,
+    "diagnostic_scope": "mask/exposure-before-update/CPU-before-and-after/state-validation; other setup/logging in unattributed",
+    "diagnostic_seconds": 2.0982180540449917,
+    "observation_export_and_hook_seconds": 0.08775657182559371,
+    "training_step_seconds": 23.83377081109211,
+    "unattributed_seconds": 31.192424962297082,
+    "wall_seconds": 66.13027605507523
+  },
+  "training_kml_calls": 745,
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "warmup_steps": [
+    1,
+    2
+  ]
+}

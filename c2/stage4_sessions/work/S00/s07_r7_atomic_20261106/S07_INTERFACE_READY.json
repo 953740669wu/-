@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "task": "S07",
+  "round": "R7_ATOMIC_REPORTS",
+  "status": "INTERFACE_READY_CODE_NOT_FROZEN",
+  "directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round7_atomic_reports_20261106",
+  "package_relative": "package/S07_ATOMIC_REPORTS_R7.zip",
+  "expected_delivery_files": 15,
+  "expected_archive_files": 16,
+  "expected_archive_members": 17,
+  "expected_test_methods": 88,
+  "test_methods_by_file": {
+    "test_atomic_reports.py": 17,
+    "test_diagnostics.py": 6,
+    "test_job_identity.py": 6,
+    "test_probe.py": 16,
+    "test_readiness.py": 16,
+    "test_stack_observer.py": 27
+  },
+  "linux_required_passed": 88,
+  "linux_required_skipped": 0,
+  "windows_expected_skipped": 1,
+  "temporary_report_glob": "**/.rank[01].json.*.tmp",
+  "temporary_collection": "Collect raw remnants with path/bytes/SHA256/mtime alongside all formal reports. Never treat a temporary file as rank JSON.",
+  "contracts": {
+    "pg_seconds": 5,
+    "case_seconds": 30,
+    "case_order": [
+      "normal",
+      "crash",
+      "collective-timeout",
+      "watchdog"
+    ],
+    "job_seconds": 300,
+    "consumer_seconds": 270,
+    "cpu_allocated": 76,
+    "cpu_selected": 72,
+    "cpu_reserved": 4,
+    "per_rank": {
+      "allocated": 38,
+      "selected": 36,
+      "reserved": 2
+    },
+    "ddr_total_mb": 24576,
+    "hbm_mb": 0
+  },
+  "change_scope": "one rank writer plus three rank report call sites only; original reader/readiness and observer unchanged",
+  "followup": "ATOMIC_READY.json will bind frozen package bytes/SHA and all contracts/tests; not ready to submit until S01 exact-SHA PASS"
+}

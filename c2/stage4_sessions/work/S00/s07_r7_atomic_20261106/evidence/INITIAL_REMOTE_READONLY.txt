@@ -1,0 +1,57 @@
+
+login03
+Fri Nov  6 07:30:35 AM UTC 2026
+{"data":[{"jobId":"2050862","jobName":"b1-joint-rms-reference-both","user":"dengqingtian","state":"RUNNING","queue":"q_hpcai","assistJob":"DEFAULT","mpiType":"HMPI","jobType":"COSCHED:HMPI","pmiType":"OTHER","account":"common","startTime":"2026-11-06T07:30:05Z","endTime":"-","createTime":"2026-11-06T07:30:00Z","submitNode":"login06","execNodes":"cn[21426-21427]","execNodesCnt":2,"jobWallclockDuration":0},{"jobId":"2050378","jobName":"dspark-serve","user":"dengqingtian","state":"RUNNING","queue":"q_hpcai","assistJob":"DEFAULT","mpiType":"HMPI","jobType":"COSCHED:HMPI","pmiType":"OTHER","account":"common","startTime":"2026-11-06T06:36:57Z","endTime":"-","createTime":"2026-11-06T06:36:52Z","submitNode":"login01","execNodes":"cn[21833-21834,21836-21837]","execNodesCnt":4,"jobWallclockDuration":3180},{"jobId":"2049241","jobName":"gllm5-four-fixed","user":"dengqingtian","state":"RUNNING","queue":"q_hpcai","assistJob":"DEFAULT","mpiType":"DEFAULT","jobType":"COSCHED","pmiType":"OTHER","account":"common","startTime":"2026-11-06T04:03:01Z","endTime":"-","createTime":"2026-11-06T04:02:59Z","submitNode":"login05","execNodes":"cn[21353,21362-21376]","execNodesCnt":16,"jobWallclockDuration":12361}],"message":"List job brief infos successfully.","code":"success","requestId":"req-3e208cbc-533b-4bd5-8cf4-9e784038d14e","totalElements":3,"pageNumber":1,"pageSize":3}
+
+{"data":{"successData":[{"jobId":"2050433","jobName":"default","description":"",
+[23;80H,"priority":1,"exclusive":true,"interactionMode":"DEFAULT","state":"FAILED","curr
+[23;80HrentOperation":"EMPTY","createTime":"2026-11-06T06:43:45Z","startTime":"2026-11-0
+[23;80H06T06:43:49Z","lastModifiedTime":"-","endTime":"2026-11-06T06:45:34Z","queue":"q_
+[23;80H_hpcai","account":"common","reserveRes":"-","backfillRes":"-","backfilledRes":"-"
+[23;80H","startTimeEstimated":"-","jobType":"COSCHED","mpiType":"DEFAULT","assistJob":"D
+[23;80HDEFAULT","pmiType":"OTHER","scheduledTime":"-","jobWallClockLimit":300,"retryPoli
+[23;80Hicy":{"maxRetryCnt":0,"currentRetryTimes":0},"user":"dengqingtian","execPath":"/h
+[23;80Hhome/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z","s
+[23;80HsubmitNode":"login03","traceMessages":["2026-11-06T06:43:45Z   :    [JOB_ADD] Job
+[23;80Hb 2050433 is submitted by dengqingtian, job state is PENDING.","2026-11-06T06:43:
+[23;80H:49Z   :    [JOB_START] Job 2050433 start message has been sent.","2026-11-06T06:
+[23;80H:43:49Z   :    [JOB_START_ACK] Job 2050433 start message has been received by age
+[23;80Hent cn21338.","2026-11-06T06:43:49Z   :    [JOB_EXECUTION] Job 2050433 state is f
+[23;80Hfrom PENDING to RUNNING, execution path: /home/share/dengqingtian/opt/stage4_sess
+[23;80Hsions/S00/S07_STACK_R6_20261106T062352Z.","2026-11-06T06:45:34Z   :    [JOB_FINIS
+[23;80HSH] Job 2050433 state is from RUNNING to FAILED, reason: job failed."],"resGroups
+[23;80Hs":[{"taskGroupName":"rg0","replica":1,"preferNodes":"-","nodeSelectPolicyReq":"-
+[23;80H-","nodeSelectPolicyEff":"SEQUENCE","affinityRequest":["numa[count=2, distributio
+[23;80Hon=pack]"],"taskLabels":"queue_q_hpcai aarch64","resReq":{"cpu":76,"mem":24576,"g
+[23;80Hgpu":{"amount":0,"type":"gpu"},"npu":{"count":0,"name":"npu"},"license":{}},"resL
+[23;80HLimit":{"mem":24576,"license":{}},"resAlloc":{"cpu":76,"mem":24576,"gpu":{"amount
+[23;80Ht":0,"type":"gpu"},"npu":{"count":0,"name":"npu"},"license":{}},"nodeResUsages":[
+[23;80H[{"tPreCheckRunTime":0,"execNode":"cn21338","resIndex":"0/1","userCpuTime":83,"sy
+[23;80HystemCpuTime":35,"memswMax":312,"memMax":312,"memAvg":27,"memReal":0,"rss":0,"cac
+[23;80Hche":1,"preHookRunTime":0,"postHookRunTime":0,"hostPreHookRunTime":0,"hostPostHoo
+[23;80HokRunTime":0,"swap":0,"swapMax":0,"wallclockDuration":104,"sstoppedTime":0,"cpuUt
+[23;80HtilAvg":114,"cpuUtilRecent":135,"gpuUtilAvg":[],"gpuUtilRecent":[],"npuUtilRecent
+[23;80Ht":[],"pids":"-","hwThreads":"0-75","gpuIds":"-","npuIds":"-"}]}],"adminPriority"
+[23;80H":-1,"taskExecNodes":"cn21338","taskExecNodesCount":1,"totalResUsage":{"userCpuTi
+[23;80HimeTotal":83,"systemCpuTimeTotal":35,"memswMaxTotal":0,"memMaxTotal":0,"wallclock
+[23;80HkDurationTotal":104,"sstoppedTimeTotal":0,"preHookRunTime":0,"postHookRunTime":0,
+[23;80H,"hostPreHookRunTime":0,"hostPostHookRunTime":0,"coreHours":63232},"jobResReq":{"
+[23;80H"license":{}},"jobResAlloc":{"license":{}},"transferInfo":{"transferType":"LOCAL"
+[23;80H","forwardTime":"-","recallTime":"-"},"logRedirectPath":{"stderrRedirectPath":"",
+[23;80H,"stdoutRedirectPath":"/home/share/dengqingtian/opt/stage4_sessions/S00/S07_STACK
+[23;80HK_R6_20261106T062352Z/job.log","stderrRedirectType":"append","stdoutRedirectType"
+[23;80H":"override"},"cmd":"bash /home/share/dengqingtian/opt/stage4_sessions/S00/S07_ST
+[23;80HTACK_R6_20261106T062352Z/run_s07_diag_job.sh b9082f2385df26e05ff6ccd9b11f421db38e
+[23;80He2e597d643bff81b2d9859e09b250","preHook":{},"postHook":{},"hostPreHook":{},"hostP
+[23;80HPostHook":{},"exitCode":10001,"exitMessage":"Job command execution failed, errCod
+[23;80Hde: 1","jobExitCode":1,"isX11ForwardEnabled":false,"logRedirectOutputPath":{"stde
+[23;80HerrRedirectOutputPath":"","stdoutRedirectOutputPath":"/home/share/dengqingtian/op
+[23;80Hpt/stage4_sessions/S00/S07_STACK_R6_20261106T062352Z/job.log"},"isAutoResizable":
+[23;80H:false,"resizeNotifyCmd":"","execUsages":{"cn21338":{"tgName":"rg0","numTimeUsage
+[23;80He":""}},"hasResourceAffinityReq":false}],"errorData":{}},"message":"List job deta
+[23;80Hail infos successfully.","code":"success","requestId":"req-72bdfa10-5ecb-427c-822
+[23;80H29-cbf2b4c043d3","totalElements":1,"pageNumber":1,"pageSize":1}
+
+2050433
+Connection to 10.44.9.4 closed.
+[?9001l[?1004l

@@ -1,0 +1,20 @@
+--- R12/owned_processes.py
++++ R6/owned_processes.py
+@@ -1,4 +1,4 @@
+-"""Owned descendants and bounded15s TERM/15s KILL shared cleanup; no frameworks."""
++"""Owned descendants and bounded2s TERM/10s KILL, original15s cleanup cap; no frameworks."""
+ import time
+ import json
+ import os
+@@ -54,9 +54,9 @@
+     reaped = []
+     sent = set()
+     # These are absolute shared windows, never another timeout per descendant.
+-    term_end = min(started + 15, deadline)
++    term_end = min(started + 2, deadline)
+     for name, sig, end in [('TERM', signal.SIGTERM, term_end),
+-                           ('KILL', signal.SIGKILL, min(started + 30, deadline))]:
++                           ('KILL', signal.SIGKILL, min(started + 12, deadline))]:
+         while True:
+             rows = process_table(); owner.update(rows)
+             live = owner.live(rows)

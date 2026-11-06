@@ -1,0 +1,319 @@
+{
+  "cases": [
+    {
+      "case": "normal",
+      "expected_behavior": "PASS",
+      "probe_exit": 0,
+      "summary": {
+        "case": "normal",
+        "communication": "FIXED_TENSOR_2_RANK_ONLY",
+        "status": "PASS",
+        "supervisor": {
+          "all_reaped": true,
+          "errors": [],
+          "exit_codes": [
+            0,
+            0
+          ],
+          "pids": [
+            2875748,
+            2875749
+          ],
+          "reason": "complete",
+          "wall_seconds": 19.648015270009637
+        }
+      }
+    },
+    {
+      "case": "crash",
+      "expected_behavior": "PASS",
+      "probe_exit": 1,
+      "summary": {
+        "case": "crash",
+        "communication": "NOT_PASSED",
+        "error": "ValueError: workers did not complete normally",
+        "status": "FAIL",
+        "supervisor": {
+          "all_reaped": true,
+          "errors": [],
+          "exit_codes": [
+            -15,
+            17
+          ],
+          "pids": [
+            2877626,
+            2877631
+          ],
+          "reason": "child_failed",
+          "wall_seconds": 18.72815605904907
+        }
+      }
+    },
+    {
+      "case": "collective-timeout",
+      "expected_behavior": "PASS",
+      "probe_exit": 1,
+      "summary": {
+        "case": "collective-timeout",
+        "communication": "NOT_PASSED",
+        "error": "ValueError: workers did not complete normally",
+        "status": "FAIL",
+        "supervisor": {
+          "all_reaped": true,
+          "errors": [],
+          "exit_codes": [
+            1,
+            -15
+          ],
+          "pids": [
+            2879442,
+            2879445
+          ],
+          "reason": "child_failed",
+          "wall_seconds": 25.15577024174854
+        }
+      }
+    },
+    {
+      "case": "watchdog",
+      "expected_behavior": "PASS",
+      "probe_exit": 124,
+      "summary": {
+        "case": "watchdog",
+        "communication": "NOT_PASSED",
+        "error": "ValueError: workers did not complete normally",
+        "status": "FAIL",
+        "supervisor": {
+          "all_reaped": true,
+          "errors": [],
+          "exit_codes": [
+            -15,
+            -15
+          ],
+          "pids": [
+            2882120,
+            2882122
+          ],
+          "reason": "deadline",
+          "stack_observation": {
+            "helper_pid": 2882123,
+            "reaped": true,
+            "returncode": 0,
+            "sample_stop_ns": 3973122092789588,
+            "status": "EXITED",
+            "target_ns": 3973120092789588
+          },
+          "wall_seconds": 30.084034422878176
+        }
+      }
+    }
+  ],
+  "cleanup_seconds": 15,
+  "closing_seconds": 15,
+  "communication_passed": true,
+  "consumer_seconds": 270,
+  "execution_deadline": 3973238.841618965,
+  "exit_code": 0,
+  "finished": 3973131.40284903,
+  "formal_training": false,
+  "host": "cn21348",
+  "inherited_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75
+  ],
+  "job_id": "2051116",
+  "job_seconds": 300,
+  "real_HBM": false,
+  "standard_library_tests": {
+    "passed": 88,
+    "skipped": 0
+  },
+  "status": "PASS_S07_R7_FIXED_TWO_RANK_TENSOR_PROBE_ONLY",
+  "steps": [
+    {
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/tests/test_atomic_reports.py"
+      ],
+      "cwd": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1",
+      "deadline": 3972999.392491592,
+      "finished": 3972974.493578863,
+      "pid": 2869865,
+      "returncode": 0,
+      "started": 3972969.392514492
+    },
+    {
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/tests/test_stack_observer.py"
+      ],
+      "cwd": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1",
+      "deadline": 3973006.902439637,
+      "finished": 3972980.075446914,
+      "pid": 2870498,
+      "returncode": 0,
+      "started": 3972976.902448817
+    },
+    {
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/tests/test_readiness.py"
+      ],
+      "cwd": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1",
+      "deadline": 3973012.527345,
+      "finished": 3972987.041083226,
+      "pid": 2871088,
+      "returncode": 0,
+      "started": 3972982.527355051
+    },
+    {
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/tests/test_diagnostics.py"
+      ],
+      "cwd": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1",
+      "deadline": 3973019.432907094,
+      "finished": 3972992.00575397,
+      "pid": 2871613,
+      "returncode": 0,
+      "started": 3972989.432916944
+    },
+    {
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/tests/test_job_identity.py"
+      ],
+      "cwd": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1",
+      "deadline": 3973039.397797535,
+      "finished": 3972996.143729368,
+      "pid": 2872096,
+      "returncode": 0,
+      "started": 3972994.397806935
+    },
+    {
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/tests/test_probe.py"
+      ],
+      "cwd": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1",
+      "deadline": 3973043.573359845,
+      "finished": 3973003.008813996,
+      "pid": 2872575,
+      "returncode": 0,
+      "started": 3972998.573371276
+    },
+    {
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/candidate/comm_probe.py",
+        "environment",
+        "--output",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/environment_current.json"
+      ],
+      "cwd": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1",
+      "deadline": 3973065.718539057,
+      "finished": 3973026.000903925,
+      "pid": 2873118,
+      "returncode": 0,
+      "started": 3973005.718550747
+    },
+    {
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+        "-B",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/candidate/run_checks.py",
+        "--allocation",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/allocation.json",
+        "--output",
+        "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job"
+      ],
+      "cwd": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1",
+      "deadline": 3973238.841618965,
+      "finished": 3973125.750817887,
+      "pid": 2875557,
+      "returncode": 0,
+      "started": 3973028.701710627
+    }
+  ]
+}

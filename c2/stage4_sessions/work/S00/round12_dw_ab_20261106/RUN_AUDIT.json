@@ -1,0 +1,772 @@
+{
+  "active_s00_job": null,
+  "all_owned_processes_reaped": true,
+  "archive": {
+    "archived_files": 116,
+    "bundle": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/JOB_2049894_evidence.zip",
+    "bytes": 865426,
+    "remote_only": [
+      "payload/outputs/perf_baseline_2049894/checkpoints/final.pt",
+      "payload/outputs/perf_candidate_2049894/checkpoints/final.pt"
+    ],
+    "sha256": "a078da8c80b776f88859f4cd824207b1fc8d98dad15d1a0d2421841f8037ecd7"
+  },
+  "engineering_only": true,
+  "formal_split_status": "UNKNOWN",
+  "host": "cn21338",
+  "job_exit_code": 0,
+  "job_id": "2049894",
+  "node_seconds": 471.0,
+  "old9_and_fixed36_unchanged": true,
+  "outcome": {
+    "complete": true,
+    "errors": [],
+    "failure_stage": null,
+    "full_model_updates": 60,
+    "missing": [],
+    "phase_status": {
+      "perf_baseline": "PERF25_EXPLORATORY_NOT_SPEEDUP_ACCEPTANCE",
+      "perf_candidate": "PERF25_EXPLORATORY_NOT_SPEEDUP_ACCEPTANCE",
+      "strict": "PASS_STRICT_ENCODER5",
+      "target": "PASS_ACTUAL_KML_TARGET_ONLY"
+    }
+  },
+  "performance": {
+    "baseline": {
+      "all25_seconds": [
+        4.953297985717654,
+        4.760609483812004,
+        4.776652018073946,
+        4.539976932108402,
+        4.55191673990339,
+        4.523676453158259,
+        4.421566691249609,
+        4.440261444076896,
+        4.472530111204833,
+        4.355480792932212,
+        4.384354325011373,
+        4.61845821980387,
+        4.574315385892987,
+        4.613382816314697,
+        4.524758128914982,
+        4.589070208836347,
+        4.560853586066514,
+        4.582484120968729,
+        4.606562218628824,
+        4.5270618558861315,
+        4.463446036912501,
+        4.320207665674388,
+        4.496801754459739,
+        4.442630608100444,
+        4.335101570934057
+      ],
+      "all25_training_seconds": 113.43545715464279,
+      "checkpoint": {
+        "bytes": 456122783,
+        "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/outputs/perf_baseline_2049894/checkpoints/final.pt",
+        "sha256": "04db7a7ef57d72ddfec0d2ec23f5b27658fa6f5cc3a04c52544cd9cfdddd357e"
+      },
+      "observed20_median_seconds": 4.510239103808999,
+      "observed20_range_seconds": [
+        4.320207665674388,
+        4.61845821980387
+      ],
+      "observed20_seconds": [
+        4.523676453158259,
+        4.421566691249609,
+        4.440261444076896,
+        4.472530111204833,
+        4.355480792932212,
+        4.384354325011373,
+        4.61845821980387,
+        4.574315385892987,
+        4.613382816314697,
+        4.524758128914982,
+        4.589070208836347,
+        4.560853586066514,
+        4.582484120968729,
+        4.606562218628824,
+        4.5270618558861315,
+        4.463446036912501,
+        4.320207665674388,
+        4.496801754459739,
+        4.442630608100444,
+        4.335101570934057
+      ],
+      "process_lifetime_HWM_MiB": 6820.1171875,
+      "recovery": {
+        "cursor_exact": true,
+        "extra_updates": 0,
+        "forward_metrics": [
+          {
+            "l2_relative": 0.0,
+            "max_abs": 0.0,
+            "name": "restore.h",
+            "passed": true,
+            "reference_norm": 2888.4722615469045
+          },
+          {
+            "l2_relative": 0.0,
+            "max_abs": 0.0,
+            "name": "restore.voltage",
+            "passed": true,
+            "reference_norm": 14.162341663769842
+          },
+          {
+            "l2_relative": 0.0,
+            "max_abs": 0.0,
+            "name": "restore.coarse",
+            "passed": true,
+            "reference_norm": 16.624425385613648
+          }
+        ],
+        "identity_exact": true,
+        "optimizer_exact": true,
+        "parameters_exact": true,
+        "rng_exact": true,
+        "status": "PASS_NO_EXTRA_UPDATE"
+      },
+      "rss_after_MiB": [
+        3489.8984375,
+        4946.65234375,
+        5908.72265625,
+        5778.5078125,
+        6452.8828125,
+        6504.765625,
+        6401.28515625,
+        6065.14453125,
+        6325.30078125,
+        6220.63671875,
+        6194.75390625,
+        5935.375,
+        5831.3515625,
+        5649.6328125,
+        6013.65234375,
+        5779.59765625,
+        5857.64453125,
+        5883.9375,
+        5935.99609375,
+        5988.0234375,
+        6300.14453125,
+        6456.2109375,
+        6430.25,
+        6456.02734375,
+        6430.328125
+      ],
+      "rss_before_MiB": [
+        598.3046875,
+        3491.08984375,
+        4946.65234375,
+        5908.72265625,
+        5778.5078125,
+        6452.8828125,
+        6504.765625,
+        6401.28515625,
+        6065.14453125,
+        6325.30078125,
+        6220.63671875,
+        6194.75390625,
+        5935.375,
+        5831.3515625,
+        5649.6328125,
+        6013.65234375,
+        5779.59765625,
+        5857.64453125,
+        5883.9375,
+        5935.99609375,
+        5988.0234375,
+        6300.14453125,
+        6456.2109375,
+        6430.25,
+        6456.02734375
+      ],
+      "rss_scope": "independent perf process at same before/after update sampling; HWM is process lifetime, not per-step exclusive or whole-job final peak",
+      "timing": {
+        "batch_materialization_seconds": 0.024948046542704105,
+        "checkpoint_recovery_seconds": 7.351268450263888,
+        "data_loading_seconds": 1.3413830040954053,
+        "diagnostic_seconds": 10.01409127516672,
+        "mask_and_attempt_ledger_seconds": 2.2725814981386065,
+        "strict_comparison_seconds": 0.0,
+        "training_step_seconds": 113.43545715464279,
+        "unattributed_seconds": 32.96511535346508,
+        "wall_seconds": 167.4048447823152
+      },
+      "warmup5_seconds": [
+        4.953297985717654,
+        4.760609483812004,
+        4.776652018073946,
+        4.539976932108402,
+        4.55191673990339
+      ]
+    },
+    "candidate": {
+      "all25_seconds": [
+        5.006146814208478,
+        4.912358575966209,
+        4.947452231310308,
+        4.852360645774752,
+        4.984845177736133,
+        4.926456287037581,
+        4.705225374083966,
+        4.699945650063455,
+        4.550330726895481,
+        4.677435555960983,
+        4.804869348648936,
+        4.846578419674188,
+        4.814354598056525,
+        4.633644714020193,
+        4.481312453746796,
+        4.6112891510128975,
+        4.614947605412453,
+        4.582924338057637,
+        4.517645362764597,
+        4.558231267146766,
+        4.537582667078823,
+        4.6829385329037905,
+        4.622477582190186,
+        4.640914434101433,
+        4.6207428658381104
+      ],
+      "all25_training_seconds": 117.83301037969068,
+      "checkpoint": {
+        "bytes": 456122783,
+        "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/outputs/perf_candidate_2049894/checkpoints/final.pt",
+        "sha256": "8827f68136af39983775a4b7d207a4801e0a291d33bef5b5ed2a94fd1cc05ba7"
+      },
+      "observed20_median_seconds": 4.628061148105189,
+      "observed20_range_seconds": [
+        4.481312453746796,
+        4.926456287037581
+      ],
+      "observed20_seconds": [
+        4.926456287037581,
+        4.705225374083966,
+        4.699945650063455,
+        4.550330726895481,
+        4.677435555960983,
+        4.804869348648936,
+        4.846578419674188,
+        4.814354598056525,
+        4.633644714020193,
+        4.481312453746796,
+        4.6112891510128975,
+        4.614947605412453,
+        4.582924338057637,
+        4.517645362764597,
+        4.558231267146766,
+        4.537582667078823,
+        4.6829385329037905,
+        4.622477582190186,
+        4.640914434101433,
+        4.6207428658381104
+      ],
+      "process_lifetime_HWM_MiB": 6923.1328125,
+      "recovery": {
+        "cursor_exact": true,
+        "extra_updates": 0,
+        "forward_metrics": [
+          {
+            "l2_relative": 0.0,
+            "max_abs": 0.0,
+            "name": "restore.h",
+            "passed": true,
+            "reference_norm": 2888.4722615469045
+          },
+          {
+            "l2_relative": 0.0,
+            "max_abs": 0.0,
+            "name": "restore.voltage",
+            "passed": true,
+            "reference_norm": 14.162341663769842
+          },
+          {
+            "l2_relative": 0.0,
+            "max_abs": 0.0,
+            "name": "restore.coarse",
+            "passed": true,
+            "reference_norm": 16.624425385613648
+          }
+        ],
+        "identity_exact": true,
+        "optimizer_exact": true,
+        "parameters_exact": true,
+        "rng_exact": true,
+        "status": "PASS_NO_EXTRA_UPDATE"
+      },
+      "rss_after_MiB": [
+        3410.546875,
+        4946.25390625,
+        4972.38671875,
+        4920.21484375,
+        4946.46484375,
+        6220.5703125,
+        6558.50390625,
+        6428.90625,
+        6480.2421875,
+        6325.09375,
+        6455.12890625,
+        6455.12890625,
+        6481.1875,
+        6507.16015625,
+        6481.2578125,
+        6299.0546875,
+        6247.25,
+        6325.17578125,
+        6298.99609375,
+        6299.1796875,
+        6351.1484375,
+        6299.8203125,
+        6376.8515625,
+        6299.08203125,
+        6352.10546875
+      ],
+      "rss_before_MiB": [
+        598.5625,
+        3411.734375,
+        4946.25390625,
+        4972.38671875,
+        4920.21484375,
+        4946.46484375,
+        6220.5703125,
+        6558.50390625,
+        6428.90625,
+        6480.2421875,
+        6325.09375,
+        6455.12890625,
+        6455.12890625,
+        6481.1875,
+        6507.16015625,
+        6481.2578125,
+        6299.0546875,
+        6247.25,
+        6325.17578125,
+        6298.99609375,
+        6299.1796875,
+        6351.1484375,
+        6299.8203125,
+        6376.8515625,
+        6299.08203125
+      ],
+      "rss_scope": "independent perf process at same before/after update sampling; HWM is process lifetime, not per-step exclusive or whole-job final peak",
+      "timing": {
+        "batch_materialization_seconds": 0.024869516491889954,
+        "checkpoint_recovery_seconds": 7.3757982472889125,
+        "data_loading_seconds": 1.70442218426615,
+        "diagnostic_seconds": 9.756072476040572,
+        "mask_and_attempt_ledger_seconds": 2.171815833542496,
+        "strict_comparison_seconds": 0.0,
+        "training_step_seconds": 117.83301037969068,
+        "unattributed_seconds": 31.686782408505678,
+        "wall_seconds": 170.55277104582638
+      },
+      "warmup5_seconds": [
+        5.006146814208478,
+        4.912358575966209,
+        4.947452231310308,
+        4.852360645774752,
+        4.984845177736133
+      ]
+    }
+  },
+  "phases": {
+    "perf_baseline": {
+      "completed_updates": 25,
+      "confirmed_ledger_updates": 25,
+      "consumed_frames": 1600,
+      "cpu_snapshots": 54,
+      "error": null,
+      "failed_metrics": [],
+      "imports": {
+        "baseline": {
+          "actual_kml": true,
+          "linear_dtype": "torch.float32",
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/baseline/kml_ops.py",
+          "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+        },
+        "candidate": {
+          "actual_kml": true,
+          "linear_dtype": "torch.float32",
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/candidate/kml_ops.py",
+          "sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea"
+        }
+      },
+      "in_flight": null,
+      "libraries": [
+        {
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+          "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+        },
+        {
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so",
+          "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a"
+        },
+        {
+          "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so",
+          "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f"
+        },
+        {
+          "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+          "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+        },
+        {
+          "path": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+          "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c"
+        }
+      ],
+      "max_abs": 0.0,
+      "max_l2_relative": 0.0,
+      "max_observed_TIDs": 36,
+      "metric_count": 15,
+      "native_counts": {
+        "baseline": {
+          "captured_target": [],
+          "native_calls": 3823,
+          "native_shapes": {
+            "(101, 111, 111, 13312, 2048, 512, 1.0, 512, 2048, 0.0, 2048)": 300,
+            "(101, 111, 111, 13312, 512, 1, 1.0, 1, 512, 0.0, 512)": 25,
+            "(101, 111, 111, 13312, 512, 1536, 1.0, 1536, 512, 0.0, 512)": 300,
+            "(101, 111, 111, 13312, 512, 2048, 1.0, 2048, 512, 0.0, 512)": 300,
+            "(101, 111, 111, 13312, 512, 512, 1.0, 512, 512, 0.0, 512)": 300,
+            "(101, 111, 112, 13312, 1, 512, 1.0, 512, 512, 1.0, 1)": 25,
+            "(101, 111, 112, 13312, 1536, 512, 1.0, 512, 512, 1.0, 1536)": 300,
+            "(101, 111, 112, 13312, 2048, 512, 1.0, 512, 512, 1.0, 2048)": 300,
+            "(101, 111, 112, 13312, 512, 2048, 1.0, 2048, 2048, 1.0, 512)": 300,
+            "(101, 111, 112, 13312, 512, 512, 1.0, 512, 512, 1.0, 512)": 300,
+            "(101, 111, 112, 13312, 512, 65, 1.0, 65, 65, 1.0, 512)": 25,
+            "(101, 111, 112, 416, 1, 512, 1.0, 512, 512, 1.0, 1)": 2,
+            "(101, 111, 112, 416, 1536, 512, 1.0, 512, 512, 1.0, 1536)": 24,
+            "(101, 111, 112, 416, 2048, 512, 1.0, 512, 512, 1.0, 2048)": 24,
+            "(101, 111, 112, 416, 512, 2048, 1.0, 2048, 2048, 1.0, 512)": 24,
+            "(101, 111, 112, 416, 512, 512, 1.0, 512, 512, 1.0, 512)": 24,
+            "(101, 112, 111, 1, 512, 13312, 1.0, 1, 512, 0.0, 512)": 25,
+            "(101, 112, 111, 1536, 512, 13312, 1.0, 1536, 512, 0.0, 512)": 300,
+            "(101, 112, 111, 2048, 512, 13312, 1.0, 2048, 512, 0.0, 512)": 300,
+            "(101, 112, 111, 512, 2048, 13312, 1.0, 512, 2048, 0.0, 2048)": 300,
+            "(101, 112, 111, 512, 512, 13312, 1.0, 512, 512, 0.0, 512)": 300,
+            "(101, 112, 111, 512, 65, 13312, 1.0, 512, 65, 0.0, 65)": 25
+          },
+          "original_type": "_FuncPtr",
+          "target_full": 300,
+          "target_tiles": 0
+        },
+        "candidate": {
+          "captured_target": [],
+          "native_calls": 0,
+          "native_shapes": {},
+          "original_type": "_FuncPtr",
+          "target_full": 0,
+          "target_tiles": 0
+        }
+      },
+      "optimizer_updates_total": 25,
+      "pid": 2138330,
+      "planned_updates": 25,
+      "status": "PERF25_EXPLORATORY_NOT_SPEEDUP_ACCEPTANCE",
+      "timing": {
+        "batch_materialization_seconds": 0.024948046542704105,
+        "checkpoint_recovery_seconds": 7.351268450263888,
+        "data_loading_seconds": 1.3413830040954053,
+        "diagnostic_seconds": 10.01409127516672,
+        "mask_and_attempt_ledger_seconds": 2.2725814981386065,
+        "strict_comparison_seconds": 0.0,
+        "training_step_seconds": 113.43545715464279,
+        "unattributed_seconds": 32.96511535346508,
+        "wall_seconds": 167.4048447823152
+      },
+      "torch_interop": 608,
+      "torch_intraop": 36,
+      "wall_seconds": 167.4048447823152
+    },
+    "perf_candidate": {
+      "completed_updates": 25,
+      "confirmed_ledger_updates": 25,
+      "consumed_frames": 1600,
+      "cpu_snapshots": 54,
+      "error": null,
+      "failed_metrics": [],
+      "imports": {
+        "baseline": {
+          "actual_kml": true,
+          "linear_dtype": "torch.float32",
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/baseline/kml_ops.py",
+          "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+        },
+        "candidate": {
+          "actual_kml": true,
+          "linear_dtype": "torch.float32",
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/candidate/kml_ops.py",
+          "sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea"
+        }
+      },
+      "in_flight": null,
+      "libraries": [
+        {
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+          "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+        },
+        {
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so",
+          "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a"
+        },
+        {
+          "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so",
+          "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f"
+        },
+        {
+          "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+          "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+        },
+        {
+          "path": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+          "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c"
+        }
+      ],
+      "max_abs": 0.0,
+      "max_l2_relative": 0.0,
+      "max_observed_TIDs": 36,
+      "metric_count": 15,
+      "native_counts": {
+        "baseline": {
+          "captured_target": [],
+          "native_calls": 0,
+          "native_shapes": {},
+          "original_type": "_FuncPtr",
+          "target_full": 0,
+          "target_tiles": 0
+        },
+        "candidate": {
+          "captured_target": [],
+          "native_calls": 4123,
+          "native_shapes": {
+            "(101, 111, 111, 13312, 2048, 512, 1.0, 512, 2048, 0.0, 2048)": 300,
+            "(101, 111, 111, 13312, 512, 1, 1.0, 1, 512, 0.0, 512)": 25,
+            "(101, 111, 111, 13312, 512, 1536, 1.0, 1536, 512, 0.0, 512)": 300,
+            "(101, 111, 111, 13312, 512, 2048, 1.0, 2048, 512, 0.0, 512)": 300,
+            "(101, 111, 111, 13312, 512, 512, 1.0, 512, 512, 0.0, 512)": 300,
+            "(101, 111, 112, 13312, 1, 512, 1.0, 512, 512, 1.0, 1)": 25,
+            "(101, 111, 112, 13312, 1536, 512, 1.0, 512, 512, 1.0, 1536)": 300,
+            "(101, 111, 112, 13312, 2048, 512, 1.0, 512, 512, 1.0, 2048)": 300,
+            "(101, 111, 112, 13312, 512, 2048, 1.0, 2048, 2048, 1.0, 512)": 300,
+            "(101, 111, 112, 13312, 512, 512, 1.0, 512, 512, 1.0, 512)": 300,
+            "(101, 111, 112, 13312, 512, 65, 1.0, 65, 65, 1.0, 512)": 25,
+            "(101, 111, 112, 416, 1, 512, 1.0, 512, 512, 1.0, 1)": 2,
+            "(101, 111, 112, 416, 1536, 512, 1.0, 512, 512, 1.0, 1536)": 24,
+            "(101, 111, 112, 416, 2048, 512, 1.0, 512, 512, 1.0, 2048)": 24,
+            "(101, 111, 112, 416, 512, 2048, 1.0, 2048, 2048, 1.0, 512)": 24,
+            "(101, 111, 112, 416, 512, 512, 1.0, 512, 512, 1.0, 512)": 24,
+            "(101, 112, 111, 1, 512, 13312, 1.0, 1, 512, 0.0, 512)": 25,
+            "(101, 112, 111, 1536, 512, 13312, 1.0, 1536, 512, 0.0, 512)": 300,
+            "(101, 112, 111, 2048, 512, 13312, 1.0, 2048, 512, 0.0, 512)": 300,
+            "(101, 112, 111, 512, 1024, 13312, 1.0, 512, 2048, 0.0, 2048)": 600,
+            "(101, 112, 111, 512, 512, 13312, 1.0, 512, 512, 0.0, 512)": 300,
+            "(101, 112, 111, 512, 65, 13312, 1.0, 512, 65, 0.0, 65)": 25
+          },
+          "original_type": "_FuncPtr",
+          "target_full": 0,
+          "target_tiles": 600
+        }
+      },
+      "optimizer_updates_total": 25,
+      "pid": 2153730,
+      "planned_updates": 25,
+      "status": "PERF25_EXPLORATORY_NOT_SPEEDUP_ACCEPTANCE",
+      "timing": {
+        "batch_materialization_seconds": 0.024869516491889954,
+        "checkpoint_recovery_seconds": 7.3757982472889125,
+        "data_loading_seconds": 1.70442218426615,
+        "diagnostic_seconds": 9.756072476040572,
+        "mask_and_attempt_ledger_seconds": 2.171815833542496,
+        "strict_comparison_seconds": 0.0,
+        "training_step_seconds": 117.83301037969068,
+        "unattributed_seconds": 31.686782408505678,
+        "wall_seconds": 170.55277104582638
+      },
+      "torch_interop": 608,
+      "torch_intraop": 36,
+      "wall_seconds": 170.55277104582638
+    },
+    "strict": {
+      "compared_parameters_per_step": 153,
+      "completed_updates": 5,
+      "confirmed_ledger_updates": 5,
+      "consumed_frames": 320,
+      "cpu_snapshots": 24,
+      "error": null,
+      "failed_metrics": [],
+      "imports": {
+        "baseline": {
+          "actual_kml": true,
+          "linear_dtype": "torch.float32",
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/baseline/kml_ops.py",
+          "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+        },
+        "candidate": {
+          "actual_kml": true,
+          "linear_dtype": "torch.float32",
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/candidate/kml_ops.py",
+          "sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea"
+        }
+      },
+      "in_flight": null,
+      "libraries": [
+        {
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+          "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+        },
+        {
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so",
+          "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a"
+        },
+        {
+          "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so",
+          "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f"
+        },
+        {
+          "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+          "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+        },
+        {
+          "path": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+          "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c"
+        }
+      ],
+      "max_abs": 0.0,
+      "max_l2_relative": 0.0,
+      "max_observed_TIDs": 36,
+      "metric_count": 3895,
+      "native_counts": {
+        "baseline": {
+          "captured_target": [],
+          "native_calls": 745,
+          "native_shapes": {
+            "(101, 111, 111, 13312, 2048, 512, 1.0, 512, 2048, 0.0, 2048)": 60,
+            "(101, 111, 111, 13312, 512, 1, 1.0, 1, 512, 0.0, 512)": 5,
+            "(101, 111, 111, 13312, 512, 1536, 1.0, 1536, 512, 0.0, 512)": 60,
+            "(101, 111, 111, 13312, 512, 2048, 1.0, 2048, 512, 0.0, 512)": 60,
+            "(101, 111, 111, 13312, 512, 512, 1.0, 512, 512, 0.0, 512)": 60,
+            "(101, 111, 112, 13312, 1, 512, 1.0, 512, 512, 1.0, 1)": 5,
+            "(101, 111, 112, 13312, 1536, 512, 1.0, 512, 512, 1.0, 1536)": 60,
+            "(101, 111, 112, 13312, 2048, 512, 1.0, 512, 512, 1.0, 2048)": 60,
+            "(101, 111, 112, 13312, 512, 2048, 1.0, 2048, 2048, 1.0, 512)": 60,
+            "(101, 111, 112, 13312, 512, 512, 1.0, 512, 512, 1.0, 512)": 60,
+            "(101, 111, 112, 13312, 512, 65, 1.0, 65, 65, 1.0, 512)": 5,
+            "(101, 112, 111, 1, 512, 13312, 1.0, 1, 512, 0.0, 512)": 5,
+            "(101, 112, 111, 1536, 512, 13312, 1.0, 1536, 512, 0.0, 512)": 60,
+            "(101, 112, 111, 2048, 512, 13312, 1.0, 2048, 512, 0.0, 512)": 60,
+            "(101, 112, 111, 512, 2048, 13312, 1.0, 512, 2048, 0.0, 2048)": 60,
+            "(101, 112, 111, 512, 512, 13312, 1.0, 512, 512, 0.0, 512)": 60,
+            "(101, 112, 111, 512, 65, 13312, 1.0, 512, 65, 0.0, 65)": 5
+          },
+          "original_type": "_FuncPtr",
+          "target_full": 60,
+          "target_tiles": 0
+        },
+        "candidate": {
+          "captured_target": [],
+          "native_calls": 805,
+          "native_shapes": {
+            "(101, 111, 111, 13312, 2048, 512, 1.0, 512, 2048, 0.0, 2048)": 60,
+            "(101, 111, 111, 13312, 512, 1, 1.0, 1, 512, 0.0, 512)": 5,
+            "(101, 111, 111, 13312, 512, 1536, 1.0, 1536, 512, 0.0, 512)": 60,
+            "(101, 111, 111, 13312, 512, 2048, 1.0, 2048, 512, 0.0, 512)": 60,
+            "(101, 111, 111, 13312, 512, 512, 1.0, 512, 512, 0.0, 512)": 60,
+            "(101, 111, 112, 13312, 1, 512, 1.0, 512, 512, 1.0, 1)": 5,
+            "(101, 111, 112, 13312, 1536, 512, 1.0, 512, 512, 1.0, 1536)": 60,
+            "(101, 111, 112, 13312, 2048, 512, 1.0, 512, 512, 1.0, 2048)": 60,
+            "(101, 111, 112, 13312, 512, 2048, 1.0, 2048, 2048, 1.0, 512)": 60,
+            "(101, 111, 112, 13312, 512, 512, 1.0, 512, 512, 1.0, 512)": 60,
+            "(101, 111, 112, 13312, 512, 65, 1.0, 65, 65, 1.0, 512)": 5,
+            "(101, 112, 111, 1, 512, 13312, 1.0, 1, 512, 0.0, 512)": 5,
+            "(101, 112, 111, 1536, 512, 13312, 1.0, 1536, 512, 0.0, 512)": 60,
+            "(101, 112, 111, 2048, 512, 13312, 1.0, 2048, 512, 0.0, 512)": 60,
+            "(101, 112, 111, 512, 1024, 13312, 1.0, 512, 2048, 0.0, 2048)": 120,
+            "(101, 112, 111, 512, 512, 13312, 1.0, 512, 512, 0.0, 512)": 60,
+            "(101, 112, 111, 512, 65, 13312, 1.0, 512, 65, 0.0, 65)": 5
+          },
+          "original_type": "_FuncPtr",
+          "target_full": 0,
+          "target_tiles": 120
+        }
+      },
+      "optimizer_updates_total": 10,
+      "pid": 2129473,
+      "planned_updates": 5,
+      "status": "PASS_STRICT_ENCODER5",
+      "timing": {
+        "batch_materialization_seconds": 0.011537689715623856,
+        "checkpoint_recovery_seconds": 0.0,
+        "data_loading_seconds": 1.2362694726325572,
+        "diagnostic_seconds": 4.041950960177928,
+        "mask_and_attempt_ledger_seconds": 0.1882051727734506,
+        "strict_comparison_seconds": 11.4487235089764,
+        "training_step_seconds": 46.02833308139816,
+        "unattributed_seconds": 31.553629882168025,
+        "wall_seconds": 94.50864976784214
+      },
+      "torch_interop": 608,
+      "torch_intraop": 36,
+      "wall_seconds": 94.50864976784214
+    },
+    "target": {
+      "completed_updates": null,
+      "consumed_frames": null,
+      "cpu_snapshots": 7,
+      "error": null,
+      "failed_metrics": [],
+      "imports": {
+        "baseline": {
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/baseline/kml_ops.py",
+          "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+        },
+        "candidate": {
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z/payload/candidate/kml_ops.py",
+          "sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea"
+        }
+      },
+      "libraries": [
+        {
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+          "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+        },
+        {
+          "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so",
+          "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a"
+        },
+        {
+          "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so",
+          "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f"
+        },
+        {
+          "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+          "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+        },
+        {
+          "path": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+          "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c"
+        }
+      ],
+      "max_abs": 0.0,
+      "max_l2_relative": 0.0,
+      "max_observed_TIDs": 36,
+      "metric_count": 1,
+      "optimizer_updates_total": null,
+      "pid": 2127377,
+      "planned_updates": null,
+      "status": "PASS_ACTUAL_KML_TARGET_ONLY",
+      "timing": null,
+      "torch_interop": 608,
+      "torch_intraop": 36,
+      "wall_seconds": null
+    }
+  },
+  "scheduler_pids_cleared": true,
+  "scheduler_state": "SUCCEEDED",
+  "scheduler_usage_seconds": 470,
+  "scientific_acceptance": false,
+  "signal_fault_cleanup_triggered": false,
+  "source_status": "UNCHANGED",
+  "status": "R12_FULL_CHAIN_COMPLETE_EXPLORATORY_ONLY",
+  "steady_state_speedup_acceptance": false,
+  "subject_mapping_status": "UNKNOWN"
+}

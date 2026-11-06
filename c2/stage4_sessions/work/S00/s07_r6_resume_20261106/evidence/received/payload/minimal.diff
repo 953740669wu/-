@@ -1,0 +1,144 @@
+--- a/candidate/comm_probe.py
++++ b/candidate/comm_probe.py
+@@ -13,6 +13,7 @@
+ import traceback
+ 
+ import cpu36_contract as cpu36
++import stack_observer
+ 
+ ENVIRONMENT = cpu36.ENVIRONMENT
+ BROADCAST = [1.0, -2.0, 0.5, 4.0]
+@@ -201,11 +202,12 @@
+                 raise ValueError(f'rank{rank}: {key} mismatch')
+ 
+ 
+-def supervise(commands, directory, deadline, environment, ready_context=None):
++def supervise(commands, directory, deadline, environment, ready_context=None, stack_context=None):
+     processes, logs = [], []
+     state = dict(reason='complete', errors=[])
+     started = time.monotonic()
+     stop_ns = int((started + deadline) * 1e9)
++    observer = None
+     if ready_context is not None:
+         environment = dict(environment, S07_CASE_DEADLINE_NS=str(stop_ns))
+     event_path = directory / 'supervisor.events.jsonl'
+@@ -221,6 +223,10 @@
+         if ready_context is not None:
+             publish_json(directory / 'participants.json',
+                          dict(ready_context, pids=[p.pid for p in processes], deadline_ns=stop_ns))
++        if stack_context is not None and stack_context.get('case') == 'watchdog':
++            observer = stack_observer.ProcObserver(directory, stack_context, processes, stop_ns, environment)
++            observer.start()
++            record_event(event_path, 'proc_helper_started', **observer.state)
+         while True:
+             codes = [process.poll() for process in processes]
+             if any(code is not None and code != 0 for code in codes):
+@@ -231,6 +237,8 @@
+             if time.monotonic() - started >= deadline:
+                 state['reason'] = 'deadline'
+                 break
++            if observer is not None:
++                observer.poll()
+             time.sleep(0.05)
+     except Exception as exc:
+         state.update(reason='launch_failed', errors=[str(exc)])
+@@ -248,8 +256,13 @@
+             elif process.poll() is None:
+                 process.terminate()
+                 record_event(event_path, 'child_terminate', child_pid=process.pid)
++        if observer is not None:
++            observer.stop()
+         grace = time.monotonic() + 2
+-        while any(process.poll() is None for process in processes) and time.monotonic() < grace:
++        while (any(process.poll() is None for process in processes)
++               or (observer is not None and observer.running)) and time.monotonic() < grace:
++            if observer is not None:
++                observer.poll()
+             time.sleep(0.05)
+         for process in processes:
+             if os.name == 'posix':
+@@ -268,6 +281,8 @@
+     state.update(pids=[p.pid for p in processes], exit_codes=[p.returncode for p in processes],
+                  all_reaped=all(p.returncode is not None for p in processes),
+                  wall_seconds=time.monotonic() - started)
++    if observer is not None:
++        state['stack_observation'] = observer.receipt()
+     record_event(event_path, 'supervisor_end', reason=state['reason'], exit_codes=state['exit_codes'],
+                  all_reaped=state['all_reaped'])
+     return state
+@@ -285,6 +300,7 @@
+     record = dict(status='FAIL', rank=rank, pid=os.getpid(), run_id=spec['run_id'],
+                   world_size=2, host=socket.gethostname(), cpu_receipt=receipt, checkpoints=[])
+     event_path = directory / f'rank{rank}.events.jsonl'
++    dump = None
+ 
+     def checkpoint(stage):
+         record_event(event_path, 'checkpoint_begin', stage=stage)
+@@ -297,6 +313,10 @@
+ 
+     try:
+         record_event(event_path, 'worker_ready', rank=rank, job_id=spec['job_id'], run_id=spec['run_id'])
++        if spec.get('case') == 'watchdog':
++            dump = stack_observer.StackDump(directory, spec, rank,
++                lambda event, **fields: record_event(event_path, event, **fields))
++            dump.arm()
+         checkpoint('before_framework')
+         record['environment'] = {key: os.environ.get(key) for key in ENVIRONMENT}
+         if record['environment'] != ENVIRONMENT:
+@@ -305,6 +325,8 @@
+         record['runtime'] = info
+         if info['status'] != 'AVAILABLE_BUILT_NOT_COMM_TESTED':
+             raise RuntimeError('Gloo backend unavailable: ' + json.dumps(info))
++        if dump is not None:
++            record['installed_python'] = stack_observer.installed_sources(directory, rank)
+         import torch
+         import torch.distributed as dist
+         record['torch_intraop'] = torch.get_num_threads()
+@@ -323,6 +345,8 @@
+                                 rank=rank, world_size=2,
+                                 timeout=timedelta(seconds=spec['pg_timeout']))
+         record_event(event_path, 'init_process_group_end')
++        if dump is not None:
++            dump.cancel('init_end')
+         record.update(backend=str(dist.get_backend()), actual_rank=dist.get_rank(),
+                       actual_world_size=dist.get_world_size())
+         if record['actual_rank'] != rank or record['actual_world_size'] != 2:
+@@ -366,6 +390,9 @@
+         write_json(directory / f'rank{rank}.json', record)
+         traceback.print_exc()
+         return 1
++    finally:
++        if dump is not None:
++            dump.cancel('finally')
+ 
+ 
+ def run(args):
+@@ -376,7 +403,8 @@
+         if not 1 <= args.pg_timeout < args.deadline <= 120:
+             raise ValueError('require 1 <= pg-timeout < deadline <= 120 seconds')
+         allocation = load_allocation(args.allocation.resolve())
+-        source = {p.name: cpu36.sha(p) for p in (Path(__file__), Path(cpu36.__file__))}
++        source_paths = (Path(__file__), Path(cpu36.__file__), Path(stack_observer.__file__))
++        source = {p.name: cpu36.sha(p) for p in source_paths}
+         spec = dict(run_id=directory.name, ready_token=secrets.token_hex(16), case=args.case, pg_timeout=args.pg_timeout,
+                     deadline=args.deadline, allocation=allocation, source_sha256=source,
+                     tensor_contract=dict(broadcast=BROADCAST, total=TOTAL, tolerance=0,
+@@ -389,7 +417,8 @@
+                      '--output', str(directory), '--rank', str(rank)] for rank in range(2)]
+         write_json(directory / 'commands.json', commands)
+         state = supervise(commands, directory, args.deadline, environment,
+-                          ready_context={key: spec[key] for key in ('run_id', 'job_id', 'ready_token')})
++                          ready_context={key: spec[key] for key in ('run_id', 'job_id', 'ready_token')},
++                          stack_context=spec if args.case == 'watchdog' else None)
+         summary['supervisor'] = state
+         if (state['reason'] != 'complete' or state['exit_codes'] != [0, 0]
+                 or not state['all_reaped']):
+@@ -397,7 +426,7 @@
+         reports = [json.loads((directory / f'rank{rank}.json').read_text(encoding='utf-8'))
+                    for rank in range(2)]
+         validate_reports(reports, directory.name, state['pids'])
+-        if source != {p.name: cpu36.sha(p) for p in (Path(__file__), Path(cpu36.__file__))}:
++        if source != {p.name: cpu36.sha(p) for p in source_paths}:
+             raise ValueError('probe source changed while running')
+         if args.case != 'normal':
+             raise ValueError('fault case unexpectedly succeeded')

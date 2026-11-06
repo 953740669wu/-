@@ -1,0 +1,30 @@
+{
+  "status": "FAIL",
+  "cases": [
+    {
+      "case": "normal",
+      "expected_behavior": "PASS",
+      "probe_exit": 0,
+      "summary": {
+        "status": "PASS",
+        "communication": "FIXED_TENSOR_2_RANK_ONLY",
+        "case": "normal",
+        "supervisor": {
+          "reason": "complete",
+          "errors": [],
+          "pids": [
+            2430758,
+            2430759
+          ],
+          "exit_codes": [
+            0,
+            0
+          ],
+          "all_reaped": true,
+          "wall_seconds": 19.627162976190448
+        }
+      }
+    }
+  ],
+  "error": "Expecting value: line 1 column 1 (char 0)"
+}

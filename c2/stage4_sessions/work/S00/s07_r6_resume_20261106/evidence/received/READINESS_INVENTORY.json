@@ -1,0 +1,110 @@
+{
+  "cases": {
+    "crash": {
+      "complete": true,
+      "files": {
+        "participants.json": {
+          "bytes": 153,
+          "mtime_ns": 1793947508506306160,
+          "sha256": "28c9627e396782875dc1163da338508cf2a81e905968c7f7a6ac024294af577c"
+        },
+        "ready_rank0.json": {
+          "bytes": 119,
+          "mtime_ns": 1793947525888025000,
+          "sha256": "6dd57505a153dd93ad3b7f75e5f90c3f2c0be2b07d3385f163f71c2a9b8bd50c"
+        },
+        "ready_rank1.json": {
+          "bytes": 119,
+          "mtime_ns": 1793947517622192000,
+          "sha256": "c669ec2c5d2678ef76b042715934d99b3e56162b0900ccbea1be4072a736765f"
+        }
+      },
+      "issues": [],
+      "temporary_files": [],
+      "verified_context": {
+        "deadline_ns": 3968913492755767,
+        "job_id": "2050433",
+        "pids": [
+          2432590,
+          2432591
+        ],
+        "ready_token": "597df62241d3a97a6a0a8936fde847ea",
+        "run_id": "crash",
+        "supervisor_begin_ns": 3968883492839668,
+        "worker_event_ns": {
+          "0": {
+            "after_framework": 3968900963406647,
+            "both_ready": 3968900996646113,
+            "init_process_group_begin": 3968901006307036,
+            "preparation_complete": 3968900965000189,
+            "ready_published": 3968900989978683
+          },
+          "1": {
+            "after_framework": 3968892706305225,
+            "both_ready": 3968901009877111,
+            "init_process_group_begin": 3968901017939352,
+            "preparation_complete": 3968892707311576,
+            "ready_published": 3968892718369002
+          }
+        }
+      }
+    },
+    "normal": {
+      "complete": true,
+      "files": {
+        "participants.json": {
+          "bytes": 154,
+          "mtime_ns": 1793947488219444000,
+          "sha256": "a2076103b66d35779e198be64955efb9549002cfc41920f58fbc8c97031de588"
+        },
+        "ready_rank0.json": {
+          "bytes": 120,
+          "mtime_ns": 1793947505605970000,
+          "sha256": "b37734194077f40452bc79a3c0bb72da857ca3f4a1487b8716b86075375d927c"
+        },
+        "ready_rank1.json": {
+          "bytes": 120,
+          "mtime_ns": 1793947496796052000,
+          "sha256": "81101e2dc551ca3122ccb37b3452d94225442c0599b6036584707b5efda24812"
+        }
+      },
+      "issues": [],
+      "temporary_files": [],
+      "verified_context": {
+        "deadline_ns": 3968893229029655,
+        "job_id": "2050433",
+        "pids": [
+          2430758,
+          2430759
+        ],
+        "ready_token": "286d026e5f205849791d16e33ac5e4f6",
+        "run_id": "normal",
+        "supervisor_begin_ns": 3968863229122345,
+        "worker_event_ns": {
+          "0": {
+            "after_framework": 3968880704041287,
+            "both_ready": 3968880723912074,
+            "init_process_group_begin": 3968880732296865,
+            "preparation_complete": 3968880705541479,
+            "ready_published": 3968880717293965
+          },
+          "1": {
+            "after_framework": 3968871899345019,
+            "both_ready": 3968880758021590,
+            "init_process_group_begin": 3968880765484480,
+            "preparation_complete": 3968871900416220,
+            "ready_published": 3968871911217675
+          }
+        }
+      }
+    }
+  },
+  "complete": true,
+  "issues": [],
+  "not_run": [
+    "collective-timeout",
+    "watchdog"
+  ],
+  "scope": "archived readiness consistency only; no communication verdict or cross-rank publication-time inference",
+  "status": "CONSISTENT_AVAILABLE_READINESS_ONLY"
+}

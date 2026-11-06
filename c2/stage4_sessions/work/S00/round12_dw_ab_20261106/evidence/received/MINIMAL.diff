@@ -1,0 +1,384 @@
+--- R11/prepare.py
++++ R12/prepare.py
+@@ -7,10 +7,10 @@
+ import zipfile
+ 
+ BASE=Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
+-PREFIX='S02_GEMM5_'
+-DEPLOYMENT='S00_R11_GEMM5_DEPLOYMENT.zip'
++PREFIX='S02_DW_R12_'
++DEPLOYMENT='S00_R12_DW_AB_DEPLOYMENT.zip'
+ RESOURCES=dict(allocated_cores=38,actual_physical_cores=36,reserved_cores=2,memory_MB=24576,
+- memory_limit_MB=24576,exclusive=True,job_seconds=900,whole_entry_timeout=840,cleanup_seconds=30,closing_seconds=30,stop_new_update_after_seconds=720,HBM=0)
++ memory_limit_MB=24576,exclusive=True,job_seconds=900,whole_entry_timeout=840,cleanup_seconds=30,closing_seconds=30,stop_new_update_after_seconds=720,HBM=0,whole_chain_seconds=840)
+ 
+ 
+ def sha(path):
+@@ -38,7 +38,7 @@
+         if sha(root/name)!=digest:raise ValueError('deployment source drift: '+name)
+     for name,digest in json.loads((root/'pre_submit_checks.json').read_text())['payload_files'].items():
+         if sha(root/name)!=digest:raise ValueError('code source drift: '+name)
+-    for name,digest in [('ENGINEERING_DESCRIPTOR.json',pins['descriptor_sha256']),('INTERFACE.json',pins['interface_sha256']),
++    for name,digest in [('ENGINEERING_DESCRIPTOR.json',pins['descriptor_sha256']),('R12_CONTRACT.json',pins['contract_sha256']),
+                         (pins['code_archive'],pins['code_package_sha256'])]:
+         if sha(root/name)!=digest:raise ValueError('pinned input drift: '+name)
+     return pins
+--- R11/review_gate.py
++++ R12/review_gate.py
+@@ -3,19 +3,21 @@
+ from prepare import sha,pinned,RESOURCES,DEPLOYMENT
+ 
+ BINDING_KEYS=('code_package_sha256','code_source_manifest_sha256','deployment_package_sha256',
+-              'descriptor_sha256','interface_sha256','gemm_contract_sha256','reference_first5_sha256','deployment_source_manifest_sha256')
++              'descriptor_sha256','candidate_sha256','r12_contract_sha256','reference_first5_sha256','reference_epoch25_sha256','task_card_sha256','deployment_source_manifest_sha256')
+ 
+ 
+ def expected(root):
+     pins=pinned(root)
+     return dict(code_package_sha256=pins['code_package_sha256'],code_source_manifest_sha256=pins['code_source_manifest_sha256'],
+       deployment_package_sha256=sha(root/DEPLOYMENT),descriptor_sha256=sha(root/'ENGINEERING_DESCRIPTOR.json'),
+-      interface_sha256=sha(root/'INTERFACE.json'),gemm_contract_sha256=sha(root/'GEMM_CONTRACT.json'),
++      candidate_sha256=pins['candidate_sha256'],r12_contract_sha256=sha(root/'R12_CONTRACT.json'),reference_epoch25_sha256=sha(root/'REFERENCE_EPOCH25.json'),task_card_sha256=sha(root/'TASK_CARD.md'),
+       reference_first5_sha256=sha(root/'REFERENCE_FIRST5.json'),deployment_source_manifest_sha256=sha(root/'ARTIFACT_SHA256.json'))
+ 
+ 
++WORKLOAD=dict(strict_updates_each=5,perf_updates_each=25,max_full_encoder_updates=60,performance_pairs=1,warmup_updates=5,observed_updates=20,stage_order=['target','strict','perf_baseline','perf_candidate'])
++
+ def validate(review,bindings):
+-    if review.get('decision')!='PASS_FOR_ENGINEERING_GEMM5' or review.get('review_complete') is not True:
++    if review.get('decision')!='PASS_FOR_ENGINEERING_R12_AB' or review.get('review_complete') is not True:
+         raise ValueError('S01 explicit complete PASS required; fail/blocked is not approval')
+     if any(review.get('bindings',{}).get(k)!=bindings[k] for k in BINDING_KEYS):
+         raise ValueError('S01 concrete SHA bindings mismatch')
+@@ -23,6 +25,8 @@
+         raise ValueError('S01 resource/budget binding mismatch')
+ 
+ 
++    if any(review.get('workload',{}).get(k)!=v for k,v in WORKLOAD.items()):raise ValueError('S01 exact ordered workload binding mismatch')
++
+ def check_review(root,expected_review_sha=None):
+     path=root/'S01_REVIEW.json';digest=sha(path)
+     if expected_review_sha is not None and digest!=expected_review_sha:raise ValueError('S01 review itself changed')
+--- R11/run_job.py
++++ R12/run_job.py
+@@ -11,7 +11,7 @@
+ from prepare import check_root,save,sha,verify_prepared
+ from review_gate import check_review
+ from owned_processes import Owned,run_phase,cleanup
+-from gemm_outcome import inspect,SUCCESS
++from r12_outcome import inspect,SUCCESS
+ 
+ 
+ def interrupted(signum,frame):raise InterruptedError('outer signal '+str(signum))
+@@ -20,11 +20,12 @@
+ def main(root):
+     check_root(root);out=root/'job_evidence';out.mkdir(exist_ok=False)
+     owner=Owned(os.getpid());code=2
+-    summary=dict(status='FAIL_STOP_NO_RETRY',engineering_only=True,protocol='ENGINEERING_REAL_CORPUS_GEMM5_V1',
++    summary=dict(status='FAIL_STOP_NO_RETRY',engineering_only=True,protocol='ENGINEERING_DW_TILES_R12_AB_V1',
+         formal_split_status='UNKNOWN',validation_status='NOT_RUN_NO_FORMAL_SPLIT',subject_mapping_status='UNKNOWN',
+         job_id=os.environ.get('CCS_JOB_ID'),started=START,execution_seconds=840,cleanup_seconds=30,closing_seconds=30,job_seconds=900,attempts=1)
+     try:
+         if sys.platform!='linux' or not os.environ.get('CCS_JOB_ID'):raise ValueError('native Linux compute job required')
++        if sys.flags.optimize or os.environ.get('PYTHONOPTIMIZE'):raise ValueError('non-optimized Python assertions required')
+         libc=ctypes.CDLL(None,use_errno=True)
+         if libc.prctl(36,1,0,0,0)!=0:raise OSError(ctypes.get_errno(),'cannot own orphaned descendants')
+         for sig in (signal.SIGTERM,signal.SIGINT,signal.SIGALRM):signal.signal(sig,interrupted)
+@@ -32,22 +33,17 @@
+         check_review(root,os.environ['S00_REVIEW_SHA']);pins=verify_prepared(root)
+         run_phase(root,owner,'gate',['/usr/bin/python3','-B',str(root/'gate.py'),str(root),str(START+30)],START+30)
+         os.environ.update(S02_ENGINEERING_DESCRIPTOR=str(root/'ENGINEERING_DESCRIPTOR.json'),S02_ENGINEERING_DESCRIPTOR_SHA256=pins['descriptor_sha256'])
+-        record=run_phase(root,owner,'training',['/bin/bash',str(root/'payload'/pins['entrypoint'])],START+840,allowed=(0,2,3))
+-        result_paths=list((root/'payload/outputs').glob('gemm_*/result.json'))
+-        if len(result_paths)!=1:raise ValueError('one original GEMM5 result required')
+-        app=json.loads(result_paths[0].read_text());summary['application_result']=str(result_paths[0]);summary['application_status']=app.get('status')
+-        if app.get('protocol')!='ENGINEERING_REAL_CORPUS_GEMM5_V1' or app.get('engineering_only') is not True:raise ValueError('GEMM5 application scope drift')
+-        outcome=inspect(root,os.environ['CCS_JOB_ID']);summary['gemm_outcome']=outcome
++        record=run_phase(root,owner,'chain',['/bin/bash',str(root/'payload'/pins['entrypoint'])],START+840,allowed=(0,2,3,124,137,143))
++        outcome=inspect(root,os.environ['CCS_JOB_ID']);summary['r12_outcome']=outcome
+         code=record['returncode']
+         if code==0:
+-            if not outcome['gemm5_complete']:raise ValueError('GEMM5 evidence incomplete: '+repr(outcome))
++            if not outcome['complete']:raise ValueError('R12 chain evidence incomplete: '+repr(outcome))
+             summary['status']=SUCCESS
+         else:
+-            if app.get('status')==SUCCESS:raise ValueError('nonzero exit conflicts with application completion')
+-            summary['status']=app.get('status','FAIL_STOP_NO_RETRY')
++            summary['status']='INCOMPLETE_STOP_NO_RETRY' if code in (3,124,137,143) else 'FAIL_STOP_NO_RETRY'
+         verify_prepared(root)
+     except BaseException as exc:
+-        summary.update(status='FAIL_STOP_NO_RETRY',error=repr(exc),traceback=traceback.format_exc());code=2
++        summary.update(status='INCOMPLETE_STOP_NO_RETRY' if isinstance(exc,(TimeoutError,InterruptedError)) else 'FAIL_STOP_NO_RETRY',error=repr(exc),traceback=traceback.format_exc());code=3 if isinstance(exc,(TimeoutError,InterruptedError)) else 2
+     finally:
+         signal.setitimer(signal.ITIMER_REAL,0)
+         for sig in (signal.SIGTERM,signal.SIGINT):signal.signal(sig,signal.SIG_IGN)
+--- R11/collect_evidence.py
++++ R12/collect_evidence.py
+@@ -5,21 +5,20 @@
+ import sys
+ import zipfile
+ from prepare import check_root,sha,save,verify_prepared
+-from gemm_outcome import inspect
++from r12_outcome import inspect
+ 
+ 
+ def exposure(root):
+     job=(root/'job_id.txt').read_text().strip()
+-    path=root/'payload/outputs'/('gemm_'+job)/'EXPOSURE_LEDGER.json'
+-    if path.is_file():
+-        try:return dict(status='RAW_RUNTIME_LEDGER_PRESERVED',path=str(path),sha256=sha(path),raw=json.loads(path.read_text()))
+-        except ValueError as exc:return dict(status='INVALID_RAW_RUNTIME_LEDGER_PRESERVED',path=str(path),error=repr(exc),future_test_exclusion_review_required=True)
++    ledgers={}
++    for phase in ('strict','perf_baseline','perf_candidate'):
++        path=root/'payload/outputs'/(phase+'_'+job)/'EXPOSURE_LEDGER.json'
++        if path.is_file():
++            try:ledgers[phase]=dict(path=str(path),sha256=sha(path),raw=json.loads(path.read_text()))
++            except ValueError as exc:ledgers[phase]=dict(path=str(path),error=repr(exc),status='INVALID_RAW_PRESERVED')
+     initial=json.loads((root/'EXPOSURE_LEDGER_INITIAL.json').read_text())
+-    attempted=(root/'job_evidence/training.json').exists()
+-    return dict(status='RUNTIME_LEDGER_MISSING',training_entry_attempted=attempted,
+-        initial_selected_units=initial['units'],actual_optimizer_consumption='UNKNOWN' if attempted else 'NOT_STARTED',
+-        future_test_exclusion_review_required=attempted,
+-        note='Do not fabricate consumed units; conservatively review all reserved subjects if execution stage unknown')
++    return dict(status='RAW_PHASE_LEDGERS_OR_ABSENCE_PRESERVED',ledgers=ledgers,initial_selected_units=initial['units'],
++        future_test_exclusion_review_required=True,note='Target has no corpus use; missing phase ledger is not proof of no exposure if chain/phase start is ambiguous. Preserve each in_flight and confirmed record; do not fabricate consumption.')
+ 
+ 
+ def collect(root):
+@@ -44,20 +43,15 @@
+         metadata[name]=dict(path=str(p),bytes=after.st_size,mtime_ns=after.st_mtime_ns,sha256=digest,archive_payload=not omit)
+         if omit:remote_only.append(name)
+         else:archived.append(p)
+-    results=list((root/'payload/outputs').glob('gemm_*/result.json'))
+-    app=None
+-    if len(results)==1:
+-        try:app=json.loads(results[0].read_text())
+-        except ValueError:pass
++    outcome=inspect(root,job)
+     missing=[]
+-    if len(results)!=1:missing.append('exactly_one_application_result')
+-    for name in ('job.log','scheduler_allocation.json','job_evidence/cleanup.json','job_evidence/SUMMARY.json','payload/outputs/gemm_'+job+'/EXPOSURE_LEDGER.json'):
++    for name in ('job.log','scheduler_allocation.json','job_evidence/cleanup.json','job_evidence/SUMMARY.json'):
+         if not (root/name).is_file():missing.append(name)
+     index=root/'COLLECTION_S00.json'
+     save(index,dict(job_id=job,state=row['state'],job_exit_code=row.get('jobExitCode'),query_command=command,
+       scheduler_pids_cleared=all(n['pids']=='-' for g in row['resGroups'] for n in g['nodeResUsages']),
+       source_status=source_status,files=metadata,remote_only=remote_only,missing=missing,
+-      application_status=app.get('status') if app else None,gemm_outcome=inspect(root,job),exposure_reconciliation=recon,
++      application_status=outcome['phase_status'],r12_outcome=outcome,exposure_reconciliation=recon,
+       start_time=row.get('startTime'),end_time=row.get('endTime'),engineering_only=True,
+       formal_split_status='UNKNOWN',validation_status='NOT_RUN_NO_FORMAL_SPLIT',retries=0))
+     archived.append(index)
+--- /dev/null
++++ R12/r12_outcome.py
+@@ -0,0 +1,100 @@
++"""Read all four original phase results; never turn partial execution into A/B."""
++import hashlib
++import json
++import math
++
++PROTOCOL='ENGINEERING_DW_TILES_R12_AB_V1'
++TARGET_PROTOCOL='ENGINEERING_DW_TILES_R12_V1'
++TARGET_SUCCESS='PASS_ACTUAL_KML_TARGET_ONLY'
++STRICT_SUCCESS='PASS_STRICT_ENCODER5'
++PERF_SUCCESS='PERF25_EXPLORATORY_NOT_SPEEDUP_ACCEPTANCE'
++SUCCESS='R12_COMPLETE_EXPLORATORY_NOT_SPEEDUP_ACCEPTANCE'
++IMPORTS=dict(baseline='e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26',candidate='8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea')
++ORDER=('target','strict','perf_baseline','perf_candidate')
++STATUSES=(TARGET_SUCCESS,STRICT_SUCCESS,PERF_SUCCESS,PERF_SUCCESS)
++
++def require(ok,message):
++    if not ok:raise ValueError(message)
++
++def validate(phases):
++    result=dict(complete=False,full_model_updates=0,failure_stage=None,missing=[s for s in ORDER if s not in phases],phase_status={s:p.get('status') for s,p in phases.items()},errors=[])
++    try:
++        for i,name in enumerate(ORDER):
++            app=phases.get(name)
++            if app is None or app.get('status')!=STATUSES[i]:
++                result['failure_stage']=name
++                require(not any(s in phases for s in ORDER[i+1:]),'later phase exists after missing/failed '+name)
++                return result
++            target=phases['target']
++            require(app['protocol']==(TARGET_PROTOCOL if name=='target' else PROTOCOL),'phase protocol mismatch')
++            require(all(app[k]==target[k] for k in ('source_manifest_sha256','host','job_id')),'source/host/job mismatch')
++            cpu=app['cpu36'];require(cpu['errors']==[] and len(cpu['receipt']['selected'])==36 and cpu['receipt']['selected']==target['cpu36']['receipt']['selected'],'actual selected36 differs')
++            runtime=app['runtime'];require(runtime['backend']=='kml' and runtime['libraries']==runtime['libraries_after']==target['runtime']['libraries'],'KML/library identity mismatch')
++            require(all(runtime.get(k)==target['runtime'].get(k) for k in ('torch','torch_file','numpy','numpy_file','env')),'framework/environment drift')
++            require(all(app['imports'][r]['sha256']==h for r,h in IMPORTS.items()),'actual baseline/candidate import identity mismatch')
++            require(app.get('metrics') and all(m.get('passed') is True for m in app['metrics']),'original comparison failed/missing')
++            if name=='target':
++                for role,count,full,tiles in [('baseline',1,1,0),('candidate',2,0,2)]:
++                    native=app['native'][role]
++                    require((native['native_calls'],native['target_full'],native['target_tiles'])==(count,full,tiles) and native['original_type']=='_FuncPtr','actual target native ABI counts missing')
++                continue
++            strict=name=='strict';count=5 if strict else 25;roles=['baseline','candidate'] if strict else [name[5:]]
++            require(app['engineering_only'] is True and app['phase']==('strict' if strict else 'perf') and app['variant']==(None if strict else roles[0]),'phase/variant mismatch')
++            require(app['completed_updates']==app['planned_updates']==count and app['consumed_frames']==count*64,'required update count/frames incomplete')
++            require(app['descriptor_sha256']==phases['strict']['descriptor_sha256'] and app['normalization']==phases['strict']['normalization'],'descriptor/scale mismatch')
++            steps=app['steps'];require(len(steps)==count*len(roles)==app['optimizer_updates_total'],'step record count mismatch')
++            for role in roles:
++                require(app['initialization'][role]==phases['strict']['initialization']['baseline'],'same full model initialization required')
++            for step in range(1,count+1):
++                rows=steps[(step-1)*len(roles):step*len(roles)]
++                for role,row in zip(roles,rows):
++                    require(row['role']==role and row['step']==row['adamw_step']==step and row['batch_size']==64,'step/role/AdamW continuity mismatch')
++                    require(len(row['frame_indices'])==len(row['frame_ids'])==64 and all(math.isfinite(v) for v in row['losses'].values()),'batch/nonfinite loss')
++                    require(row['sampled']==(not strict and step>=6),'warmup/observe phase mismatch')
++                    expected=(149,149,12,12,0,0) if role=='baseline' else (149,161,12,0,24,12)
++                    require(tuple(row[k] for k in ('kml_calls','native_sgemm_calls','target_logical_gemm','target_native_full','target_native_tiles','dispatch_hits'))==expected,'logical/native/target/dispatch counts differ')
++                    if strict:
++                        ref=rows[0]
++                    else:
++                        ref=phases['perf_baseline']['steps'][step-1]
++                    require(all(row[k]==ref[k] for k in ('frame_indices','frame_ids','mask_sha256')),'paired frame/mask mismatch')
++                if not strict and step<=5:
++                    ref=phases['strict']['steps'][(step-1)*2]
++                    require(all(rows[0][k]==ref[k] for k in ('frame_indices','frame_ids','mask_sha256')),'strict/performance first5 identity mismatch')
++            for role in roles:
++                indices=[n for row in steps if row['role']==role for n in row['frame_indices']]
++                require(len(indices)==len(set(indices))==count*64,'padding/repeated frame indices')
++            if not strict:
++                recovery=app['recovery'];require(recovery['status']=='PASS_NO_EXTRA_UPDATE' and recovery['extra_updates']==0,'zero-update restore missing')
++                require(all(recovery.get(k) is True for k in ('parameters_exact','optimizer_exact','rng_exact','cursor_exact','identity_exact')) and app['checkpoint']['sha256'],'restore state/checkpoint missing')
++            result['full_model_updates']+=len(steps)
++        require(result['full_model_updates']==60,'maximum/exact complete chain60 updates required')
++        result['complete']=True
++    except (ValueError,KeyError,TypeError) as exc:result['errors'].append(repr(exc))
++    return result
++
++def inspect(root,job):
++    paths=dict(target=root/'payload/outputs'/('target_'+str(job))/'screen_result.json')
++    for phase in ORDER[1:]:paths[phase]=root/'payload/outputs'/(phase+'_'+str(job))/'result.json'
++    phases={};errors=[]
++    for name,path in paths.items():
++        if path.is_file():
++            try:phases[name]=json.loads(path.read_text(encoding='utf-8'))
++            except (OSError,ValueError) as exc:errors.append(name+': '+repr(exc))
++    result=validate(phases)
++    try:
++        for name,app in phases.items():
++            if name=='target':continue
++            steps=paths[name].parent/'steps.jsonl'
++            if app.get('status') in (STRICT_SUCCESS,PERF_SUCCESS):
++                require([json.loads(line) for line in steps.read_text(encoding='utf-8').splitlines()]==app['steps'],'result/step log mismatch '+name)
++                ledger=json.loads((paths[name].parent/'EXPOSURE_LEDGER.json').read_text(encoding='utf-8'))
++                count=5 if name=='strict' else 25
++                require(ledger['in_flight'] is None and len(ledger['confirmed_updates'])==count,'incomplete exposure ledger '+name)
++                if name=='strict':require(app['target_screen_sha256']==hashlib.sha256(paths['target'].read_bytes()).hexdigest(),'target receipt SHA mismatch')
++                else:
++                    argv=app['argv'];require(argv[argv.index('--strict-receipt-sha256')+1]==hashlib.sha256(paths['strict'].read_bytes()).hexdigest(),'strict receipt SHA mismatch')
++    except (OSError,ValueError,KeyError,TypeError) as exc:errors.append(repr(exc))
++    result['errors'].extend(errors)
++    if errors:result['complete']=False
++    return result
+--- /dev/null
++++ R12/inspect_metadata.py
+@@ -0,0 +1,14 @@
++"""Login-only original descriptor/hash gate; no framework or NPZ array imports."""
++import argparse
++import json
++from pathlib import Path
++import sys
++sys.path.insert(0,str(Path(__file__).resolve().parent/'payload'))
++from data_gate import engineering_data as data
++p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);args=p.parse_args()
++if args.output.exists():p.error('refuse overwriting metadata evidence')
++root=Path(__file__).resolve().parent
++descriptor=root/'ENGINEERING_DESCRIPTOR.json'
++metadata=data.load_descriptor(descriptor,'b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6')
++result=dict(status='ENGINEERING_METADATA_HASH_GATE_PASS',identity=metadata['identity'],npz_arrays_read=False,framework_imported=False)
++args.output.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8');print(result['status'])
+--- /dev/null
++++ R12/check_old_inputs.py
+@@ -0,0 +1,23 @@
++"""Read-only old artifacts: bounded byte/SHA check, receipts only in this new root."""
++import argparse
++import json
++from pathlib import Path
++import signal
++from prepare import sha,save
++p=argparse.ArgumentParser();p.add_argument('--phase',choices=['BEFORE','AFTER'],required=True);args=p.parse_args()
++root=Path(__file__).resolve().parent
++out=root/('OLD_INPUTS_'+args.phase+'.json')
++if out.exists():raise FileExistsError('preserve original check receipt')
++def timeout(*_):raise TimeoutError('old artifact SHA check50s exceeded')
++signal.signal(signal.SIGALRM,timeout);signal.alarm(50)
++records=[]
++try:
++    for asset in json.loads((root/'OLD_INPUT_IDENTITIES.json').read_text(encoding='utf-8')):
++        path=Path(asset['path']);before=path.stat();digest=sha(path);after=path.stat()
++        if before.st_size!=after.st_size or before.st_mtime_ns!=after.st_mtime_ns or digest!=asset['sha256']:
++            raise ValueError('OLD_SOURCE_CHANGED: '+str(path))
++        records.append(dict(path=str(path),bytes=after.st_size,mtime_ns=after.st_mtime_ns,sha256=digest))
++    save(out,dict(status='OLD_INPUT_IDENTITIES_PASS',phase=args.phase,checked=records))
++except BaseException as exc:
++    save(out,dict(status='OLD_INPUT_CHECK_FAILED',phase=args.phase,checked=records,error=repr(exc)));raise
++print('OLD_INPUT_IDENTITIES_PASS',args.phase,len(records),flush=True)
+--- /dev/null
++++ R12/tests/test_r12_deployment.py
+@@ -0,0 +1,64 @@
++"""LOCAL_FIXTURE only: chain completeness/fail-stop and exact release binding."""
++import copy
++from pathlib import Path
++import sys
++import unittest
++sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
++import r12_outcome as outcome
++import review_gate
++from prepare import RESOURCES
++
++class ChainTests(unittest.TestCase):
++    def fixture(self):
++        common=dict(source_manifest_sha256='a'*64,host='fixture',job_id='42',cpu36=dict(receipt=dict(selected=list(range(36))),errors=[]),runtime=dict(backend='kml',libraries=[dict(path='KML',sha256='b'*64)],libraries_after=[dict(path='KML',sha256='b'*64)]),imports={r:dict(sha256=s) for r,s in outcome.IMPORTS.items()})
++        target=dict(copy.deepcopy(common),protocol=outcome.TARGET_PROTOCOL,phase='target_screen',status=outcome.TARGET_SUCCESS,metrics=[dict(name='actual_KML_target.output',passed=True)],native=dict(baseline=dict(native_calls=1,target_full=1,target_tiles=0,original_type='_FuncPtr'),candidate=dict(native_calls=2,target_full=0,target_tiles=2,original_type='_FuncPtr')))
++        phases={'target':target}
++        for phase in ('strict','perf_baseline','perf_candidate'):
++            strict=phase=='strict';count=5 if strict else 25;roles=['baseline','candidate'] if strict else [phase[5:]]
++            steps=[]
++            for i in range(1,count+1):
++                for role in roles:
++                    steps.append(dict(role=role,step=i,adamw_step=i,batch_size=64,frame_indices=list(range((i-1)*64,i*64)),frame_ids=[str(n) for n in range((i-1)*64,i*64)],mask_sha256=str(i),sampled=not strict and i>=6,losses=dict(total=1.,voltage=.8,coarse=.2),kml_calls=149,native_sgemm_calls=149 if role=='baseline' else 161,target_logical_gemm=12,target_native_full=12 if role=='baseline' else 0,target_native_tiles=0 if role=='baseline' else 24,dispatch_hits=0 if role=='baseline' else 12))
++            phases[phase]=dict(copy.deepcopy(common),protocol=outcome.PROTOCOL,phase='strict' if strict else 'perf',variant=None if strict else phase[5:],engineering_only=True,status=outcome.STRICT_SUCCESS if strict else outcome.PERF_SUCCESS,descriptor_sha256='c'*64,planned_updates=count,completed_updates=count,consumed_frames=count*64,optimizer_updates_total=len(steps),steps=steps,metrics=[dict(name='fixture_numeric',passed=True)],initialization={r:dict(initial_weights_sha256='d'*64,parameters=37995777,train_seed=0) for r in roles},normalization=dict(scope='train'),recovery=dict(status='PASS_NO_EXTRA_UPDATE',extra_updates=0,parameters_exact=True,optimizer_exact=True,rng_exact=True,cursor_exact=True,identity_exact=True),checkpoint=dict(sha256='e'*64))
++        return phases
++
++    def test_complete_exact60_updates_and_original_native_counts(self):
++        result=outcome.validate(self.fixture());self.assertTrue(result['complete']);self.assertEqual(result['full_model_updates'],60)
++
++    def test_target_fail_preserved_no_later_stage(self):
++        p=self.fixture();p['target']['status']='FAIL_CLOSE_FIXED_CANDIDATE';p={k:v for k,v in p.items() if k=='target'}
++        result=outcome.validate(p);self.assertFalse(result['complete']);self.assertEqual(result['failure_stage'],'target');self.assertFalse(result['errors'])
++
++    def test_later_execution_after_gate_failure_rejected(self):
++        p=self.fixture();p['strict']['status']='FAIL_STOP_NO_RETRY';self.assertTrue(outcome.validate(p)['errors'])
++
++    def test_missing_phase_or_shortened25_never_complete(self):
++        p=self.fixture();del p['perf_candidate'];self.assertFalse(outcome.validate(p)['complete'])
++        p=self.fixture();p['perf_baseline']['completed_updates']=5;self.assertFalse(outcome.validate(p)['complete'])
++
++    def test_candidate_native161_and_dispatch24_required(self):
++        for field,bad in [('native_sgemm_calls',149),('target_native_tiles',12),('dispatch_hits',0)]:
++            p=self.fixture();p['perf_candidate']['steps'][0][field]=bad;self.assertFalse(outcome.validate(p)['complete'])
++
++    def test_job_cpu_source_library_import_mismatch(self):
++        for change in [lambda p:p['strict'].update(job_id='43'),lambda p:p['perf_candidate']['cpu36']['receipt'].update(selected=list(range(38))),lambda p:p['perf_baseline'].update(source_manifest_sha256='f'*64),lambda p:p['strict']['runtime'].update(libraries_after=[]),lambda p:p['perf_candidate']['imports']['candidate'].update(sha256=outcome.IMPORTS['baseline'])]:
++            p=self.fixture();change(p);self.assertFalse(outcome.validate(p)['complete'])
++
++    def test_original_numeric_failure_or_restore_failure_blocks_completion(self):
++        p=self.fixture();p['strict']['metrics'][0]['passed']=False;self.assertFalse(outcome.validate(p)['complete'])
++        p=self.fixture();p['perf_candidate']['recovery']['extra_updates']=1;self.assertFalse(outcome.validate(p)['complete'])
++
++    def test_frame_mask_init_pair_identity_required(self):
++        for change in [lambda p:p['perf_candidate']['steps'][0]['frame_indices'].reverse(),lambda p:p['perf_candidate']['steps'][0].update(mask_sha256='wrong'),lambda p:p['perf_candidate']['initialization']['candidate'].update(initial_weights_sha256='wrong')]:
++            p=self.fixture();change(p);self.assertFalse(outcome.validate(p)['complete'])
++
++    def test_new_review_all_sha_and_workload_bindings_required(self):
++        bindings={k:'a'*64 for k in review_gate.BINDING_KEYS};r=dict(decision='PASS_FOR_ENGINEERING_R12_AB',review_complete=True,bindings=bindings,resources=RESOURCES,workload=review_gate.WORKLOAD)
++        review_gate.validate(r,bindings)
++        for key in review_gate.BINDING_KEYS:
++            bad=dict(bindings);bad[key]='b'*64
++            with self.assertRaises(ValueError):review_gate.validate(r,bad)
++        r['workload']=dict(review_gate.WORKLOAD,max_full_encoder_updates=61)
++        with self.assertRaises(ValueError):review_gate.validate(r,bindings)
++
++if __name__=='__main__':unittest.main(verbosity=2)

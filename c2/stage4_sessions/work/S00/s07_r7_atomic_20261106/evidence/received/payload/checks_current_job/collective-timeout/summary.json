@@ -1,0 +1,20 @@
+{
+  "status": "FAIL",
+  "communication": "NOT_PASSED",
+  "case": "collective-timeout",
+  "supervisor": {
+    "reason": "child_failed",
+    "errors": [],
+    "pids": [
+      2879442,
+      2879445
+    ],
+    "exit_codes": [
+      1,
+      -15
+    ],
+    "all_reaped": true,
+    "wall_seconds": 25.15577024174854
+  },
+  "error": "ValueError: workers did not complete normally"
+}

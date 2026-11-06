@@ -1,0 +1,433 @@
+{
+  "R12": "CLOSED_NO_TRAINING_GAIN_KEEP_ORIGINAL_FP32_BASELINE",
+  "active_s00_job": null,
+  "all_formal_reports_valid": true,
+  "all_owned_processes_reaped": true,
+  "analysis_inputs": {
+    "case_subdirs": {
+      "collective-timeout": "collective-timeout",
+      "crash": "crash",
+      "normal": "normal",
+      "watchdog": "watchdog"
+    },
+    "evidence_dir": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job",
+    "not_run_cases": []
+  },
+  "archive": {
+    "bytes": 390914,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\JOB_2051116_full_evidence.zip",
+    "sha256": "fc4ebaa826668fe3f72186e2bdf9b67e0998db52f7c86502bce6cbe0dde38b4b"
+  },
+  "atomic_residual_count": 0,
+  "audit": {
+    "bytes": 33193,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\RUN_AUDIT.json",
+    "sha256": "44f388d613d9ad486b99662beb7faf5ea78189ccc8357993d5f19b9d883d773a"
+  },
+  "bounded_diagnostic_attempt_completed": true,
+  "case_order": [
+    "normal",
+    "crash",
+    "collective-timeout",
+    "watchdog"
+  ],
+  "case_results": {
+    "collective-timeout": {
+      "accepted_by_original_reader": true,
+      "atomic_residuals": [],
+      "events": [
+        {
+          "bytes": 6149,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\collective-timeout\\rank0.events.jsonl",
+          "sha256": "ee06a2a23c62933deddb5f6e0d19aeaecd566ce59b1c350aeaebcda6aaff696d"
+        },
+        {
+          "bytes": 5876,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\collective-timeout\\rank1.events.jsonl",
+          "sha256": "fd79506151cc24840b8d209b7f38bb6ebad9d19b56df1cb08b5e463789f15f97"
+        },
+        {
+          "bytes": 1421,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\collective-timeout\\supervisor.events.jsonl",
+          "sha256": "a30449353f097850b44335a067566f5dcb51e79fef3dc248d8cfad472e0b0214"
+        }
+      ],
+      "manifest": {
+        "bytes": 8974,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\collective-timeout\\manifest.json",
+        "sha256": "daaee96ba80e9805c30b4cf3231129fd8cc916ac65a1395ef8c401338888b7a5"
+      },
+      "participants": {
+        "bytes": 166,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\collective-timeout\\participants.json",
+        "sha256": "5a050f20b450e1d29913d64ba5411b7d51f139765272eee217d010ce60b565de"
+      },
+      "probe_exit": 1,
+      "rank_reports": [
+        {
+          "bytes": 10619,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\collective-timeout\\rank0.json",
+          "sha256": "04d16c57c07a986f46dfb099f1099f24c66d1c8b7b48d28f506d2d00c46a96fc"
+        },
+        {
+          "bytes": 10555,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\collective-timeout\\rank1.json",
+          "sha256": "71c42d6d0f8b5994c0236af411b3ceeceb5e7494d2765acc2106809c8a5f7ed0"
+        }
+      ],
+      "ready": [
+        {
+          "bytes": 132,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\collective-timeout\\ready_rank0.json",
+          "sha256": "13172fa48ff41a2a2b39c3799692ecf046609b0676f3728d5602c3a53225af1b"
+        },
+        {
+          "bytes": 132,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\collective-timeout\\ready_rank1.json",
+          "sha256": "6cb4ede3426d81542dd3fa4f012cefec52fa3c618ff73fbcaa7d5e62382c6d4e"
+        }
+      ],
+      "summary": {
+        "bytes": 377,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\collective-timeout\\summary.json",
+        "sha256": "c6fdc44be35479cfbc23b7ff54d17e4a528bb8764ebeb6ef3db4aef714efe64e"
+      }
+    },
+    "crash": {
+      "accepted_by_original_reader": true,
+      "atomic_residuals": [],
+      "events": [
+        {
+          "bytes": 6099,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\rank0.events.jsonl",
+          "sha256": "a04932eab85d4cf793f5795b4292cb520717cdb14218d6725e1d68e52404bc72"
+        },
+        {
+          "bytes": 5839,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\rank1.events.jsonl",
+          "sha256": "0bb1d01e6148925ac1ccf4a24d0c5af799b67bf4457ac1b2daabe24a5e129682"
+        },
+        {
+          "bytes": 1424,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\supervisor.events.jsonl",
+          "sha256": "c4a7f646ea5d34ac308b9065b1e6d38f9fd369fe7d4f198307cb22b3c42a5046"
+        }
+      ],
+      "manifest": {
+        "bytes": 8948,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\manifest.json",
+        "sha256": "3a8c8ffb4af14634cb09a8a70d8960acc5926b0937b182e8b5543f8d96873efb"
+      },
+      "participants": {
+        "bytes": 153,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\participants.json",
+        "sha256": "2d0c8baa76ec837e527e32283a8eb1c7d76d8e5ec339d571c76cf349ded2febc"
+      },
+      "probe_exit": 1,
+      "rank_reports": [
+        {
+          "bytes": 10595,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\rank0.json",
+          "sha256": "887e4b2d8707e2ae382f23d6af9e590fa79de6b192b5a69fd5b7cc0d08f66ab6"
+        },
+        {
+          "bytes": 10544,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\rank1.json",
+          "sha256": "6eddcbfeeeb39315ed1e0a454d21b8ca4059a9211b7f6de8566ad5bc396e4432"
+        }
+      ],
+      "ready": [
+        {
+          "bytes": 119,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\ready_rank0.json",
+          "sha256": "8cb73b4d5f7acc035bca18d264064ed7b721b59d5438648ca703e75e4c90d46e"
+        },
+        {
+          "bytes": 119,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\ready_rank1.json",
+          "sha256": "d177666ac7bb4e5f76afdaf12bc88b105adea4a115d41e35e6f48cead8b35053"
+        }
+      ],
+      "summary": {
+        "bytes": 365,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\summary.json",
+        "sha256": "0dc4a245383ef6643676baa356347eafb50ee3e37646154f8ec97b6f866c37d1"
+      }
+    },
+    "normal": {
+      "accepted_by_original_reader": true,
+      "atomic_residuals": [],
+      "events": [
+        {
+          "bytes": 7059,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\rank0.events.jsonl",
+          "sha256": "a76541f614fb486da967a06b24c48a144670f6790ff0d628fd56ab27461dc231"
+        },
+        {
+          "bytes": 7059,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\rank1.events.jsonl",
+          "sha256": "54290bd1fe7deea001e20eb6db13d1ff70ca89d0b200809f9e3c10656699bacb"
+        },
+        {
+          "bytes": 1263,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\supervisor.events.jsonl",
+          "sha256": "e957bc366dcb668706db0bfec09bfb00790943fd52f0ee9128c86e96e841cc8b"
+        }
+      ],
+      "manifest": {
+        "bytes": 8950,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\manifest.json",
+        "sha256": "2b720aab35b4894249e68d83b96bc93b9d5b3ac88c57e4c6a140e581f5b34d6e"
+      },
+      "participants": {
+        "bytes": 154,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\participants.json",
+        "sha256": "80cf064b150e926873d3c5df8d503bbe23e95711ef497dea272024fa301a2eaa"
+      },
+      "probe_exit": 0,
+      "rank_reports": [
+        {
+          "bytes": 14241,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\rank0.json",
+          "sha256": "b165ae6c1b2afd9ec79dcb291fc1e4da342a0b55cbd914edc36fde8ff05e927a"
+        },
+        {
+          "bytes": 14348,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\rank1.json",
+          "sha256": "10d5d80c6a21d1355f9e01c5653edfda4dcb021fce0f01f1b2ff2cb915dde03f"
+        }
+      ],
+      "ready": [
+        {
+          "bytes": 120,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\ready_rank0.json",
+          "sha256": "5bc0a7a1874a553a4a37ea4bb1c575831d4fac7907b43871efc19d66231198a6"
+        },
+        {
+          "bytes": 120,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\ready_rank1.json",
+          "sha256": "f2f3af095ccf6c18f3c2e369ae85a092d910ba2150a60d31a539705e6351de9c"
+        }
+      ],
+      "summary": {
+        "bytes": 314,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\normal\\summary.json",
+        "sha256": "9645c8c9321d6dff7a0987100279af8d63918d5b7ae0766a33557ca2450aacaa"
+      }
+    },
+    "watchdog": {
+      "accepted_by_original_reader": true,
+      "atomic_residuals": [],
+      "events": [
+        {
+          "bytes": 6022,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\watchdog\\rank0.events.jsonl",
+          "sha256": "9dcd8e23af184d36027f39c8828becf443ef5d2523b75f660dafa56d4077bd61"
+        },
+        {
+          "bytes": 6022,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\watchdog\\rank1.events.jsonl",
+          "sha256": "a1674c714fccb532d9b4bd65e95ed5c4bd318ff88d6b4c086e3917601ca21e69"
+        },
+        {
+          "bytes": 1789,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\watchdog\\supervisor.events.jsonl",
+          "sha256": "9de06ee520c4eb77b9a04ac1b5ecb235cf4e3b691a3d124f577911ba69f73b16"
+        }
+      ],
+      "manifest": {
+        "bytes": 8954,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\watchdog\\manifest.json",
+        "sha256": "296c2a12ead220462ea03e315aa148854d5dfa7d47ac031d6829faf6d90f93fd"
+      },
+      "participants": {
+        "bytes": 156,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\watchdog\\participants.json",
+        "sha256": "9807e48148a45bef8d9953a536584fc3022c71640929a8c07b03ff9085f1b9a9"
+      },
+      "probe_exit": 124,
+      "rank_reports": [
+        {
+          "bytes": 14852,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\watchdog\\rank0.json",
+          "sha256": "ec2ed64287a7432be93480cc71bf16c07efef9e0bef74525f91e94601eeb73e0"
+        },
+        {
+          "bytes": 14966,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\watchdog\\rank1.json",
+          "sha256": "bba8d575cb20868ea125a6cad631a53c2d9ff9804c4bc5ed91f59048ee5c1131"
+        }
+      ],
+      "ready": [
+        {
+          "bytes": 122,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\watchdog\\ready_rank0.json",
+          "sha256": "c3d2b34434bbc87ef9b1df2702f35fae1f2f6266cb48b053fc7d4cf4d22ac6fa"
+        },
+        {
+          "bytes": 122,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\watchdog\\ready_rank1.json",
+          "sha256": "f51d411b0445c7de7aa0680bec21bfd34d189e79ce53493f603d3d8dcb8823ee"
+        }
+      ],
+      "summary": {
+        "bytes": 578,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\watchdog\\summary.json",
+        "sha256": "2ab7b79dc9fbe84b5b09f636b5a28be1b9a5ffad2443ab1a0e8d92e72b9b873e"
+      }
+    }
+  },
+  "cleanup": {
+    "bytes": 890,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\job_evidence\\cleanup.json",
+    "sha256": "40f64822a681898977fb8c0a3512336ee49c685a7646ecf5c5e701e68e395c06"
+  },
+  "communication_suite_passed": true,
+  "deployment_ready": {
+    "bytes": 9828,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\S00_DEPLOYMENT_READY.json",
+    "sha256": "bd5f6f657a997f94c5c0ebe867b668d82bac4d5502ad1bb305310259358f1830"
+  },
+  "evidence_directory": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received",
+  "evidence_index": {
+    "bytes": 112175,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\COLLECTION_S00.json",
+    "sha256": "e5df4ddffb5f378e10b2ab89d192b7e80f10fd36673d5e974aea0ba34a24ba45"
+  },
+  "formal_rank_reports": 8,
+  "formal_training": false,
+  "full_stack_capture_complete": false,
+  "host": "cn21348",
+  "immutable_after_publish": true,
+  "job_exit_code": 0,
+  "job_id": "2051116",
+  "limits": "One bounded four-case tensor probe, not synchronized model training, performance acceptance or proof of permanent initialization root-cause repair. Controlled Linux atomic tests passed; this real crash report committed its error record, not an observed pre-commit interruption.",
+  "linux_checks_passed": 88,
+  "linux_checks_skipped": 0,
+  "new_jobs": 1,
+  "next_action": "Coordinator/S07 read exact original case/report/timeline and separate observation review. No further job authorized in this round; no model training or root-cause/speedup conclusion.",
+  "node_seconds": 163,
+  "not_run": [],
+  "observation_review": {
+    "bytes": 6266,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\OBSERVATION_REVIEW.json",
+    "sha256": "27f4402b9d3de767f9deef92117b9bf5332f8f753eb6434f363fc84a46d7d2b7"
+  },
+  "observer_timer_cpu_snapshots": 4,
+  "old_protected_evidence_unchanged": true,
+  "original_checks": {
+    "bytes": 2653,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\payload\\checks_current_job\\checks.json",
+    "sha256": "345492b718c7557d30a7e2826071c3e48fec2911385dd7793639e503027e375e"
+  },
+  "outer_cleanup_signal_actions": [],
+  "owned_pid_count": 22,
+  "performance_acceptance": false,
+  "proc_fields_complete": false,
+  "proc_fields_errors": [
+    {
+      "error": "PermissionError(13, 'Permission denied')",
+      "field": "stack",
+      "pid": 2882120,
+      "rank": 0,
+      "status": "ERROR"
+    },
+    {
+      "error": "PermissionError(13, 'Permission denied')",
+      "field": "stack",
+      "pid": 2882122,
+      "rank": 1,
+      "status": "ERROR"
+    }
+  ],
+  "proc_fields_ok": 6,
+  "proc_fields_total": 8,
+  "proc_helper_cpu_snapshots": 2,
+  "proc_helper_reaped": true,
+  "protocol": "S07_R7_ATOMIC_REPORT_DIAGNOSTIC_V1",
+  "published_utc": "2026-11-06T08:06:29.543681+00:00",
+  "python_stack_capture_complete": false,
+  "python_stack_capture_status": "LEGALLY_CANCELLED_ON_INIT_END_NO_CAPTURE",
+  "rank_report_inventory": {
+    "bytes": 13590,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\RANK_REPORT_INVENTORY.json",
+    "sha256": "5d9af6e2028406312d16098cd6824955d0492e0f51eec3965c68c6b4905de477"
+  },
+  "raw_existing_files_collected_and_verified": true,
+  "readiness_inventory": {
+    "bytes": 6743,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\READINESS_INVENTORY.json",
+    "sha256": "b998ac9565cd6b4699ed3073f0c845f2f4e3f225791a1fb0aa413f2e5f0a0ab7"
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_cores_per_domain": 36,
+    "actual_physical_cores": 72,
+    "allocated_cores": 76,
+    "cleanup_seconds": 15,
+    "closing_seconds": 15,
+    "consumer_seconds": 270,
+    "domains": 2,
+    "exclusive": true,
+    "job_seconds": 300,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 4
+  },
+  "retries": 0,
+  "review": {
+    "bytes": 6487,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\S01_REVIEW.json",
+    "sha256": "8493beccf28ed9fe760ff2dd73a157147897aa551860c87aac476956e12b79bd"
+  },
+  "scheduler_pids_cleared": true,
+  "scheduler_state": "SUCCEEDED",
+  "scheduler_usage_seconds": 163,
+  "source_bindings": {
+    "atomic_tests_sha256": "9ab4e1b49ce3a2a93ca59614753ee70d6de71c0c6cbd831ca311a495dcdd0e7f",
+    "comm_probe_sha256": "42424581db02b15ee8af0c65f85553dff61767979d9644b40fe954f779434608",
+    "cpu_contract_sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+    "deployment_package_sha256": "963ad618d09c998764342f446207d07ee29fcb95818386503ffea6e232de42e4",
+    "deployment_source_manifest_sha256": "e7511b33e39f459bce6e0e56627bcce31d7db610a0f9ec00f0b4ab973915dd1e",
+    "inner_manifest_sha256": "f9441fe47988dbb8a47365f230f2f0eb54ed59779e43fbab0d68562a19855196",
+    "inner_package_sha256": "57a1f4c530ce2c9a5edcfe9cc9741129fb1ba4f90459fde459803103a362382d",
+    "interface_ready_sha256": "d0f0fc25e226066803f1290696436afbfebc3ba81e945fa567cc4e9f0c62cbba",
+    "observation_contract_sha256": "448cad1a857165c74d0cb241e32b18480d1495ec995704f9f6c5de2208712dde",
+    "observer_sha256": "5b3ad54e675a293e3eb51d292b149c6939bbdc52b68322f340eb76be3b02b875",
+    "reader_sha256": "7b7cc96edd9401981a61db5122bf785e3e2348a41cda5363ba5d2ea4b0217d07",
+    "task_card_sha256": "a2bdce7fad12bc8ef8e0de985c6a25dc3316bf63009568138d58c2100bccf28e"
+  },
+  "source_status": "UNCHANGED",
+  "stack_inventory": {
+    "bytes": 4991,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\STACK_INVENTORY.json",
+    "sha256": "54145375a34aee6382bca08f7d271b5e4b61fe8fb66369917ffb5bd810ba3599"
+  },
+  "status": "RUN_COMPLETE",
+  "trace_inventory": {
+    "bytes": 3703,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\received\\DIAGNOSTIC_INVENTORY.json",
+    "sha256": "c9f9fc04fb653883d63b5eae8a723563aa154b5f017f5a219dfb7caf974912d8"
+  },
+  "worker_cpu_snapshots": 48,
+  "workload": {
+    "atomic_report_tests": 17,
+    "case_deadline_seconds": 30,
+    "case_order": [
+      "normal",
+      "crash",
+      "collective-timeout",
+      "watchdog"
+    ],
+    "communication_criterion": "original candidate/run_checks.py check_case unchanged; watchdog requires both injected_hang",
+    "exit": false,
+    "linux_checks": 88,
+    "max_jobs": 1,
+    "pg_timeout_seconds": 5,
+    "proc_shared_window_seconds": 2,
+    "python_dump_before_deadline_seconds": 5,
+    "repeat": false,
+    "retry": false,
+    "skipped_checks": 0
+  }
+}

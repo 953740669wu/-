@@ -1,0 +1,185 @@
+{
+  "bounded_diagnostic_attempt_completed": true,
+  "communication_suite_passed": true,
+  "full_stack_capture_complete": false,
+  "helper": {
+    "helper_pid": 2882123,
+    "reaped": true,
+    "returncode": 0,
+    "sample_stop_ns": 3973122092789588,
+    "status": "EXITED",
+    "target_ns": 3973120092789588
+  },
+  "interpretation": "Both init_process_group calls returned; timers legally cancelled at init_end before original deadline-5 target, no Python traceback. Proc helper finished/reaped but kernel stack reads permission-denied. No fabricated stack or extra run.",
+  "proc_fields_complete": false,
+  "proc_fields_errors": [
+    {
+      "error": "PermissionError(13, 'Permission denied')",
+      "field": "stack",
+      "pid": 2882120,
+      "rank": 0,
+      "status": "ERROR"
+    },
+    {
+      "error": "PermissionError(13, 'Permission denied')",
+      "field": "stack",
+      "pid": 2882122,
+      "rank": 1,
+      "status": "ERROR"
+    }
+  ],
+  "proc_fields_ok": 6,
+  "proc_fields_total": 8,
+  "proc_shared_sample_seconds": 0.010804443,
+  "python_stack_capture_complete": false,
+  "python_stack_capture_status": "LEGALLY_CANCELLED_ON_INIT_END_NO_CAPTURE",
+  "python_stack_states": [
+    {
+      "armed_at_ns": 3973096070387529,
+      "cancel_reason": "init_end",
+      "cancelled_at_ns": 3973114174741302,
+      "installed_python": {
+        "files": [
+          {
+            "bytes": 213848,
+            "calls": [
+              {
+                "call": "_new_process_group_helper",
+                "function": "init_process_group",
+                "line": 1693
+              },
+              {
+                "call": "rendezvous",
+                "function": "init_process_group",
+                "line": 1707
+              },
+              {
+                "call": "next",
+                "function": "init_process_group",
+                "line": 1710
+              },
+              {
+                "call": "set_timeout",
+                "function": "init_process_group",
+                "line": 1711
+              },
+              {
+                "call": "_new_process_group_helper",
+                "function": "init_process_group",
+                "line": 1717
+              },
+              {
+                "call": "next",
+                "function": "_new_process_group_helper",
+                "line": 1905
+              },
+              {
+                "call": "ProcessGroupGloo",
+                "function": "_new_process_group_helper",
+                "line": 1942
+              }
+            ],
+            "module": "torch.distributed.distributed_c10d",
+            "mtime_ns": 1793581041638974651,
+            "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/distributed/distributed_c10d.py",
+            "sha256": "45d1858add83ba43b8bf19e36bb38b9e89ff73cfb39b8fa7a561fbcc8f818659"
+          },
+          {
+            "bytes": 10182,
+            "calls": [
+              {
+                "call": "FileStore",
+                "function": "_file_rendezvous_handler",
+                "line": 150
+              }
+            ],
+            "module": "torch.distributed.rendezvous",
+            "mtime_ns": 1793581041638974651,
+            "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/distributed/rendezvous.py",
+            "sha256": "01085cf0cfcc2ce925dec3cba3e6fd20b112b07090f94151cf3c761ce2bd27d0"
+          }
+        ],
+        "status": "RECORDED"
+      },
+      "python_stack_bytes": 0,
+      "rank": 0,
+      "seconds_before_target": 5.918048286,
+      "status": "CANCELLED_OR_DUMP_FINISHED",
+      "target_ns": 3973120092789588
+    },
+    {
+      "armed_at_ns": 3973096114123395,
+      "cancel_reason": "init_end",
+      "cancelled_at_ns": 3973114174170122,
+      "installed_python": {
+        "files": [
+          {
+            "bytes": 213848,
+            "calls": [
+              {
+                "call": "_new_process_group_helper",
+                "function": "init_process_group",
+                "line": 1693
+              },
+              {
+                "call": "rendezvous",
+                "function": "init_process_group",
+                "line": 1707
+              },
+              {
+                "call": "next",
+                "function": "init_process_group",
+                "line": 1710
+              },
+              {
+                "call": "set_timeout",
+                "function": "init_process_group",
+                "line": 1711
+              },
+              {
+                "call": "_new_process_group_helper",
+                "function": "init_process_group",
+                "line": 1717
+              },
+              {
+                "call": "next",
+                "function": "_new_process_group_helper",
+                "line": 1905
+              },
+              {
+                "call": "ProcessGroupGloo",
+                "function": "_new_process_group_helper",
+                "line": 1942
+              }
+            ],
+            "module": "torch.distributed.distributed_c10d",
+            "mtime_ns": 1793581041638974651,
+            "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/distributed/distributed_c10d.py",
+            "sha256": "45d1858add83ba43b8bf19e36bb38b9e89ff73cfb39b8fa7a561fbcc8f818659"
+          },
+          {
+            "bytes": 10182,
+            "calls": [
+              {
+                "call": "FileStore",
+                "function": "_file_rendezvous_handler",
+                "line": 150
+              }
+            ],
+            "module": "torch.distributed.rendezvous",
+            "mtime_ns": 1793581041638974651,
+            "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/distributed/rendezvous.py",
+            "sha256": "01085cf0cfcc2ce925dec3cba3e6fd20b112b07090f94151cf3c761ce2bd27d0"
+          }
+        ],
+        "status": "RECORDED"
+      },
+      "python_stack_bytes": 0,
+      "rank": 1,
+      "seconds_before_target": 5.918619466,
+      "status": "CANCELLED_OR_DUMP_FINISHED",
+      "target_ns": 3973120092789588
+    }
+  ],
+  "status": "BOUNDED_ATTEMPT_COMPLETE_CAPTURE_LIMITS_RECORDED"
+}

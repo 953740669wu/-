@@ -1,0 +1,134 @@
+
+{"end_time": "-", "exposure": {"confirmed_updates": 2, "in_flight": true, "unit_usage": {"s0285_p0_16_adjacent_c14": "CONSUMED_CONFIRMED", "s0285_p0_16_adjacent_c21": "CONSUMED_CONFIRMED", "s0285_p1_16_adjacent_c15": "CONSUMED_CONFIRMED", "s0285_p1_16_adjacent_c18": "CONSUMED_CONFIRMED", "s0285_p1_16_adjacent_c20": "CONSUMED_CONFIRMED", "s0285_p1_16_adjacent_c21": "CONSUMED_CONFIRMED", "s0285_p1_16_adjacent_c23": "CONSUMED_CONFIRMED", "s0285_p1_16_adjacent_c9": "CONSUMED_CONFIRMED", "s0593_p0_16_adjacent_c22": "CONSUMED_CONFIRMED", "s0593_p1_16_adjacent_c1": "CONSUMED_CONFIRMED", "s0593_p1_16_adjacent_c11": "CONSUMED_CONFIRMED", "s0593_p1_16_adjacent_c14": "CONSUMED_CONFIRMED", "s0593_p1_16_adjacent_c18": "CONSUMED_CONFIRMED", "s0593_p1_16_adjacent_c19": "CONSUMED_CONFIRMED", "s0593_p1_16_adjacent_c2": "CONSUMED_CONFIRMED", "s0593_p1_16_adjacent_c6": "CONSUMED_CONFIRMED"}}, "job_exit_code": null, "job_id": "2049454", "last_step": {"adamw_step": 2, "batch_size": 64, "cursor": 128, "kml_calls": 149, "losses": {"coarse": 7.970687389373779, "total": 403.96356201171875, "voltage": 395.9928894042969}, "step": 2, "step_seconds": 4.5844255750998855}, "query_returncode": 0, "query_stderr": "", "raw_scheduler": "{\"data\":{\"successData\":[{\"jobId\":\"2049454\",\"jobName\":\"default\",\"description\":\"\",\"priority\":1,\"exclusive\":true,\"interactionMode\":\"DEFAULT\",\"state\":\"RUNNING\",\"currentOperation\":\"EMPTY\",\"createTime\":\"2026-11-06T04:43:35Z\",\"startTime\":\"2026-11-06T04:43:39Z\",\"lastModifiedTime\":\"-\",\"endTime\":\"-\",\"queue\":\"q_hpcai\",\"account\":\"common\",\"reserveRes\":\"-\",\"backfillRes\":\"-\",\"backfilledRes\":\"-\",\"start
+[23;80HtTimeEstimated\":\"-\",\"jobType\":\"COSCHED\",\"mpiType\":\"DEFAULT\",\"assistJo
+[23;80Hob\":\"DEFAULT\",\"pmiType\":\"OTHER\",\"scheduledTime\":\"-\",\"jobWallClockLimi
+[23;80Hit\":900,\"retryPolicy\":{\"maxRetryCnt\":0,\"currentRetryTimes\":0},\"user\":\"d
+[23;80Hdengqingtian\",\"execPath\":\"/home/share/dengqingtian/opt/stage4_sessions/S00/S0
+[23;80H02_GEMM5_20261106T041202Z\",\"submitNode\":\"login03\",\"depInfo\":{\"depJobList\
+[23;80H\":[],\"children\":[]},\"traceMessages\":[\"2026-11-06T04:43:35Z   :    [JOB_ADD]
+[23;80H] Job 2049454 is submitted by dengqingtian, job state is PENDING.\",\"2026-11-06T
+[23;80HT04:43:38Z   :    [JOB_START] Job 2049454 start message has been sent.\",\"2026-1
+[23;80H11-06T04:43:38Z   :    [JOB_START_ACK] Job 2049454 start message has been receive
+[23;80Hed by agent cn21338.\",\"2026-11-06T04:43:39Z   :    [JOB_EXECUTION] Job 2049454 
+[23;80H state is from PENDING to RUNNING, execution path: /home/share/dengqingtian/opt/s
+[23;80Hstage4_sessions/S00/S02_GEMM5_20261106T041202Z.\"],\"resGroups\":[{\"taskGroupNam
+[23;80Hme\":\"rg0\",\"minReplica\":1,\"replica\":1,\"preferNodes\":\"-\",\"nodeSelectPol
+[23;80HlicyReq\":\"-\",\"nodeSelectPolicyEff\":\"SEQUENCE\",\"affinityRequest\":[\"numa[
+[23;80H[count=1, distribution=pack]\"],\"taskLabels\":\"queue_q_hpcai aarch64\",\"resReq
+[23;80Hq\":{\"cpu\":38,\"mem\":24576,\"gpu\":{\"amount\":0,\"type\":\"gpu\"},\"npu\":{\"
+[23;80H"count\":0,\"name\":\"npu\"},\"license\":{}},\"resLimit\":{\"cpu\":0,\"mem\":2457
+[23;80H76,\"gpu\":{\"amount\":0,\"type\":\"gpu\"},\"npu\":{\"count\":0,\"name\":\"npu\"}
+[23;80H},\"license\":{}},\"resAlloc\":{\"cpu\":38,\"mem\":24576,\"gpu\":{\"amount\":0,\"
+[23;80H"type\":\"gpu\"},\"npu\":{\"count\":0,\"name\":\"npu\"},\"license\":{}},\"nodeRes
+[23;80HsUsages\":[{\"tPreCheckRunTime\":0,\"execNode\":\"cn21338\",\"resIndex\":\"0/1\",
+[23;80H,\"userCpuTime\":0,\"systemCpuTime\":0,\"memswMax\":0,\"memMax\":0,\"memAvg\":0,\
+[23;80H\"memReal\":0,\"rss\":0,\"cache\":0,\"preHookRunTime\":0,\"postHookRunTime\":0,\"
+[23;80H"hostPreHookRunTime\":0,\"hostPostHookRunTime\":0,\"swap\":0,\"swapMax\":0,\"wall
+[23;80HlclockDuration\":0,\"sstoppedTime\":0,\"cpuUtilAvg\":0,\"cpuUtilRecent\":0,\"gpuU
+[23;80HUtilAvg\":[],\"gpuUtilRecent\":[],\"npuUtilRecent\":[],\"pids\":\"1757738,1758047
+[23;80H7,1758053,1758054,1758130\",\"hwThreads\":\"0-37\",\"gpuIds\":\"-\",\"npuIds\":\"
+[23;80H"-\"}]}],\"adminPriority\":-1,\"taskExecNodes\":\"cn21338\",\"taskExecNodesCount\
+[23;80H\":1,\"totalResUsage\":{\"userCpuTimeTotal\":0,\"systemCpuTimeTotal\":0,\"memswMa
+[23;80HaxTotal\":0,\"memMaxTotal\":0,\"wallclockDurationTotal\":0,\"sstoppedTimeTotal\":
+[23;80H:0,\"preHookRunTime\":0,\"postHookRunTime\":0,\"hostPreHookRunTime\":0,\"hostPost
+[23;80HtHookRunTime\":0,\"coreHours\":0},\"jobResReq\":{\"license\":{}},\"jobResAlloc\":
+[23;80H:{\"license\":{}},\"transferInfo\":{\"transferType\":\"LOCAL\",\"forwardTime\":\"
+[23;80H"-\",\"recallTime\":\"-\"},\"logRedirectPath\":{\"stderrRedirectPath\":\"\",\"std
+[23;80HdoutRedirectPath\":\"/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_2
+[23;80H20261106T041202Z/job.log\",\"stderrRedirectType\":\"append\",\"stdoutRedirectType
+[23;80He\":\"override\"},\"cmd\":\"bash /home/share/dengqingtian/opt/stage4_sessions/S00
+[23;80H0/S02_GEMM5_20261106T041202Z/run_job.sh f75a7030f76613d1126960d2d27ace9b8e327d417
+[23;80H788a7a3301cd7105ea5723f1\",\"preHook\":{},\"postHook\":{},\"hostPreHook\":{},\"ho
+[23;80HostPostHook\":{},\"isX11ForwardEnabled\":false,\"logRedirectOutputPath\":{\"stder
+[23;80HrrRedirectOutputPath\":\"\",\"stdoutRedirectOutputPath\":\"/home/share/dengqingti
+[23;80Hian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z/job.log\"},\"isAutoResizab
+[23;80Hble\":false,\"resizeNotifyCmd\":\"\",\"hasResourceAffinityReq\":false}],\"errorDa
+[23;80Hata\":{}},\"message\":\"List job detail infos successfully.\",\"code\":\"success\
+[23;80H\",\"requestId\":\"req-2763a06a-8c42-4c78-9c5a-aadbda97f91a\",\"totalElements\":1
+[23;80H1,\"pageNumber\":1,\"pageSize\":1}\n\n", "start_time": "2026-11-06T04:43:39Z", "s
+[23;80Hstate": "RUNNING", "step_records": 2, "utc": "2026-11-06T04:44:27.863446+00:00"} [24;1H
+{"application": {"checkpoint": {"bytes": 456135071, "path": "/home/share/dengqin
+[23;80Hngtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z/payload/outputs/gemm_20
+[23;80H049454/checkpoints/final.pt", "sha256": "19f445a0104d0cd95610989421a1d37add3e8486
+[23;80H667cf81140aaf475af4ef6cc7"}, "completed_updates": 5, "consumed_frames": 320, "err
+[23;80Hror": null, "planned_updates": 5, "recovery": {"cursor_exact": true, "extra_updat
+[23;80Htes": 0, "forward_metrics": [{"l2_relative": 0.0, "max_abs": 0.0, "name": "restor
+[23;80Hre.h", "passed": true, "reference_norm": 2678.4932153407826}, {"l2_relative": 0.0
+[23;80H0, "max_abs": 0.0, "name": "restore.voltage", "passed": true, "reference_norm": 9
+[23;80H95.33803996838932}, {"l2_relative": 0.0, "max_abs": 0.0, "name": "restore.coarse"
+[23;80H", "passed": true, "reference_norm": 57.78741400894874}], "identity_exact": true,
+[23;80H, "optimizer_exact": true, "parameters_exact": true, "rng_exact": true, "status":
+[23;80H: "PASS_NO_EXTRA_UPDATE"}, "status": "GEMM5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+[23;80H, "stop_reason": "gemm_update_cap_5"}, "end_time": "2026-11-06T04:44:55Z", "expos
+[23;80Hsure": {"confirmed_updates": 5, "in_flight": false, "unit_usage": {"s0285_p0_16_a
+[23;80Hadjacent_c14": "CONSUMED_CONFIRMED", "s0285_p0_16_adjacent_c21": "CONSUMED_CONFIR
+[23;80HRMED", "s0285_p1_16_adjacent_c15": "CONSUMED_CONFIRMED", "s0285_p1_16_adjacent_c1
+[23;80H18": "CONSUMED_CONFIRMED", "s0285_p1_16_adjacent_c20": "CONSUMED_CONFIRMED", "s02
+[23;80H285_p1_16_adjacent_c21": "CONSUMED_CONFIRMED", "s0285_p1_16_adjacent_c23": "CONSU
+[23;80HUMED_CONFIRMED", "s0285_p1_16_adjacent_c9": "CONSUMED_CONFIRMED", "s0593_p0_16_ad
+[23;80Hdjacent_c22": "CONSUMED_CONFIRMED", "s0593_p1_16_adjacent_c1": "CONSUMED_CONFIRME
+[23;80HED", "s0593_p1_16_adjacent_c11": "CONSUMED_CONFIRMED", "s0593_p1_16_adjacent_c14"
+[23;80H": "CONSUMED_CONFIRMED", "s0593_p1_16_adjacent_c18": "CONSUMED_CONFIRMED", "s0593
+[23;80H3_p1_16_adjacent_c19": "CONSUMED_CONFIRMED", "s0593_p1_16_adjacent_c2": "CONSUMED
+[23;80HD_CONFIRMED", "s0593_p1_16_adjacent_c6": "CONSUMED_CONFIRMED"}}, "job_exit_code":
+[23;80H: 0, "job_id": "2049454", "last_step": {"adamw_step": 5, "batch_size": 64, "curso
+[23;80Hor": 320, "kml_calls": 149, "losses": {"coarse": 6.756547927856445, "total": 101.
+[23;80H.5914306640625, "voltage": 94.83488464355469}, "step": 5, "step_seconds": 4.56767
+[23;80H71652883291}, "query_returncode": 0, "query_stderr": "", "raw_scheduler": "{\"dat
+[23;80Hta\":{\"successData\":[{\"jobId\":\"2049454\",\"jobName\":\"default\",\"descripti
+[23;80Hion\":\"\",\"priority\":1,\"exclusive\":true,\"interactionMode\":\"DEFAULT\",\"st
+[23;80Htate\":\"SUCCEEDED\",\"currentOperation\":\"EMPTY\",\"createTime\":\"2026-11-06T0
+[23;80H04:43:35Z\",\"startTime\":\"2026-11-06T04:43:39Z\",\"lastModifiedTime\":\"-\",\"e
+[23;80HendTime\":\"2026-11-06T04:44:55Z\",\"queue\":\"q_hpcai\",\"account\":\"common\",\
+[23;80H\"reserveRes\":\"-\",\"backfillRes\":\"-\",\"backfilledRes\":\"-\",\"startTimeEst
+[23;80Htimated\":\"-\",\"jobType\":\"COSCHED\",\"mpiType\":\"DEFAULT\",\"assistJob\":\"D
+[23;80HDEFAULT\",\"pmiType\":\"OTHER\",\"scheduledTime\":\"-\",\"jobWallClockLimit\":900
+[23;80H0,\"retryPolicy\":{\"maxRetryCnt\":0,\"currentRetryTimes\":0},\"user\":\"dengqing
+[23;80Hgtian\",\"execPath\":\"/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5
+[23;80H5_20261106T041202Z\",\"submitNode\":\"login03\",\"depInfo\":{\"depJobList\":[],\"
+[23;80H"children\":[]},\"traceMessages\":[\"2026-11-06T04:43:35Z   :    [JOB_ADD] Job 20
+[23;80H049454 is submitted by dengqingtian, job state is PENDING.\",\"2026-11-06T04:43:3
+[23;80H38Z   :    [JOB_START] Job 2049454 start message has been sent.\",\"2026-11-06T04
+[23;80H4:43:38Z   :    [JOB_START_ACK] Job 2049454 start message has been received by ag
+[23;80Hgent cn21338.\",\"2026-11-06T04:43:39Z   :    [JOB_EXECUTION] Job 2049454 state i
+[23;80His from PENDING to RUNNING, execution path: /home/share/dengqingtian/opt/stage4_s
+[23;80Hsessions/S00/S02_GEMM5_20261106T041202Z.\",\"2026-11-06T04:44:55Z   :    [JOB_FIN
+[23;80HNISH] Job 2049454 state is from RUNNING to SUCCEEDED.\"],\"resGroups\":[{\"taskGr
+[23;80HroupName\":\"rg0\",\"minReplica\":1,\"replica\":1,\"preferNodes\":\"-\",\"nodeSel
+[23;80HlectPolicyReq\":\"-\",\"nodeSelectPolicyEff\":\"SEQUENCE\",\"affinityRequest\":[\
+[23;80H\"numa[count=1, distribution=pack]\"],\"taskLabels\":\"queue_q_hpcai aarch64\",\"
+[23;80H"resReq\":{\"cpu\":38,\"mem\":24576,\"gpu\":{\"amount\":0,\"type\":\"gpu\"},\"npu
+[23;80Hu\":{\"count\":0,\"name\":\"npu\"},\"license\":{}},\"resLimit\":{\"cpu\":0,\"mem\
+[23;80H\":24576,\"gpu\":{\"amount\":0,\"type\":\"gpu\"},\"npu\":{\"count\":0,\"name\":\"
+[23;80H"npu\"},\"license\":{}},\"resAlloc\":{\"cpu\":38,\"mem\":24576,\"gpu\":{\"amount\
+[23;80H\":0,\"type\":\"gpu\"},\"npu\":{\"count\":0,\"name\":\"npu\"},\"license\":{}},\"n
+[23;80HnodeResUsages\":[{\"tPreCheckRunTime\":0,\"execNode\":\"cn21338\",\"resIndex\":\"
+[23;80H"0/1\",\"userCpuTime\":904,\"systemCpuTime\":145,\"memswMax\":6675,\"memMax\":667
+[23;80H75,\"memAvg\":2258,\"memReal\":0,\"rss\":0,\"cache\":436,\"preHookRunTime\":0,\"p
+[23;80HpostHookRunTime\":0,\"hostPreHookRunTime\":0,\"hostPostHookRunTime\":0,\"swap\":0
+[23;80H0,\"swapMax\":0,\"wallclockDuration\":76,\"sstoppedTime\":0,\"cpuUtilAvg\":1375,\
+[23;80H\"cpuUtilRecent\":591,\"gpuUtilAvg\":[],\"gpuUtilRecent\":[],\"npuUtilRecent\":[]
+[23;80H],\"pids\":\"-\",\"hwThreads\":\"0-37\",\"gpuIds\":\"-\",\"npuIds\":\"-\"}]}],\"a
+[23;80HadminPriority\":-1,\"taskExecNodes\":\"cn21338\",\"taskExecNodesCount\":1,\"total
+[23;80HlResUsage\":{\"userCpuTimeTotal\":904,\"systemCpuTimeTotal\":145,\"memswMaxTotal\
+[23;80H\":0,\"memMaxTotal\":0,\"wallclockDurationTotal\":76,\"sstoppedTimeTotal\":0,\"pr
+[23;80HreHookRunTime\":0,\"postHookRunTime\":0,\"hostPreHookRunTime\":0,\"hostPostHookRu
+[23;80HunTime\":0,\"coreHours\":46208},\"jobResReq\":{\"license\":{}},\"jobResAlloc\":{\
+[23;80H\"license\":{}},\"transferInfo\":{\"transferType\":\"LOCAL\",\"forwardTime\":\"-\
+[23;80H\",\"recallTime\":\"-\"},\"logRedirectPath\":{\"stderrRedirectPath\":\"\",\"stdou
+[23;80HutRedirectPath\":\"/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_202
+[23;80H261106T041202Z/job.log\",\"stderrRedirectType\":\"append\",\"stdoutRedirectType\"
+[23;80H":\"override\"},\"cmd\":\"bash /home/share/dengqingtian/opt/stage4_sessions/S00/S
+[23;80HS02_GEMM5_20261106T041202Z/run_job.sh f75a7030f76613d1126960d2d27ace9b8e327d41788
+[23;80H8a7a3301cd7105ea5723f1\",\"preHook\":{},\"postHook\":{},\"hostPreHook\":{},\"host
+[23;80HtPostHook\":{},\"exitCode\":0,\"exitMessage\":\"Job execution succeeded\",\"jobEx
+[23;80HxitCode\":0,\"isX11ForwardEnabled\":false,\"logRedirectOutputPath\":{\"stderrRedi
+[23;80HirectOutputPath\":\"\",\"stdoutRedirectOutputPath\":\"/home/share/dengqingtian/op
+[23;80Hpt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z/job.log\"},\"isAutoResizable\":
+[23;80H:false,\"resizeNotifyCmd\":\"\",\"hasResourceAffinityReq\":false}],\"errorData\":
+[23;80H:{}},\"message\":\"List job detail infos successfully.\",\"code\":\"success\",\"r
+[23;80HrequestId\":\"req-b8413945-3e32-406d-8237-f63ea420d3a1\",\"totalElements\":1,\"pa
+[23;80HageNumber\":1,\"pageSize\":1}\n\n", "start_time": "2026-11-06T04:43:39Z", "state"
+[23;80H": "SUCCEEDED", "step_records": 5, "utc": "2026-11-06T04:44:57.914923+00:00"}    
+Connection to 10.44.9.4 closed.
+[?9001l[?1004l

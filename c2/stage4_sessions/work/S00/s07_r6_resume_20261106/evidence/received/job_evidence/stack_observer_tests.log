@@ -1,0 +1,32 @@
+test_absolute_target_and_no_rearm (__main__.StackObserverChecks) ... ok
+test_cancel_error_keeps_descriptor_open (__main__.StackObserverChecks) ... ok
+test_cancel_happens_before_file_close (__main__.StackObserverChecks) ... ok
+test_file_open_delay_can_miss_target (__main__.StackObserverChecks) ... ok
+test_helper_binding_never_expands_inherited_authority (__main__.StackObserverChecks) ... ok
+test_helper_clock_is_absolute_and_missed_not_restarted (__main__.StackObserverChecks) ... ok
+test_helper_log_close_error_does_not_escape (__main__.StackObserverChecks) ... ok
+test_installed_source_hashes_and_call_positions (__main__.StackObserverChecks) ... ok
+test_missed_target_is_not_reset (__main__.StackObserverChecks) ... ok
+test_missing_installed_source_is_recorded (__main__.StackObserverChecks) ... ok
+test_nonblocking_timeout_and_cancel_do_not_wait (__main__.StackObserverChecks) ... ok
+test_normal_worker_never_starts_stack_observers (__main__.StackObserverChecks) ... ok
+test_old_pid_and_wrong_parent_rejected (__main__.StackObserverChecks) ... ok
+test_only_watchdog (__main__.StackObserverChecks) ... ok
+test_parent_deadline_cleans_workers_without_helper_wait (__main__.StackObserverChecks) ... ok
+test_permission_and_empty_proc_fields_preserved (__main__.StackObserverChecks) ... ok
+test_proc_alarm_is_not_swallowed_as_permission_error (__main__.StackObserverChecks) ... ok
+test_proc_capture_uses_remaining_shared_budget (__main__.StackObserverChecks) ... ok
+test_proc_missed_before_arming_has_no_new_window (__main__.StackObserverChecks) ... ok
+test_proc_rejects_wrong_job_or_oversized_budget (__main__.StackObserverChecks) ... ok
+test_real_local_timer_dumps_once_and_keeps_file (__main__.StackObserverChecks) ... ok
+test_real_owned_helper_is_killed_and_reaped (__main__.StackObserverChecks) ... ok
+test_target_cpu_boundary_rejected (__main__.StackObserverChecks) ... ok
+test_timer_error_does_not_escape_cleanup (__main__.StackObserverChecks) ... ok
+test_watchdog_init_error_cancels_in_finally (__main__.StackObserverChecks) ... ok
+test_watchdog_init_return_cancels_before_next_stage (__main__.StackObserverChecks) ... ok
+test_wrong_job_or_cpu_never_arms (__main__.StackObserverChecks) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 1.882s
+
+OK

@@ -1,0 +1,37 @@
+{"event": "worker_ready", "time_ns": 1793951872816478882, "monotonic_ns": 3973070166892077, "pid": 2879442, "rank": 0, "job_id": "2051116", "run_id": "collective-timeout"}
+{"event": "checkpoint_begin", "time_ns": 1793951872820376006, "monotonic_ns": 3973070170789921, "pid": 2879442, "stage": "before_framework"}
+{"event": "checkpoint_end", "time_ns": 1793951872917475138, "monotonic_ns": 3973070267888833, "pid": 2879442, "stage": "before_framework"}
+{"event": "torch_import_begin", "time_ns": 1793951872919872804, "monotonic_ns": 3973070270286539, "pid": 2879442}
+{"event": "torch_import_end", "time_ns": 1793951888836823645, "monotonic_ns": 3973086187237260, "pid": 2879442}
+{"event": "distributed_import_begin", "time_ns": 1793951888839210560, "monotonic_ns": 3973086189624015, "pid": 2879442}
+{"event": "distributed_import_end", "time_ns": 1793951888840568956, "monotonic_ns": 3973086190982901, "pid": 2879442}
+{"event": "runtime_metadata_begin", "time_ns": 1793951888841836510, "monotonic_ns": 3973086192251665, "pid": 2879442}
+{"event": "library_sha_begin", "time_ns": 1793951888845357706, "monotonic_ns": 3973086195770831, "pid": 2879442, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so"}
+{"event": "library_sha_end", "time_ns": 1793951888860117766, "monotonic_ns": 3973086210531861, "pid": 2879442, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so"}
+{"event": "library_sha_begin", "time_ns": 1793951888861872209, "monotonic_ns": 3973086212286144, "pid": 2879442, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so"}
+{"event": "library_sha_end", "time_ns": 1793951888867427834, "monotonic_ns": 3973086217841829, "pid": 2879442, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so"}
+{"event": "library_sha_begin", "time_ns": 1793951888869341680, "monotonic_ns": 3973086219755205, "pid": 2879442, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so"}
+{"event": "library_sha_end", "time_ns": 1793951888871571972, "monotonic_ns": 3973086221985927, "pid": 2879442, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so"}
+{"event": "library_sha_begin", "time_ns": 1793951888873137562, "monotonic_ns": 3973086223551527, "pid": 2879442, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"}
+{"event": "library_sha_end", "time_ns": 1793951889707206417, "monotonic_ns": 3973087057621172, "pid": 2879442, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so"}
+{"event": "library_sha_begin", "time_ns": 1793951889709557342, "monotonic_ns": 3973087059970667, "pid": 2879442, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so"}
+{"event": "library_sha_end", "time_ns": 1793951889711540519, "monotonic_ns": 3973087061954024, "pid": 2879442, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so"}
+{"event": "library_sha_begin", "time_ns": 1793951889712924555, "monotonic_ns": 3973087063337220, "pid": 2879442, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so"}
+{"event": "library_sha_end", "time_ns": 1793951889817171267, "monotonic_ns": 3973087167585562, "pid": 2879442, "library": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so"}
+{"event": "runtime_metadata_end", "time_ns": 1793951889923209212, "monotonic_ns": 3973087273623097, "pid": 2879442}
+{"event": "checkpoint_begin", "time_ns": 1793951889945861761, "monotonic_ns": 3973087296275756, "pid": 2879442, "stage": "after_framework"}
+{"event": "checkpoint_end", "time_ns": 1793951889958783805, "monotonic_ns": 3973087309197650, "pid": 2879442, "stage": "after_framework"}
+{"event": "preparation_complete", "time_ns": 1793951889960304734, "monotonic_ns": 3973087310718239, "pid": 2879442, "rank": 0}
+{"event": "ready_context_wait", "time_ns": 1793951889961725041, "monotonic_ns": 3973087312138126, "pid": 2879442, "rank": 0}
+{"event": "ready_published", "time_ns": 1793951889973128486, "monotonic_ns": 3973087323542642, "pid": 2879442, "rank": 0, "job_id": "2051116", "run_id": "collective-timeout", "ready_token": "dae2e0c166a14f2e398fe59791b3c082"}
+{"event": "peer_ready_wait", "time_ns": 1793951889975095964, "monotonic_ns": 3973087325509789, "pid": 2879442, "rank": 0}
+{"event": "both_ready", "time_ns": 1793951889977833475, "monotonic_ns": 3973087328245560, "pid": 2879442, "rank": 0, "pids": [2879442, 2879445]}
+{"event": "checkpoint_begin", "time_ns": 1793951889978996837, "monotonic_ns": 3973087329410263, "pid": 2879442, "stage": "init_process_group"}
+{"event": "checkpoint_end", "time_ns": 1793951889996201223, "monotonic_ns": 3973087346615128, "pid": 2879442, "stage": "init_process_group"}
+{"event": "init_process_group_begin", "time_ns": 1793951889997816813, "monotonic_ns": 3973087348231118, "pid": 2879442, "pg_timeout_seconds": 5, "rank": 0, "world_size": 2, "backend": "gloo", "init_method": "file:///home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/collective-timeout/rendezvous"}
+{"event": "init_process_group_end", "time_ns": 1793951890843265431, "monotonic_ns": 3973088193679246, "pid": 2879442}
+{"event": "checkpoint_begin", "time_ns": 1793951890846199976, "monotonic_ns": 3973088196613151, "pid": 2879442, "stage": "all_gather_identity"}
+{"event": "checkpoint_end", "time_ns": 1793951890863674486, "monotonic_ns": 3973088214088222, "pid": 2879442, "stage": "all_gather_identity"}
+{"event": "checkpoint_begin", "time_ns": 1793951890873984911, "monotonic_ns": 3973088224398586, "pid": 2879442, "stage": "broadcast"}
+{"event": "checkpoint_end", "time_ns": 1793951890895936227, "monotonic_ns": 3973088246349352, "pid": 2879442, "stage": "broadcast"}
+{"event": "worker_error", "time_ns": 1793951895900773718, "monotonic_ns": 3973093251186963, "pid": 2879442, "stage": "broadcast", "error": "RuntimeError: [/pytorch/third_party/gloo/gloo/transport/tcp/unbound_buffer.cc:133] Timed out waiting 5000ms for send operation to complete"}

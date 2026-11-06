@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/candidate/comm_probe.py", line 389, in worker
+    dist.broadcast(value, src=0)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/distributed/c10d_logger.py", line 81, in wrapper
+    return func(*args, **kwargs)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/distributed/distributed_c10d.py", line 2718, in broadcast
+    work.wait()
+RuntimeError: [/pytorch/third_party/gloo/gloo/transport/tcp/pair.cc:525] Read error [127.0.0.1]:19110: Connection reset by peer

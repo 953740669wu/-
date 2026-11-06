@@ -1,0 +1,21 @@
+test_rank_report_collection (unittest.loader._FailedTest.test_rank_report_collection) ... ERROR
+
+======================================================================
+ERROR: test_rank_report_collection (unittest.loader._FailedTest.test_rank_report_collection)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_rank_report_collection
+Traceback (most recent call last):
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\s07_r7_atomic_20261106\tests\test_rank_report_collection.py", line 8, in <module>
+    import rank_report_inventory as reports
+ModuleNotFoundError: No module named 'rank_report_inventory'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

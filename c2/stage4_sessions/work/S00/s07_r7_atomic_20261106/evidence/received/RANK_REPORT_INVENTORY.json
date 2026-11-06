@@ -1,0 +1,360 @@
+{
+  "cases": {
+    "collective-timeout": {
+      "context_error": null,
+      "note": "A terminal official report may be the last committed checkpoint; it does not prove the final error handler committed. Temporary bytes are archived, never parsed as official reports.",
+      "parent_event_parse_error": null,
+      "reports": {
+        "0": {
+          "error": "RuntimeError: [/pytorch/third_party/gloo/gloo/transport/tcp/unbound_buffer.cc:133] Timed out waiting 5000ms for send operation to complete",
+          "error_present": true,
+          "event_parse_error": null,
+          "file": {
+            "bytes": 10619,
+            "mtime_ns": 1793951895905162000,
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/collective-timeout/rank0.json",
+            "sha256": "04d16c57c07a986f46dfb099f1099f24c66d1c8b7b48d28f506d2d00c46a96fc"
+          },
+          "formal_report_valid": true,
+          "last_checkpoint_end_event": {
+            "event": "checkpoint_end",
+            "monotonic_ns": 3973088246349352,
+            "pid": 2879442,
+            "stage": "broadcast",
+            "time_ns": 1793951890895936227
+          },
+          "last_published_checkpoint": "broadcast",
+          "parent_term_and_reap_events": [
+            {
+              "child_pid": 2879442,
+              "event": "child_reaped",
+              "exit_code": 1,
+              "monotonic_ns": 3973094520083212,
+              "pid": 2879401,
+              "time_ns": 1793951897169670537
+            }
+          ],
+          "pid": 2879442,
+          "stage": "broadcast",
+          "status": "FAIL",
+          "worker_error_events": [
+            {
+              "error": "RuntimeError: [/pytorch/third_party/gloo/gloo/transport/tcp/unbound_buffer.cc:133] Timed out waiting 5000ms for send operation to complete",
+              "event": "worker_error",
+              "monotonic_ns": 3973093251186963,
+              "pid": 2879442,
+              "stage": "broadcast",
+              "time_ns": 1793951895900773718
+            }
+          ]
+        },
+        "1": {
+          "error": null,
+          "error_present": false,
+          "event_parse_error": null,
+          "file": {
+            "bytes": 10555,
+            "mtime_ns": 1793951890886560000,
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/collective-timeout/rank1.json",
+            "sha256": "71c42d6d0f8b5994c0236af411b3ceeceb5e7494d2765acc2106809c8a5f7ed0"
+          },
+          "formal_report_valid": true,
+          "last_checkpoint_end_event": {
+            "event": "checkpoint_end",
+            "monotonic_ns": 3973088245995905,
+            "pid": 2879445,
+            "stage": "injected_hang",
+            "time_ns": 1793951890895580910
+          },
+          "last_published_checkpoint": "injected_hang",
+          "parent_term_and_reap_events": [
+            {
+              "child_pid": 2879445,
+              "event": "signal_sent",
+              "monotonic_ns": 3973094468102600,
+              "pid": 2879401,
+              "signal": 15,
+              "time_ns": 1793951897117688815
+            },
+            {
+              "child_pid": 2879445,
+              "event": "child_reaped",
+              "exit_code": -15,
+              "monotonic_ns": 3973094521854405,
+              "pid": 2879401,
+              "time_ns": 1793951897171441600
+            }
+          ],
+          "pid": 2879445,
+          "stage": "injected_hang",
+          "status": "FAIL",
+          "worker_error_events": []
+        }
+      },
+      "residuals": []
+    },
+    "crash": {
+      "context_error": null,
+      "note": "A terminal official report may be the last committed checkpoint; it does not prove the final error handler committed. Temporary bytes are archived, never parsed as official reports.",
+      "parent_event_parse_error": null,
+      "reports": {
+        "0": {
+          "error": "RuntimeError: [/pytorch/third_party/gloo/gloo/transport/tcp/pair.cc:525] Read error [127.0.0.1]:19110: Connection reset by peer",
+          "error_present": true,
+          "event_parse_error": null,
+          "file": {
+            "bytes": 10595,
+            "mtime_ns": 1793951871188719000,
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/crash/rank0.json",
+            "sha256": "887e4b2d8707e2ae382f23d6af9e590fa79de6b192b5a69fd5b7cc0d08f66ab6"
+          },
+          "formal_report_valid": true,
+          "last_checkpoint_end_event": {
+            "event": "checkpoint_end",
+            "monotonic_ns": 3973068488046822,
+            "pid": 2877626,
+            "stage": "broadcast",
+            "time_ns": 1793951871137632527
+          },
+          "last_published_checkpoint": "broadcast",
+          "parent_term_and_reap_events": [
+            {
+              "child_pid": 2877626,
+              "event": "signal_sent",
+              "monotonic_ns": 3973068574339140,
+              "pid": 2877596,
+              "signal": 15,
+              "time_ns": 1793951871223925155
+            },
+            {
+              "child_pid": 2877626,
+              "event": "child_reaped",
+              "exit_code": -15,
+              "monotonic_ns": 3973068676842175,
+              "pid": 2877596,
+              "time_ns": 1793951871326429260
+            }
+          ],
+          "pid": 2877626,
+          "stage": "broadcast",
+          "status": "FAIL",
+          "worker_error_events": [
+            {
+              "error": "RuntimeError: [/pytorch/third_party/gloo/gloo/transport/tcp/pair.cc:525] Read error [127.0.0.1]:19110: Connection reset by peer",
+              "event": "worker_error",
+              "monotonic_ns": 3973068536530912,
+              "pid": 2877626,
+              "stage": "broadcast",
+              "time_ns": 1793951871186117717
+            }
+          ]
+        },
+        "1": {
+          "error": null,
+          "error_present": false,
+          "event_parse_error": null,
+          "file": {
+            "bytes": 10544,
+            "mtime_ns": 1793951871127117000,
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/crash/rank1.json",
+            "sha256": "6eddcbfeeeb39315ed1e0a454d21b8ca4059a9211b7f6de8566ad5bc396e4432"
+          },
+          "formal_report_valid": true,
+          "last_checkpoint_end_event": {
+            "event": "checkpoint_end",
+            "monotonic_ns": 3973068487630144,
+            "pid": 2877631,
+            "stage": "injected_crash",
+            "time_ns": 1793951871137216099
+          },
+          "last_published_checkpoint": "injected_crash",
+          "parent_term_and_reap_events": [
+            {
+              "child_pid": 2877631,
+              "event": "child_reaped",
+              "exit_code": 17,
+              "monotonic_ns": 3973068678703090,
+              "pid": 2877596,
+              "time_ns": 1793951871328290135
+            }
+          ],
+          "pid": 2877631,
+          "stage": "injected_crash",
+          "status": "FAIL",
+          "worker_error_events": []
+        }
+      },
+      "residuals": []
+    },
+    "normal": {
+      "context_error": null,
+      "note": "A terminal official report may be the last committed checkpoint; it does not prove the final error handler committed. Temporary bytes are archived, never parsed as official reports.",
+      "parent_event_parse_error": null,
+      "reports": {
+        "0": {
+          "error": null,
+          "error_present": false,
+          "event_parse_error": null,
+          "file": {
+            "bytes": 14241,
+            "mtime_ns": 1793951850868994800,
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/normal/rank0.json",
+            "sha256": "b165ae6c1b2afd9ec79dcb291fc1e4da342a0b55cbd914edc36fde8ff05e927a"
+          },
+          "formal_report_valid": true,
+          "last_checkpoint_end_event": {
+            "event": "checkpoint_end",
+            "monotonic_ns": 3973048162069870,
+            "pid": 2875748,
+            "stage": "finished",
+            "time_ns": 1793951850811655245
+          },
+          "last_published_checkpoint": "finished",
+          "parent_term_and_reap_events": [
+            {
+              "child_pid": 2875748,
+              "event": "child_reaped",
+              "exit_code": 0,
+              "monotonic_ns": 3973049329213706,
+              "pid": 2875689,
+              "time_ns": 1793951851978800411
+            }
+          ],
+          "pid": 2875748,
+          "stage": "finished",
+          "status": "PASS",
+          "worker_error_events": []
+        },
+        "1": {
+          "error": null,
+          "error_present": false,
+          "event_parse_error": null,
+          "file": {
+            "bytes": 14348,
+            "mtime_ns": 1793951850870613590,
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/normal/rank1.json",
+            "sha256": "10d5d80c6a21d1355f9e01c5653edfda4dcb021fce0f01f1b2ff2cb915dde03f"
+          },
+          "formal_report_valid": true,
+          "last_checkpoint_end_event": {
+            "event": "checkpoint_end",
+            "monotonic_ns": 3973048162199052,
+            "pid": 2875749,
+            "stage": "finished",
+            "time_ns": 1793951850811784957
+          },
+          "last_published_checkpoint": "finished",
+          "parent_term_and_reap_events": [
+            {
+              "child_pid": 2875749,
+              "event": "child_reaped",
+              "exit_code": 0,
+              "monotonic_ns": 3973049330616543,
+              "pid": 2875689,
+              "time_ns": 1793951851980203918
+            }
+          ],
+          "pid": 2875749,
+          "stage": "finished",
+          "status": "PASS",
+          "worker_error_events": []
+        }
+      },
+      "residuals": []
+    },
+    "watchdog": {
+      "context_error": null,
+      "note": "A terminal official report may be the last committed checkpoint; it does not prove the final error handler committed. Temporary bytes are archived, never parsed as official reports.",
+      "parent_event_parse_error": null,
+      "reports": {
+        "0": {
+          "error": null,
+          "error_present": false,
+          "event_parse_error": null,
+          "file": {
+            "bytes": 14852,
+            "mtime_ns": 1793951916896955000,
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/watchdog/rank0.json",
+            "sha256": "ec2ed64287a7432be93480cc71bf16c07efef9e0bef74525f91e94601eeb73e0"
+          },
+          "formal_report_valid": true,
+          "last_checkpoint_end_event": {
+            "event": "checkpoint_end",
+            "monotonic_ns": 3973114246121066,
+            "pid": 2882120,
+            "stage": "injected_hang",
+            "time_ns": 1793951916895707461
+          },
+          "last_published_checkpoint": "injected_hang",
+          "parent_term_and_reap_events": [
+            {
+              "child_pid": 2882120,
+              "event": "signal_sent",
+              "monotonic_ns": 3973125105787926,
+              "pid": 2882086,
+              "signal": 15,
+              "time_ns": 1793951927755374251
+            },
+            {
+              "child_pid": 2882120,
+              "event": "child_reaped",
+              "exit_code": -15,
+              "monotonic_ns": 3973125173708513,
+              "pid": 2882086,
+              "time_ns": 1793951927823295018
+            }
+          ],
+          "pid": 2882120,
+          "stage": "injected_hang",
+          "status": "FAIL",
+          "worker_error_events": []
+        },
+        "1": {
+          "error": null,
+          "error_present": false,
+          "event_parse_error": null,
+          "file": {
+            "bytes": 14966,
+            "mtime_ns": 1793951916890232000,
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1/payload/checks_current_job/watchdog/rank1.json",
+            "sha256": "bba8d575cb20868ea125a6cad631a53c2d9ff9804c4bc5ed91f59048ee5c1131"
+          },
+          "formal_report_valid": true,
+          "last_checkpoint_end_event": {
+            "event": "checkpoint_end",
+            "monotonic_ns": 3973114246240228,
+            "pid": 2882122,
+            "stage": "injected_hang",
+            "time_ns": 1793951916895826623
+          },
+          "last_published_checkpoint": "injected_hang",
+          "parent_term_and_reap_events": [
+            {
+              "child_pid": 2882122,
+              "event": "signal_sent",
+              "monotonic_ns": 3973125121635294,
+              "pid": 2882086,
+              "signal": 15,
+              "time_ns": 1793951927771221309
+            },
+            {
+              "child_pid": 2882122,
+              "event": "child_reaped",
+              "exit_code": -15,
+              "monotonic_ns": 3973125175428215,
+              "pid": 2882086,
+              "time_ns": 1793951927825014420
+            }
+          ],
+          "pid": 2882122,
+          "stage": "injected_hang",
+          "status": "FAIL",
+          "worker_error_events": []
+        }
+      },
+      "residuals": []
+    }
+  },
+  "not_run": [],
+  "scope": "terminal official JSON identity/checkpoint and raw residues only; not a communication verdict; no temp-to-formal recovery"
+}

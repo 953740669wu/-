@@ -1,0 +1,12 @@
+{"event": "supervisor_begin", "time_ns": 1793951897742459475, "monotonic_ns": 3973095092872760, "pid": 2882086, "deadline_seconds": 30}
+{"event": "spawn_begin", "time_ns": 1793951897745890259, "monotonic_ns": 3973095096303944, "pid": 2882086, "rank": 0}
+{"event": "spawned", "time_ns": 1793951897798007444, "monotonic_ns": 3973095148422089, "pid": 2882086, "rank": 0, "child_pid": 2882120}
+{"event": "spawn_begin", "time_ns": 1793951897799870419, "monotonic_ns": 3973095150285204, "pid": 2882086, "rank": 1}
+{"event": "spawned", "time_ns": 1793951897850499335, "monotonic_ns": 3973095200912820, "pid": 2882086, "rank": 1, "child_pid": 2882122}
+{"event": "proc_helper_started", "time_ns": 1793951897907767367, "monotonic_ns": 3973095258181582, "pid": 2882086, "status": "STARTED", "target_ns": 3973120092789588, "sample_stop_ns": 3973122092789588, "helper_pid": 2882123}
+{"event": "cleanup_begin", "time_ns": 1793951927752890864, "monotonic_ns": 3973125103304269, "pid": 2882086, "reason": "deadline", "exit_codes": [null, null]}
+{"event": "signal_sent", "time_ns": 1793951927755374251, "monotonic_ns": 3973125105787926, "pid": 2882086, "child_pid": 2882120, "signal": 15}
+{"event": "signal_sent", "time_ns": 1793951927771221309, "monotonic_ns": 3973125121635294, "pid": 2882086, "child_pid": 2882122, "signal": 15}
+{"event": "child_reaped", "time_ns": 1793951927823295018, "monotonic_ns": 3973125173708513, "pid": 2882086, "child_pid": 2882120, "exit_code": -15}
+{"event": "child_reaped", "time_ns": 1793951927825014420, "monotonic_ns": 3973125175428215, "pid": 2882086, "child_pid": 2882122, "exit_code": -15}
+{"event": "supervisor_end", "time_ns": 1793951927826576009, "monotonic_ns": 3973125176989534, "pid": 2882086, "reason": "deadline", "exit_codes": [-15, -15], "all_reaped": true}

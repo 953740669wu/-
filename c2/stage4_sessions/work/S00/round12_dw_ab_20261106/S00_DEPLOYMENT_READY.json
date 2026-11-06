@@ -1,0 +1,194 @@
+{
+  "assertions": "Non-optimized Python: env-i excludes PYTHONOPTIMIZE; Python -B, never -O/-OO; frozen asserts unchanged",
+  "authorization": "User current round and frozen TASK_CARD.md; original R12_READY execution_authorized=false retained as history",
+  "checks": {
+    "bytes": 482,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\DEPLOYMENT_CHECKS.json",
+    "sha256": "a5cead57667fbc90e5fc4310e5aca941ff467c66469b31448130bdda2585589e"
+  },
+  "code_source_manifest": {
+    "bytes": 2492,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\S02_SOURCE_SHA256.json",
+    "sha256": "f61b8db309b8dad5853c7916d371b4484af609bd7610c096846bb21a7ac866bd"
+  },
+  "collection": {
+    "all_phase_outputs": true,
+    "checkpoint": "REMOTE_ONLY_PATH_BYTES_SHA_ZERO_UPDATE_RESTORE",
+    "exposure": "separate strict/perf ledgers; preserve in_flight/unknown conservatively",
+    "partial_and_raw_failures_preserved": true
+  },
+  "commands": {
+    "bytes": 4433,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\COMMANDS.md",
+    "sha256": "25c1714a75726a9e10e5f0dfd0709bf1e0f74a50ed22044f04e5e8e9fba0ea46"
+  },
+  "deadline": "Absolute START+840 from wrapper import covers gate and whole frozen chain; unified cleanup<=30 ends<=START+870, reserve30 under scheduler900. Inner phase720 only fallback, no reset of outer deadline.",
+  "deployment_package": {
+    "bytes": 150897,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\S00_R12_DW_AB_DEPLOYMENT.zip",
+    "sha256": "a3f81b40e58e63bde612c95cd04fcb7a2d054746f5977371bc58310ca8beccc8"
+  },
+  "deployment_source_manifest": {
+    "bytes": 2803,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\ARTIFACT_SHA256.json",
+    "sha256": "e51c425815ad7f3ae0a48b27adbae389271f1b2b0201e031c44ee11ff41c0189"
+  },
+  "descriptor": {
+    "bytes": 12222,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\ENGINEERING_DESCRIPTOR.json",
+    "sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6"
+  },
+  "engineering_only": true,
+  "entry_environment": [
+    "S02_ENGINEERING_DESCRIPTOR",
+    "S02_ENGINEERING_DESCRIPTOR_SHA256"
+  ],
+  "entrypoint": "run_ab_proposal.sh",
+  "expected_counts_per_update": {
+    "baseline": {
+      "dispatch": 0,
+      "logical": 149,
+      "native": 149,
+      "target_full": 12,
+      "target_tiles": 0
+    },
+    "candidate": {
+      "dispatch": 12,
+      "logical": 149,
+      "native": 161,
+      "target_full": 0,
+      "target_tiles": 24
+    }
+  },
+  "formal_split_status": "UNKNOWN",
+  "hbm": false,
+  "immutable_after_publish": true,
+  "initial_remote_check": {
+    "bytes": 680,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\INITIAL_REMOTE_READONLY.txt",
+    "sha256": "23cea8e8ac77f40b4a417dec57029629bbbd6274f69b9a3e70fd590e796299b2"
+  },
+  "linux_login_log": {
+    "bytes": 12265,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\LOGIN_DEPLOYMENT_CHECKS.txt",
+    "sha256": "ebd5dc3864e3e8da9209e061cfc6e5ad518f99bd37f6b0a30b49e6b18d4a6f0b"
+  },
+  "local_fixture_log": {
+    "bytes": 1384,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\tests_after.txt",
+    "sha256": "db9e843f98f9427495919ebf08699dbbd915bdabef5bbadf0294b63649fdf4a3"
+  },
+  "max_retry_count": 0,
+  "new_jobs": 0,
+  "node_count": 1,
+  "numa_domains": 1,
+  "old_outputs_and_formal_gates": "READ_ONLY_UNCHANGED",
+  "phase_success": {
+    "perf_baseline": "PERF25_EXPLORATORY_NOT_SPEEDUP_ACCEPTANCE",
+    "perf_candidate": "PERF25_EXPLORATORY_NOT_SPEEDUP_ACCEPTANCE",
+    "strict": "PASS_STRICT_ENCODER5",
+    "target": "PASS_ACTUAL_KML_TARGET_ONLY"
+  },
+  "protocol": "ENGINEERING_DW_TILES_R12_AB_V1",
+  "published_utc": "2026-11-06T05:44:57.416256+00:00",
+  "r12_contract": {
+    "bytes": 3246,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\R12_CONTRACT.json",
+    "sha256": "16f19bab92e57e2730d801dab5fb012c32d53a37bf4011e516a5467fe5f378df"
+  },
+  "r12_ready": {
+    "bytes": 4114,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\S02_R12_READY.json",
+    "sha256": "98c12351d91c0379ed940cc38e3e76919516290e1402f7fa06fc060f952de60c"
+  },
+  "reference_epoch25": {
+    "bytes": 29576,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\REFERENCE_EPOCH25.json",
+    "sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444"
+  },
+  "reference_first5": {
+    "bytes": 19052,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\REFERENCE_FIRST5.json",
+    "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "remote_staging_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_DW_R12_20261106T053753Z",
+  "required_review": {
+    "bindings_object_required": true,
+    "decision": "PASS_FOR_ENGINEERING_R12_AB",
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\round12_dw_ab_review_20261106\\S01_REVIEW.json",
+    "resources_object_required": true,
+    "review_complete": true,
+    "workload_object_required": true
+  },
+  "required_review_bindings": {
+    "candidate_sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea",
+    "code_package_sha256": "44232f7627cfbcf59fb721acd23af46aed8fa790b20fe743a3c9886717ec4de4",
+    "code_source_manifest_sha256": "f61b8db309b8dad5853c7916d371b4484af609bd7610c096846bb21a7ac866bd",
+    "deployment_package_sha256": "a3f81b40e58e63bde612c95cd04fcb7a2d054746f5977371bc58310ca8beccc8",
+    "deployment_source_manifest_sha256": "e51c425815ad7f3ae0a48b27adbae389271f1b2b0201e031c44ee11ff41c0189",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "r12_contract_sha256": "16f19bab92e57e2730d801dab5fb012c32d53a37bf4011e516a5467fe5f378df",
+    "reference_epoch25_sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8",
+    "task_card_sha256": "bad48674eee0bfb41be0f5fbd2e2a0807e29dce31bc0e789263fc49665a5bec3"
+  },
+  "required_review_workload": {
+    "max_full_encoder_updates": 60,
+    "observed_updates": 20,
+    "perf_updates_each": 25,
+    "performance_pairs": 1,
+    "stage_order": [
+      "target",
+      "strict",
+      "perf_baseline",
+      "perf_candidate"
+    ],
+    "strict_updates_each": 5,
+    "warmup_updates": 5
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_physical_cores": 36,
+    "allocated_cores": 38,
+    "cleanup_seconds": 30,
+    "closing_seconds": 30,
+    "exclusive": true,
+    "job_seconds": 900,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 2,
+    "stop_new_update_after_seconds": 720,
+    "whole_chain_seconds": 840,
+    "whole_entry_timeout": 840
+  },
+  "source_manifest": {
+    "bytes": 2803,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\ARTIFACT_SHA256.json",
+    "sha256": "e51c425815ad7f3ae0a48b27adbae389271f1b2b0201e031c44ee11ff41c0189"
+  },
+  "status": "S00_DEPLOYMENT_READY",
+  "stop": "Any failed/missing gate stops all later phases; budget insufficiency INCOMPLETE, never shorten25 or retry/fallback/change tile or precision.",
+  "subject_mapping_status": "UNKNOWN",
+  "submit_marker": "new exclusive submit_once.marker in new root",
+  "success": "R12_COMPLETE_EXPLORATORY_NOT_SPEEDUP_ACCEPTANCE",
+  "task_card": {
+    "bytes": 9771,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\TASK_CARD.md",
+    "sha256": "bad48674eee0bfb41be0f5fbd2e2a0807e29dce31bc0e789263fc49665a5bec3"
+  },
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "workload": {
+    "max_full_encoder_updates": 60,
+    "observed_updates": 20,
+    "perf_updates_each": 25,
+    "performance_pairs": 1,
+    "stage_order": [
+      "target",
+      "strict",
+      "perf_baseline",
+      "perf_candidate"
+    ],
+    "strict_updates_each": 5,
+    "warmup_updates": 5
+  }
+}

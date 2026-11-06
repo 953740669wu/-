@@ -1,0 +1,40 @@
+{
+  "status": "PASS_NEW_INNER_SHA_MANIFEST_AND_SYNTAX_ONLY",
+  "package_name": "S07_ALIGNED_STACK_R6.zip",
+  "package_sha256": "32740dcbbce682ee6b245dbb563e7d6ff7a22a11e78d4279db57c4c5b122e7a1",
+  "package_bytes": 43727,
+  "package_files": 15,
+  "manifest_entries": 14,
+  "payload_files": {
+    "payload/allocation.template.json": "2cb84d2ec9616ec33f491e6e4156c3c25b0cdcb795f48ffc7e085bb15ba8948c",
+    "payload/REPORT.md": "ef759d09ad462099fd49116df3fbb17706600fa1a32b369f445e6780ec4ade60",
+    "payload/INTERFACE_FOR_S00.md": "66bdf9936855c547c747d51bae828f4ab27640f6e740d140a9ef96ca3f1d43fa",
+    "payload/OBSERVATION_CONTRACT.md": "448cad1a857165c74d0cb241e32b18480d1495ec995704f9f6c5de2208712dde",
+    "payload/minimal.diff": "53622e7f9b52da424bf718075fddec0dc84c36caad73a527b485102e8a30d3f4",
+    "payload/SOURCE_MANIFEST.json": "1b2dec1148d74844ca826e21244069a54a009d8935242fd325fc0ad744083f46",
+    "payload/candidate/comm_probe.py": "c9efa0c9d4ba05c8fb4501ce75f2dd60e6268d732c707cc3beef133330a356dd",
+    "payload/candidate/cpu36_contract.py": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+    "payload/candidate/run_checks.py": "7b7cc96edd9401981a61db5122bf785e3e2348a41cda5363ba5d2ea4b0217d07",
+    "payload/candidate/stack_observer.py": "5b3ad54e675a293e3eb51d292b149c6939bbdc52b68322f340eb76be3b02b875",
+    "payload/tests/test_diagnostics.py": "9f3430ec82bb200a56c292754d47837b2e3989b12590b0adb1cd83efd6c4cc03",
+    "payload/tests/test_job_identity.py": "4f1abca370e2c15ce843737f9883f48b6bcea510f3b8a56706e3fd1f1bb387d1",
+    "payload/tests/test_probe.py": "00be905b4dd2b0aa17592edbc725d70611cf91f59ccbd7f9120664503685673f",
+    "payload/tests/test_readiness.py": "c4cee8e78621b05023303762b7c3a9c94f882db411b4effaa32763bcbff35c2f",
+    "payload/tests/test_stack_observer.py": "52d067d13ee76719090196b46b8bb39035bb4cd82e607cf4b5ceb5b121cfb300"
+  },
+  "wrapper_files": {
+    "bounded_round_step.py": "a8a53122c36bef163c2b90d243d197c146bebc2da9a40f6bf0b3ed9c3c7c66ed",
+    "collect_evidence.py": "895e11cbb168f794ff7524bd66436cf171369c50ea115adbe5836348561febe3",
+    "freeze_deployment.py": "ba9cbe0758b0fcb65d1d11300f4fd6aa6b7e650b104d17030e0f3259e37a8e2e",
+    "owned_processes.py": "4846cd782782ff76b261028c8a1b54e56a7fd9c247b95dce4294a5dfb35ccb63",
+    "prepare.py": "cd14c664901859e170008fd52c2d487536547fa45982188ef25aac4d5694bfa2",
+    "readiness_inventory.py": "29a89d817e21f1b6addd4cc2319b8fad8ba80a7d7ae77786dc179cf624f65bb1",
+    "review_gate.py": "fc0c963e67ac0830d8ffa4aea0dc70371b022ac7ad1bf9beb4d3f3a3d1cc97df",
+    "run_s07_diag_job.py": "51137c7e1cee5a65c839f2acf2a2aaed541ef01b6203f376952ce5798d098f79",
+    "run_s07_diag_job.sh": "c063d060d2107d7794fe821447e11093904552eb70b52aeb48608034019ab1bb",
+    "scheduler_handoff.py": "f907cbf8286f7bc9035c9e58f986c3b342b2a6f6f5a1c60f97834915f2a7065c",
+    "stack_inventory.py": "1c80acc8636eca20ebfcd9a1efdd2251fe0de5b631ba9f1741b4aff104d867d4",
+    "submit_once.py": "40369e6e4209d65be678f464219942cbf849f338a8706acb04eadccdde3f8bf2",
+    "trace_inventory.py": "8c8897e735110a92c563b5637ec4ea57db9260e2efcccce08510316cbe43f0af"
+  }
+}

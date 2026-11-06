@@ -1,0 +1,161 @@
+{
+  "R10_disposition": "CLOSED_NOT_SELECTED_LOW_BENEFIT_NO_AB",
+  "checks": {
+    "bytes": 654,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\DEPLOYMENT_CHECKS.json",
+    "sha256": "58ece3baa4c90ed8fd69b2e4fa4a831f13ee2eff6e2470d383944d253d552f44"
+  },
+  "code_source_manifest": {
+    "bytes": 2487,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\S02_SOURCE_SHA256.json",
+    "sha256": "bda3b37a35880c35bfcec65b80c53624e108de6387f4fa9fd377429b76afffa1"
+  },
+  "collection": {
+    "all_gemm_files": true,
+    "checkpoint": "REMOTE_ONLY_PATH_BYTES_SHA_RESTORE",
+    "command": "/usr/bin/python3 -B collect_evidence.py <fixed RUN>",
+    "raw_failures_preserved": true
+  },
+  "commands": {
+    "bytes": 5819,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\COMMANDS.md",
+    "sha256": "9def82f182b258c177c9d7112f75ae06128fa521671e46ab0cb65327c190fd0f"
+  },
+  "deployment_package": {
+    "bytes": 132033,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\S00_R11_GEMM5_DEPLOYMENT.zip",
+    "sha256": "64a45ae7444506984ebb65d7cb3a39930d088be4f1ac1f3fdcc2d89eeb095d3b"
+  },
+  "deployment_source_manifest": {
+    "bytes": 2415,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\ARTIFACT_SHA256.json",
+    "sha256": "2e825fb7663689aee5cf664b8fdcd4bd9a4809c41707352e1a8c8fd1f33075d9"
+  },
+  "descriptor": {
+    "bytes": 12222,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\ENGINEERING_DESCRIPTOR.json",
+    "sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6"
+  },
+  "engineering_only": true,
+  "entry_environment": [
+    "S02_ENGINEERING_DESCRIPTOR",
+    "S02_ENGINEERING_DESCRIPTOR_SHA256"
+  ],
+  "entrypoint": "run_gemm5.sh",
+  "failure_states_preserved": [
+    "GEMM_OBSERVATION_ERROR",
+    "GEMM_LIMIT_EXCEEDED",
+    "UNSUPPORTED_GEMM_OBSERVATION",
+    "SOURCE_CHANGED",
+    "DATA_NOT_READY",
+    "ERROR_RUNTIME_OR_STATE",
+    "INCOMPLETE"
+  ],
+  "formal_split_status": "UNKNOWN",
+  "gemm_contract": {
+    "bytes": 4335,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\GEMM_CONTRACT.json",
+    "sha256": "a4876ab4a6b6a3c517fb95bc18183bc89015617cdb49a4f6eb5b3380967edeab"
+  },
+  "gemm_ready": {
+    "bytes": 4833,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\S02_GEMM_READY.json",
+    "sha256": "800df62a563aeb9f211a46ed516b985670e182da20485f1d491f46cf550c05e0"
+  },
+  "hbm": false,
+  "immutable_after_publish": true,
+  "initial_remote_check": {
+    "bytes": 3079,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\INITIAL_REMOTE_READONLY.txt",
+    "sha256": "1a2b98948c06e3911916c3cb177d1dc4ca1486fd3877bb8aea447cbb4ab4fcb6"
+  },
+  "interface": {
+    "bytes": 5273,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\INTERFACE.json",
+    "sha256": "1477124f8b772226c76f8f50cee16c5d34ac34f7d8748d327c4402f82d074f76"
+  },
+  "limits": {
+    "detail_bytes_each": 1048576,
+    "expected_records_per_sample": 149,
+    "full_torch_profiler": false,
+    "max_detail_files": 3,
+    "max_records_per_sample": 256,
+    "over_limit": "FAIL_STOP_NO_RETRY_NO_TRUNCATION"
+  },
+  "linux_login_log": {
+    "bytes": 16642,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\LOGIN_DEPLOYMENT_CHECKS.txt",
+    "sha256": "7646467a9dee2e6df5a0f1d82a2704831a7282d843f06a4a3669f3635f58913a"
+  },
+  "max_retry_count": 0,
+  "new_jobs": 0,
+  "node_count": 1,
+  "numa_domains": 1,
+  "old_outputs_and_formal_gates": "READ_ONLY_UNCHANGED",
+  "protocol": "ENGINEERING_REAL_CORPUS_GEMM5_V1",
+  "published_utc": "2026-11-06T04:36:13.705093+00:00",
+  "reference_first5": {
+    "bytes": 19052,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\REFERENCE_FIRST5.json",
+    "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "remote_staging_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z",
+  "required_review": {
+    "bindings_object_required": true,
+    "decision": "PASS_FOR_ENGINEERING_GEMM5",
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\round11_gemm_review_20261106\\S01_REVIEW.json",
+    "resources_object_required": true,
+    "review_complete": true
+  },
+  "required_review_bindings": {
+    "code_package_sha256": "d9bd138890e56c5fc6c1dba538c0c78112441849689a82782fdc6856a203e142",
+    "code_source_manifest_sha256": "bda3b37a35880c35bfcec65b80c53624e108de6387f4fa9fd377429b76afffa1",
+    "deployment_package_sha256": "64a45ae7444506984ebb65d7cb3a39930d088be4f1ac1f3fdcc2d89eeb095d3b",
+    "deployment_source_manifest_sha256": "2e825fb7663689aee5cf664b8fdcd4bd9a4809c41707352e1a8c8fd1f33075d9",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "gemm_contract_sha256": "a4876ab4a6b6a3c517fb95bc18183bc89015617cdb49a4f6eb5b3380967edeab",
+    "interface_sha256": "1477124f8b772226c76f8f50cee16c5d34ac34f7d8748d327c4402f82d074f76",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_physical_cores": 36,
+    "allocated_cores": 38,
+    "cleanup_seconds": 30,
+    "closing_seconds": 30,
+    "exclusive": true,
+    "job_seconds": 900,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 2,
+    "stop_new_update_after_seconds": 720,
+    "whole_entry_timeout": 840
+  },
+  "source_manifest": {
+    "bytes": 2415,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\ARTIFACT_SHA256.json",
+    "sha256": "2e825fb7663689aee5cf664b8fdcd4bd9a4809c41707352e1a8c8fd1f33075d9"
+  },
+  "status": "S00_DEPLOYMENT_READY",
+  "subject_mapping_status": "UNKNOWN",
+  "submit_marker": "new exclusive submit_once.marker in new root",
+  "success": "GEMM5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+  "timing_scope": "ctypes wall includes Python conversion and native packing/scheduling/compute; outer difference includes preparation/counters/allocation/observer; not pure kernel or A/B speedup",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "workload": {
+    "actual_train_frames": 320,
+    "continuous_updates": 5,
+    "new_sample_selection": false,
+    "normalization_frames": 1600,
+    "old_checkpoint_loaded": false,
+    "sampled_steps": [
+      3,
+      4,
+      5
+    ],
+    "warmup_steps": [
+      1,
+      2
+    ]
+  }
+}

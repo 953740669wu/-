@@ -1,0 +1,28 @@
+{
+  "status": "FAIL",
+  "communication": "NOT_PASSED",
+  "case": "watchdog",
+  "supervisor": {
+    "reason": "deadline",
+    "errors": [],
+    "pids": [
+      2882120,
+      2882122
+    ],
+    "exit_codes": [
+      -15,
+      -15
+    ],
+    "all_reaped": true,
+    "wall_seconds": 30.084034422878176,
+    "stack_observation": {
+      "status": "EXITED",
+      "target_ns": 3973120092789588,
+      "sample_stop_ns": 3973122092789588,
+      "helper_pid": 2882123,
+      "returncode": 0,
+      "reaped": true
+    }
+  },
+  "error": "ValueError: workers did not complete normally"
+}
