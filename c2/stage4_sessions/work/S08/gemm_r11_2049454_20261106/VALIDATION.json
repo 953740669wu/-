@@ -1,0 +1,52 @@
+{
+  "checked_utc": "2026-11-06T05:05:14.833777+00:00",
+  "checks": {
+    "447_complete_pairs": true,
+    "actual_role_counts": true,
+    "actual_thread_and_overlap": true,
+    "sample_limits": true,
+    "role_group_time_reconciliation": true,
+    "17_complete_parameter_groups": true,
+    "crosscheck_coordinator_ranking": true,
+    "five_continuous_updates": true,
+    "init_and_train_statistics_identity": true,
+    "five_frame_order_mask_identity": true,
+    "15_original_loss_records_zero": true,
+    "320_unique_frames_and_exposure": true,
+    "CPU36_19_complete_snapshots": true,
+    "recorded_native_backend_identity": true,
+    "recovery_records_exact": true,
+    "remote_checkpoint_identity_record": true,
+    "engineering_scope": true,
+    "step_result_and_log_identity": true,
+    "all_bound_inputs_unchanged": true
+  },
+  "all_passed": true,
+  "input_hash_checks_after": {
+    "handoff": true,
+    "application_result": true,
+    "steps": true,
+    "evidence_index": true,
+    "audit": true,
+    "review": true,
+    "gemm_contract": true,
+    "reference_first5": true,
+    "exposure_ledger": true,
+    "archive": true,
+    "sample_3": true,
+    "sample_4": true,
+    "sample_5": true,
+    "source_gemm_observer.py": true,
+    "source_baseline/kml_ops.py": true,
+    "coordination_review": true,
+    "source_profile_contract.py": true,
+    "source_train_gemm5.py": true
+  },
+  "local_fixture": {
+    "tests": 7,
+    "observed_exit_code": 0,
+    "scope": "LOCAL_FIXTURE_METADATA_ONLY"
+  },
+  "new_jobs": 0,
+  "data_or_weights_read": false
+}

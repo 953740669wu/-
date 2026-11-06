@@ -1,0 +1,21 @@
+# R9 只读归因方法
+
+输入只来自S00 R9 RUN_COMPLETE明确绑定的result、steps、3trace、3events、profile_contract及reference。INPUT_VERIFICATION.json记录本地路径/bytes/SHA与收集索引的交叉核对；运行解析前重新核SHA，结束后再核。读取的冻结profile_probe.py亦核对result.source.files的SHA，确认导出语义。没有读取NPZ或权重、连接集群、修改00证据或把PROFILE5输入旧PILOT工具。
+
+阶段wall来自各step.profile.phase_seconds，以perf_counter测量。step1—2无CPU捕获，step3—5带捕获；两组均为同一个连续5更新运行，不是独立匹配的有/无profiler对照。setup/start、stop、postprocess/export单列为profiler外层开销；采样步骤内插桩开销未知，不从两个不同batch或跨节点旧job相减估计。
+
+trace由冻结导出器从CPU FunctionEvent.time_range.start和elapsed_us()写成X区间，存储单位为微秒；displayTimeUnit=ms仅为显示元数据。三份trace五个阶段区间换算秒后，均与独立阶段wall相差小于1ms。trace.tid为FunctionEvent.thread标识，不作操作系统实际工作线程数或物理核数证明。
+
+对每个KML包裹和copy_事件沿parent_id回溯，检查无缺失/环、每层pid/tid一致且区间包含；parent链须含且仅含一个阶段，另以同pid/tid完整区间包含查找阶段，二者必须唯一且相同。否则标UNKNOWN并记录原因；不把单纯时间相交当因果。当前三份均能确认逻辑阶段归属，不能据此细分原生KML内部调用。
+
+KML包裹按phase/pid/tid/最近相关Linear owner分组，在每组取[start,end]区间并集，报告raw_duration_sum、union及overlap_removed。单独的copy分组亦取并集；不把阶段inclusive、LinearFn inclusive、KML inclusive、子事件self CPU相加。跨线程分组不得相加后称wall；本次采集的全部FunctionEvent跨度均为同一pid/tid，仍不能推断没有原生库工作线程。区间时间与key_averages的self CPU排名分列，不以CPU和/wall计算占比。
+
+copy owner是可见祖先的逻辑路径标签，不是输入/输出tensor或物理复制根因。PROFILE_SUMMARY.json保留完整祖先名字分组、代表event_id及去重统计；ATTRIBUTION_INDEX.json保留全部447个KML事件的精确文件SHA、parent/ancestor IDs、tid和起止区间，供02直接引用。真正源/目的tensor、shape/stride/alias及ViewBackward对应哪次前向reshape，因未录shapes/stack/tensor IDs仍UNKNOWN。
+
+事件排名直接使用3份events中的top_self_cpu，不重算不完整的self时间。每份记录10845个事件、130个distinct keys，但只导出排名前80；未导出key为未知而非0。摘要列每份前10名的并集和三次rank/calls/self CPU分布；不相加self与total，也不把父子inclusive累加为阶段成本。KML envelope包括Python、计数、分配、ctypes与原生执行，native kernel share未知。
+
+LOCAL_FIXTURE检查先写后实现，覆盖父链/线程/区间一致、嵌套与重复跨度并集、跨线程、缺parent/事件、parent区间冲突、copy不同祖先。测试不计入真实采样结论。原件缺项或冲突保留，不放宽门槛以得到接受。
+
+运行：`python -B analyze_profile.py`，限在本轮目录读INPUT_VERIFICATION指定身份，拒绝已有JSON输出；不自动发现其它job。真实产物在本轮根目录，LOCAL_FIXTURE仅是test_analyze_profile.py中的人工span。
+
+原2043445与R9分别在cn21341/cn21338运行；不做跨节点速度比，不把profiler后的HWM或事件排名当稳态性能或科学验收。未来仅建议02检查已支持的局部KML线性/反向和复制边界；候选数值/同机无profiler对照需另有授权，本轮不提交。

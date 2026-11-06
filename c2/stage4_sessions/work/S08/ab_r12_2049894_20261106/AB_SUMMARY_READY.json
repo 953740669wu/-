@@ -1,0 +1,99 @@
+{
+  "status": "AB_SUMMARY_COMPLETE",
+  "disposition": "R12_CLOSED_NO_TRAINING_GAIN",
+  "published_utc": "2026-11-06T06:30:34.581631+00:00",
+  "job_id": "2049894",
+  "host": "cn21338",
+  "protocol": "ENGINEERING_DW_TILES_R12_AB_V1",
+  "assets": {
+    "S08/ROUND_DELTA.md": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\ROUND_DELTA.md",
+      "bytes": 916,
+      "sha256": "b778c12832f8ecb2ddb7619c31ea7e0daf79c90dff87865b48227267d419a1b0"
+    },
+    "S08/SESSION_STATUS.md": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\SESSION_STATUS.md",
+      "bytes": 3125,
+      "sha256": "90fef064ad4fdba1bfce469943b59cdb26279417d61c3221bbefb729c29e2f32"
+    },
+    "AB_SUMMARY.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\ab_r12_2049894_20261106\\AB_SUMMARY.json",
+      "bytes": 11923,
+      "sha256": "53440f15129a5f22be7bb34f22dd961ae9abe45716078c9af7ebeca1e99b787d"
+    },
+    "AB_SUMMARY.md": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\ab_r12_2049894_20261106\\AB_SUMMARY.md",
+      "bytes": 4868,
+      "sha256": "5bb52348a9a1168d6a21423c004a408f836d4ef76ba88e2db5918f5a62a5fab7"
+    },
+    "ARCHIVE_FILES.txt": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\ab_r12_2049894_20261106\\ARCHIVE_FILES.txt",
+      "bytes": 878,
+      "sha256": "bee49ed2e72730b91f7656b3dc46a8782efbedb4f365f1132c626c53ce838a93"
+    },
+    "BEFORE_ROUND_DELTA.md": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\ab_r12_2049894_20261106\\BEFORE_ROUND_DELTA.md",
+      "bytes": 978,
+      "sha256": "e0785c3313f1a5939f9e5577cc8f1d4127fa6256f1deeb227432aac06a8f7d17"
+    },
+    "BEFORE_SESSION_STATUS.md": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\ab_r12_2049894_20261106\\BEFORE_SESSION_STATUS.md",
+      "bytes": 2987,
+      "sha256": "cc25b2edc3445c25372502bfcbd25f306c98f852ce3636399f479e396ff8f541"
+    },
+    "INPUT_VERIFICATION.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\ab_r12_2049894_20261106\\INPUT_VERIFICATION.json",
+      "bytes": 6553,
+      "sha256": "fa58937035f144719f9a8033f648773c6ed315e6e84e8e86302a9e49a2188c74"
+    },
+    "METHOD.md": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\ab_r12_2049894_20261106\\METHOD.md",
+      "bytes": 2520,
+      "sha256": "b54991982ad6955723d4e798b1f540d446944de4d5208d1f4682a960a06d9769"
+    },
+    "VALIDATION.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\ab_r12_2049894_20261106\\VALIDATION.json",
+      "bytes": 2850,
+      "sha256": "f2cbb6a30add6e43a7a5847652e787562308233c44d260ef19c2feda9797f9ef"
+    },
+    "summarize_ab.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\ab_r12_2049894_20261106\\summarize_ab.py",
+      "bytes": 11947,
+      "sha256": "66074f0ec1e2dfbc135eab726a7aad069054405af8f1f59e8638520b82192987"
+    },
+    "test_summarize_ab.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\ab_r12_2049894_20261106\\test_summarize_ab.py",
+      "bytes": 1875,
+      "sha256": "1eb3b310e4d0d6ea0718209a7b7cd7a1ad06765510ee24bfaf1f768a90e4c0dc"
+    }
+  },
+  "input_handoff": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\RUN_COMPLETE.json",
+    "bytes": 11671,
+    "sha256": "489d70ced36d7046bb79810da2d148c9ab31b7ed900fadb66e9f312365805f59"
+  },
+  "input_identity_checks": 32,
+  "real_validation_checks": 46,
+  "local_fixture_tests": 4,
+  "observed20_median_seconds": {
+    "baseline": 4.510239103808999,
+    "candidate": 4.628061148105189
+  },
+  "candidate_median_time_change_percent": 2.6123236836088415,
+  "performance_pairs": 1,
+  "range_overlap_seconds": [
+    4.481312453746796,
+    4.61845821980387
+  ],
+  "numerical_record": "target/strict3895/perf15each exact in recorded scope",
+  "baseline_disposition": "RETAIN_ORIGINAL",
+  "candidate_integrated": false,
+  "repeat_or_tile_search_authorized": false,
+  "weights_or_data_read": false,
+  "original_evidence_modified": false,
+  "new_cluster_jobs": 0,
+  "active_s08_jobs": [],
+  "scientific_acceptance": false,
+  "performance_acceptance": false,
+  "next_action": "Archive exact reviewed S08 range and stand by; no new R12 experiment or S07 execution by S08"
+}

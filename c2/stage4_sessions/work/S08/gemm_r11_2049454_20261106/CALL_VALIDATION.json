@@ -1,0 +1,114 @@
+{
+  "issues": [],
+  "pairs": 447,
+  "samples": [
+    {
+      "step": 3,
+      "source": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\gemm_step_3.json",
+        "bytes": 150035,
+        "sha256": "ef3809752f62206c572e3864d185291af59ff10e7622e07594f2074556615f60"
+      },
+      "gemm": {
+        "raw_sum_ns": 2864462458,
+        "per_thread": [
+          {
+            "thread_id": 1758130,
+            "union_ns": 2864462458
+          }
+        ],
+        "per_thread_union_sum_ns": 2864462458,
+        "same_thread_overlap_removed_ns": 0,
+        "all_threads_coverage_ns": 2864462458
+      },
+      "ctypes": {
+        "raw_sum_ns": 2821744032,
+        "per_thread": [
+          {
+            "thread_id": 1758130,
+            "union_ns": 2821744032
+          }
+        ],
+        "per_thread_union_sum_ns": 2821744032,
+        "same_thread_overlap_removed_ns": 0,
+        "all_threads_coverage_ns": 2821744032
+      },
+      "calls": 149,
+      "paired_difference_sum_ns": 42718426,
+      "coverage_difference_ns": 42718426,
+      "parent_calls": 0
+    },
+    {
+      "step": 4,
+      "source": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\gemm_step_4.json",
+        "bytes": 150044,
+        "sha256": "94c99cde67845f7c467637c746a9368b8ad4484b3716b897809484b02d810923"
+      },
+      "gemm": {
+        "raw_sum_ns": 2891817643,
+        "per_thread": [
+          {
+            "thread_id": 1758130,
+            "union_ns": 2891817643
+          }
+        ],
+        "per_thread_union_sum_ns": 2891817643,
+        "same_thread_overlap_removed_ns": 0,
+        "all_threads_coverage_ns": 2891817643
+      },
+      "ctypes": {
+        "raw_sum_ns": 2866610865,
+        "per_thread": [
+          {
+            "thread_id": 1758130,
+            "union_ns": 2866610865
+          }
+        ],
+        "per_thread_union_sum_ns": 2866610865,
+        "same_thread_overlap_removed_ns": 0,
+        "all_threads_coverage_ns": 2866610865
+      },
+      "calls": 149,
+      "paired_difference_sum_ns": 25206778,
+      "coverage_difference_ns": 25206778,
+      "parent_calls": 0
+    },
+    {
+      "step": 5,
+      "source": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\gemm_step_5.json",
+        "bytes": 150040,
+        "sha256": "a0cb1925512fe4edf12e89cb310f964642ba65f61eb09070023cb52cdc1d2509"
+      },
+      "gemm": {
+        "raw_sum_ns": 2911700497,
+        "per_thread": [
+          {
+            "thread_id": 1758130,
+            "union_ns": 2911700497
+          }
+        ],
+        "per_thread_union_sum_ns": 2911700497,
+        "same_thread_overlap_removed_ns": 0,
+        "all_threads_coverage_ns": 2911700497
+      },
+      "ctypes": {
+        "raw_sum_ns": 2887453797,
+        "per_thread": [
+          {
+            "thread_id": 1758130,
+            "union_ns": 2887453797
+          }
+        ],
+        "per_thread_union_sum_ns": 2887453797,
+        "same_thread_overlap_removed_ns": 0,
+        "all_threads_coverage_ns": 2887453797
+      },
+      "calls": 149,
+      "paired_difference_sum_ns": 24246700,
+      "coverage_difference_ns": 24246700,
+      "parent_calls": 0
+    }
+  ]
+}

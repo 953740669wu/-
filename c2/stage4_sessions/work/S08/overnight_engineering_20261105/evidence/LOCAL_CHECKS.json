@@ -1,0 +1,60 @@
+{
+  "evidence_kind": "LOCAL_FIXTURE",
+  "generated_utc": "2026-11-05T15:53:01.595697+00:00",
+  "checks": [
+    {
+      "kind": "LOCAL_FIXTURE_normal",
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\overnight_engineering_20261105\\summarize.py",
+        "--evidence-dir",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\overnight_engineering_20261105\\evidence\\LOCAL_FIXTURE_normal\\input",
+        "--run-subdir",
+        "engineering_LOCAL_FIXTURE",
+        "--output-dir",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\overnight_engineering_20261105\\evidence\\LOCAL_FIXTURE_normal\\summary"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"summary_status\": \"ENGINEERING_OBSERVATIONS_RECORDED\", \"issues\": 0}\n",
+      "stderr": "",
+      "inputs_unchanged": true,
+      "input_sha256": {
+        "EXPOSURE_LEDGER.json": "eb9e7ce2a3a89ea72dcc9fa459093bc92fd0d8e59e278442ea5c3c44a0ec80ba",
+        "engineering_LOCAL_FIXTURE\\exit_code.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "engineering_LOCAL_FIXTURE\\result.json": "faf9f81d36ba9aabb88840cab2ffb4f9fcf7808d640a6974c914f97760c70bd7",
+        "engineering_LOCAL_FIXTURE\\steps.jsonl": "0aa1c27950c545470ad297cfd97cdac67ef89a368998f8f236f1499980c4b534"
+      }
+    },
+    {
+      "kind": "LOCAL_FIXTURE_interrupted",
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\overnight_engineering_20261105\\summarize.py",
+        "--evidence-dir",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\overnight_engineering_20261105\\evidence\\LOCAL_FIXTURE_interrupted\\input",
+        "--run-subdir",
+        "engineering_LOCAL_FIXTURE",
+        "--output-dir",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\overnight_engineering_20261105\\evidence\\LOCAL_FIXTURE_interrupted\\summary"
+      ],
+      "exit_code": 2,
+      "stdout": "{\"summary_status\": \"EVIDENCE_GAPS\", \"issues\": 5}\n",
+      "stderr": "",
+      "inputs_unchanged": true,
+      "input_sha256": {
+        "EXPOSURE_LEDGER.json": "0e76c8682a3c99b64a2226eda14489376f18f8166d06261bc26429cef61fe484",
+        "engineering_LOCAL_FIXTURE\\exit_code.txt": "4a30efff1e51f55cb5d9158fd1307180f3d0795821c35a79ab9c523e41a6241f",
+        "engineering_LOCAL_FIXTURE\\result.json": "f76c20ce9ad05177169bd06058f3b567d7179dd892653f5a901c830836bc5f4c",
+        "engineering_LOCAL_FIXTURE\\runner_status.json": "378acfd6208a29b0d85a407a73594410161ce9520f53fa6782cd4cd2a4d23e97",
+        "engineering_LOCAL_FIXTURE\\steps.jsonl": "5515748f76acbd7b1d246aee728ec8fe30317176a4693bbefcdc349d9d04a52c"
+      }
+    },
+    {
+      "kind": "LOCAL_FIXTURE_UNITTEST",
+      "exit_code": 0,
+      "tests": 8
+    }
+  ]
+}

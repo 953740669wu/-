@@ -1,0 +1,57 @@
+{
+  "status": "LOCAL_PREPARED",
+  "protocol": "ENGINEERING_REAL_CORPUS_PILOT_V1",
+  "engineering_only": true,
+  "interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+  "published_utc": "2026-11-05T15:54:41.463906+00:00",
+  "assets": {
+    "summarize.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\overnight_engineering_20261105\\summarize.py",
+      "bytes": 17447,
+      "sha256": "ff0f31bf5ff185327c8e6b1263ecb036b51e8b01900668d9516ac4e780f93bed"
+    },
+    "test_summarize.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\overnight_engineering_20261105\\test_summarize.py",
+      "bytes": 7177,
+      "sha256": "f0d308f59b9b9b5fd87868fb707101dd5aaccd2998fae8abd9f38fd514d7c158"
+    },
+    "README.md": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\overnight_engineering_20261105\\README.md",
+      "bytes": 4493,
+      "sha256": "92003ace4e13b438e56830fd9caf19c5ce943f88c17f7a0cfccc733a091332ef"
+    },
+    "ARCHIVE_FILES.txt": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\overnight_engineering_20261105\\ARCHIVE_FILES.txt",
+      "bytes": 2484,
+      "sha256": "22744fd37e1a24334a653097b41b522c5c55d732059862fe0e305ab13f200937"
+    },
+    "evidence/LOCAL_CHECKS.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\overnight_engineering_20261105\\evidence\\LOCAL_CHECKS.json",
+      "bytes": 3108,
+      "sha256": "a98a877fe20a75c3679b2770df81a8ad9645ee79e117948c8913841156f24bb4"
+    },
+    "evidence/REFERENCE_INPUTS.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\overnight_engineering_20261105\\evidence\\REFERENCE_INPUTS.json",
+      "bytes": 2005,
+      "sha256": "353704e006edefdd20e70c4aaf87ede2dfb872e817b23c34db0383819a63ce4c"
+    }
+  },
+  "tests": {
+    "kind": "LOCAL_FIXTURE",
+    "unittest_passed": 8,
+    "cli_checks_passed": 2,
+    "inputs_unchanged": true
+  },
+  "real_summary": "PENDING_RUN_COMPLETE",
+  "run_complete": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\RUN_COMPLETE.json",
+    "exists": false
+  },
+  "active_s08_jobs": [],
+  "background_monitor": false,
+  "scientific_acceptance": "NOT_PERFORMED",
+  "formal_split_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "subject_mapping_status": "UNKNOWN",
+  "next_action": "Read the unique S00 RUN_COMPLETE and bound evidence index, then summarize its explicit collected directory; never submit a cluster job"
+}

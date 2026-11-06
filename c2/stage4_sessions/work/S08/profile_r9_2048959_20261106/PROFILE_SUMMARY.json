@@ -1,0 +1,3632 @@
+{
+  "status": "PROFILE_OBSERVATIONS_RECORDED",
+  "job_id": "2048959",
+  "host": "cn21338",
+  "protocol": "ENGINEERING_REAL_CORPUS_PROFILE5_V1",
+  "issues": [],
+  "phase_wall_seconds": [
+    {
+      "step": 1,
+      "sampled": false,
+      "phase_seconds": {
+        "zero_grad_before": 0.0010582502000033855,
+        "forward_loss": 1.6913170646876097,
+        "zero_grad_after": 0.0004390450194478035,
+        "backward": 3.348911221139133,
+        "optimizer": 0.15751958917826414
+      },
+      "instrumented_step_seconds": 5.200396430678666,
+      "profiler_setup_start_seconds": 0.0,
+      "profiler_stop_seconds": 0.0,
+      "profiler_postprocess_export_seconds": 0.0,
+      "profiler_outside_step_seconds": 0.0
+    },
+    {
+      "step": 2,
+      "sampled": false,
+      "phase_seconds": {
+        "zero_grad_before": 0.0010355589911341667,
+        "forward_loss": 1.5326100680977106,
+        "zero_grad_after": 0.0005487049929797649,
+        "backward": 3.010924399830401,
+        "optimizer": 0.1419169306755066
+      },
+      "instrumented_step_seconds": 4.688026613090187,
+      "profiler_setup_start_seconds": 0.0,
+      "profiler_stop_seconds": 0.0,
+      "profiler_postprocess_export_seconds": 0.0,
+      "profiler_outside_step_seconds": 0.0
+    },
+    {
+      "step": 3,
+      "sampled": true,
+      "phase_seconds": {
+        "zero_grad_before": 0.04497191496193409,
+        "forward_loss": 1.5710885282605886,
+        "zero_grad_after": 0.0004699951969087124,
+        "backward": 3.480860590003431,
+        "optimizer": 0.17331215925514698
+      },
+      "instrumented_step_seconds": 5.272536623757333,
+      "profiler_setup_start_seconds": 0.0014811940491199493,
+      "profiler_stop_seconds": 0.22450606524944305,
+      "profiler_postprocess_export_seconds": 4.648733284790069,
+      "profiler_outside_step_seconds": 4.874720544088632
+    },
+    {
+      "step": 4,
+      "sampled": true,
+      "phase_seconds": {
+        "zero_grad_before": 0.0011066310107707977,
+        "forward_loss": 1.515942877624184,
+        "zero_grad_after": 0.0004106638953089714,
+        "backward": 3.485785650089383,
+        "optimizer": 0.17393938312307
+      },
+      "instrumented_step_seconds": 5.178974804002792,
+      "profiler_setup_start_seconds": 0.0009981491602957249,
+      "profiler_stop_seconds": 0.2298744129948318,
+      "profiler_postprocess_export_seconds": 5.165258675813675,
+      "profiler_outside_step_seconds": 5.3961312379688025
+    },
+    {
+      "step": 5,
+      "sampled": true,
+      "phase_seconds": {
+        "zero_grad_before": 0.0010444396175444126,
+        "forward_loss": 1.400947863701731,
+        "zero_grad_after": 0.00046816421672701836,
+        "backward": 3.171817793045193,
+        "optimizer": 0.17254156805574894
+      },
+      "instrumented_step_seconds": 4.748488476965576,
+      "profiler_setup_start_seconds": 0.0009041889570653439,
+      "profiler_stop_seconds": 0.2500352719798684,
+      "profiler_postprocess_export_seconds": 5.492760050110519,
+      "profiler_outside_step_seconds": 5.743699511047453
+    }
+  ],
+  "sampled_phase_wall_seconds": {
+    "zero_grad_before": {
+      "min": 0.0010444396175444126,
+      "median": 0.0011066310107707977,
+      "max": 0.04497191496193409
+    },
+    "forward_loss": {
+      "min": 1.400947863701731,
+      "median": 1.515942877624184,
+      "max": 1.5710885282605886
+    },
+    "zero_grad_after": {
+      "min": 0.0004106638953089714,
+      "median": 0.00046816421672701836,
+      "max": 0.0004699951969087124
+    },
+    "backward": {
+      "min": 3.171817793045193,
+      "median": 3.480860590003431,
+      "max": 3.485785650089383
+    },
+    "optimizer": {
+      "min": 0.17254156805574894,
+      "median": 0.17331215925514698,
+      "max": 0.17393938312307
+    }
+  },
+  "application_timing": {
+    "data_loading_seconds": 1.0840862612240016,
+    "batch_materialization_seconds": 0.005013276822865009,
+    "training_step_seconds": 25.088422948494554,
+    "diagnostic_seconds": 2.180669743567705,
+    "checkpoint_and_recovery_seconds": 7.453861414920539,
+    "profiler_outside_step_seconds": 16.014551293104887,
+    "wall_seconds": 82.12487999908626,
+    "unattributed_seconds": 30.29827506095171,
+    "diagnostic_scope": "mask/exposure-before-update/CPU-before-and-after/state-validation; other setup/logging in unattributed"
+  },
+  "node_seconds": 94,
+  "top_self_cpu_comparison": [
+    {
+      "key": "S02/KML_python_gemm_envelope",
+      "samples": [
+        {
+          "step": 3,
+          "rank": 1,
+          "key": "S02/KML_python_gemm_envelope",
+          "calls": 149,
+          "self_cpu_us": 3035599.5270000016,
+          "total_cpu_us": 3040954.8349999995
+        },
+        {
+          "step": 4,
+          "rank": 1,
+          "key": "S02/KML_python_gemm_envelope",
+          "calls": 149,
+          "self_cpu_us": 3025857.1699999985,
+          "total_cpu_us": 3032352.756999999
+        },
+        {
+          "step": 5,
+          "rank": 1,
+          "key": "S02/KML_python_gemm_envelope",
+          "calls": 149,
+          "self_cpu_us": 3174820.4290000047,
+          "total_cpu_us": 3179631.204000003
+        }
+      ],
+      "self_cpu_us": {
+        "min": 3025857.1699999985,
+        "median": 3035599.5270000016,
+        "max": 3174820.4290000047
+      }
+    },
+    {
+      "key": "aten::copy_",
+      "samples": [
+        {
+          "step": 3,
+          "rank": 2,
+          "key": "aten::copy_",
+          "calls": 1003,
+          "self_cpu_us": 417229.01499998814,
+          "total_cpu_us": 417229.01499998814
+        },
+        {
+          "step": 4,
+          "rank": 2,
+          "key": "aten::copy_",
+          "calls": 1003,
+          "self_cpu_us": 416738.5000000063,
+          "total_cpu_us": 416738.5000000063
+        },
+        {
+          "step": 5,
+          "rank": 2,
+          "key": "aten::copy_",
+          "calls": 1003,
+          "self_cpu_us": 284686.4870000067,
+          "total_cpu_us": 284686.4870000067
+        }
+      ],
+      "self_cpu_us": {
+        "min": 284686.4870000067,
+        "median": 416738.5000000063,
+        "max": 417229.01499998814
+      }
+    },
+    {
+      "key": "aten::_scaled_dot_product_flash_attention_for_cpu_backward",
+      "samples": [
+        {
+          "step": 3,
+          "rank": 3,
+          "key": "aten::_scaled_dot_product_flash_attention_for_cpu_backward",
+          "calls": 12,
+          "self_cpu_us": 242568.83900000085,
+          "total_cpu_us": 307672.57099999953
+        },
+        {
+          "step": 4,
+          "rank": 3,
+          "key": "aten::_scaled_dot_product_flash_attention_for_cpu_backward",
+          "calls": 12,
+          "self_cpu_us": 245120.91700000688,
+          "total_cpu_us": 350367.7840000009
+        },
+        {
+          "step": 5,
+          "rank": 3,
+          "key": "aten::_scaled_dot_product_flash_attention_for_cpu_backward",
+          "calls": 12,
+          "self_cpu_us": 180480.9129999976,
+          "total_cpu_us": 209474.10399999865
+        }
+      ],
+      "self_cpu_us": {
+        "min": 180480.9129999976,
+        "median": 242568.83900000085,
+        "max": 245120.91700000688
+      }
+    },
+    {
+      "key": "aten::_scaled_dot_product_flash_attention_for_cpu",
+      "samples": [
+        {
+          "step": 3,
+          "rank": 4,
+          "key": "aten::_scaled_dot_product_flash_attention_for_cpu",
+          "calls": 12,
+          "self_cpu_us": 231772.61099999957,
+          "total_cpu_us": 233393.86800000025
+        },
+        {
+          "step": 4,
+          "rank": 5,
+          "key": "aten::_scaled_dot_product_flash_attention_for_cpu",
+          "calls": 12,
+          "self_cpu_us": 213523.03999999934,
+          "total_cpu_us": 215051.38799999995
+        },
+        {
+          "step": 5,
+          "rank": 5,
+          "key": "aten::_scaled_dot_product_flash_attention_for_cpu",
+          "calls": 12,
+          "self_cpu_us": 127854.81099999967,
+          "total_cpu_us": 129039.04000000011
+        }
+      ],
+      "self_cpu_us": {
+        "min": 127854.81099999967,
+        "median": 213523.03999999934,
+        "max": 231772.61099999957
+      }
+    },
+    {
+      "key": "aten::fill_",
+      "samples": [
+        {
+          "step": 3,
+          "rank": 6,
+          "key": "aten::fill_",
+          "calls": 154,
+          "self_cpu_us": 150434.01200000383,
+          "total_cpu_us": 150434.01200000383
+        },
+        {
+          "step": 4,
+          "rank": 4,
+          "key": "aten::fill_",
+          "calls": 154,
+          "self_cpu_us": 236798.53899999917,
+          "total_cpu_us": 236798.53899999917
+        },
+        {
+          "step": 5,
+          "rank": 4,
+          "key": "aten::fill_",
+          "calls": 154,
+          "self_cpu_us": 136642.1810000022,
+          "total_cpu_us": 136642.1810000022
+        }
+      ],
+      "self_cpu_us": {
+        "min": 136642.1810000022,
+        "median": 150434.01200000383,
+        "max": 236798.53899999917
+      }
+    },
+    {
+      "key": "aten::clamp_min",
+      "samples": [
+        {
+          "step": 3,
+          "rank": 7,
+          "key": "aten::clamp_min",
+          "calls": 12,
+          "self_cpu_us": 142520.4779999999,
+          "total_cpu_us": 142520.4779999999
+        },
+        {
+          "step": 4,
+          "rank": 6,
+          "key": "aten::clamp_min",
+          "calls": 12,
+          "self_cpu_us": 126374.41800000025,
+          "total_cpu_us": 126374.41800000025
+        },
+        {
+          "step": 5,
+          "rank": 8,
+          "key": "aten::clamp_min",
+          "calls": 12,
+          "self_cpu_us": 90754.06899999981,
+          "total_cpu_us": 90754.06899999981
+        }
+      ],
+      "self_cpu_us": {
+        "min": 90754.06899999981,
+        "median": 126374.41800000025,
+        "max": 142520.4779999999
+      }
+    },
+    {
+      "key": "aten::add_",
+      "samples": [
+        {
+          "step": 3,
+          "rank": 5,
+          "key": "aten::add_",
+          "calls": 356,
+          "self_cpu_us": 160544.89100002288,
+          "total_cpu_us": 165158.64200000628
+        },
+        {
+          "step": 4,
+          "rank": 7,
+          "key": "aten::add_",
+          "calls": 356,
+          "self_cpu_us": 113285.1739999929,
+          "total_cpu_us": 118242.48199999309
+        },
+        {
+          "step": 5,
+          "rank": 6,
+          "key": "aten::add_",
+          "calls": 356,
+          "self_cpu_us": 111379.39300001995,
+          "total_cpu_us": 116228.4770000123
+        }
+      ],
+      "self_cpu_us": {
+        "min": 111379.39300001995,
+        "median": 113285.1739999929,
+        "max": 160544.89100002288
+      }
+    },
+    {
+      "key": "aten::add",
+      "samples": [
+        {
+          "step": 3,
+          "rank": 8,
+          "key": "aten::add",
+          "calls": 26,
+          "self_cpu_us": 139953.20100000012,
+          "total_cpu_us": 139953.20100000012
+        },
+        {
+          "step": 4,
+          "rank": 8,
+          "key": "aten::add",
+          "calls": 26,
+          "self_cpu_us": 96528.24299999999,
+          "total_cpu_us": 96528.24299999999
+        },
+        {
+          "step": 5,
+          "rank": 17,
+          "key": "aten::add",
+          "calls": 26,
+          "self_cpu_us": 22769.209000000308,
+          "total_cpu_us": 22769.209000000308
+        }
+      ],
+      "self_cpu_us": {
+        "min": 22769.209000000308,
+        "median": 96528.24299999999,
+        "max": 139953.20100000012
+      }
+    },
+    {
+      "key": "aten::sum",
+      "samples": [
+        {
+          "step": 3,
+          "rank": 9,
+          "key": "aten::sum",
+          "calls": 56,
+          "self_cpu_us": 73668.58600000176,
+          "total_cpu_us": 74589.59500000277
+        },
+        {
+          "step": 4,
+          "rank": 9,
+          "key": "aten::sum",
+          "calls": 56,
+          "self_cpu_us": 92543.9970000002,
+          "total_cpu_us": 93465.44900000235
+        },
+        {
+          "step": 5,
+          "rank": 9,
+          "key": "aten::sum",
+          "calls": 56,
+          "self_cpu_us": 89638.54500000249,
+          "total_cpu_us": 90551.19900000072
+        }
+      ],
+      "self_cpu_us": {
+        "min": 73668.58600000176,
+        "median": 89638.54500000249,
+        "max": 92543.9970000002
+      }
+    },
+    {
+      "key": "aten::mul_",
+      "samples": [
+        {
+          "step": 3,
+          "rank": 10,
+          "key": "aten::mul_",
+          "calls": 306,
+          "self_cpu_us": 71462.78000001237,
+          "total_cpu_us": 75967.01900000311
+        },
+        {
+          "step": 4,
+          "rank": 10,
+          "key": "aten::mul_",
+          "calls": 306,
+          "self_cpu_us": 72643.34800000489,
+          "total_cpu_us": 77012.81000000238
+        },
+        {
+          "step": 5,
+          "rank": 7,
+          "key": "aten::mul_",
+          "calls": 306,
+          "self_cpu_us": 93447.34799999371,
+          "total_cpu_us": 98017.20499999821
+        }
+      ],
+      "self_cpu_us": {
+        "min": 71462.78000001237,
+        "median": 72643.34800000489,
+        "max": 93447.34799999371
+      }
+    },
+    {
+      "key": "_LinearFnBackward",
+      "samples": [
+        {
+          "step": 3,
+          "rank": 16,
+          "key": "_LinearFnBackward",
+          "calls": 50,
+          "self_cpu_us": 36203.601999999955,
+          "total_cpu_us": 2357174.6109999996
+        },
+        {
+          "step": 4,
+          "rank": 11,
+          "key": "_LinearFnBackward",
+          "calls": 50,
+          "self_cpu_us": 52064.60699999868,
+          "total_cpu_us": 2355153.602999998
+        },
+        {
+          "step": 5,
+          "rank": 10,
+          "key": "_LinearFnBackward",
+          "calls": 50,
+          "self_cpu_us": 52308.46199999703,
+          "total_cpu_us": 2307809.9059999995
+        }
+      ],
+      "self_cpu_us": {
+        "min": 36203.601999999955,
+        "median": 52064.60699999868,
+        "max": 52308.46199999703
+      }
+    }
+  ],
+  "samples": [
+    {
+      "step": 3,
+      "checks": {
+        "event_count_matches": true,
+        "event_count_limit": true,
+        "kml_count_matches": true,
+        "kml_marker_limit": true,
+        "trace_byte_limit": true,
+        "summary_byte_limit": true,
+        "copy_count_matches": true,
+        "phase_wall_close": true
+      },
+      "trace": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\trace_step_3.json",
+        "bytes": 1533488,
+        "sha256": "2b93ca1d5975a7f90db90bbdcabc92b6b97e933b006a27a5c8f460957482fcf7"
+      },
+      "event_summary": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\events_step_3.json",
+        "bytes": 9122,
+        "sha256": "631dd754e956431e880748d50805f6a9a76a95cba15133c124fca4cd24cfc2d4"
+      },
+      "events": 10845,
+      "distinct_keys": 130,
+      "exported_top_keys": 80,
+      "top_self_cpu": [
+        {
+          "key": "S02/KML_python_gemm_envelope",
+          "calls": 149,
+          "self_cpu_us": 3035599.5270000016,
+          "total_cpu_us": 3040954.8349999995
+        },
+        {
+          "key": "aten::copy_",
+          "calls": 1003,
+          "self_cpu_us": 417229.01499998814,
+          "total_cpu_us": 417229.01499998814
+        },
+        {
+          "key": "aten::_scaled_dot_product_flash_attention_for_cpu_backward",
+          "calls": 12,
+          "self_cpu_us": 242568.83900000085,
+          "total_cpu_us": 307672.57099999953
+        },
+        {
+          "key": "aten::_scaled_dot_product_flash_attention_for_cpu",
+          "calls": 12,
+          "self_cpu_us": 231772.61099999957,
+          "total_cpu_us": 233393.86800000025
+        },
+        {
+          "key": "aten::add_",
+          "calls": 356,
+          "self_cpu_us": 160544.89100002288,
+          "total_cpu_us": 165158.64200000628
+        },
+        {
+          "key": "aten::fill_",
+          "calls": 154,
+          "self_cpu_us": 150434.01200000383,
+          "total_cpu_us": 150434.01200000383
+        },
+        {
+          "key": "aten::clamp_min",
+          "calls": 12,
+          "self_cpu_us": 142520.4779999999,
+          "total_cpu_us": 142520.4779999999
+        },
+        {
+          "key": "aten::add",
+          "calls": 26,
+          "self_cpu_us": 139953.20100000012,
+          "total_cpu_us": 139953.20100000012
+        },
+        {
+          "key": "aten::sum",
+          "calls": 56,
+          "self_cpu_us": 73668.58600000176,
+          "total_cpu_us": 74589.59500000277
+        },
+        {
+          "key": "aten::mul_",
+          "calls": 306,
+          "self_cpu_us": 71462.78000001237,
+          "total_cpu_us": 75967.01900000311
+        },
+        {
+          "key": "aten::native_layer_norm_backward",
+          "calls": 24,
+          "self_cpu_us": 55600.226000000956,
+          "total_cpu_us": 70520.04799999925
+        },
+        {
+          "key": "aten::threshold_backward",
+          "calls": 12,
+          "self_cpu_us": 50189.86200000043,
+          "total_cpu_us": 50189.86200000043
+        },
+        {
+          "key": "Optimizer.zero_grad#AdamW.zero_grad",
+          "calls": 2,
+          "self_cpu_us": 44889.363999999834,
+          "total_cpu_us": 44889.363999999834
+        },
+        {
+          "key": "aten::native_layer_norm",
+          "calls": 24,
+          "self_cpu_us": 42322.02900000012,
+          "total_cpu_us": 44250.59700000027
+        },
+        {
+          "key": "S02/forward_loss",
+          "calls": 1,
+          "self_cpu_us": 42274.41399999941,
+          "total_cpu_us": 1571259.1800000002
+        },
+        {
+          "key": "_LinearFnBackward",
+          "calls": 50,
+          "self_cpu_us": 36203.601999999955,
+          "total_cpu_us": 2357174.6109999996
+        },
+        {
+          "key": "autograd::engine::evaluate_function: SelectBackward0",
+          "calls": 37,
+          "self_cpu_us": 32918.12599999993,
+          "total_cpu_us": 297975.29800000135
+        },
+        {
+          "key": "aten::div",
+          "calls": 154,
+          "self_cpu_us": 30490.041000002995,
+          "total_cpu_us": 33125.69899999909
+        },
+        {
+          "key": "Optimizer.step#AdamW.step",
+          "calls": 1,
+          "self_cpu_us": 30044.745999965817,
+          "total_cpu_us": 173115.4759999998
+        },
+        {
+          "key": "S02/backward",
+          "calls": 1,
+          "self_cpu_us": 28417.715999995824,
+          "total_cpu_us": 3481022.1720000003
+        },
+        {
+          "key": "aten::empty",
+          "calls": 624,
+          "self_cpu_us": 27992.81399999868,
+          "total_cpu_us": 27992.81399999868
+        },
+        {
+          "key": "_LinearFn",
+          "calls": 50,
+          "self_cpu_us": 26079.957999999628,
+          "total_cpu_us": 931055.2980000002
+        },
+        {
+          "key": "autograd::engine::evaluate_function: _LinearFnBackward",
+          "calls": 50,
+          "self_cpu_us": 17889.093000002904,
+          "total_cpu_us": 2375896.432000002
+        },
+        {
+          "key": "ScaledDotProductFlashAttentionForCpuBackward0",
+          "calls": 12,
+          "self_cpu_us": 16514.847000000766,
+          "total_cpu_us": 324187.4180000003
+        },
+        {
+          "key": "autograd::engine::evaluate_function: ReluBackward0",
+          "calls": 12,
+          "self_cpu_us": 11327.309999998892,
+          "total_cpu_us": 61977.33799999999
+        },
+        {
+          "key": "autograd::engine::evaluate_function: ViewBackward0",
+          "calls": 111,
+          "self_cpu_us": 10487.336999999592,
+          "total_cpu_us": 269480.5140000002
+        },
+        {
+          "key": "aten::view",
+          "calls": 424,
+          "self_cpu_us": 9017.854999999756,
+          "total_cpu_us": 9017.854999999756
+        },
+        {
+          "key": "aten::lerp_",
+          "calls": 153,
+          "self_cpu_us": 6640.427000003867,
+          "total_cpu_us": 6640.427000003867
+        },
+        {
+          "key": "aten::addcdiv_",
+          "calls": 153,
+          "self_cpu_us": 6394.263000003062,
+          "total_cpu_us": 6394.263000003062
+        },
+        {
+          "key": "aten::sqrt",
+          "calls": 153,
+          "self_cpu_us": 5541.900000011548,
+          "total_cpu_us": 5541.900000011548
+        },
+        {
+          "key": "aten::reshape",
+          "calls": 270,
+          "self_cpu_us": 4803.121999998046,
+          "total_cpu_us": 274692.4999999971
+        },
+        {
+          "key": "autograd::engine::evaluate_function: ScaledDotProductFlashAttentionForCpuBackward0",
+          "calls": 12,
+          "self_cpu_us": 4442.871000000974,
+          "total_cpu_us": 328630.28900000127
+        },
+        {
+          "key": "aten::clone",
+          "calls": 194,
+          "self_cpu_us": 4243.151999994247,
+          "total_cpu_us": 409155.155
+        },
+        {
+          "key": "aten::_to_copy",
+          "calls": 770,
+          "self_cpu_us": 4022.5350000493418,
+          "total_cpu_us": 10586.240000017657
+        },
+        {
+          "key": "aten::addcmul_",
+          "calls": 153,
+          "self_cpu_us": 3737.7590000135824,
+          "total_cpu_us": 3737.7590000135824
+        },
+        {
+          "key": "aten::as_strided",
+          "calls": 609,
+          "self_cpu_us": 3664.2159999989162,
+          "total_cpu_us": 3664.2159999989162
+        },
+        {
+          "key": "aten::empty_strided",
+          "calls": 783,
+          "self_cpu_us": 3628.677999981999,
+          "total_cpu_us": 3628.677999981999
+        },
+        {
+          "key": "aten::transpose",
+          "calls": 334,
+          "self_cpu_us": 3577.630999999885,
+          "total_cpu_us": 5363.866000001559
+        },
+        {
+          "key": "autograd::engine::evaluate_function: NativeLayerNormBackward0",
+          "calls": 24,
+          "self_cpu_us": 3063.512000000337,
+          "total_cpu_us": 88887.68500000052
+        },
+        {
+          "key": "torch::autograd::AccumulateGrad",
+          "calls": 155,
+          "self_cpu_us": 2313.0930000075605,
+          "total_cpu_us": 4348.0250000045635
+        },
+        {
+          "key": "aten::select",
+          "calls": 82,
+          "self_cpu_us": 1844.967000000106,
+          "total_cpu_us": 2481.315000000279
+        },
+        {
+          "key": "aten::select_backward",
+          "calls": 37,
+          "self_cpu_us": 1740.244999995688,
+          "total_cpu_us": 136451.094999996
+        },
+        {
+          "key": "aten::where",
+          "calls": 5,
+          "self_cpu_us": 1715.5660000008356,
+          "total_cpu_us": 2941.3280000002705
+        },
+        {
+          "key": "aten::empty_like",
+          "calls": 211,
+          "self_cpu_us": 1712.4960000043793,
+          "total_cpu_us": 14576.824000003653
+        },
+        {
+          "key": "aten::_unsafe_view",
+          "calls": 108,
+          "self_cpu_us": 1707.6129999974946,
+          "total_cpu_us": 1707.6129999974946
+        },
+        {
+          "key": "aten::to",
+          "calls": 1072,
+          "self_cpu_us": 1669.1259999519316,
+          "total_cpu_us": 12255.365999969588
+        },
+        {
+          "key": "autograd::engine::evaluate_function: torch::autograd::AccumulateGrad",
+          "calls": 155,
+          "self_cpu_us": 1611.4229999915697,
+          "total_cpu_us": 5959.447999996133
+        },
+        {
+          "key": "detach",
+          "calls": 158,
+          "self_cpu_us": 1551.1399999996647,
+          "total_cpu_us": 1551.1399999996647
+        },
+        {
+          "key": "aten::addmm",
+          "calls": 2,
+          "self_cpu_us": 1479.7319999999527,
+          "total_cpu_us": 1877.596999999958
+        },
+        {
+          "key": "aten::mm",
+          "calls": 4,
+          "self_cpu_us": 1345.0630000010133,
+          "total_cpu_us": 1352.993000001181
+        },
+        {
+          "key": "aten::zeros",
+          "calls": 73,
+          "self_cpu_us": 1232.0469999928027,
+          "total_cpu_us": 157487.5429999989
+        },
+        {
+          "key": "aten::expand",
+          "calls": 54,
+          "self_cpu_us": 1048.8749999988795,
+          "total_cpu_us": 1451.10899999892
+        },
+        {
+          "key": "autograd::engine::evaluate_function: TransposeBackward0",
+          "calls": 72,
+          "self_cpu_us": 995.9349999963306,
+          "total_cpu_us": 3796.6489999978803
+        },
+        {
+          "key": "aten::relu",
+          "calls": 12,
+          "self_cpu_us": 950.0090000000782,
+          "total_cpu_us": 143470.48699999996
+        },
+        {
+          "key": "ViewBackward0",
+          "calls": 111,
+          "self_cpu_us": 943.6960000037216,
+          "total_cpu_us": 258993.1770000006
+        },
+        {
+          "key": "aten::item",
+          "calls": 153,
+          "self_cpu_us": 915.3219999903813,
+          "total_cpu_us": 1524.0459999954328
+        },
+        {
+          "key": "aten::zero_",
+          "calls": 104,
+          "self_cpu_us": 914.8299999996088,
+          "total_cpu_us": 150785.9470000025
+        },
+        {
+          "key": "aten::unsqueeze",
+          "calls": 29,
+          "self_cpu_us": 709.3970000009867,
+          "total_cpu_us": 969.2879999994911
+        },
+        {
+          "key": "aten::contiguous",
+          "calls": 86,
+          "self_cpu_us": 689.7339999999458,
+          "total_cpu_us": 145294.05499999988
+        },
+        {
+          "key": "NativeLayerNormBackward0",
+          "calls": 24,
+          "self_cpu_us": 611.4769999999553,
+          "total_cpu_us": 71131.52499999921
+        },
+        {
+          "key": "aten::_local_scalar_dense",
+          "calls": 153,
+          "self_cpu_us": 608.7240000050515,
+          "total_cpu_us": 608.7240000050515
+        },
+        {
+          "key": "TransposeBackward0",
+          "calls": 72,
+          "self_cpu_us": 589.8570000017062,
+          "total_cpu_us": 2800.7140000015497
+        },
+        {
+          "key": "SelectBackward0",
+          "calls": 37,
+          "self_cpu_us": 584.8060000047553,
+          "total_cpu_us": 137035.90100000077
+        },
+        {
+          "key": "aten::permute",
+          "calls": 24,
+          "self_cpu_us": 584.0709999995743,
+          "total_cpu_us": 703.533999999534
+        },
+        {
+          "key": "aten::nonzero",
+          "calls": 4,
+          "self_cpu_us": 571.6850000005215,
+          "total_cpu_us": 645.9760000000242
+        },
+        {
+          "key": "autograd::engine::evaluate_function: CloneBackward0",
+          "calls": 12,
+          "self_cpu_us": 527.140000000596,
+          "total_cpu_us": 587.9710000008345
+        },
+        {
+          "key": "aten::detach",
+          "calls": 158,
+          "self_cpu_us": 516.7319999977481,
+          "total_cpu_us": 2067.871999997413
+        },
+        {
+          "key": "ReluBackward0",
+          "calls": 12,
+          "self_cpu_us": 460.1660000006668,
+          "total_cpu_us": 50650.0280000011
+        },
+        {
+          "key": "aten::squeeze",
+          "calls": 25,
+          "self_cpu_us": 436.3010000009963,
+          "total_cpu_us": 510.55199999966135
+        },
+        {
+          "key": "autograd::engine::evaluate_function: AddBackward0",
+          "calls": 26,
+          "self_cpu_us": 418.2710000029765,
+          "total_cpu_us": 649.5230000014417
+        },
+        {
+          "key": "aten::layer_norm",
+          "calls": 24,
+          "self_cpu_us": 307.0529999999999,
+          "total_cpu_us": 44557.65000000027
+        },
+        {
+          "key": "S02/zero_grad_before",
+          "calls": 1,
+          "self_cpu_us": 260.76200000000244,
+          "total_cpu_us": 44916.404
+        },
+        {
+          "key": "S02/zero_grad_after",
+          "calls": 1,
+          "self_cpu_us": 247.86200000019744,
+          "total_cpu_us": 481.58400000003166
+        },
+        {
+          "key": "aten::t",
+          "calls": 10,
+          "self_cpu_us": 240.6819999996078,
+          "total_cpu_us": 360.24399999940215
+        },
+        {
+          "key": "aten::scaled_dot_product_attention",
+          "calls": 12,
+          "self_cpu_us": 240.01200000008976,
+          "total_cpu_us": 233633.88000000035
+        },
+        {
+          "key": "aten::resize_",
+          "calls": 29,
+          "self_cpu_us": 239.1919999996535,
+          "total_cpu_us": 239.1919999996535
+        },
+        {
+          "key": "aten::div_",
+          "calls": 3,
+          "self_cpu_us": 235.94200000003912,
+          "total_cpu_us": 355.7129999999888
+        },
+        {
+          "key": "AddBackward0",
+          "calls": 26,
+          "self_cpu_us": 231.25199999846518,
+          "total_cpu_us": 231.25199999846518
+        },
+        {
+          "key": "aten::index",
+          "calls": 2,
+          "self_cpu_us": 229.49300000001676,
+          "total_cpu_us": 620.8670000000857
+        },
+        {
+          "key": "aten::cat",
+          "calls": 1,
+          "self_cpu_us": 216.96100000000297,
+          "total_cpu_us": 277.1229999999996
+        }
+      ],
+      "attribution": {
+        "issues": [],
+        "trace_spans": 10845,
+        "threads": [
+          {
+            "pid": 1306257,
+            "tid": 1
+          }
+        ],
+        "phase_spans": [
+          {
+            "name": "S02/zero_grad_before",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 1,
+            "start_us": 478.401,
+            "duration_us": 44916.404
+          },
+          {
+            "name": "S02/forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 3,
+            "start_us": 45496.126,
+            "duration_us": 1571259.1800000002
+          },
+          {
+            "name": "S02/zero_grad_after",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 1886,
+            "start_us": 1616905.148,
+            "duration_us": 481.58400000003166
+          },
+          {
+            "name": "S02/backward",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 1888,
+            "start_us": 1617469.273,
+            "duration_us": 3481022.1720000003
+          },
+          {
+            "name": "S02/optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 6099,
+            "start_us": 5098613.126,
+            "duration_us": 173331.2179999994
+          }
+        ],
+        "kml_groups": [
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFnBackward",
+            "calls": 99,
+            "raw_duration_sum_us": 2242561.850999999,
+            "union_us": 2242561.850999999,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              2036,
+              2041,
+              2064
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFn",
+            "calls": 50,
+            "raw_duration_sum_us": 798392.9840000008,
+            "union_us": 798392.9840000008,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              62,
+              98,
+              166
+            ]
+          }
+        ],
+        "copy_groups": [
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "ViewBackward_reshape_path",
+            "calls": 96,
+            "raw_duration_sum_us": 244095.9990000017,
+            "union_us": 244095.9990000017,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::reshape",
+              "ViewBackward0",
+              "autograd::engine::evaluate_function: ViewBackward0",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              2143,
+              2225,
+              2233
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "attention_backward_path",
+            "calls": 12,
+            "raw_duration_sum_us": 16207.634000000311,
+            "union_us": 16207.634000000311,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::contiguous",
+              "aten::_scaled_dot_product_flash_attention_for_cpu_backward",
+              "ScaledDotProductFlashAttentionForCpuBackward0",
+              "autograd::engine::evaluate_function: ScaledDotProductFlashAttentionForCpuBackward0",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              2209,
+              2538,
+              2867
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "layer_norm_backward_path",
+            "calls": 12,
+            "raw_duration_sum_us": 11455.449000001187,
+            "union_us": 11455.449000001187,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::contiguous",
+              "aten::native_layer_norm_backward",
+              "NativeLayerNormBackward0",
+              "autograd::engine::evaluate_function: NativeLayerNormBackward0",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              2372,
+              2701,
+              3030
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 1,
+            "raw_duration_sum_us": 15.239999999990687,
+            "union_us": 15.239999999990687,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::div",
+              "MeanBackward1",
+              "autograd::engine::evaluate_function: MeanBackward1",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              1969
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 37,
+            "raw_duration_sum_us": 21965.956999999704,
+            "union_us": 21965.956999999704,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::select_backward",
+              "SelectBackward0",
+              "autograd::engine::evaluate_function: SelectBackward0",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              2030,
+              2288,
+              2298
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFn_forward_boundary",
+            "calls": 50,
+            "raw_duration_sum_us": 85508.09799999898,
+            "union_us": 85508.09799999898,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::contiguous",
+              "_LinearFn",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              61,
+              97,
+              165
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFn_forward_boundary",
+            "calls": 12,
+            "raw_duration_sum_us": 10617.359000000077,
+            "union_us": 10617.359000000077,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::reshape",
+              "_LinearFn",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              86,
+              229,
+              372
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 1,
+            "raw_duration_sum_us": 15.430000000000291,
+            "union_us": 15.430000000000291,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              27
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 1,
+            "raw_duration_sum_us": 13.850000000093132,
+            "union_us": 13.850000000093132,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::div_",
+              "aten::mean",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              1854
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 2,
+            "raw_duration_sum_us": 22.760000000009313,
+            "union_us": 22.760000000009313,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::div_",
+              "aten::mean",
+              "aten::mse_loss",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              1844,
+              1884
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 2,
+            "raw_duration_sum_us": 371.8050000000221,
+            "union_us": 371.8050000000221,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::addmm",
+              "aten::linear",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              15,
+              1862
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 12,
+            "raw_duration_sum_us": 23346.188999999955,
+            "union_us": 23346.188999999955,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::contiguous",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              112,
+              255,
+              398
+            ]
+          },
+          {
+            "phase": "optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "optimizer_path",
+            "calls": 306,
+            "raw_duration_sum_us": 1448.0690000019968,
+            "union_us": 1448.0690000019968,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::add_",
+              "Optimizer.step#AdamW.step",
+              "S02/optimizer"
+            ],
+            "example_event_ids": [
+              6105,
+              6130,
+              6136
+            ]
+          },
+          {
+            "phase": "optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "optimizer_path",
+            "calls": 153,
+            "raw_duration_sum_us": 765.5559999998659,
+            "union_us": 765.5559999998659,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::div",
+              "Optimizer.step#AdamW.step",
+              "S02/optimizer"
+            ],
+            "example_event_ids": [
+              6125,
+              6156,
+              6187
+            ]
+          },
+          {
+            "phase": "optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "optimizer_path",
+            "calls": 306,
+            "raw_duration_sum_us": 1379.6199999842793,
+            "union_us": 1379.6199999842793,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::mul_",
+              "Optimizer.step#AdamW.step",
+              "S02/optimizer"
+            ],
+            "example_event_ids": [
+              6110,
+              6116,
+              6141
+            ]
+          }
+        ],
+        "copy_owner_groups": [
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "ViewBackward_reshape_path",
+            "calls": 96,
+            "raw_duration_sum_us": 244095.9990000017,
+            "union_us": 244095.9990000017,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              2143,
+              2225,
+              2233
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "attention_backward_path",
+            "calls": 12,
+            "raw_duration_sum_us": 16207.634000000311,
+            "union_us": 16207.634000000311,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              2209,
+              2538,
+              2867
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "layer_norm_backward_path",
+            "calls": 12,
+            "raw_duration_sum_us": 11455.449000001187,
+            "union_us": 11455.449000001187,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              2372,
+              2701,
+              3030
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 38,
+            "raw_duration_sum_us": 21981.196999999695,
+            "union_us": 21981.196999999695,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              1969,
+              2030,
+              2288
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFn_forward_boundary",
+            "calls": 62,
+            "raw_duration_sum_us": 96125.45699999905,
+            "union_us": 96125.45699999905,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              61,
+              86,
+              97
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 18,
+            "raw_duration_sum_us": 23770.03400000008,
+            "union_us": 23770.03400000008,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              15,
+              27,
+              112
+            ]
+          },
+          {
+            "phase": "optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "optimizer_path",
+            "calls": 765,
+            "raw_duration_sum_us": 3593.244999986142,
+            "union_us": 3593.244999986142,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              6105,
+              6110,
+              6116
+            ]
+          }
+        ],
+        "shape_metadata": "UNKNOWN_NO_PER_CALL_SHAPES_IN_CAPTURE",
+        "native_kernel_time": "UNKNOWN_PYTHON_ENVELOPES_ONLY"
+      }
+    },
+    {
+      "step": 4,
+      "checks": {
+        "event_count_matches": true,
+        "event_count_limit": true,
+        "kml_count_matches": true,
+        "kml_marker_limit": true,
+        "trace_byte_limit": true,
+        "summary_byte_limit": true,
+        "copy_count_matches": true,
+        "phase_wall_close": true
+      },
+      "trace": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\trace_step_4.json",
+        "bytes": 1556905,
+        "sha256": "dbb6c58dcdfd27e485eacc7a956cae70552a571a285b220fea8d096dd1cf3494"
+      },
+      "event_summary": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\events_step_4.json",
+        "bytes": 9119,
+        "sha256": "75280ced547b37733da594e5a0ca164a467227d2fbee3f289d06e35b289db545"
+      },
+      "events": 10845,
+      "distinct_keys": 130,
+      "exported_top_keys": 80,
+      "top_self_cpu": [
+        {
+          "key": "S02/KML_python_gemm_envelope",
+          "calls": 149,
+          "self_cpu_us": 3025857.1699999985,
+          "total_cpu_us": 3032352.756999999
+        },
+        {
+          "key": "aten::copy_",
+          "calls": 1003,
+          "self_cpu_us": 416738.5000000063,
+          "total_cpu_us": 416738.5000000063
+        },
+        {
+          "key": "aten::_scaled_dot_product_flash_attention_for_cpu_backward",
+          "calls": 12,
+          "self_cpu_us": 245120.91700000688,
+          "total_cpu_us": 350367.7840000009
+        },
+        {
+          "key": "aten::fill_",
+          "calls": 154,
+          "self_cpu_us": 236798.53899999917,
+          "total_cpu_us": 236798.53899999917
+        },
+        {
+          "key": "aten::_scaled_dot_product_flash_attention_for_cpu",
+          "calls": 12,
+          "self_cpu_us": 213523.03999999934,
+          "total_cpu_us": 215051.38799999995
+        },
+        {
+          "key": "aten::clamp_min",
+          "calls": 12,
+          "self_cpu_us": 126374.41800000025,
+          "total_cpu_us": 126374.41800000025
+        },
+        {
+          "key": "aten::add_",
+          "calls": 356,
+          "self_cpu_us": 113285.1739999929,
+          "total_cpu_us": 118242.48199999309
+        },
+        {
+          "key": "aten::add",
+          "calls": 26,
+          "self_cpu_us": 96528.24299999999,
+          "total_cpu_us": 96528.24299999999
+        },
+        {
+          "key": "aten::sum",
+          "calls": 56,
+          "self_cpu_us": 92543.9970000002,
+          "total_cpu_us": 93465.44900000235
+        },
+        {
+          "key": "aten::mul_",
+          "calls": 306,
+          "self_cpu_us": 72643.34800000489,
+          "total_cpu_us": 77012.81000000238
+        },
+        {
+          "key": "_LinearFnBackward",
+          "calls": 50,
+          "self_cpu_us": 52064.60699999868,
+          "total_cpu_us": 2355153.602999998
+        },
+        {
+          "key": "aten::threshold_backward",
+          "calls": 12,
+          "self_cpu_us": 50500.795000000624,
+          "total_cpu_us": 50500.795000000624
+        },
+        {
+          "key": "S02/backward",
+          "calls": 1,
+          "self_cpu_us": 44566.71899999585,
+          "total_cpu_us": 3486064.2129999995
+        },
+        {
+          "key": "S02/forward_loss",
+          "calls": 1,
+          "self_cpu_us": 37702.028000000864,
+          "total_cpu_us": 1516108.06
+        },
+        {
+          "key": "aten::native_layer_norm",
+          "calls": 24,
+          "self_cpu_us": 30750.83000000054,
+          "total_cpu_us": 32481.739000000303
+        },
+        {
+          "key": "aten::empty",
+          "calls": 624,
+          "self_cpu_us": 30454.56899999868,
+          "total_cpu_us": 30454.56899999868
+        },
+        {
+          "key": "Optimizer.step#AdamW.step",
+          "calls": 1,
+          "self_cpu_us": 30163.512000008486,
+          "total_cpu_us": 173708.3309999993
+        },
+        {
+          "key": "aten::native_layer_norm_backward",
+          "calls": 24,
+          "self_cpu_us": 25977.04300000635,
+          "total_cpu_us": 41432.3199999989
+        },
+        {
+          "key": "_LinearFn",
+          "calls": 50,
+          "self_cpu_us": 24428.603000000596,
+          "total_cpu_us": 959049.4010000001
+        },
+        {
+          "key": "aten::as_strided",
+          "calls": 609,
+          "self_cpu_us": 19857.134999998892,
+          "total_cpu_us": 19857.134999998892
+        },
+        {
+          "key": "autograd::engine::evaluate_function: _LinearFnBackward",
+          "calls": 50,
+          "self_cpu_us": 18802.45700000436,
+          "total_cpu_us": 2374756.7480000025
+        },
+        {
+          "key": "aten::addcdiv_",
+          "calls": 153,
+          "self_cpu_us": 17377.92400000803,
+          "total_cpu_us": 17377.92400000803
+        },
+        {
+          "key": "autograd::engine::evaluate_function: SelectBackward0",
+          "calls": 37,
+          "self_cpu_us": 15439.89100000239,
+          "total_cpu_us": 326961.8680000012
+        },
+        {
+          "key": "aten::addmm",
+          "calls": 2,
+          "self_cpu_us": 14649.610000000315,
+          "total_cpu_us": 14967.423000000046
+        },
+        {
+          "key": "aten::mm",
+          "calls": 4,
+          "self_cpu_us": 10050.678000000771,
+          "total_cpu_us": 10059.038000000175
+        },
+        {
+          "key": "autograd::engine::evaluate_function: ReluBackward0",
+          "calls": 12,
+          "self_cpu_us": 9833.356000000378,
+          "total_cpu_us": 60798.48599999957
+        },
+        {
+          "key": "autograd::engine::evaluate_function: ViewBackward0",
+          "calls": 111,
+          "self_cpu_us": 9088.243999997387,
+          "total_cpu_us": 237817.90800000145
+        },
+        {
+          "key": "aten::view",
+          "calls": 424,
+          "self_cpu_us": 8951.201000006364,
+          "total_cpu_us": 8951.201000006364
+        },
+        {
+          "key": "aten::div",
+          "calls": 154,
+          "self_cpu_us": 7247.2890000038315,
+          "total_cpu_us": 9932.886000005528
+        },
+        {
+          "key": "aten::lerp_",
+          "calls": 153,
+          "self_cpu_us": 6399.086000003852,
+          "total_cpu_us": 6399.086000003852
+        },
+        {
+          "key": "aten::sqrt",
+          "calls": 153,
+          "self_cpu_us": 5716.05699998606,
+          "total_cpu_us": 5716.05699998606
+        },
+        {
+          "key": "aten::reshape",
+          "calls": 270,
+          "self_cpu_us": 4791.409999995868,
+          "total_cpu_us": 242442.5340000043
+        },
+        {
+          "key": "aten::_to_copy",
+          "calls": 770,
+          "self_cpu_us": 4121.177999998858,
+          "total_cpu_us": 10856.772000013396
+        },
+        {
+          "key": "aten::clone",
+          "calls": 194,
+          "self_cpu_us": 4028.683999995883,
+          "total_cpu_us": 375562.7710000003
+        },
+        {
+          "key": "aten::addcmul_",
+          "calls": 153,
+          "self_cpu_us": 3776.5229999963194,
+          "total_cpu_us": 3776.5229999963194
+        },
+        {
+          "key": "aten::empty_strided",
+          "calls": 783,
+          "self_cpu_us": 3753.1830000102163,
+          "total_cpu_us": 3753.1830000102163
+        },
+        {
+          "key": "aten::transpose",
+          "calls": 334,
+          "self_cpu_us": 3647.4140000009315,
+          "total_cpu_us": 21562.547000000483
+        },
+        {
+          "key": "autograd::engine::evaluate_function: ScaledDotProductFlashAttentionForCpuBackward0",
+          "calls": 12,
+          "self_cpu_us": 3574.82200000016,
+          "total_cpu_us": 354336.02900000056
+        },
+        {
+          "key": "autograd::engine::evaluate_function: NativeLayerNormBackward0",
+          "calls": 24,
+          "self_cpu_us": 3164.958999996772,
+          "total_cpu_us": 59692.26299999887
+        },
+        {
+          "key": "torch::autograd::AccumulateGrad",
+          "calls": 155,
+          "self_cpu_us": 2350.567000002833,
+          "total_cpu_us": 4370.881000001449
+        },
+        {
+          "key": "aten::select",
+          "calls": 82,
+          "self_cpu_us": 1810.554999999942,
+          "total_cpu_us": 2430.8309999996927
+        },
+        {
+          "key": "aten::where",
+          "calls": 5,
+          "self_cpu_us": 1784.3869999997914,
+          "total_cpu_us": 2978.597000001133
+        },
+        {
+          "key": "aten::select_backward",
+          "calls": 37,
+          "self_cpu_us": 1765.5580000036862,
+          "total_cpu_us": 230095.56099999882
+        },
+        {
+          "key": "aten::_unsafe_view",
+          "calls": 108,
+          "self_cpu_us": 1693.9210000043677,
+          "total_cpu_us": 1693.9210000043677
+        },
+        {
+          "key": "aten::empty_like",
+          "calls": 211,
+          "self_cpu_us": 1691.4179999998632,
+          "total_cpu_us": 14832.672000001668
+        },
+        {
+          "key": "autograd::engine::evaluate_function: torch::autograd::AccumulateGrad",
+          "calls": 155,
+          "self_cpu_us": 1627.4699999997392,
+          "total_cpu_us": 5998.351000001188
+        },
+        {
+          "key": "aten::to",
+          "calls": 1072,
+          "self_cpu_us": 1586.251999980639,
+          "total_cpu_us": 12443.023999994035
+        },
+        {
+          "key": "detach",
+          "calls": 158,
+          "self_cpu_us": 1542.3999999980442,
+          "total_cpu_us": 1542.3999999980442
+        },
+        {
+          "key": "aten::zeros",
+          "calls": 73,
+          "self_cpu_us": 1265.9809999954887,
+          "total_cpu_us": 244775.09299999615
+        },
+        {
+          "key": "aten::expand",
+          "calls": 54,
+          "self_cpu_us": 1124.1209999998453,
+          "total_cpu_us": 1594.9570000003043
+        },
+        {
+          "key": "autograd::engine::evaluate_function: TransposeBackward0",
+          "calls": 72,
+          "self_cpu_us": 1023.5979999986012,
+          "total_cpu_us": 3718.8660000001546
+        },
+        {
+          "key": "Optimizer.zero_grad#AdamW.zero_grad",
+          "calls": 2,
+          "self_cpu_us": 1020.0099999999925,
+          "total_cpu_us": 1020.0099999999925
+        },
+        {
+          "key": "aten::relu",
+          "calls": 12,
+          "self_cpu_us": 956.5300000002171,
+          "total_cpu_us": 127330.94800000047
+        },
+        {
+          "key": "aten::zero_",
+          "calls": 104,
+          "self_cpu_us": 944.664000000339,
+          "total_cpu_us": 237173.97199999844
+        },
+        {
+          "key": "ViewBackward0",
+          "calls": 111,
+          "self_cpu_us": 942.6930000013672,
+          "total_cpu_us": 228729.66400000406
+        },
+        {
+          "key": "aten::item",
+          "calls": 153,
+          "self_cpu_us": 932.8210000013933,
+          "total_cpu_us": 1631.477999996394
+        },
+        {
+          "key": "aten::_local_scalar_dense",
+          "calls": 153,
+          "self_cpu_us": 698.6569999950007,
+          "total_cpu_us": 698.6569999950007
+        },
+        {
+          "key": "aten::unsqueeze",
+          "calls": 29,
+          "self_cpu_us": 614.2120000002124,
+          "total_cpu_us": 876.9560000007273
+        },
+        {
+          "key": "NativeLayerNormBackward0",
+          "calls": 24,
+          "self_cpu_us": 613.4740000017919,
+          "total_cpu_us": 42045.79400000069
+        },
+        {
+          "key": "aten::permute",
+          "calls": 24,
+          "self_cpu_us": 607.5920000013284,
+          "total_cpu_us": 734.215000000404
+        },
+        {
+          "key": "TransposeBackward0",
+          "calls": 72,
+          "self_cpu_us": 578.8149999990128,
+          "total_cpu_us": 2695.2680000015534
+        },
+        {
+          "key": "SelectBackward0",
+          "calls": 37,
+          "self_cpu_us": 571.4800000002142,
+          "total_cpu_us": 230667.04099999904
+        },
+        {
+          "key": "aten::nonzero",
+          "calls": 4,
+          "self_cpu_us": 567.2460000000428,
+          "total_cpu_us": 640.097000000067
+        },
+        {
+          "key": "aten::contiguous",
+          "calls": 86,
+          "self_cpu_us": 546.8749999966276,
+          "total_cpu_us": 143831.74199999883
+        },
+        {
+          "key": "autograd::engine::evaluate_function: CloneBackward0",
+          "calls": 12,
+          "self_cpu_us": 519.4150000005029,
+          "total_cpu_us": 582.3159999998752
+        },
+        {
+          "key": "aten::detach",
+          "calls": 158,
+          "self_cpu_us": 509.8349999997299,
+          "total_cpu_us": 2052.234999997774
+        },
+        {
+          "key": "ReluBackward0",
+          "calls": 12,
+          "self_cpu_us": 464.33499999856576,
+          "total_cpu_us": 50965.12999999919
+        },
+        {
+          "key": "aten::squeeze",
+          "calls": 25,
+          "self_cpu_us": 438.7340000020631,
+          "total_cpu_us": 519.6550000004136
+        },
+        {
+          "key": "autograd::engine::evaluate_function: AddBackward0",
+          "calls": 26,
+          "self_cpu_us": 418.69399999734014,
+          "total_cpu_us": 647.4449999977369
+        },
+        {
+          "key": "ScaledDotProductFlashAttentionForCpuBackward0",
+          "calls": 12,
+          "self_cpu_us": 393.4229999994859,
+          "total_cpu_us": 350761.2070000004
+        },
+        {
+          "key": "aten::layer_norm",
+          "calls": 24,
+          "self_cpu_us": 270.3239999995385,
+          "total_cpu_us": 32752.062999999842
+        },
+        {
+          "key": "aten::t",
+          "calls": 10,
+          "self_cpu_us": 261.17199999847435,
+          "total_cpu_us": 400.7019999996385
+        },
+        {
+          "key": "aten::scaled_dot_product_attention",
+          "calls": 12,
+          "self_cpu_us": 241.3130000000092,
+          "total_cpu_us": 215292.70099999994
+        },
+        {
+          "key": "S02/zero_grad_before",
+          "calls": 1,
+          "self_cpu_us": 241.18200000000002,
+          "total_cpu_us": 1058.55
+        },
+        {
+          "key": "aten::resize_",
+          "calls": 29,
+          "self_cpu_us": 234.39299999775176,
+          "total_cpu_us": 234.39299999775176
+        },
+        {
+          "key": "AddBackward0",
+          "calls": 26,
+          "self_cpu_us": 228.75100000039674,
+          "total_cpu_us": 228.75100000039674
+        },
+        {
+          "key": "S02/optimizer",
+          "calls": 1,
+          "self_cpu_us": 224.02300000097603,
+          "total_cpu_us": 173932.35400000028
+        },
+        {
+          "key": "aten::index",
+          "calls": 2,
+          "self_cpu_us": 222.38200000021607,
+          "total_cpu_us": 614.3159999998752
+        },
+        {
+          "key": "aten::cat",
+          "calls": 1,
+          "self_cpu_us": 218.52200000000084,
+          "total_cpu_us": 274.8029999999999
+        },
+        {
+          "key": "aten::unflatten",
+          "calls": 12,
+          "self_cpu_us": 209.88199999947392,
+          "total_cpu_us": 580.2159999996366
+        }
+      ],
+      "attribution": {
+        "issues": [],
+        "trace_spans": 10845,
+        "threads": [
+          {
+            "pid": 1306257,
+            "tid": 1
+          }
+        ],
+        "phase_spans": [
+          {
+            "name": "S02/zero_grad_before",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 11265,
+            "start_us": 493.672,
+            "duration_us": 1058.55
+          },
+          {
+            "name": "S02/forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 11267,
+            "start_us": 1625.423,
+            "duration_us": 1516108.06
+          },
+          {
+            "name": "S02/zero_grad_after",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 13150,
+            "start_us": 1517861.314,
+            "duration_us": 412.3640000000596
+          },
+          {
+            "name": "S02/backward",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 13152,
+            "start_us": 1518337.648,
+            "duration_us": 3486064.2129999995
+          },
+          {
+            "name": "S02/optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 17363,
+            "start_us": 5004553.522,
+            "duration_us": 173932.35400000028
+          }
+        ],
+        "kml_groups": [
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFnBackward",
+            "calls": 99,
+            "raw_duration_sum_us": 2205941.9919999987,
+            "union_us": 2205941.9919999987,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              13300,
+              13305,
+              13328
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFn",
+            "calls": 50,
+            "raw_duration_sum_us": 826410.7650000002,
+            "union_us": 826410.7650000002,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              11326,
+              11362,
+              11430
+            ]
+          }
+        ],
+        "copy_groups": [
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "ViewBackward_reshape_path",
+            "calls": 96,
+            "raw_duration_sum_us": 212576.97200000216,
+            "union_us": 212576.97200000216,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::reshape",
+              "ViewBackward0",
+              "autograd::engine::evaluate_function: ViewBackward0",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              13407,
+              13489,
+              13497
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "attention_backward_path",
+            "calls": 12,
+            "raw_duration_sum_us": 13813.673999998719,
+            "union_us": 13813.673999998719,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::contiguous",
+              "aten::_scaled_dot_product_flash_attention_for_cpu_backward",
+              "ScaledDotProductFlashAttentionForCpuBackward0",
+              "autograd::engine::evaluate_function: ScaledDotProductFlashAttentionForCpuBackward0",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              13473,
+              13802,
+              14131
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "layer_norm_backward_path",
+            "calls": 12,
+            "raw_duration_sum_us": 11610.094000001205,
+            "union_us": 11610.094000001205,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::contiguous",
+              "aten::native_layer_norm_backward",
+              "NativeLayerNormBackward0",
+              "autograd::engine::evaluate_function: NativeLayerNormBackward0",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              13636,
+              13965,
+              14294
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 1,
+            "raw_duration_sum_us": 17.0,
+            "union_us": 17.0,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::div",
+              "MeanBackward1",
+              "autograd::engine::evaluate_function: MeanBackward1",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              13233
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 37,
+            "raw_duration_sum_us": 55310.324999999255,
+            "union_us": 55310.324999999255,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::select_backward",
+              "SelectBackward0",
+              "autograd::engine::evaluate_function: SelectBackward0",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              13294,
+              13552,
+              13562
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFn_forward_boundary",
+            "calls": 50,
+            "raw_duration_sum_us": 89161.59500000009,
+            "union_us": 89161.59500000009,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::contiguous",
+              "_LinearFn",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              11325,
+              11361,
+              11429
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFn_forward_boundary",
+            "calls": 12,
+            "raw_duration_sum_us": 9031.6149999999,
+            "union_us": 9031.6149999999,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::reshape",
+              "_LinearFn",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              11350,
+              11493,
+              11636
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 1,
+            "raw_duration_sum_us": 16.980999999999767,
+            "union_us": 16.980999999999767,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              11291
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 1,
+            "raw_duration_sum_us": 12.879999999888241,
+            "union_us": 12.879999999888241,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::div_",
+              "aten::mean",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              13118
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 2,
+            "raw_duration_sum_us": 23.37000000011176,
+            "union_us": 23.37000000011176,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::div_",
+              "aten::mean",
+              "aten::mse_loss",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              13108,
+              13148
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 2,
+            "raw_duration_sum_us": 289.3429999999162,
+            "union_us": 289.3429999999162,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::addmm",
+              "aten::linear",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              11279,
+              13126
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 12,
+            "raw_duration_sum_us": 21308.92400000045,
+            "union_us": 21308.92400000045,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::contiguous",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              11376,
+              11519,
+              11662
+            ]
+          },
+          {
+            "phase": "optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "optimizer_path",
+            "calls": 306,
+            "raw_duration_sum_us": 1541.2410000041127,
+            "union_us": 1541.2410000041127,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::add_",
+              "Optimizer.step#AdamW.step",
+              "S02/optimizer"
+            ],
+            "example_event_ids": [
+              17369,
+              17394,
+              17400
+            ]
+          },
+          {
+            "phase": "optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "optimizer_path",
+            "calls": 153,
+            "raw_duration_sum_us": 764.0249999985099,
+            "union_us": 764.0249999985099,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::div",
+              "Optimizer.step#AdamW.step",
+              "S02/optimizer"
+            ],
+            "example_event_ids": [
+              17389,
+              17420,
+              17451
+            ]
+          },
+          {
+            "phase": "optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "optimizer_path",
+            "calls": 306,
+            "raw_duration_sum_us": 1260.4610000019893,
+            "union_us": 1260.4610000019893,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::mul_",
+              "Optimizer.step#AdamW.step",
+              "S02/optimizer"
+            ],
+            "example_event_ids": [
+              17374,
+              17380,
+              17405
+            ]
+          }
+        ],
+        "copy_owner_groups": [
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "ViewBackward_reshape_path",
+            "calls": 96,
+            "raw_duration_sum_us": 212576.97200000216,
+            "union_us": 212576.97200000216,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              13407,
+              13489,
+              13497
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "attention_backward_path",
+            "calls": 12,
+            "raw_duration_sum_us": 13813.673999998719,
+            "union_us": 13813.673999998719,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              13473,
+              13802,
+              14131
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "layer_norm_backward_path",
+            "calls": 12,
+            "raw_duration_sum_us": 11610.094000001205,
+            "union_us": 11610.094000001205,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              13636,
+              13965,
+              14294
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 38,
+            "raw_duration_sum_us": 55327.324999999255,
+            "union_us": 55327.324999999255,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              13233,
+              13294,
+              13552
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFn_forward_boundary",
+            "calls": 62,
+            "raw_duration_sum_us": 98193.20999999999,
+            "union_us": 98193.20999999999,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              11325,
+              11350,
+              11361
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 18,
+            "raw_duration_sum_us": 21651.498000000367,
+            "union_us": 21651.498000000367,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              11279,
+              11291,
+              11376
+            ]
+          },
+          {
+            "phase": "optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "optimizer_path",
+            "calls": 765,
+            "raw_duration_sum_us": 3565.727000004612,
+            "union_us": 3565.727000004612,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              17369,
+              17374,
+              17380
+            ]
+          }
+        ],
+        "shape_metadata": "UNKNOWN_NO_PER_CALL_SHAPES_IN_CAPTURE",
+        "native_kernel_time": "UNKNOWN_PYTHON_ENVELOPES_ONLY"
+      }
+    },
+    {
+      "step": 5,
+      "checks": {
+        "event_count_matches": true,
+        "event_count_limit": true,
+        "kml_count_matches": true,
+        "kml_marker_limit": true,
+        "trace_byte_limit": true,
+        "summary_byte_limit": true,
+        "copy_count_matches": true,
+        "phase_wall_close": true
+      },
+      "trace": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\trace_step_5.json",
+        "bytes": 1555946,
+        "sha256": "93742d26b4fe6a5faef0a082ee931b3a08b53a206b889726565a9b138c24e27b"
+      },
+      "event_summary": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\events_step_5.json",
+        "bytes": 9120,
+        "sha256": "dc0142e1dcd2b19c43ae6a47375f448f0bc5decf40dccd4e6867f8a9c08598a3"
+      },
+      "events": 10845,
+      "distinct_keys": 130,
+      "exported_top_keys": 80,
+      "top_self_cpu": [
+        {
+          "key": "S02/KML_python_gemm_envelope",
+          "calls": 149,
+          "self_cpu_us": 3174820.4290000047,
+          "total_cpu_us": 3179631.204000003
+        },
+        {
+          "key": "aten::copy_",
+          "calls": 1003,
+          "self_cpu_us": 284686.4870000067,
+          "total_cpu_us": 284686.4870000067
+        },
+        {
+          "key": "aten::_scaled_dot_product_flash_attention_for_cpu_backward",
+          "calls": 12,
+          "self_cpu_us": 180480.9129999976,
+          "total_cpu_us": 209474.10399999865
+        },
+        {
+          "key": "aten::fill_",
+          "calls": 154,
+          "self_cpu_us": 136642.1810000022,
+          "total_cpu_us": 136642.1810000022
+        },
+        {
+          "key": "aten::_scaled_dot_product_flash_attention_for_cpu",
+          "calls": 12,
+          "self_cpu_us": 127854.81099999967,
+          "total_cpu_us": 129039.04000000011
+        },
+        {
+          "key": "aten::add_",
+          "calls": 356,
+          "self_cpu_us": 111379.39300001995,
+          "total_cpu_us": 116228.4770000123
+        },
+        {
+          "key": "aten::mul_",
+          "calls": 306,
+          "self_cpu_us": 93447.34799999371,
+          "total_cpu_us": 98017.20499999821
+        },
+        {
+          "key": "aten::clamp_min",
+          "calls": 12,
+          "self_cpu_us": 90754.06899999981,
+          "total_cpu_us": 90754.06899999981
+        },
+        {
+          "key": "aten::sum",
+          "calls": 56,
+          "self_cpu_us": 89638.54500000249,
+          "total_cpu_us": 90551.19900000072
+        },
+        {
+          "key": "_LinearFnBackward",
+          "calls": 50,
+          "self_cpu_us": 52308.46199999703,
+          "total_cpu_us": 2307809.9059999995
+        },
+        {
+          "key": "aten::threshold_backward",
+          "calls": 12,
+          "self_cpu_us": 46317.060999999754,
+          "total_cpu_us": 46317.060999999754
+        },
+        {
+          "key": "autograd::engine::evaluate_function: ScaledDotProductFlashAttentionForCpuBackward0",
+          "calls": 12,
+          "self_cpu_us": 33352.71100000059,
+          "total_cpu_us": 243219.5400000005
+        },
+        {
+          "key": "S02/forward_loss",
+          "calls": 1,
+          "self_cpu_us": 32018.17299999972,
+          "total_cpu_us": 1401092.3760000002
+        },
+        {
+          "key": "Optimizer.step#AdamW.step",
+          "calls": 1,
+          "self_cpu_us": 29823.894999985583,
+          "total_cpu_us": 172351.2259999998
+        },
+        {
+          "key": "S02/backward",
+          "calls": 1,
+          "self_cpu_us": 27686.11300000595,
+          "total_cpu_us": 3171995.145
+        },
+        {
+          "key": "_LinearFn",
+          "calls": 50,
+          "self_cpu_us": 22860.721000001387,
+          "total_cpu_us": 1080458.5830000006
+        },
+        {
+          "key": "aten::add",
+          "calls": 26,
+          "self_cpu_us": 22769.209000000308,
+          "total_cpu_us": 22769.209000000308
+        },
+        {
+          "key": "aten::native_layer_norm_backward",
+          "calls": 24,
+          "self_cpu_us": 20641.285999998683,
+          "total_cpu_us": 30636.626999998
+        },
+        {
+          "key": "aten::clone",
+          "calls": 194,
+          "self_cpu_us": 19950.940000000963,
+          "total_cpu_us": 261674.87700000437
+        },
+        {
+          "key": "aten::native_layer_norm",
+          "calls": 24,
+          "self_cpu_us": 14054.022000001394,
+          "total_cpu_us": 15216.555000000582
+        },
+        {
+          "key": "aten::empty",
+          "calls": 624,
+          "self_cpu_us": 13561.547999993996,
+          "total_cpu_us": 13561.547999993996
+        },
+        {
+          "key": "autograd::engine::evaluate_function: _LinearFnBackward",
+          "calls": 50,
+          "self_cpu_us": 10551.738000001293,
+          "total_cpu_us": 2331588.9420000007
+        },
+        {
+          "key": "aten::view",
+          "calls": 424,
+          "self_cpu_us": 8786.41099999932,
+          "total_cpu_us": 8786.41099999932
+        },
+        {
+          "key": "aten::div",
+          "calls": 154,
+          "self_cpu_us": 7548.845999998273,
+          "total_cpu_us": 10351.67000000365
+        },
+        {
+          "key": "aten::lerp_",
+          "calls": 153,
+          "self_cpu_us": 6660.654000000097,
+          "total_cpu_us": 6660.654000000097
+        },
+        {
+          "key": "aten::addcdiv_",
+          "calls": 153,
+          "self_cpu_us": 6290.741999998689,
+          "total_cpu_us": 6290.741999998689
+        },
+        {
+          "key": "aten::sqrt",
+          "calls": 153,
+          "self_cpu_us": 5788.878000003286,
+          "total_cpu_us": 5788.878000003286
+        },
+        {
+          "key": "autograd::engine::evaluate_function: ReluBackward0",
+          "calls": 12,
+          "self_cpu_us": 4888.288999999175,
+          "total_cpu_us": 51662.121999999275
+        },
+        {
+          "key": "autograd::engine::evaluate_function: ViewBackward0",
+          "calls": 111,
+          "self_cpu_us": 4517.369999998948,
+          "total_cpu_us": 203724.59199999785
+        },
+        {
+          "key": "aten::reshape",
+          "calls": 270,
+          "self_cpu_us": 4415.208000000484,
+          "total_cpu_us": 209940.2749999998
+        },
+        {
+          "key": "aten::_to_copy",
+          "calls": 770,
+          "self_cpu_us": 4181.108000005102,
+          "total_cpu_us": 10959.385999988057
+        },
+        {
+          "key": "aten::addcmul_",
+          "calls": 153,
+          "self_cpu_us": 3840.306999997236,
+          "total_cpu_us": 3840.306999997236
+        },
+        {
+          "key": "aten::transpose",
+          "calls": 334,
+          "self_cpu_us": 3667.826999998322,
+          "total_cpu_us": 5346.862999998454
+        },
+        {
+          "key": "aten::as_strided",
+          "calls": 609,
+          "self_cpu_us": 3566.129000003114,
+          "total_cpu_us": 3566.129000003114
+        },
+        {
+          "key": "aten::empty_strided",
+          "calls": 783,
+          "self_cpu_us": 3406.813999978325,
+          "total_cpu_us": 3406.813999978325
+        },
+        {
+          "key": "autograd::engine::evaluate_function: NativeLayerNormBackward0",
+          "calls": 24,
+          "self_cpu_us": 3194.3110000009183,
+          "total_cpu_us": 60402.89800000051
+        },
+        {
+          "key": "autograd::engine::evaluate_function: SelectBackward0",
+          "calls": 37,
+          "self_cpu_us": 2470.9879999973346,
+          "total_cpu_us": 235467.5319999992
+        },
+        {
+          "key": "torch::autograd::AccumulateGrad",
+          "calls": 155,
+          "self_cpu_us": 2361.0309999966994,
+          "total_cpu_us": 4391.549999998417
+        },
+        {
+          "key": "aten::where",
+          "calls": 5,
+          "self_cpu_us": 1867.3270000008497,
+          "total_cpu_us": 3121.570000001103
+        },
+        {
+          "key": "aten::_unsafe_view",
+          "calls": 108,
+          "self_cpu_us": 1725.8229999987561,
+          "total_cpu_us": 1725.8229999987561
+        },
+        {
+          "key": "aten::to",
+          "calls": 1072,
+          "self_cpu_us": 1679.423000011322,
+          "total_cpu_us": 12638.808999999379
+        },
+        {
+          "key": "autograd::engine::evaluate_function: torch::autograd::AccumulateGrad",
+          "calls": 155,
+          "self_cpu_us": 1673.954000000842,
+          "total_cpu_us": 6065.503999999259
+        },
+        {
+          "key": "aten::select",
+          "calls": 82,
+          "self_cpu_us": 1615.4369999978007,
+          "total_cpu_us": 2177.922000000268
+        },
+        {
+          "key": "aten::empty_like",
+          "calls": 211,
+          "self_cpu_us": 1599.5390000013122,
+          "total_cpu_us": 6839.315000001052
+        },
+        {
+          "key": "detach",
+          "calls": 158,
+          "self_cpu_us": 1546.443000000203,
+          "total_cpu_us": 1546.443000000203
+        },
+        {
+          "key": "aten::mm",
+          "calls": 4,
+          "self_cpu_us": 1380.9640000001527,
+          "total_cpu_us": 1387.5140000001993
+        },
+        {
+          "key": "aten::addmm",
+          "calls": 2,
+          "self_cpu_us": 1377.7750000002986,
+          "total_cpu_us": 1774.7580000001024
+        },
+        {
+          "key": "aten::select_backward",
+          "calls": 37,
+          "self_cpu_us": 1239.9789999972563,
+          "total_cpu_us": 165764.70099999965
+        },
+        {
+          "key": "aten::expand",
+          "calls": 54,
+          "self_cpu_us": 1053.0539999998152,
+          "total_cpu_us": 1538.775000000138
+        },
+        {
+          "key": "aten::item",
+          "calls": 153,
+          "self_cpu_us": 952.2219999926165,
+          "total_cpu_us": 1632.5410000002012
+        },
+        {
+          "key": "aten::relu",
+          "calls": 12,
+          "self_cpu_us": 947.3429999999644,
+          "total_cpu_us": 91701.41199999978
+        },
+        {
+          "key": "Optimizer.zero_grad#AdamW.zero_grad",
+          "calls": 2,
+          "self_cpu_us": 945.4199999998995,
+          "total_cpu_us": 945.4199999998995
+        },
+        {
+          "key": "aten::zeros",
+          "calls": 73,
+          "self_cpu_us": 939.687000001315,
+          "total_cpu_us": 137816.53000000212
+        },
+        {
+          "key": "ViewBackward0",
+          "calls": 111,
+          "self_cpu_us": 937.4699999985751,
+          "total_cpu_us": 199207.2219999989
+        },
+        {
+          "key": "autograd::engine::evaluate_function: TransposeBackward0",
+          "calls": 72,
+          "self_cpu_us": 923.9969999939203,
+          "total_cpu_us": 3566.822999997763
+        },
+        {
+          "key": "aten::_local_scalar_dense",
+          "calls": 153,
+          "self_cpu_us": 680.3190000075847,
+          "total_cpu_us": 680.3190000075847
+        },
+        {
+          "key": "aten::permute",
+          "calls": 24,
+          "self_cpu_us": 631.3759999989707,
+          "total_cpu_us": 757.406999999439
+        },
+        {
+          "key": "aten::unsqueeze",
+          "calls": 29,
+          "self_cpu_us": 603.766999999365,
+          "total_cpu_us": 859.3499999995054
+        },
+        {
+          "key": "aten::zero_",
+          "calls": 104,
+          "self_cpu_us": 602.9070000008214,
+          "total_cpu_us": 136682.87600000273
+        },
+        {
+          "key": "NativeLayerNormBackward0",
+          "calls": 24,
+          "self_cpu_us": 600.9560000021011,
+          "total_cpu_us": 31237.5830000001
+        },
+        {
+          "key": "TransposeBackward0",
+          "calls": 72,
+          "self_cpu_us": 580.2080000059213,
+          "total_cpu_us": 2642.8260000038426
+        },
+        {
+          "key": "aten::nonzero",
+          "calls": 4,
+          "self_cpu_us": 564.5460000005551,
+          "total_cpu_us": 640.976000000257
+        },
+        {
+          "key": "SelectBackward0",
+          "calls": 37,
+          "self_cpu_us": 536.3270000023767,
+          "total_cpu_us": 166301.02800000203
+        },
+        {
+          "key": "aten::detach",
+          "calls": 158,
+          "self_cpu_us": 516.3760000013281,
+          "total_cpu_us": 2062.819000001531
+        },
+        {
+          "key": "aten::contiguous",
+          "calls": 86,
+          "self_cpu_us": 516.1929999984095,
+          "total_cpu_us": 61884.61200000115
+        },
+        {
+          "key": "ReluBackward0",
+          "calls": 12,
+          "self_cpu_us": 456.77200000034645,
+          "total_cpu_us": 46773.8330000001
+        },
+        {
+          "key": "aten::squeeze",
+          "calls": 25,
+          "self_cpu_us": 434.6929999986605,
+          "total_cpu_us": 513.43399999963
+        },
+        {
+          "key": "autograd::engine::evaluate_function: CloneBackward0",
+          "calls": 12,
+          "self_cpu_us": 434.5649999990128,
+          "total_cpu_us": 493.4559999986086
+        },
+        {
+          "key": "autograd::engine::evaluate_function: AddBackward0",
+          "calls": 26,
+          "self_cpu_us": 422.3129999996163,
+          "total_cpu_us": 649.5139999999665
+        },
+        {
+          "key": "ScaledDotProductFlashAttentionForCpuBackward0",
+          "calls": 12,
+          "self_cpu_us": 392.7250000012573,
+          "total_cpu_us": 209866.8289999999
+        },
+        {
+          "key": "S02/zero_grad_after",
+          "calls": 1,
+          "self_cpu_us": 270.8530000001192,
+          "total_cpu_us": 459.8950000000186
+        },
+        {
+          "key": "aten::layer_norm",
+          "calls": 24,
+          "self_cpu_us": 254.62199999988843,
+          "total_cpu_us": 15471.17700000047
+        },
+        {
+          "key": "aten::scaled_dot_product_attention",
+          "calls": 12,
+          "self_cpu_us": 242.10199999979523,
+          "total_cpu_us": 129281.1419999999
+        },
+        {
+          "key": "S02/zero_grad_before",
+          "calls": 1,
+          "self_cpu_us": 233.95100000000002,
+          "total_cpu_us": 990.3290000000001
+        },
+        {
+          "key": "aten::index",
+          "calls": 2,
+          "self_cpu_us": 232.1329999996815,
+          "total_cpu_us": 629.4660000002477
+        },
+        {
+          "key": "aten::cat",
+          "calls": 1,
+          "self_cpu_us": 228.64199999999983,
+          "total_cpu_us": 286.1819999999998
+        },
+        {
+          "key": "AddBackward0",
+          "calls": 26,
+          "self_cpu_us": 227.20100000035018,
+          "total_cpu_us": 227.20100000035018
+        },
+        {
+          "key": "aten::resize_",
+          "calls": 29,
+          "self_cpu_us": 212.02200000070025,
+          "total_cpu_us": 212.02200000070025
+        },
+        {
+          "key": "aten::unflatten",
+          "calls": 12,
+          "self_cpu_us": 210.95299999967392,
+          "total_cpu_us": 587.6059999999998
+        },
+        {
+          "key": "S02/optimizer",
+          "calls": 1,
+          "self_cpu_us": 198.7620000001043,
+          "total_cpu_us": 172549.9879999999
+        }
+      ],
+      "attribution": {
+        "issues": [],
+        "trace_spans": 10845,
+        "threads": [
+          {
+            "pid": 1306257,
+            "tid": 1
+          }
+        ],
+        "phase_spans": [
+          {
+            "name": "S02/zero_grad_before",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 22529,
+            "start_us": 432.408,
+            "duration_us": 990.3290000000001
+          },
+          {
+            "name": "S02/forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 22531,
+            "start_us": 1495.788,
+            "duration_us": 1401092.3760000002
+          },
+          {
+            "name": "S02/zero_grad_after",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 24414,
+            "start_us": 1402702.665,
+            "duration_us": 459.8950000000186
+          },
+          {
+            "name": "S02/backward",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 24416,
+            "start_us": 1403216.44,
+            "duration_us": 3171995.145
+          },
+          {
+            "name": "S02/optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "event_id": 28627,
+            "start_us": 4575331.656,
+            "duration_us": 172549.9879999999
+          }
+        ],
+        "kml_groups": [
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFnBackward",
+            "calls": 99,
+            "raw_duration_sum_us": 2161633.956000004,
+            "union_us": 2161633.956000004,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              24564,
+              24569,
+              24592
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFn",
+            "calls": 50,
+            "raw_duration_sum_us": 1017997.2479999996,
+            "union_us": 1017997.2479999996,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              22590,
+              22626,
+              22694
+            ]
+          }
+        ],
+        "copy_groups": [
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "ViewBackward_reshape_path",
+            "calls": 96,
+            "raw_duration_sum_us": 171565.22700000275,
+            "union_us": 171565.22700000275,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::reshape",
+              "ViewBackward0",
+              "autograd::engine::evaluate_function: ViewBackward0",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              24671,
+              24753,
+              24761
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "attention_backward_path",
+            "calls": 12,
+            "raw_duration_sum_us": 7975.674000000581,
+            "union_us": 7975.674000000581,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::contiguous",
+              "aten::_scaled_dot_product_flash_attention_for_cpu_backward",
+              "ScaledDotProductFlashAttentionForCpuBackward0",
+              "autograd::engine::evaluate_function: ScaledDotProductFlashAttentionForCpuBackward0",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              24737,
+              25066,
+              25395
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "layer_norm_backward_path",
+            "calls": 12,
+            "raw_duration_sum_us": 7292.37200000044,
+            "union_us": 7292.37200000044,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::contiguous",
+              "aten::native_layer_norm_backward",
+              "NativeLayerNormBackward0",
+              "autograd::engine::evaluate_function: NativeLayerNormBackward0",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              24900,
+              25229,
+              25558
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 1,
+            "raw_duration_sum_us": 15.290000000037253,
+            "union_us": 15.290000000037253,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::div",
+              "MeanBackward1",
+              "autograd::engine::evaluate_function: MeanBackward1",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              24497
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 37,
+            "raw_duration_sum_us": 45168.19999999972,
+            "union_us": 45168.19999999972,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::select_backward",
+              "SelectBackward0",
+              "autograd::engine::evaluate_function: SelectBackward0",
+              "S02/backward"
+            ],
+            "example_event_ids": [
+              24558,
+              24816,
+              24826
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFn_forward_boundary",
+            "calls": 50,
+            "raw_duration_sum_us": 24987.404999999275,
+            "union_us": 24987.404999999275,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::contiguous",
+              "_LinearFn",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              22589,
+              22625,
+              22693
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFn_forward_boundary",
+            "calls": 12,
+            "raw_duration_sum_us": 6585.193999999565,
+            "union_us": 6585.193999999565,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::reshape",
+              "_LinearFn",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              22614,
+              22757,
+              22900
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 1,
+            "raw_duration_sum_us": 15.379999999999654,
+            "union_us": 15.379999999999654,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              22555
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 1,
+            "raw_duration_sum_us": 14.520000000018626,
+            "union_us": 14.520000000018626,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::div_",
+              "aten::mean",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              24382
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 2,
+            "raw_duration_sum_us": 22.179999999934807,
+            "union_us": 22.179999999934807,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::div_",
+              "aten::mean",
+              "aten::mse_loss",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              24372,
+              24412
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 2,
+            "raw_duration_sum_us": 371.5929999998882,
+            "union_us": 371.5929999998882,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::addmm",
+              "aten::linear",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              22543,
+              24390
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 12,
+            "raw_duration_sum_us": 16998.173999999948,
+            "union_us": 16998.173999999948,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::clone",
+              "aten::contiguous",
+              "S02/forward_loss"
+            ],
+            "example_event_ids": [
+              22640,
+              22783,
+              22926
+            ]
+          },
+          {
+            "phase": "optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "optimizer_path",
+            "calls": 306,
+            "raw_duration_sum_us": 1424.918999997899,
+            "union_us": 1424.918999997899,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::add_",
+              "Optimizer.step#AdamW.step",
+              "S02/optimizer"
+            ],
+            "example_event_ids": [
+              28633,
+              28658,
+              28664
+            ]
+          },
+          {
+            "phase": "optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "optimizer_path",
+            "calls": 153,
+            "raw_duration_sum_us": 780.7569999992847,
+            "union_us": 780.7569999992847,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::div",
+              "Optimizer.step#AdamW.step",
+              "S02/optimizer"
+            ],
+            "example_event_ids": [
+              28653,
+              28684,
+              28715
+            ]
+          },
+          {
+            "phase": "optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "optimizer_path",
+            "calls": 306,
+            "raw_duration_sum_us": 1469.6020000074059,
+            "union_us": 1469.6020000074059,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [
+              "aten::_to_copy",
+              "aten::to",
+              "aten::mul_",
+              "Optimizer.step#AdamW.step",
+              "S02/optimizer"
+            ],
+            "example_event_ids": [
+              28638,
+              28644,
+              28669
+            ]
+          }
+        ],
+        "copy_owner_groups": [
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "ViewBackward_reshape_path",
+            "calls": 96,
+            "raw_duration_sum_us": 171565.22700000275,
+            "union_us": 171565.22700000275,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              24671,
+              24753,
+              24761
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "attention_backward_path",
+            "calls": 12,
+            "raw_duration_sum_us": 7975.674000000581,
+            "union_us": 7975.674000000581,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              24737,
+              25066,
+              25395
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "layer_norm_backward_path",
+            "calls": 12,
+            "raw_duration_sum_us": 7292.37200000044,
+            "union_us": 7292.37200000044,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              24900,
+              25229,
+              25558
+            ]
+          },
+          {
+            "phase": "backward",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 38,
+            "raw_duration_sum_us": 45183.48999999976,
+            "union_us": 45183.48999999976,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              24497,
+              24558,
+              24816
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "_LinearFn_forward_boundary",
+            "calls": 62,
+            "raw_duration_sum_us": 31572.598999998838,
+            "union_us": 31572.598999998838,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              22589,
+              22614,
+              22625
+            ]
+          },
+          {
+            "phase": "forward_loss",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "other_observed_ancestors",
+            "calls": 18,
+            "raw_duration_sum_us": 17421.84699999979,
+            "union_us": 17421.84699999979,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              22543,
+              22555,
+              22640
+            ]
+          },
+          {
+            "phase": "optimizer",
+            "pid": 1306257,
+            "tid": 1,
+            "owner": "optimizer_path",
+            "calls": 765,
+            "raw_duration_sum_us": 3675.2780000045896,
+            "union_us": 3675.2780000045896,
+            "overlap_removed_us": 0.0,
+            "ancestor_names": [],
+            "example_event_ids": [
+              28633,
+              28638,
+              28644
+            ]
+          }
+        ],
+        "shape_metadata": "UNKNOWN_NO_PER_CALL_SHAPES_IN_CAPTURE",
+        "native_kernel_time": "UNKNOWN_PYTHON_ENVELOPES_ONLY"
+      }
+    }
+  ],
+  "unknowns": {
+    "native_kml_kernel_time": "UNKNOWN",
+    "per_call_matrix_shapes": "UNKNOWN_NOT_CAPTURED",
+    "actual_source_tensors_of_copies": "UNKNOWN_NO_SHAPES_STACKS_OR_TENSOR_IDS",
+    "in_step_profiler_overhead": "UNKNOWN_WITHOUT_MATCHED_CONTROL"
+  },
+  "scientific_acceptance": false,
+  "performance_acceptance": false,
+  "new_cluster_jobs": 0,
+  "source_verification": "INPUT_VERIFICATION.json",
+  "method": "METHOD.md",
+  "interpretation": {
+    "priority": "Inspect existing fp32 KML linear/backward boundary first; investigate visible layout-copy paths separately, not all copy_ as KML",
+    "kml_calls_per_sample": {
+      "forward_loss": 50,
+      "backward": 99,
+      "optimizer": 0
+    },
+    "copy_calls_per_sample": {
+      "optimizer": 765,
+      "view_backward": 96,
+      "linear_forward_boundary": 62,
+      "attention_backward": 12,
+      "layer_norm_backward": 12,
+      "other_forward": 18,
+      "other_backward": 38
+    },
+    "kml_backward_copy_children": "No aten::copy_ descendants of _LinearFnBackward or KML envelope observed; this does not prove no native copying",
+    "minimal_next_verification": "Use frozen source to map only observed parent paths; shape/stride/alias or native kernel timing need separate bounded instrumentation, then strict numeric checks and matched-node unprofiled A/B if authorized",
+    "evidence_index": "ATTRIBUTION_INDEX.json"
+  },
+  "limitations": [
+    "No per-call shapes, strides, tensor IDs or stacks; no exact largest-matrix attribution",
+    "ViewBackward copies cannot be mapped to a specific forward operation or tensor solely from these spans",
+    "KML envelopes include Python/counter/allocation/ctypes/native; pure kernel time unknown",
+    "Trace FunctionEvent TID is not native worker/core inventory; no CPU-sum/wall shares",
+    "In-step profiler overhead unknown without matched control; no cross-host old-job speedup",
+    "No formal subject split/val/test or scientific/performance acceptance"
+  ]
+}

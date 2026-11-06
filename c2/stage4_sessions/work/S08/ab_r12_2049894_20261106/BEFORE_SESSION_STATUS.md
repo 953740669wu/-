@@ -1,0 +1,25 @@
+# S08 当前状态
+
+- 任务/轮次：R11_GEMM_SUMMARY_2049454_20261106。
+- 更新时间：2026-11-06 13:07 Asia/Shanghai。
+- 本轮目标：只读整理R11实际矩阵/角色/参数/双边界排名，独立供02及协调引用。
+- 状态：R9/旧真实摘要保留；本轮GEMM_SUMMARY_COMPLETE_ENGINEERING_ONLY。
+- 写入范围：仅S08/gemm_r11_2049454_20261106及当前短状态/六行摘要；旧解析门禁、00原件不改。
+- 交付：新目录GEMM_SUMMARY.md/JSON、SHAPE_RANKING.md/JSON、CALL_RANKING.json、METHOD.md。
+- 直接交接：同目录GEMM_SUMMARY_READY.json，精确绑定摘要/排名/核对记录与447条来源索引。
+- 输入身份：job2049454/cn21338、ENGINEERING_REAL_CORPUS_GEMM5_V1；26项交接/SHA/源码/收集绑定检查通过。
+- 配对检查：3×149=447对，角色每份forward50/dX49/dW50，实际A/B尺寸/stride/flags/完整native参数/报告alias均核。
+- 线程/边界：调用与ctypes线程一致1758130，native区间被outer包含；parent均空、两边界各自无调用间重叠；按并集处理，不称程序wall。
+- 角色ctypes覆盖中位：dW1253.128373ms、forward861.051619ms、dX762.955976ms；独立中位不相加。
+- 最大参数组：dW(m,n,k)=(512,2048,13312)，ta/T、tb/F、beta0，每份12次；ctypes中位377.310428ms、outer379.521718ms、差值中位2.249272ms。
+- 最慢单次：step4/call148，dW(1536,512,13312)，ctypes40.149095ms；不是总占用最大组。
+- 波动保留：step3/call68的outer−ctypes16.656714ms，原因UNKNOWN；该组step3差值18.693123ms，未删异常或指定为分配耗时。
+- 计时口径：outer不含Linear前面的reshape/contiguous/转换/bias铺开；ctypes含转换/打包/调度/计算，非纯内核；差值含观察器，完整步内观察开销UNKNOWN。
+- 来源：CALL_RANKING含全部447调用的path/bytes/SHA/JSON pointer、参数、线程/parent和单调起止；17组保留每份/逐调用范围中位与两套排名。
+- 上下文核对：19项检查通过，包括15项原loss差0、init/scale/unit/frame/mask相同、19完整CPU快照、恢复前向差0/额外更新0；输入前后SHA不变。
+- 新检查：7个LOCAL_FIXTURE配对/尺寸/ABI元数据/alias/角色/嵌套/跨线程分支通过；不执行实际KML，不复跑旧测试。
+- R12口径：目标当前占用只是实验线索，非节省保证；候选数值/性能未运行，不拿R11诊断作正式对照或按FLOPs保证加速。
+- 活动作业：S08无；S00交接R11 SUCCEEDED/exit0、active_s00_job=null且已清理；本轮未SSH实时核查。
+- 未运行：训练、BLAS、NPZ/信号数据或权重读取、候选实现/集群提交；无正式val/test/subject划分、科学或加速接受。
+- 下一步：本轮完成，02/协调直接读取就绪文件及排名；R12后续严格数值/同机无观察器A/B需另安排。
+- 待归档：gemm_r11_2049454_20261106/ARCHIVE_FILES.txt；未操作共享Git暂存/分支/提交/推送。

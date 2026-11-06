@@ -1,0 +1,154 @@
+{
+  "protocol": "ENGINEERING_REAL_CORPUS_PILOT_V1",
+  "engineering_only": true,
+  "formal_split_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "subject_mapping_status": "UNKNOWN",
+  "evidence_kind": "LOCAL_FIXTURE",
+  "status": "ENGINEERING_PILOT_COMPLETE_NOT_SCIENTIFIC_ACCEPTANCE",
+  "completed_updates": 2,
+  "planned_updates": 2,
+  "consumed_frames": 2,
+  "stop_reason": "epoch_complete",
+  "data_identity": {
+    "interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+    "corpus": {
+      "manifest": {
+        "sha256": "bdd146040bddf2ddd47fb9d571d5d2f40e5fa20fbd30d0c0d11239893e647032"
+      }
+    }
+  },
+  "source": {
+    "manifest_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "files": {
+      "train_engineering.py": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  },
+  "source_and_data_after": "PASS_SAME_FROZEN_IDENTITIES",
+  "config": {
+    "threads": 36
+  },
+  "steps": [
+    {
+      "step": 1,
+      "batch_size": 1,
+      "frame_indices": [
+        0
+      ],
+      "frame_ids": [
+        {
+          "case": "caseA",
+          "unit": "unitA",
+          "pair_index": 0,
+          "belt": "16_adjacent",
+          "subject_id": null,
+          "npz_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "sidecar_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "masked_elements": 100,
+      "mask_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "losses": {
+        "total": 3.0,
+        "voltage": 1.0,
+        "coarse": 2.0
+      },
+      "loader_seconds": 0.1,
+      "step_seconds": 1.0,
+      "diagnostic_seconds": 0.2,
+      "rss_before": {
+        "rss_bytes": 100,
+        "peak_rss_bytes": 200
+      },
+      "rss_after": {
+        "rss_bytes": 150,
+        "peak_rss_bytes": 250
+      },
+      "rss_peak_scope": "process_lifetime",
+      "kml_calls": 20,
+      "adamw_step": 1,
+      "cursor": 1
+    },
+    {
+      "step": 2,
+      "batch_size": 1,
+      "frame_indices": [
+        1
+      ],
+      "frame_ids": [
+        {
+          "case": "caseA",
+          "unit": "unitA",
+          "pair_index": 1,
+          "belt": "16_adjacent",
+          "subject_id": null,
+          "npz_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "sidecar_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "masked_elements": 100,
+      "mask_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "losses": {
+        "total": 3.0,
+        "voltage": 1.0,
+        "coarse": 2.0
+      },
+      "loader_seconds": 0.1,
+      "step_seconds": 2.0,
+      "diagnostic_seconds": 0.2,
+      "rss_before": {
+        "rss_bytes": 100,
+        "peak_rss_bytes": 200
+      },
+      "rss_after": {
+        "rss_bytes": 150,
+        "peak_rss_bytes": 250
+      },
+      "rss_peak_scope": "process_lifetime",
+      "kml_calls": 20,
+      "adamw_step": 2,
+      "cursor": 2
+    }
+  ],
+  "runtime": {
+    "backend": "kml",
+    "torch_threads": 36,
+    "kml_gemm_calls": 40,
+    "kml_resolved": "/lib/libkblas.so",
+    "libraries": [
+      {
+        "path": "/lib/libkblas.so",
+        "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    ]
+  },
+  "cpu36": {
+    "errors": [],
+    "checkpoints": [
+      {
+        "name": "publish"
+      }
+    ]
+  },
+  "checkpoint": {
+    "path": "/remote/final.pt",
+    "bytes": 123,
+    "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+  },
+  "recovery": {
+    "status": "PASS_NO_EXTRA_UPDATE",
+    "extra_updates": 0
+  },
+  "exposure_ledger": {
+    "path": "/remote/EXPOSURE_LEDGER.json"
+  },
+  "timing": {
+    "wall_seconds": 10,
+    "data_loading_seconds": 1,
+    "batch_materialization_seconds": 0.2,
+    "training_step_seconds": 3,
+    "diagnostic_seconds": 0.4,
+    "checkpoint_and_recovery_seconds": 2,
+    "unattributed_seconds": 3.4
+  }
+}

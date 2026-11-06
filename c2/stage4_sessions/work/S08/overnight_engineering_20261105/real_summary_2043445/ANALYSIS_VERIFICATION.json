@@ -1,0 +1,62 @@
+{
+  "checked_utc": "2026-11-06T02:33:48.290836+00:00",
+  "job_id": "2043445",
+  "checks": {
+    "no_parser_gaps": true,
+    "25_contiguous_updates": true,
+    "1600_unique_frames": true,
+    "2_cases_16_units_full_rows": true,
+    "descriptor_unit_set": true,
+    "ledger_matches_each_update": true,
+    "epoch_complete": true,
+    "new_masks_actual_kml": true,
+    "training_step_seconds_reconciled": true,
+    "diagnostic_seconds_reconciled": true,
+    "batch_materialization_seconds_reconciled": true,
+    "wall_components_reconciled": true,
+    "recovery_record_exact": true,
+    "checkpoint_handoff_identity": true,
+    "cpu_job_identity": true,
+    "all_bound_inputs_unchanged": true
+  },
+  "all_checks_passed": true,
+  "case_frame_counts": {
+    "s0285": 800,
+    "s0593": 800
+  },
+  "unit_row_counts": {
+    "s0285_p0_16_adjacent_c14": 100,
+    "s0285_p0_16_adjacent_c21": 100,
+    "s0285_p1_16_adjacent_c15": 100,
+    "s0285_p1_16_adjacent_c18": 100,
+    "s0285_p1_16_adjacent_c20": 100,
+    "s0285_p1_16_adjacent_c21": 100,
+    "s0285_p1_16_adjacent_c23": 100,
+    "s0285_p1_16_adjacent_c9": 100,
+    "s0593_p0_16_adjacent_c22": 100,
+    "s0593_p1_16_adjacent_c1": 100,
+    "s0593_p1_16_adjacent_c11": 100,
+    "s0593_p1_16_adjacent_c14": 100,
+    "s0593_p1_16_adjacent_c18": 100,
+    "s0593_p1_16_adjacent_c19": 100,
+    "s0593_p1_16_adjacent_c2": 100,
+    "s0593_p1_16_adjacent_c6": 100
+  },
+  "post_analysis_hash_checks": {
+    "application_result": true,
+    "steps": true,
+    "evidence_index": true,
+    "exposure_ledger": true,
+    "archive": true,
+    "audit": true,
+    "review": true,
+    "exit_code": true,
+    "coordination_review": true,
+    "handoff": true
+  },
+  "source_tool_modified": false,
+  "fixture_tests_rerun": false,
+  "checkpoint_read": false,
+  "cluster_access": false,
+  "summary_cli_exit_code": 0
+}

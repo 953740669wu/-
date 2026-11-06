@@ -1,0 +1,85 @@
+{
+  "checked_utc": "2026-11-06T02:31:56.821318+00:00",
+  "job_id": "2043445",
+  "scope": "LOCAL_HANDOFF_AND_COLLECTED_EVIDENCE_HASHES_NO_WEIGHT_READ_NO_SSH",
+  "checks": {
+    "application_result": true,
+    "steps": true,
+    "evidence_index": true,
+    "exposure_ledger": true,
+    "archive": true,
+    "audit": true,
+    "review": true,
+    "job_identity": true,
+    "explicit_root": true,
+    "explicit_paths": true,
+    "application_result_collection_binding": true,
+    "steps_collection_binding": true,
+    "exposure_ledger_collection_binding": true,
+    "exit_code_index": true,
+    "engineering_scope": true,
+    "source_bindings": true,
+    "recorded_terminal": true,
+    "tool_summarize.py": true,
+    "tool_test_summarize.py": true
+  },
+  "assets": {
+    "application_result": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\received\\payload\\outputs\\engineering_2043445\\result.json",
+      "bytes": 1709553,
+      "sha256": "6bb313a9171f04dc0e2055cef205c01239cf3752dea6fee73068067669625d78"
+    },
+    "steps": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\received\\payload\\outputs\\engineering_2043445\\steps.jsonl",
+      "bytes": 564457,
+      "sha256": "8f0654f46457a73b582c548d44ffa7d1a36b19f006b1936d6817272a84763358"
+    },
+    "evidence_index": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\received\\COLLECTION_S00.json",
+      "bytes": 884929,
+      "sha256": "50c784796813493f05018f54b80b6c9eca02f924373cd1932ec042c9b3044361"
+    },
+    "exposure_ledger": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\received\\payload\\outputs\\EXPOSURE_LEDGER.json",
+      "bytes": 763274,
+      "sha256": "86d9f6c7c26ca466b73869e95a0565a9662fb16e4bc58d5234456fb05aa83075"
+    },
+    "archive": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\JOB_2043445_evidence.zip",
+      "bytes": 543118,
+      "sha256": "53feb1041cc17472d8ec6777ec8ec64e2d8fd4a286a518be42f2d49298e82b00"
+    },
+    "audit": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\RUN_AUDIT.json",
+      "bytes": 3724,
+      "sha256": "f49ea22d49aae02d568a9563f30438d0918a5247034615764e98da0b5926c722"
+    },
+    "review": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\S01_REVIEW.json",
+      "bytes": 6450,
+      "sha256": "da7e84289a905466bc5bfdaa1e9cf7a1b80c41ace0cfaae63488d11ae8f6e408"
+    },
+    "exit_code": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\received\\payload\\outputs\\engineering_2043445\\exit_code.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "coordination_review": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\JOB2043445_ENGINEERING_REVIEW_20261106.json",
+      "bytes": 1156,
+      "sha256": "83e37a1ebebc2b7a6d0245e57e97ccb7aa70e4ae90dbf46824ef854bb95b874c"
+    },
+    "handoff": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\RUN_COMPLETE.json",
+      "bytes": 4319,
+      "sha256": "8b9f38079c7ea0ffccc61dbf9741eb07fb97184740bd2682e98a0eb59ecde836"
+    }
+  },
+  "all_checks_passed": true,
+  "analysis_inputs": {
+    "evidence_dir": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\received\\payload\\outputs",
+    "ledger_relative_path": "EXPOSURE_LEDGER.json",
+    "run_subdir": "engineering_2043445"
+  },
+  "checkpoint_access": "NOT_READ_OR_DOWNLOADED"
+}

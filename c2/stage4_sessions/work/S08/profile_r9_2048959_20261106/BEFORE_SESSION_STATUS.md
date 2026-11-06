@@ -1,0 +1,23 @@
+# S08 当前状态
+
+- 任务/轮次：JOB2043445_REAL_SUMMARY_20261106。
+- 更新时间：2026-11-06 10:34 Asia/Shanghai。
+- 本轮目标：用已准备工具整理唯一真实job2043445，不重新训练或修改原证据。
+- 状态：LOCAL_PREPARED / PENDING_RUN_COMPLETE → REAL_SUMMARY_COMPLETE_ENGINEERING_ONLY。
+- 写入范围：仅work/S08；原工具、夹具、旧就绪文件与其他窗口证据保持原样。
+- 真实摘要：overnight_engineering_20261105/real_summary_2043445/{SUMMARY.md,SUMMARY.json}；与LOCAL_FIXTURE分离。
+- 就绪交接：同目录SUMMARY_READY.json，锚定摘要与核对记录的path/bytes/SHA。
+- 输入：S00 RUN_COMPLETE指定received/payload/outputs及engineering_2043445；工程接口/descriptor/源码清单SHA一致。
+- 验证增量：19项交接/身份核对通过；7份绑定原件bytes/SHA及退出码/收集索引一致；原工具CLI exit0、issues=[]。
+- 结果核对：16项记录检查通过；25个连续AdamW/B64更新、1600个不重复帧、16unit各100行，s0285/s0593各800帧，账本逐步一致。
+- 耗时：程序86.690500秒；训练58.477237秒；单步中位2.329944秒；诊断6.842871秒；另列96节点秒/调度usage95秒。
+- 内存：训练前后50次采样；process-lifetime HWM最大7258705920bytes（6.7602GiB），不代表单步独占或整个job最终峰值。
+- loss：两分量/total逐步与范围完整保留；首末为不同batch，不作收敛/泛化/加速判断。
+- 恢复：原记录PASS_NO_EXTRA_UPDATE，参数/AdamW/RNG/cursor/身份一致，前向差0、额外更新0；S08未加载或重核远端权重。
+- 暴露：16unit确认使用、25条确认更新、in_flight为空，2帧恢复探针无更新；未来须按真实subject追溯排除最终test。
+- 证据：真实摘要目录HANDOFF_VERIFICATION.json、ANALYSIS_VERIFICATION.json；输入前后bytes/SHA一致，源码未改、未重复旧夹具测试。
+- 范围限制：正式split/subject映射UNKNOWN；validation=NOT_RUN_NO_FORMAL_SPLIT；无科学/性能/效果验收。
+- 活动作业：S08无；S00固定交接记录job2043445终态SUCCEEDED/exit0、active_s00_job=null、所属进程已清理；本轮无SSH实时查询。
+- 未运行：训练、NPZ/权重读取、恢复重算、新集群job；未操作共享Git暂存/分支/提交/推送。
+- 下一步：本轮已完成，无执行阻塞；由协调/Git窗口读取SUMMARY_READY与本轮精确清单归档，后续任务另派。
+- 本轮待归档：overnight_engineering_20261105/real_summary_2043445/ARCHIVE_FILES.txt；原工具轮清单保留为上一轮记录。

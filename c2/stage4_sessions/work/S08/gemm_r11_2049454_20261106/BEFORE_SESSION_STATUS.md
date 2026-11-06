@@ -1,0 +1,24 @@
+# S08 当前状态
+
+- 任务/轮次：R9_PROFILE_ATTRIBUTION_2048959_20261106。
+- 更新时间：2026-11-06 11:45 Asia/Shanghai。
+- 本轮目标：只读整理R9三份真实采样，为02提供阶段和热点归因；不等待其候选。
+- 状态：上一轮2043445真实摘要已保留；本轮PROFILE_SUMMARY_COMPLETE_ENGINEERING_ONLY。
+- 写入范围：仅S08/profile_r9_2048959_20261106及本短状态/六行摘要；旧PILOT工具和00原件未改。
+- 交付：profile_r9_2048959_20261106/{PROFILE_SUMMARY.md,PROFILE_SUMMARY.json,ATTRIBUTION_INDEX.json,METHOD.md}。
+- 直接交接：同目录PROFILE_SUMMARY_READY.json，绑定摘要/索引/核对记录SHA；02可直接读取。
+- 输入身份：job2048959/cn21338、ENGINEERING_REAL_CORPUS_PROFILE5_V1；31项交接/样本/冻结导出器来源检查全过。
+- 限额：3trace/3events，均10845事件、130key、导出top80、149个KML包裹；原事件/bytes/marker限额检查通过。
+- 阶段：前2预热、后3采样分列；采样forward_loss/backward/optimizer中位1.515943/3.480861/0.173312秒。
+- 开销：程序82.124880秒；5步25.088423秒；profiler外层16.014551秒；另94节点秒；采样内插桩成本UNKNOWN。
+- 归属：三份均前向_LinearFn 50次KML、反向_LinearFnBackward 99次；447包裹父链/线程/区间全部一致，区间并集去重，无实际重叠。
+- copy：每份1003次，optimizer765、ViewBackward96、Linear前向62、attention反向12、layernorm反向12、其余56；不全部归给KML。
+- 排名：KML包裹self CPU均第1、copy_均第2；self与inclusive/phase wall分列，未累加父子或算CPU和/wall占比。
+- 建议：先核KML线性/反向边界，布局复制另核；ViewBackward复制不能凭此映射到Linear反向或指定前向tensor。
+- 未知：纯KML内核时间、逐调用矩阵shape/stride/alias、copy源tensor、采样内插桩开销；无跨节点速度比或稳态性能接受。
+- 验证增量：6个LOCAL_FIXTURE归属/缺事件/嵌套去重检查通过；23项真实归因/限额/时间对账及输入前后SHA核对通过。
+- 证据：INPUT_VERIFICATION.json、VALIDATION.json；ATTRIBUTION_INDEX保留447个包裹精确索引。
+- 活动作业：S08无；S00交接记录R9 SUCCEEDED/exit0、active_s00_job=null、已清理；本轮未SSH实时探测。
+- 未运行：训练、权重/NPZ读取、集群提交、候选实现；无正式val/test/subject映射、科学或加速接受。
+- 下一步：本轮已完成；02/协调直接引用就绪文件及索引，候选必要数值/同机无profiler A/B另安排，不阻断02并行工作。
+- 待归档：profile_r9_2048959_20261106/ARCHIVE_FILES.txt；未操作共享Git暂存/分支/提交/推送。
