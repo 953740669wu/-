@@ -1,0 +1,96 @@
+{
+  "status": "PASS_LOCAL_PREPARED",
+  "timestamp": "2026-11-05T15:52:42.924732+00:00",
+  "python": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Scripts\\python.exe",
+  "tests": [
+    {
+      "label": "engineering_tests_final",
+      "exit": 0,
+      "log": "evidence/engineering_tests_final.log"
+    },
+    {
+      "label": "native_engineering_final",
+      "exit": 0,
+      "log": "evidence/native_engineering_final.log"
+    },
+    {
+      "label": "pairing_rejections_final",
+      "exit": 0,
+      "log": "evidence/pairing_rejections_final.log"
+    },
+    {
+      "label": "zero_reference_final",
+      "exit": 0,
+      "log": "evidence/zero_reference_final.log"
+    },
+    {
+      "label": "cross_belt_final",
+      "exit": 0,
+      "log": "evidence/cross_belt_final.log"
+    }
+  ],
+  "test_count": 14,
+  "unchanged_r8_files": [
+    "real_data.py",
+    "pilot_training.py",
+    "train_real.py",
+    "run_real_pilot.sh",
+    "inspect_descriptor.py",
+    "baseline/s4_models.py",
+    "baseline/kml_ops.py",
+    "cpu36_guard.py",
+    "cpu36_contract.py",
+    "diagnostic_common.py",
+    "memory_metrics.py",
+    "interfaces/cluster_runtime.env",
+    "tests/check_equivalence.py"
+  ],
+  "source_entries": 28,
+  "python39_ast": true,
+  "shell": {
+    "run_engineering.sh": {
+      "cr_bytes": 0,
+      "bash_n_exit": 0
+    },
+    "interfaces/cluster_runtime.env": {
+      "cr_bytes": 0,
+      "bash_n_exit": 0
+    }
+  },
+  "cli_rejections": [
+    {
+      "label": "engineering_missing",
+      "exit": 2,
+      "status": "DATA_NOT_READY",
+      "error": "engineering descriptor path and trusted SHA required",
+      "before_framework": true,
+      "result": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\evidence\\entry_93e8179d42_engineering_missing\\result.json"
+    },
+    {
+      "label": "formal_reject_engineering",
+      "exit": 2,
+      "status": "DATA_NOT_READY",
+      "error": "S00 DATA_NOT_READY: ",
+      "before_framework": true,
+      "result": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\evidence\\entry_93e8179d42_formal_reject_engineering\\result.json"
+    }
+  ],
+  "compatibility": {
+    "status": "PASS_METADATA_ONLY",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "initial_ledger_sha256": "adcf84752f65b4a527133f5023a61f8bf533a4d0e5f62d327943ea50a67e728b",
+    "units": 16,
+    "frames": 1600,
+    "linux_source_gate": "NOT_RUN_BY_S02",
+    "npz_arrays_read": false
+  },
+  "real_npz_read": false,
+  "full_encoder_runs": 0,
+  "jobs_submitted": 0,
+  "unrun": [
+    "Linux C2/KML full Encoder",
+    "actual CPU36 all TIDs",
+    "real training/checkpoint/recovery",
+    "formal val/test"
+  ]
+}

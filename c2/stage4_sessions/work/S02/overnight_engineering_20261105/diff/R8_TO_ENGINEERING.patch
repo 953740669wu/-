@@ -1,0 +1,578 @@
+--- R8/train_real.py
++++ engineering/train_engineering.py
+@@ -1,4 +1,4 @@
+-"""One authorized real-corpus encoder pilot, fp32/CKPT0, one epoch or 200 updates."""
++"""Engineering-only real samples; no formal split or scientific acceptance."""
+ import argparse
+ from datetime import datetime,timezone
+ import hashlib
+@@ -14,7 +14,8 @@
+ import cpu36_guard
+ from diagnostic_common import configure_backend,finish_backend
+ import memory_metrics
+-import pilot_training as training
++import engineering_training as training
++import engineering_data
+ import real_data
+ 
+ ROOT=Path(__file__).resolve().parent
+@@ -40,7 +41,9 @@
+ def main(args,result):
+     started=time.monotonic()
+     result['source']=source_identity()
+-    metadata=real_data.load_descriptor(args.descriptor,args.descriptor_sha256)
++    metadata=engineering_data.load_descriptor(args.descriptor,args.descriptor_sha256)
++    ledger=engineering_data.Exposure(metadata['description']['runtime_exposure_ledger_path'],metadata['description'])
++    result['exposure_ledger']=dict(path=str(ledger.path),initial=metadata['description']['exposure_ledger'])
+     result['data_identity']=metadata['identity']
+     result['cpu36']={}
+     cpu36_guard.prepare(args.expected_cpus,args.cpu_contract,result['cpu36'])
+@@ -49,7 +52,9 @@
+     cpu36_guard.checkpoint(result['cpu36'],'after_framework',torch)
+     runtime,expected=configure_backend(torch,'kml',args.expected_cpus);result['runtime']=runtime
+     cpu36_guard.checkpoint(result['cpu36'],'after_backend',torch)
+-    loaded=real_data.load_arrays(metadata)
++    tick=time.perf_counter()
++    loaded=engineering_data.load_arrays(metadata,ledger)
++    result['timing']['data_loading_seconds']=time.perf_counter()-tick
+     frames=len(loaded['train']['v'])
+     real_data.require(frames>args.batch_size,'pilot needs multiple real batches; never duplicate/pad frames')
+     result['normalization']=dict(image_scale=loaded['image_scale'],scope=loaded['normalization_scope'],
+@@ -69,54 +74,53 @@
+     planned=min(200,math.ceil(frames/args.batch_size));step=cursor=0
+     result['planned_updates']=planned;result['completed_updates']=0
+     cpu36_guard.checkpoint(result['cpu36'],'initialized',torch)
+-    before=runtime['kml_gemm_calls']
+-    result['val_initial']=training.evaluate(torch,model,loaded['val'],args.batch_size,angles)
+-    result['val_initial']['kml_calls']=runtime['kml_gemm_calls']-before
+-    if loaded['val'] and result['val_initial']['kml_calls']<=0:raise ValueError('no KML in initial validation')
++    result['val_initial']=dict(status='NOT_RUN_NO_FORMAL_SPLIT')
+     cpu36_guard.checkpoint(result['cpu36'],'initial_val',torch)
+-    records=[];stop='epoch_complete'
++    records=[];result['steps']=records;result['consumed_frames']=0;stop='epoch_complete'
+     with (args.output_dir/'steps.jsonl').open('x',encoding='utf-8') as log:
+         while cursor<frames and step<200:
+-            # The outer process is limited to840s. Reserve120s for val/save/recovery.
++            # The outer process is limited to840s. Reserve120s for save/recovery.
+             if STOP_REQUESTED or time.monotonic()-started>=720:
+                 stop='BUDGET_INCOMPLETE';break
+             indices=order[cursor:cursor+args.batch_size]
+             load_start=time.perf_counter();values=training.batch(torch,loaded['train'],indices,angles)
+             loader_seconds=time.perf_counter()-load_start
++            result['timing']['batch_materialization_seconds']+=loader_seconds
++            diagnostic_start=time.perf_counter()
+             mask=torch.rand(len(indices),208)<0.5
+             if not mask.any():raise ValueError('empty training mask; no resampling')
++            ledger.attempt(step+1,indices,[loaded['train']['frame_ids'][i] for i in indices])
+             cpu36_guard.checkpoint(result['cpu36'],f'before_train_{step+1}',torch)
+             rss_before=memory_metrics.rss();calls=runtime['kml_gemm_calls']
++            pre_diagnostic=time.perf_counter()-diagnostic_start
+             tick=time.perf_counter();losses=training.train_step(torch,model,opt,values,mask)
+             elapsed=time.perf_counter()-tick;rss_after=memory_metrics.rss()
++            diagnostic_start=time.perf_counter()
+             training.validate_update(torch,model,opt,values,step+1)
+             if any(not torch.isfinite(value) for value in losses.values()):raise ValueError('nonfinite training loss')
+             count=runtime['kml_gemm_calls']-calls
+             if count<=0:raise ValueError('no actual KML in training step')
+-            step+=1;cursor+=len(indices);result['completed_updates']=step
++            step+=1;cursor+=len(indices);result['completed_updates']=step;result['consumed_frames']=cursor
+             cpu36_guard.checkpoint(result['cpu36'],f'after_train_{step}',torch)
+-            record=dict(step=step,batch_size=len(indices),frame_indices=indices,
++            diagnostic_seconds=pre_diagnostic+time.perf_counter()-diagnostic_start
++            result['timing']['training_step_seconds']+=elapsed
++            result['timing']['diagnostic_seconds']+=diagnostic_seconds
++            record=dict(diagnostic_seconds=diagnostic_seconds,step=step,batch_size=len(indices),frame_indices=indices,
+                 frame_ids=[loaded['train']['frame_ids'][i] for i in indices],masked_elements=int(mask.sum()),
+                 mask_sha256=hashlib.sha256(mask.numpy().tobytes()).hexdigest(),
+                 losses={name:value.item() for name,value in losses.items()},loader_seconds=loader_seconds,
+                 step_seconds=elapsed,rss_before=rss_before,rss_after=rss_after,rss_peak_scope='process_lifetime',
+                 kml_calls=count,adamw_step=step,cursor=cursor)
+-            log.write(json.dumps(record)+'\n');log.flush();records.append({k:v for k,v in record.items() if k!='frame_ids'})
++            log.write(json.dumps(record)+'\n');log.flush();ledger.confirm(step);records.append(record)
+     if cursor<frames and step==200:stop='update_cap_200'
+     result.update(stop_reason=stop,steps=records,consumed_frames=cursor,elapsed_seconds=time.monotonic()-started)
+-    # A hard outer TERM leaves an honest incomplete checkpoint, without extra work.
+-    before=runtime['kml_gemm_calls']
+-    result['val_final']=dict(status='VAL_NOT_RUN_BUDGET') if STOP_REQUESTED else training.evaluate(torch,model,loaded['val'],args.batch_size,angles)
+-    result['val_final']['kml_calls']=runtime['kml_gemm_calls']-before
+-    if loaded['val'] and not STOP_REQUESTED:
+-        if result['val_final']['mask_sha256']!=result['val_initial']['mask_sha256']:raise ValueError('validation masks changed')
+-        if result['val_final']['kml_calls']<=0:raise ValueError('no KML in final validation')
++    result['val_final']=dict(status='NOT_RUN_NO_FORMAL_SPLIT')
+     cpu36_guard.checkpoint(result['cpu36'],'final_val',torch)
+     if source_identity()!=result['source']:raise ValueError('pilot source changed during execution')
+-    real_data.load_descriptor(args.descriptor,args.descriptor_sha256)
++    engineering_data.load_descriptor(args.descriptor,args.descriptor_sha256)
+     for items in metadata['units'].values():
+         for item in items:
+-            real_data.require(real_data.sha(item['path'])==item['npz_sha256'] and
++            engineering_data.unchanged(real_data.sha(item['path'])==item['npz_sha256'] and
+                 real_data.sha(item['sidecar_path'])==item['sidecar_sha256'],'input source changed during execution')
+     result['source_and_data_after']='PASS_SAME_FROZEN_IDENTITIES'
+     progress=dict(epoch_completed=cursor==frames,epoch_order=order,cursor=cursor,optimizer_updates=step,
+@@ -124,16 +128,22 @@
+                   order_method='Python_Random_shuffle_once',cursor_unit='frame_offset')
+     identity=dict(source=result['source'],data=result['data_identity'],config=result['config'],
+                   initialization=result['initialization'])
++    checkpoint_start=time.perf_counter()
+     result['checkpoint']=training.save_checkpoint(torch,args.output_dir/'checkpoints/final.pt',model,opt,
+                                                   identity,progress,result['normalization'])
+     cpu36_guard.checkpoint(result['cpu36'],'checkpoint_saved',torch)
+     if STOP_REQUESTED:
+         result['recovery']=dict(status='NOT_RUN_BUDGET',extra_updates=0)
+     else:
++        ledger.value['recovery_probe']=dict(status='POSSIBLY_USED_IN_RECOVERY_PROBE',
++            frame_ids=loaded['train']['frame_ids'][:min(2,frames)],extra_updates=0)
++        ledger.save()
+         probe_values=training.batch(torch,loaded['train'],list(range(min(2,frames))),angles)
+         result['recovery']=training.verify_restore(torch,result['checkpoint'],model,opt,factory,identity,
+             progress,result['normalization'],probe_values,accepted.compare)
++        ledger.value['recovery_probe']['status']='RECOVERY_PROBE_CONFIRMED_NO_UPDATE';ledger.save()
+         cpu36_guard.checkpoint(result['cpu36'],'restore_verified',torch)
++    result['timing']['checkpoint_and_recovery_seconds']=time.perf_counter()-checkpoint_start
+     finish_backend(runtime,expected)
+     cpu36_guard.checkpoint(result['cpu36'],'publish',torch)
+     names=['before_framework','after_framework','after_backend','initialized','initial_val']
+@@ -141,7 +151,7 @@
+     names += ['final_val','checkpoint_saved']+(['restore_verified'] if not STOP_REQUESTED else [])+['publish']
+     if result['cpu36']['errors'] or [x['name'] for x in result['cpu36']['checkpoints']]!=names:raise ValueError('missing pilot CPU36 evidence')
+     incomplete=stop=='BUDGET_INCOMPLETE' or STOP_REQUESTED or step<planned
+-    result['status']='INCOMPLETE' if incomplete else 'PILOT_COMPLETE_NOT_QUALITY_ACCEPTANCE'
++    result['status']='INCOMPLETE' if incomplete else 'ENGINEERING_PILOT_COMPLETE_NOT_SCIENTIFIC_ACCEPTANCE'
+     return 3 if incomplete else 0
+ 
+ 
+@@ -159,14 +169,21 @@
+         parser.error('refuse existing pilot outputs')
+     args.output_dir.mkdir(parents=True,exist_ok=True)
+     signal.signal(signal.SIGTERM,request_stop)
+-    result=dict(status='STARTED',started_utc=datetime.now(timezone.utc).isoformat(),protocol=real_data.PROTOCOL,
++    result=dict(status='STARTED',started_utc=datetime.now(timezone.utc).isoformat(),protocol=engineering_data.PROTOCOL,**engineering_data.FLAGS,
++        timing=dict(data_loading_seconds=0.,batch_materialization_seconds=0.,training_step_seconds=0.,diagnostic_seconds=0.,checkpoint_and_recovery_seconds=0.),
+         config=dict(belt='16_adjacent',part='pre',precision='fp32',checkpoint=False,compile=False,hbm=False,
+             attention='original_native_SDPA',linear='existing_KML_fp32',batch_size=args.batch_size,
+             max_epochs=1,max_updates=200,gradient_accumulation=False,train_seed=0,subset_seed=2026,
+             lr=1e-4,betas=[0.9,0.999],eps=1e-8,weight_decay=0.01,threads=36))
++    wall_start=time.perf_counter()
+     try:code=main(args,result)
++    except engineering_data.SourceChanged as exc:result.update(status='SOURCE_CHANGED',error=str(exc));code=2
+     except real_data.DataNotReady as exc:result.update(status='DATA_NOT_READY',error=str(exc));code=2
+     except Exception as exc:result.update(status='ERROR_RUNTIME_OR_STATE',error=repr(exc),traceback=traceback.format_exc());code=2
++    wall=time.perf_counter()-wall_start
++    measured=sum(result['timing'].values())
++    result['timing'].update(wall_seconds=wall,unattributed_seconds=wall-measured,
++        diagnostic_scope='mask/exposure-before-update/CPU-before-and-after/state-validation; other setup/logging in unattributed')
+     result['ended_utc']=datetime.now(timezone.utc).isoformat()
+     write_json(args.output_dir/'result.json',result)
+     print(json.dumps({k:result[k] for k in ('status','completed_updates','stop_reason','error') if k in result},indent=2))
+--- R8/pilot_training.py
++++ engineering/engineering_training.py
+@@ -111,7 +111,7 @@
+     path.parent.mkdir(parents=True,exist_ok=True)
+     temporary=path.with_suffix('.tmp')
+     if temporary.exists():raise ValueError('refuse stale checkpoint temporary file')
+-    payload=dict(protocol='REAL_CORPUS_PILOT_V1',identity=identity,progress=progress,normalization=normalization,
++    payload=dict(protocol='ENGINEERING_REAL_CORPUS_PILOT_V1',identity=identity,progress=progress,normalization=normalization,
+                  model=model.state_dict(),optimizer=opt.state_dict(),rng=rng_state(torch))
+     torch.save(payload,temporary);temporary.replace(path)
+     from real_data import sha
+@@ -137,7 +137,7 @@
+     path=Path(checkpoint['path'])
+     if sha(path)!=checkpoint['sha256']:raise ValueError('checkpoint SHA mismatch')
+     saved=torch.load(path,map_location='cpu',weights_only=True)
+-    if saved['protocol']!='REAL_CORPUS_PILOT_V1' or saved['identity']!=identity or saved['progress']!=progress or saved['normalization']!=normalization:
++    if saved['protocol']!='ENGINEERING_REAL_CORPUS_PILOT_V1' or saved['identity']!=identity or saved['progress']!=progress or saved['normalization']!=normalization:
+         raise ValueError('checkpoint source/data/config/cursor identity mismatch')
+     restored=factory();restored_opt=optimizer(torch,restored)
+     restored.load_state_dict(saved['model'],strict=True);restored_opt.load_state_dict(saved['optimizer'])
+--- R8/run_real_pilot.sh
++++ engineering/run_engineering.sh
+@@ -3,12 +3,12 @@
+ set -euo pipefail
+ HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
+ fail() { echo "$*" >&2; exit 2; }
+-[[ -n "${CCS_JOB_ID:-}" && -n "${S02_REAL_DESCRIPTOR:-}" && -n "${S02_REAL_DESCRIPTOR_SHA256:-}" ]] || fail 'new job and authoritative ready descriptor/SHA required'
++[[ -n "${CCS_JOB_ID:-}" && -n "${S02_ENGINEERING_DESCRIPTOR:-}" && -n "${S02_ENGINEERING_DESCRIPTOR_SHA256:-}" ]] || fail 'new job and authoritative ready descriptor/SHA required'
+ [[ "$(hostname)" != login* ]] || fail 'compute allocation required'
+ case "$HERE" in /home/share/dengqingtian/*) ;; *) fail 'owned staging path required' ;; esac
+ export OMP_NUM_THREADS=36 MKL_NUM_THREADS=36 OPENBLAS_NUM_THREADS=1 OMP_PLACES=cores OMP_PROC_BIND=close
+ export PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 LINEAR_DTYPE=fp32 HBM=0
+-OUT="$HERE/outputs/real_${CCS_JOB_ID}"
++OUT="$HERE/outputs/engineering_${CCS_JOB_ID}"
+ if [[ "${1:-}" != --bounded-child ]]; then
+   mkdir -p "$HERE/outputs"
+   mkdir "$OUT" || fail 'refuse existing pilot output; no automatic retry'
+@@ -24,16 +24,15 @@
+ fi
+ source "$HERE/interfaces/cluster_runtime.env"
+ trap 'code=$?; echo "$code" >"$OUT/wrapper_error_code.txt"; exit 2' ERR
+-# Gate official metadata before allocation/framework imports; a fixture or old
+-# DATA_NOT_READY audit cannot launch training.
+-"$C2_PYTHON" -B "$HERE/inspect_descriptor.py" --descriptor "$S02_REAL_DESCRIPTOR" \
+-  --descriptor-sha256 "$S02_REAL_DESCRIPTOR_SHA256" --output "$OUT/data_gate.json" >"$OUT/data_gate.log" 2>&1
++# Gate engineering metadata before allocation/framework imports; formal mode remains separate.
++"$C2_PYTHON" -B "$HERE/inspect_engineering.py" --descriptor "$S02_ENGINEERING_DESCRIPTOR" \
++  --descriptor-sha256 "$S02_ENGINEERING_DESCRIPTOR_SHA256" --output "$OUT/data_gate.json" >"$OUT/data_gate.log" 2>&1
+ PLACEMENT=$("$C2_PYTHON" -B "$HERE/cpu36_guard.py" --capture "$OUT/cpu_allocation.json" 2>"$OUT/allocation_error.txt")
+ read -r NUMA_NODE ALLOCATED_CPUSET SELECTED_CPUSET <<< "$PLACEMENT"
+ [[ -z "${S02_CPUSET:-}" || "$S02_CPUSET" == "$SELECTED_CPUSET" ]] || fail 'CPU set differs'
+ COMMAND=(numactl --physcpubind="$ALLOCATED_CPUSET" --membind="$NUMA_NODE"
+-  "$C2_PYTHON" -B "$HERE/train_real.py" --descriptor "$S02_REAL_DESCRIPTOR"
+-  --descriptor-sha256 "$S02_REAL_DESCRIPTOR_SHA256" --expected-cpus "$SELECTED_CPUSET"
++  "$C2_PYTHON" -B "$HERE/train_engineering.py" --descriptor "$S02_ENGINEERING_DESCRIPTOR"
++  --descriptor-sha256 "$S02_ENGINEERING_DESCRIPTOR_SHA256" --expected-cpus "$SELECTED_CPUSET"
+   --cpu-contract "$OUT/cpu_allocation.json" --batch-size 64 --output-dir "$OUT")
+ printf '%q ' "${COMMAND[@]}" >"$OUT/command.txt"
+ printf '\n' >>"$OUT/command.txt"
+--- /dev/null
++++ engineering/engineering_data.py
+@@ -0,0 +1,158 @@
++"""Explicit engineering-only metadata; R8 formal gates remain independent."""
++import csv
++import io
++import json
++from pathlib import Path, PurePosixPath
++import random
++
++import real_data
++from real_data import require,sha,asset,parse_json,DataNotReady
++
++ROOT=Path(__file__).resolve().parent
++PROTOCOL='ENGINEERING_REAL_CORPUS_PILOT_V1'
++MANIFEST='bdd146040bddf2ddd47fb9d571d5d2f40e5fa20fbd30d0c0d11239893e647032'
++CASES='f0a3c5bd443b63f06dc69c8bed5e58dd50999a91fddb5222f0c38594ba92d836'
++CODE='d8b2be8d1f';CONFIG='b1049eac1a'
++FLAGS=dict(engineering_only=True,formal_split_status='UNKNOWN',
++           validation_status='NOT_RUN_NO_FORMAL_SPLIT',subject_mapping_status='UNKNOWN')
++
++
++class SourceChanged(DataNotReady):pass
++
++
++def unchanged(condition,message):
++    if not condition:raise SourceChanged(message)
++
++
++def validate_description(d):
++    require(d.get('protocol')==PROTOCOL and d.get('status')=='ENGINEERING_DATA_READY','engineering protocol/status required')
++    require(d.get('data_origin')=='REAL_CORPUS_ENGINEERING_SAMPLES' and d.get('version'),'engineering provenance/version required')
++    require(all(type(d.get(k)) is type(v) and d[k]==v for k,v in FLAGS.items()),'explicit engineering flags required')
++    require(not set(d).intersection(('val','test','split','mapping','subset','normalization')),'no formal partitions/statistics in engineering mode')
++    require(d['interface_sha256']==sha(ROOT/'INTERFACE.json'),'published interface SHA mismatch')
++    c=d['corpus'];m=c['manifest'];s=d['selection']
++    unchanged(m['sha256']==MANIFEST and m['bytes']==3399057 and c['code_hash']==CODE and c['config_hash']==CONFIG,
++              'SOURCE_CHANGED: engineering source anchor differs')
++    require(m['path']=='/home/share/songzhenlong/eitfm/corpus_shape_20261102/manifest.csv' and
++            c['root']=='/home/share/songzhenlong/eitfm/corpus_shape_20261102','unexpected engineering source location')
++    require(s['seed']==2026 and s['algorithm']=='sorted_prefer119_python_random_sample_v1' and
++            s['cases_txt']['sha256']==CASES and type(s['preferred_scope_used']) is bool,'selection identity mismatch')
++    items=d['train'];require(isinstance(items,list) and items,'nonempty engineering train required')
++    seen=set();counts={}
++    for item in items:
++        unit=item['unit'];case=item['case']
++        require(unit not in seen and item['subject_id'] is None and item['belt']=='16_adjacent','duplicate/wrong-belt/invented subject')
++        seen.add(unit);counts[case]=counts.get(case,0)+1
++        require(all(type(item[k]) is int and item[k]>=0 for k in ('placement','contact','n_pairs')) and item['n_pairs']>0,'invalid unit integer fields')
++        expected=PurePosixPath(c['root'])/'parts'/(unit+'.npz')
++        require(PurePosixPath(item['path'])==expected and PurePosixPath(item['sidecar_path'])==expected.with_suffix('.json'),'unit path identity mismatch')
++        for prefix in ('npz','sidecar'):
++            require(len(item[prefix+'_sha256'])==64 and all(x in '0123456789abcdef' for x in item[prefix+'_sha256']) and
++                    type(item[prefix+'_bytes']) is int and item[prefix+'_bytes']>0,'missing file SHA/bytes')
++    require(len(counts)<=2 and all(n<=8 for n in counts.values()),'case/unit cap exceeded')
++    require(s['selected_cases']==sorted(counts) and [x['unit'] for x in items]==
++            [x['unit'] for x in sorted(items,key=lambda x:(x['case'],x['unit']))],'fixed selected case/unit ordering mismatch')
++    runtime=PurePosixPath(d['runtime_exposure_ledger_path'])
++    owned=PurePosixPath('/home/share/dengqingtian/opt/stage4_sessions/S00')
++    require(runtime.is_absolute() and '..' not in runtime.parts and owned in runtime.parents and
++            runtime.name=='EXPOSURE_LEDGER.json' and runtime.parent.name=='outputs' and
++            runtime.parent.parent.name=='payload' and str(runtime)!=d['exposure_ledger']['path'],
++            'new owned payload outputs exposure ledger required')
++
++
++def select_units(rows,preferred):
++    eligible=[r for r in rows if r['belt']=='16_adjacent' and r['status']=='done' and r['finite'].lower()=='true'
++              and int(r['n_pairs'])>0 and r['code_hash']==CODE and r['config_hash']==CONFIG]
++    cases=sorted({r['case'] for r in eligible});pool=sorted(set(cases).intersection(preferred));used=bool(pool)
++    if not pool:pool=cases
++    rng=random.Random(2026);chosen=sorted(rng.sample(pool,min(2,len(pool))));selected=[]
++    for case in chosen:
++        units=sorted((r for r in eligible if r['case']==case),key=lambda r:r['unit'])
++        selected.extend(sorted(rng.sample(units,min(8,len(units))),key=lambda r:r['unit']))
++    return selected,used
++
++
++def load_descriptor(path,expected_sha):
++    try:
++        require(path is not None and expected_sha,'engineering descriptor path and trusted SHA required')
++        path=Path(path);require(sha(path)==expected_sha,'descriptor SHA mismatch')
++        d=parse_json(path.read_text('utf-8-sig'));validate_description(d)
++        c=d['corpus'];mp=Path(c['manifest']['path'])
++        unchanged(mp.stat().st_size==3399057 and sha(mp)==MANIFEST,'SOURCE_CHANGED: actual manifest drift')
++        _,raw=asset(c['manifest']);rows=list(csv.DictReader(io.StringIO(raw.decode('utf-8-sig'))))
++        unchanged(len(rows)==14300 and len({r['case'] for r in rows})==143 and
++                  sum(int(r['n_pairs']) for r in rows)==1430000,'SOURCE_CHANGED: manifest counts')
++        require(len({r['unit'] for r in rows})==len(rows),'duplicate manifest unit')
++        _,raw=asset(d['selection']['cases_txt']);preferred=raw.decode('utf-8-sig').splitlines()
++        require(len(preferred)==119 and len(set(preferred))==119,'original119 case pool mismatch')
++        chosen,used=select_units(rows,preferred)
++        require([r['unit'] for r in chosen]==[r['unit'] for r in d['train']] and
++                used==d['selection']['preferred_scope_used'],'deterministic selection mismatch; no replacement')
++        for row,item in zip(chosen,d['train']):
++            require(all(str(item[k])==row[k] for k in ('unit','case','belt','placement','contact','n_pairs')) and
++                    row['file']==item['unit']+'.npz','selected manifest identity mismatch')
++            for field,prefix in (('path','npz'),('sidecar_path','sidecar')):
++                p=Path(item[field]);unchanged(p.stat().st_size==item[prefix+'_bytes'] and sha(p)==item[prefix+'_sha256'],
++                                              'SOURCE_CHANGED: selected unit drift: '+str(p))
++        _,raw=asset(d['exposure_ledger']);ledger=parse_json(raw)
++        require(ledger['protocol']==PROTOCOL and ledger['engineering_only'] is True and
++                ledger['formal_split_status']=='UNKNOWN' and ledger['subject_mapping_status']=='UNKNOWN' and
++                ledger.get('future_test_policy'),'initial exposure policy missing')
++        expected=[dict(case=x['case'],unit=x['unit'],npz_sha256=x['npz_sha256'],sidecar_sha256=x['sidecar_sha256'],
++                       selection_status='SELECTED_RESERVED',usage_status='NOT_STARTED') for x in d['train']]
++        require(ledger['units']==expected,'initial exposure selection/usage mismatch')
++        return dict(description=d,units=dict(train=d['train'],val=[]),
++                    identity=dict(descriptor_sha256=expected_sha,descriptor_version=d['version'],
++                                  interface_sha256=d['interface_sha256'],corpus=c,selection=d['selection'],units=d['train']))
++    except SourceChanged:raise
++    except (OSError,KeyError,TypeError,AttributeError,ValueError,csv.Error) as exc:raise DataNotReady(str(exc)) from exc
++
++
++class Exposure:
++    def __init__(self,path,description):
++        self.path=Path(path);require(not self.path.exists(),'refuse existing runtime exposure ledger; no retry')
++        self.value=dict(protocol=PROTOCOL,**FLAGS,units=[dict(x,selection_status='SELECTED_RESERVED',usage_status='NOT_STARTED')
++                        for x in description['train']],confirmed_updates=[],in_flight=None,recovery_probe=None,
++                        future_test_policy='Resolve true subjects and exclude all engineering-exposed subjects from final test; interrupted use requires conservative review.')
++        self.save()
++
++    def save(self):
++        self.path.parent.mkdir(parents=True,exist_ok=True)
++        temporary=self.path.with_suffix('.tmp');require(not temporary.exists(),'stale exposure temporary file')
++        with temporary.open('x',encoding='utf-8') as stream:
++            json.dump(self.value,stream,indent=2);stream.write('\n');stream.flush()
++            import os
++            os.fsync(stream.fileno())
++        temporary.replace(self.path)
++
++    def unit_status(self,unit,status):
++        for item in self.value['units']:
++            if item['unit']==unit:item['usage_status']=status
++        self.save()
++
++    def attempt(self,step,indices,frame_ids):
++        require(self.value['in_flight'] is None,'unfinished prior update')
++        self.value['in_flight']=dict(step=step,frame_indices=indices,frame_ids=frame_ids,status='POSSIBLY_USED_IN_INTERRUPTED_UPDATE')
++        self.save()
++
++    def confirm(self,step):
++        value=self.value['in_flight'];require(value and value['step']==step,'exposure update mismatch')
++        value['status']='CONSUMED_CONFIRMED';self.value['confirmed_updates'].append(value);self.value['in_flight']=None
++        for unit in {x['unit'] for x in value['frame_ids']}: 
++            for item in self.value['units']:
++                if item['unit']==unit:item['usage_status']='CONSUMED_CONFIRMED'
++        self.save()
++
++
++def load_arrays(metadata,ledger):
++    import numpy as np
++    values=[]
++    for item in metadata['units']['train']:
++        ledger.unit_status(item['unit'],'LOAD_ATTEMPTED')
++        values.append(real_data.read_unit(item,metadata['description']['corpus']))
++        ledger.unit_status(item['unit'],'LOADED_FOR_ENGINEERING_TRAIN_STATISTICS')
++    v=np.concatenate([x[0] for x in values]);images=np.concatenate([x[1] for x in values])
++    scale=np.abs(images).max();require(np.isfinite(scale) and scale>0,'engineering train absmax must be positive finite')
++    y0=(images/scale)[:,None];require(np.isfinite(y0).all(),'nonfinite normalized images')
++    return dict(train=dict(v=v,y0=y0,frame_ids=[f for x in values for f in x[2]]),val=None,
++                image_scale=float(scale),normalization_scope='fit_engineering_train_subset_absmax_once')
+--- /dev/null
++++ engineering/inspect_engineering.py
+@@ -0,0 +1,19 @@
++"""Metadata/hash gate only; imports no NumPy/Torch and performs no training."""
++import argparse
++import json
++from pathlib import Path
++import engineering_data as data
++
++if __name__=='__main__':
++    p=argparse.ArgumentParser(description=__doc__)
++    p.add_argument('--descriptor',type=Path,required=True);p.add_argument('--descriptor-sha256',required=True)
++    p.add_argument('--output',type=Path,required=True);a=p.parse_args()
++    if a.output.exists():p.error('refuse existing inspection evidence')
++    try:
++        m=data.load_descriptor(a.descriptor,a.descriptor_sha256)
++        result=dict(status='ENGINEERING_METADATA_HASH_GATE_PASS',protocol=data.PROTOCOL,**data.FLAGS,
++                    identity=m['identity'],npz_arrays_read=False,framework_imported=False)
++        code=0
++    except data.SourceChanged as exc:result=dict(status='SOURCE_CHANGED',error=str(exc));code=2
++    except Exception as exc:result=dict(status='DATA_NOT_READY',error=str(exc));code=2
++    a.output.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8');print(json.dumps(result));raise SystemExit(code)
+--- /dev/null
++++ engineering/tests/test_engineering.py
+@@ -0,0 +1,85 @@
++"""LOCAL_FIXTURE: isolated engineering gates and durable exposure transitions."""
++import copy
++import json
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++
++ROOT=Path(__file__).resolve().parents[1]
++sys.path.insert(0,str(ROOT))
++import engineering_data as data
++import real_data
++
++
++class EngineeringTests(unittest.TestCase):
++    def description(self):
++        d=json.loads((ROOT/'tests/ENGINEERING_DESCRIPTOR_METADATA_FIXTURE.json').read_text())
++        return d
++
++    def test_actual_s00_schema_only_no_real_data_read(self):
++        d=self.description();data.validate_description(d)
++        self.assertEqual(sum(x['n_pairs'] for x in d['train']),1600)
++
++    def test_formal_engineering_isolation(self):
++        d=self.description();d['protocol']='REAL_CORPUS_PILOT_V1'
++        with self.assertRaises(real_data.DataNotReady):data.validate_description(d)
++        path=ROOT/'tests/ENGINEERING_DESCRIPTOR_METADATA_FIXTURE.json'
++        with self.assertRaises(real_data.DataNotReady):real_data.load_descriptor(path,real_data.sha(path))
++
++    def test_source_third_version(self):
++        d=self.description();d['corpus']['manifest']['sha256']='0'*64
++        with self.assertRaises(data.SourceChanged):data.validate_description(d)
++
++    def test_caps_duplicates_subject_and_val_rejected(self):
++        for mutate in (lambda d:d['train'].append(copy.deepcopy(d['train'][0])),
++                       lambda d:d['train'][0].update(subject_id='invented'),
++                       lambda d:d.update(val=[]),
++                       lambda d:d['train'][0].update(belt='32_adjacent'),
++                       lambda d:d['selection'].update(seed=0)):
++            d=self.description();mutate(d)
++            with self.assertRaises(real_data.DataNotReady):data.validate_description(d)
++
++    def test_deterministic_sorted_selector(self):
++        rows=[dict(unit=f'{case}_{i:02}',case=case,belt='16_adjacent',status='done',finite='true',
++                   n_pairs='100',code_hash=data.CODE,config_hash=data.CONFIG)
++              for case in ['z','b','a'] for i in range(12)]
++        a=data.select_units(rows,['b','a']);b=data.select_units(list(reversed(rows)),['a','b'])
++        self.assertEqual(a,b);self.assertEqual(len(a[0]),16);self.assertTrue(a[1])
++        self.assertEqual({r['case'] for r in a[0]},{'a','b'})
++
++    def test_ninth_unique_unit_rejected(self):
++        d=self.description();item=copy.deepcopy(d['train'][0]);item['unit']+='_extra'
++        item['path']=str(Path(item['path']).with_name(item['unit']+'.npz')).replace('\\','/')
++        item['sidecar_path']=item['path'][:-4]+'.json';d['train'].append(item)
++        with self.assertRaisesRegex(real_data.DataNotReady,'cap exceeded'):data.validate_description(d)
++
++    def test_exposure_survives_failure_and_distinguishes_confirmed(self):
++        d=self.description()
++        with tempfile.TemporaryDirectory(dir=ROOT/'evidence') as tmp:
++            path=Path(tmp)/'ledger.json';ledger=data.Exposure(path,d)
++            ledger.unit_status(d['train'][0]['unit'],'LOAD_ATTEMPTED')
++            ids=[dict(unit=d['train'][0]['unit'],pair_index=2)]
++            ledger.attempt(1,[2],ids)
++            saved=json.loads(path.read_text());self.assertEqual(saved['in_flight']['status'],'POSSIBLY_USED_IN_INTERRUPTED_UPDATE')
++            self.assertEqual(saved['confirmed_updates'],[])
++            ledger.confirm(1);saved=json.loads(path.read_text())
++            self.assertIsNone(saved['in_flight']);self.assertEqual(saved['confirmed_updates'][0]['frame_ids'],ids)
++            with self.assertRaises(real_data.DataNotReady):data.Exposure(path,d)
++
++    def test_engineering_loader_train_only_scale_and_pairing(self):
++        from test_real_data import DataTests
++        fixture=DataTests();fixture.setUp()
++        try:
++            d=dict(train=[dict(fixture.units[0],subject_id=None)],corpus=fixture.description['corpus'])
++            ledger=data.Exposure(fixture.root/'runtime.json',d)
++            loaded=data.load_arrays(dict(description=d,units=dict(train=d['train'])),ledger)
++            self.assertIsNone(loaded['val']);self.assertEqual(loaded['image_scale'],4.)
++            self.assertEqual([f['baseline_index'] for f in loaded['train']['frame_ids']],[0,1,0,1])
++            self.assertTrue(all(f['subject_id'] is None for f in loaded['train']['frame_ids']))
++            self.assertEqual(ledger.value['units'][0]['usage_status'],'LOADED_FOR_ENGINEERING_TRAIN_STATISTICS')
++            self.assertFalse(ledger.value['confirmed_updates'])
++        finally:fixture.tearDown()
++
++
++if __name__=='__main__':unittest.main(verbosity=2)
+--- /dev/null
++++ engineering/tests/test_engineering_native.py
+@@ -0,0 +1,78 @@
++"""Small synthetic native Torch36 only; no real corpus or full encoder run."""
++import copy
++from pathlib import Path
++import random
++import sys
++import tempfile
++import unittest
++import numpy as np
++import torch
++
++ROOT=Path(__file__).resolve().parents[1]
++sys.path.insert(0,str(ROOT));sys.path.insert(0,str(ROOT/'tests'))
++import engineering_training as training
++from check_equivalence import compare
++
++
++class TinyEncoder(torch.nn.Module):
++    def __init__(self):
++        super().__init__();self.val=torch.nn.Linear(1,4);self.head_v=torch.nn.Linear(4,1);self.head_coarse=torch.nn.Linear(4,256)
++    def forward(self,v,a,b,mask):return self.val(v.unsqueeze(-1)).tanh()
++
++
++class NativeTests(unittest.TestCase):
++    def setUp(self):
++        torch.manual_seed(0);np.random.seed(0);random.seed(0)
++        self.model=TinyEncoder();self.opt=training.optimizer(torch,self.model)
++        self.part=dict(v=np.arange(5*208,dtype=np.float32).reshape(5,208)/1000,
++            y0=np.ones((5,1,64,64),np.float32),frame_ids=list(range(5)))
++        self.angles=torch.zeros(208,4)
++
++    def test_different_batches_tail_and_continuous_adamw(self):
++        identity=id(self.opt);seen=[];masks=[]
++        for step,indices in enumerate(([0,1],[2,3],[4]),1):
++            values=training.batch(torch,self.part,indices,self.angles)
++            mask=torch.rand(len(indices),208)<0.5;masks.append(mask.clone());seen.extend(indices)
++            loss=training.train_step(torch,self.model,self.opt,values,mask)
++            training.validate_update(torch,self.model,self.opt,values,step)
++            self.assertEqual(id(self.opt),identity)
++            self.assertTrue(torch.equal(loss['total'],loss['voltage']+loss['coarse']))
++        self.assertEqual(seen,list(range(5)));self.assertFalse(torch.equal(masks[0],masks[1]))
++
++    def test_mean_step_matches_original_expression_and_states(self):
++        reference=copy.deepcopy(self.model);opt=training.optimizer(torch,reference)
++        values=training.batch(torch,self.part,[0,1],self.angles)
++        cloned=[x.clone().requires_grad_() if i<2 else x.clone() for i,x in enumerate(values)]
++        mask=torch.rand(2,208)<0.5
++        got=training.train_step(torch,self.model,self.opt,values,mask)
++        v,image,a,b=cloned;h=reference(v,a,b,mask);F=torch.nn.functional
++        loss=F.mse_loss(reference.head_v(h)[...,0][mask],v[mask])+F.mse_loss(reference.head_coarse(h.mean(1)),F.adaptive_avg_pool2d(image,16).flatten(1))
++        opt.zero_grad();loss.backward();opt.step()
++        self.assertTrue(torch.equal(loss,got['total']))
++        self.assertTrue(training.exact(torch,self.model.state_dict(),reference.state_dict()))
++        self.assertTrue(training.exact(torch,self.opt.state_dict(),opt.state_dict()))
++
++    def test_checkpoint_restores_all_state_cursor_and_rng_without_update(self):
++        values=training.batch(torch,self.part,[0,1],self.angles)
++        training.train_step(torch,self.model,self.opt,values,torch.rand(2,208)<0.5)
++        progress=dict(epoch_order=[2,0,4,1,3],cursor=2,optimizer_updates=1)
++        identity=dict(source='LOCAL_TEST_ONLY',data='NO_REAL_DATA',config=dict(precision='fp32'))
++        normalization=dict(image_scale=1.,fit_partition='train')
++        with tempfile.TemporaryDirectory(dir=ROOT/'evidence') as temporary:
++            path=Path(temporary).resolve();path.relative_to(ROOT)
++            checkpoint=training.save_checkpoint(torch,path/'final.pt',self.model,self.opt,identity,progress,normalization)
++            self.assertEqual(torch.load(path/'final.pt',weights_only=True)['protocol'],'ENGINEERING_REAL_CORPUS_PILOT_V1')
++            before=copy.deepcopy(self.opt.state_dict())
++            result=training.verify_restore(torch,checkpoint,self.model,self.opt,TinyEncoder,identity,progress,
++                normalization,training.batch(torch,self.part,[0,1],self.angles),compare)
++            self.assertEqual(result['extra_updates'],0);self.assertEqual(result['status'],'PASS_NO_EXTRA_UPDATE')
++            self.assertTrue(training.exact(torch,before,self.opt.state_dict()))
++            with self.assertRaises(ValueError):
++                training.verify_restore(torch,checkpoint,self.model,self.opt,TinyEncoder,dict(identity,data='wrong'),progress,
++                    normalization,values,compare)
++
++
++if __name__=='__main__':
++    torch.set_num_threads(36);assert torch.get_num_threads()==36
++    print('LOCAL_SYNTHETIC_SMALL_NATIVE_TORCH36_ONLY; NO REAL DATA/FULL MODEL/C2',flush=True)
++    unittest.main(verbosity=2)

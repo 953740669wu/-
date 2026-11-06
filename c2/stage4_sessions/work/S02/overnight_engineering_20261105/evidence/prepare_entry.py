@@ -1,0 +1,43 @@
+"""Generate the separate entry by narrow substitutions of the frozen R8 entry."""
+from pathlib import Path
+
+ROOT=Path(__file__).resolve().parents[1]
+text=(ROOT/'pilot_training.py').read_text().replace("'REAL_CORPUS_PILOT_V1'","'ENGINEERING_REAL_CORPUS_PILOT_V1'")
+(ROOT/'engineering_training.py').write_text(text,encoding='utf-8',newline='\n')
+text=(ROOT/'train_real.py').read_text()
+text=text.replace('import pilot_training as training','import engineering_training as training\nimport engineering_data')
+text=text.replace('metadata=real_data.load_descriptor(args.descriptor,args.descriptor_sha256)',
+                  "metadata=engineering_data.load_descriptor(args.descriptor,args.descriptor_sha256)\n    ledger=engineering_data.Exposure(metadata['description']['runtime_exposure_ledger_path'],metadata['description'])\n    result['exposure_ledger']=dict(path=str(ledger.path),initial=metadata['description']['exposure_ledger'])")
+text=text.replace("loaded=real_data.load_arrays(metadata)","tick=time.perf_counter()\n    loaded=engineering_data.load_arrays(metadata,ledger)\n    result['timing']['data_loading_seconds']=time.perf_counter()-tick")
+start=text.index("    before=runtime['kml_gemm_calls']")
+end=text.index("    records=[];stop=",start)
+text=text[:start]+"    result['val_initial']=dict(status='NOT_RUN_NO_FORMAL_SPLIT')\n    cpu36_guard.checkpoint(result['cpu36'],'initial_val',torch)\n"+text[end:]
+text=text.replace('# The outer process is limited to840s. Reserve120s for val/save/recovery.','# The outer process is limited to840s. Reserve120s for save/recovery.')
+text=text.replace("            mask=torch.rand(len(indices),208)<0.5", "            result['timing']['batch_materialization_seconds']+=loader_seconds\n            diagnostic_start=time.perf_counter()\n            mask=torch.rand(len(indices),208)<0.5")
+text=text.replace("            cpu36_guard.checkpoint(result['cpu36'],f'before_train_{step+1}',torch)","            ledger.attempt(step+1,indices,[loaded['train']['frame_ids'][i] for i in indices])\n            cpu36_guard.checkpoint(result['cpu36'],f'before_train_{step+1}',torch)")
+text=text.replace("            tick=time.perf_counter();losses=", "            pre_diagnostic=time.perf_counter()-diagnostic_start\n            tick=time.perf_counter();losses=")
+text=text.replace("            training.validate_update(torch,model,opt,values,step+1)","            diagnostic_start=time.perf_counter()\n            training.validate_update(torch,model,opt,values,step+1)")
+text=text.replace("            record=dict(step=", "            diagnostic_seconds=pre_diagnostic+time.perf_counter()-diagnostic_start\n            result['timing']['training_step_seconds']+=elapsed\n            result['timing']['diagnostic_seconds']+=diagnostic_seconds\n            record=dict(diagnostic_seconds=diagnostic_seconds,step=")
+text=text.replace("log.flush();records.append", "log.flush();ledger.confirm(step);records.append")
+start=text.index("    # A hard outer TERM")
+end=text.index("    cpu36_guard.checkpoint(result['cpu36'],'final_val',torch)",start)
+text=text[:start]+"    result['val_final']=dict(status='NOT_RUN_NO_FORMAL_SPLIT')\n"+text[end:]
+text=text.replace('    real_data.load_descriptor(args.descriptor,args.descriptor_sha256)','    engineering_data.load_descriptor(args.descriptor,args.descriptor_sha256)')
+text=text.replace("            real_data.require(real_data.sha(item['path'])", "            engineering_data.unchanged(real_data.sha(item['path'])")
+text=text.replace("    result['checkpoint']=training.save_checkpoint", "    checkpoint_start=time.perf_counter()\n    result['checkpoint']=training.save_checkpoint")
+text=text.replace("        probe_values=training.batch", "        ledger.value['recovery_probe']=dict(status='POSSIBLY_USED_IN_RECOVERY_PROBE',\n            frame_ids=loaded['train']['frame_ids'][:min(2,frames)],extra_updates=0)\n        ledger.save()\n        probe_values=training.batch")
+text=text.replace("        cpu36_guard.checkpoint(result['cpu36'],'restore_verified',torch)","        ledger.value['recovery_probe']['status']='RECOVERY_PROBE_CONFIRMED_NO_UPDATE';ledger.save()\n        cpu36_guard.checkpoint(result['cpu36'],'restore_verified',torch)")
+text=text.replace("    finish_backend(runtime,expected)","    result['timing']['checkpoint_and_recovery_seconds']=time.perf_counter()-checkpoint_start\n    finish_backend(runtime,expected)")
+text=text.replace("'PILOT_COMPLETE_NOT_QUALITY_ACCEPTANCE'","'ENGINEERING_PILOT_COMPLETE_NOT_SCIENTIFIC_ACCEPTANCE'")
+text=text.replace('protocol=real_data.PROTOCOL,','protocol=engineering_data.PROTOCOL,**engineering_data.FLAGS,\n        timing=dict(data_loading_seconds=0.,batch_materialization_seconds=0.,training_step_seconds=0.,diagnostic_seconds=0.,checkpoint_and_recovery_seconds=0.),')
+text=text.replace('    try:code=main(args,result)', "    wall_start=time.perf_counter()\n    try:code=main(args,result)\n    except engineering_data.SourceChanged as exc:result.update(status='SOURCE_CHANGED',error=str(exc));code=2")
+text=text.replace("    result['ended_utc']", "    wall=time.perf_counter()-wall_start\n    measured=sum(result['timing'].values())\n    result['timing'].update(wall_seconds=wall,unattributed_seconds=wall-measured,\n        diagnostic_scope='mask/exposure-before-update/CPU-before-and-after/state-validation; other setup/logging in unattributed')\n    result['ended_utc']")
+text=text.replace('"""One authorized real-corpus encoder pilot, fp32/CKPT0, one epoch or 200 updates."""','"""Engineering-only real samples; no formal split or scientific acceptance."""')
+text=text.replace("    records=[];stop='epoch_complete'", "    records=[];result['steps']=records;result['consumed_frames']=0;stop='epoch_complete'")
+text=text.replace("result['completed_updates']=step", "result['completed_updates']=step;result['consumed_frames']=cursor")
+text=text.replace("records.append({k:v for k,v in record.items() if k!='frame_ids'})", "records.append(record)")
+(ROOT/'train_engineering.py').write_text(text,encoding='utf-8',newline='\n')
+text=(ROOT/'run_real_pilot.sh').read_text().replace('S02_REAL_DESCRIPTOR','S02_ENGINEERING_DESCRIPTOR').replace('real_${CCS_JOB_ID}','engineering_${CCS_JOB_ID}')
+text=text.replace('inspect_descriptor.py','inspect_engineering.py').replace('train_real.py','train_engineering.py')
+text=text.replace('# Gate official metadata before allocation/framework imports; a fixture or old\n# DATA_NOT_READY audit cannot launch training.','# Gate engineering metadata before allocation/framework imports; formal mode remains separate.')
+(ROOT/'run_engineering.sh').write_text(text,encoding='utf-8',newline='\n')
