@@ -1,0 +1,28 @@
+[
+  {
+    "id": "PRE_FREEZE_ENV_WIRING",
+    "severity": "BLOCKING_IF_FROZEN_UNCHANGED",
+    "status": "AUTHOR_DELIVERIES_NOT_YET_READY",
+    "files": [
+      {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\run_job.py",
+        "sha256": "47b9bff36dc0dac943d7bcf0931e78fb8c06621010e719478718462f4d999684"
+      },
+      {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\run_engineering.sh",
+        "sha256": "257294948f0a5eba1ee15dfa26d984cd1acd17eebc85f55b7ed042cbd62477ed"
+      }
+    ],
+    "observed_exported_descriptor_names": [
+      "S02_REAL_DESCRIPTOR",
+      "S02_REAL_DESCRIPTOR_SHA256"
+    ],
+    "required_engineering_names": [
+      "S02_ENGINEERING_DESCRIPTOR",
+      "S02_ENGINEERING_DESCRIPTOR_SHA256"
+    ],
+    "evidence": "run_job.py main sets S02_REAL_DESCRIPTOR and S02_REAL_DESCRIPTOR_SHA256; run_engineering.sh requires S02_ENGINEERING_DESCRIPTOR and S02_ENGINEERING_DESCRIPTOR_SHA256",
+    "impact": "Engineering wrapper exits before data gate/training; sole job would be spent without training",
+    "required_action": "S00 must use the published engineering environment names in its first frozen deployment and cover the actual caller-to-entry environment in a minimal wiring check; no source hotfix after READY"
+  }
+]

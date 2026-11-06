@@ -1,0 +1,113 @@
+{
+  "actual_entrypoint": "run_engineering.sh",
+  "checks": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\DEPLOYMENT_CHECKS.json",
+    "sha256": "9c9f2bb2e63d4b14d31fc62bff76eb70528f05da2dbedb03d9e0ad10df46efec",
+    "status": "PASS_LOCAL_AND_LOGIN_METADATA_ONLY"
+  },
+  "closing_seconds": 30,
+  "code_ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\S02_CODE_READY.json",
+    "sha256": "5d7838d0faa7119b5df9d6f3fa658af9cee8dbfeb61e6001bed2421889213cff"
+  },
+  "collection": {
+    "checkpoint": "remote-only path/bytes/SHA; no extra update",
+    "command": "/usr/bin/python3 -B collect_evidence.py <fixed RUN>",
+    "failure_policy": "preserve all raw evidence and missing records; never fabricate PASS"
+  },
+  "commands": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\COMMANDS.md",
+    "sha256": "db2a9b815f320c2e2806222bb35bc1821fbb9b595916d2aae531c8775e4466ae"
+  },
+  "data_ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\DATA_READY.json",
+    "sha256": "d7ca453699a79ce9a0bf731cccf91aa7d8506f58543dbba84eb8df75a0491614"
+  },
+  "deployment_package": {
+    "bytes": 135582,
+    "entries": 27,
+    "files": 26,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\S00_OVERNIGHT_ENGINEERING_DEPLOYMENT.zip",
+    "sha256": "938f7df81f3f7fa8c61239f8041950e4eb47043e869bbbd5aad7be8e6d27359e",
+    "source_index_sha256": "a88f76692502b2c54abddc3b86d93da00321e516f610c6ce19e9a51c00ec31dc"
+  },
+  "descriptor": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\ENGINEERING_DESCRIPTOR.json",
+    "sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6"
+  },
+  "engineering_only": true,
+  "entry_environment": [
+    "S02_ENGINEERING_DESCRIPTOR",
+    "S02_ENGINEERING_DESCRIPTOR_SHA256"
+  ],
+  "formal_split_status": "UNKNOWN",
+  "hbm": false,
+  "immutable_after_publish": true,
+  "interface": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\INTERFACE.json",
+    "sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669"
+  },
+  "linux_login_log": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\LOGIN_DEPLOYMENT_CHECKS.txt",
+    "sha256": "846f6eddd65e9f9abb53404459d3d0e827aa5647822947f0ef62e842ea3fe369"
+  },
+  "max_retry_count": 0,
+  "new_jobs": 0,
+  "node_count": 1,
+  "numa_domains": 1,
+  "package": {
+    "bytes": 135582,
+    "entries": 27,
+    "files": 26,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\S00_OVERNIGHT_ENGINEERING_DEPLOYMENT.zip",
+    "sha256": "938f7df81f3f7fa8c61239f8041950e4eb47043e869bbbd5aad7be8e6d27359e",
+    "source_index_sha256": "a88f76692502b2c54abddc3b86d93da00321e516f610c6ce19e9a51c00ec31dc"
+  },
+  "pre_freeze_resolution": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\PRE_FREEZE_RESOLUTION.json",
+    "sha256": "82e7a3c66ae7cada1bcb654b42c172a6911ad71cfb7378e5c1d179f66ebe8aae"
+  },
+  "protocol": "ENGINEERING_REAL_CORPUS_PILOT_V1",
+  "published_utc": "2026-11-05T15:58:31.917098+00:00",
+  "remote_staging_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENGINEERING_PILOT_20261105T154333Z",
+  "required_review": {
+    "bindings_object_required": true,
+    "decision": "PASS_FOR_ENGINEERING_PILOT",
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\overnight_engineering_20261105\\S01_REVIEW.json",
+    "resources_object_required": true,
+    "review_complete": true
+  },
+  "required_review_bindings": {
+    "code_package_sha256": "add690cf983d5902c78586101ee6250358380786a8c13aa209b0a024735835a7",
+    "code_source_manifest_sha256": "e4acbbcb604dc3afd22b462bbfc2c3e348108c32e004557b891de7e14978b7d2",
+    "deployment_package_sha256": "938f7df81f3f7fa8c61239f8041950e4eb47043e869bbbd5aad7be8e6d27359e",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669"
+  },
+  "resources": {
+    "actual_physical_cores": 36,
+    "allocated_cores": 38,
+    "cleanup_seconds": 30,
+    "exclusive": true,
+    "job_seconds": 900,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 2,
+    "whole_entry_timeout": 840
+  },
+  "source_manifest": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\ARTIFACT_SHA256.json",
+    "sha256": "a88f76692502b2c54abddc3b86d93da00321e516f610c6ce19e9a51c00ec31dc"
+  },
+  "status": "S00_DEPLOYMENT_READY",
+  "stop_conditions": [
+    "source/manifest/SHA or selection drift",
+    "native authority/NUMA/physicalCPU/DDR/CPU36/KML mismatch",
+    "NaN/Inf or invalid data/state/gradient/update",
+    "any exception/nonzero runtime or840s shared execution deadline",
+    "missing S01 exact complete review",
+    "never retry or enlarge scope"
+  ],
+  "subject_mapping_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT"
+}

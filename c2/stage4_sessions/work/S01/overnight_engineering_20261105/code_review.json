@@ -1,0 +1,50 @@
+{
+  "status": "FROZEN_CODE_REVIEW_PASS_NOT_DEPLOYMENT_RELEASE",
+  "package": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\package\\S02_OVERNIGHT_ENGINEERING_CODE.zip",
+    "bytes": 71182,
+    "sha256": "add690cf983d5902c78586101ee6250358380786a8c13aa209b0a024735835a7"
+  },
+  "source_manifest": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\SOURCE_SHA256.json",
+    "bytes": 2720,
+    "sha256": "e4acbbcb604dc3afd22b462bbfc2c3e348108c32e004557b891de7e14978b7d2"
+  },
+  "code_ready_sha256": "5d7838d0faa7119b5df9d6f3fa658af9cee8dbfeb61e6001bed2421889213cff",
+  "interface": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\INTERFACE.json",
+    "bytes": 6682,
+    "sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669"
+  },
+  "checks": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\evidence\\local_validation.json",
+    "bytes": 2922,
+    "sha256": "6870bb4386a08444e63637ab5f23cea07e5eba75fdd334aed9ef5cf302cf1964",
+    "status": "PASS_LOCAL_PREPARED",
+    "test_count": 14
+  },
+  "source_files": 28,
+  "zip_members": 29,
+  "original_r8_files_unchanged": 18,
+  "source_review_identical_to_frozen_package": true,
+  "local_test_receipts": 14,
+  "independent_checks": {
+    "positive_engineering_metadata": 1,
+    "rejected": [
+      "formal_protocol",
+      "false_engineering",
+      "fabricated_validation",
+      "third_source",
+      "invented_subject",
+      "duplicate_unit",
+      "formal_cli_module_rejects_engineering_descriptor"
+    ],
+    "torch_imported": false,
+    "numpy_imported": false
+  },
+  "unrun": [
+    "actual Linux process cleanup",
+    "actual C2 Torch36/all TIDs/KML",
+    "real Encoder/checkpoint/recovery"
+  ]
+}
