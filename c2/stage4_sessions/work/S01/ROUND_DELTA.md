@@ -1,6 +1,6 @@
-任务/轮次：S01 / 诊断R1只读证据收尾复核完成（2026-11-06）。
-状态变化：WAITING转ACCEPT_ARCHIVE_WITH_PRESERVED_LIMITATIONS，review_complete=true，无执行许可。
-验证增量：68唯一文件SHA、86原字段、40份定向文本和2份raw元数据；15分类5支持/4不支持/6未记录均核。
-结论边界：历史缺口补齐0，E01–E06已如实定稿；父子/后代15秒清理等仍未知，可归档不等于数值或清理实测通过。
-保留与未运行：原DIAGNOSIS_REVIEW/最终FAIL及阈值不变；无新模型/收缩/DDP/数值复算/进程查询/集群/共享Git操作。
-交付与下一步：EVIDENCE_CLOSEOUT_REVIEW.json及ARCHIVE_SCOPE；协调按新精确清单归档有限诊断，不追加268批次，不由归档意见授权训练。
+任务/轮次：S01 / 无候选提案独立审核及最小取证规格（2026-11-06）。
+状态变化：ACCEPT 02 NO_JUSTIFIED_CANDIDATE，候选0；原最终FAIL/诊断/有限归档结论及阈值不变。
+验证增量：52文件SHA；447条R11实际B64调用与原生/KML分派、dX/dW/db/ABI核清，rank32仅静态推导。
+必要性拆分：M01/02需定位证据；M03已有静态与旧B64可答、配对实际证据待补；M04后续条件；M05历史限留，不补跑DDP/Tiny。
+唯一规格：固定首批B64/顺序32+32零更新定位，拟单域36实际核/24GiB/300秒；NEEDS_NEW_EXECUTION_AUTHORIZATION，不借旧许可。
+交付与停点：PROPOSAL_REVIEW.json、MINIMAL_EVIDENCE_SPEC.json、REPORT.md及ARCHIVE_SCOPE；本轮0实验/Torch/SSH/集群/实现/Git操作，交协调另定授权。

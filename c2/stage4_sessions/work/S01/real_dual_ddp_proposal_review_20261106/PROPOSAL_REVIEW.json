@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "task": "S01",
+  "round": "REAL_DUAL_DDP_PROPOSAL_REVIEW_20261106",
+  "reviewed_utc": "2026-11-06T13:27:38.169661+00:00",
+  "decision": "ACCEPT",
+  "review_complete": true,
+  "accepted_claim": "NO_JUSTIFIED_CANDIDATE",
+  "candidate_count": 0,
+  "implementation_authorized": false,
+  "execution_authorized": false,
+  "training_acceptance": false,
+  "rationale": [
+    "Tiny native weight-contraction sensitivity does not identify one actual complete-model KML call or show a KML-only correction is appropriate.",
+    "Complete val and pooled head_coarse use native path at both64/32; pos/Transformer projections/FFN/head_v use direct KML when runtime guard is satisfied. Native route is not proof of underlying BLAS vendor.",
+    "Actual R11 B64 ABI/count records do not establish rank32 runtime, X/G parity, failing full parameter or a fp32 change direction."
+  ],
+  "proposal_ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_minimal_candidate_proposal_20261106\\PROPOSAL_READY.json",
+    "bytes": 3959,
+    "sha256": "5204542f26294abbbe3a2fae40c6fbc93b0bb8133ca1e9796e4cf80cac79fb76"
+  },
+  "proposal": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_minimal_candidate_proposal_20261106\\PROPOSAL.json",
+    "bytes": 17963,
+    "sha256": "b988cbfec4702e9799ed0a275e3bc8581eb7338d3c6390bc427dfa381c3a9cf4"
+  },
+  "source_evidence": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_proposal_review_20261106\\STATIC_REVIEW_EVIDENCE.json",
+    "bytes": 28550,
+    "sha256": "89892c8e2718ae228de3a5ca84ee8962ca013fe8ad027f81da4a3b6e4fab4d70"
+  },
+  "verified_unique_files": 52,
+  "author_source_entries": 32,
+  "dispatch_review": {
+    "Tiny": "All relevant linear inputs below65536; original native F.linear/autograd, not custom _LinearFn.",
+    "full_native": [
+      "val",
+      "pooled head_coarse"
+    ],
+    "full_KML_conditioned": [
+      "pos",
+      "12 packedQKV",
+      "12 attention.out_proj",
+      "12 linear1",
+      "12 linear2",
+      "head_v"
+    ],
+    "dX": "G@W; NT/NT mL nI kO; skipped for fixed positional inputs",
+    "dW": "G.T@X; T/NT mO nI kL; fp32 full local contraction",
+    "db": "Torch sumG, not _sgemm",
+    "ABI": "RowMajor101 alpha1 beta0 for dX/dW; ldaO ldbI ldcI",
+    "fp32_acc32_flag": "Does not select a higher-precision accumulator"
+  },
+  "R11_evidence": {
+    "job": "2049454",
+    "host": "cn21338",
+    "actual_batch": 64,
+    "actual_steps": [
+      3,
+      4,
+      5
+    ],
+    "actual_records": 447,
+    "per_B64_forward": 50,
+    "per_B64_dW": 50,
+    "per_B64_dX": 49,
+    "actual_rank32_records": 0,
+    "rank32_dimensions_and_counts": "STATIC_INFERENCE_ONLY",
+    "unresolved_native_indirect_BLAS": true
+  },
+  "M01_M05": [
+    {
+      "id": "M01_FULL_KML_FAILURE",
+      "category": "REQUIRED_NEW_LOCALIZATION_EVIDENCE",
+      "existing_answer": "No full-model paired failure recorded; R11 is B64 metadata only.",
+      "needed": "One fixed fullB64 versus sequential32+32 zero-update comparison identifying first observed difference/failing canonical parameter and actual route; no DDP prerequisite."
+    },
+    {
+      "id": "M02_OPERAND_PARITY",
+      "category": "REQUIRED_NEW_FULL_MODEL_EVIDENCE",
+      "existing_answer": "Tiny X/G parity is supported only for Tiny.",
+      "needed": "Current complete-model logical sample-aligned X/G and forward/dX hashes plus original output/loss/input/all153 parameter-gradient metrics, without all-layer raw snapshots."
+    },
+    {
+      "id": "M03_BACKEND_SCOPE",
+      "category": "SPLIT_EXISTING_ANSWER_AND_PAIRED_RUNTIME_EVIDENCE",
+      "existing_answer": "Native/custom dispatch threshold, fp32 dX/dW/db ABI and R11 actualB64 calls are answered by frozen source and three records.",
+      "needed": "Only paired32/full actual route/library/ABI/numeric evidence remains needed; included in M01/M02. No separate GEMM sweep or exact-kernel trace is required for initial localization."
+    },
+    {
+      "id": "M04_FP32_DIRECTION",
+      "category": "CONDITIONAL_NEW_EVIDENCE_WHEN_A_CHANGE_IS_PROPOSED",
+      "existing_answer": "Both Tiny fp32 forms differ from fp64; more fp64 accuracy does not imply agreement with unchanged B64/fp32.",
+      "needed": "A future single concrete modification must justify direction against original reference after localization; no candidate trials or precision/layout search in this spec."
+    },
+    {
+      "id": "M05_DDP_AND_LIFECYCLE",
+      "category": "SPLIT_EXISTING_FACTS_HISTORICAL_LIMITS_AND_FUTURE_RUNTIME_GATE",
+      "existing_answer": "Source default scaling and PG permission stop already recorded; archive is accepted only with historical limitations.",
+      "needed": "No recovery experiment for old PPID/15s/fp64/initial-vector gaps and no DDP retry to choose a contraction point. New prospective process identity/cleanup evidence is required for any future authorized diagnostic; actual DDP runtime correctness remains a later training gate."
+    }
+  ],
+  "plan_scope_correction": {
+    "proposal_field": "future_minimal_regression_if_separately_authorized.A_RETAIN_AND_REPRODUCE",
+    "disposition": "Not required or included in the current minimum evidence specification; retain already-reviewed Tiny failure without rerunning. Conditional wording in S02 proposal is not current authorization.",
+    "author_original_modified": false
+  },
+  "minimum_evidence_spec": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_proposal_review_20261106\\MINIMAL_EVIDENCE_SPEC.json",
+    "bytes": 21646,
+    "sha256": "d1da482f2971281996ac70e9133606933277bb31bfead1a48ed64fbbddaf67c2"
+  },
+  "evidence_spec_status": "NEEDS_NEW_EXECUTION_AUTHORIZATION",
+  "spec_question": "On the one original fixed first global64 batch, does the first observed original-threshold failure occur in a named complete-model linear dW with identical logical X/G operands under B64 versus sequential32+32 grouping?",
+  "spec_currently_executable": false,
+  "spec_feasibility": "Conditional single-domain existingR4 envelope; concrete passive observation/memory budget/current resources still require new implementation delivery and review. If infeasible, block before submission, never relax reference/resources.",
+  "retained_reviews": [
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_review_20261106\\S01_REVIEW.json",
+      "bytes": 6152,
+      "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS_REVIEW.json",
+      "bytes": 25271,
+      "sha256": "a18ab449e1d99fd830fb6360d3abd85add53dbdf175081472417634516a47314"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_evidence_closeout_r1_20261106\\EVIDENCE_CLOSEOUT_REVIEW.json",
+      "bytes": 36006,
+      "sha256": "33eca31daa73fe62c9a49057e936d4775bf6970d14be7171cce9553cc1eaf359"
+    }
+  ],
+  "report": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_proposal_review_20261106\\REPORT.md",
+    "bytes": 6584,
+    "sha256": "3d9ffa0f660193772cf71ac4280629a30efe62502efc5d00162cfb7cd6ce01bd"
+  },
+  "activity": {
+    "model_runs": 0,
+    "contractions": 0,
+    "tests": 0,
+    "DDP": 0,
+    "SSH": 0,
+    "cluster_jobs": 0,
+    "Torch_imports": 0,
+    "tensor_deserializations": 0,
+    "new_process_queries": 0,
+    "installs": 0,
+    "elevation": 0,
+    "candidate_or_capture_script_implementations": 0,
+    "author_edits": 0,
+    "git_operations": 0
+  },
+  "next_action": "Coordination reviews the sole minimal evidence spec and separately grants/denies implementation/execution scope; original FAIL remains. No old job permission is reused, no new candidate is implemented now."
+}

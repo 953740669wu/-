@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "task": "S01",
+  "round": "REAL_DUAL_DDP_PROPOSAL_REVIEW_20261106",
+  "status": "NEEDS_NEW_EXECUTION_AUTHORIZATION",
+  "implementation_authorized": false,
+  "execution_authorized": false,
+  "training_authorized": false,
+  "candidate_count": 0,
+  "question": "On the one original fixed first global64 batch, does the first observed original-threshold failure occur in a named complete-model linear dW with identical logical X/G operands under B64 versus sequential32+32 grouping?",
+  "falsification": [
+    "No threshold failure in this fixed batch: report no failure observed within this scope and stop; do not add batches or seeds.",
+    "Earlier output/G/dX/native/nonlinear/db difference or missing operand identity: same-operand direct-KML-dW localization is not established.",
+    "Identical logical X/G and a failing dW on a verified route support only that named grouping-sensitive operation; they do not establish a candidate fix, exact kernel or actual DDP result."
+  ],
+  "purpose": "Baseline localization only. Sequential32+32 is a diagnostic control; original fullB64/fp32 remains the sole reference.",
+  "frozen_inputs": [
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\REFERENCE_READY.json",
+      "bytes": 6655,
+      "sha256": "924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\SOURCE_SHA256.json",
+      "bytes": 1638,
+      "sha256": "6b9cd186d27a5130f22cd2e58a2c6cb231be31c70d5df98dce4c40e92008b757"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\baseline\\kml_ops.py",
+      "bytes": 10255,
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\baseline\\s4_models.py",
+      "bytes": 14121,
+      "sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\tests\\check_equivalence.py",
+      "bytes": 14614,
+      "sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\dual_reference.py",
+      "bytes": 12374,
+      "sha256": "2d7b287dd231ae2ae69ad4d802b3c789a694e9cc023166609df493dfe0340e3b"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\engineering_training.py",
+      "bytes": 8430,
+      "sha256": "9009e96fe4cc8071048e8aed8d3dc11e20d04f4271c48dbe36472e4218d8e5dc"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\diagnostic_common.py",
+      "bytes": 5468,
+      "sha256": "e3683f15e907c8a041795ccd4b775c78b235cc20bb09492108db4e950da7e705"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\real_data.py",
+      "bytes": 14332,
+      "sha256": "6490b5aa7ab8eacc43ba7e4fa13ac64ebd6239671397774025979efdf050c8e0"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\profile_contract.py",
+      "bytes": 1109,
+      "sha256": "15fd272040db36271680e947b2d183e852ed60b343bbcd4ded8f88821d67793d"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\data_gate\\engineering_data.py",
+      "bytes": 10342,
+      "sha256": "fbb89097f2aab0633b5be44e10b3160e4a8a33a2f69b1a889f4930df909e42b3"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\data_gate\\INTERFACE.json",
+      "bytes": 6682,
+      "sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\cpu36_contract.py",
+      "bytes": 11171,
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\REFERENCE_FIRST5.json",
+      "bytes": 19052,
+      "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\REFERENCE_EPOCH25.json",
+      "bytes": 29576,
+      "sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\ENGINEERING_DESCRIPTOR.json",
+      "bytes": 12222,
+      "sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\RUNTIME_CONTRACT.json",
+      "bytes": 3344,
+      "sha256": "029fddfc7bc31158dc63589eb087c794cd8536282c4d8cecae452805344e8bb0"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\R4_RUNTIME.env",
+      "bytes": 786,
+      "sha256": "32248af7857b7fd1616b19899c1411a4a59f9378c9231f0ec56f6c922ec2866d"
+    }
+  ],
+  "fixed_data": {
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "manifest_sha256": "bdd146040bddf2ddd47fb9d571d5d2f40e5fa20fbd30d0c0d11239893e647032",
+    "engineering_interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+    "original_units": 16,
+    "original_engineering_pool_frames": 1600,
+    "formal_split": "UNKNOWN",
+    "subject_mapping": "UNKNOWN",
+    "validation_or_test_created": false,
+    "global_batch": 64,
+    "shards": [
+      32,
+      32
+    ],
+    "step": 1,
+    "frame_indices": [
+      718,
+      231,
+      1141,
+      274,
+      1077,
+      1438,
+      1138,
+      1103,
+      957,
+      340,
+      364,
+      1059,
+      632,
+      1488,
+      885,
+      693,
+      179,
+      890,
+      15,
+      1423,
+      977,
+      1471,
+      57,
+      1306,
+      1093,
+      210,
+      1054,
+      1522,
+      181,
+      280,
+      395,
+      1435,
+      317,
+      628,
+      1264,
+      230,
+      683,
+      770,
+      1364,
+      394,
+      1327,
+      204,
+      1173,
+      379,
+      1216,
+      790,
+      249,
+      136,
+      1005,
+      190,
+      1580,
+      1540,
+      944,
+      241,
+      991,
+      675,
+      844,
+      608,
+      1180,
+      928,
+      37,
+      244,
+      784,
+      388
+    ],
+    "frame_ids_sha256": "13e1a0ee02ecc22a1ef25f2a6222968edddfb5af48013c8f0f5d423408d947ff",
+    "mask_sha256": "2ecef102a789ab31fe44970f544dbcfb21f97d70f836fe826853399a087789b3",
+    "normalization": {
+      "image_scale": 0.03546142578125,
+      "scope": "fit_engineering_train_subset_absmax_once",
+      "fit_partition": "train",
+      "train_units": [
+        "s0285_p0_16_adjacent_c14",
+        "s0285_p0_16_adjacent_c21",
+        "s0285_p1_16_adjacent_c15",
+        "s0285_p1_16_adjacent_c18",
+        "s0285_p1_16_adjacent_c20",
+        "s0285_p1_16_adjacent_c21",
+        "s0285_p1_16_adjacent_c23",
+        "s0285_p1_16_adjacent_c9",
+        "s0593_p0_16_adjacent_c22",
+        "s0593_p1_16_adjacent_c1",
+        "s0593_p1_16_adjacent_c11",
+        "s0593_p1_16_adjacent_c14",
+        "s0593_p1_16_adjacent_c18",
+        "s0593_p1_16_adjacent_c19",
+        "s0593_p1_16_adjacent_c2",
+        "s0593_p1_16_adjacent_c6"
+      ]
+    },
+    "initialization": {
+      "kind": "original_torch_encoder_default_seed0",
+      "parameters": 37995777,
+      "model_source_sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+      "initial_weights_sha256": "2543d05f25883b654141cbc5dc1bb093906e3b360f11ec9f5e87cb4f8bad76b5"
+    },
+    "mask_rule": "One original64x208 draw from a private generator holding original post-model-initialization RNG state; reuse its two slices. No seed0 shortcut, reseed, resampling or extra draw.",
+    "target_gradient_rule": "v and image require gradients as in original train_step. v is also voltage target and image generates coarse target; do not detach either target. Angles/belt remain fixed non-gradient original tensors.",
+    "exposure": {
+      "unique_model_frames_max": 64,
+      "reference_observations_max": 64,
+      "sequential_observations_max": 64,
+      "cumulative_model_observations_max": 128,
+      "normalization_reads": "Original pool and frozen scale only; no refit on first64",
+      "ledger": "New diagnostic ledger recording attempted/finished reference/control exposures, never overwrite old ledgers"
+    }
+  },
+  "paths": [
+    {
+      "id": "A_FULL_B64",
+      "maximum_invocations": 1,
+      "forward": 1,
+      "backward": 1,
+      "description": "One unchanged complete Encoder+both-heads fullB64 forward/backward at original seed0 initial state. Use frozen engineering_training.losses mean expressions unchanged and call backward once; never call train_step/B64Reference.advance because they execute optimizer.step. Retain necessary output/input/parameter-gradient reference tensors; record frozen first-step losses under original compare."
+    },
+    {
+      "id": "B_SEQUENTIAL_32_PLUS_32",
+      "maximum_invocations": 1,
+      "forward_max": 2,
+      "backward_max": 2,
+      "description": "Restore same byte-identical initial parameters/buffers and required RNG from one in-memory initial snapshot, zero gradients once. Process original first32 then last32; independent input leaves and original mask slices; accumulate raw parameter gradients on the same model without intermediate zeroing. No second model copy or optimizer state is needed."
+    }
+  ],
+  "scaling": {
+    "reference": "Original frozen F.mse_loss mean expressions from engineering_training.losses, including head_v and head_coarse; do not rewrite full reference into sum/divisor.",
+    "sequential": "Each shard uses its local voltage/coarse SSE divided by the two original global denominators separately. Sum backward contributions; local multiplier1, parameter gradient divisor1, input gradient divisor1.",
+    "voltage_denominator": "Actual count of true values in the one original real-data64x208 mask; record both local counts and their sum. Do not use Tiny count4.",
+    "coarse_denominator": 16384,
+    "coarse_local_denominator_counts": [
+      8192,
+      8192
+    ],
+    "zero_global_denominator": "Reject without resampling or epsilon; local empty masked sum stays differentiable.",
+    "future_DDP_contract": "world2 would use local multiplier2/default parameter averaging/input divisor2. This spec has no DDP, so it must not apply those factors."
+  },
+  "observation": {
+    "coverage": "All153 canonical parameters, including biases/norm/mask token; complete outputs h/voltage/coarse, original3 losses and v/image input gradients. Nonlinear or native failure is a valid negative outcome, never relabel it KML.",
+    "per_linear_metadata": [
+      "canonical parameter name or verified storage/view-to-parameter mapping",
+      "role/native versus direct _LinearFn branch, forward and backward call index",
+      "X/G/Y/dX logical shape,stride,dtype,requires_grad,actual sample axis and sample-ID-to-flattened-row mapping",
+      "full/global and each corresponding32-sample canonical byteSHA plus finite flags",
+      "dW/db canonical parameter mapping and original comparator metrics",
+      "for direct KML: exact loaded library/symbol identity,actual SGEMM layout/transa/transb,m/n/k,lda/ldb/ldc,alpha/beta,contiguity/output alias flags and actual calls"
+    ],
+    "logical_hash_rule": "Canonicalize by original sample IDs and actual batch axis, not first half of flattened rows. Internal attention projections can be token-major. Missing/unprovable row mapping blocks inference; never sort numerical values or compare mismatched shapes as if aligned.",
+    "X_G_capture": "Observe actual forward X and actual output-adjoint G transiently. Compare per-logical-shard bytes/hashes; no full-layer X/G snapshots persist. Hash equality is the required exact-operand evidence; hashes differing mean upstream/localization remains limited.",
+    "dX_capture": "Observe actual operator VJP via a reviewed passive return/node observer on the installed2.7.1 autograd path, not a combined tensor-leaf gradient when shared by multiple consumers. No extra autograd.grad/backward/GEMM. Intentional pos dX=None is recorded with needs_input_grad=false. If actual per-operation VJP cannot be observed without recomputation, block this requirement rather than synthesize it.",
+    "dW_db_capture": "Retain one B64 set of all153 reference gradients. Compare sequential accumulated canonical gradients and bias gradients with original compare; no second division. Record direct call role and per-shard VJP metadata where naturally available. db is Torch reduction, not a direct _sgemm call.",
+    "extra_boundaries": "Encoder input/output,12 block boundaries and both heads: hashes only to bound the earliest observed forward/adjoint difference; do not claim an instruction trace.",
+    "required_tensor_values": "FullB64 reference h/v/coarse, loss scalars, v/image gradients and153 parameter gradients must exist for original comparator. Sequential counterparts exist transiently and are compared/released. X/G/Y/dX tensors must be observed to hash but need not be copied to persistent storage. No initial-weight serialization, all-layer activation/adjoint dump or all-step model snapshots.",
+    "first_failure_report": "Distinguish first nonzero observation from first original-threshold failure by declared graph dependencies. Report unobserved intervals and missing samples; do not infer causality merely from coarse scalar rounding.",
+    "direct_call_estimate": "For these unchanged requires_grad/dispatch assumptions only: static149 per forward/backward graph, estimated447 across64/32/32. This is not measured rank32 evidence or a count of indirect native BLAS; record actual per-path observations and reject unexplained mapping/call changes."
+  },
+  "comparator": {
+    "asset": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\tests\\check_equivalence.py",
+      "bytes": 14614,
+      "sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e"
+    },
+    "tensor_abs": 2e-05,
+    "state_abs": 2e-06,
+    "relative_l2": 2e-06,
+    "relative_waiver_reference_norm_at_most": 1e-08,
+    "relative_norm_floor": 1e-12,
+    "shape_dtype_finite_exact_rules": "Original function byte-identical; no dropped categories or relaxed thresholds.",
+    "historical_reference_losses": {
+      "total": 15.211074829101562,
+      "voltage": 8.037483215332031,
+      "coarse": 7.173591136932373
+    },
+    "formal_update_AdamW_delta_buffer_restore_gates": "NOT_RUN by this zero-update diagnosis; all remain required for any later training gate, not replaced or waived."
+  },
+  "proposed_resources": {
+    "location": "NEW C2 Linux/aarch64 single NUMA domain, existing pinned R4 environment only; no SSH or queue action authorized now",
+    "domains": 1,
+    "allocated_physical_cores": 38,
+    "actual_physical_cores": 36,
+    "reserved_cores": 2,
+    "cpu_rule": "Use current native authorized physical IDs, select first36/reserve last2 within domain, reject overlap/unauthorized CPUs. Job and actual compute identity before Torch; actual intra-op36 and all relevant nonempty TID masks subsets selected36.",
+    "thread_environment": {
+      "OMP_NUM_THREADS": "36",
+      "MKL_NUM_THREADS": "36",
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_PLACES": "cores",
+      "OMP_PROC_BIND": "close"
+    },
+    "DDR_total_MiB": 24576,
+    "DDR_limit_MiB": 24576,
+    "exclusive": true,
+    "HBM_MiB": 0,
+    "job_seconds": 300,
+    "common_execution_seconds": 240,
+    "cleanup_seconds": 30,
+    "collection_seconds": 30,
+    "per_model_path_seconds": 90,
+    "deadline_rule": "Single monotonic start before preflight; execute only until common+240, cleanup until+270, close until+300. Per-path90 caps cannot reset common budget. No reservation/wait on compute node for missing prerequisites.",
+    "extra_retained_diagnostic_memory_bytes_max": 1073741824,
+    "remote_raw_diagnostic_bytes_max": 536870912,
+    "text_and_indices_bytes_max": 67108864,
+    "retention": "Keep one initial in-memory parameter snapshot, one B64 gradient/output/input-gradient reference set and transient sequential buffers; release graph and gradients between paths. Remote raw diagnostic artifacts only with path/bytes/SHA indexes; no raw/weights/data/env/ZIP in returned archive.",
+    "feasibility": "Conditional static envelope; actual peak memory/CPU availability not proved. Future reviewed implementation must supply a retention-size bound and passive observation mapping. If unavailable or cap cannot be respected, BLOCKED_SPEC_WITH_REASON before submission; runtime OOM/timeout stops without retry or resource increase."
+  },
+  "identity_and_cleanup": {
+    "source": "Bind this spec, task card, frozen source/reference/config/data and concrete implementation/deployment SHA in a new S01 review before any execution. Same process/environment/backend for both paths; fixed fp32/native SDPA/CKPT0, no compile/HBM/candidate.",
+    "backend": "Verify exact Python/Torch/NumPy/module origins, KML/OpenMP/shim library hashes and loaded maps before/after; actual direct SGEMM evidence. Intentional small-native branches are named explicitly; no silent KML fallback.",
+    "process_evidence": "Prospective actual compute PID/PPID/process creation start ticks, native job/run identity, supervisor handles and all owned descendants. Record same-clock TERM/KILL/actual exit/reap events and remaining processes, not just Popen handles or later PID absence. No signals to unrelated jobs/PIDs.",
+    "cleanup": "Only owned start-identity-verified process group/descendants; bounded TERM then KILL/reap within common30seconds. Missing lifecycle/CPU/library evidence is FAIL/INCOMPLETE, never automatic PASS."
+  },
+  "stopping": [
+    "No automatic Tiny reproduction, DDP/PG, optimizer step, five/25-step continuation, performance matrix, extra contraction/float64 control, tile/precision/bucket/seed search or retry.",
+    "Identity/sample/normalization/mask/init/coverage/ABI/boundary/finite/retention-budget error or deadline failure stops immediately, preserves partial raw/text evidence and cleans only owned processes.",
+    "At any detected original-threshold failure label NUMERIC_FAIL and prohibit new forward/backward/operator paths; only compare already-produced required tensors, emit evidence and clean up. Incomplete later stages remain NOT_RUN.",
+    "A completed baseline comparison with no first-batch failure reports NO_FAILURE_OBSERVED_FIXED_BATCH, not training PASS; do not add another batch."
+  ],
+  "relation_to_original_FAIL": "Original small-DDP strict numerical FAIL remains frozen. This diagnostic is not a rerun of the failed training protocol and cannot mutate its prechecks or S01_REVIEW; old900-second authorization is not reusable.",
+  "authorization_requirements": [
+    "New explicit coordination/user task authorizing this sole zero-update localization despite retaining the old Tiny FAIL; explicitly scoped independently of training release.",
+    "New implementation/deployment delivery with fixed source/config/spec/data SHA, reviewer-approved passive mapping/retention/bounded lifecycle evidence and single-run marker before any queue action.",
+    "S00 new queue/resource/ownership check and new exact-version S01 diagnostic-only execution review. No actual permission is granted by this specification."
+  ],
+  "outputs": [
+    "Exact ready/spec/source/config/data/environment/init/RNG/frame/mask/normalization identity manifest",
+    "All original tensor-metric rows and declared mapping/hashes/first-observed-difference/first-threshold-failure or clearly scoped no-failure result",
+    "Actual direct/native route and ABI metadata per path, conditional invariants and missing/unobservable fields",
+    "New exposure ledger; per-path actual counts/exit/deadline/owned-process-tree cleanup and collection evidence",
+    "Remote raw diagnostic path/bytes/SHA index, bounded retained tensors only; no download of initial weights or all-layer X/G"
+  ],
+  "expected_next": "Review evidence before proposing any one fp32 change. This specification does not establish M04, implement a candidate or authorize any run.",
+  "fixed_model_mode": "Original training=True and grad_enabled=True for both paths; CPU fp32/no autocast, LINEAR_DTYPE fp32, native SDPA/dropout0/CKPT0/compile off. Record actual flags and reject mode/dispatch changes; do not use eval fast paths."
+}
