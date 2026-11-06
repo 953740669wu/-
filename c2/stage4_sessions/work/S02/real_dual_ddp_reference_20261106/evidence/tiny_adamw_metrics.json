@@ -1,0 +1,1337 @@
+{
+  "scope": "TINY_NATIVE_TORCH_B64_VS_IDENTICAL_B64_WITH_RAW_INPUT_GRADS_X2_NOT_DDP_OR_KML",
+  "completed_steps": 5,
+  "metric_count": 190,
+  "metrics": [
+    {
+      "name": "1.outputs.coarse",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 80.1889578865584,
+      "passed": true
+    },
+    {
+      "name": "1.outputs.h",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 12.496317939022036,
+      "passed": true
+    },
+    {
+      "name": "1.outputs.v",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.8016255775417679,
+      "passed": true
+    },
+    {
+      "name": "1.losses.coarse",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.40609845519065857,
+      "passed": true
+    },
+    {
+      "name": "1.losses.total",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.41380202770233154,
+      "passed": true
+    },
+    {
+      "name": "1.losses.voltage",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.007703559007495642,
+      "passed": true
+    },
+    {
+      "name": "1.input_grad.0",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.026147797885957003,
+      "passed": true
+    },
+    {
+      "name": "1.input_grad.1",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.009957164826527282,
+      "passed": true
+    },
+    {
+      "name": "1.grad.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.001306017250317245,
+      "passed": true
+    },
+    {
+      "name": "1.param.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.5365967080090985,
+      "passed": true
+    },
+    {
+      "name": "1.delta.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00014104851473941188,
+      "passed": true
+    },
+    {
+      "name": "1.state.val.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00013060172506665173,
+      "passed": true
+    },
+    {
+      "name": "1.state.val.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 1.6987080016368182e-09,
+      "passed": true
+    },
+    {
+      "name": "1.grad.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.40421364920486075,
+      "passed": true
+    },
+    {
+      "name": "1.param.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 1.103945288935289,
+      "passed": true
+    },
+    {
+      "name": "1.delta.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00014258279474156638,
+      "passed": true
+    },
+    {
+      "name": "1.state.val.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.040421366494070084,
+      "passed": true
+    },
+    {
+      "name": "1.state.val.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00011751830514508462,
+      "passed": true
+    },
+    {
+      "name": "1.grad.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.15804517245720234,
+      "passed": true
+    },
+    {
+      "name": "1.param.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.3318273442155045,
+      "passed": true
+    },
+    {
+      "name": "1.delta.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00014146625018595028,
+      "passed": true
+    },
+    {
+      "name": "1.state.head_v.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.015804517530132834,
+      "passed": true
+    },
+    {
+      "name": "1.state.head_v.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 1.7719369973011196e-05,
+      "passed": true
+    },
+    {
+      "name": "1.grad.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.14119336009025574,
+      "passed": true
+    },
+    {
+      "name": "1.param.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.014109998010098934,
+      "passed": true
+    },
+    {
+      "name": "1.delta.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 9.998586028814316e-05,
+      "passed": true
+    },
+    {
+      "name": "1.state.head_v.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.014119336381554604,
+      "passed": true
+    },
+    {
+      "name": "1.state.head_v.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 1.99355654331157e-05,
+      "passed": true
+    },
+    {
+      "name": "1.grad.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.08646878210857892,
+      "passed": true
+    },
+    {
+      "name": "1.param.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 9.316400771715205,
+      "passed": true
+    },
+    {
+      "name": "1.delta.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.002266780877109986,
+      "passed": true
+    },
+    {
+      "name": "1.state.head_coarse.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.008646878387124387,
+      "passed": true
+    },
+    {
+      "name": "1.state.head_coarse.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 5.248672331025693e-07,
+      "passed": true
+    },
+    {
+      "name": "1.grad.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.07829816789999137,
+      "passed": true
+    },
+    {
+      "name": "1.param.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 6.772959446651071,
+      "passed": true
+    },
+    {
+      "name": "1.delta.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0016040248972599611,
+      "passed": true
+    },
+    {
+      "name": "1.state.head_coarse.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.007829816934369651,
+      "passed": true
+    },
+    {
+      "name": "1.state.head_coarse.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 6.047865396237641e-07,
+      "passed": true
+    },
+    {
+      "name": "2.outputs.coarse",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 80.15607564741481,
+      "passed": true
+    },
+    {
+      "name": "2.outputs.h",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 12.494709805281767,
+      "passed": true
+    },
+    {
+      "name": "2.outputs.v",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.798651993737226,
+      "passed": true
+    },
+    {
+      "name": "2.losses.coarse",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.405776709318161,
+      "passed": true
+    },
+    {
+      "name": "2.losses.total",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.4134424328804016,
+      "passed": true
+    },
+    {
+      "name": "2.losses.voltage",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0076657128520309925,
+      "passed": true
+    },
+    {
+      "name": "2.input_grad.0",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.02609649374680011,
+      "passed": true
+    },
+    {
+      "name": "2.input_grad.1",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0099532192701669,
+      "passed": true
+    },
+    {
+      "name": "2.grad.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0013049610901553967,
+      "passed": true
+    },
+    {
+      "name": "2.param.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.5366976009918172,
+      "passed": true
+    },
+    {
+      "name": "2.delta.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00028209504879005316,
+      "passed": true
+    },
+    {
+      "name": "2.state.val.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00024803764807595016,
+      "passed": true
+    },
+    {
+      "name": "2.state.val.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 3.392862724405854e-09,
+      "passed": true
+    },
+    {
+      "name": "2.grad.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.40382373735999644,
+      "passed": true
+    },
+    {
+      "name": "2.param.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 1.1038029259228235,
+      "passed": true
+    },
+    {
+      "name": "2.delta.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00028516558948313276,
+      "passed": true
+    },
+    {
+      "name": "2.state.val.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0767616036769937,
+      "passed": true
+    },
+    {
+      "name": "2.state.val.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00023467950692226453,
+      "passed": true
+    },
+    {
+      "name": "2.grad.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.15744134432895704,
+      "passed": true
+    },
+    {
+      "name": "2.param.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.33180217473441626,
+      "passed": true
+    },
+    {
+      "name": "2.delta.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00028292198742707316,
+      "passed": true
+    },
+    {
+      "name": "2.state.head_v.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.029968200624909597,
+      "passed": true
+    },
+    {
+      "name": "2.state.head_v.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 3.528572419464517e-05,
+      "passed": true
+    },
+    {
+      "name": "2.grad.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.14066475629806519,
+      "passed": true
+    },
+    {
+      "name": "2.param.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.014209973625838757,
+      "passed": true
+    },
+    {
+      "name": "2.delta.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00019996147602796555,
+      "passed": true
+    },
+    {
+      "name": "2.state.head_v.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.026773877441883087,
+      "passed": true
+    },
+    {
+      "name": "2.state.head_v.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 3.97022049583029e-05,
+      "passed": true
+    },
+    {
+      "name": "2.grad.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.08642216524489961,
+      "passed": true
+    },
+    {
+      "name": "2.param.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 9.315429614463422,
+      "passed": true
+    },
+    {
+      "name": "2.delta.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.004533500739979806,
+      "passed": true
+    },
+    {
+      "name": "2.state.head_coarse.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.016424407082816127,
+      "passed": true
+    },
+    {
+      "name": "2.state.head_coarse.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 1.0487411311201034e-06,
+      "passed": true
+    },
+    {
+      "name": "2.grad.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.07826604905368491,
+      "passed": true
+    },
+    {
+      "name": "2.param.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 6.7720237407756105,
+      "passed": true
+    },
+    {
+      "name": "2.delta.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0032080086670106,
+      "passed": true
+    },
+    {
+      "name": "2.state.head_coarse.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.014873440104441684,
+      "passed": true
+    },
+    {
+      "name": "2.state.head_coarse.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 1.2085832369142464e-06,
+      "passed": true
+    },
+    {
+      "name": "3.outputs.coarse",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 80.12320235288297,
+      "passed": true
+    },
+    {
+      "name": "3.outputs.h",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 12.493101674627853,
+      "passed": true
+    },
+    {
+      "name": "3.outputs.v",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.7956792741029896,
+      "passed": true
+    },
+    {
+      "name": "3.losses.coarse",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.4054551124572754,
+      "passed": true
+    },
+    {
+      "name": "3.losses.total",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.41308313608169556,
+      "passed": true
+    },
+    {
+      "name": "3.losses.voltage",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.007628016639500856,
+      "passed": true
+    },
+    {
+      "name": "3.input_grad.0",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.026045225459346868,
+      "passed": true
+    },
+    {
+      "name": "3.input_grad.1",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.009949274846881984,
+      "passed": true
+    },
+    {
+      "name": "3.grad.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.001303907612879076,
+      "passed": true
+    },
+    {
+      "name": "3.param.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.5367985120180339,
+      "passed": true
+    },
+    {
+      "name": "3.delta.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00042313894195037424,
+      "passed": true
+    },
+    {
+      "name": "3.state.val.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0003536246252136807,
+      "passed": true
+    },
+    {
+      "name": "3.state.val.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 5.082477056150313e-09,
+      "passed": true
+    },
+    {
+      "name": "3.grad.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.40343418179823026,
+      "passed": true
+    },
+    {
+      "name": "3.param.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 1.103660562967102,
+      "passed": true
+    },
+    {
+      "name": "3.delta.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0004277483842246992,
+      "passed": true
+    },
+    {
+      "name": "3.state.val.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.10942885743835297,
+      "passed": true
+    },
+    {
+      "name": "3.state.val.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0003514844590722986,
+      "passed": true
+    },
+    {
+      "name": "3.grad.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.1568377508325545,
+      "passed": true
+    },
+    {
+      "name": "3.param.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.3317770551249676,
+      "passed": true
+    },
+    {
+      "name": "3.delta.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00042436721231466285,
+      "passed": true
+    },
+    {
+      "name": "3.state.head_v.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.04265515516869173,
+      "passed": true
+    },
+    {
+      "name": "3.state.head_v.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 5.2699788586143595e-05,
+      "passed": true
+    },
+    {
+      "name": "3.grad.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.14013633131980896,
+      "passed": true
+    },
+    {
+      "name": "3.param.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.01430993340909481,
+      "passed": true
+    },
+    {
+      "name": "3.delta.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00029992125928401947,
+      "passed": true
+    },
+    {
+      "name": "3.state.head_v.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.038110122084617615,
+      "passed": true
+    },
+    {
+      "name": "3.state.head_v.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 5.9300698922015727e-05,
+      "passed": true
+    },
+    {
+      "name": "3.grad.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.08637556537022299,
+      "passed": true
+    },
+    {
+      "name": "3.param.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 9.314458930375398,
+      "passed": true
+    },
+    {
+      "name": "3.delta.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.006800091491138506,
+      "passed": true
+    },
+    {
+      "name": "3.state.head_coarse.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.023419522627423344,
+      "passed": true
+    },
+    {
+      "name": "3.state.head_coarse.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 1.5716230415287154e-06,
+      "passed": true
+    },
+    {
+      "name": "3.grad.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.07823393889238463,
+      "passed": true
+    },
+    {
+      "name": "3.param.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 6.7710882591697015,
+      "passed": true
+    },
+    {
+      "name": "3.delta.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.004811902117644613,
+      "passed": true
+    },
+    {
+      "name": "3.state.head_coarse.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.02120948976007469,
+      "passed": true
+    },
+    {
+      "name": "3.state.head_coarse.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 1.8113913130845712e-06,
+      "passed": true
+    },
+    {
+      "name": "4.outputs.coarse",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 80.09033810461969,
+      "passed": true
+    },
+    {
+      "name": "4.outputs.h",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 12.491493544792938,
+      "passed": true
+    },
+    {
+      "name": "4.outputs.v",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.7927073396312012,
+      "passed": true
+    },
+    {
+      "name": "4.losses.coarse",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.40513378381729126,
+      "passed": true
+    },
+    {
+      "name": "4.losses.total",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.41272425651550293,
+      "passed": true
+    },
+    {
+      "name": "4.losses.voltage",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.007590467110276222,
+      "passed": true
+    },
+    {
+      "name": "4.input_grad.0",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.025993991585191712,
+      "passed": true
+    },
+    {
+      "name": "4.input_grad.1",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.009945331556936957,
+      "passed": true
+    },
+    {
+      "name": "4.grad.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0013028534115988293,
+      "passed": true
+    },
+    {
+      "name": "4.param.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.5368995006600266,
+      "passed": true
+    },
+    {
+      "name": "4.delta.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0005642215752847155,
+      "passed": true
+    },
+    {
+      "name": "4.state.val.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.00044854747253054094,
+      "passed": true
+    },
+    {
+      "name": "4.state.val.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 6.767555444261851e-09,
+      "passed": true
+    },
+    {
+      "name": "4.grad.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.4030449826422953,
+      "passed": true
+    },
+    {
+      "name": "4.param.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 1.1035182445017304,
+      "passed": true
+    },
+    {
+      "name": "4.delta.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0005702890212176698,
+      "passed": true
+    },
+    {
+      "name": "4.state.val.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.13879046491089897,
+      "passed": true
+    },
+    {
+      "name": "4.state.val.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0004679339912997872,
+      "passed": true
+    },
+    {
+      "name": "4.grad.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.15623450612387177,
+      "passed": true
+    },
+    {
+      "name": "4.param.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.331752009814646,
+      "passed": true
+    },
+    {
+      "name": "4.delta.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0005657808030167455,
+      "passed": true
+    },
+    {
+      "name": "4.state.head_v.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.05401308943916698,
+      "passed": true
+    },
+    {
+      "name": "4.state.head_v.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 6.996230887376895e-05,
+      "passed": true
+    },
+    {
+      "name": "4.grad.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.1396079957485199,
+      "passed": true
+    },
+    {
+      "name": "4.param.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.014409868977963924,
+      "passed": true
+    },
+    {
+      "name": "4.delta.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0003998568281531334,
+      "passed": true
+    },
+    {
+      "name": "4.state.head_v.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0482599101960659,
+      "passed": true
+    },
+    {
+      "name": "4.state.head_v.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 7.873179129092023e-05,
+      "passed": true
+    },
+    {
+      "name": "4.grad.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.08632898317368935,
+      "passed": true
+    },
+    {
+      "name": "4.param.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 9.313488738779984,
+      "passed": true
+    },
+    {
+      "name": "4.delta.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.009066482118781267,
+      "passed": true
+    },
+    {
+      "name": "4.state.head_coarse.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.02971046803160492,
+      "passed": true
+    },
+    {
+      "name": "4.state.head_coarse.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 2.093514282945502e-06,
+      "passed": true
+    },
+    {
+      "name": "4.grad.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0782018370173728,
+      "passed": true
+    },
+    {
+      "name": "4.param.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 6.770153041578126,
+      "passed": true
+    },
+    {
+      "name": "4.delta.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0064156670679108106,
+      "passed": true
+    },
+    {
+      "name": "4.state.head_coarse.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.02690872407265815,
+      "passed": true
+    },
+    {
+      "name": "4.state.head_coarse.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 2.4132119064281047e-06,
+      "passed": true
+    },
+    {
+      "name": "5.outputs.coarse",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 80.05748505053901,
+      "passed": true
+    },
+    {
+      "name": "5.outputs.h",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 12.489885920797336,
+      "passed": true
+    },
+    {
+      "name": "5.outputs.v",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.7897369177841393,
+      "passed": true
+    },
+    {
+      "name": "5.losses.coarse",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.40481269359588623,
+      "passed": true
+    },
+    {
+      "name": "5.losses.total",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.41236576437950134,
+      "passed": true
+    },
+    {
+      "name": "5.losses.voltage",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.007553075440227985,
+      "passed": true
+    },
+    {
+      "name": "5.input_grad.0",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.025942803585465128,
+      "passed": true
+    },
+    {
+      "name": "5.input_grad.1",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.009941389672790542,
+      "passed": true
+    },
+    {
+      "name": "5.grad.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0013018007942608289,
+      "passed": true
+    },
+    {
+      "name": "5.param.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.5370005668699217,
+      "passed": true
+    },
+    {
+      "name": "5.delta.val.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0007053413066278017,
+      "passed": true
+    },
+    {
+      "name": "5.state.val.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0005338727647900401,
+      "passed": true
+    },
+    {
+      "name": "5.state.val.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 8.448107666328371e-09,
+      "passed": true
+    },
+    {
+      "name": "5.grad.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.40265625465258187,
+      "passed": true
+    },
+    {
+      "name": "5.param.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 1.1033759260937184,
+      "passed": true
+    },
+    {
+      "name": "5.delta.val.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0007128296600786582,
+      "passed": true
+    },
+    {
+      "name": "5.state.val.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.16517703668503128,
+      "passed": true
+    },
+    {
+      "name": "5.state.val.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0005840290355670376,
+      "passed": true
+    },
+    {
+      "name": "5.grad.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.15563171128058415,
+      "passed": true
+    },
+    {
+      "name": "5.param.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.33172703023987693,
+      "passed": true
+    },
+    {
+      "name": "5.delta.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.000707152246982725,
+      "passed": true
+    },
+    {
+      "name": "5.state.head_v.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.06417495183083462,
+      "passed": true
+    },
+    {
+      "name": "5.state.head_v.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 8.707405357873998e-05,
+      "passed": true
+    },
+    {
+      "name": "5.grad.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.13907991349697113,
+      "passed": true
+    },
+    {
+      "name": "5.param.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.01450977474451065,
+      "passed": true
+    },
+    {
+      "name": "5.delta.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0004997625946998596,
+      "passed": true
+    },
+    {
+      "name": "5.state.head_v.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.057341910898685455,
+      "passed": true
+    },
+    {
+      "name": "5.state.head_v.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 9.799627878237516e-05,
+      "passed": true
+    },
+    {
+      "name": "5.grad.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.08628242903851881,
+      "passed": true
+    },
+    {
+      "name": "5.param.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 9.312519117191485,
+      "passed": true
+    },
+    {
+      "name": "5.delta.head_coarse.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.011332556928504538,
+      "passed": true
+    },
+    {
+      "name": "5.state.head_coarse.weight.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.035367663316596486,
+      "passed": true
+    },
+    {
+      "name": "5.state.head_coarse.weight.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 2.6144163699373905e-06,
+      "passed": true
+    },
+    {
+      "name": "5.grad.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.07816974672023051,
+      "passed": true
+    },
+    {
+      "name": "5.param.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 6.769218119987404,
+      "passed": true
+    },
+    {
+      "name": "5.delta.head_coarse.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.008019277753670777,
+      "passed": true
+    },
+    {
+      "name": "5.state.head_coarse.bias.exp_avg",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.03203482548046097,
+      "passed": true
+    },
+    {
+      "name": "5.state.head_coarse.bias.exp_avg_sq",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 3.0140462223596617e-06,
+      "passed": true
+    }
+  ]
+}

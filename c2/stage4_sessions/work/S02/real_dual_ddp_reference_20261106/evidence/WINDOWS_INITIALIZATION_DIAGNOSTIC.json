@@ -1,0 +1,20 @@
+{
+  "scope": "READ_ONLY_DIAGNOSIS_AFTER_LOCAL_INIT_FAILURE_NO_TRAINING",
+  "torch": "2.7.1+cpu",
+  "numpy": "2.2.6",
+  "platform": "win32",
+  "expected": {
+    "kind": "original_torch_encoder_default_seed0",
+    "parameters": 37995777,
+    "model_source_sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+    "initial_weights_sha256": "2543d05f25883b654141cbc5dc1bb093906e3b360f11ec9f5e87cb4f8bad76b5"
+  },
+  "actual": {
+    "parameters": 37995777,
+    "initial_weights_sha256": "411aa36f4d120512d7de6e6646733ea898a99531144cac84688a9ef1c2a567dd"
+  },
+  "first_mask_sha256": "2ecef102a789ab31fe44970f544dbcfb21f97d70f836fe826853399a087789b3",
+  "expected_first_mask_sha256": "2ecef102a789ab31fe44970f544dbcfb21f97d70f836fe826853399a087789b3",
+  "init_hash_match": false,
+  "first_mask_match": true
+}

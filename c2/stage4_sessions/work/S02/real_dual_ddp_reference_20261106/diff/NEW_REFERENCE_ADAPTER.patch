@@ -1,0 +1,429 @@
+--- /dev/null
++++ new/dual_reference.py
+@@ -0,0 +1,233 @@
++"""Fixed real-engineering shards/masks and original complete B64 strict reference."""
++from contextlib import contextmanager
++import hashlib
++import importlib.util
++import json
++from pathlib import Path
++import random
++
++from data_gate import engineering_data as data
++import engineering_training as training
++import profile_contract
++from diagnostic_common import configure_backend, finish_backend
++
++ROOT = Path(__file__).resolve().parent
++DESCRIPTOR_SHA256 = 'b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6'
++FIRST5 = json.loads((ROOT / 'REFERENCE_FIRST5.json').read_text())
++EPOCH25 = json.loads((ROOT / 'REFERENCE_EPOCH25.json').read_text())
++_spec = importlib.util.spec_from_file_location('s02_dual_accepted', ROOT / 'tests/check_equivalence.py')
++accepted = importlib.util.module_from_spec(_spec)
++_spec.loader.exec_module(accepted)
++
++
++def validate_partition(global_indices, rank_indices):
++    if (len(global_indices) != 64 or any(type(x) is not int for x in global_indices) or
++            len(set(global_indices)) != 64 or rank_indices != [global_indices[:32], global_indices[32:]]):
++        raise ValueError('exact ordered first32/last32 disjoint partition required')
++
++
++def plan(step):
++    if type(step) is not int or not 1 <= step <= 25:
++        raise ValueError('original epoch steps 1..25 only')
++    order = list(range(1600)); random.Random(0).shuffle(order)
++    indices = order[(step - 1) * 64:step * 64]
++    expected = EPOCH25['steps'][step - 1]
++    if len(EPOCH25['steps']) != 25 or expected['step'] != step or expected['frame_indices'] != indices:
++        raise ValueError('frozen original25 epoch identity differs')
++    ranks = [indices[:32], indices[32:]]
++    validate_partition(indices, ranks)
++    return dict(step=step, global_indices=indices, rank_indices=ranks,
++                expected_mask_sha256=expected['mask_sha256'],
++                expected_frame_ids_sha256=expected['frame_ids_sha256'])
++
++
++def check_identity(step, frame_ids, mask):
++    expected = plan(step)
++    if (len(frame_ids) != 64 or tuple(mask.shape) != (64, 208) or str(mask.dtype) != 'torch.bool' or
++            profile_contract.identity(frame_ids) != expected['expected_frame_ids_sha256'] or
++            hashlib.sha256(mask.detach().contiguous().numpy().tobytes()).hexdigest() != expected['expected_mask_sha256']):
++        raise ValueError('original global frame/mask identity differs; no resampling')
++
++
++def load_data(descriptor_path, descriptor_sha256, ledger_path):
++    if descriptor_sha256 != DESCRIPTOR_SHA256:
++        raise ValueError('original engineering descriptor SHA required')
++    metadata = data.load_descriptor(descriptor_path, descriptor_sha256)
++    description = metadata['description']
++    profile_contract.check_data(description, FIRST5)
++    path = Path(ledger_path)
++    if not path.is_absolute() or path.resolve() in {
++            Path(description['runtime_exposure_ledger_path']).resolve(),
++            Path(description['exposure_ledger']['path']).resolve()}:
++        raise ValueError('new owned absolute per-rank exposure ledger required')
++    ledger = data.Exposure(path, description)
++    loaded = data.load_arrays(metadata, ledger)
++    normalization = dict(image_scale=loaded['image_scale'], scope=loaded['normalization_scope'],
++                         fit_partition='train', train_units=[x['unit'] for x in metadata['units']['train']])
++    if len(loaded['train']['v']) != 1600 or normalization != FIRST5['normalization']:
++        raise ValueError('original1600 frames/train-only normalization required')
++    return metadata, loaded, normalization, ledger
++
++
++def initialize(torch):
++    import numpy as np
++    torch.manual_seed(0); np.random.seed(0); random.seed(0)
++    definitions = accepted.model_definitions(torch)
++    model = definitions['Encoder']()
++    opt = training.optimizer(torch, model)
++    angles = definitions['protocol_angles'](16, 1)
++    identity = dict(parameters=sum(p.numel() for p in model.parameters()),
++                    initial_weights_sha256=training.model_sha(model), train_seed=0)
++    if identity['parameters'] != 37995777 or identity['initial_weights_sha256'] != FIRST5['initialization']['initial_weights_sha256']:
++        raise ValueError('full original seed0 Encoder initialization differs')
++    if any(p.dtype != torch.float32 or p.device.type != 'cpu' for p in model.parameters()):
++        raise ValueError('original CPU fp32 parameters required')
++    return model, opt, angles, torch.get_rng_state().clone(), identity
++
++
++class MaskStream:
++    def __init__(self, torch, post_init_rng_state):
++        self.torch = torch
++        self.post_init_state = post_init_rng_state.clone()
++        self.generator = torch.Generator(device='cpu').set_state(self.post_init_state)
++        self.next_step = 1
++
++    def next(self, step):
++        if step != self.next_step:
++            raise ValueError('mask stream cursor differs')
++        expected = plan(step)
++        mask = self.torch.rand(64, 208, generator=self.generator) < .5
++        if hashlib.sha256(mask.numpy().tobytes()).hexdigest() != expected['expected_mask_sha256']:
++            raise ValueError('original post-init mask stream differs; stop without reseeding')
++        self.next_step += 1
++        return mask
++
++    def state_dict(self):
++        return dict(next_step=self.next_step, post_init_state=self.post_init_state.clone(),
++                    generator_state=self.generator.get_state().clone())
++
++    def load_state_dict(self, value):
++        step = value['next_step']
++        if (type(step) is not int or not 1 <= step <= 26 or
++                not self.torch.equal(value['post_init_state'], self.post_init_state)):
++            raise ValueError('mask restore initial state/cursor mismatch')
++        expected = self.torch.Generator(device='cpu').set_state(self.post_init_state)
++        for _ in range(step - 1):
++            self.torch.rand(64, 208, generator=expected)
++        if not self.torch.equal(expected.get_state(), value['generator_state']):
++            raise ValueError('mask restore generator state/cursor mismatch')
++        self.generator.set_state(value['generator_state']); self.next_step = step
++
++
++def new_mask_stream(torch, post_init_rng_state):
++    return MaskStream(torch, post_init_rng_state)
++
++
++def shard(torch, global_values, global_mask, rank):
++    if (type(rank) is not int or rank not in (0, 1) or len(global_values) != 4 or
++            any(v.shape[0] != 64 for v in global_values) or global_mask.shape != global_values[0].shape or
++            global_mask.dtype != torch.bool):
++        raise ValueError('two ordered32 shards of complete64 required')
++    start = rank * 32
++    values = tuple(v[start:start + 32].detach().clone().contiguous() for v in global_values)
++    return values, global_mask[start:start + 32].clone().contiguous()
++
++
++@contextmanager
++def _isolated_rng(torch):
++    before = training.rng_state(torch)
++    try:
++        yield
++    finally:
++        training.restore_rng(torch, before)
++
++
++def _historical_loss_check(torch, step, losses, metrics, role):
++    for key in ('total', 'voltage', 'coarse'):
++        accepted.compare(torch, f'{role}.{step}.baseline_loss.{key}',
++                         torch.tensor(FIRST5['steps'][step - 1]['losses'][key], dtype=torch.float32),
++                         losses[key], 'tensor', metrics)
++
++
++class B64Reference:
++    def __init__(self, torch):
++        self.torch = torch
++        with _isolated_rng(torch):
++            self.model, self.opt, self.angles, _, self.initialization = initialize(torch)
++        self.initial = {n: p.detach().clone() for n, p in self.model.named_parameters()}
++        self.last_step = 0
++        self.pending = None
++        self.closed = False
++
++    def advance(self, step, global_values, global_mask, metrics):
++        if self.closed or self.pending is not None or type(step) is not int or step != self.last_step + 1 or not 1 <= step <= 5:
++            raise ValueError('reference sequential five updates only; release each compared step')
++        if global_values[0].shape[0] != 64 or global_mask.shape != global_values[0].shape:
++            raise ValueError('complete B64 reference required; never B32x2')
++        torch = self.torch
++        values = tuple(v.detach().clone() for v in global_values)
++        outputs = {}
++        def capture(key):
++            def hook(_module, _args, value): outputs[key] = value.detach().clone()
++            return hook
++        handles = [m.register_forward_hook(capture(k)) for k, m in
++                   [('h', self.model), ('v', self.model.head_v), ('coarse', self.model.head_coarse)]]
++        try:
++            with _isolated_rng(torch):
++                losses = training.train_step(torch, self.model, self.opt, values, global_mask)
++                training.validate_update(torch, self.model, self.opt, values, step)
++                _historical_loss_check(torch, step, losses, metrics, 'reference')
++            self.pending = dict(outputs=outputs, losses=losses,
++                                input_grads=[values[i].grad.detach().clone() for i in (0, 1)])
++        finally:
++            for h in handles: h.remove()
++        return self.pending
++
++    def compare(self, step, ddp_encoder, ddp_optimizer, got, metrics):
++        if self.closed or self.pending is None or step != self.last_step + 1:
++            raise ValueError('matching pending reference step required')
++        torch = self.torch
++        a, b = dict(self.model.named_parameters()), dict(ddp_encoder.named_parameters())
++        if set(a) != set(b) or set(self.initial) != set(a):
++            raise ValueError('all original canonical Encoder/head parameter names required')
++        group = ddp_optimizer.param_groups
++        if len(group) != 1 or len(group[0]['params']) != len(b) or {id(p) for p in group[0]['params']} != {id(p) for p in b.values()}:
++            raise ValueError('optimizer must cover each canonical parameter exactly once')
++        if {k: v for k, v in group[0].items() if k != 'params'} != {k: v for k, v in self.opt.param_groups[0].items() if k != 'params'}:
++            raise ValueError('original AdamW hyperparameters required')
++        for field, names in [('outputs', {'h', 'v', 'coarse'}), ('losses', {'total', 'voltage', 'coarse'})]:
++            if set(got[field]) != names:
++                raise ValueError('complete global outputs/losses required')
++            for key in sorted(names):
++                accepted.compare(torch, f'{step}.{field}.{key}', self.pending[field][key], got[field][key], 'tensor', metrics)
++        _historical_loss_check(torch, step, got['losses'], metrics, 'ddp')
++        if len(got['input_grads']) != 2 or any(v is None for v in got['input_grads']):
++            raise ValueError('both global concatenated raw input gradients required')
++        for i in (0, 1):
++            accepted.compare(torch, f'{step}.input_grad.{i}', self.pending['input_grads'][i], got['input_grads'][i] / 2, 'tensor', metrics)
++        for name, p in a.items():
++            q = b[name]
++            if p.grad is None or q.grad is None:
++                raise ValueError('missing canonical parameter gradient: ' + name)
++            for key, left, right in [('grad', p.grad, q.grad), ('param', p.detach(), q.detach()),
++                                     ('delta', p.detach() - self.initial[name], q.detach() - self.initial[name])]:
++                accepted.compare(torch, f'{step}.{key}.{name}', left, right, 'tensor', metrics)
++            sa, sb = self.opt.state[p], ddp_optimizer.state[q]
++            if set(sa) != {'step', 'exp_avg', 'exp_avg_sq'} or set(sa) != set(sb):
++                raise ValueError('complete original AdamW state required: ' + name)
++            for key in sa:
++                accepted.compare(torch, f'{step}.state.{name}.{key}', sa[key], sb[key], 'exact' if key == 'step' else 'state', metrics)
++        aa, bb = self.model.state_dict(), ddp_encoder.state_dict()
++        if set(aa) != set(bb):
++            raise ValueError('complete original model state keys required')
++        for name in sorted(set(aa) - set(a)):
++            accepted.compare(torch, f'{step}.buffer.{name}', aa[name], bb[name], 'tensor', metrics)
++        self.last_step = step
++        self.pending = None
++        self.opt.zero_grad(set_to_none=True)
++
++    def close(self):
++        if self.opt is not None: self.opt.zero_grad(set_to_none=True)
++        self.pending = None; self.initial.clear()
++        self.model = self.opt = self.angles = None
++        self.closed = True
+--- /dev/null
++++ new/tests/test_dual_reference.py
+@@ -0,0 +1,190 @@
++"""New reference/shard contract checks; tiny models do not establish C2 acceptance."""
++import hashlib
++import json
++from pathlib import Path
++import random
++import sys
++import tempfile
++import unittest
++from unittest.mock import patch
++
++import numpy as np
++import torch
++
++ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT))
++import dual_reference as ref
++
++
++class TinyEncoder(torch.nn.Module):
++    def __init__(self):
++        super().__init__()
++        self.val = torch.nn.Linear(1, 2)
++        self.head_v = torch.nn.Linear(2, 1)
++        self.head_coarse = torch.nn.Linear(2, 256)
++
++    def forward(self, v, angles, belt, mask):
++        return self.val(v[..., None])
++
++
++def tiny_initialize(torch):
++    torch.manual_seed(0); np.random.seed(0); random.seed(0)
++    model = TinyEncoder()
++    return model, ref.training.optimizer(torch, model), None, torch.get_rng_state().clone(), {}
++
++
++def tiny_values():
++    v = torch.linspace(-.1, .1, 64 * 2).reshape(64, 2)
++    image = torch.linspace(-.2, .2, 64 * 16 * 16).reshape(64, 1, 16, 16)
++    return (v, image, torch.zeros(64, 2, 4), torch.zeros(64, 2))
++
++
++class ReferenceTests(unittest.TestCase):
++    def test_01_original_25_order_and_partition_rejections(self):
++        order = list(range(1600)); random.Random(0).shuffle(order)
++        combined = []
++        for step in range(1, 26):
++            p = ref.plan(step)
++            self.assertEqual(p['global_indices'], order[(step - 1) * 64:step * 64])
++            self.assertEqual(p['rank_indices'], [p['global_indices'][:32], p['global_indices'][32:]])
++            ref.validate_partition(p['global_indices'], p['rank_indices'])
++            combined += p['global_indices']
++        self.assertEqual(sorted(combined), list(range(1600)))
++        p = ref.plan(1)
++        for ranks in ([p['rank_indices'][0], p['rank_indices'][0]],
++                      [p['rank_indices'][0][:-1], p['rank_indices'][1]],
++                      [p['rank_indices'][1], p['rank_indices'][0]]):
++            with self.assertRaises(ValueError): ref.validate_partition(p['global_indices'], ranks)
++        for step in (0, 26, True):
++            with self.assertRaises(ValueError): ref.plan(step)
++
++    def test_02_full_original_init_and_all_masks_isolated(self):
++        # Full original initialization only: no Encoder forward/train or real input read.
++        torch.manual_seed(0); np.random.seed(0); random.seed(0)
++        definitions = ref.accepted.model_definitions(torch)
++        model = definitions['Encoder']()
++        state = torch.get_rng_state().clone()
++        angles = definitions['protocol_angles'](16, 1)
++        self.assertEqual(sum(p.numel() for p in model.parameters()), 37995777)
++        named = dict(model.named_parameters())
++        self.assertEqual(len(named), 153)
++        self.assertTrue({'head_v.weight', 'head_v.bias', 'head_coarse.weight', 'head_coarse.bias'} <= set(named))
++        original_opt = ref.training.optimizer(torch, model)
++        self.assertEqual({id(p) for p in original_opt.param_groups[0]['params']}, {id(p) for p in named.values()})
++        digest = ref.training.model_sha(model)
++        if sys.platform == 'win32':
++            # First failure is retained separately. Runtime guard remains strict;
++            # these checks validate original masks without claiming C2 init PASS.
++            self.assertEqual(digest, '411aa36f4d120512d7de6e6646733ea898a99531144cac84688a9ef1c2a567dd')
++            with self.assertRaisesRegex(ValueError, 'initialization differs'):
++                ref.initialize(torch)
++        else:
++            self.assertEqual(digest, ref.FIRST5['initialization']['initial_weights_sha256'])
++            checked, opt, _, checked_state, _ = ref.initialize(torch)
++            self.assertTrue(torch.equal(state, checked_state))
++            del checked, opt
++        self.assertEqual(tuple(angles.shape), (208, 4))
++        stream = ref.new_mask_stream(torch, state)
++        for step in range(1, 26):
++            torch.rand(3)  # DDP/extra construction may use process RNG.
++            before = torch.get_rng_state().clone()
++            mask = stream.next(step)
++            self.assertTrue(torch.equal(before, torch.get_rng_state()))
++            self.assertEqual(hashlib.sha256(mask.numpy().tobytes()).hexdigest(), ref.plan(step)['expected_mask_sha256'])
++            if step == 8:
++                restored = ref.new_mask_stream(torch, state)
++                restored.load_state_dict(stream.state_dict())
++        self.assertEqual(stream.next_step, 26)
++        with self.assertRaises(ValueError): stream.next(26)
++        with self.assertRaises(ValueError): restored.next(8)
++        self.assertEqual(hashlib.sha256(restored.next(9).numpy().tobytes()).hexdigest(), ref.plan(9)['expected_mask_sha256'])
++        changed = dict(restored.state_dict()); changed['post_init_state'] = state.clone(); changed['post_init_state'][0] ^= 1
++        with self.assertRaises(ValueError): restored.load_state_dict(changed)
++        del model, named, original_opt, stream, restored
++
++    def test_03_shard_order_and_independent_leaves(self):
++        values = tiny_values(); mask = torch.arange(128).reshape(64, 2) % 3 == 0
++        pieces = [ref.shard(torch, values, mask, rank) for rank in (0, 1)]
++        for i in range(4): self.assertTrue(torch.equal(torch.cat([x[0][i] for x in pieces]), values[i]))
++        self.assertTrue(torch.equal(torch.cat([x[1] for x in pieces]), mask))
++        for local, local_mask in pieces:
++            self.assertTrue(local[0].is_leaf and local[1].is_leaf)
++            self.assertNotEqual(local[0].untyped_storage().data_ptr(), values[0].untyped_storage().data_ptr())
++            self.assertTrue(local_mask.is_contiguous())
++        for rank in (-1, 2, True):
++            with self.assertRaises(ValueError): ref.shard(torch, values, mask, rank)
++
++    def test_04_identity_checks_and_original_comparator_failure(self):
++        for bad in (torch.zeros(64, 208, dtype=torch.bool), torch.zeros(63, 208, dtype=torch.bool)):
++            with self.assertRaises(ValueError): ref.check_identity(1, [], bad)
++        raw = (ROOT / 'tests/check_equivalence.py').read_bytes()
++        self.assertEqual(hashlib.sha256(raw).hexdigest(), 'e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e')
++        with self.assertRaises(AssertionError): ref.accepted.compare(torch, 'original_limit', torch.zeros(1), torch.tensor([3e-5]), 'tensor', [])
++        with self.assertRaises(AssertionError): ref.accepted.compare(torch, 'missing', torch.ones(1), None, 'tensor', [])
++
++    def test_05_five_continuous_tiny_adamw_and_rng_release(self):
++        metrics = []
++        with patch.object(ref, 'initialize', tiny_initialize):
++            peer, opt, _, _, _ = tiny_initialize(torch)
++            before = ref.training.rng_state(torch)
++            reference = ref.B64Reference(torch)
++            self.assertTrue(ref.training.exact(torch, before, ref.training.rng_state(torch)))
++            mask = torch.ones(64, 2, dtype=torch.bool)
++            for step in range(1, 6):
++                values = tiny_values()
++                before = ref.training.rng_state(torch)
++                with patch.object(ref, '_historical_loss_check'):
++                    expected = reference.advance(step, values, mask, metrics)
++                self.assertTrue(ref.training.exact(torch, before, ref.training.rng_state(torch)))
++                pvalues = tuple(v.clone().detach() for v in values)
++                captured = {}
++                handles = [module.register_forward_hook(lambda _m, _a, out, k=key: captured.__setitem__(k, out.detach().clone()))
++                           for key, module in [('h', peer), ('v', peer.head_v), ('coarse', peer.head_coarse)]]
++                losses = ref.training.train_step(torch, peer, opt, pvalues, mask)
++                for h in handles: h.remove()
++                got = dict(outputs=captured, losses=losses, input_grads=[pvalues[i].grad * 2 for i in (0, 1)])
++                with patch.object(ref, '_historical_loss_check'):
++                    reference.compare(step, peer, opt, got, metrics)
++                self.assertIsNone(reference.pending)
++                self.assertTrue(all(p.grad is None for p in reference.model.parameters()))
++                self.assertTrue(all(opt.state[p]['step'].item() == step for p in peer.parameters()))
++                del expected
++            with self.assertRaises(ValueError): reference.advance(6, tiny_values(), mask, metrics)
++            reference.close()
++            self.assertIsNone(reference.model); self.assertIsNone(reference.opt)
++            self.assertEqual(reference.initial, {})
++        self.assertTrue(metrics and all(x['passed'] and x['max_abs'] == 0 for x in metrics))
++        (ROOT / 'evidence/tiny_adamw_metrics.json').write_text(json.dumps(dict(
++            scope='TINY_NATIVE_TORCH_B64_VS_IDENTICAL_B64_WITH_RAW_INPUT_GRADS_X2_NOT_DDP_OR_KML',
++            completed_steps=5, metric_count=len(metrics), metrics=metrics), indent=2) + '\n', encoding='utf-8')
++
++    def test_06_missing_parameter_or_input_scale_rejected(self):
++        for kind in ('parameter', 'input_scale'):
++            with patch.object(ref, 'initialize', tiny_initialize):
++                reference = ref.B64Reference(torch)
++                with patch.object(ref, '_historical_loss_check'):
++                    expected = reference.advance(1, tiny_values(), torch.ones(64, 2, dtype=torch.bool), [])
++                got = dict(outputs=expected['outputs'], losses=expected['losses'], input_grads=expected['input_grads'])
++                if kind == 'parameter':
++                    peer = TinyEncoder(); peer.extra = torch.nn.Parameter(torch.zeros(1)); opt = ref.training.optimizer(torch, peer)
++                else: peer, opt = reference.model, reference.opt
++                with self.assertRaises((AssertionError, ValueError)):
++                    reference.compare(1, peer, opt, got, [])
++                reference.close()
++
++    def test_07_data_anchor_refusal_and_new_ledger(self):
++        with tempfile.TemporaryDirectory(dir=ROOT / 'evidence', prefix='data_contract_') as temp:
++            path = Path(temp) / 'ledger.json'
++            with self.assertRaises(ValueError): ref.load_data(None, 'untrusted', path)
++            d = dict(corpus=ref.FIRST5['corpus'], train=ref.FIRST5['units'],
++                     runtime_exposure_ledger_path=str(path), exposure_ledger=dict(path=str(path.with_name('old.json'))))
++            metadata = dict(description=d, units=dict(train=d['train'], val=[]))
++            with patch.object(ref.data, 'load_descriptor', return_value=metadata):
++                with self.assertRaises(ValueError): ref.load_data('ignored', ref.DESCRIPTOR_SHA256, path)
++            self.assertFalse(path.exists())
++
++
++if __name__ == '__main__':
++    (ROOT / 'evidence').mkdir(exist_ok=True)
++    torch.set_num_threads(2)
++    unittest.main(failfast=True, verbosity=2)

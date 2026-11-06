@@ -1,0 +1,20 @@
+test_01_original_25_order_and_partition_rejections (__main__.ReferenceTests.test_01_original_25_order_and_partition_rejections) ... ok
+test_02_full_original_init_and_all_masks_isolated (__main__.ReferenceTests.test_02_full_original_init_and_all_masks_isolated) ... E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\round2_20261104T114949Z\.venv\Lib\site-packages\torch\nn\modules\transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+ERROR
+
+======================================================================
+ERROR: test_02_full_original_init_and_all_masks_isolated (__main__.ReferenceTests.test_02_full_original_init_and_all_masks_isolated)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\real_dual_ddp_reference_20261106\tests\test_dual_reference.py", line 63, in test_02_full_original_init_and_all_masks_isolated
+    model, opt, angles, state, identity = ref.initialize(torch)
+                                          ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\real_dual_ddp_reference_20261106\dual_reference.py", line 82, in initialize
+    raise ValueError('full original seed0 Encoder initialization differs')
+ValueError: full original seed0 Encoder initialization differs
+
+----------------------------------------------------------------------
+Ran 2 tests in 4.126s
+
+FAILED (errors=1)
