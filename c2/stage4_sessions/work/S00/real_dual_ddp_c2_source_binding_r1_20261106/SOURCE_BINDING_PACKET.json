@@ -1,0 +1,523 @@
+{
+  "acquisition": {
+    "association": {
+      "event": "package_association",
+      "framework_executed": false,
+      "method": "stdlib PathFinder metadata only; frozen R4 PYTHONPATH, -S, no Torch import",
+      "origin": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+      "search_locations": [
+        "/home/share/songzhenlong/eitfm/sw/torch_kml/torch"
+      ]
+    },
+    "binary_payload_bytes_exported": 0,
+    "clock_note": "Remote/receiver wall clocks are separate observations; common budget uses remote monotonic clock and outer timeout",
+    "common_deadline_seconds": 60,
+    "exporter": {
+      "bytes": 10273,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\export_target_sources.py",
+      "sha256": "a5dd323099425117c638ff0bb67986e4bffbe8ab6b7356806c39d58f6f9fa301"
+    },
+    "method": "ONE_BOUNDED_READ_ONLY_SSH_STDOUT_NDJSON_ORIGINAL_BYTES_BASE64",
+    "outer_timeout_seconds": 60,
+    "raw_transport": {
+      "bytes": 592914,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\evidence\\REMOTE_EXPORT.ndjson",
+      "sha256": "711396f8dfe9d969a9e0af5a92e954b380b8ecdc652a24411a2174a1c52b93a2"
+    },
+    "read_counts": {
+      "anchor_reads": 4,
+      "core_files_hashed": 6,
+      "directory_enumerations": 2,
+      "identity_bytes_hashed": 276220120,
+      "text_bytes_exported": 432651,
+      "text_files_exported": 6
+    },
+    "read_hash_export_elapsed_seconds": 0.364120211917907,
+    "receiver_completed_utc": "2026-11-06T15:45:58.5840396+00:00",
+    "remote_temp_writes": 0,
+    "retries": 0,
+    "source_host": "login03",
+    "source_utc": "2026-11-06T15:45:58.863780+00:00",
+    "ssh_connections_established": 1,
+    "ssh_invocations": 1,
+    "text_bytes": 432651,
+    "text_bytes_max": 2097152,
+    "transport_result": {
+      "bytes": 129,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\evidence\\SSH_RESULT.json",
+      "sha256": "02ffc5c3ca713c5f505bf176840770186dfbd752985f1b58e4ed17663f9abfde"
+    }
+  },
+  "activity": {
+    "DDP": 0,
+    "Git_operations": 0,
+    "SCP_invocations": 0,
+    "SSH_connections_established": 1,
+    "SSH_invocations": 1,
+    "SSH_retries": 0,
+    "Torch_imports": 0,
+    "Torch_native_library_loads_or_execution": 0,
+    "autograd": 0,
+    "binary_payload_bytes_downloaded": 0,
+    "cluster_jobs": 0,
+    "compute_node_allocations": 0,
+    "fixtures": 0,
+    "installs": 0,
+    "local_fixture_runs": 0,
+    "local_static_metadata_parsing_only": true,
+    "model_or_tensor_operations": 0,
+    "models": 0,
+    "no_PREPARATION_READY_published": true,
+    "no_automatic_deployment_or_follow_on_execution": true,
+    "queue_or_process_queries": 0,
+    "readonly_exports_completed": 1,
+    "remote_anchor_hash_passes": 4,
+    "remote_core_files_hashed": 6,
+    "remote_directory_enumerations": 2,
+    "remote_elevation": 0,
+    "remote_file_hash_passes": 16,
+    "remote_source_files": 6,
+    "remote_temp_files_written": 0,
+    "round": "C2_SOURCE_BINDING_R1",
+    "runtime_or_shared_source_edits": 0,
+    "schema_version": 1,
+    "scope": "THIS_ROUND_ONLY",
+    "training_updates": 0
+  },
+  "archive_manifest_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\ARCHIVE_FILES.json",
+  "authorization": "Current coordination task card grants one source-only acquisition and method clarification; copied earlier no-authorization statements refer to their prior rounds",
+  "created_utc": "2026-11-06T15:48:49.805385+00:00",
+  "execution_authorized": false,
+  "frozen_anchor_checks": [
+    {
+      "final": {
+        "anchor_match": true,
+        "bytes": 100862,
+        "ctime_ns": 1793599512633589980,
+        "device": 50,
+        "elf": null,
+        "expected_sha256": "9801e75447c7f585545f989f8a21940b60e0c4cc888effb2f08e739664b4b904",
+        "inode": 117093808904662016,
+        "kind": "anchor",
+        "mtime_ns": 1793581041302966793,
+        "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+        "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+        "sha256": "9801e75447c7f585545f989f8a21940b60e0c4cc888effb2f08e739664b4b904"
+      },
+      "initial": {
+        "anchor_match": true,
+        "bytes": 100862,
+        "ctime_ns": 1793599512633589980,
+        "device": 50,
+        "elf": null,
+        "expected_sha256": "9801e75447c7f585545f989f8a21940b60e0c4cc888effb2f08e739664b4b904",
+        "inode": 117093808904662016,
+        "kind": "anchor",
+        "mtime_ns": 1793581041302966793,
+        "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+        "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+        "sha256": "9801e75447c7f585545f989f8a21940b60e0c4cc888effb2f08e739664b4b904"
+      },
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+      "same_bytes_sha_realpath_stat": true
+    },
+    {
+      "final": {
+        "anchor_match": true,
+        "bytes": 67624,
+        "ctime_ns": 1760369355728000000,
+        "device": 64768,
+        "elf": {
+          "build_id_status": "PRESENT",
+          "elf_type": 3,
+          "endian": "little",
+          "flags": 0,
+          "format": "ELF64",
+          "gnu_build_ids": [
+            "0e6965eae653483177e1845b085d2d7a6b8b6ae1"
+          ],
+          "machine": "AArch64",
+          "machine_id": 183
+        },
+        "expected_sha256": "41ed40932add50d0a953bbe92ba15a9e60a2ee476ce68cfd4798cf814647c383",
+        "inode": 11944889,
+        "kind": "anchor",
+        "mtime_ns": 1753759710000000000,
+        "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+        "realpath": "/usr/bin/python3.9",
+        "sha256": "41ed40932add50d0a953bbe92ba15a9e60a2ee476ce68cfd4798cf814647c383"
+      },
+      "initial": {
+        "anchor_match": true,
+        "bytes": 67624,
+        "ctime_ns": 1760369355728000000,
+        "device": 64768,
+        "elf": {
+          "build_id_status": "PRESENT",
+          "elf_type": 3,
+          "endian": "little",
+          "flags": 0,
+          "format": "ELF64",
+          "gnu_build_ids": [
+            "0e6965eae653483177e1845b085d2d7a6b8b6ae1"
+          ],
+          "machine": "AArch64",
+          "machine_id": 183
+        },
+        "expected_sha256": "41ed40932add50d0a953bbe92ba15a9e60a2ee476ce68cfd4798cf814647c383",
+        "inode": 11944889,
+        "kind": "anchor",
+        "mtime_ns": 1753759710000000000,
+        "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+        "realpath": "/usr/bin/python3.9",
+        "sha256": "41ed40932add50d0a953bbe92ba15a9e60a2ee476ce68cfd4798cf814647c383"
+      },
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+      "same_bytes_sha_realpath_stat": true
+    }
+  ],
+  "identity_drift": [],
+  "identity_manifest": {
+    "bytes": 16066,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\IDENTITY_MANIFEST.json",
+    "sha256": "58275bffa64318a38bf06ee18fa39e97fc1dc0c44165e09a39b0012e986330aa"
+  },
+  "implementation_authorized_by_this_packet": false,
+  "input_bindings": {
+    "bytes": 3437,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\INPUT_BINDINGS.json",
+    "sha256": "4ce3459ba4f20a40f4ffa79984b3de69506c3d9467701223d2543209ba567af3"
+  },
+  "limits_exceeded": [],
+  "local_verification": {
+    "bytes": 5487,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\evidence\\LOCAL_SOURCE_VERIFICATION.json",
+    "sha256": "d7ed9a1550961bc7cb57b4dfc7d294456c2eb109bc8ee94b5de5b8da05914cd8"
+  },
+  "missing_sources": [],
+  "native_core_identities": [
+    {
+      "anchor_match": null,
+      "bytes": 132353,
+      "ctime_ns": 1793599516819912300,
+      "device": 50,
+      "elf": {
+        "build_id_status": "PRESENT",
+        "elf_type": 3,
+        "endian": "little",
+        "flags": 0,
+        "format": "ELF64",
+        "gnu_build_ids": [
+          "c7ec7be1ad62d6d6d0189d7dccd9e7983d78eb94"
+        ],
+        "machine": "AArch64",
+        "machine_id": 183
+      },
+      "expected_sha256": null,
+      "inode": 45036214866735296,
+      "kind": "core",
+      "mtime_ns": 1793581041294966606,
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so",
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so",
+      "sha256": "0098ec8982bc60ae9511ee3a636d9b9c8f9d3decceb4b44c7e1d446d8b74ab0b"
+    },
+    {
+      "anchor_match": null,
+      "bytes": 1382416,
+      "ctime_ns": 1793884341770785470,
+      "device": 50,
+      "elf": {
+        "build_id_status": "PRESENT",
+        "elf_type": 3,
+        "endian": "little",
+        "flags": 0,
+        "format": "ELF64",
+        "gnu_build_ids": [
+          "abf5d01628deb911d8f0e337882c3c1b7c8050b6"
+        ],
+        "machine": "AArch64",
+        "machine_id": 183
+      },
+      "expected_sha256": null,
+      "inode": 99079411318484672,
+      "kind": "core",
+      "mtime_ns": 1793581044023030402,
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so",
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so",
+      "sha256": "34370e00fc38fe83b82685b113358b12afe6959286b8f5fc8125682ce9e0af10"
+    },
+    {
+      "anchor_match": null,
+      "bytes": 134633,
+      "ctime_ns": 1793909277989231590,
+      "device": 50,
+      "elf": {
+        "build_id_status": "PRESENT",
+        "elf_type": 3,
+        "endian": "little",
+        "flags": 0,
+        "format": "ELF64",
+        "gnu_build_ids": [
+          "9c4e24aca28730e9ff780b1d1f418524a59b2335"
+        ],
+        "machine": "AArch64",
+        "machine_id": 183
+      },
+      "expected_sha256": null,
+      "inode": 99079411318484416,
+      "kind": "core",
+      "mtime_ns": 1793581044023030402,
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so",
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so",
+      "sha256": "340a49fc5a0ed13f02b67f08f62bc1a7e9636a0f277950ef00c8da0ff896a646"
+    },
+    {
+      "anchor_match": null,
+      "bytes": 249487721,
+      "ctime_ns": 1793884340701850290,
+      "device": 50,
+      "elf": {
+        "build_id_status": "PRESENT",
+        "elf_type": 3,
+        "endian": "little",
+        "flags": 0,
+        "format": "ELF64",
+        "gnu_build_ids": [
+          "84bc0d206b637094bf29976104864fdb6b3f065e"
+        ],
+        "machine": "AArch64",
+        "machine_id": 183
+      },
+      "expected_sha256": null,
+      "inode": 99079411318484608,
+      "kind": "core",
+      "mtime_ns": 1793599513654373000,
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so",
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so",
+      "sha256": "eee755641450652e0c08aeb5d3436f39bd9d3ff89e501a4262b3b0ca5862ac7a"
+    },
+    {
+      "anchor_match": null,
+      "bytes": 70000,
+      "ctime_ns": 1793599512797838160,
+      "device": 50,
+      "elf": {
+        "build_id_status": "PRESENT",
+        "elf_type": 3,
+        "endian": "little",
+        "flags": 0,
+        "format": "ELF64",
+        "gnu_build_ids": [
+          "5d9fcfa0d7a783625f6916d23f3d43c2fdabf9c1"
+        ],
+        "machine": "AArch64",
+        "machine_id": 183
+      },
+      "expected_sha256": null,
+      "inode": 99079411318484544,
+      "kind": "core",
+      "mtime_ns": 1793581045003053318,
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so",
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so",
+      "sha256": "2cbf6ab7259b743b02eb75babb72548784b1503b280f934eeceefec0fb1816e4"
+    },
+    {
+      "anchor_match": null,
+      "bytes": 24676025,
+      "ctime_ns": 1793884340307044750,
+      "device": 50,
+      "elf": {
+        "build_id_status": "PRESENT",
+        "elf_type": 3,
+        "endian": "little",
+        "flags": 0,
+        "format": "ELF64",
+        "gnu_build_ids": [
+          "c053be5efba2f69567a82922ff8f4e5918351ff4"
+        ],
+        "machine": "AArch64",
+        "machine_id": 183
+      },
+      "expected_sha256": null,
+      "inode": 99079411318484480,
+      "kind": "core",
+      "mtime_ns": 1793599512742767000,
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so",
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so",
+      "sha256": "c26b39e44ea1b339ab2828f492dfc8d6ddf854c3da3f5c5f5cf4aa3d06e47912"
+    }
+  ],
+  "next_step": "Return packet to coordination for S01 independent static target/API/layout/callsite review. Completeness does not by itself lift B01 or authorize implementation, fixtures, deployment, a job or training.",
+  "not_run": {
+    "bytes": 1025,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\NOT_RUN.json",
+    "sha256": "61274e68132770650ba6a65b8297489f63b2b48f0576927360dbe747a870745e"
+  },
+  "offline_inventory": {
+    "bytes": 25893,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\OFFLINE_AUDIT.json",
+    "sha256": "06d42a8ea60f561b10280f80204145bf4f4744e87524127703bda9dbc84f0f83"
+  },
+  "original_spec_and_original_FAIL_preserved": true,
+  "original_spec_modified": false,
+  "partial": false,
+  "preparation_ready": false,
+  "protected_originals": {
+    "bytes": 3523,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\evidence\\PROTECTED_FINAL_RECHECK.json",
+    "sha256": "f9dbf826b26284b52d48c0fb224c90338adb529568c5dc965daf3156e162c40c"
+  },
+  "purpose": "Target-bound source-only materials for independent S01 static review; no preparation/execution release",
+  "report_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\REPORT.md",
+  "round": "REAL_DUAL_DDP_C2_SOURCE_BINDING_R1_20261106",
+  "schema_version": 1,
+  "source_files": [
+    {
+      "anchor_match": null,
+      "bytes": 72403,
+      "ctime_ns": 1793599516806192090,
+      "device": 50,
+      "elf": null,
+      "expected_sha256": null,
+      "inode": 45036214866735104,
+      "kind": "source",
+      "local_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\_tensor.py",
+      "local_relative": "sources/torch/_tensor.py",
+      "material_id": "P01",
+      "mtime_ns": 1793581041306966886,
+      "original_bytes_preserved": true,
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_tensor.py",
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_tensor.py",
+      "relative_path": "_tensor.py",
+      "sha256": "e4ee029526fbfe0b91d814722e572d1c8a4d181d4a3643dafaf4f7bf266324b0"
+    },
+    {
+      "anchor_match": null,
+      "bytes": 10776,
+      "ctime_ns": 1793599517732502290,
+      "device": 50,
+      "elf": null,
+      "expected_sha256": null,
+      "inode": 72057813753120576,
+      "kind": "source",
+      "local_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\modules\\linear.py",
+      "local_relative": "sources/torch/nn/modules/linear.py",
+      "material_id": "P02",
+      "mtime_ns": 1793581045135056404,
+      "original_bytes_preserved": true,
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/linear.py",
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/linear.py",
+      "relative_path": "nn/modules/linear.py",
+      "sha256": "e48ab9e6476de669b3c79e7da9bd91137dbe7218f7a7acc583ce99eb7f1d7825"
+    },
+    {
+      "anchor_match": null,
+      "bytes": 57927,
+      "ctime_ns": 1793599517806079810,
+      "device": 50,
+      "elf": null,
+      "expected_sha256": null,
+      "inode": 219715193856,
+      "kind": "source",
+      "local_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\modules\\activation.py",
+      "local_relative": "sources/torch/nn/modules/activation.py",
+      "material_id": "P03",
+      "mtime_ns": 1793581045131056311,
+      "original_bytes_preserved": true,
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/activation.py",
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/activation.py",
+      "relative_path": "nn/modules/activation.py",
+      "sha256": "6c8b3f79682e6474a0c59189795b75d79e6e3802b52574b3fa7660103fb840ca"
+    },
+    {
+      "anchor_match": null,
+      "bytes": 49735,
+      "ctime_ns": 1793599517715039460,
+      "device": 50,
+      "elf": null,
+      "expected_sha256": null,
+      "inode": 36029016734156288,
+      "kind": "source",
+      "local_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\modules\\transformer.py",
+      "local_relative": "sources/torch/nn/modules/transformer.py",
+      "material_id": "P04",
+      "mtime_ns": 1793581045139056498,
+      "original_bytes_preserved": true,
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py",
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py",
+      "relative_path": "nn/modules/transformer.py",
+      "sha256": "40269ff005f7d147c4b410b43d7d83e1f796225a7f54ea8d30bd5f0a044fae38"
+    },
+    {
+      "anchor_match": null,
+      "bytes": 241540,
+      "ctime_ns": 1793599517805667520,
+      "device": 50,
+      "elf": null,
+      "expected_sha256": null,
+      "inode": 219366162880,
+      "kind": "source",
+      "local_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\functional.py",
+      "local_relative": "sources/torch/nn/functional.py",
+      "material_id": "P05",
+      "mtime_ns": 1793581045123056124,
+      "original_bytes_preserved": true,
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/functional.py",
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/functional.py",
+      "relative_path": "nn/functional.py",
+      "sha256": "0c02464c208daff72bcfcb3f0eed09a136e0766d926c08c4bfd0038eb977bc28"
+    },
+    {
+      "anchor_match": null,
+      "bytes": 270,
+      "ctime_ns": 1793599516789694270,
+      "device": 50,
+      "elf": null,
+      "expected_sha256": null,
+      "inode": 9007417847770880,
+      "kind": "source",
+      "local_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\version.py",
+      "local_relative": "sources/torch/version.py",
+      "material_id": "P06",
+      "mtime_ns": 1793581041318967167,
+      "original_bytes_preserved": true,
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/version.py",
+      "realpath": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/version.py",
+      "relative_path": "version.py",
+      "sha256": "f4b24de5e1bfa5f4be93c679d043f3b8d38fbf43fca95d5175d5d5df433d493a"
+    }
+  ],
+  "source_sha256_manifest": {
+    "bytes": 636,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\SOURCE_SHA256.json",
+    "sha256": "ccd4cec265b9fac31de0861d4ad4036bc06fbfd05f19c3673ee563c9741e0ab8"
+  },
+  "status": "SOURCE_PACKET_COMPLETE_FOR_REVIEW",
+  "target": {
+    "actual_version_literal": {
+      "__version__": "2.7.1+cpu",
+      "debug": false,
+      "git_version": "e2d141dbde55c2a4370fac5165b0561b6af4798b"
+    },
+    "expected_torch": "2.7.1+cpu",
+    "interpreter": {
+      "PYTHONPATH": "/home/share/songzhenlong/eitfm/sw/torch_kml",
+      "executable": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+      "executable_realpath": "/usr/bin/python3.9",
+      "machine": "aarch64",
+      "no_site": 1,
+      "python_version": "3.9.9 (main, Jul 29 2025, 11:26:21) \n[GCC 10.3.1]",
+      "sys_path": [
+        "",
+        "/home/share/songzhenlong/eitfm/sw/torch_kml",
+        "/usr/lib64/python39.zip",
+        "/usr/lib64/python3.9",
+        "/usr/lib64/python3.9/lib-dynload"
+      ]
+    },
+    "package_root": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch"
+  },
+  "task": "S00",
+  "training_authorized": false,
+  "unreadable_files": []
+}

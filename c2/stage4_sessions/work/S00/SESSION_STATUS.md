@@ -1,14 +1,14 @@
 # S00简短状态
 
-- 更新/轮次：2026-11-06；REAL_DUAL_DDP_NOT_RUN_S01_NUMERIC_FAIL；目录real_dual_ddp_20261106。
-- 最终停点：S01于09:39:25Z对同24 SHA/资源/workload给review_complete=true、decision=FAIL、execution_authorized=false；必要小B64/two-rank原阈值控制3/13指标失败。部署仅快照核对、未授最终接受，不称候选/训练通过；不重试或豁免。
-- 实际执行：本轮0新job、0重试、0新增节点秒；09:42:41Z真实完整队列/每项活动job详情和本系列marker再次核对，无系列提交记录或活动job。未调用dsub，未创建计算worker、模型权重或真实语料暴露账本，无活动S00 job。
-- 已完成准备：新外包37成员/232024bytes，SHA8d4fb023b99109850919b904561b0b228cdce50c607b9c26408adf90ce711434；ARTIFACT源清单SHAe4b4111046457c6926681692a846202e9cfb6567601612d99fb8a36780294cba。02原包62170bytes SHAdf7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5；07原包59416bytes SHAd032d67cd76eddbc372ab6f9dd51c8355c4bb1ef3e7469254c2549a3481623a9，payload未改。
-- 准备验证：原16单元/36文件当前SHA及本地原模型/KML/两参考通过；收当前C2已装DDP源码及Torch/NumPy身份，原R4环境连线。10 Windows、10初始Linux、10最终冻结包Linux包装夹具、SHA/CRC/清单/LF/AST39/bash-n/实际caller CLI解析通过，仅无训练准备证据，不是实际C2/KML/CPU训练验收。
-- 失败原件：07最终19方法17过/1数值FAIL/1 Linux skip；val.weight/pos.weight max_abs1.9147992134094238e-05、rel9.410191088070238e-05；tf.weight max_abs3.723800182342529e-05、rel0.0001142869133502608。三原度量与全部13项、原测试和失败日志保留，不把早期通信PASS替换此FAIL。
-- 冻结交接：S00_DEPLOYMENT_READY SHAacc2d1e14423a14b94867ff1eeb62459167541cafd753697e267468b91afe706保持原样；S01_REVIEW原字节SHAf933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74；相同24 SHA/资源/阶段相符，实际放行门禁正确拒绝。
-- 未运行项：计算节点环境/CPU/库门禁、26现场前置（07的19+02的7）、C2小DDP、真实完整B64五步、DDP接续到25、checkpoint/零更新恢复及性能均NOT_RUN；global/rank/reference完整更新与真实训练/参考曝光均0。无需要清理的计算所属PID，不操作其他作业。
-- 原方案仅提案：每域B32/全局64，两38分配/各36实际，总76/72留4，DDR24576MB同limit/exclusive/HBM0；840应用前置+30清理+30收尾共享900，新PG120；原阈值strict5全过才同状态到25，上限55完整更新。因FAIL未执行，不缩步、扩资源或改原门槛。
-- 回传与索引：准备ZIP6339bytes/9成员（8原文+索引），SHAc3f25b3f1786cc3952c2f4729bf95cb30234e70781b1c49d53bb8a86bd6a11dc，bytes/SHA/CRC/逐项bytes-SHA通过；linux_preparation_received保存原日志。RUN_COMPLETE.status=NOT_RUN_S01_REVIEW_FAIL_NO_JOB，analysis_inputs精确指准备/队列/审核/原失败度量，模型结果列表为空；NO_JOB_HANDOFF/RUN_REPORT/ARCHIVE_FILES/SHA256_INDEX供协调/01/08直接读。
-- 保留与边界：旧R7/R6空报告/R12及原descriptor/ledger等8份保护原件SHA未变，登录端无HPCKit错误/缺失也保留；只写S00新任务及自身状态，无共享Git暂存/提交/推送。formal split/subject UNKNOWN、无val/test和效果/提速结论。
-- 下一步：当前候选发布停止；交总协调定义后续新诊断/修订，不自动补跑或继续等待同版放行。唯一Git窗口按ARCHIVE_FILES精确归档本轮证据，不视为集成/执行许可。
+- 更新/轮次：2026-11-06；C2_SOURCE_BINDING_R1 / SOURCE_PACKET_COMPLETE_FOR_REVIEW；目录real_dual_ddp_c2_source_binding_r1_20261106。
+- 本轮完成：补齐指定六份实际C2 Torch前端原文及6份核心文件身份元数据，SOURCE_BINDING_PACKET.json SHAb0a0c1e11fb0ba26987f69cfc13b24eb15dc97820f141cfa835857af56edd93f；仅供协调/01静态复核，不发布PREPARATION_READY，不自动继续实现/部署/执行。
+- 输入核验：01 BLOCKER_REVIEW/MISSING_BINDING_SPEC分别SHA a3cd69328af79dfb4d4e7cbc658455b5545d6024c1f870dcc9e7d3bdedd22d82 / d9457578a5a31a457fd65a87174f1066bbc77427f4d3469c05fe5be767d6cc9a；原R4运行时/共享身份锚SHA029fddfc.../95f2477a...吻合。新卡授权本轮一次补源，旧轮无授权记录原字节保留。
+- 离线先查：S00目录及93份ZIP成员中央目录无这六份确切目标原件；容器另做本地SHA记录，不用Windows或上游替代版。
+- 实际采集：只一次只读SSH，login03 / aarch64，远端UTC2026-11-06T15:45:58.863780+00:00；原R4 Python3.9.9 -S/-B，仅标准库文件/ELF/PathFinder元数据。六文本共432651bytes，上限2097152；读取/哈希/导出共同monotonic0.364120211917907秒，上限60，退出0、重试0、远端临时写0、SCP0。
+- 六源原件：_tensor.py、nn/modules/linear.py、nn/modules/activation.py、nn/modules/transformer.py、nn/functional.py、version.py；保存在sources/torch原相对路径，逐份原字节bytes/SHA核验，未换行重写/执行。静态version.py=2.7.1+cpu，git_version=e2d141dbde55c2a4370fac5165b0561b6af4798b。
+- 冻结锚：__init__.py SHA9801e75447c7f585545f989f8a21940b60e0c4cc888effb2f08e739664b4b904与原R4 Python SHA41ed40932add50d0a953bbe92ba15a9e60a2ee476ce68cfd4798cf814647c383首尾各核一次，身份不变；14份唯一文件末次stat一致。
+- 核心身份：实际_C.cpython-39-aarch64-linux-gnu.so及libc10/libtorch/libtorch_cpu/libtorch_global_deps/libtorch_python共6份，交path/realpath/bytes/SHA和ELF64/AArch64/GNU build ID；只在既知包根与lib非递归定向识别，仅元数据、二进制下载0。这些核心SHA是本次首次记录，不回溯冒称旧job核心库已核。
+- NOT_RUN：本轮Torch导入、模型、autograd、DDP、夹具、计算job、训练更新、队列/进程查询、安装/远端提权、运行时/共享源码修改及Git操作均0；SSH=1如实记录。没有本轮活动job，不更新其它作业的实时状态。
+- 保留：旧MINIMAL_EVIDENCE_SPEC、原S01 FAIL、BLOCKER及前轮S00冻结部署/结果等12份保护输入全部SHA不变；仅写本轮S00目录和自身短状态，登录密码/私钥未入交付，本地SSH公钥记录不入归档。
+- 交付：SOURCE_BINDING_PACKET.json、SOURCE_SHA256.json、IDENTITY_MANIFEST.json、NOT_RUN.json、REPORT.md、ARCHIVE_FILES.json及六原文/原始SSH NDJSON/核验记录；六份缺源材料已齐，完整性仅供审核。
+- 下一步：用户将此包交总协调，原01独立静态核目标API/专用输入边/布局及冻结调用点；本轮不判定B01全部解除、不改原阈值/规格/FAIL、不安排后续模型或集群计算。

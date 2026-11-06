@@ -1,6 +1,6 @@
-任务/轮次：S00 / REAL_DUAL_DDP_20261106。
-状态变化：01同24 SHA/资源/阶段完整最终FAIL（本地严格小B64控制3/13失败）；提交前停止，0新job/0重试/0节点秒，无活动job。
-本轮改动：完成原样02/07新部署、S00_DEPLOYMENT_READY/精确命令/最小diff与完整收集层；外包232024bytes SHA8d4fb023b99109850919b904561b0b228cdce50c607b9c26408adf90ce711434，冻结原件未改。
-验证增量：原固定16单元36文件与原模型/两参考SHA、10 Windows及初始/最终各10 Linux包装检查、LF/AST39/bash-n/真实CLI连线通过；最终真实队列/系列marker无尝试或活动job，8份旧保护原件不变。
-证据：real_dual_ddp_20261106/{RUN_COMPLETE.json,NO_JOB_HANDOFF.json,RUN_REPORT.md,S00_DEPLOYMENT_READY.json,S01_REVIEW.json,ARCHIVE_FILES.txt,SHA256_INDEX.json}；准备原件ZIP6339bytes/9成员逐项核验通过，原数值失败和门禁拒绝均保存。
-阻塞与下一步：计算环境/26现场检查/完整模型strict5和25步/恢复/性能全NOT_RUN，真实训练/参考曝光0；当前候选发布停止，交协调定义新诊断，唯一Git窗口按清单归档证据，不重试/放阈值/扩资源或操作共享Git暂存。
+任务/轮次：S00 / REAL_DUAL_DDP_C2_SOURCE_BINDING_R1_20261106。
+状态变化：完成SOURCE_PACKET_COMPLETE_FOR_REVIEW，六份缺源原文齐全；不是PREPARATION_READY，原B01与旧数值FAIL保持供01复核。
+本轮改动：新目录交六源原字节432651bytes、SOURCE_BINDING_PACKET/SOURCE_SHA256/IDENTITY_MANIFEST/NOT_RUN/REPORT及精确ARCHIVE_FILES；原规格/阈值/旧部署未改。
+验证增量：离线93份ZIP无确切原件后仅1次只读SSH，0.364120212秒共用60秒截止、文本低于2MiB；首尾Python/__init__冻结SHA和14份文件stat一致，六源逐份bytes/SHA、6份核心ELF/build ID已核，无二进制下载或补取。
+证据：E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S00\real_dual_ddp_c2_source_binding_r1_20261106\SOURCE_BINDING_PACKET.json；SHAb0a0c1e11fb0ba26987f69cfc13b24eb15dc97820f141cfa835857af56edd93f，原始REMOTE_EXPORT.ndjson与全部核验/身份清单同目录。
+阻塞与下一步：Torch/模型/autograd/DDP/夹具/job/训练更新均0，SSH1/重试0；交总协调转01独立静态审核，不发布READY、不自动继续执行，无共享Git操作。
