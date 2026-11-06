@@ -1,0 +1,69 @@
+{
+  "review": {
+    "bytes": 25271,
+    "sha256": "a18ab449e1d99fd830fb6360d3abd85add53dbdf175081472417634516a47314"
+  },
+  "status": "REVIEWED_PARTIAL_DIAGNOSIS_WITH_EVIDENCE_GAPS",
+  "decision": "ACCEPT_PARTIAL_DIAGNOSIS_NOT_TRAINING_ACCEPTANCE",
+  "checks": [
+    {
+      "binding": "task_card",
+      "bytes": 4130,
+      "sha256": "d1c2c20245ccbb0c199f5cef7a297639722d72bf380efe356eac721caf89bc8f"
+    },
+    {
+      "binding": "original_final_review",
+      "bytes": 6152,
+      "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+    },
+    {
+      "binding": "diagnosis_ready",
+      "bytes": 3723,
+      "sha256": "de9c6e26ea7d2f280b835e1de44dbc4697d0fee2c0cc69fe66b4fa986bf07dde"
+    },
+    {
+      "binding": "evidence_review",
+      "bytes": 25077,
+      "sha256": "df3b18aba6df9bccd6988d29314a2897c95f7a3ab1556a7eb43e9b457a69514e"
+    },
+    {
+      "binding": "report",
+      "bytes": 7105,
+      "sha256": "bc56fe17ffcb907ab2819bff643ab3e0f9b81f6ecc030929c594520435e6cf50"
+    },
+    {
+      "binding": "current_pid_check",
+      "bytes": 1080,
+      "sha256": "2735ee8b120289449ec6759f090d5dd43513ee8a71f34268c681b644e846ecac"
+    }
+  ],
+  "disposition": "DEFER_BOTH_DIAGNOSIS_DIRECTORIES_THIS_BATCH",
+  "reason": "S01 review completed but new DDP and contemporaneous compute-PID/descendant cleanup evidence remain incomplete; no rerun authorized",
+  "gaps": [
+    {
+      "code": "E01_DDP_NOT_COMPLETED",
+      "detail": "New DDP stopped before after_pg with10013/10049; no new rank gradient vectors/counts/reducer/input-scaling or sequence-DDP comparison. Additional DDP effects remain unknown."
+    },
+    {
+      "code": "E02_CLEANUP_PID_BINDING",
+      "detail": "Popen supervised PIDs differ from compute PIDs. Direct handles were reaped, but actual compute PID/descendant exit timing and ownership were not retained. Current exact-PID check finds none; this does not prove all descendants reaped within15s."
+    },
+    {
+      "code": "E03_HISTORICAL_IDENTITY",
+      "detail": "Original failure lacks actual thread counts, initial tensor digest and intermediate tensors; all13 scalar metrics matching cannot establish full historical vector/environment identity."
+    },
+    {
+      "code": "E04_EXACT_KERNEL",
+      "detail": "No native kernel/instruction trace; shape/grouping-sensitive fp32 contraction precision is supported, exact implementation cause remains undetermined."
+    },
+    {
+      "code": "E05_FP64_THREAD_SNAPSHOT",
+      "detail": "Float64 process used the same interpreter/controller environment and has no thread-changing code, but its own actual thread snapshot was not recorded."
+    },
+    {
+      "code": "E06_INITIAL_TENSOR_RETENTION",
+      "detail": "New full/sequence/two rank initialization and RNG digests agree under identical seed/source; initial parameter tensors were not retained for a second direct tensor comparison. This limits direct reinspection, not the observed gradient reproduction."
+    }
+  ],
+  "next_action": "If existing process ownership/compute-PID exit originals exist, S07 may supply them read-only; otherwise retain the timing gap without rerunning. Coordination decides any separately scoped minimal contraction candidate; no current frozen-source edit, DDP retry, fp64/reference replacement or job is authorized."
+}

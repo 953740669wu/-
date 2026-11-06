@@ -1,0 +1,253 @@
+{
+  "checked_utc": "2026-11-06T09:08:59.7380594Z",
+  "scope": "COORDINATOR_DELIVERY_IDENTITY_ONLY_NOT_MATH_OR_C2_ACCEPTANCE",
+  "status": "PASS_DELIVERY_IDENTITIES_ONLY",
+  "ready_sha256": "924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3",
+  "binding_checks": [
+    {
+      "binding": "package",
+      "sha256": "df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5",
+      "bytes": 62170,
+      "pass": true
+    },
+    {
+      "binding": "source_manifest",
+      "sha256": "6b9cd186d27a5130f22cd2e58a2c6cb231be31c70d5df98dce4c40e92008b757",
+      "bytes": 1638,
+      "pass": true
+    },
+    {
+      "binding": "interface",
+      "sha256": "974c7c1f2fd1cd21b2a1e94be3a72fd21686e61575450cdf608249e92f313544",
+      "bytes": 6737,
+      "pass": true
+    },
+    {
+      "binding": "task_card",
+      "sha256": "ebabda929df06e0c1366563af0d16ac360c0fdf3cc16b330f3bf2804a088a1ec",
+      "bytes": 13336,
+      "pass": true
+    },
+    {
+      "binding": "comparator",
+      "sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e",
+      "bytes": 14614,
+      "pass": true
+    },
+    {
+      "binding": "local_checks",
+      "sha256": "2757ec67d8afb120e50f5bf48b0cc9a733726af2f2b0580ea40ee724292a2a67",
+      "bytes": 1662,
+      "pass": true
+    },
+    {
+      "binding": "local_metrics",
+      "sha256": "6fed2956dd6c96a1097720913139e8bc6bf55883deaaf45a826b706f66d95dcc",
+      "bytes": 33357,
+      "pass": true
+    },
+    {
+      "binding": "first_failure",
+      "sha256": "44876028c0079b21660367e9cb8606fefe98a133d0171aee2ad69ee991bcfa2f",
+      "bytes": 1605,
+      "pass": true
+    },
+    {
+      "binding": "windows_initialization_diagnostic",
+      "sha256": "bcfe5ec4064422797f50ea5cd3fc95c68faf2829676bbc94a6e7fdd4cf6e7b70",
+      "bytes": 845,
+      "pass": true
+    },
+    {
+      "binding": "test_log",
+      "sha256": "080528a463e3b169eb4f9e8a9c0ba41e088f977493cbee830bd3c43268d3ab58",
+      "bytes": 1601,
+      "pass": true
+    },
+    {
+      "binding": "original25_metadata_check",
+      "sha256": "f6d8c9e9aeb9db9655022749304ebb787408be79db05ebb24ccc334bad1aa932",
+      "bytes": 10598,
+      "pass": true
+    },
+    {
+      "binding": "frozen_sources",
+      "sha256": "4dc3925851e859585929a76154e92090c88e048ef0deaf9761c1a990af7c3444",
+      "bytes": 3722,
+      "pass": true
+    },
+    {
+      "binding": "report",
+      "sha256": "0bbbd16cd6861a2dfc0dbb8067ca623dc5c3f1a63b8420e1249523af4d5f3a55",
+      "bytes": 5571,
+      "pass": true
+    },
+    {
+      "binding": "consumer_guide",
+      "sha256": "b2a866a0343c8b96b1d149d97edc8faa64aebf296422cc44b5967c7c0b63404d",
+      "bytes": 5368,
+      "pass": true
+    },
+    {
+      "binding": "diff",
+      "sha256": "86e5391edbcca0b9aa291ae31a15dc5ff3ab78170cde0faddc25d3042a972b39",
+      "bytes": 24177,
+      "pass": true
+    },
+    {
+      "binding": "package_manifest",
+      "sha256": "599e4832b3669c156e5bda574fb936913de8200ae7201dd584f2c4952aefeb2c",
+      "bytes": 5543,
+      "pass": true
+    }
+  ],
+  "source_checks": [
+    {
+      "file": "CONSUMER_GUIDE.md",
+      "pass": true
+    },
+    {
+      "file": "DECISION_BEFORE_CODE.md",
+      "pass": true
+    },
+    {
+      "file": "INTERFACE_READY.json",
+      "pass": true
+    },
+    {
+      "file": "REFERENCE_EPOCH25.json",
+      "pass": true
+    },
+    {
+      "file": "REFERENCE_FIRST5.json",
+      "pass": true
+    },
+    {
+      "file": "baseline/kml_ops.py",
+      "pass": true
+    },
+    {
+      "file": "baseline/s4_models.py",
+      "pass": true
+    },
+    {
+      "file": "cpu36_contract.py",
+      "pass": true
+    },
+    {
+      "file": "data_gate/INTERFACE.json",
+      "pass": true
+    },
+    {
+      "file": "data_gate/engineering_data.py",
+      "pass": true
+    },
+    {
+      "file": "diagnostic_common.py",
+      "pass": true
+    },
+    {
+      "file": "dual_reference.py",
+      "pass": true
+    },
+    {
+      "file": "engineering_training.py",
+      "pass": true
+    },
+    {
+      "file": "profile_contract.py",
+      "pass": true
+    },
+    {
+      "file": "real_data.py",
+      "pass": true
+    },
+    {
+      "file": "tests/check_equivalence.py",
+      "pass": true
+    },
+    {
+      "file": "tests/test_dual_reference.py",
+      "pass": true
+    }
+  ],
+  "zip_checks": [
+    {
+      "file": "CONSUMER_GUIDE.md",
+      "pass": true
+    },
+    {
+      "file": "DECISION_BEFORE_CODE.md",
+      "pass": true
+    },
+    {
+      "file": "INTERFACE_READY.json",
+      "pass": true
+    },
+    {
+      "file": "REFERENCE_EPOCH25.json",
+      "pass": true
+    },
+    {
+      "file": "REFERENCE_FIRST5.json",
+      "pass": true
+    },
+    {
+      "file": "SOURCE_SHA256.json",
+      "pass": true
+    },
+    {
+      "file": "baseline/kml_ops.py",
+      "pass": true
+    },
+    {
+      "file": "baseline/s4_models.py",
+      "pass": true
+    },
+    {
+      "file": "cpu36_contract.py",
+      "pass": true
+    },
+    {
+      "file": "data_gate/INTERFACE.json",
+      "pass": true
+    },
+    {
+      "file": "data_gate/engineering_data.py",
+      "pass": true
+    },
+    {
+      "file": "diagnostic_common.py",
+      "pass": true
+    },
+    {
+      "file": "dual_reference.py",
+      "pass": true
+    },
+    {
+      "file": "engineering_training.py",
+      "pass": true
+    },
+    {
+      "file": "profile_contract.py",
+      "pass": true
+    },
+    {
+      "file": "real_data.py",
+      "pass": true
+    },
+    {
+      "file": "tests/check_equivalence.py",
+      "pass": true
+    },
+    {
+      "file": "tests/test_dual_reference.py",
+      "pass": true
+    }
+  ],
+  "original_comparator_sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e",
+  "author_local_checks": "7 helper contracts / 190 tiny metrics; not C2 full B64 or actual DDP",
+  "windows_init": "Original C2 init hash rejected on Windows; unchanged gate retained; actual C2 NOT_RUN",
+  "execution_authorization": false,
+  "next": "S07 consume frozen reference; S01 independent math/code/deployment review remains required"
+}

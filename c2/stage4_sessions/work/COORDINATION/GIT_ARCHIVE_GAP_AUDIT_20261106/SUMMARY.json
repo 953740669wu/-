@@ -1,0 +1,81 @@
+{
+  "snapshot_started": "2026-11-06T18:49:35.164021+08:00",
+  "snapshot_finished": "2026-11-06T18:49:38.099037+08:00",
+  "head": "cb342a1f3f9fc0b2bea66f342138f68acc2950e6",
+  "origin_tracking": "cb342a1f3f9fc0b2bea66f342138f68acc2950e6",
+  "remote_live_checked": false,
+  "index_changed_by_audit": false,
+  "staged_diff_empty": true,
+  "latest_manifest": "GIT_SUBMIT_R9_R12_S07R7_20261106.tsv",
+  "latest_manifest_counts": {
+    "HEAD_EXACT": 1422
+  },
+  "latest_manifest_self_exact": true,
+  "historical_manifest_counts": {
+    "GIT_SUBMIT_ENGINEERING_JOB2043445_20261106.tsv": {
+      "HEAD_EXACT": 249,
+      "HISTORICAL_EXACT": 7
+    },
+    "GIT_SUBMIT_HANDOFF_PROTOCOL_20261105.tsv": {
+      "HISTORICAL_EXACT": 12,
+      "HEAD_EXACT": 6
+    },
+    "GIT_SUBMIT_MEMORY3_S06R3_20261105.tsv": {
+      "HEAD_EXACT": 654,
+      "HISTORICAL_EXACT": 7
+    },
+    "GIT_SUBMIT_MEMORY_PROBE_R2_20261105.tsv": {
+      "HEAD_EXACT": 374,
+      "NOT_FOUND_IN_LOCAL_HISTORY": 11,
+      "HISTORICAL_EXACT": 2
+    },
+    "GIT_SUBMIT_R6_PASS_PROBE_REVIEW_20261105.tsv": {
+      "HEAD_EXACT": 111,
+      "NOT_FOUND_IN_LOCAL_HISTORY": 9
+    },
+    "GIT_SUBMIT_R6_S03R2_20261105.tsv": {
+      "HEAD_EXACT": 76
+    },
+    "GIT_SUBMIT_R9_R12_S07R7_20261106.tsv": {
+      "HEAD_EXACT": 1422
+    },
+    "GIT_SUBMIT_READY_R5_FP32_R3_20261105.tsv": {
+      "HEAD_EXACT": 706,
+      "HISTORICAL_EXACT": 9
+    },
+    "GIT_SUBMIT_S00_RESULTS_20261105.tsv": {
+      "HEAD_EXACT": 107,
+      "HISTORICAL_EXACT": 7
+    },
+    "GIT_SUBMIT_SEQUENCE5_WRAPPER_20261105.tsv": {
+      "HEAD_EXACT": 188,
+      "HISTORICAL_EXACT": 9
+    }
+  },
+  "historical_exception_rows": 20,
+  "historical_exceptions_found_other_archive_paths": 12,
+  "historical_exceptions_found_working_copies": 12,
+  "current_pending_files": 1254,
+  "prior_remaining_files": 873,
+  "still_pending_from_prior": 873,
+  "added_pending_since_prior": 381,
+  "author_indexed_pending": 287,
+  "archive_index_count": 31,
+  "archive_issue_count": 20,
+  "changed_archive_indices": [
+    "c2/stage4_sessions/work/S00/real_dual_ddp_20261106/ARCHIVE_FILES.txt",
+    "c2/stage4_sessions/work/S01/real_dual_ddp_numeric_diagnosis_r1_20261106/ARCHIVE_SCOPE.json",
+    "c2/stage4_sessions/work/S01/real_dual_ddp_review_20261106/ARCHIVE_SCOPE.json",
+    "c2/stage4_sessions/work/S02/real_dual_ddp_reference_20261106/ARCHIVE_FILES.json",
+    "c2/stage4_sessions/work/S07/real_dual_ddp_20261106/ARCHIVE_SCOPE.json",
+    "c2/stage4_sessions/work/S07/real_dual_ddp_numeric_diagnosis_r1_20261106/ARCHIVE_SCOPE.json",
+    "c2/stage4_sessions/work/S08/real_dual_ddp_summary_20261106/ARCHIVE_FILES.txt"
+  ],
+  "notes": [
+    "Author archive indices are proposed scopes, not coordinator acceptance.",
+    "This audit directory is excluded from the pending-file counts.",
+    "Mutable status hashes may legitimately differ after later rounds.",
+    "Ignored data, weights, environments and packages are excluded from the pending-file inventory.",
+    "Concurrent author edits can change this snapshot; never use it as an approved submission manifest."
+  ]
+}
