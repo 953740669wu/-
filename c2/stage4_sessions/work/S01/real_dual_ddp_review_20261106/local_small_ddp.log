@@ -1,0 +1,17 @@
+test_actual_small_two_rank_gloo_ddp (__main__.TorchTrainingChecks.test_actual_small_two_rank_gloo_ddp) ... FAIL
+
+======================================================================
+FAIL: test_actual_small_two_rank_gloo_ddp (__main__.TorchTrainingChecks.test_actual_small_two_rank_gloo_ddp)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S01\real_dual_ddp_review_20261106\local_small_ddp\tests\test_training_torch.py", line 34, in test_actual_small_two_rank_gloo_ddp
+    self.assertEqual(result['reason'], 'complete')
+AssertionError: 'deadline' != 'complete'
+- deadline
++ complete
+
+
+----------------------------------------------------------------------
+Ran 1 test in 25.044s
+
+FAILED (failures=1)

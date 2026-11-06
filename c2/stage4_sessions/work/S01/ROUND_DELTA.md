@@ -1,6 +1,6 @@
-任务/轮次：S01 / S07_R7_ATOMIC_PRE_REVIEW_COMPLETE（2026-11-06）。
-状态变化：专项审核PASS_FOR_S07_R7_ATOMIC、review_complete=true，无阻断；草稿包名门禁错误已在首READY/作业前修正并重核P1。
-本轮改动：仅自身s07_r7_atomic_review_20261106和两份状态，不改作者源/旧reader判据/R6失败或R12原件；R12保持原基线不再搜索。
-验证增量：旧crash窄证据；R7包17成员16文件15 delivery/9复用、唯一diff/AST/3写入点/6复现/88方法87过1跳过；P1外包35成员34文件32索引/7复用、00本地15/登录15、146冻结输入及实际expected/validate。
-证据：S01_REVIEW.json（SHA=8493beccf28ed9fe760ff2dd73a157147897aa551860c87aac476956e12b79bd）、REPORT.md、BASELINE_FAILURE.json、DRAFT_FINDING.json、code_review.json、deployment_review.json、FROZEN_INPUTS.json与精确ARCHIVE_FILES.json。
-阻塞与下一步：00核12 SHA/实时队列/新marker后唯一总76-72核DDR总24GiB/job300-consumer270的完整四case，现场88零skip，失败停不补case/不重试；S01 0提交、实时job未直接核实、无后台监控或Git暂存操作。
+任务/轮次：S01 / 本地数值诊断R1独立复核完成（2026-11-06）。
+状态变化：WAITING转有限诊断接受，review_complete=true；原数值验收及最终FAIL不变，无训练许可。
+验证增量：60唯一文件SHA、34保存指标复算及原13梯度误差全复现；同输入/初值摘要/8线程、分母与缩放已核。
+有限归因：支持fp32权重收缩分组累计精度差异；首个观测非零coarse loss，首个依赖越阈值tf.weight；新DDP/具体内核仍未知。
+证据不足：实际worker PID与Popen不同，缺15秒内后代终态；当前4计算PID均不存在，历史身份和fp64线程快照仍有限。
+停点与交付：DIAGNOSIS_REVIEW.json列不足和最小下一动作；S01无新增模型/收缩/DDP/集群路径，仅既有指标复算，不改作者源码或共享Git。

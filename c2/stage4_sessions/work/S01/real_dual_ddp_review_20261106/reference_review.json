@@ -1,0 +1,236 @@
+{
+  "status": "PASS_REFERENCE_PRE_REVIEW_PENDING_TRAINING_DEPLOYMENT",
+  "blockers": [],
+  "package_members": 18,
+  "source_entries": 17,
+  "reused_original_files": 12,
+  "plan_25_steps_exact_first32_last32": true,
+  "unique_frames": 1600,
+  "import_before_framework": true,
+  "original_comparator_and_thresholds_unchanged": true,
+  "original_B64_reference": true,
+  "canonical_parameter_names": 153,
+  "parameter_numel": 37995777,
+  "local_helper_checks": 7,
+  "local_tiny_metrics": 190,
+  "Windows_C2_init": "REJECTED_ORIGINAL_GATE_RETAINED",
+  "actual_C2_initialization_data_KML_DDP": "PENDING_UNIQUE_JOB",
+  "repeated_author_suites": 0,
+  "inputs": [
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\REAL_DUAL_DOMAIN_DDP_START_20261106.md",
+      "bytes": 13336,
+      "sha256": "ebabda929df06e0c1366563af0d16ac360c0fdf3cc16b330f3bf2804a088a1ec"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\CONSUMER_GUIDE.md",
+      "bytes": 5368,
+      "sha256": "b2a866a0343c8b96b1d149d97edc8faa64aebf296422cc44b5967c7c0b63404d"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\DECISION_BEFORE_CODE.md",
+      "bytes": 2013,
+      "sha256": "877e93bc8c8c2b0515017f028e08e6aff88c70e1bdb3bac60703eddbaf5da307"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\INTERFACE_READY.json",
+      "bytes": 6737,
+      "sha256": "974c7c1f2fd1cd21b2a1e94be3a72fd21686e61575450cdf608249e92f313544"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\REFERENCE_EPOCH25.json",
+      "bytes": 29576,
+      "sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\REFERENCE_FIRST5.json",
+      "bytes": 19052,
+      "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\REFERENCE_READY.json",
+      "bytes": 6655,
+      "sha256": "924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\REPORT.md",
+      "bytes": 5571,
+      "sha256": "0bbbd16cd6861a2dfc0dbb8067ca623dc5c3f1a63b8420e1249523af4d5f3a55"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\SOURCE_SHA256.json",
+      "bytes": 1638,
+      "sha256": "6b9cd186d27a5130f22cd2e58a2c6cb231be31c70d5df98dce4c40e92008b757"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\baseline\\kml_ops.py",
+      "bytes": 10255,
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\baseline\\s4_models.py",
+      "bytes": 14121,
+      "sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\cpu36_contract.py",
+      "bytes": 11171,
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\data_gate\\INTERFACE.json",
+      "bytes": 6682,
+      "sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\data_gate\\engineering_data.py",
+      "bytes": 10342,
+      "sha256": "fbb89097f2aab0633b5be44e10b3160e4a8a33a2f69b1a889f4930df909e42b3"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\diagnostic_common.py",
+      "bytes": 5468,
+      "sha256": "e3683f15e907c8a041795ccd4b775c78b235cc20bb09492108db4e950da7e705"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\diff\\NEW_REFERENCE_ADAPTER.patch",
+      "bytes": 24177,
+      "sha256": "86e5391edbcca0b9aa291ae31a15dc5ff3ab78170cde0faddc25d3042a972b39"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\dual_reference.py",
+      "bytes": 12374,
+      "sha256": "2d7b287dd231ae2ae69ad4d802b3c789a694e9cc023166609df493dfe0340e3b"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\engineering_training.py",
+      "bytes": 8430,
+      "sha256": "9009e96fe4cc8071048e8aed8d3dc11e20d04f4271c48dbe36472e4218d8e5dc"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\evidence\\FROZEN_SOURCES.json",
+      "bytes": 3722,
+      "sha256": "4dc3925851e859585929a76154e92090c88e048ef0deaf9761c1a990af7c3444"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\evidence\\LOCAL_CHECKS.json",
+      "bytes": 1662,
+      "sha256": "2757ec67d8afb120e50f5bf48b0cc9a733726af2f2b0580ea40ee724292a2a67"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\evidence\\ORIGINAL25_METADATA_CHECK.json",
+      "bytes": 10598,
+      "sha256": "f6d8c9e9aeb9db9655022749304ebb787408be79db05ebb24ccc334bad1aa932"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\evidence\\WINDOWS_INITIALIZATION_DIAGNOSTIC.json",
+      "bytes": 845,
+      "sha256": "bcfe5ec4064422797f50ea5cd3fc95c68faf2829676bbc94a6e7fdd4cf6e7b70"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\evidence\\reference_tests_first.log",
+      "bytes": 1605,
+      "sha256": "44876028c0079b21660367e9cb8606fefe98a133d0171aee2ad69ee991bcfa2f"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\evidence\\reference_tests_frozen.log",
+      "bytes": 1601,
+      "sha256": "080528a463e3b169eb4f9e8a9c0ba41e088f977493cbee830bd3c43268d3ab58"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\evidence\\tiny_adamw_metrics.json",
+      "bytes": 33357,
+      "sha256": "6fed2956dd6c96a1097720913139e8bc6bf55883deaaf45a826b706f66d95dcc"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\package\\PACKAGE_MANIFEST.json",
+      "bytes": 5543,
+      "sha256": "599e4832b3669c156e5bda574fb936913de8200ae7201dd584f2c4952aefeb2c"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\package\\S02_REAL_DUAL_DDP_REFERENCE.zip",
+      "bytes": 62170,
+      "sha256": "df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\profile_contract.py",
+      "bytes": 1109,
+      "sha256": "15fd272040db36271680e947b2d183e852ed60b343bbcd4ded8f88821d67793d"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\real_data.py",
+      "bytes": 14332,
+      "sha256": "6490b5aa7ab8eacc43ba7e4fa13ac64ebd6239671397774025979efdf050c8e0"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\tests\\check_equivalence.py",
+      "bytes": 14614,
+      "sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\tests\\test_dual_reference.py",
+      "bytes": 10824,
+      "sha256": "58d0a73796a819bfc35c208643cb0c45ee1b5d1e7faa740d0edd8e63f3929386"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\REFERENCE_EPOCH25.json",
+      "bytes": 29576,
+      "sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\REFERENCE_FIRST5.json",
+      "bytes": 19052,
+      "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\baseline\\kml_ops.py",
+      "bytes": 10255,
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\baseline\\s4_models.py",
+      "bytes": 14121,
+      "sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\cpu36_contract.py",
+      "bytes": 11171,
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\data_gate\\INTERFACE.json",
+      "bytes": 6682,
+      "sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\data_gate\\engineering_data.py",
+      "bytes": 10342,
+      "sha256": "fbb89097f2aab0633b5be44e10b3160e4a8a33a2f69b1a889f4930df909e42b3"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\diagnostic_common.py",
+      "bytes": 5468,
+      "sha256": "e3683f15e907c8a041795ccd4b775c78b235cc20bb09492108db4e950da7e705"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\engineering_training.py",
+      "bytes": 8430,
+      "sha256": "9009e96fe4cc8071048e8aed8d3dc11e20d04f4271c48dbe36472e4218d8e5dc"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\profile_contract.py",
+      "bytes": 1109,
+      "sha256": "15fd272040db36271680e947b2d183e852ed60b343bbcd4ded8f88821d67793d"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\real_data.py",
+      "bytes": 14332,
+      "sha256": "6490b5aa7ab8eacc43ba7e4fa13ac64ebd6239671397774025979efdf050c8e0"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\tests\\check_equivalence.py",
+      "bytes": 14614,
+      "sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e"
+    }
+  ]
+}
