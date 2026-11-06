@@ -1,0 +1,35 @@
+{
+  "scope": "R12_TARGETED_CANDIDATE_ABI_ORCHESTRATION_AND_PACKAGE_REVIEW_NOT_C2_ACCEPTANCE",
+  "decision": "READY_FOR_S01_AND_S00_R12_REVIEW",
+  "R12": {
+    "bound_artifacts": 13,
+    "source_entries": 26,
+    "zip_members": 27,
+    "python39_ast": "PASS",
+    "issues": [],
+    "package_sha256": "44232f7627cfbcf59fb721acd23af46aed8fa790b20fe743a3c9886717ec4de4",
+    "candidate_sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea",
+    "author_local_checks": 9,
+    "original_comparator_checks_author_reported": 30,
+    "actual_KML_target_run": false,
+    "full_encoder_strict_run": false,
+    "same_node_AB_run": false,
+    "coordinator_targeted_source_read": [
+      "candidate diff",
+      "AB_PROPOSAL",
+      "runtime_counts.py",
+      "run_ab_proposal.sh",
+      "target screen",
+      "strict/perf core loop"
+    ]
+  },
+  "S08": {
+    "bound_summary_assets": 14,
+    "issues": [],
+    "summary_complete": true,
+    "scientific_acceptance": false,
+    "performance_acceptance": false
+  },
+  "new_jobs": 0,
+  "execution_gate": "New S01 SHA-bound code+S00 deployment review required before the one bounded actual R12 job"
+}

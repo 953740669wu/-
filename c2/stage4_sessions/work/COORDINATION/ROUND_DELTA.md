@@ -1,6 +1,6 @@
-任务/轮次：COORDINATION / GIT_ENGINEERING_JOB2043445_READY_20261106。
-状态变化：首次真实工程运行的已核冻结交付可归档；02/08新任务继续，本批不干扰。
-本轮改动：仅协调精确提交说明/TSV/核对JSON及总表/状态/六行摘要；作者源码/原件/Git暂存未改。
-验证增量：核00/01/02原归档清单来源/范围/存在/已有SHA、Git忽略规则与原始字节；排除活动共享状态与ZIP，生成当前bytes/SHA供Git窗口复核。
-证据：GIT_SUBMIT_ENGINEERING_JOB2043445_20261106.md/.tsv、GIT_ENGINEERING_JOB2043445_CHECKS_20261106.json；原JOB2043445_ENGINEERING_REVIEW及任务归档索引。
-阻塞与下一步：唯一Git窗口逐项复核TSV，无漂移才分任务提交/普通推送GitHub并核远端；范围外工作区保留，不追求清空，不升级为科学或性能接受。
+任务/轮次：COORDINATION / S07_R7_PROTOCOL_PASS_GIT_READY_20261106。
+状态变化：原子报告修复版本R7唯一2051116完整四case通过/88 Linux零skip；R6失败原件及R12无收益结论保留，实际模型DDP未测。
+本轮改动：仅协调新协议核对JSON/Git交接清单/总表/状态/摘要，旧三状态归档；作者代码/证据/旧257清单/暂存不动。
+验证增量：R7 12绑定/八正式报告/原4case/48 CPU与清理一致；Python计时合法取消/内核栈权限限制保持。作者22份归档索引/253稳定文件原SHA核无漂移，实际Git范围以新TSV为准；不重跑检查或模型。
+证据：JOB2051116_S07_R7_PROTOCOL_REVIEW_20261106.json、GIT_SUBMIT_R9_R12_S07R7_20261106.md/.tsv及GIT_R9_R12_S07R7_SCOPE_CHECKS_20261106.json。
+阻塞与下一步：已闭合交付先冻结归档，唯一Git窗口逐项核SHA/分任务提交/普通push并核远端，范围外保留；暂不并发写归档文件，后续再派真实双域模型训练准备。

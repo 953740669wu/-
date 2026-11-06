@@ -1,0 +1,341 @@
+{
+  "scope": "COLLECTED_R11_GEMM_RECORDS_METADATA_AND_TARGETED_ARITHMETIC_CHECK_NO_NEW_RUN",
+  "decision": "R11_ENGINEERING_GEMM_EVIDENCE_VERIFIED",
+  "checks": {
+    "application_result_identity": true,
+    "archive_identity": true,
+    "audit_identity": true,
+    "evidence_index_identity": true,
+    "exposure_ledger_identity": true,
+    "review_identity": true,
+    "steps_identity": true,
+    "gemm_contract_identity": true,
+    "reference_first5_identity": true,
+    "three_gemm_samples": true,
+    "sample_3_identity": true,
+    "sample_3_records": true,
+    "sample_3_native_pairs": true,
+    "sample_3_dimensions": true,
+    "sample_4_identity": true,
+    "sample_4_records": true,
+    "sample_4_native_pairs": true,
+    "sample_4_dimensions": true,
+    "sample_5_identity": true,
+    "sample_5_records": true,
+    "sample_5_native_pairs": true,
+    "sample_5_dimensions": true,
+    "review_binding": true,
+    "success_record": true,
+    "five_updates": true,
+    "first5_loss_exact": true,
+    "cpu36_snapshots": true,
+    "restoration_record": true
+  },
+  "roles": {
+    "forward": {
+      "calls_each": [
+        50,
+        50,
+        50
+      ],
+      "median_ctypes_call_span_ms": 861.0516190000001,
+      "median_outer_minus_ctypes_ms": 6.315448
+    },
+    "dX": {
+      "calls_each": [
+        49,
+        49,
+        49
+      ],
+      "median_ctypes_call_span_ms": 762.955976,
+      "median_outer_minus_ctypes_ms": 9.570901
+    },
+    "dW": {
+      "calls_each": [
+        50,
+        50,
+        50
+      ],
+      "median_ctypes_call_span_ms": 1253.1283729999998,
+      "median_outer_minus_ctypes_ms": 9.320428999999999
+    }
+  },
+  "shape_rank": [
+    {
+      "role": "dW",
+      "m": 512,
+      "n": 2048,
+      "k": 13312,
+      "ta": true,
+      "tb": false,
+      "beta": 0.0,
+      "calls_each": [
+        12,
+        12,
+        12
+      ],
+      "median_ctypes_call_span_ms": 377.31042800000006,
+      "median_outer_minus_ctypes_ms": 2.2492720000000004
+    },
+    {
+      "role": "dW",
+      "m": 2048,
+      "n": 512,
+      "k": 13312,
+      "ta": true,
+      "tb": false,
+      "beta": 0.0,
+      "calls_each": [
+        12,
+        12,
+        12
+      ],
+      "median_ctypes_call_span_ms": 349.73337599999996,
+      "median_outer_minus_ctypes_ms": 2.3500049999999995
+    },
+    {
+      "role": "dX",
+      "m": 13312,
+      "n": 2048,
+      "k": 512,
+      "ta": false,
+      "tb": false,
+      "beta": 0.0,
+      "calls_each": [
+        12,
+        12,
+        12
+      ],
+      "median_ctypes_call_span_ms": 293.732347,
+      "median_outer_minus_ctypes_ms": 2.6425039999999993
+    },
+    {
+      "role": "dW",
+      "m": 1536,
+      "n": 512,
+      "k": 13312,
+      "ta": true,
+      "tb": false,
+      "beta": 0.0,
+      "calls_each": [
+        12,
+        12,
+        12
+      ],
+      "median_ctypes_call_span_ms": 273.858891,
+      "median_outer_minus_ctypes_ms": 2.187511
+    },
+    {
+      "role": "forward",
+      "m": 13312,
+      "n": 512,
+      "k": 2048,
+      "ta": false,
+      "tb": true,
+      "beta": 1.0,
+      "calls_each": [
+        12,
+        12,
+        12
+      ],
+      "median_ctypes_call_span_ms": 265.705041,
+      "median_outer_minus_ctypes_ms": 1.503463
+    },
+    {
+      "role": "forward",
+      "m": 13312,
+      "n": 2048,
+      "k": 512,
+      "ta": false,
+      "tb": true,
+      "beta": 1.0,
+      "calls_each": [
+        12,
+        12,
+        12
+      ],
+      "median_ctypes_call_span_ms": 258.76878400000004,
+      "median_outer_minus_ctypes_ms": 1.5275880000000002
+    },
+    {
+      "role": "dX",
+      "m": 13312,
+      "n": 512,
+      "k": 2048,
+      "ta": false,
+      "tb": false,
+      "beta": 0.0,
+      "calls_each": [
+        12,
+        12,
+        12
+      ],
+      "median_ctypes_call_span_ms": 244.65150299999996,
+      "median_outer_minus_ctypes_ms": 2.1685649999999996
+    },
+    {
+      "role": "dW",
+      "m": 512,
+      "n": 512,
+      "k": 13312,
+      "ta": true,
+      "tb": false,
+      "beta": 0.0,
+      "calls_each": [
+        12,
+        12,
+        12
+      ],
+      "median_ctypes_call_span_ms": 240.504173,
+      "median_outer_minus_ctypes_ms": 2.24491
+    },
+    {
+      "role": "forward",
+      "m": 13312,
+      "n": 1536,
+      "k": 512,
+      "ta": false,
+      "tb": true,
+      "beta": 1.0,
+      "calls_each": [
+        12,
+        12,
+        12
+      ],
+      "median_ctypes_call_span_ms": 202.67274099999997,
+      "median_outer_minus_ctypes_ms": 1.512804
+    },
+    {
+      "role": "dX",
+      "m": 13312,
+      "n": 512,
+      "k": 1536,
+      "ta": false,
+      "tb": false,
+      "beta": 0.0,
+      "calls_each": [
+        12,
+        12,
+        12
+      ],
+      "median_ctypes_call_span_ms": 163.44280300000003,
+      "median_outer_minus_ctypes_ms": 2.065233
+    },
+    {
+      "role": "forward",
+      "m": 13312,
+      "n": 512,
+      "k": 512,
+      "ta": false,
+      "tb": true,
+      "beta": 1.0,
+      "calls_each": [
+        12,
+        12,
+        12
+      ],
+      "median_ctypes_call_span_ms": 111.77483699999999,
+      "median_outer_minus_ctypes_ms": 1.507417
+    },
+    {
+      "role": "dX",
+      "m": 13312,
+      "n": 512,
+      "k": 512,
+      "ta": false,
+      "tb": false,
+      "beta": 0.0,
+      "calls_each": [
+        12,
+        12,
+        12
+      ],
+      "median_ctypes_call_span_ms": 46.238203999999996,
+      "median_outer_minus_ctypes_ms": 2.435326
+    },
+    {
+      "role": "dX",
+      "m": 13312,
+      "n": 512,
+      "k": 1,
+      "ta": false,
+      "tb": false,
+      "beta": 0.0,
+      "calls_each": [
+        1,
+        1,
+        1
+      ],
+      "median_ctypes_call_span_ms": 2.583405,
+      "median_outer_minus_ctypes_ms": 0.267073
+    },
+    {
+      "role": "dW",
+      "m": 512,
+      "n": 65,
+      "k": 13312,
+      "ta": true,
+      "tb": false,
+      "beta": 0.0,
+      "calls_each": [
+        1,
+        1,
+        1
+      ],
+      "median_ctypes_call_span_ms": 1.513685,
+      "median_outer_minus_ctypes_ms": 0.161372
+    },
+    {
+      "role": "dW",
+      "m": 1,
+      "n": 512,
+      "k": 13312,
+      "ta": true,
+      "tb": false,
+      "beta": 0.0,
+      "calls_each": [
+        1,
+        1,
+        1
+      ],
+      "median_ctypes_call_span_ms": 1.111031,
+      "median_outer_minus_ctypes_ms": 0.163442
+    },
+    {
+      "role": "forward",
+      "m": 13312,
+      "n": 512,
+      "k": 65,
+      "ta": false,
+      "tb": true,
+      "beta": 1.0,
+      "calls_each": [
+        1,
+        1,
+        1
+      ],
+      "median_ctypes_call_span_ms": 0.916389,
+      "median_outer_minus_ctypes_ms": 0.131491
+    },
+    {
+      "role": "forward",
+      "m": 13312,
+      "n": 1,
+      "k": 512,
+      "ta": false,
+      "tb": true,
+      "beta": 1.0,
+      "calls_each": [
+        1,
+        1,
+        1
+      ],
+      "median_ctypes_call_span_ms": 0.873628,
+      "median_outer_minus_ctypes_ms": 0.120261
+    }
+  ],
+  "interpretation": "Native ctypes-call spans dominate outer preparation; spans include marshalling/packing/scheduling and are not pure microkernel times. R12 output-column tiling is an experiment, not a guaranteed speedup or unchanged KML internal rounding.",
+  "new_jobs": 0,
+  "scientific_acceptance": false,
+  "performance_acceptance": false
+}

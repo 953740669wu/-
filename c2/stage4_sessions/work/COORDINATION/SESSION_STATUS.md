@@ -1,13 +1,13 @@
 # 总协调简短状态
 
-- 更新/轮次：2026-11-06；JOB2043445_ENGINEERING_REVIEW，后续02/08待转发。
-- 当前目标/结果：首次真实工程训练链路已完成并核收集原件；非正式质量/性能接受。00成功实跑，01前置审核/02冻结入口/08工具准备各完成，01/08结束时结果未到属时间先后。
-- 真实运行：2043445/cn21341 SUCCEEDED/exit0，1600帧/16unit/25次连续AdamW/1epoch，38授权36实际、DDR24GiB同limit/exclusive，fp32/CKPT0/KML/完整Encoder；无重试，按已收终态无活动S00 job。
-- 性能观察：程序86.6905秒、训练步骤58.4772秒、中位2.32994秒；采样process-lifetime HWM最大7258705920bytes，不能称整job最终峰值；调度96节点秒/usage95分列。
-- 模型保存：checkpoint456135327bytes留远端，SHA=ec491c46c06f94a7fac54d5f80010866311743e1f722947cb680cdaf3579e403；恢复记录参数/AdamW/RNG/cursor/身份一致、固定前向差0、extra_updates0。协调未下载/重哈希权重。
-- 数据/暴露：14300版manifest固定SHA前后未变；s0285/s0593各8unit，同belt/row/源SHA。1600帧无重复填充，25mask不同，暴露清单完全对账；subject未知，不称2受试者。以后按真实subject映射排除最终test，旧正式门禁仍DATA_NOT_READY。
-- 本轮独立核对：RUN_COMPLETE绑定7原件大小/SHA、前置review绑定、调度成功/退出、25步/1600帧/16unit覆盖、finite/mask/KML、暴露账本、59 CPU快照及恢复记录一致；无SSH、无重跑模型/原19检查。证据JOB2043445_ENGINEERING_REVIEW_20261106.json。
-- 修改范围：仅协调新核对JSON/AFTER_ENGINEERING_PILOT_20261106.md/总表和自身状态；旧三状态归档history/PRE_JOB2043445_REVIEW_20261106/；作者源码/原证据/暂存未改。
-- 下一步：08只读整理实际2043445结果；02分析现有时间分解，准备2预热+3采样的有限CPU剖析包，不改算术/默认参数、不扩数据、不直接提交job。包核后另派01审核/00执行，原一次授权已用完。
-- 其余/Git：00/01及03—07待命，避免重复审核/探针。提醒唯一Git窗口按新明确范围归档已核工程交付及原件，数据/权重/ZIP/环境不进Git；历史716文件批次保持，不blind add全部工作区。
-- Git本轮：用户询问可推送范围；以首次真实工程运行00/01/02冻结交付加协调记录生成精确TSV，排除02/08正在写的新任务及共享短状态、S02 ZIP与数据权重；唯一Git窗口执行，本协调不stage/commit/push。
+- 更新/轮次：2026-11-06；S07_R7_PROTOCOL_PASS_GIT_READY，未在本窗口提交/推送。
+- 已收完成：07原子报告修复、01最终P1前置审核、00现场完整四case均结束；02 R12关闭与08实际摘要保持已完成。当前先归档，不同时分派写入本批范围的新任务。
+- R7实际：唯一2051116/cn21348成功/exit0，同一job原normal/crash/collective-timeout/watchdog接受（probe_exit0/1/1/124），88 Linux零skip；八rank报告完整，crash rank0=10595bytes错误报告已提交，旧R6空JSON/失败不改。
+- 已核原件：12顶层绑定、01最终12绑定、八rank身份/原四case实际判据/48 CPU快照、Linux88及清理终态一致；JOB2051116_S07_R7_PROTOCOL_REVIEW_20261106.json。协调无SSH/真实通信重跑或权重读取。
+- 观测限制：计时器init_end前于目标约5.918秒合法取消，两个Python栈0bytes不称捕获；proc8字段6 OK/2 kernel stack E13权限拒绝，完整栈false。仅有界诊断尝试完成，不提权/补采，不称原初始化永久修复。
+- 代码适配成果：R7同目录临时写/flush/fsync/close/replace及3处rank写入在新包，原reader/ready/观察器/四case/超时/CPU/清理不变；受控中断保护与本次真实crash报告完整分别陈述，不声称本次恰好中断在commit前。
+- 性能/范围：R12严格数值通过但本次后20步中位4.510239/4.628061秒、候选慢2.6123%，关闭不集成/不再tile搜索；工程split/subject UNKNOWN、无val/test。S07通过固定张量/故障协议，不是实际模型DDP或稳态性能/科学接受。
+- Git本轮：HEAD=f1ed9f23943263cbe07b700a93c5503e6220a577、暂存空；按已完成作者ARCHIVE清单聚合R9/R10/R11/R12及结案、S07 R6失败/R7修复通过、对应审核/全部已成08摘要和协调记录。精确TSV逐项冻结bytes/SHA，代码/证据原始字节保留。
+- 不纳入：旧R8正式训练准备/初始数据审计、S04 P1、S05/S06及其它未明确本批范围的历史准备、冻结重复审阅副本、数据/权重/ZIP/环境；旧257清单不改。运行FileStore或空/残JSON仅明确索引列出的失败原件按原字节保留，不能补造/格式化。
+- 修改范围：仅协调协议核对JSON/新Git说明-TSV-检查JSON/总表和自身状态；旧三状态存history/PRE_S07_R7_PASS_GIT_READY_20261106/，作者源/原件/共享暂存不改。
+- 下一步：用户发唯一Git窗口按新.md/.tsv精确分任务提交及普通push现有GitHub origin/main，核Git对象/实时远端一致并回报；本协调不代操作Git。归档完成后再安排真实双域模型训练接入准备，不跳过批量/梯度/参数同步的明确工程协议。

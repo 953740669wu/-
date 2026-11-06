@@ -1,0 +1,71 @@
+{
+  "scope": "COLLECTED_R12_SAME_NODE_RAW_PERF_CROSSCHECK_NO_NEW_RUN",
+  "decision": "R12_CLOSED_NO_TRAINING_GAIN",
+  "checks": {
+    "archive_identity": true,
+    "audit_identity": true,
+    "evidence_index_identity": true,
+    "review_identity": true,
+    "deployment_ready_identity": true,
+    "perf_baseline_ledger_identity": true,
+    "perf_baseline_result_identity": true,
+    "perf_baseline_steps_identity": true,
+    "perf_candidate_ledger_identity": true,
+    "perf_candidate_result_identity": true,
+    "perf_candidate_steps_identity": true,
+    "strict_ledger_identity": true,
+    "strict_result_identity": true,
+    "strict_steps_identity": true,
+    "target_result_identity": true,
+    "stage_success": true,
+    "same_host_job": true,
+    "strict_3895_exact": true,
+    "review_binding": true,
+    "success_cleanup": true,
+    "resource_total_updates": true,
+    "perf_baseline_25_steps": true,
+    "perf_baseline_frames": true,
+    "perf_baseline_calls": true,
+    "perf_baseline_recovery_record": true,
+    "perf_candidate_25_steps": true,
+    "perf_candidate_frames": true,
+    "perf_candidate_calls": true,
+    "perf_candidate_recovery_record": true,
+    "matched_frames_masks": true,
+    "matched_initialization": true,
+    "matched_runtime": true,
+    "all_cpu36_snapshots": true,
+    "139_cpu_snapshots": true
+  },
+  "performance": {
+    "baseline": {
+      "observed20_count": 20,
+      "median_seconds": 4.510239103808999,
+      "range_seconds": [
+        4.320207665674388,
+        4.61845821980387
+      ],
+      "all25_training_seconds": 113.43545715464279,
+      "application_wall_seconds": 167.4048447823152,
+      "sampled_process_lifetime_HWM_MiB": 6820.1171875
+    },
+    "candidate": {
+      "observed20_count": 20,
+      "median_seconds": 4.628061148105189,
+      "range_seconds": [
+        4.481312453746796,
+        4.926456287037581
+      ],
+      "all25_training_seconds": 117.83301037969068,
+      "application_wall_seconds": 170.55277104582638,
+      "sampled_process_lifetime_HWM_MiB": 6923.1328125
+    }
+  },
+  "candidate_observed20_median_time_change_percent": 2.6123236836088415,
+  "conclusion": "No speedup in this one same-node pair; candidate median slower. Numerical gate exact in this scope. No claim of stable regression or production performance acceptance.",
+  "candidate_integrated": false,
+  "repeat_or_tile_search_authorized": false,
+  "new_jobs": 0,
+  "scientific_acceptance": false,
+  "performance_acceptance": false
+}

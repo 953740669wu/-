@@ -1,0 +1,46 @@
+{
+  "scope": "METADATA_AND_TARGETED_R9_SOURCE_REVIEW_NOT_C2_ACCEPTANCE",
+  "R9": {
+    "ready_artifacts_checked": 9,
+    "source_entries": 24,
+    "zip_members": 25,
+    "issues": [],
+    "python39_ast": "PASS",
+    "package_sha256": "15621eaa3328e407059c352d86a0f49ee68bfea39f02a68503ded6f94099abe3",
+    "full_model_runs_by_coordinator": 0,
+    "author_local_checks": 6
+  },
+  "S08": {
+    "bound_local_summary_files": [
+      "ANALYSIS_VERIFICATION.json",
+      "ARCHIVE_FILES.txt",
+      "BEFORE_ROUND_DELTA.md",
+      "BEFORE_SESSION_STATUS.md",
+      "HANDOFF_VERIFICATION.json",
+      "SUMMARY.json",
+      "SUMMARY.md"
+    ],
+    "issues": [],
+    "checks": {
+      "handoff_identity_passed": 19,
+      "result_checks_passed": 16,
+      "summary_cli_exit_code": 0,
+      "parser_issues": [],
+      "inputs_unchanged": true
+    },
+    "observations": {
+      "updates": 25,
+      "frames": 1600,
+      "units": 16,
+      "case_frames": {
+        "s0285": 800,
+        "s0593": 800
+      },
+      "program_wall_seconds": 86.69049982586876,
+      "node_seconds": 96,
+      "sampled_process_lifetime_hwm_bytes": 7258705920,
+      "extra_optimizer_updates": 0
+    }
+  },
+  "decision": "READY_FOR_S01_AND_S00_DEPLOYMENT_REVIEW"
+}

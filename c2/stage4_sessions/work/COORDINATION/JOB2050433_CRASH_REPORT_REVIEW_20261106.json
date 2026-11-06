@@ -1,0 +1,35 @@
+{
+  "scope": "COLLECTED_S07_R6_FAILURE_AND_TARGETED_SOURCE_REVIEW_NOT_NEW_RUN",
+  "decision": "R6_FAIL_PRESERVED_NEEDS_RANK_REPORT_PUBLICATION_FIX",
+  "bound_top_level_artifacts": 10,
+  "checks": {
+    "archive_identity": true,
+    "audit_identity": true,
+    "cleanup_identity": true,
+    "deployment_ready_identity": true,
+    "evidence_index_identity": true,
+    "original_checks_identity": true,
+    "readiness_inventory_identity": true,
+    "review_identity": true,
+    "stack_inventory_identity": true,
+    "trace_inventory_identity": true,
+    "crash_report_empty": true,
+    "injection_and_cleanup": true,
+    "failed_stop": true,
+    "normal_only_accepted": true,
+    "review_binding": true,
+    "terminal_cleanup": true
+  },
+  "timeline": {
+    "last_completed_checkpoint": "broadcast",
+    "worker_error": "RuntimeError: [/pytorch/third_party/gloo/gloo/transport/tcp/pair.cc:525] Read error [127.0.0.1]:60118: Connection reset by peer",
+    "worker_error_to_cleanup_ms": 6.326138,
+    "worker_error_to_TERM_ms": 8.903532
+  },
+  "source_finding": "Each checkpoint/end/error overwrites rank JSON using Path.write_text, which truncates destination before completing write. Last broadcast checkpoint_end precedes worker_error; zero-byte final file is consistent with subsequent overwrite interrupted by TERM.",
+  "causal_limit": "Exact interrupted syscall not captured; reproduce the publication failure mode before asserting a proven syscall-level root cause.",
+  "proposal": "Atomic same-directory rank-report replacement preserving last committed checkpoint; keep parser and all original case criteria fail-closed.",
+  "new_jobs": 0,
+  "communication_suite_passed": false,
+  "watchdog_diagnostic_complete": false
+}

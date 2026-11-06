@@ -1,0 +1,36 @@
+{
+  "scope": "R10_TARGETED_DIFF_AND_S08_ATTRIBUTION_REVIEW_NO_NEW_MODEL_RUN",
+  "R10": {
+    "bound_artifacts_checked": 10,
+    "issues": [],
+    "coordinator_disposition": "DEFER_CLUSTER_AB_LOW_BENEFIT_EVIDENCE_NOT_NUMERICAL_FAILURE",
+    "reason": "Only removes50 repeated reshape views; no observed matrix-copy removal; instrumented view time is not a valid unprofiled gain estimate.",
+    "candidate_integrated": false,
+    "native_substitute_checks_author_reported": 7,
+    "actual_KML_and_full_encoder_not_run": true
+  },
+  "S08": {
+    "bound_summary_assets_checked": 11,
+    "issues": [],
+    "known_KML_calls_each_forward_backward": [
+      50,
+      99
+    ],
+    "known_copy_classification_each": {
+      "optimizer": 765,
+      "view_backward": 96,
+      "linear_forward": 62,
+      "attention_backward": 12,
+      "layernorm_backward": 12,
+      "other": 56
+    },
+    "largest_remaining_unknowns": [
+      "actual per-call m/n/k and flags",
+      "native ctypes call span versus outer GEMM preparation",
+      "matrix shape to duration attribution"
+    ],
+    "report_is_engineering_only": true
+  },
+  "next": "One bounded GEMM breakdown on baseline; no R10 20-update AB",
+  "new_jobs": 0
+}

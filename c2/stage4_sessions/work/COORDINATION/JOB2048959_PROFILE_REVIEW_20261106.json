@@ -1,0 +1,116 @@
+{
+  "scope": "LOCAL_COLLECTED_R9_EVIDENCE_AND_SAMPLE_EVENT_ATTRIBUTION_NOT_LIVE_SSH",
+  "decision": "R9_ENGINEERING_PROFILE_EVIDENCE_VERIFIED",
+  "checks": {
+    "application_result_identity": true,
+    "archive_identity": true,
+    "audit_identity": true,
+    "evidence_index_identity": true,
+    "exposure_ledger_identity": true,
+    "review_identity": true,
+    "steps_identity": true,
+    "profile_contract_identity": true,
+    "reference_first5_identity": true,
+    "traces_count": true,
+    "traces_3_identity": true,
+    "traces_4_identity": true,
+    "traces_5_identity": true,
+    "events_count": true,
+    "events_3_identity": true,
+    "events_4_identity": true,
+    "events_5_identity": true,
+    "success_record": true,
+    "review_binding": true,
+    "five_sequential_updates": true,
+    "two_warm_three_sample": true,
+    "baseline_loss_exact": true,
+    "cpu36_snapshots": true,
+    "recovery_record": true,
+    "capture_limits": true
+  },
+  "sampled_phase_wall_medians_seconds": {
+    "forward_loss": 1.515942877624184,
+    "backward": 3.480860590003431,
+    "optimizer": 0.17331215925514698
+  },
+  "top_common_self_cpu_events": [
+    {
+      "key": "S02/KML_python_gemm_envelope",
+      "median_self_cpu_us": 3035599.5270000016,
+      "calls": [
+        149,
+        149,
+        149
+      ]
+    },
+    {
+      "key": "aten::copy_",
+      "median_self_cpu_us": 416738.5000000063,
+      "calls": [
+        1003,
+        1003,
+        1003
+      ]
+    },
+    {
+      "key": "aten::_scaled_dot_product_flash_attention_for_cpu_backward",
+      "median_self_cpu_us": 242568.83900000085,
+      "calls": [
+        12,
+        12,
+        12
+      ]
+    },
+    {
+      "key": "aten::_scaled_dot_product_flash_attention_for_cpu",
+      "median_self_cpu_us": 213523.03999999934,
+      "calls": [
+        12,
+        12,
+        12
+      ]
+    },
+    {
+      "key": "aten::fill_",
+      "median_self_cpu_us": 150434.01200000383,
+      "calls": [
+        154,
+        154,
+        154
+      ]
+    },
+    {
+      "key": "aten::clamp_min",
+      "median_self_cpu_us": 126374.41800000025,
+      "calls": [
+        12,
+        12,
+        12
+      ]
+    },
+    {
+      "key": "aten::add_",
+      "median_self_cpu_us": 113285.1739999929,
+      "calls": [
+        356,
+        356,
+        356
+      ]
+    },
+    {
+      "key": "aten::add",
+      "median_self_cpu_us": 96528.24299999999,
+      "calls": [
+        26,
+        26,
+        26
+      ]
+    }
+  ],
+  "interpretation": "KML Python GEMM envelope leads all three samples; includes Python/counter/alloc/ctypes/native and is not pure KML kernel attribution. No CPU-time/wall share or speedup computed; original and profile jobs ran on different hosts.",
+  "proposed_next_target": "one fp32 KML linear-path candidate, first inspect backward and copy/allocation boundaries; no attention rewrite yet",
+  "checkpoint_downloaded": false,
+  "new_jobs": 0,
+  "scientific_acceptance": false,
+  "performance_acceptance": false
+}
