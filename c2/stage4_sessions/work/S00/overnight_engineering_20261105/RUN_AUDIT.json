@@ -1,0 +1,111 @@
+{
+  "actual_frames": 1600,
+  "adamw_steps_contiguous": true,
+  "all_owned_processes_reaped": true,
+  "all_sampled_TIDs_within_selected36": true,
+  "bundle": {
+    "archived_files": 102,
+    "bundle": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENGINEERING_PILOT_20261105T154333Z/JOB_2043445_evidence.zip",
+    "bytes": 543118,
+    "remote_only": [
+      "payload/outputs/engineering_2043445/checkpoints/final.pt"
+    ],
+    "sha256": "53feb1041cc17472d8ec6777ec8ec64e2d8fd4a286a518be42f2d49298e82b00"
+  },
+  "checkpoint": {
+    "bytes": 456135327,
+    "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENGINEERING_PILOT_20261105T154333Z/payload/outputs/engineering_2043445/checkpoints/final.pt",
+    "sha256": "ec491c46c06f94a7fac54d5f80010866311743e1f722947cb680cdaf3579e403"
+  },
+  "completed_updates": 25,
+  "cpu_checkpoint_count": 59,
+  "cpu_evidence_scope": "all TIDs per59 complete snapshots; not continuous monitoring; no setter used",
+  "distinct_training_masks": 25,
+  "engineering_only": true,
+  "exit_code": 0,
+  "first_loss": {
+    "coarse": 7.173591136932373,
+    "total": 15.211074829101562,
+    "voltage": 8.037483215332031
+  },
+  "formal_split_status": "UNKNOWN",
+  "future_subject_test_exclusion_review_required": true,
+  "host": "cn21341",
+  "job_id": "2043445",
+  "kml_calls_runtime": 3823,
+  "kml_calls_training": 3725,
+  "last_loss": {
+    "coarse": 0.5106865167617798,
+    "total": 5.6920552253723145,
+    "voltage": 5.181368827819824
+  },
+  "max_observed_TIDs": 36,
+  "missing": [],
+  "no_duplicate_or_padding_frames": true,
+  "node_seconds": 96.0,
+  "observed_torch_interop": 608,
+  "observed_torch_intraop": 36,
+  "performance_acceptance": false,
+  "recovery": {
+    "cursor_exact": true,
+    "extra_updates": 0,
+    "forward_metrics": [
+      {
+        "l2_relative": 0.0,
+        "max_abs": 0.0,
+        "name": "restore.h",
+        "passed": true,
+        "reference_norm": 2888.4722615469045
+      },
+      {
+        "l2_relative": 0.0,
+        "max_abs": 0.0,
+        "name": "restore.voltage",
+        "passed": true,
+        "reference_norm": 14.162341663769842
+      },
+      {
+        "l2_relative": 0.0,
+        "max_abs": 0.0,
+        "name": "restore.coarse",
+        "passed": true,
+        "reference_norm": 16.624425385613648
+      }
+    ],
+    "identity_exact": true,
+    "optimizer_exact": true,
+    "parameters_exact": true,
+    "rng_exact": true,
+    "status": "PASS_NO_EXTRA_UPDATE"
+  },
+  "rss_scope": "process lifetime HWM sampled during25 updates; not exclusive step memory or whole-job post-restore peak",
+  "sampled_process_lifetime_hwm_bytes": 7258705920,
+  "scheduler_pids_cleared": true,
+  "scheduler_state": "SUCCEEDED",
+  "scheduler_usage_seconds": 95,
+  "scientific_acceptance": false,
+  "selected_cases": [
+    "s0285",
+    "s0593"
+  ],
+  "selected_units": 16,
+  "source_status": "UNCHANGED",
+  "status": "PASS_ENGINEERING_EVIDENCE_ONLY",
+  "step_seconds": {
+    "max": 2.8303963500075042,
+    "median": 2.3299436238594353,
+    "min": 2.2428814726881683
+  },
+  "subject_mapping_status": "UNKNOWN",
+  "timing": {
+    "batch_materialization_seconds": 0.022266951855272055,
+    "checkpoint_and_recovery_seconds": 4.092292259912938,
+    "data_loading_seconds": 0.9140070439316332,
+    "diagnostic_scope": "mask/exposure-before-update/CPU-before-and-after/state-validation; other setup/logging in unattributed",
+    "diagnostic_seconds": 6.842871188186109,
+    "training_step_seconds": 58.47723744949326,
+    "unattributed_seconds": 16.341824932489544,
+    "wall_seconds": 86.69049982586876
+  },
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT"
+}

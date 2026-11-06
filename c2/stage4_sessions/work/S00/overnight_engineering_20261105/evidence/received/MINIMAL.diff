@@ -1,0 +1,834 @@
+--- /dev/null
++++ S00/overnight_engineering_20261105/prepare.py
+@@ -0,0 +1,75 @@
++"""Pinned engineering deployment; no models or scheduler submission."""
++import ast
++import hashlib
++import json
++from pathlib import Path
++import subprocess
++import zipfile
++
++BASE=Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
++PREFIX='ENGINEERING_PILOT_'
++DEPLOYMENT='S00_OVERNIGHT_ENGINEERING_DEPLOYMENT.zip'
++RESOURCES=dict(allocated_cores=38,actual_physical_cores=36,reserved_cores=2,memory_MB=24576,
++ memory_limit_MB=24576,exclusive=True,job_seconds=900,whole_entry_timeout=840,cleanup_seconds=30)
++
++
++def sha(path):
++    h=hashlib.sha256()
++    with Path(path).open('rb') as f:
++        for block in iter(lambda:f.read(1024*1024),b''):h.update(block)
++    return h.hexdigest()
++
++
++def save(path,value):
++    Path(path).write_text(json.dumps(value,indent=2,sort_keys=True)+'\n',encoding='utf-8')
++
++
++def check_root(root):
++    if root.parent!=BASE or not root.name.startswith(PREFIX):raise ValueError('new unique S00 engineering directory required')
++
++
++def pinned(root):return json.loads((root/'PINNED_INPUTS.json').read_text(encoding='utf-8'))
++
++
++def verify_prepared(root):
++    pins=pinned(root)
++    index=json.loads((root/'ARTIFACT_SHA256.json').read_text(encoding='utf-8'))
++    for name,digest in index.items():
++        if sha(root/name)!=digest:raise ValueError('deployment source drift: '+name)
++    for name,digest in json.loads((root/'pre_submit_checks.json').read_text())['payload_files'].items():
++        if sha(root/name)!=digest:raise ValueError('code source drift: '+name)
++    for name,digest in [('ENGINEERING_DESCRIPTOR.json',pins['descriptor_sha256']),('INTERFACE.json',pins['interface_sha256']),
++                        (pins['code_archive'],pins['code_package_sha256'])]:
++        if sha(root/name)!=digest:raise ValueError('pinned input drift: '+name)
++    return pins
++
++
++def prepare(root):
++    check_root(root)
++    if (root/'pre_submit_checks.json').exists():raise FileExistsError('prepared directory is not reusable')
++    pins=pinned(root)
++    index=json.loads((root/'ARTIFACT_SHA256.json').read_text(encoding='utf-8'))
++    for name,digest in index.items():
++        if sha(root/name)!=digest:raise ValueError('deployment SHA mismatch: '+name)
++    if sha(root/pins['code_archive'])!=pins['code_package_sha256']:raise ValueError('S02 code ZIP drift')
++    with zipfile.ZipFile(root/pins['code_archive']) as z:
++        names=z.namelist()
++        if len(names)!=len(set(names)) or any(Path(n).is_absolute() or '..' in Path(n).parts or '\\' in n or ':' in n for n in names):raise ValueError('unsafe/duplicate code ZIP entry')
++        payload=root/'payload';payload.mkdir(exist_ok=False);z.extractall(payload)
++    manifest=payload/pins['code_source_manifest_name']
++    if sha(manifest)!=pins['code_source_manifest_sha256']:raise ValueError('S02 source manifest drift')
++    source=json.loads(manifest.read_text(encoding='utf-8'))
++    for name,digest in source.items():
++        if sha(payload/name)!=digest:raise ValueError('S02 source differs: '+name)
++    for path in [*root.glob('*.py'),*root.glob('*.sh'),*root.glob('payload/**/*.py'),*root.glob('payload/**/*.sh')]:
++        raw=path.read_bytes()
++        if b'\r' in raw:raise ValueError('non-LF execution source: '+str(path))
++        if path.suffix=='.py':ast.parse(raw.decode('utf-8'),feature_version=(3,9))
++        if path.suffix=='.sh':subprocess.run(['bash','-n',str(path)],check=True,timeout=5)
++    (payload/'outputs').mkdir(exist_ok=True)
++    save(root/'pre_submit_checks.json',dict(status='SHA_SYNTAX_ONLY_NO_MODEL',
++      payload_files={p.relative_to(root).as_posix():sha(p) for p in payload.rglob('*') if p.is_file()}))
++    verify_prepared(root)
++
++
++if __name__=='__main__':prepare(Path(__file__).resolve().parent)
+--- /dev/null
++++ S00/overnight_engineering_20261105/review_gate.py
+@@ -0,0 +1,29 @@
++"""Require S01's explicit complete decision and every concrete frozen identity."""
++import json
++from prepare import sha,pinned,RESOURCES,DEPLOYMENT
++
++BINDING_KEYS=('code_package_sha256','code_source_manifest_sha256','deployment_package_sha256',
++              'descriptor_sha256','interface_sha256')
++
++
++def expected(root):
++    pins=pinned(root)
++    return dict(code_package_sha256=pins['code_package_sha256'],code_source_manifest_sha256=pins['code_source_manifest_sha256'],
++      deployment_package_sha256=sha(root/DEPLOYMENT),descriptor_sha256=sha(root/'ENGINEERING_DESCRIPTOR.json'),
++      interface_sha256=sha(root/'INTERFACE.json'))
++
++
++def validate(review,bindings):
++    if review.get('decision')!='PASS_FOR_ENGINEERING_PILOT' or review.get('review_complete') is not True:
++        raise ValueError('S01 explicit complete PASS required; fail/blocked is not approval')
++    if any(review.get('bindings',{}).get(k)!=bindings[k] for k in BINDING_KEYS):
++        raise ValueError('S01 concrete SHA bindings mismatch')
++    if any(review.get('resources',{}).get(k)!=v for k,v in RESOURCES.items()):
++        raise ValueError('S01 resource/budget binding mismatch')
++
++
++def check_review(root,expected_review_sha=None):
++    path=root/'S01_REVIEW.json';digest=sha(path)
++    if expected_review_sha is not None and digest!=expected_review_sha:raise ValueError('S01 review itself changed')
++    validate(json.loads(path.read_text(encoding='utf-8')),expected(root))
++    return digest
+--- /dev/null
++++ S00/overnight_engineering_20261105/gate.py
+@@ -0,0 +1,47 @@
++"""Live native job/resource gate; bounded30s, consumed inside whole-entry840."""
++import json
++import os
++from pathlib import Path
++import re
++import socket
++import sys
++import time
++from prepare import check_root,verify_prepared,save
++from review_gate import check_review
++from scheduler_handoff import live_context,create_request,await_handoff
++from cpu36_contract import discover_contracts,validate_receipt
++
++
++def gate(root,deadline):
++    check_root(root);verify_prepared(root)
++    check_review(root,os.environ['S00_REVIEW_SHA'])
++    if socket.gethostname().startswith('login') or os.environ.get('HBM')!='0':raise ValueError('compute/HBM0 required')
++    context=live_context();request=create_request(root,context)
++    remaining=deadline-time.monotonic()
++    if remaining<=0:raise TimeoutError('preflight budget exhausted')
++    authority=await_handoff(root,request,context,38,24576,900,timeout=remaining)
++    if live_context()!=context:raise ValueError('native context changed')
++    out=root/'job_evidence';save(out/'scheduler_handoff_receipt.json',authority)
++    raw=json.loads((root/'scheduler_allocation.json').read_bytes())['data']['successData'][0]
++    if raw['retryPolicy']!=dict(maxRetryCnt=0,currentRetryTimes=0):raise ValueError('scheduler retries forbidden')
++    alloc=raw['resGroups'][0]['resAlloc']
++    if alloc['cpu']!=38 or alloc['mem']!=24576:raise ValueError('actual allocation differs')
++    contracts=discover_contracts(context['allowed'],1);node,contract=next(iter(contracts.items()));validate_receipt(contract)
++    if contract['allocated']!=context['allowed'] or len(contract['allocated'])!=38:raise ValueError('complete authorized38 domain required')
++    physical={}
++    for cpu in contract['allocated']:
++        base=Path('/sys/devices/system/cpu/cpu'+str(cpu))
++        if sorted(p.name for p in base.glob('node[0-9]*'))!=['node'+str(node)]:raise ValueError('per-core NUMA mismatch')
++        physical[str(cpu)]=[(base/'topology'/f).read_text().strip() for f in ('physical_package_id','core_id')]
++    if len({tuple(v) for v in physical.values()})!=38:raise ValueError('38 physical cores required')
++    mem=Path('/sys/devices/system/node/node'+str(node)+'/meminfo').read_text();(out/'selected_ddr_node_meminfo.txt').write_text(mem)
++    if int(re.search(r'MemTotal:\s+(\d+)\s+kB',mem).group(1))<24576*1024:raise ValueError('CPU-bearing DDR insufficient')
++    for exe in ['/usr/bin/numactl','/usr/bin/timeout','/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3']:
++        if not os.access(exe,os.X_OK):raise ValueError('missing existing executable: '+exe)
++    save(out/'cpu_ddr_receipt.json',dict(**context,contract=contract,DDR_node=node,physical_ids=physical,
++        allocation_mem_MB=24576,limit_mem_MB=24576,HBM=0,
++        note='launcher inherits38; original S02 same-PID guard binds first36 before framework import; no setter or login profile here'))
++    if time.monotonic()>deadline:raise TimeoutError('preflight budget exhausted')
++
++
++if __name__=='__main__':gate(Path(sys.argv[1]).resolve(),float(sys.argv[2]))
+--- /dev/null
++++ S00/overnight_engineering_20261105/run_job.py
+@@ -0,0 +1,57 @@
++"""Exactly one engineering entry: gate+training<=840, cleanup<=30, closing30."""
++import time
++START=time.monotonic()
++import ctypes
++import json
++import os
++from pathlib import Path
++import signal
++import sys
++import traceback
++from prepare import check_root,save,sha,verify_prepared
++from review_gate import check_review
++from owned_processes import Owned,run_phase,cleanup
++
++
++def interrupted(signum,frame):raise InterruptedError('outer signal '+str(signum))
++
++
++def main(root):
++    check_root(root);out=root/'job_evidence';out.mkdir(exist_ok=False)
++    owner=Owned(os.getpid());code=2
++    summary=dict(status='FAIL_STOP_NO_RETRY',engineering_only=True,protocol='ENGINEERING_REAL_CORPUS_PILOT_V1',
++        formal_split_status='UNKNOWN',validation_status='NOT_RUN_NO_FORMAL_SPLIT',subject_mapping_status='UNKNOWN',
++        job_id=os.environ.get('CCS_JOB_ID'),started=START,execution_seconds=840,cleanup_seconds=30,closing_seconds=30,job_seconds=900,attempts=1)
++    try:
++        if sys.platform!='linux' or not os.environ.get('CCS_JOB_ID'):raise ValueError('native Linux compute job required')
++        libc=ctypes.CDLL(None,use_errno=True)
++        if libc.prctl(36,1,0,0,0)!=0:raise OSError(ctypes.get_errno(),'cannot own orphaned descendants')
++        for sig in (signal.SIGTERM,signal.SIGINT,signal.SIGALRM):signal.signal(sig,interrupted)
++        signal.setitimer(signal.ITIMER_REAL,max(.001,START+840-time.monotonic()))
++        check_review(root,os.environ['S00_REVIEW_SHA']);pins=verify_prepared(root)
++        run_phase(root,owner,'gate',['/usr/bin/python3','-B',str(root/'gate.py'),str(root),str(START+30)],START+30)
++        os.environ.update(S02_ENGINEERING_DESCRIPTOR=str(root/'ENGINEERING_DESCRIPTOR.json'),S02_ENGINEERING_DESCRIPTOR_SHA256=pins['descriptor_sha256'])
++        record=run_phase(root,owner,'training',['/bin/bash',str(root/'payload'/pins['entrypoint'])],START+840,allowed=(0,3))
++        result_paths=list((root/'payload/outputs').glob('*/result.json'))
++        if len(result_paths)!=1:raise ValueError('one original engineering result required')
++        app=json.loads(result_paths[0].read_text());summary['application_result']=str(result_paths[0]);summary['application_status']=app.get('status')
++        if app.get('protocol')!='ENGINEERING_REAL_CORPUS_PILOT_V1' or app.get('engineering_only') is not True:raise ValueError('application scope drift')
++        if record['returncode']==0:
++            if app.get('status')!='ENGINEERING_PILOT_COMPLETE_NOT_SCIENTIFIC_ACCEPTANCE':raise ValueError('missing original engineering completion')
++            if app.get('completed_updates',0)<2:raise ValueError('multiple real optimizer batches required')
++            summary['status']=app['status'];code=0
++        else:summary['status']='INCOMPLETE';code=3
++        verify_prepared(root)
++    except BaseException as exc:summary.update(error=repr(exc),traceback=traceback.format_exc())
++    finally:
++        signal.setitimer(signal.ITIMER_REAL,0)
++        for sig in (signal.SIGTERM,signal.SIGINT):signal.signal(sig,signal.SIG_IGN)
++        try:
++            clean=cleanup(owner,min(time.monotonic()+30,START+870));save(out/'cleanup.json',clean)
++            if not clean['all_reaped']:summary.update(status='FAIL_STOP_NO_RETRY',cleanup_incomplete=True);code=2
++        except BaseException as exc:summary.update(status='FAIL_STOP_NO_RETRY',cleanup_error=repr(exc));code=2
++        summary.update(finished=time.monotonic(),exit_code=code);save(out/'SUMMARY.json',summary)
++    return code
++
++
++if __name__=='__main__':raise SystemExit(main(Path(sys.argv[1]).resolve()))
+--- /dev/null
++++ S00/overnight_engineering_20261105/run_job.sh
+@@ -0,0 +1,6 @@
++#!/bin/bash
++set -euo pipefail
++HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
++: "${CCS_JOB_ID:?native job identity required}"
++[[ "${1:-}" =~ ^[a-f0-9]{64}$ ]] || exit 2
++exec env -i PATH=/usr/bin:/bin HOME=/home/share/dengqingtian USER=dengqingtian LC_ALL=C PYTHONUTF8=1 PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 HBM=0 CCS_JOB_ID="$CCS_JOB_ID" S00_REVIEW_SHA="$1" /usr/bin/python3 -B "$HERE/run_job.py" "$HERE"
+--- /dev/null
++++ S00/overnight_engineering_20261105/owned_processes.py
+@@ -0,0 +1,107 @@
++"""Owned descendants and bounded15s TERM/15s KILL shared cleanup; no frameworks."""
++import time
++import json
++import os
++from pathlib import Path
++import signal
++import subprocess
++from prepare import save
++
++def process_table():
++    rows = {}
++    for p in Path('/proc').glob('[0-9]*/stat'):
++        try:
++            text = p.read_text(); f = text[text.rfind(')') + 2:].split()
++            rows[int(p.parent.name)] = dict(state=f[0], ppid=int(f[1]), session=int(f[3]), start=int(f[19]))
++        except (FileNotFoundError, ProcessLookupError): pass
++    return rows
++
++
++class Owned:
++    """Subreaper owns orphaned descendants, including children that call setsid."""
++    def __init__(self, parent):
++        self.parent = parent
++        self.identities = {}
++
++    def update(self, rows):
++        parents = {self.parent} | {p for p, start in self.identities.items()
++                                  if p in rows and rows[p]['start'] == start}
++        while True:
++            new = {p for p, row in rows.items() if row['ppid'] in parents}
++            if new <= parents: break
++            parents.update(new)
++        for p in parents - {self.parent}:
++            if p in rows: self.identities[p] = rows[p]['start']
++
++    def live(self, rows):
++        return sorted(p for p, start in self.identities.items() if p in rows
++                      and rows[p]['start'] == start and rows[p]['state'] != 'Z')
++
++
++def reap():
++    results = []
++    while True:
++        try:
++            pid, status = os.waitpid(-1, os.WNOHANG)
++            if pid == 0: return results
++            results.append(dict(pid=pid, wait_status=status, exit_code=os.waitstatus_to_exitcode(status)))
++        except ChildProcessError: return results
++
++
++def cleanup(owner, deadline):
++    started = time.monotonic()
++    actions = []
++    reaped = []
++    sent = set()
++    # These are absolute shared windows, never another timeout per descendant.
++    term_end = min(started + 15, deadline)
++    for name, sig, end in [('TERM', signal.SIGTERM, term_end),
++                           ('KILL', signal.SIGKILL, min(started + 30, deadline))]:
++        while True:
++            rows = process_table(); owner.update(rows)
++            live = owner.live(rows)
++            for pid in live:
++                identity = (pid, rows[pid]['start'], name)
++                if identity in sent: continue
++                # Recheck start ticks immediately before signalling; no unrelated groups.
++                current = process_table().get(pid)
++                if not current or current['start'] != identity[1]: continue
++                try:
++                    os.kill(pid, sig)
++                    actions.append(dict(pid=pid, start_ticks=identity[1], signal=name, at=time.monotonic()))
++                except ProcessLookupError: pass
++                sent.add(identity)
++            reaped.extend(reap())
++            if not live or time.monotonic() >= end: break
++            time.sleep(min(0.02, max(0, end - time.monotonic())))
++    reaped.extend(reap())
++    rows = process_table(); owner.update(rows)
++    remaining = sorted(p for p, start in owner.identities.items() if p in rows and rows[p]['start'] == start)
++    return dict(started=started, finished=time.monotonic(), deadline=deadline,
++                actions=actions, owned=owner.identities, reaped=reaped,
++                remaining_live=owner.live(rows), remaining_processes=remaining, all_reaped=not remaining,
++                method='PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked')
++
++
++def run_phase(root, owner, label, argv, deadline, allowed=(0,)):
++    receipt = dict(command=argv, cwd=str(root), deadline=deadline, started=time.monotonic(), returncode=None)
++    proc = None
++    try:
++        if receipt['started'] >= deadline: raise TimeoutError(label + ' budget exhausted before spawn')
++        with (root / 'job_evidence' / (label + '.log')).open('xb') as log:
++            proc = subprocess.Popen(argv, cwd=str(root), stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
++            receipt['pid'] = proc.pid
++            while True:
++                owner.update(process_table())
++                code = proc.poll()
++                if code is not None:
++                    receipt['returncode'] = code
++                    if code not in allowed: raise RuntimeError(label + ' failed; no retry')
++                    return receipt
++                if time.monotonic() >= deadline: raise TimeoutError(label + ' timeout; no retry')
++                time.sleep(min(0.02, max(0, deadline - time.monotonic())))
++    finally:
++        if proc is not None: receipt['returncode'] = proc.poll()
++        receipt['finished'] = time.monotonic()
++        save(root / 'job_evidence' / (label + '.json'), receipt)
++
+--- /dev/null
++++ S00/overnight_engineering_20261105/submit_once.py
+@@ -0,0 +1,45 @@
++"""Login only: S01 bound review then durable single attempt; no automatic retry."""
++import json
++from pathlib import Path
++import subprocess
++import sys
++import time
++from prepare import check_root,verify_prepared,save
++from review_gate import check_review
++from scheduler_handoff import publish
++
++
++def command(root,review_sha):
++    return ['dsub','-J','-q','q_hpcai','-x','job','-R','cpu=38,mem=24576MB','-RL','mem=24576MB',
++      '-a','numa[count=1,distribution=pack]','-T','900','--env','none','--cwd',str(root),
++      '-oo',str(root/'job.log'),'bash',str(root/'run_job.sh'),review_sha]
++
++
++def submit(root):
++    check_root(root);verify_prepared(root);review_sha=check_review(root)
++    with (root/'submit_once.marker').open('x') as f:f.write('one engineering job attempt including ambiguous failures; no retry\n')
++    argv=command(root,review_sha);save(root/'submission.command.json',dict(command=argv,review_sha256=review_sha,attempts=1))
++    try:p=subprocess.run(argv,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=10)
++    except subprocess.TimeoutExpired as exc:
++        (root/'submission.stdout').write_bytes(exc.stdout or b'');(root/'submission.stderr').write_bytes(exc.stderr or b'')
++        save(root/'submission.result.json',dict(timed_out=True,ambiguous_job_id=True,retry=False));raise
++    (root/'submission.stdout').write_bytes(p.stdout);(root/'submission.stderr').write_bytes(p.stderr)
++    save(root/'submission.result.json',dict(returncode=p.returncode,timed_out=False,retry=False))
++    if p.returncode:raise RuntimeError('submission failed; do not retry')
++    job=str(json.loads(p.stdout)['data']['jobId']);(root/'job_id.txt').write_text(job+'\n')
++    began=time.monotonic()
++    while True:
++        q=subprocess.run(['djob','-J','-l',job],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=5)
++        (root/'scheduler_observed.json').write_bytes(q.stdout);(root/'scheduler_observed.stderr').write_bytes(q.stderr)
++        if q.returncode:raise RuntimeError('observation failed; monitor same job, never resubmit')
++        row=json.loads(q.stdout)['data']['successData'][0]
++        if str(row['jobId'])!=job:raise ValueError('wrong observed job')
++        if row['state']=='RUNNING':publish(root,job);print('PUBLISHED_ONCE',job,flush=True);return
++        if row['state'] in ('SUCCEEDED','FAILED','CANCELLED'):raise RuntimeError('terminal before publication; collect')
++        if time.monotonic()-began>=3600:
++            # Caller may cancel ONLY this own not-started job after rechecking state.
++            raise TimeoutError('own job queued60min; verify still not RUNNING then cancel only it; no retry')
++        time.sleep(0.5)
++
++
++if __name__=='__main__':submit(Path(sys.argv[1]).resolve())
+--- /dev/null
++++ S00/overnight_engineering_20261105/collect_evidence.py
+@@ -0,0 +1,68 @@
++"""Terminal logs/source/data identities; checkpoint stays remote with bytes/SHA."""
++import json
++from pathlib import Path
++import subprocess
++import sys
++import zipfile
++from prepare import check_root,sha,save,verify_prepared
++
++
++def exposure(root):
++    path=root/'payload/outputs/EXPOSURE_LEDGER.json'
++    if path.is_file():
++        try:return dict(status='RAW_RUNTIME_LEDGER_PRESERVED',path=str(path),sha256=sha(path),raw=json.loads(path.read_text()))
++        except ValueError as exc:return dict(status='INVALID_RAW_RUNTIME_LEDGER_PRESERVED',path=str(path),error=repr(exc),future_test_exclusion_review_required=True)
++    initial=json.loads((root/'EXPOSURE_LEDGER_INITIAL.json').read_text())
++    attempted=(root/'job_evidence/training.json').exists()
++    return dict(status='RUNTIME_LEDGER_MISSING',training_entry_attempted=attempted,
++        initial_selected_units=initial['units'],actual_optimizer_consumption='UNKNOWN' if attempted else 'NOT_STARTED',
++        future_test_exclusion_review_required=attempted,
++        note='Do not fabricate consumed units; conservatively review all reserved subjects if execution stage unknown')
++
++
++def collect(root):
++    check_root(root);job=(root/'job_id.txt').read_text().strip();bundle=root/('JOB_'+job+'_evidence.zip')
++    if bundle.exists() or (root/'COLLECTION_S00.json').exists():raise FileExistsError('already collected')
++    command=['djob','-J','-l',job]
++    q=subprocess.run(command,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=10)
++    (root/'djob_final.json').write_bytes(q.stdout);(root/'djob_final.stderr').write_bytes(q.stderr)
++    if q.returncode:raise RuntimeError('raw query saved; terminal query failed')
++    rows=json.loads(q.stdout)['data']['successData']
++    if len(rows)!=1 or str(rows[0]['jobId'])!=job or rows[0]['state'] not in ('SUCCEEDED','FAILED','CANCELLED'):raise ValueError('exact terminal job required')
++    row=rows[0]
++    try:verify_prepared(root);source_status='UNCHANGED'
++    except Exception as exc:source_status=repr(exc)
++    recon=exposure(root);save(root/'EXPOSURE_RECONCILIATION.json',recon)
++    files=sorted(p for p in root.rglob('*') if p.is_file() and p.name not in ('bundle_receipt.json',bundle.name))
++    metadata={};archived=[];remote_only=[]
++    for p in files:
++        before=p.stat();digest=sha(p);after=p.stat()
++        if (before.st_size,before.st_mtime_ns)!=(after.st_size,after.st_mtime_ns):raise RuntimeError('terminal file changing: '+str(p))
++        name=p.relative_to(root).as_posix();omit=p.suffix.lower() in ('.pt','.pth','.npz')
++        metadata[name]=dict(path=str(p),bytes=after.st_size,mtime_ns=after.st_mtime_ns,sha256=digest,archive_payload=not omit)
++        if omit:remote_only.append(name)
++        else:archived.append(p)
++    results=list((root/'payload/outputs').glob('*/result.json'))
++    app=None
++    if len(results)==1:
++        try:app=json.loads(results[0].read_text())
++        except ValueError:pass
++    missing=[]
++    if len(results)!=1:missing.append('exactly_one_application_result')
++    for name in ('job.log','scheduler_allocation.json','job_evidence/cleanup.json','job_evidence/SUMMARY.json','payload/outputs/EXPOSURE_LEDGER.json'):
++        if not (root/name).is_file():missing.append(name)
++    index=root/'COLLECTION_S00.json'
++    save(index,dict(job_id=job,state=row['state'],job_exit_code=row.get('jobExitCode'),query_command=command,
++      scheduler_pids_cleared=all(n['pids']=='-' for g in row['resGroups'] for n in g['nodeResUsages']),
++      source_status=source_status,files=metadata,remote_only=remote_only,missing=missing,
++      application_status=app.get('status') if app else None,exposure_reconciliation=recon,
++      start_time=row.get('startTime'),end_time=row.get('endTime'),engineering_only=True,
++      formal_split_status='UNKNOWN',validation_status='NOT_RUN_NO_FORMAL_SPLIT',retries=0))
++    archived.append(index)
++    with zipfile.ZipFile(bundle,'x',zipfile.ZIP_DEFLATED) as z:
++        for p in archived:z.write(p,p.relative_to(root).as_posix())
++    receipt=dict(bundle=str(bundle),bytes=bundle.stat().st_size,sha256=sha(bundle),archived_files=len(archived),remote_only=remote_only)
++    save(root/'bundle_receipt.json',receipt);print(json.dumps(receipt));return receipt
++
++
++if __name__=='__main__':collect(Path(sys.argv[1]).resolve())
+--- /dev/null
++++ S00/overnight_engineering_20261105/tests/test_deployment.py
+@@ -0,0 +1,160 @@
++"""Portable deployment controls; all scheduler/process operations are mocked."""
++import json
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++from unittest import mock
++
++sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
++import prepare as p
++import review_gate as g
++import submit_once as s
++import owned_processes as o
++import collect_evidence as c
++import run_job as r
++
++
++class DeploymentTests(unittest.TestCase):
++    def setUp(self):
++        self.tmp=tempfile.TemporaryDirectory(dir=Path(__file__).resolve().parents[1]/'evidence')
++        self.addCleanup(self.tmp.cleanup);self.root=Path(self.tmp.name)
++
++    def test_review_all_exact_bindings_and_resources(self):
++        bindings={k:'a'*64 for k in g.BINDING_KEYS}
++        review=dict(decision='PASS_FOR_ENGINEERING_PILOT',review_complete=True,bindings=bindings,resources=p.RESOURCES)
++        g.validate(review,bindings)
++        for key in g.BINDING_KEYS:
++            wrong=dict(bindings);wrong[key]='b'*64
++            with self.assertRaises(ValueError):g.validate(review,wrong)
++        review['review_complete']=False
++        with self.assertRaises(ValueError):g.validate(review,bindings)
++
++    def test_fail_blocked_or_resource_expansion_not_approval(self):
++        bindings={k:'a'*64 for k in g.BINDING_KEYS}
++        for decision in ['FAIL','BLOCKED','PASS']:
++            with self.assertRaises(ValueError):g.validate(dict(decision=decision,review_complete=True,bindings=bindings,resources=p.RESOURCES),bindings)
++        bad=dict(p.RESOURCES,job_seconds=901)
++        with self.assertRaises(ValueError):g.validate(dict(decision='PASS_FOR_ENGINEERING_PILOT',review_complete=True,bindings=bindings,resources=bad),bindings)
++
++    def test_resource_command_and_pinned_review_argument(self):
++        cmd=s.command(self.root,'a'*64)
++        self.assertIn('cpu=38,mem=24576MB',cmd);self.assertIn('mem=24576MB',cmd)
++        self.assertIn('numa[count=1,distribution=pack]',cmd)
++        self.assertEqual(cmd[cmd.index('-T')+1],'900');self.assertEqual(cmd[-1],'a'*64)
++
++    def test_submit_failure_and_timeout_never_repeated(self):
++        for timeout in [False,True]:
++            with self.subTest(timeout=timeout):
++                root=self.root/str(timeout);root.mkdir()
++                effect=subprocess.TimeoutExpired('dsub',10,output=b'partial',stderr=b'err') if timeout else None
++                with mock.patch.object(s,'check_root'),mock.patch.object(s,'verify_prepared'), \
++                     mock.patch.object(s,'check_review',return_value='a'*64), \
++                     mock.patch.object(s.subprocess,'run',side_effect=effect,return_value=subprocess.CompletedProcess([],7,b'failure',b'denied')) as run:
++                    with self.assertRaises((RuntimeError,subprocess.TimeoutExpired)):s.submit(root)
++                    with self.assertRaises(FileExistsError):s.submit(root)
++                self.assertEqual(run.call_count,1)
++                self.assertTrue((root/'submission.stdout').exists())
++
++    def test_incomplete_review_never_creates_submission_marker(self):
++        with mock.patch.object(s,'check_root'),mock.patch.object(s,'verify_prepared'), \
++             mock.patch.object(s,'check_review',side_effect=ValueError('BLOCKED')), \
++             mock.patch.object(s.subprocess,'run') as run:
++            with self.assertRaises(ValueError):s.submit(self.root)
++        self.assertFalse((self.root/'submit_once.marker').exists());run.assert_not_called()
++
++    def test_prepared_source_drift_rejected(self):
++        for name in ('ENGINEERING_DESCRIPTOR.json','INTERFACE.json','code.zip','source.py'):(self.root/name).write_bytes(name.encode())
++        pins=dict(descriptor_sha256=p.sha(self.root/'ENGINEERING_DESCRIPTOR.json'),interface_sha256=p.sha(self.root/'INTERFACE.json'),code_archive='code.zip',code_package_sha256=p.sha(self.root/'code.zip'))
++        p.save(self.root/'PINNED_INPUTS.json',pins)
++        p.save(self.root/'ARTIFACT_SHA256.json',{'source.py':p.sha(self.root/'source.py')})
++        p.save(self.root/'pre_submit_checks.json',dict(payload_files={}))
++        p.verify_prepared(self.root);(self.root/'source.py').write_bytes(b'drift')
++        with self.assertRaises(ValueError):p.verify_prepared(self.root)
++
++    def test_failed_gate_never_starts_training_but_cleans(self):
++        libc=mock.Mock();libc.prctl.return_value=0
++        with mock.patch.object(r,'check_root'),mock.patch.object(r.sys,'platform','linux'), \
++             mock.patch.dict(r.os.environ,CCS_JOB_ID='42',S00_REVIEW_SHA='a'*64), \
++             mock.patch.object(r.ctypes,'CDLL',return_value=libc), \
++             mock.patch.object(r.signal,'SIGALRM',14,create=True),mock.patch.object(r.signal,'ITIMER_REAL',0,create=True), \
++             mock.patch.object(r.signal,'setitimer',create=True),mock.patch.object(r.signal,'signal'), \
++             mock.patch.object(r,'check_review'),mock.patch.object(r,'verify_prepared',return_value={}), \
++             mock.patch.object(r,'run_phase',side_effect=ValueError('bad allocation')) as run, \
++             mock.patch.object(r,'cleanup',return_value=dict(all_reaped=True)) as clean:
++            self.assertEqual(r.main(self.root),2)
++        self.assertEqual(run.call_count,1);self.assertEqual(run.call_args.args[2],'gate');self.assertEqual(clean.call_count,1)
++        self.assertEqual(json.loads((self.root/'job_evidence/SUMMARY.json').read_text())['status'],'FAIL_STOP_NO_RETRY')
++
++    def test_actual_frozen_engineering_entry_environment_wiring(self):
++        import os
++        import zipfile
++        delivered=Path(__file__).resolve().parents[1];pins=p.pinned(delivered)
++        with zipfile.ZipFile(delivered/pins['code_archive']) as z:entry=z.read(pins['entrypoint']).decode()
++        for name in pins['entry_environment']:self.assertIn('${'+name,entry)
++        libc=mock.Mock();libc.prctl.return_value=0
++        def phase(root,owner,label,argv,deadline,**kw):
++            if label=='training':
++                self.assertEqual(argv[-1],str(root/'payload'/pins['entrypoint']))
++                self.assertEqual(os.environ['S02_ENGINEERING_DESCRIPTOR'],str(root/'ENGINEERING_DESCRIPTOR.json'))
++                self.assertEqual(os.environ['S02_ENGINEERING_DESCRIPTOR_SHA256'],pins['descriptor_sha256'])
++                self.assertNotIn('S02_REAL_DESCRIPTOR',os.environ)
++                out=root/'payload/outputs/engineering_42';out.mkdir(parents=True)
++                p.save(out/'result.json',dict(protocol='ENGINEERING_REAL_CORPUS_PILOT_V1',engineering_only=True,
++                     status='ENGINEERING_PILOT_COMPLETE_NOT_SCIENTIFIC_ACCEPTANCE',completed_updates=2))
++            return dict(returncode=0)
++        with mock.patch.object(r,'check_root'),mock.patch.object(r.sys,'platform','linux'), \
++             mock.patch.dict(r.os.environ,{'CCS_JOB_ID':'42','S00_REVIEW_SHA':'a'*64},clear=True), \
++             mock.patch.object(r.ctypes,'CDLL',return_value=libc), \
++             mock.patch.object(r.signal,'SIGALRM',14,create=True),mock.patch.object(r.signal,'ITIMER_REAL',0,create=True), \
++             mock.patch.object(r.signal,'setitimer',create=True),mock.patch.object(r.signal,'signal'), \
++             mock.patch.object(r,'check_review'),mock.patch.object(r,'verify_prepared',return_value=pins), \
++             mock.patch.object(r,'run_phase',side_effect=phase) as run, \
++             mock.patch.object(r,'cleanup',return_value=dict(all_reaped=True)):
++            self.assertEqual(r.main(self.root),0)
++        self.assertEqual(run.call_count,2)
++
++    def test_descendants_after_setsid_and_reparenting(self):
++        owner=o.Owned(10);rows={11:dict(ppid=10,start=1,state='S',session=11),12:dict(ppid=11,start=2,state='S',session=12)}
++        owner.update(rows);rows.pop(11);rows[12]['ppid']=10;owner.update(rows)
++        self.assertEqual(owner.live(rows),[12]);rows[12]['start']=999;rows[12]['ppid']=1
++        self.assertEqual(owner.live(rows),[])
++
++    def test_cleanup_only_shared30_seconds_and_owned_pids(self):
++        owner=o.Owned(10);rows={11:dict(ppid=10,start=1,state='S',session=11),99:dict(ppid=1,start=2,state='S',session=99)}
++        now=[0.0]
++        with mock.patch.object(o,'process_table',return_value=rows),mock.patch.object(o,'reap',return_value=[]), \
++             mock.patch.object(o.time,'monotonic',side_effect=lambda:now[0]), \
++             mock.patch.object(o.time,'sleep',side_effect=lambda x:now.__setitem__(0,now[0]+x)), \
++             mock.patch.object(o.signal,'SIGKILL',9,create=True),mock.patch.object(o.os,'kill') as kill:
++            receipt=o.cleanup(owner,30)
++        self.assertLessEqual(now[0],30.001)
++        self.assertEqual([x.args[0] for x in kill.call_args_list],[11,11])
++        self.assertFalse(receipt['all_reaped'])
++
++    def test_terminal_failure_missing_result_still_archived(self):
++        (self.root/'job_id.txt').write_text('42')
++        p.save(self.root/'EXPOSURE_LEDGER_INITIAL.json',dict(units=[dict(unit='reserved')]))
++        app=self.root/'payload/outputs/run/checkpoints';app.mkdir(parents=True)
++        (app/'final.pt').write_bytes(b'opaque checkpoint stays remote')
++        raw=json.dumps(dict(data=dict(successData=[dict(jobId='42',state='FAILED',resGroups=[dict(nodeResUsages=[dict(pids='-')])])]))).encode()
++        with mock.patch.object(c,'check_root'),mock.patch.object(c,'verify_prepared'), \
++             mock.patch.object(c.subprocess,'run',return_value=subprocess.CompletedProcess([],0,raw,b'')):
++            receipt=c.collect(self.root)
++        import zipfile
++        with zipfile.ZipFile(receipt['bundle']) as z:
++            index=json.loads(z.read('COLLECTION_S00.json'))
++            self.assertNotIn('payload/outputs/run/checkpoints/final.pt',z.namelist())
++        self.assertEqual(index['state'],'FAILED');self.assertIn('exactly_one_application_result',index['missing'])
++        self.assertEqual(index['files']['payload/outputs/run/checkpoints/final.pt']['sha256'],p.sha(app/'final.pt'))
++
++    def test_missing_runtime_exposure_is_not_fabricated_consumed(self):
++        p.save(self.root/'EXPOSURE_LEDGER_INITIAL.json',dict(units=[dict(unit='reserved')]))
++        (self.root/'job_evidence').mkdir();(self.root/'job_evidence/training.json').write_text('{}')
++        result=c.exposure(self.root)
++        self.assertEqual(result['actual_optimizer_consumption'],'UNKNOWN')
++        self.assertTrue(result['future_test_exclusion_review_required'])
++
++
++if __name__=='__main__':unittest.main(verbosity=2)
+--- /dev/null
++++ S00/overnight_engineering_20261105/COMMANDS.md
+@@ -0,0 +1,92 @@
++# S00 夜间工程部署/执行约定
++
++仅 ENGINEERING_REAL_CORPUS_PILOT_V1；旧REALDATA_SOURCE_AUDIT.json仍DATA_NOT_READY。
++固定16个单元/1600帧只用于工程训练，case不等于subject，不产生正式val/test或效果结论。
++固定descriptor和初始暴露清单在DATA_READY.json中绑定；应用运行暴露清单独立写到payload/outputs。
++源manifest必须为任务卡14300版SHA，不接受第三个版本。
++
++## S01专项审核记录约定
++
++执行器review_gate.py要求S01_REVIEW.json中：
++
++- decision=PASS_FOR_ENGINEERING_PILOT、review_complete=true。
++- bindings对象中的code_package_sha256、code_source_manifest_sha256、deployment_package_sha256、
++  descriptor_sha256、interface_sha256与S00_DEPLOYMENT_READY.json的required_review_bindings逐项一致。
++- resources对象至少包含S00_DEPLOYMENT_READY.json.resources所有键且值相同，
++  即38/36/2核、24576MB同limit/exclusive、job900/whole_entry840/cleanup30。
++
++FAIL/BLOCKED或未绑定实物的摘要都不能放行。S01可以另加现场待验项和不含科研/性能接受的说明。
++该约定用于精确校验本任务卡要求的四类身份，不授权S00自行改变S01结论。
++
++## 部署与必要登录检查（不启动模型）
++
++固定远端目录为DATA_READY.json.remote_staging_root；不得新换目录隐藏已有提交。
++先实际djob -J、核S00已有ENGINEERING/PILOT目录及marker/job_id，再核当前manifest SHA。
++只有目录不存在且无本轮任务提交，才新建此S00目录；上传核准部署ZIP和同名.sha256。
++
++```bash
++set -euo pipefail
++source /etc/profile.d/donaukit_scheduler.sh
++RUN=/home/share/dengqingtian/opt/stage4_sessions/S00/ENGINEERING_PILOT_20261105T154333Z
++djob -J
++# 确认已有记录不含本轮提交后新建一次；目录存在时先检查，不覆盖。
++test ! -e "$RUN"
++mkdir "$RUN"
++# 上传S00_OVERNIGHT_ENGINEERING_DEPLOYMENT.zip及.sha256到RUN后：
++cd "$RUN"
++sha256sum -c S00_OVERNIGHT_ENGINEERING_DEPLOYMENT.zip.sha256
++unzip -q S00_OVERNIGHT_ENGINEERING_DEPLOYMENT.zip
++sha256sum -c ARTIFACT_SHA256.txt
++/usr/bin/python3 -B prepare.py
++/usr/bin/python3 -B -m unittest discover -s tests -v > login_wrapper_tests.log 2>&1
++# 用固定R4解释器只运行S02工程metadata入口；不运行模型或旧正式CLI，不安装依赖。
++```
++
++prepare核全部外层源及内包/源码清单SHA，拒绝已有payload/pre_submit_checks；LF、AST3.9、
++Linux bash-n均检查。工程metadata检查命令随已发布的S02具体包路径在READY记录中给出。
++计算端仍重新核包、原生job/nonce/raw/ready、主机、38实际物理核/NUMA/DDR、无重试。
++计算端不source登录profile、不检查g++。保持38核入口授权，原S02守卫在同PID框架导入前绑前36，
++观察实际Torch36/KML/全部TID，不添加线程setter冒充现场证据。
++
++## 唯一提交（只在S01明确通过且全部身份一致后）
++
++把S01确切审核原件复制到RUN/S01_REVIEW.json；复制不改字节。
++本地和登录端均用review_gate核本条审核SHA及所有binding。
++
++```bash
++cd "$RUN"
++/usr/bin/python3 -B submit_once.py "$RUN" > login_submit_publish.log 2>&1
++```
++
++submit_once先核SHA和S01专项审核，独占创建submit_once.marker，再只调用一次：
++
++```bash
++dsub -J -q q_hpcai -x job -R 'cpu=38,mem=24576MB' -RL 'mem=24576MB' \
++ -a 'numa[count=1,distribution=pack]' -T 900 --env none --cwd "$RUN" \
++ -oo "$RUN/job.log" bash "$RUN/run_job.sh" '<实际S01_REVIEW原件SHA256>'
++```
++
++不可在脚本提交后再手工执行同一dsub。提交超时/返回ID不明亦保留marker，不重提；
++先查实际队列/原stdout。PENDING轮询不算新实验；RUNNING立即单次publisher。
++只有自己本轮作业尚未运行且排队超过60分钟，复核当前状态后才可取消它，不能重提或取消其它任务。
++网络中断先保存job ID与已观测状态；恢复只查原job。
++
++外层从Python模块入口起全840秒，包括30秒以内的授权门禁、包检查及原工程入口所有步骤；
++原S02内部840秒超时也消耗此共同截止，不能从启动训练时重新给外层840秒。
++Linux child-subreaper记录并接管另起session的全部本任务后代；统一TERM15/KILL15总30秒，
++最晚870秒结束清理，留30秒收尾，调度硬限900秒。共享盘/不可中断内核I/O的实际异常照实记录。
++1epoch/200更新先到即停；多步loss波动不调参。任意来源/配对/资源/状态/数值/运行错误停止，不重试。
++
++## 原始终态收集
++
++```bash
++cd "$RUN"
++/usr/bin/python3 -B collect_evidence.py "$RUN"
++```
++
++回传JOB_<job>_evidence.zip和bundle_receipt.json；收集日志不要写入正在索引的RUN。
++归档原调度/授权/命令/退出/清理、源内外包/接口/descriptor/暴露原件、steps/result/恢复记录及线程/库。
++每个文件含远端path/bytes/SHA/mtime_ns。checkpoint留原远端路径，只回传完整大小/SHA和恢复结果；
++不下载/加载权重做额外更新，不把数据/权重加入Git。失败/缺result/ledger也保留，不能当作PASS。
++暴露不明时另写EXPOSURE_RECONCILIATION.json，保留原initial/runtime账本，不补造已消费帧。
++RUN_COMPLETE.json在本地完整回传和核对后发布，供S08直接读取；失败终态也用同样入口明确标记。
+--- /dev/null
++++ S00/overnight_engineering_20261105/inspect_engineering_samples.py
+@@ -0,0 +1,115 @@
++"""Read-only fixed small-unit selection/checks on C2 login; no Torch or training."""
++import collections
++import csv
++import datetime
++import hashlib
++import io
++import json
++import os
++from pathlib import Path
++import random
++import signal
++import socket
++import subprocess
++import sys
++
++ROOT=Path('/home/share/songzhenlong/eitfm/corpus_shape_20261102')
++ANCHOR='bdd146040bddf2ddd47fb9d571d5d2f40e5fa20fbd30d0c0d11239893e647032'
++OWNER=Path('/home/share/dengqingtian/opt/stage4_sessions/S00')
++result=dict(status='STARTED',engineering_only=True,formal_split_status='UNKNOWN',
++ validation_status='NOT_RUN_NO_FORMAL_SPLIT',subject_mapping_status='UNKNOWN',
++ started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),host=socket.gethostname(),
++ jobs_submitted=0,selected=[],training_consumed=False)
++
++
++def require(ok,message):
++    if not ok:raise ValueError(message)
++
++
++def read(path):
++    before=path.stat();b=path.read_bytes();after=path.stat()
++    require((before.st_size,before.st_mtime_ns)==(after.st_size,after.st_mtime_ns),'SOURCE_CHANGED: '+str(path))
++    return b,dict(path=str(path),bytes=len(b),sha256=hashlib.sha256(b).hexdigest(),mtime_ns=after.st_mtime_ns)
++
++
++def main():
++    q=subprocess.run(['djob','-J'],stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=8)
++    result['queue']=dict(command=['djob','-J'],returncode=q.returncode,stdout=q.stdout.decode(),stderr=q.stderr.decode())
++    require(q.returncode==0,'queue read failed')
++    entries=sorted(OWNER.iterdir(),key=lambda p:p.name)
++    result['owner_directory_names']=[p.name for p in entries]
++    result['existing_engineering_records']=[]
++    for d in entries:
++        if d.is_dir() and any(k in d.name.upper() for k in ('ENGINEER','OVERNIGHT','REAL_TRAIN')):
++            row=dict(directory=str(d),files=sorted(p.name for p in d.iterdir())[:100])
++            for name in ('job_id.txt','submit_once.marker','submission.stdout','submission.result.json'):
++                if (d/name).is_file():row[name]=(d/name).read_text(errors='replace')[:2000]
++            result['existing_engineering_records'].append(row)
++    require(not result['existing_engineering_records'],'existing engineering directory: inspect without selecting again')
++    raw,identity=read(ROOT/'manifest.csv')
++    require(identity['bytes']==3399057 and identity['sha256']==ANCHOR,'SOURCE_CHANGED: engineering manifest anchor')
++    rows=list(csv.DictReader(io.StringIO(raw.decode('utf-8-sig'))))
++    require(len(rows)==14300 and sum(int(r['n_pairs']) for r in rows)==1430000,'manifest count changed')
++    require(len({r['unit'] for r in rows})==len(rows),'duplicate manifest unit')
++    case_raw,case_identity=read(ROOT/'cases.txt');original=sorted(set(case_raw.decode().split()))
++    require(case_identity['sha256']=='f0a3c5bd443b63f06dc69c8bed5e58dd50999a91fddb5222f0c38594ba92d836' and len(original)==119,'original engineering case-range list changed')
++    groups=collections.defaultdict(list)
++    for row in rows:
++        if row['case'] in original and row['belt']=='16_adjacent' and row['status']=='done' and row['finite']=='True' and int(row['n_pairs'])==100:
++            groups[row['case']].append(row)
++    candidates=sorted(k for k,v in groups.items() if len(v)>=8)
++    require(len(candidates)>=2,'not enough engineering candidate cases; no expansion')
++    rng=random.Random(2026);chosen=sorted(rng.sample(candidates,2));selected=[]
++    for case in chosen:
++        units=sorted(groups[case],key=lambda r:r['unit'])
++        selected.extend(sorted(rng.sample(units,8),key=lambda r:r['unit']))
++    result.update(manifest=identity,original_case_range=case_identity,candidate_cases=candidates,
++      selected_cases=chosen,selection_seed=2026,
++      selection_algorithm='Python Random(2026): sample2 sorted eligible original-case IDs; sort chosen cases; sample8 sorted16_adjacent units for each with same RNG; sort chosen units; no replacement/fallback',
++      selection_scope='original cases.txt is only engineering case range, NEVER subject split',
++      metadata_candidate_eligibility='manifest original-case membership,16_adjacent,done,finite=True,n_pairs100,at least8units; selected payload failure stops without replacement')
++    import numpy as np
++    result['numpy']=dict(version=np.__version__,file=np.__file__,python=sys.executable)
++    drives=np.array([(i,(i+1)%16) for i in range(16)],dtype=np.int16)
++    meas=np.array([(i,j) for i,d in enumerate(drives) for j,m in enumerate(drives) if not(set(d)&set(m))],dtype=np.int16)
++    for row in selected:
++        unit=row['unit'];path=ROOT/'parts'/row['file'];side=path.with_suffix('.json')
++        require(path.stem==unit and row['file']==unit+'.npz','unit path mismatch')
++        item=dict(unit=unit,case=row['case'],placement=int(row['placement']),contact=int(row['contact']),
++          belt=row['belt'],n_pairs=int(row['n_pairs']),path=str(path),sidecar_path=str(side),
++          code_hash=row['code_hash'],config_hash=row['config_hash'],subject_mapping_status='UNKNOWN',status='SELECTED_CHECKING')
++        result['selected'].append(item)  # Keep identity even when a later read/check fails.
++        raw_npz,npz_id=read(path);raw_side,side_id=read(side);meta=json.loads(raw_side)
++        item.update(npz_sha256=npz_id['sha256'],sidecar_sha256=side_id['sha256'],npz_identity=npz_id,sidecar_identity=side_id)
++        require(all(meta[k]==item[k] for k in ('unit','case','placement','contact','belt','n_pairs','code_hash','config_hash')),'sidecar/manifest identity mismatch')
++        require(meta['L']==16 and meta['finite'] is True and item['code_hash']=='d8b2be8d1f' and item['config_hash']=='b1049eac1a','unit producer identity mismatch')
++        with np.load(io.BytesIO(raw_npz),allow_pickle=False) as z:
++            arrays={k:z[k] for k in ('v_ref','v_cur','images','base_of_pair','drives','meas')}
++        ref,cur,img,base=(arrays[k] for k in ('v_ref','v_cur','images','base_of_pair'))
++        require(ref.shape==(5,208) and cur.shape==(100,208) and img.shape==(100,64,64) and base.shape==(100,),'training schema/count mismatch')
++        require(ref.dtype==cur.dtype==np.float32 and img.dtype in (np.float16,np.float32),'training dtype mismatch')
++        require(arrays['drives'].dtype==arrays['meas'].dtype==np.int16 and np.array_equal(arrays['drives'],drives) and np.array_equal(arrays['meas'],meas),'ordered electrode protocol mismatch')
++        require(np.issubdtype(base.dtype,np.integer) and (base>=0).all() and (base<len(ref)).all(),'invalid base_of_pair')
++        require(len(meta['states'])==100 and [s['baseline'] for s in meta['states']]==base.tolist(),'states/base_of_pair row mismatch')
++        require(all(np.isfinite(v).all() for v in arrays.values()),'nonfinite source values')
++        denominator=np.abs(ref[base]).mean(1)
++        require(np.isfinite(denominator).all() and (denominator>0).all(),'zero/nonfinite reference denominator')
++        voltage=((cur-ref[base])/denominator[:,None]*np.float32(100)).astype(np.float32)
++        require(np.isfinite(voltage).all(),'nonfinite normalized voltage')
++        image_absmax=float(np.abs(img.astype(np.float32)).max())
++        require(np.isfinite(image_absmax) and image_absmax>0,'zero/nonfinite image scale')
++        item.update(status='PASS_FINITE_PAIRED_REAL_UNIT_ONLY',arrays={k:dict(shape=list(v.shape),dtype=str(v.dtype),finite=bool(np.isfinite(v).all())) for k,v in arrays.items()},
++          base_of_pair=base.tolist(),states_baselines=[s['baseline'] for s in meta['states']],
++          same_belt_unit_pair_rows=True,reference_denominator_min=float(denominator.min()),reference_denominator_max=float(denominator.max()),image_absmax=image_absmax)
++        require(read(path)[1]['sha256']==npz_id['sha256'] and read(side)[1]['sha256']==side_id['sha256'],'SOURCE_CHANGED after sample check')
++    require(read(ROOT/'manifest.csv')[1]['sha256']==ANCHOR,'SOURCE_CHANGED after selection')
++    result.update(status='FIXED_ENGINEERING_SAMPLE_CHECKS_PASS_NOT_FORMAL_SPLIT',total_units=len(result['selected']),
++      total_frames=sum(i['n_pairs'] for i in result['selected']),image_absmax_engineering_train_only=max(i['image_absmax'] for i in result['selected']),
++      multiple_batches_at64=True,manifest_after_sha256=ANCHOR,finished_utc=datetime.datetime.now(datetime.timezone.utc).isoformat())
++
++
++if __name__=='__main__':
++    signal.alarm(90)
++    try:main()
++    except Exception as exc:result.update(status='SOURCE_CHANGED' if 'SOURCE_CHANGED' in str(exc) else 'FAIL_STOP_NO_RESELECT',error=repr(exc))
++    finally:print(json.dumps(result,indent=2,sort_keys=True))

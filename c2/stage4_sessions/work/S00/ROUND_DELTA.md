@@ -1,6 +1,6 @@
-任务/轮次：S00 / S07_WRAPPER_R5_READY_PREP。
-状态变化：新双方就绪部署层准备完成，LOCAL_ONLY/待协调核包；本轮无SSH/新job，集群未实时复查。
-本轮改动：固定34295bytes新内包、13文件/12 delivery与44项安排；补participants/两ready/tmp/真实PID/deadline及各rank自身时序只读收集，原授权/判据/预算未改。
-验证增量：10新收集+14部署+25原交接=49通过，内包44项43过/1 Linux跳过，部署副本同组一致；3.9 AST/LF/Bash通过，53项保护哈希不变，真实Gloo未测。
-证据：SESSION_STATUS.md / ROUND_DELTA.md / s07_wrapper_r5_ready_20261105/{REPORT.md,COMMANDS.md,MINIMAL.diff,DEPLOYMENT_RECEIPT.json,evidence/FINAL_VERIFICATION.json}；外包70373bytes/16文件，SHA=b13b7c1c77241b12e7d07b0ac38d48c996667492e76a69c02f834ba6a1be9a61。
-阻塞与下一步：待总协调核具体包后另排；不把跨rank ready日志先后当原子发布时间，不预制ready、不修复残件；本轮0节点秒，不重跑02/06/07。
+任务/轮次：S00 / OVERNIGHT_ENGINEERING_20261105（中国时间2026-11-06收尾）。
+状态变化：S01完整专项PASS并绑定SHA后，唯一2043445/cn21341成功终态exit0；1epoch/25更新/1600真实帧完成，无重试、无活动S00 job。
+本轮改动：发布工程DATA_READY/descriptor、固定16单元与初始/实际暴露账本、冻结部署包及RUN_COMPLETE；保留旧正式DATA_NOT_READY门禁，未造split/val/test，未动其它任务或Git暂存/提交。
+验证增量：16单元真实配对/finite/SHA通过；12本地+12登录包装检查及Linux语法/元数据通过；25不同mask/AdamW连续/1600无重复帧、59 CPU36快照、实际KML与源身份通过；checkpoint精确恢复/额外更新0，所属PID全清空。
+证据：overnight_engineering_20261105/{RUN_COMPLETE.json,RUN_AUDIT.json,RUN_REPORT.md,EXPOSURE_LEDGER.json,SHA256_INDEX.json}及evidence/JOB_2043445_evidence.zip（543118bytes/102文件，SHA=53feb1041cc17472d8ec6777ec8ec64e2d8fd4a286a518be42f2d49298e82b00）；checkpoint456135327bytes留远端，SHA=ec491c46c06f94a7fac54d5f80010866311743e1f722947cb680cdaf3579e403。
+阻塞与下一步：本轮工程执行无阻塞，供01/08直接读RUN_COMPLETE整理；仅工程观察，不称科学/泛化/性能接受；后续真实subject追溯排除暴露对象进入最终test。新增96节点秒/usage95分列，未触发信号故障清理，不自动续训或再提job。

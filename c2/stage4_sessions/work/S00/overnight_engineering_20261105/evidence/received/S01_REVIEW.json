@@ -1,0 +1,129 @@
+{
+  "decision": "PASS_FOR_ENGINEERING_PILOT",
+  "review_complete": true,
+  "immutable_after_publish": true,
+  "protocol": "ENGINEERING_REAL_CORPUS_PILOT_V1",
+  "engineering_only": true,
+  "formal_split_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "subject_mapping_status": "UNKNOWN",
+  "review_scope": "Concrete first frozen engineering entry/data/deployment pre-submission technical review only",
+  "reviewed_at_utc": "2026-11-05T16:03:21.566087+00:00",
+  "bindings": {
+    "code_package_sha256": "add690cf983d5902c78586101ee6250358380786a8c13aa209b0a024735835a7",
+    "code_source_manifest_sha256": "e4acbbcb604dc3afd22b462bbfc2c3e348108c32e004557b891de7e14978b7d2",
+    "deployment_package_sha256": "938f7df81f3f7fa8c61239f8041950e4eb47043e869bbbd5aad7be8e6d27359e",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669"
+  },
+  "resources": {
+    "actual_physical_cores": 36,
+    "allocated_cores": 38,
+    "cleanup_seconds": 30,
+    "exclusive": true,
+    "job_seconds": 900,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 2,
+    "whole_entry_timeout": 840
+  },
+  "node_count": 1,
+  "numa_domains": 1,
+  "closing_seconds": 30,
+  "max_jobs": 1,
+  "max_retry_count": 0,
+  "remote_staging_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENGINEERING_PILOT_20261105T154333Z",
+  "scientific_acceptance": false,
+  "performance_acceptance": false,
+  "formal_split_created": false,
+  "old_formal_gates_changed": false,
+  "author_sources_modified_by_S01": false,
+  "model_runs_by_S01": 0,
+  "cluster_submissions_by_S01": 0,
+  "code_ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\CODE_READY.json",
+    "sha256": "5d7838d0faa7119b5df9d6f3fa658af9cee8dbfeb61e6001bed2421889213cff"
+  },
+  "data_ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\DATA_READY.json",
+    "sha256": "d7ca453699a79ce9a0bf731cccf91aa7d8506f58543dbba84eb8df75a0491614"
+  },
+  "deployment_ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\S00_DEPLOYMENT_READY.json",
+    "sha256": "75ae949e8f2ef41b6801821ebd78adf7775ecab935dca3677a584348964d3b89"
+  },
+  "artifacts": {
+    "code_package": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\package\\S02_OVERNIGHT_ENGINEERING_CODE.zip",
+      "bytes": 71182,
+      "sha256": "add690cf983d5902c78586101ee6250358380786a8c13aa209b0a024735835a7"
+    },
+    "code_source_manifest": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\SOURCE_SHA256.json",
+      "bytes": 2720,
+      "sha256": "e4acbbcb604dc3afd22b462bbfc2c3e348108c32e004557b891de7e14978b7d2"
+    },
+    "deployment_package": {
+      "bytes": 135582,
+      "entries": 27,
+      "files": 26,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\S00_OVERNIGHT_ENGINEERING_DEPLOYMENT.zip",
+      "sha256": "938f7df81f3f7fa8c61239f8041950e4eb47043e869bbbd5aad7be8e6d27359e",
+      "source_index_sha256": "a88f76692502b2c54abddc3b86d93da00321e516f610c6ce19e9a51c00ec31dc"
+    },
+    "deployment_source_manifest": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\ARTIFACT_SHA256.json",
+      "sha256": "a88f76692502b2c54abddc3b86d93da00321e516f610c6ce19e9a51c00ec31dc"
+    },
+    "descriptor": {
+      "bytes": 12222,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\ENGINEERING_DESCRIPTOR.json",
+      "sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6"
+    },
+    "interface": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\INTERFACE.json",
+      "bytes": 6682,
+      "sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669"
+    },
+    "initial_exposure_ledger": {
+      "bytes": 5808,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\EXPOSURE_LEDGER_INITIAL.json",
+      "sha256": "adcf84752f65b4a527133f5023a61f8bf533a4d0e5f62d327943ea50a67e728b"
+    }
+  },
+  "report": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\overnight_engineering_20261105\\PRE_SUBMISSION_REPORT.md",
+    "sha256": "6d4a91b8abd11e7474ef9ce371d62941b7350786028a2ed1350528b7a5584cc2"
+  },
+  "input_index": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\overnight_engineering_20261105\\FROZEN_INPUTS.json",
+    "sha256": "320bfae24c3e1fbe26a28cc5cd880e242d820e5da90bbaaea7506e523abfb693"
+  },
+  "blocking_findings": [],
+  "resolved_before_first_release": [
+    "PRE_FREEZE_ENV_WIRING; final run_job SHA52a0f6a1c6b91e8e8ca7a0c73edd68bd62a277edde97d95d35e561e76118f465; actual-entry wiring test included"
+  ],
+  "tests": {
+    "S02_local_receipts": 14,
+    "S00_portable_receipts": 12,
+    "S00_linux_login_mock_receipts": 12,
+    "S01_independent_metadata_positive": 1,
+    "S01_independent_metadata_rejections": 7,
+    "S01_binding_positive": 1,
+    "S01_binding_rejections": 5
+  },
+  "runtime_acceptance_required": [
+    "native PR_SET_CHILD_SUBREAPER/TERM/KILL cleanup",
+    "native job/NUMA/DDR/selected36",
+    "model PID Torch36/all TIDs/KML GEMM",
+    "real complete Encoder training/checkpoint/recovery",
+    "final scheduler exit and all owned PIDs cleared",
+    "durable per-step real frame/loss/exposure and checkpoint bytes/SHA, zero extra update restore"
+  ],
+  "execution_conditions": [
+    "S00 must recheck exact hashes/queue/single-attempt marker immediately before submission",
+    "Only this frozen owned root; one job<=900seconds, failure stops, no retry/expansion/config change",
+    "No formal val/test or quality/performance claim; preserve original formal gates",
+    "Training/cleanup/result acceptance remains pending until actual unique-job evidence arrives"
+  ]
+}

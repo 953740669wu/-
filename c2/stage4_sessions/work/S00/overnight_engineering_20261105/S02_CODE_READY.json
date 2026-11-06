@@ -1,0 +1,69 @@
+{
+  "status": "CODE_READY",
+  "protocol": "ENGINEERING_REAL_CORPUS_PILOT_V1",
+  "engineering_only": true,
+  "formal_split_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "subject_mapping_status": "UNKNOWN",
+  "preparation_status": "LOCAL_PREPARED",
+  "published_utc": "2026-11-05T15:54:15.983646+00:00",
+  "immutable_after_publish": true,
+  "interface": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\INTERFACE.json",
+    "bytes": 6682,
+    "sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669"
+  },
+  "interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+  "package": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\package\\S02_OVERNIGHT_ENGINEERING_CODE.zip",
+    "bytes": 71182,
+    "sha256": "add690cf983d5902c78586101ee6250358380786a8c13aa209b0a024735835a7"
+  },
+  "source_manifest": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\SOURCE_SHA256.json",
+    "bytes": 2720,
+    "sha256": "e4acbbcb604dc3afd22b462bbfc2c3e348108c32e004557b891de7e14978b7d2"
+  },
+  "source_manifest_name": "SOURCE_SHA256.json",
+  "checks": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\evidence\\local_validation.json",
+    "bytes": 2922,
+    "sha256": "6870bb4386a08444e63637ab5f23cea07e5eba75fdd334aed9ef5cf302cf1964",
+    "status": "PASS_LOCAL_PREPARED",
+    "test_count": 14
+  },
+  "report": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\REPORT.md",
+    "bytes": 4554,
+    "sha256": "fcba40541123ee43a166c9b5331a6162b2fd2567e3488f5ffd90a704d318f8a8"
+  },
+  "diff": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\diff\\R8_TO_ENGINEERING.patch",
+    "bytes": 37671,
+    "sha256": "138db791776db9c562c993de14ec3041dd7b377ea8c2687e4c1a5ff11e3cdc85"
+  },
+  "compatibility": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\overnight_engineering_20261105\\evidence\\S00_COMPATIBILITY.json",
+    "bytes": 334,
+    "sha256": "97b39fb745f3d8abea3460139f1bcc64bc46b8d263882b843e76ed81aee2267d"
+  },
+  "entrypoint": "run_engineering.sh",
+  "entry_environment": [
+    "S02_ENGINEERING_DESCRIPTOR",
+    "S02_ENGINEERING_DESCRIPTOR_SHA256"
+  ],
+  "resources": {
+    "allocated_cores": 38,
+    "actual_physical_cores": 36,
+    "reserved_cores": 2,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "exclusive": true,
+    "job_seconds": 900,
+    "whole_entry_timeout": 840,
+    "cleanup_seconds": 30
+  },
+  "new_jobs": 0,
+  "actual_full_encoder_training": "NOT_RUN_BY_S02",
+  "required_next": "S00 deploy/hash gate and S01 SHA-bound review before unique authorized job"
+}
