@@ -133,3 +133,21 @@ S01本地诊断复核已完成，有限接受但新DDP/清理时序未闭合；0
 01已ACCEPT_ARCHIVE_WITH_PRESERVED_LIMITATIONS；历史证据补齐0、compute/后代15秒清理仍UNKNOWN，旧3/13数值FAIL/最终FAIL保持。原55份诊断加本次收尾可按有限档案新批归档，GIT_SUBMIT_DIAG_CLOSEOUT_20261106.md/.tsv，旧268批不改；524历史待核/422排除继续保留。
 
 用户可同时发唯一Git窗口归档和原02静态提案：REAL_DUAL_DDP_MINIMAL_CANDIDATE_PROPOSAL_20261106.md，仅核Tiny与完整Encoder/KML路径对应及唯一最小候选或无依据结论，不实现、不运行。01/07/00/08待命，02交PROPOSAL_READY后协调决定方案审核/实现范围。两任务未确认接收启动，协调无Git写操作或后台运行。
+
+## 99批验收与02无候选提案（2026-11-06 21:10:10 +08:00）
+
+99份/773873bytes、4scope提交范围及Git对象SHA全过，协调实时ls-remote同HEAD/origin-main为05ded1bfd2b9339dcb5cd0c6708ec0b29dfa44a5；55诊断归档完成、946历史/排除余项仍在，02提案未混入99批。见GIT_DIAG_99_POST_PUSH_REVIEW_20261106.json。
+
+02静态提案NO_JUSTIFIED_CANDIDATE，协调核36唯一来源SHA及kml_ops关键分派/反向，未运行数值。下一任务只交原01：REAL_DUAL_DDP_PROPOSAL_REVIEW_AND_EVIDENCE_SPEC_20261106.md，独立核不选候选结论、区分必需新证据与历史限制；必要时拟一个最小取证规格，不执行、不继承旧job许可、不改阈值/原FAIL。02/07/00/08/Git待命。新卡发布未确认启动；收01六行摘要/PROPOSAL_REVIEW及必要MINIMAL_EVIDENCE_SPEC后协调决定候选或具体取证授权条件。新文档留下一批精确归档，届时主动提醒。
+
+## 01规格审核完成：本地准备阶段（2026-11-06 21:52:17 +08:00）
+
+01接受NO_JUSTIFIED_CANDIDATE并交固定首批B64/顺序32+32零更新定位规格，协调核55绑定SHA。规格仍NEEDS_NEW_EXECUTION_AUTHORIZATION，原FAIL/阈值不变；300秒/CPU36/24GiB仅未来拟议上限。
+
+新卡REAL_DUAL_DDP_LOCALIZATION_PREPARE_R1_20261106.md只给原02，授权独立目录取证代码/标准库夹具准备，不运行Torch/模型/DDP/SSH/集群。先判被动VJP/逻辑样本轴/保留上界/实际compute身份可行；不行交具体BLOCKED，不降规格。卡已发布未确认启动，01/00/07/08/Git待命。准备包具体齐后再做01审核/00本地部署准备；如需实际取证job，届时向用户呈具体可审核请求，当前不追加集群。02提案/01审核及协调增量留下一Git精确批并主动提醒。
+
+## 02准备阻断与静态材料归档（2026-11-06）
+
+用户确认上次99份Git指令之后无其它Git动作；HEAD仍05ded1b，后续提案/审核/协调增量未提交。02已完成本地支持包但B01_UNBOUND_INSTALLED_NATIVE_VJP阻断，未发PREPARATION_READY；14夹具/2CLI及909.1553MiB条件性估算非实际C2验证。原模型/阈值/FAIL保持。
+
+新GIT_SUBMIT_STATIC_SPEC_20261106.md/.tsv仅纳入已闭合02静态提案/01审核规格和协调记录，02定位准备完整目录单列暂缓；946历史余项保留。本批冻结01当前状态，用户先发唯一Git完成提交，再发原01按REAL_DUAL_DDP_PREPARATION_BLOCKER_REVIEW_20261106.md核B01，给具体离线依据或最小缺源/操作规格，不重复旧提案或盲目重做。未确认接收/启动；02/07/00/08待命，不追加模型/集群作业。
