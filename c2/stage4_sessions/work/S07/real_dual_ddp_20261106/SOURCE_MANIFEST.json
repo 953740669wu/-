@@ -1,0 +1,193 @@
+{
+  "task": "S07",
+  "round": "REAL_DUAL_DDP_20261106",
+  "status": "FROZEN_CANDIDATE_FOR_REVIEW_LOCAL_FP32_NUMERICAL_FAIL_C2_NOT_RUN",
+  "delivery_files": [
+    {
+      "path": "API_REVIEW.md",
+      "bytes": 2963,
+      "sha256": "d3790bf17206b2ed00191421347f010a0c7d47bae5dd71ae39115b11cbb81c91"
+    },
+    {
+      "path": "candidate/cpu36_contract.py",
+      "bytes": 11171,
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d"
+    },
+    {
+      "path": "candidate/loss_contract.py",
+      "bytes": 1102,
+      "sha256": "7c474cc98ed6d5f9edeffcbb3c059cc19056ee12b489bdea595174415cd995c2"
+    },
+    {
+      "path": "candidate/runtime_guard.py",
+      "bytes": 6434,
+      "sha256": "81272b807c4977bdacba94a1adb9fafb9e852ee3520dda9beb7612d45f1ce4c5"
+    },
+    {
+      "path": "candidate/supervisor.py",
+      "bytes": 3906,
+      "sha256": "45d03944a9a82b39a7d95c139a5c081c23cfb6fb6d2bb76d52d31f5642547724"
+    },
+    {
+      "path": "candidate/train_ddp.py",
+      "bytes": 23484,
+      "sha256": "6a8b3cd69051f149f3b3e6ee786b0ff32a8c3bdf951dfcc635b051df51084e94"
+    },
+    {
+      "path": "candidate/training_graph.py",
+      "bytes": 1190,
+      "sha256": "334015cc1a78ebff277f76d4601ee882e5e65cd075ac53cab0ae6c70cc4446a4"
+    },
+    {
+      "path": "candidate/training_support.py",
+      "bytes": 7921,
+      "sha256": "888ebcc3dd5718991f53cd65b6c2b5bc9a62a93d1ae58b5ae2b766b892e0270e"
+    },
+    {
+      "path": "INTERFACE_FOR_S00.md",
+      "bytes": 4623,
+      "sha256": "e0efd0e7372bac25aac426961c78315f79bc0d7cad587013545e493d75d520d9"
+    },
+    {
+      "path": "minimal.diff",
+      "bytes": 68005,
+      "sha256": "5d5d0c5867319acdd5443d0c453159eb980bfb3922d9416c18dd7e1edf504248"
+    },
+    {
+      "path": "reference_binding.json",
+      "bytes": 3939,
+      "sha256": "2cf2226fb554df7a4d0180798f603828bddbe1c1c6e45aa1debe6e7a30c3925b"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 2935,
+      "sha256": "716dec4c8e1e22e82c26f91bc5098aabdc5346c34364347e3d0d52661e27e980"
+    },
+    {
+      "path": "tests/test_contracts.py",
+      "bytes": 2572,
+      "sha256": "9fadb2e685905084d23a9505e3afed4c5ac49cd722db02615480416635e0eca5"
+    },
+    {
+      "path": "tests/test_lifecycle.py",
+      "bytes": 5340,
+      "sha256": "b17d23919c553b52b54e44bf9912f47a5524d075bb4dad3b0f1986cd5e6499d2"
+    },
+    {
+      "path": "tests/test_result_identity.py",
+      "bytes": 3916,
+      "sha256": "f763cca629cf5183350439f6c643719e856289e1cadc913621e9f933fb817bcd"
+    },
+    {
+      "path": "tests/test_training_torch.py",
+      "bytes": 2437,
+      "sha256": "0ae27b9f5dacc7240a07e2b9f8465a298720563fc38d4fc016847011e420a4eb"
+    },
+    {
+      "path": "tests/torch_checks_worker.py",
+      "bytes": 7740,
+      "sha256": "3fa8a9af637a14c634c3681fb458bb549e421ef55c0e95dc77be36650a7a9fc8"
+    },
+    {
+      "path": "training_config.json",
+      "bytes": 1587,
+      "sha256": "c7f0e948e6f16a6ecd02df8a881eabbc6f4836c2f1191646e06452adbda31ffa"
+    },
+    {
+      "path": "TRAINING_CONTRACT.md",
+      "bytes": 4481,
+      "sha256": "9b72cbbb9af09514c2cf937e99486c903d829aedc377e7a21d581042244ee545"
+    }
+  ],
+  "empty_directories": [
+    "evidence/"
+  ],
+  "reference_ready_sha256": "924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3",
+  "reference_package_sha256": "df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5",
+  "reference_source_manifest_sha256": "6b9cd186d27a5130f22cd2e58a2c6cb231be31c70d5df98dce4c40e92008b757",
+  "config_sha256": "c7f0e948e6f16a6ecd02df8a881eabbc6f4836c2f1191646e06452adbda31ffa",
+  "task_card_sha256": "ebabda929df06e0c1366563af0d16ac360c0fdf3cc16b330f3bf2804a088a1ec",
+  "training": {
+    "protocol": "REAL_DUAL_DOMAIN_DDP_V1",
+    "world_size": 2,
+    "per_rank_batch": 32,
+    "global_batch": 64,
+    "total_updates": 25,
+    "reference_updates": 5,
+    "total_frames": 1600,
+    "parameter_count": 37995777,
+    "seed": 0,
+    "precision": "fp32",
+    "backend": "gloo",
+    "pg_timeout_seconds": 120,
+    "job_seconds": 900,
+    "application_seconds": 840,
+    "cleanup_seconds": 30,
+    "collection_seconds": 30,
+    "ddp": {
+      "device_ids": null,
+      "output_device": null,
+      "broadcast_buffers": true,
+      "init_sync": true,
+      "bucket_cap_mb": 25,
+      "find_unused_parameters": false,
+      "gradient_as_bucket_view": false,
+      "static_graph": false
+    },
+    "optimizer": {
+      "name": "AdamW",
+      "lr": 0.0001,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0.01
+    },
+    "data": {
+      "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+      "manifest_sha256": "bdd146040bddf2ddd47fb9d571d5d2f40e5fa20fbd30d0c0d11239893e647032",
+      "engineering_interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+      "formal_split_status": "UNKNOWN",
+      "subject_mapping_status": "UNKNOWN"
+    },
+    "resources": {
+      "domains": 2,
+      "allocated_per_domain": 38,
+      "selected_per_domain": 36,
+      "reserved_per_domain": 2,
+      "total_allocated": 76,
+      "total_selected": 72,
+      "total_reserved": 4,
+      "ddr_total_mb": 24576,
+      "ddr_limit_mb": 24576,
+      "exclusive": true,
+      "hbm_mb": 0
+    },
+    "freeze": "native SDPA/CKPT0; no mixed precision, accumulation, scheduler, candidate or fallback"
+  },
+  "tests": {
+    "total": 19,
+    "by_file": {
+      "test_contracts.py": 7,
+      "test_lifecycle.py": 6,
+      "test_result_identity.py": 4,
+      "test_training_torch.py": 2
+    },
+    "windows_passed": 17,
+    "windows_failed": 1,
+    "windows_skipped": 1,
+    "linux_required_passed": 19,
+    "linux_required_failed": 0,
+    "linux_required_skipped": 0,
+    "strict_pair": "FAIL_3_OF_13_TENSORS_ORIGINAL_THRESHOLDS_PRESERVED"
+  },
+  "sources": {
+    "r7_components": "26920c331f2ac16bf059a99f37a0e49b1be8657a5e25d01e013ba518e6567cf4",
+    "original_inputs": "7c71dabbbcbfda236599a4935473ebd48c58eed52fe6c7e9a9e857fb02388907"
+  },
+  "local_cluster_jobs": 0,
+  "c2_model_ddp": "NOT_RUN",
+  "numeric_thresholds": "Original S02 compare byte-identical; state abs2e-6, tensor abs2e-5 and relative2e-6; exact categories unchanged",
+  "local_ready_for_training_acceptance": false
+}

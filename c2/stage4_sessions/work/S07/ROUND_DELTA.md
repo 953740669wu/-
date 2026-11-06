@@ -1,6 +1,6 @@
-任务/轮次：S07 / R7 rank报告原子发布，2026-11-06，仅本地复现/最小修复/冻结交接。
-状态变化：R6/2050433整组FAIL原样保留；新R7 READY_FOR_S01_REVIEW_FROZEN_LOCAL_ONLY，先INTERFACE_READY后ATOMIC_READY直接交S00/01。
-本轮改动：先复现旧覆盖写中断为空/残JSON，再加同目录独占temp+flush/fsync/close+replace小函数和三个rank写入调用；reader/ready/四case/pg5/case30/清理/观察器不改。
-验证增量：新增17全过；原71回归70过1原Linux清理skip，总88项87过1skip，独立ZIP同结果；24输入和R6全部14 delivery未变，9复用文件相同；Linux真实通信未运行。
-证据：round7_atomic_reports_20261106/ATOMIC_READY.json、TIMELINE.md、minimal.diff、SOURCE_MANIFEST.json、SHA256SUMS.txt、EVIDENCE_MANIFEST.json、ARCHIVE_SCOPE.json；内包44414bytes/17成员/16文件/15 delivery，SHA256=57a1f4c530ce2c9a5edcfe9cc9741129fb1ba4f90459fde459803103a362382d。
-阻塞与下一步：S00新部署→S01具体SHA PASS→S00按卡唯一完整四case；Linux须88过零skip，共享job300/consumer270/总DDR24GiB/每域实际36核；失败即停，无补旧case/重试/预算调整，本窗口无job。
+任务/轮次：S07 / 本地数值诊断R1，2026-11-06，单次受控路径与原因定位。
+状态变化：原训练FAIL保持；诊断停于唯一DDP权限错误10013，双方回收，DIAGNOSIS_READY已交。
+本轮改动：先列可证伪假设；只读原Tiny/graph/compare，新增逐层输出/adjoint、loss、全部参数/输入梯度及来源/监督记录，不改冻结训练包。
+验证增量：B64与顺序32+32各一次，前向/adjoint完全相同，coarse标量先有2.98e-8差；最早超阈tf.weight，原13误差全复现；一次float64收缩对照差至6.83e-14，总路径11.594秒，DDP额外影响仍未知。
+证据：E:/eitfm_c2_stages2-4_2026-11-03/c2/stage4_sessions/work/S07/real_dual_ddp_numeric_diagnosis_r1_20261106/DIAGNOSIS_READY.json；DIAGNOSIS.json/REPORT.md/ARCHIVE_SCOPE.json，17来源SHA保持。
+阻塞与下一步：DDP权限失败即停，无重试/提权/换backend/job；无02具体疑点，待01独立复核及协调决定后续候选，原阈值与训练FAIL不改。

@@ -1,0 +1,45 @@
+{
+  "status": "PASS_PACKAGE_SOURCE_IMPORT_STDLIB_ONLY_NOT_NUMERIC_ACCEPTANCE",
+  "delivery_files_verified": 19,
+  "archive_files": 20,
+  "archive_members": 21,
+  "python39_ast_lf_files": 12,
+  "groups": [
+    {
+      "file": "test_contracts.py",
+      "methods": 7,
+      "passed": 7,
+      "skipped": 0,
+      "returncode": 0
+    },
+    {
+      "file": "test_lifecycle.py",
+      "methods": 6,
+      "passed": 5,
+      "skipped": 1,
+      "returncode": 0
+    },
+    {
+      "file": "test_result_identity.py",
+      "methods": 4,
+      "passed": 4,
+      "skipped": 0,
+      "returncode": 0
+    },
+    {
+      "file": "test_training_torch.py",
+      "methods": 2,
+      "passed": 0,
+      "skipped": 2,
+      "returncode": 0
+    }
+  ],
+  "methods": 19,
+  "passed": 16,
+  "skipped": 3,
+  "reason": "Default isolated Python lacks Torch/NumPy; two Torch skips plus Linux descendant skip. Actual Torch strict FAIL recorded separately; not rerun to seek PASS.",
+  "reference_shared_import_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\dual_reference.py",
+  "baseline_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\baseline",
+  "reference_package_sha256": "df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5",
+  "torch_loaded": false
+}

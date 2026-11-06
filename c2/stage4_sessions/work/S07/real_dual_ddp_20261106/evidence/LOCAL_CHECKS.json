@@ -1,0 +1,70 @@
+{
+  "status": "FAIL_LOCAL_FP32_PAIR_PRESERVED_C2_NOT_RUN",
+  "total_methods": 19,
+  "passed": 17,
+  "failed": 1,
+  "skipped": 1,
+  "groups": [
+    {
+      "file": "test_contracts.py",
+      "methods": 7,
+      "passed": 7,
+      "skipped": 0,
+      "failed": 0,
+      "returncode": 0
+    },
+    {
+      "file": "test_lifecycle.py",
+      "methods": 6,
+      "passed": 5,
+      "skipped": 1,
+      "failed": 0,
+      "returncode": 0
+    },
+    {
+      "file": "test_result_identity.py",
+      "methods": 4,
+      "passed": 4,
+      "skipped": 0,
+      "failed": 0,
+      "returncode": 0
+    },
+    {
+      "file": "test_training_torch.py",
+      "methods": 2,
+      "passed": 1,
+      "failed": 1,
+      "skipped": 0,
+      "math_evidence": "evidence/torch_fp32_pair_final.log",
+      "strict_pair_evidence": "evidence\\tiny_ddp_192181562000000\\strict_pair_metrics.json",
+      "strict_pair_sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+    }
+  ],
+  "aggregation": "Final standard-library groups rerun after source fixes. Actual Torch math passed; latest identical-data/threshold pair diagnostic failed; not a claimed all-pass single invocation.",
+  "strict_pair_failed_metrics": [
+    {
+      "name": "val.weight",
+      "max_abs": 1.9147992134094238e-05,
+      "l2_relative": 9.410191088070238e-05,
+      "reference_norm": 0.2131539446846441,
+      "passed": false
+    },
+    {
+      "name": "pos.weight",
+      "max_abs": 1.9147992134094238e-05,
+      "l2_relative": 9.410191088070238e-05,
+      "reference_norm": 0.4263078893692882,
+      "passed": false
+    },
+    {
+      "name": "tf.weight",
+      "max_abs": 3.723800182342529e-05,
+      "l2_relative": 0.0001142869133502608,
+      "reference_norm": 0.5284964778141917,
+      "passed": false
+    }
+  ],
+  "small_ddp_semantic_scope": "Reached Gloo/DDP/backward; cross-rank parameter gradients equal and normalized input gradients pass; strict full small-B64 numerical match FAIL",
+  "c2_training": "NOT_RUN",
+  "new_cluster_jobs": 0
+}

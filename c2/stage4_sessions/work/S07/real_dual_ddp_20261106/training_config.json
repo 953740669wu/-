@@ -1,0 +1,59 @@
+{
+  "protocol": "REAL_DUAL_DOMAIN_DDP_V1",
+  "world_size": 2,
+  "per_rank_batch": 32,
+  "global_batch": 64,
+  "total_updates": 25,
+  "reference_updates": 5,
+  "total_frames": 1600,
+  "parameter_count": 37995777,
+  "seed": 0,
+  "precision": "fp32",
+  "backend": "gloo",
+  "pg_timeout_seconds": 120,
+  "job_seconds": 900,
+  "application_seconds": 840,
+  "cleanup_seconds": 30,
+  "collection_seconds": 30,
+  "ddp": {
+    "device_ids": null,
+    "output_device": null,
+    "broadcast_buffers": true,
+    "init_sync": true,
+    "bucket_cap_mb": 25,
+    "find_unused_parameters": false,
+    "gradient_as_bucket_view": false,
+    "static_graph": false
+  },
+  "optimizer": {
+    "name": "AdamW",
+    "lr": 0.0001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-8,
+    "weight_decay": 0.01
+  },
+  "data": {
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "manifest_sha256": "bdd146040bddf2ddd47fb9d571d5d2f40e5fa20fbd30d0c0d11239893e647032",
+    "engineering_interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+    "formal_split_status": "UNKNOWN",
+    "subject_mapping_status": "UNKNOWN"
+  },
+  "resources": {
+    "domains": 2,
+    "allocated_per_domain": 38,
+    "selected_per_domain": 36,
+    "reserved_per_domain": 2,
+    "total_allocated": 76,
+    "total_selected": 72,
+    "total_reserved": 4,
+    "ddr_total_mb": 24576,
+    "ddr_limit_mb": 24576,
+    "exclusive": true,
+    "hbm_mb": 0
+  },
+  "freeze": "native SDPA/CKPT0; no mixed precision, accumulation, scheduler, candidate or fallback"
+}
