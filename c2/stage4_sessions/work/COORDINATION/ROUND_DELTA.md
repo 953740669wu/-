@@ -1,6 +1,6 @@
-任务/轮次：COORDINATION / GIT_READY_R5_FP32_R3_REVIEW
-状态变化：00 R5本地准备/04 R3本地fp32控制核验，累积交付转唯一Git窗口归档；实际远端为GitHub。
-本轮改动：新归档指令/TSV、定向核验MD/JSON、10+2项复跑日志、总表/自身状态；作者源码不动。
-验证增量：核00索引15/86及16文件包、04索引29及30文件包/保存83零误差；新增10收集+2结构复跑全过，旧全量检查不重复。
-证据：GIT_READY_R5_FP32_R3_REVIEW.md/.json、S00_R5_GIT_TARGETED_TESTS.txt、S04_R3_GIT_TARGETED_TESTS.txt、新提交TSV。
-阻塞与下一步：Git按精确SHA分批commit并普通push现有origin，核远端/回报；bf16仍FAIL、P1未实施、就绪协议未现场测，root不代提交。
+任务/轮次：COORDINATION / GIT_ENGINEERING_JOB2043445_READY_20261106。
+状态变化：首次真实工程运行的已核冻结交付可归档；02/08新任务继续，本批不干扰。
+本轮改动：仅协调精确提交说明/TSV/核对JSON及总表/状态/六行摘要；作者源码/原件/Git暂存未改。
+验证增量：核00/01/02原归档清单来源/范围/存在/已有SHA、Git忽略规则与原始字节；排除活动共享状态与ZIP，生成当前bytes/SHA供Git窗口复核。
+证据：GIT_SUBMIT_ENGINEERING_JOB2043445_20261106.md/.tsv、GIT_ENGINEERING_JOB2043445_CHECKS_20261106.json；原JOB2043445_ENGINEERING_REVIEW及任务归档索引。
+阻塞与下一步：唯一Git窗口逐项复核TSV，无漂移才分任务提交/普通推送GitHub并核远端；范围外工作区保留，不追求清空，不升级为科学或性能接受。
