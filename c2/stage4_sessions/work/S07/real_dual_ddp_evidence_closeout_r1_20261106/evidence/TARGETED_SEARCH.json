@@ -1,0 +1,610 @@
+{
+  "scope": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106",
+  "text_files_searched": 40,
+  "pattern": "ppid|parent.?pid|descendant|creation.?time|create.?time|exit.?time|terminate|kill|cleanup|all_reaped|start_ticks|start_monotonic|started_ns|monotonic_ns|\"pid\"|\"pids\"|intraop|interop",
+  "files": [
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\ARCHIVE_SCOPE.json",
+      "line_count": 52,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS.json",
+      "line_count": 1316,
+      "matches": [
+        {
+          "line": 8,
+          "text": "      \"pids\": ["
+        },
+        {
+          "line": 14,
+          "text": "      \"all_reaped\": true,"
+        },
+        {
+          "line": 16,
+          "text": "      \"cleanup_seconds\": 0.0"
+        },
+        {
+          "line": 20,
+          "text": "      \"pids\": ["
+        },
+        {
+          "line": 26,
+          "text": "      \"all_reaped\": true,"
+        },
+        {
+          "line": 28,
+          "text": "      \"cleanup_seconds\": 0.0"
+        },
+        {
+          "line": 32,
+          "text": "      \"pids\": ["
+        },
+        {
+          "line": 38,
+          "text": "      \"all_reaped\": true,"
+        },
+        {
+          "line": 40,
+          "text": "      \"cleanup_seconds\": 0.0"
+        },
+        {
+          "line": 44,
+          "text": "      \"pids\": ["
+        },
+        {
+          "line": 52,
+          "text": "      \"all_reaped\": true,"
+        },
+        {
+          "line": 54,
+          "text": "      \"cleanup_seconds\": 0.01600000000325963"
+        },
+        {
+          "line": 66,
+          "text": "    \"cleanup_seconds\": 15,"
+        },
+        {
+          "line": 1189,
+          "text": "        \"intraop\": 8,"
+        },
+        {
+          "line": 1190,
+          "text": "        \"interop\": 8,"
+        },
+        {
+          "line": 1207,
+          "text": "      \"pid\": 124816"
+        },
+        {
+          "line": 1220,
+          "text": "        \"intraop\": 8,"
+        },
+        {
+          "line": 1221,
+          "text": "        \"interop\": 8,"
+        },
+        {
+          "line": 1238,
+          "text": "      \"pid\": 117608"
+        },
+        {
+          "line": 1251,
+          "text": "        \"intraop\": 8,"
+        },
+        {
+          "line": 1252,
+          "text": "        \"interop\": 8,"
+        },
+        {
+          "line": 1269,
+          "text": "      \"pid\": 118980,"
+        },
+        {
+          "line": 1288,
+          "text": "        \"intraop\": 8,"
+        },
+        {
+          "line": 1289,
+          "text": "        \"interop\": 8,"
+        },
+        {
+          "line": 1306,
+          "text": "      \"pid\": 123980,"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS_READY.json",
+      "line_count": 80,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\diagnostic_worker.py",
+      "line_count": 341,
+      "matches": [
+        {
+          "line": 71,
+          "text": "                intraop=torch.get_num_threads(), interop=torch.get_num_interop_threads(),"
+        },
+        {
+          "line": 84,
+          "text": "        order.append(dict(key=key, monotonic_ns=time.monotonic_ns()))"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\AUTOMATIC_STOP_DIAGNOSIS.json",
+      "line_count": 1130,
+      "matches": [
+        {
+          "line": 8,
+          "text": "      \"pids\": ["
+        },
+        {
+          "line": 14,
+          "text": "      \"all_reaped\": true,"
+        },
+        {
+          "line": 16,
+          "text": "      \"cleanup_seconds\": 0.0"
+        },
+        {
+          "line": 20,
+          "text": "      \"pids\": ["
+        },
+        {
+          "line": 26,
+          "text": "      \"all_reaped\": true,"
+        },
+        {
+          "line": 28,
+          "text": "      \"cleanup_seconds\": 0.0"
+        },
+        {
+          "line": 32,
+          "text": "      \"pids\": ["
+        },
+        {
+          "line": 38,
+          "text": "      \"all_reaped\": true,"
+        },
+        {
+          "line": 40,
+          "text": "      \"cleanup_seconds\": 0.0"
+        },
+        {
+          "line": 44,
+          "text": "      \"pids\": ["
+        },
+        {
+          "line": 52,
+          "text": "      \"all_reaped\": true,"
+        },
+        {
+          "line": 54,
+          "text": "      \"cleanup_seconds\": 0.01600000000325963"
+        },
+        {
+          "line": 66,
+          "text": "    \"cleanup_seconds\": 15,"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\AUTOMATIC_STOP_DIAGNOSIS_READY.json",
+      "line_count": 59,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\AUTOMATIC_STOP_REPORT.md",
+      "line_count": 25,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\BEFORE_ROUND_DELTA.md",
+      "line_count": 6,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\BEFORE_SESSION_STATUS.md",
+      "line_count": 19,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\controller.log",
+      "line_count": 5,
+      "matches": [
+        {
+          "line": 1,
+          "text": "full {'status': 'COMPLETED', 'pids': [111828], 'exit_codes': [0], 'all_reaped': True, 'seconds': 3.484000000025844, 'cleanup_seconds': 0.0}"
+        },
+        {
+          "line": 2,
+          "text": "sequence {'status': 'COMPLETED', 'pids': [121848], 'exit_codes': [0], 'all_reaped': True, 'seconds': 2.7189999999827705, 'cleanup_seconds': 0.0}"
+        },
+        {
+          "line": 3,
+          "text": "fp64 {'status': 'COMPLETED', 'pids': [123160], 'exit_codes': [0], 'all_reaped': True, 'seconds': 2.6719999999913853, 'cleanup_seconds': 0.0}"
+        },
+        {
+          "line": 4,
+          "text": "ddp {'status': 'STOPPED_DDP_PERMISSION_FAILURE', 'pids': [116596, 111740], 'exit_codes': [1, 1], 'all_reaped': True, 'seconds': 2.7190000000118744, 'cleanup_seconds': 0.01600000000325963}"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\ddp0.log",
+      "line_count": 4,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\ddp0_initial.json",
+      "line_count": 37,
+      "matches": [
+        {
+          "line": 12,
+          "text": "    \"intraop\": 8,"
+        },
+        {
+          "line": 13,
+          "text": "    \"interop\": 8,"
+        },
+        {
+          "line": 30,
+          "text": "  \"pid\": 118980,"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\ddp1.log",
+      "line_count": 4,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\ddp1_initial.json",
+      "line_count": 37,
+      "matches": [
+        {
+          "line": 12,
+          "text": "    \"intraop\": 8,"
+        },
+        {
+          "line": 13,
+          "text": "    \"interop\": 8,"
+        },
+        {
+          "line": 30,
+          "text": "  \"pid\": 123980,"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\ddp_supervision.json",
+      "line_count": 14,
+      "matches": [
+        {
+          "line": 3,
+          "text": "  \"pids\": ["
+        },
+        {
+          "line": 11,
+          "text": "  \"all_reaped\": true,"
+        },
+        {
+          "line": 13,
+          "text": "  \"cleanup_seconds\": 0.01600000000325963"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\FLOAT64_CONTROL.json",
+      "line_count": 120,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\fp640.log",
+      "line_count": 0,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\fp64_supervision.json",
+      "line_count": 12,
+      "matches": [
+        {
+          "line": 3,
+          "text": "  \"pids\": ["
+        },
+        {
+          "line": 9,
+          "text": "  \"all_reaped\": true,"
+        },
+        {
+          "line": 11,
+          "text": "  \"cleanup_seconds\": 0.0"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\full0.log",
+      "line_count": 1,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\full_complete.json",
+      "line_count": 211,
+      "matches": [
+        {
+          "line": 13,
+          "text": "      \"intraop\": 8,"
+        },
+        {
+          "line": 14,
+          "text": "      \"interop\": 8,"
+        },
+        {
+          "line": 31,
+          "text": "    \"pid\": 124816"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\full_initial.json",
+      "line_count": 31,
+      "matches": [
+        {
+          "line": 12,
+          "text": "    \"intraop\": 8,"
+        },
+        {
+          "line": 13,
+          "text": "    \"interop\": 8,"
+        },
+        {
+          "line": 30,
+          "text": "  \"pid\": 124816"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\full_supervision.json",
+      "line_count": 12,
+      "matches": [
+        {
+          "line": 3,
+          "text": "  \"pids\": ["
+        },
+        {
+          "line": 9,
+          "text": "  \"all_reaped\": true,"
+        },
+        {
+          "line": 11,
+          "text": "  \"cleanup_seconds\": 0.0"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\FULL_VS_SEQUENCE.json",
+      "line_count": 802,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\RUN_SOURCES.json",
+      "line_count": 19,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\sequence0.log",
+      "line_count": 1,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\sequence_complete.json",
+      "line_count": 215,
+      "matches": [
+        {
+          "line": 13,
+          "text": "      \"intraop\": 8,"
+        },
+        {
+          "line": 14,
+          "text": "      \"interop\": 8,"
+        },
+        {
+          "line": 31,
+          "text": "    \"pid\": 117608"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\sequence_initial.json",
+      "line_count": 31,
+      "matches": [
+        {
+          "line": 12,
+          "text": "    \"intraop\": 8,"
+        },
+        {
+          "line": 13,
+          "text": "    \"interop\": 8,"
+        },
+        {
+          "line": 30,
+          "text": "  \"pid\": 117608"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\sequence_supervision.json",
+      "line_count": 12,
+      "matches": [
+        {
+          "line": 3,
+          "text": "  \"pids\": ["
+        },
+        {
+          "line": 9,
+          "text": "  \"all_reaped\": true,"
+        },
+        {
+          "line": 11,
+          "text": "  \"cleanup_seconds\": 0.0"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\EVIDENCE_MANIFEST.json",
+      "line_count": 209,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\FLOAT64_PURPOSE.json",
+      "line_count": 9,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\HYPOTHESES_AND_CHECKS.md",
+      "line_count": 19,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\PROGRESS.json",
+      "line_count": 10,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\REPORT.md",
+      "line_count": 33,
+      "matches": []
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\RUN_ddp.json",
+      "line_count": 1,
+      "matches": [
+        {
+          "line": 1,
+          "text": "{\"start_monotonic\": 196437.531, \"commands\": [[\"E:\\\\eitfm_c2_stages2-4_2026-11-03\\\\c2\\\\stage4_sessions\\\\work\\\\S02\\\\round2_20261104T114949Z\\\\.venv\\\\Scripts\\\\python.exe\", \"-B\", \"E:\\\\eitfm_c2_stages2-4_2026-11-03\\\\c2\\\\stage4_sessions\\\\work\\\\S07\\\\real_dual_ddp_numeric_diagnosis_r1_20261106\\\\diagnostic_worker.py\", \"--mode\", \"ddp\", \"--rank\", \"0\", \"--init-method\", \"tcp://127.0.0.1:51250\"], [\"E:\\\\eitfm_c2_stages2-4_2026-11-03\\\\c2\\\\stage4_sessions\\\\work\\\\S02\\\\round2_20261104T114949Z\\\\.venv\\\\Scripts\\\\python.exe\", \"-B\", \"E:\\\\eitfm_c2_stages2-4_2026-11-03\\\\c2\\\\stage4_sessions\\\\work\\\\S07\\\\real_dual_ddp_numeric_diagnosis_r1_20261106\\\\diagnostic_worker.py\", \"--mode\", \"ddp\", \"--rank\", \"1\", \"--init-method\", \"tcp://127.0.0.1:51250\"]]}"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\RUN_fp64.json",
+      "line_count": 1,
+      "matches": [
+        {
+          "line": 1,
+          "text": "{\"start_monotonic\": 196434.859, \"commands\": [[\"E:\\\\eitfm_c2_stages2-4_2026-11-03\\\\c2\\\\stage4_sessions\\\\work\\\\S02\\\\round2_20261104T114949Z\\\\.venv\\\\Scripts\\\\python.exe\", \"-B\", \"E:\\\\eitfm_c2_stages2-4_2026-11-03\\\\c2\\\\stage4_sessions\\\\work\\\\S07\\\\real_dual_ddp_numeric_diagnosis_r1_20261106\\\\diagnostic_worker.py\", \"--mode\", \"fp64\"]]}"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\RUN_full.json",
+      "line_count": 1,
+      "matches": [
+        {
+          "line": 1,
+          "text": "{\"start_monotonic\": 196428.656, \"commands\": [[\"E:\\\\eitfm_c2_stages2-4_2026-11-03\\\\c2\\\\stage4_sessions\\\\work\\\\S02\\\\round2_20261104T114949Z\\\\.venv\\\\Scripts\\\\python.exe\", \"-B\", \"E:\\\\eitfm_c2_stages2-4_2026-11-03\\\\c2\\\\stage4_sessions\\\\work\\\\S07\\\\real_dual_ddp_numeric_diagnosis_r1_20261106\\\\diagnostic_worker.py\", \"--mode\", \"full\"]]}"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\RUN_ONCE.json",
+      "line_count": 1,
+      "matches": [
+        {
+          "line": 1,
+          "text": "{\"pid\": 118628, \"started_ns\": 196428640000000}"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\run_once.py",
+      "line_count": 212,
+      "matches": [
+        {
+          "line": 52,
+          "text": "        limits=dict(per_path_seconds=60,cleanup_seconds=15,total_seconds=300),"
+        },
+        {
+          "line": 108,
+          "text": "                   value.get('all_reaped',True) for value in states.values()),"
+        },
+        {
+          "line": 119,
+          "text": "        json.dump(dict(pid=os.getpid(),started_ns=time.monotonic_ns()),stream)"
+        },
+        {
+          "line": 134,
+          "text": "            json.dump(dict(start_monotonic=time.monotonic(),commands=commands),stream)"
+        },
+        {
+          "line": 160,
+          "text": "            cleanup_start=time.monotonic();cleanup_deadline=min(cleanup_start+15,end)"
+        },
+        {
+          "line": 163,
+          "text": "                    if os.name=='posix':os.killpg(process.pid,signal.SIGTERM)"
+        },
+        {
+          "line": 164,
+          "text": "                    else:process.terminate()"
+        },
+        {
+          "line": 165,
+          "text": "            grace=min(cleanup_deadline,time.monotonic()+2)"
+        },
+        {
+          "line": 169,
+          "text": "                    if os.name=='posix':os.killpg(process.pid,signal.SIGKILL)"
+        },
+        {
+          "line": 170,
+          "text": "                    else:process.kill()"
+        },
+        {
+          "line": 171,
+          "text": "            while any(p.poll() is None for p in processes) and time.monotonic()<cleanup_deadline:time.sleep(.01)"
+        },
+        {
+          "line": 176,
+          "text": "                   all_reaped=all(p.returncode is not None for p in processes),"
+        },
+        {
+          "line": 177,
+          "text": "                   seconds=time.monotonic()-stage_start,cleanup_seconds=time.monotonic()-cleanup_start)"
+        },
+        {
+          "line": 180,
+          "text": "        return reason=='COMPLETED' and state['all_reaped']"
+        },
+        {
+          "line": 199,
+          "text": "        states['ddp']=dict(status='STOPPED_DDP_BIND_PERMISSION_FAILURE',error=str(exc),all_reaped=True,pids=[])"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\RUN_sequence.json",
+      "line_count": 1,
+      "matches": [
+        {
+          "line": 1,
+          "text": "{\"start_monotonic\": 196432.14, \"commands\": [[\"E:\\\\eitfm_c2_stages2-4_2026-11-03\\\\c2\\\\stage4_sessions\\\\work\\\\S02\\\\round2_20261104T114949Z\\\\.venv\\\\Scripts\\\\python.exe\", \"-B\", \"E:\\\\eitfm_c2_stages2-4_2026-11-03\\\\c2\\\\stage4_sessions\\\\work\\\\S07\\\\real_dual_ddp_numeric_diagnosis_r1_20261106\\\\diagnostic_worker.py\", \"--mode\", \"sequence\"]]}"
+        }
+      ]
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\SOURCE_INPUTS.json",
+      "line_count": 108,
+      "matches": []
+    }
+  ],
+  "exclusions": [
+    "raw/*.pt",
+    "environment tree",
+    "remote",
+    "current process table"
+  ],
+  "passes": 1
+}

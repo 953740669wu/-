@@ -1,0 +1,80 @@
+{
+  "task": "S07_NUMERIC_DIAGNOSIS_R1",
+  "status": "STOPPED_DDP_PERMISSION_FAILURE",
+  "diagnosis": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS.json",
+    "bytes": 41741,
+    "sha256": "b24834c500da2cb595ad9baf548fad6f922d7c51a773ac27daec1e665202a3e4"
+  },
+  "report": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\REPORT.md",
+    "bytes": 4556,
+    "sha256": "9d77987fc05ba3c4112508f028eda59014b2240b28b019d4dceaa26b6c395fd1"
+  },
+  "source_inputs": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\SOURCE_INPUTS.json",
+    "bytes": 5132,
+    "sha256": "928640767a49b066e41901c62d763083b5296a18dd8b0d29edb0cb79849580d5"
+  },
+  "hypotheses": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\HYPOTHESES_AND_CHECKS.md",
+    "bytes": 3404,
+    "sha256": "707246915a149a6466ae8936177332e59c3fdf18b945e1e80c2366e298b24fa4"
+  },
+  "scripts": [
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\run_once.py",
+      "bytes": 14331,
+      "sha256": "693b14327d4aa1da2845ec6c2df3f95bf4a2a9960ebb92d1f792d05316789905"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\diagnostic_worker.py",
+      "bytes": 18418,
+      "sha256": "948fdd8d2f68b9422f65fc3c2a6ab3c1b7958ddd4f2e551dd3132b8545ad6d24"
+    }
+  ],
+  "evidence_manifest": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\EVIDENCE_MANIFEST.json",
+    "bytes": 11135,
+    "sha256": "8c596027714f4aba4796876750f6ec2aa7ab2b67c615451cad7c31688b6b246b"
+  },
+  "archive_scope": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\ARCHIVE_SCOPE.json",
+    "bytes": 6521,
+    "sha256": "eab0c7ff9c165546f9d5d097fec1c61bfcc3f3c7eb730c441fc60bb64db863ef"
+  },
+  "original_inputs_unchanged": true,
+  "run_counts": {
+    "full": 1,
+    "sequence": 1,
+    "ddp": 1,
+    "fp64": 1
+  },
+  "all_owned_children_reaped": true,
+  "local_wall_seconds": 11.797000000020489,
+  "specific_question_for_S02": null,
+  "no_training_release": true,
+  "new_jobs": 0,
+  "computed_after_communication_failure": false,
+  "final_revision": 1,
+  "immutable_after_this_publish": true,
+  "initial_stop_snapshots": [
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\AUTOMATIC_STOP_DIAGNOSIS.json",
+      "bytes": 28999,
+      "sha256": "e9aff4a6cadcc0821c5b854f7b44d38f703499ae85585fb81217f1c4dc2233cd"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\AUTOMATIC_STOP_REPORT.md",
+      "bytes": 2722,
+      "sha256": "e9e7e670a54dbc9870b9896cad1e608b99662c91bae18669281d93912671b6cf"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\AUTOMATIC_STOP_DIAGNOSIS_READY.json",
+      "bytes": 2590,
+      "sha256": "acace1fd0252519780c4c152dd2ae201735bf2e2348278e0c533b56968f8baab"
+    }
+  ],
+  "post_stop_actions": "Only JSON interpretation, explanatory report and hash-index closure; no source/numeric/model/communication rerun.",
+  "source_inputs_unchanged": true
+}

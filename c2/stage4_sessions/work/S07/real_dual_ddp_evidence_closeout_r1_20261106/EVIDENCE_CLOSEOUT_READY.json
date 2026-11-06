@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "task": "S07",
+  "round": "REAL_DUAL_DDP_EVIDENCE_CLOSEOUT_R1_20261106",
+  "status": "COMPLETE_EXISTING_EVIDENCE_GAPS_FINALIZED",
+  "immutable_after_publish": true,
+  "evidence_closeout": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_evidence_closeout_r1_20261106\\EVIDENCE_CLOSEOUT.json",
+    "bytes": 77762,
+    "sha256": "7baa9a6d7c0696741f047178e43ad4e4b51732910d271ec50d30ed80d9a131bf"
+  },
+  "report": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_evidence_closeout_r1_20261106\\REPORT.md",
+    "bytes": 3054,
+    "sha256": "faf8a385d46f5595786b7a810771ff03b8bebea06a35e79d4f9ab55696eba7af"
+  },
+  "input_manifest": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_evidence_closeout_r1_20261106\\INPUT_MANIFEST.json",
+    "bytes": 17495,
+    "sha256": "f4f12088c86a10bd08793af242ed174a13dcb26501d4c0687528eceb9a4262e3"
+  },
+  "source_recheck": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_evidence_closeout_r1_20261106\\SOURCE_RECHECK.json",
+    "bytes": 16542,
+    "sha256": "fafba2acbcaed2b246fd8c340c6966fc8bb13e65527d0b5b5922c235486af4ff"
+  },
+  "targeted_search": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_evidence_closeout_r1_20261106\\evidence\\TARGETED_SEARCH.json",
+    "bytes": 20574,
+    "sha256": "ede6ce79977d29fd212888e411037afcb1d2b3ffeff9be984363485a431098f8"
+  },
+  "raw_metadata_inspection": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_evidence_closeout_r1_20261106\\evidence\\RAW_METADATA_INSPECTION.json",
+    "bytes": 4388,
+    "sha256": "74eddc415f24a5073b14129697f5ba280837c5a7571bfc822d29b151b9eb01fa"
+  },
+  "archive_scope": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_evidence_closeout_r1_20261106\\ARCHIVE_SCOPE.json",
+    "bytes": 10232,
+    "sha256": "d77e05a8942c04cfb38f61ef73bd35c2526eb8c8bf82a3c71d11050ec5825a4b"
+  },
+  "sha256sums": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_evidence_closeout_r1_20261106\\SHA256SUMS.txt",
+    "bytes": 819,
+    "sha256": "841754ff53582374f12ebcb7d184ebb6cc035ed2c2227270a68de922658f5801"
+  },
+  "original_diagnosis_ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS_READY.json",
+    "bytes": 3723,
+    "sha256": "de9c6e26ea7d2f280b835e1de44dbc4697d0fee2c0cc69fe66b4fa986bf07dde"
+  },
+  "original_S01_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS_REVIEW.json",
+    "bytes": 25271,
+    "sha256": "a18ab449e1d99fd830fb6360d3abd85add53dbdf175081472417634516a47314"
+  },
+  "classification_counts": {
+    "SUPPORTED": 5,
+    "UNSUPPORTED": 4,
+    "NOT_RECORDED": 6
+  },
+  "original_files_verified": 56,
+  "originals_unchanged": true,
+  "historical_compute_and_descendant_15s_cleanup": "UNKNOWN_NOT_PROVEN",
+  "historical_gaps_recovered": false,
+  "gaps_finalized": true,
+  "popen_receipts_scope": "Only five recorded direct Popen handles; no assertion actual compute/descendant historical15s cleanup proved.",
+  "activity": {
+    "model_runs": 0,
+    "tests": 0,
+    "torch_imports": 0,
+    "tensor_deserializations": 0,
+    "DDP_or_communication_runs": 0,
+    "current_PID_queries": 0,
+    "remote_scans": 0,
+    "cluster_jobs": 0,
+    "elevation": 0,
+    "installs": 0,
+    "git_operations": 0,
+    "contraction_runs": 0,
+    "current_process_table_queries": 0,
+    "whole_disk_scans": 0,
+    "raw_archive_metadata_inspections": 2
+  },
+  "training_FAIL_preserved": true,
+  "numerical_thresholds_unchanged": true,
+  "training_pass": false,
+  "execution_authorized": false,
+  "specific_question_for_S02": null,
+  "next_action": "S01 independent read-only closeout review. No new run/wait/deployment/job authorized."
+}

@@ -1,17 +1,18 @@
 # S07 简短状态
 
-- 更新/轮次：2026-11-06，NUMERIC_DIAGNOSIS_R1，当前07窗口续接；仅新诊断目录及自身状态可写。
-- 当前状态：STOPPED_DDP_PERMISSION_FAILURE；新两rank在before_pg报本地10013/10049后立即停止，双方回收，无重试、换backend、提权、安装或job。
-- 本轮范围：原seed7/TinyEncoder AST、输入/初值/mask/原比较器固定；一次完整B64、一次顺序32+32、一真实DDP尝试，另一次有证据前提的float64操作数收缩对照。
-- 最早数值差异：前向逐层输出、反向中间adjoint完全一致；coarse loss标量归约差2.9802322387695312e-8、total差5.960464477539063e-8，均过原门槛。
-- 最早越阈值：按反向依赖为tf.weight权重梯度收缩；tf最大绝对3.723800182342529e-5、相对1.142869133502608e-4；val.weight/pos.weight相对9.410191088070238e-5。
-- 原失败复现：不经过DDP的顺序分片已复现同3项失败，全部13项标量误差与旧DDP原件精确相同。完整B64仍是正式参考，顺序分片仅用于定位。
-- 原因证据：失败3个weight对应输入及输出adjoint逐位相同；float64同操作数全归约/32+32归约在val/pos差0，tf差6.827871601444713e-14。支持fp32权重收缩/累计精度受分组形状影响，未定位精确native内核/指令。
-- 原因边界：新DDP未完成PG，无新输出/梯度；DDP额外影响仍UNKNOWN。旧13标量一致不证明旧未保存梯度向量相同。没有证据判定分母/DDP缩放实现缺陷，不能用float64给fp32 PASS。
-- 一致性：四准备进程初值SHA及post-init RNG SHA一致，实际intra/inter-op均8/8且环境相同；原实际线程数未记录，为历史比较缺口。mask1+3=4、coarse16384；分母及输入梯度缩放来源/新观测在JSON分列。
-- 检查/预算：34项扩展原指标及原13项保留；完整B64/顺序分片/float64均完成，DDP唯一尝试2.719秒停/清理0.016秒，5个自建子进程均回收，总路径壁钟11.594秒；原每路径60/清理15/总300上限未扩。
-- 固定交接：real_dual_ddp_numeric_diagnosis_r1_20261106/DIAGNOSIS_READY.json，SHA256=de9c6e26ea7d2f280b835e1de44dbc4697d0fee2c0cc69fe66b4fa986bf07dde；含DIAGNOSIS/REPORT/来源/指标/进程回收及精确归档清单。
-- 证据：同目录HYPOTHESES_AND_CHECKS.md、SOURCE_INPUTS.json、evidence/FULL_VS_SEQUENCE.json、FLOAT64_CONTROL.json、ddp0.log/ddp1.log及监督记录；原始激活/梯度仅本地raw索引，不保存模型权重，归档排除环境/数据/权重/raw张量。
-- 保持不变：17项必要来源bytes/SHA末次全匹配，原TRAINING_READY/训练包/原FAIL/01最终FAIL均未改，原绝对2e-5/相对2e-6及所有失败项不动；无数值重跑寻PASS。
-- 下一步：01按DIAGNOSIS_READY独立核归因及缺口，交协调决定是否另定候选；本轮不改冻结训练包、不补跑DDP、不恢复900秒job。需要02回答的具体接口/数学疑点：无。
-- 结论边界：C2模型训练、真实语料、优化器更新、性能/扩展效率均未执行/接受；原训练FAIL继续保持；无Git暂存/提交/推送。通信失败后仅JSON解释、报告与索引闭合及本状态更新，无新张量计算。
+- 更新/轮次：2026-11-06，EVIDENCE_CLOSEOUT_R1；当前07会话只读证据收尾。
+- 当前状态：COMPLETE_EXISTING_EVIDENCE_GAPS_FINALIZED；无法恢复的缺口已定稿，完成收尾不表示历史清理实测或训练通过。
+- 本轮范围：仅新real_dual_ddp_evidence_closeout_r1_20261106/及本状态/增量；原诊断、READY、FAIL、冻结训练包均未改。
+- 核查增量：一次定向检索40份原诊断文本，连同明确引用原件核56项bytes/SHA/mtime；两份raw仅检视ZIP pickle元数据opcode，无Torch导入/反序列化/数值计算。
+- 结论分级：15项声明逐条列原件路径/bytes/SHA/原字段，5 SUPPORTED、4 UNSUPPORTED、6 NOT_RECORDED；支持只适用于各条限定范围。
+- PID差异：full Popen111828/compute124816；sequence121848/117608；DDP0 116596/118980；DDP1 111740/123980；fp64仅Popen123160，compute未记录。按mode/rank可关联逻辑路径，不等于OS父子证明。
+- 身份缺口：无当时PPID、创建身份、进程树/session/job-object或完整后代清单；PID差异是否来自venv启动器也未证实，实际归属UNKNOWN。
+- 回收声明纠正：原all_reaped/exit_codes及0.016秒DDP cleanup只支持5个直接Popen句柄的监督回收记录；上轮“双方/五个子进程均回收”过宽，本轮状态收窄，原文保留。
+- 清理时序：实际compute及后代的TERM/KILL/退出时刻未记录，15秒内是否全回收UNKNOWN；不把RUN起点+耗时、mtime或计算hook时间合成为退出事件。
+- 现时PID限制：只引用01于2026-11-06T10:42:27.6659060Z的CURRENT_PID_CHECK，未新查进程；该时刻四PID未找到不能证明当时15秒内退出，也不覆盖fp64/完整后代。
+- 其它缺口：fp64同解释器/无调线程代码仅静态来源支持，自身PID/实际线程快照未记录；01指标读取进程8线程不能补它。旧失败实际初态/线程/中间向量、初始参数张量、精确内核仍未恢复。
+- 原DDP：权限停点未完成PG，新增梯度/分母/平均系数验证仍NOT_RUN，额外DDP效应UNKNOWN；不补跑。
+- 固定交接：real_dual_ddp_evidence_closeout_r1_20261106/EVIDENCE_CLOSEOUT_READY.json，SHA256=91634c57086c6fb4e6e780de1cb413f185a01fb6086b40ccfb4802344fd90b33。
+- 证据/归档：同目录EVIDENCE_CLOSEOUT.json、REPORT.md、INPUT_MANIFEST.json、SOURCE_RECHECK.json、SHA256SUMS.txt、ARCHIVE_SCOPE.json及evidence/定向检索/元数据记录。归档清单仅本轮新目录+两个短状态，不混旧55份/已验收268批次，排除环境/数据/权重/ZIP/raw。
+- 活动：0模型/测试/收缩/DDP/通信/新PID查询/远端扫描/安装/提权/job/Git操作；不扫描全盘或环境树，无后台等待。
+- 下一步：01依本轮READY独立复核，判断可否按“有限诊断/缺口保留”归档；原数值阈值、训练FAIL及不放行保持。需要02回答的具体疑点：无。

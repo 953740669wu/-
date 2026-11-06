@@ -1,0 +1,147 @@
+{
+  "files": [
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\raw\\full.pt",
+      "bytes": 2953463,
+      "sha256": "9a6ae2017435ae9baba8fa8db25c521aad9e4daec58d7e980aad91be4b462c3d",
+      "metadata_member": "full/data.pkl",
+      "metadata_bytes": 9400,
+      "metadata_sha256": "eb7a5e59f8b69af585e6f064a740f8119b0ebed192b2cf676e04f2a26ee8564b",
+      "observed_literal_keys": [
+        {
+          "literal": "metadata",
+          "opcode": "BINUNICODE",
+          "position": 6
+        },
+        {
+          "literal": "initialization_sha256",
+          "opcode": "BINUNICODE",
+          "position": 59
+        },
+        {
+          "literal": "post_init_rng_sha256",
+          "opcode": "BINUNICODE",
+          "position": 158
+        },
+        {
+          "literal": "pid",
+          "opcode": "BINUNICODE",
+          "position": 2218
+        },
+        {
+          "literal": "tensors",
+          "opcode": "BINUNICODE",
+          "position": 2234
+        },
+        {
+          "literal": "parameter_grads",
+          "opcode": "BINUNICODE",
+          "position": 3924
+        },
+        {
+          "literal": "hook_order",
+          "opcode": "BINUNICODE",
+          "position": 8078
+        },
+        {
+          "literal": "monotonic_ns",
+          "opcode": "BINUNICODE",
+          "position": 8127
+        }
+      ],
+      "absent_literal_keys": [
+        "cleanup_end",
+        "cleanup_end_ns",
+        "cleanup_start",
+        "cleanup_start_ns",
+        "create_time",
+        "creation_time",
+        "exit_monotonic_ns",
+        "exit_time",
+        "initial_parameters",
+        "initial_weights",
+        "kill_time",
+        "parent_pid",
+        "parent_process_id",
+        "ppid",
+        "start_ticks",
+        "state_dict",
+        "terminate_time"
+      ],
+      "method": "ZIP metadata data.pkl opcode inspection only; no unpickle/import torch/tensor storage read/model execution",
+      "limit": "hook_order timestamps concern computation observations, not OS creation/exit or cleanup; key presence alone does not reconstruct an ownership chain"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\raw\\sequence.pt",
+      "bytes": 2966641,
+      "sha256": "ac6972733693d1332e35223aff1a1a3b207af8d998e2d23db290e2a6daa6cd6c",
+      "metadata_member": "sequence/data.pkl",
+      "metadata_bytes": 12674,
+      "metadata_sha256": "1bcd1f24e46fd895259fa9b8498e0d9a3b7eea1906fd2fdd4c1706b3b7313223",
+      "observed_literal_keys": [
+        {
+          "literal": "metadata",
+          "opcode": "BINUNICODE",
+          "position": 6
+        },
+        {
+          "literal": "initialization_sha256",
+          "opcode": "BINUNICODE",
+          "position": 63
+        },
+        {
+          "literal": "post_init_rng_sha256",
+          "opcode": "BINUNICODE",
+          "position": 162
+        },
+        {
+          "literal": "pid",
+          "opcode": "BINUNICODE",
+          "position": 2222
+        },
+        {
+          "literal": "tensors",
+          "opcode": "BINUNICODE",
+          "position": 2238
+        },
+        {
+          "literal": "parameter_grads",
+          "opcode": "BINUNICODE",
+          "position": 3928
+        },
+        {
+          "literal": "hook_order",
+          "opcode": "BINUNICODE",
+          "position": 9545
+        },
+        {
+          "literal": "monotonic_ns",
+          "opcode": "BINUNICODE",
+          "position": 9594
+        }
+      ],
+      "absent_literal_keys": [
+        "cleanup_end",
+        "cleanup_end_ns",
+        "cleanup_start",
+        "cleanup_start_ns",
+        "create_time",
+        "creation_time",
+        "exit_monotonic_ns",
+        "exit_time",
+        "initial_parameters",
+        "initial_weights",
+        "kill_time",
+        "parent_pid",
+        "parent_process_id",
+        "ppid",
+        "start_ticks",
+        "state_dict",
+        "terminate_time"
+      ],
+      "method": "ZIP metadata data.pkl opcode inspection only; no unpickle/import torch/tensor storage read/model execution",
+      "limit": "hook_order timestamps concern computation observations, not OS creation/exit or cleanup; key presence alone does not reconstruct an ownership chain"
+    }
+  ],
+  "archive_tensor_payloads_read": 0
+}

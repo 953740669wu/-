@@ -1,0 +1,211 @@
+{
+  "metadata": {
+    "mode": "full",
+    "rank": null,
+    "initialization_sha256": "38a200103f7ca459effccbc4c70f17549ae1573ee08bf1d346f00883c6da17d3",
+    "post_init_rng_sha256": "49c8acc6455bdd0081eb5c1c9a96e68090d17c22a114a24aba4eaad2b165e3d0",
+    "environment": {
+      "python": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Scripts\\python.exe",
+      "torch": "2.7.1+cpu",
+      "numpy": "2.2.6",
+      "torch_file": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Lib\\site-packages\\torch\\__init__.py",
+      "torch_sha256": "9e46616b9d27c3553ae7587381510cc5a42e8b6fa1c37694c7dc9ea829b11c9b",
+      "intraop": 8,
+      "interop": 8,
+      "default_dtype": "torch.float32",
+      "torch_config": "PyTorch built with:\n  - C++ Version: 201703\n  - MSVC 192930158\n  - Intel(R) oneAPI Math Kernel Library Version 2025.1-Product Build 20250306 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 2019\n  - LAPACK is enabled (usually provided by MKL)\n  - CPU capability usage: AVX512\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=e2d141dbde55c2a4370fac5165b0561b6af4798b, CXX_COMPILER=C:/actions-runner/_work/pytorch/pytorch/pytorch/.ci/pytorch/windows/tmp_bin/sccache-cl.exe, CXX_FLAGS=/DWIN32 /D_WINDOWS /GR /EHsc /Zc:__cplusplus /bigobj /FS /utf-8 -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE /wd4624 /wd4068 /wd4067 /wd4267 /wd4661 /wd4717 /wd4244 /wd4804 /wd4273, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.7.1, USE_CUDA=0, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=OFF, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, \n",
+      "environment": {
+        "OMP_NUM_THREADS": null,
+        "MKL_NUM_THREADS": null,
+        "OPENBLAS_NUM_THREADS": null,
+        "OMP_PLACES": null,
+        "OMP_PROC_BIND": null,
+        "GLOO_SOCKET_IFNAME": null,
+        "USE_LIBUV": null,
+        "PYTHONPATH": null
+      }
+    },
+    "parameters": 1337,
+    "seed": 7,
+    "optimizer_updates": 0,
+    "pid": 124816
+  },
+  "global_counts": [
+    4,
+    16384
+  ],
+  "local_counts": [
+    [
+      4,
+      16384
+    ]
+  ],
+  "backward_multiplier": 1,
+  "parameter_grad_divisor": 1,
+  "input_grad_divisor": 1,
+  "tensor_indices": {
+    "activation.encoder.input": {
+      "shape": [
+        64,
+        208
+      ],
+      "dtype": "torch.float32",
+      "sha256": "e73917cf185d14a4a5b158e496fdac09136bf69e986a650f51b4e3928a61a94f"
+    },
+    "activation.val.input": {
+      "shape": [
+        64,
+        208,
+        1
+      ],
+      "dtype": "torch.float32",
+      "sha256": "e73917cf185d14a4a5b158e496fdac09136bf69e986a650f51b4e3928a61a94f"
+    },
+    "activation.val.output": {
+      "shape": [
+        64,
+        208,
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "5d01a143a1c2600b0e699a1f66ec9666913901ff707b33f338834208352dfeeb"
+    },
+    "activation.pos.input": {
+      "shape": [
+        64,
+        208,
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "749cecefd869e412d4338c4ae37dd11cba9b3c965d01b7af1734e9b43e0cc4d0"
+    },
+    "activation.pos.output": {
+      "shape": [
+        64,
+        208,
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "32ae35824e1206bd5d83d5c20ec7e44c9c076d7df7d785e1fbdded160f512579"
+    },
+    "activation.tf.input": {
+      "shape": [
+        64,
+        208,
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "ffe1f01dd4012fa2ce943e77e8c1dafb5e0a5a695805155bbee4368389869caa"
+    },
+    "activation.tf.output": {
+      "shape": [
+        64,
+        208,
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "977892d28f71375f106f512b66748f19f8a78d244c8761f8c478228eb33d4984"
+    },
+    "activation.encoder.output": {
+      "shape": [
+        64,
+        208,
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "977892d28f71375f106f512b66748f19f8a78d244c8761f8c478228eb33d4984"
+    },
+    "activation.head_v.input": {
+      "shape": [
+        64,
+        208,
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "977892d28f71375f106f512b66748f19f8a78d244c8761f8c478228eb33d4984"
+    },
+    "activation.head_v.output": {
+      "shape": [
+        64,
+        208,
+        1
+      ],
+      "dtype": "torch.float32",
+      "sha256": "3f78009a8b42e9380c1ece3eb882299ccc7d70da50d5a849f1fa7b389bedc2ce"
+    },
+    "activation.head_coarse.input": {
+      "shape": [
+        64,
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "7059aa908b60a4b8291a2ac414ed52e8094ef08353505983fa73ac5ae7b8dc27"
+    },
+    "activation.head_coarse.output": {
+      "shape": [
+        64,
+        256
+      ],
+      "dtype": "torch.float32",
+      "sha256": "35c25003cd5170bd197eb5056f9ef3d45e71c81fb993db3e371db72a458f19f1"
+    },
+    "adjoint.head_coarse.output": {
+      "shape": [
+        64,
+        256
+      ],
+      "dtype": "torch.float32",
+      "sha256": "31d4f0dede47d3a7e0eee40b2e820422c01a9bdde4605a5390abafe02f787270"
+    },
+    "adjoint.head_v.output": {
+      "shape": [
+        64,
+        208,
+        1
+      ],
+      "dtype": "torch.float32",
+      "sha256": "a52e49a2c2079e877643536df287fce0a89ea12906269791c44e91bc048a08da"
+    },
+    "adjoint.tf.output": {
+      "shape": [
+        64,
+        208,
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "c73ce97e969e17698506f8104b4e4411c9a121dd9058c44ab97d564e721af859"
+    },
+    "adjoint.encoder.output": {
+      "shape": [
+        64,
+        208,
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "c73ce97e969e17698506f8104b4e4411c9a121dd9058c44ab97d564e721af859"
+    },
+    "adjoint.pos.output": {
+      "shape": [
+        64,
+        208,
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "bb372291cb33c139ac0e81dc9f3adcc36e512c40773ce117ae2a0f032ef6edfb"
+    },
+    "adjoint.val.output": {
+      "shape": [
+        64,
+        208,
+        4
+      ],
+      "dtype": "torch.float32",
+      "sha256": "bb372291cb33c139ac0e81dc9f3adcc36e512c40773ce117ae2a0f032ef6edfb"
+    }
+  },
+  "losses": {
+    "voltage": 0.1724368780851364,
+    "coarse": 0.30482250452041626,
+    "total": 0.47725939750671387
+  }
+}
