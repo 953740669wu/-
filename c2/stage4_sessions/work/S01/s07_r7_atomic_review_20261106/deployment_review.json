@@ -1,0 +1,322 @@
+{
+  "status": "PASS_DEPLOYMENT_PRE_REVIEW",
+  "blockers": [],
+  "zip_members": 35,
+  "zip_files": 34,
+  "source_index_entries": 32,
+  "unchanged_R6_helpers": 7,
+  "bindings": {
+    "inner_package_sha256": "57a1f4c530ce2c9a5edcfe9cc9741129fb1ba4f90459fde459803103a362382d",
+    "inner_manifest_sha256": "f9441fe47988dbb8a47365f230f2f0eb54ed59779e43fbab0d68562a19855196",
+    "observer_sha256": "5b3ad54e675a293e3eb51d292b149c6939bbdc52b68322f340eb76be3b02b875",
+    "reader_sha256": "7b7cc96edd9401981a61db5122bf785e3e2348a41cda5363ba5d2ea4b0217d07",
+    "cpu_contract_sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+    "atomic_tests_sha256": "9ab4e1b49ce3a2a93ca59614753ee70d6de71c0c6cbd831ca311a495dcdd0e7f",
+    "interface_ready_sha256": "d0f0fc25e226066803f1290696436afbfebc3ba81e945fa567cc4e9f0c62cbba",
+    "comm_probe_sha256": "42424581db02b15ee8af0c65f85553dff61767979d9644b40fe954f779434608",
+    "observation_contract_sha256": "448cad1a857165c74d0cb241e32b18480d1495ec995704f9f6c5de2208712dde",
+    "deployment_package_sha256": "963ad618d09c998764342f446207d07ee29fcb95818386503ffea6e232de42e4",
+    "deployment_source_manifest_sha256": "e7511b33e39f459bce6e0e56627bcce31d7db610a0f9ec00f0b4ab973915dd1e",
+    "task_card_sha256": "a2bdce7fad12bc8ef8e0de985c6a25dc3316bf63009568138d58c2100bccf28e"
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_cores_per_domain": 36,
+    "actual_physical_cores": 72,
+    "allocated_cores": 76,
+    "cleanup_seconds": 15,
+    "closing_seconds": 15,
+    "consumer_seconds": 270,
+    "domains": 2,
+    "exclusive": true,
+    "job_seconds": 300,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 4
+  },
+  "workload": {
+    "atomic_report_tests": 17,
+    "case_deadline_seconds": 30,
+    "case_order": [
+      "normal",
+      "crash",
+      "collective-timeout",
+      "watchdog"
+    ],
+    "communication_criterion": "original candidate/run_checks.py check_case unchanged; watchdog requires both injected_hang",
+    "exit": false,
+    "linux_checks": 88,
+    "max_jobs": 1,
+    "pg_timeout_seconds": 5,
+    "proc_shared_window_seconds": 2,
+    "python_dump_before_deadline_seconds": 5,
+    "repeat": false,
+    "retry": false,
+    "skipped_checks": 0
+  },
+  "remote_staging_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/S07_ATOMIC_R7_20261106T073004Z_P1",
+  "concrete_expected_and_validate_accept": true,
+  "archive_basename_bug_resolved": true,
+  "fixed_review_gate_sha256": "8abb04c3f2ed6a615e7bd69a5c85bdecd630038052a9529a767fe7801df7e131",
+  "old_draft_not_executable_approval": true,
+  "local_fixture_checks": 15,
+  "linux_login_fixture_checks": 15,
+  "current_job_linux88": "PENDING",
+  "consumer_deadline": 270,
+  "shared_cleanup_deadline": 285,
+  "job_deadline": 300,
+  "original_case_criteria_and_cleanup_retained": true,
+  "formal_and_temporary_reports_separate": true,
+  "diagnostic_completion_separate_from_communication": true,
+  "signal_fault_cleanup": "NOT_RUN_THIS_ROUND",
+  "S01_jobs": 0,
+  "S01_remote_connections": 0,
+  "S01_Torch_Gloo_runs": 0,
+  "inputs": [
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\S07_R7_ATOMIC_REPORT_NEXT_20261106.md",
+      "bytes": 10382,
+      "sha256": "a2bdce7fad12bc8ef8e0de985c6a25dc3316bf63009568138d58c2100bccf28e"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\bounded_round_step.py",
+      "bytes": 675,
+      "sha256": "a8a53122c36bef163c2b90d243d197c146bebc2da9a40f6bf0b3ed9c3c7c66ed"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\owned_processes.py",
+      "bytes": 4716,
+      "sha256": "4846cd782782ff76b261028c8a1b54e56a7fd9c247b95dce4294a5dfb35ccb63"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\run_s07_diag_job.sh",
+      "bytes": 682,
+      "sha256": "c063d060d2107d7794fe821447e11093904552eb70b52aeb48608034019ab1bb"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\scheduler_handoff.py",
+      "bytes": 6367,
+      "sha256": "f907cbf8286f7bc9035c9e58f986c3b342b2a6f6f5a1c60f97834915f2a7065c"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\stack_inventory.py",
+      "bytes": 6300,
+      "sha256": "1c80acc8636eca20ebfcd9a1efdd2251fe0de5b631ba9f1741b4aff104d867d4"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\submit_once.py",
+      "bytes": 2712,
+      "sha256": "40369e6e4209d65be678f464219942cbf849f338a8706acb04eadccdde3f8bf2"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\trace_inventory.py",
+      "bytes": 4949,
+      "sha256": "8c8897e735110a92c563b5637ec4ea57db9260e2efcccce08510316cbe43f0af"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\ARTIFACT_SHA256.json",
+      "bytes": 3039,
+      "sha256": "e7511b33e39f459bce6e0e56627bcce31d7db610a0f9ec00f0b4ab973915dd1e"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\COMMANDS.md",
+      "bytes": 4628,
+      "sha256": "a90dbe71720074f19a5659737a0ad6251c0c1030123c2817b07ff8fc8eb4bb62"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\COMMON_REUSE_CHECK.json",
+      "bytes": 2616,
+      "sha256": "47d50d687201f5ea97c5b30c07e0ceb16eecbaf5411541a5a4970f5303669a4c"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\INTERFACE_FOR_S00.md",
+      "bytes": 4295,
+      "sha256": "7e0b6be1ba780ed9a713b41bcbd8666c298780d63cce29573aedea999b712c73"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\MINIMAL.diff",
+      "bytes": 30661,
+      "sha256": "1031fae96d74edb133b39b388382521710c09e815b9fde29aa910bb15668220a"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\OBSERVATION_CONTRACT.md",
+      "bytes": 4755,
+      "sha256": "448cad1a857165c74d0cb241e32b18480d1495ec995704f9f6c5de2208712dde"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\OWNERSHIP_FROM_R12.diff",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\OWNERSHIP_PROVENANCE.json",
+      "bytes": 430,
+      "sha256": "2b64591fe3725d91c61d89b008b30fb3ad14c77a554cea351ce087806f80efef"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\S00_DEPLOYMENT_READY.json",
+      "bytes": 9828,
+      "sha256": "bd5f6f657a997f94c5c0ebe867b668d82bac4d5502ad1bb305310259358f1830"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\S00_S07_R7_ATOMIC_DEPLOYMENT.zip",
+      "bytes": 112105,
+      "sha256": "963ad618d09c998764342f446207d07ee29fcb95818386503ffea6e232de42e4"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\S07_ATOMIC_READY.json",
+      "bytes": 13960,
+      "sha256": "1c39805a36f5df33344aef04e2c977b23621ebc3da2f7ebc1bb884dcb821e766"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\S07_ATOMIC_REPORTS_R7.zip",
+      "bytes": 44414,
+      "sha256": "57a1f4c530ce2c9a5edcfe9cc9741129fb1ba4f90459fde459803103a362382d"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\S07_INTERFACE_READY.json",
+      "bytes": 1686,
+      "sha256": "d0f0fc25e226066803f1290696436afbfebc3ba81e945fa567cc4e9f0c62cbba"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\SOURCE_MANIFEST.json",
+      "bytes": 5910,
+      "sha256": "f9441fe47988dbb8a47365f230f2f0eb54ed59779e43fbab0d68562a19855196"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\TASK_CARD.md",
+      "bytes": 10382,
+      "sha256": "a2bdce7fad12bc8ef8e0de985c6a25dc3316bf63009568138d58c2100bccf28e"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\UNCHANGED_HELPERS.json",
+      "bytes": 1878,
+      "sha256": "a61f2c9ca4a2ef06fe903cb2653097f23ae74b249defa380fde91aeccb60f505"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\WORK_STARTED.json",
+      "bytes": 373,
+      "sha256": "2ed7b7f04367ed566fa32e378b70f6490dd728a575a933ad78a1b1dd94b55722"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\bounded_round_step.py",
+      "bytes": 675,
+      "sha256": "a8a53122c36bef163c2b90d243d197c146bebc2da9a40f6bf0b3ed9c3c7c66ed"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\collect_evidence.py",
+      "bytes": 3813,
+      "sha256": "1155b47d4228dda30d284f4e88f364bd90d41ec59ecda58a713b500a56b46e55"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\create_remote_once.py",
+      "bytes": 1518,
+      "sha256": "e1e7e80b176321436365898cd8ea2755c0a976e37cd85eb1d2f8cf2030bb95dc"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\DEPLOYMENT_CHECKS.json",
+      "bytes": 457,
+      "sha256": "ab3b30f22cb8cf4e36d78c931f06715c0dde7b1cf31f0c765c7f1635f68012a0"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\INITIAL_REMOTE_READONLY.txt",
+      "bytes": 5764,
+      "sha256": "8c85e7093a128a2d99932a3f5ca5b53c5ab1ace76a171b3200aa40d15d9582c6"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\LOGIN_DEPLOYMENT_CHECKS.txt",
+      "bytes": 3076,
+      "sha256": "c246bf347f4d6d12517a3614c2bc59016aebe00ebf5619c7442c21d0ef85e434"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\PREPUBLISH_CORRECTION.json",
+      "bytes": 673,
+      "sha256": "9ad1725a8eb3115904cde6536f3b5eb133494becf6688786d0a09bb292fc13de"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\PRE_DEPLOY_CHECK.txt",
+      "bytes": 1359,
+      "sha256": "253524ee607b42e3277a0b439512453afd0cdf0b449fbf0a4d2c9b7961c416ff"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\evidence\\tests_after.txt",
+      "bytes": 2854,
+      "sha256": "22cca5dcf3b72b6dbec96e7f7a476023903b97bac70123b41196de64b75b562c"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\freeze_deployment.py",
+      "bytes": 3919,
+      "sha256": "b5b7962a4ae5dcbd8eaa8d31bc7a2b7f09cb2e7476999712d34f0c9f7b854c5f"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\owned_processes.py",
+      "bytes": 4716,
+      "sha256": "4846cd782782ff76b261028c8a1b54e56a7fd9c247b95dce4294a5dfb35ccb63"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\prepare.py",
+      "bytes": 4563,
+      "sha256": "04464b51d15ef0105bb80e8f58ce56d4b8f08794a52bdfe4f62963554fbcf153"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\publish_ready.py",
+      "bytes": 4660,
+      "sha256": "d5acfa853796dc507739fb885db3fd497044e6e56e2fc0f3cc789f1ac1815c3b"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\rank_report_inventory.py",
+      "bytes": 3549,
+      "sha256": "7c75d81db7fdbc8fb6e86f5b4eb3bbaa09e1472302296c5ccc0d45093a9b9030"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\readiness_inventory.py",
+      "bytes": 7239,
+      "sha256": "7acd58715272993426c4a4bfac188848f235624d92ca2f82dfc53e757afaab36"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\review_gate.py",
+      "bytes": 2886,
+      "sha256": "8abb04c3f2ed6a615e7bd69a5c85bdecd630038052a9529a767fe7801df7e131"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\run_s07_diag_job.py",
+      "bytes": 6043,
+      "sha256": "790131292d3824a51263aa828649ca45ccfcda090f07613e88fa6564cb838b2c"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\run_s07_diag_job.sh",
+      "bytes": 682,
+      "sha256": "c063d060d2107d7794fe821447e11093904552eb70b52aeb48608034019ab1bb"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\scheduler_handoff.py",
+      "bytes": 6367,
+      "sha256": "f907cbf8286f7bc9035c9e58f986c3b342b2a6f6f5a1c60f97834915f2a7065c"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\stack_inventory.py",
+      "bytes": 6300,
+      "sha256": "1c80acc8636eca20ebfcd9a1efdd2251fe0de5b631ba9f1741b4aff104d867d4"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\submit_once.py",
+      "bytes": 2712,
+      "sha256": "40369e6e4209d65be678f464219942cbf849f338a8706acb04eadccdde3f8bf2"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\tests\\test_r7_deployment.py",
+      "bytes": 9072,
+      "sha256": "2241b291774fc5fb3c0c600fda8faa78eb2a682438d291c71a053791c07945da"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\tests\\test_rank_report_collection.py",
+      "bytes": 2803,
+      "sha256": "4c37b1fe83c819520afc092f53afa7099704658dcbb98eb9a3accc199b6adb04"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\trace_inventory.py",
+      "bytes": 4949,
+      "sha256": "8c8897e735110a92c563b5637ec4ea57db9260e2efcccce08510316cbe43f0af"
+    }
+  ]
+}

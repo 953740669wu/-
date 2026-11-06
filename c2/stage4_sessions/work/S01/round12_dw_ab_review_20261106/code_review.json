@@ -1,0 +1,290 @@
+{
+  "status": "PASS_CODE_PRE_REVIEW_PENDING_DEPLOYMENT",
+  "package_members": 27,
+  "source_entries": 26,
+  "reused_sources": 14,
+  "unique_added_gemm_if": true,
+  "all_other_AST_unchanged": true,
+  "sole_diff_exact": true,
+  "Python39_AST": true,
+  "LF": true,
+  "epoch_reference_exact_original25": true,
+  "unique_epoch_frames": 1600,
+  "author_local_checks": 9,
+  "author_local_metrics": 30,
+  "repeated_model_or_fake_math_tests": 0,
+  "actual_KML": "NOT_RUN_BY_S01",
+  "full_model": "NOT_RUN_BY_S01",
+  "new_jobs": 0,
+  "ABI": {
+    "m": 512,
+    "n": 2048,
+    "k": 13312,
+    "width": 1024,
+    "columns": [
+      0,
+      1024
+    ],
+    "B_offsets_bytes": [
+      0,
+      4096
+    ],
+    "C_offsets_bytes": [
+      0,
+      4096
+    ],
+    "lda": 512,
+    "ldb": 2048,
+    "ldc": 2048,
+    "A_last_float": 6815743,
+    "B_last_float": 27262975,
+    "C_last_float": 1048575
+  },
+  "stage_order": [
+    "target",
+    "strict",
+    "perf_baseline",
+    "perf_candidate"
+  ],
+  "counts": {
+    "baseline": [
+      149,
+      12,
+      149,
+      12,
+      0
+    ],
+    "candidate": [
+      149,
+      12,
+      161,
+      0,
+      24
+    ],
+    "fields": [
+      "logical",
+      "target_logical",
+      "native",
+      "target_full",
+      "target_tiles"
+    ]
+  },
+  "blockers": [],
+  "inputs": {
+    "ready": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\R12_READY.json",
+      "bytes": 4114,
+      "sha256": "98c12351d91c0379ed940cc38e3e76919516290e1402f7fa06fc060f952de60c"
+    },
+    "package": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\package\\S02_R12_DW_TWO_COLUMN_TILES.zip",
+      "bytes": 81080,
+      "sha256": "44232f7627cfbcf59fb721acd23af46aed8fa790b20fe743a3c9886717ec4de4"
+    },
+    "source_manifest": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\SOURCE_SHA256.json",
+      "bytes": 2492,
+      "sha256": "f61b8db309b8dad5853c7916d371b4484af609bd7610c096846bb21a7ac866bd"
+    },
+    "baseline": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\baseline\\kml_ops.py",
+      "bytes": 10255,
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+    },
+    "candidate_source": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\candidate\\kml_ops.py",
+      "bytes": 11311,
+      "sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea"
+    },
+    "contract": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\R12_CONTRACT.json",
+      "bytes": 3246,
+      "sha256": "16f19bab92e57e2730d801dab5fb012c32d53a37bf4011e516a5467fe5f378df"
+    },
+    "diff": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\diff\\CANDIDATE_ONLY.patch",
+      "bytes": 1504,
+      "sha256": "3dd99c0d3398eecc8ab2b4cc4fee1276a2e83e70ce94623177bde01d7523ff67"
+    },
+    "checks": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\local_validation.json",
+      "bytes": 3131,
+      "sha256": "666d26668ef1c41da70123cc7f2065b021f89475536a200d11b7c8e7759cefa3"
+    },
+    "local_numeric": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\native_screen.json",
+      "bytes": 5460,
+      "sha256": "8309a9e5066f88a6d830983ba4f85b74ecf5dba25f268e111774eebfea3c2464"
+    },
+    "import_identity": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\IMPORT_IDENTITY.json",
+      "bytes": 1157,
+      "sha256": "6348bdfa20144db670152948e83888ec549f3bad0adc119d87c97dfd29ae653d"
+    },
+    "target_evidence": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\TARGET_FROM_R11.json",
+      "bytes": 9068,
+      "sha256": "35d44d6382ac723f19385c2d5a1739a861fc53476f2c63317125e09226b417ea"
+    },
+    "report": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\REPORT.md",
+      "bytes": 6584,
+      "sha256": "311d6622e45f6bb113212a5c9963e114ffe0511df7ceba262b8115747420282e"
+    },
+    "proposal": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\AB_PROPOSAL.md",
+      "bytes": 5257,
+      "sha256": "15443016dbdbc1e031d90d5faba71d0180c30ffe57b3341da40ad9777cdf4358"
+    },
+    "package_manifest": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\package\\PACKAGE_MANIFEST.json",
+      "bytes": 8110,
+      "sha256": "c1ccb3a26e6c076c99d6977bb6e081e25c0e94ef084f47c5af8636ecb07046d9"
+    },
+    "source:AB_PROPOSAL.md": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\AB_PROPOSAL.md",
+      "bytes": 5257,
+      "sha256": "15443016dbdbc1e031d90d5faba71d0180c30ffe57b3341da40ad9777cdf4358"
+    },
+    "source:baseline/kml_ops.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\baseline\\kml_ops.py",
+      "bytes": 10255,
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+    },
+    "source:baseline/s4_models.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\baseline\\s4_models.py",
+      "bytes": 14121,
+      "sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2"
+    },
+    "source:candidate/kml_ops.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\candidate\\kml_ops.py",
+      "bytes": 11311,
+      "sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea"
+    },
+    "source:cpu36_contract.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\cpu36_contract.py",
+      "bytes": 11171,
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d"
+    },
+    "source:cpu36_guard.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\cpu36_guard.py",
+      "bytes": 4144,
+      "sha256": "80635c8c980100612758483ef83bd2b0d7bbda8fdc611384b095f80bbfeba38e"
+    },
+    "source:data_gate/engineering_data.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\data_gate\\engineering_data.py",
+      "bytes": 10342,
+      "sha256": "fbb89097f2aab0633b5be44e10b3160e4a8a33a2f69b1a889f4930df909e42b3"
+    },
+    "source:data_gate/INTERFACE.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\data_gate\\INTERFACE.json",
+      "bytes": 6682,
+      "sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669"
+    },
+    "source:DECISION_BEFORE_CODE.md": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\DECISION_BEFORE_CODE.md",
+      "bytes": 2671,
+      "sha256": "58b9da863b63e7e6d7cce67feea558100262e359677dbcede44c363767b13d49"
+    },
+    "source:diagnostic_common.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\diagnostic_common.py",
+      "bytes": 5468,
+      "sha256": "e3683f15e907c8a041795ccd4b775c78b235cc20bb09492108db4e950da7e705"
+    },
+    "source:engineering_training.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\engineering_training.py",
+      "bytes": 8430,
+      "sha256": "9009e96fe4cc8071048e8aed8d3dc11e20d04f4271c48dbe36472e4218d8e5dc"
+    },
+    "source:interfaces/cluster_runtime.env": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\interfaces\\cluster_runtime.env",
+      "bytes": 786,
+      "sha256": "32248af7857b7fd1616b19899c1411a4a59f9378c9231f0ec56f6c922ec2866d"
+    },
+    "source:memory_metrics.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\memory_metrics.py",
+      "bytes": 1203,
+      "sha256": "390f8669dee069e9153ee517419cf26131d59e88bd8c68ab3bd98dc495aa806f"
+    },
+    "source:profile_contract.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\profile_contract.py",
+      "bytes": 1109,
+      "sha256": "15fd272040db36271680e947b2d183e852ed60b343bbcd4ded8f88821d67793d"
+    },
+    "source:R12_CONTRACT.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\R12_CONTRACT.json",
+      "bytes": 3246,
+      "sha256": "16f19bab92e57e2730d801dab5fb012c32d53a37bf4011e516a5467fe5f378df"
+    },
+    "source:real_data.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\real_data.py",
+      "bytes": 14332,
+      "sha256": "6490b5aa7ab8eacc43ba7e4fa13ac64ebd6239671397774025979efdf050c8e0"
+    },
+    "source:reference/train_linear_ab_r10.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\reference\\train_linear_ab_r10.py",
+      "bytes": 14766,
+      "sha256": "27c9475cb18b0f8463b06215dad2c7874b862159cb7cb51519b83f9d0174fb20"
+    },
+    "source:REFERENCE_EPOCH25.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\REFERENCE_EPOCH25.json",
+      "bytes": 29576,
+      "sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444"
+    },
+    "source:REFERENCE_FIRST5.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\REFERENCE_FIRST5.json",
+      "bytes": 19052,
+      "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+    },
+    "source:run_ab_proposal.sh": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\run_ab_proposal.sh",
+      "bytes": 2800,
+      "sha256": "8e2d080df8d67a14824f06867505140b8d705116bacf940f0d3b9917c1a445b3"
+    },
+    "source:runtime_counts.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\runtime_counts.py",
+      "bytes": 1913,
+      "sha256": "9157461df13a02163f5686642fdfb8ba846f2c48b908a46be0fc0832e9ab355a"
+    },
+    "source:screen_target.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\screen_target.py",
+      "bytes": 4678,
+      "sha256": "4724937d9dce3b4f10d8a4b17a5cd2a2f31e65fa0519f7809020a3c5ec56e007"
+    },
+    "source:tests/check_equivalence.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\tests\\check_equivalence.py",
+      "bytes": 14614,
+      "sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e"
+    },
+    "source:tests/test_dw_tiles.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\tests\\test_dw_tiles.py",
+      "bytes": 7378,
+      "sha256": "5602078a8c024bec4d07a16935d13e28d851eaaee75945cc18641b1335a0583c"
+    },
+    "source:tests/test_runtime_contract.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\tests\\test_runtime_contract.py",
+      "bytes": 3319,
+      "sha256": "14b8c8611c78f34eceea697c884fb9c1f5ae2839e2ac45c322611f923ef090cd"
+    },
+    "source:train_dw_ab.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\train_dw_ab.py",
+      "bytes": 17856,
+      "sha256": "ea64656a18044408ad7a4d81767cd85f6697977e2222d7f59d10dc0bbe9b7418"
+    },
+    "evidence/PROTECTED_INPUTS.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\PROTECTED_INPUTS.json",
+      "bytes": 3551,
+      "sha256": "13644bd5478f467b064b7ef1615aa441e79f07aba5a551495d96a34ab8339981"
+    },
+    "evidence/runtime_contract_final.log": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\runtime_contract_final.log",
+      "bytes": 617,
+      "sha256": "bad689e161208547c608fd691d40eb13cba98cda08ceddc874c631b960cd964d"
+    },
+    "original_epoch_steps": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\received\\payload\\outputs\\engineering_2043445\\steps.jsonl",
+      "bytes": 564457,
+      "sha256": "8f0654f46457a73b582c548d44ffa7d1a36b19f006b1936d6817272a84763358"
+    }
+  }
+}

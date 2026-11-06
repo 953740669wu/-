@@ -1,0 +1,63 @@
+{
+  "scope": "LOCAL_FIXTURE_STDLIB_ONLY_NO_MODEL_NO_PROFILER",
+  "positive": {
+    "application_status": "PROFILE5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+    "profile5_complete": true,
+    "errors": [],
+    "missing_outputs": [],
+    "captures": [
+      {
+        "step": 3,
+        "events": 154,
+        "kml_markers": 149,
+        "trace": {
+          "bytes": 6425,
+          "sha256": "a250ffebe036ee3cc40abe371fa55fac986aa7e576ee8a6253815d1c0724705d"
+        },
+        "summary": {
+          "bytes": 35,
+          "sha256": "96fe07f6654b92cbea1d18021ea9e31bfaf3e2fcaa2c85f43ca2f4dc997f9418"
+        }
+      },
+      {
+        "step": 4,
+        "events": 154,
+        "kml_markers": 149,
+        "trace": {
+          "bytes": 6425,
+          "sha256": "a250ffebe036ee3cc40abe371fa55fac986aa7e576ee8a6253815d1c0724705d"
+        },
+        "summary": {
+          "bytes": 35,
+          "sha256": "96fe07f6654b92cbea1d18021ea9e31bfaf3e2fcaa2c85f43ca2f4dc997f9418"
+        }
+      },
+      {
+        "step": 5,
+        "events": 154,
+        "kml_markers": 149,
+        "trace": {
+          "bytes": 6425,
+          "sha256": "a250ffebe036ee3cc40abe371fa55fac986aa7e576ee8a6253815d1c0724705d"
+        },
+        "summary": {
+          "bytes": 35,
+          "sha256": "96fe07f6654b92cbea1d18021ea9e31bfaf3e2fcaa2c85f43ca2f4dc997f9418"
+        }
+      }
+    ],
+    "application_error": null
+  },
+  "negative": {
+    "application_status": "PROFILE5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE",
+    "profile5_complete": false,
+    "errors": [
+      "ValueError('required phase events missing')"
+    ],
+    "missing_outputs": [],
+    "captures": [],
+    "application_error": null
+  },
+  "change": "Removed backward event; refreshed events count and both file SHA/bytes so the semantic guard is reached",
+  "author_sources_changed": false
+}

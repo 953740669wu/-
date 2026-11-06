@@ -1,12 +1,16 @@
 # S01简短状态
 
-- 更新/轮次：2026-11-06T00:05:18.792363+08:00；OVERNIGHT_ENGINEERING_20261105_PRE_REVIEW_COMPLETE。
-- 当前目标与结果：今晚真实语料工程入口/固定数据/部署独立专项前置复核完成，PASS_FOR_ENGINEERING_PILOT、review_complete=true；没有科学/性能接受。
-- 固定交接：overnight_engineering_20261105/S01_REVIEW.json，SHA256=da7e84289a905466bc5bfdaa1e9cf7a1b80c41ace0cfaae63488d11ae8f6e408；发布后保持原件，不需用户中转。
-- 精确身份：S02代码包add690cf983d5902c78586101ee6250358380786a8c13aa209b0a024735835a7；S00部署包938f7df81f3f7fa8c61239f8041950e4eb47043e869bbbd5aad7be8e6d27359e；descriptor b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6；其余绑定见审核原件。
-- 本轮变化：只写自身overnight目录/短状态；指出未冻结草稿descriptor接线问题，作者在首次部署就绪前修正并补测试；未改00/02源码、原R7/R8、旧正式门禁。
-- 验证增量：29成员/28源码代码包、27成员/26文件部署包及67冻结输入一致；核S02 14项和S00本地12/登录Linux mock12原件；S01补元数据正例1/拒绝7、实际审核binding正例1/拒绝5。无Torch/Numpy导入或真实NPZ重读。
-- 工程边界：固定14300版工程源、s0285/s0593各8单元/1600帧；完整Encoder/fp32/CKPT0/KML；唯一38分配36实际/24GiB同limit/exclusive/900秒，整体840+清理30+收尾30；正式split/subject未知、val/test不运行。
-- 实际运行/活动job：本窗口0新job/0模型运行；截至2026-11-05T16:05:18.792363+00:00未收到00 RUN_COMPLETE，未直接查远端队列，不推断00当前活动job。
-- 阻塞与下一步：无前置复核阻断；00重核同SHA/队列/唯一标记后直接执行唯一授权job并跟踪终态，失败停止不重提；08整理。S01本轮结束，不描述为后台继续，实际工程结果待后续原job证据。
-- 证据/归档：overnight_engineering_20261105/{REPORT.md,PRE_SUBMISSION_REPORT.md,S01_REVIEW.json,FROZEN_INPUTS.json,code_review.json,data_review.json,deployment_review.json,ARCHIVE_FILES.json}；未操作共享Git暂存/提交/推送。
+- 更新/轮次：2026-11-06T07:53:26.374312+00:00；S07_R7_ATOMIC_PRE_REVIEW_COMPLETE。
+- 当前结果：R7原子rank发布/原reader拒绝与S00最终P1新部署专项审核完成，PASS_FOR_S07_R7_ATOMIC、review_complete=true，无前置阻断项。
+- 固定交接：s07_r7_atomic_review_20261106/S01_REVIEW.json；SHA256=8493beccf28ed9fe760ff2dd73a157147897aa551860c87aac476956e12b79bd，发布后冻结，00直接读同SHA执行唯一整组，无需用户中转。
+- 精确身份：内包57a1f4c530ce2c9a5edcfe9cc9741129fb1ba4f90459fde459803103a362382d；comm42424581db02b15ee8af0c65f85553dff61767979d9644b40fe954f779434608；P1外包963ad618d09c998764342f446207d07ee29fcb95818386503ffea6e232de42e4；12项bindings含原reader/CPU/observer/17新测试/接口/本卡和resources/workload见审核原件。
+- 本轮变化：仅自身s07_r7_atomic_review_20261106与两份状态；R6/2050433空报告/失败与旧审核不改，R12原基线无训练收益结案保持、不再tile/A-B。
+- 旧故障窄核：rank0=0bytes/原checks FAIL，normal通过、后两case NOT_RUN；error→cleanup6.326ms/TERM8.904ms。具体write/syscall未现场证明，受控旧写空/半份机制与旧事实分明。
+- 修复与覆盖：同目录独占临时文件完整序列化/写/flush/fsync/close后replace；仅一个writer/tempfile import/3处rank写入。还原后整个模块AST等于R6，原ready不可覆盖、双rank缺/空/残reader、四case/时间/清理不变。6组受控原件核新旧目标/临时残件；无旧目标仍拒绝，报告仅最后已提交checkpoint。
+- 发现与关闭：草稿review_gate错读S07_ALIGNED_STACK_R7.zip已作只读最小复现；00在首READY/任何job前统一prepare.ARCHIVE、补真实包名回归并重包/新P1根。最终expected(实际部署)+validate(本审核)均通过，固定gate SHA8abb04c3f2ed6a615e7bd69a5c85bdecd630038052a9529a767fe7801df7e131；旧草稿3851afdf无放行。
+- 验证增量：内包17成员16文件15 delivery、9原封复用、10份Python LF/3.9 AST及唯一diff；作者88方法87过1 Linux跳过/隔离包原件；P1外包35成员34文件32源索引/7复用helper、00本地15及Linux登录15包装检查，146冻结输入无漂移。未重跑作者套件/模型/旧5315。
+- 唯一执行边界：新S07_ATOMIC_R7_20261106T073004Z_P1；单节点两域各38/36留2，总76分配72实际4预留，DDR总24576MB同limit/exclusive/HBM0。Linux88本job零skip→环境→normal/crash/collective-timeout/watchdog各一次；pg5/case30，watchdog须双方injected_hang。前置/新旧检查/四case/观测共用START+270，cleanup最晚285，收尾到job300，不等报告补写/不重开helper预算。
+- 清理与收集：原subreaper/PID-start_ticks/跨session helper拥有与时序不变；正式报告和隐藏.rank[01].json.*.tmp分别索引，不读temp补正式。原ready/store/事件/最后checkpoint/worker_error/TERM回收/全部栈proc/缺空权限截断残留均留原件；诊断与通信分判。
+- 实际完成/活动job：S01 0提交/0远端/0Torch-Gloo模型；S00实时队列或job未由本窗口直接核实，不据本地状态宣称无活动作业。现场Linux88/CPU-TID/四case/取证及R7故障信号清理仍待唯一job，非通信或同步训练/性能接受。
+- 下一步/停点：00提交前核全部同SHA/实时队列/新独占marker后直接一次并跟踪原job终态；失败停、不补旧case/重试/改预算门槛/换包重提。S01本轮复核结束，不后台轮询监控。
+- 证据/归档：本轮REPORT.md、S01_REVIEW.json、BASELINE_FAILURE.json、DRAFT_FINDING.json、code_review.json、deployment_review.json、FROZEN_INPUTS.json、ARCHIVE_FILES.json；精确清单排除ZIP/frozen重复副本/数据权重环境。未操作共享Git暂存/提交/推送。

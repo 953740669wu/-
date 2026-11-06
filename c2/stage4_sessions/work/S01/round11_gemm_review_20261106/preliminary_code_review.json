@@ -1,0 +1,18 @@
+{
+  "status": "DRAFT_READ_ONLY_REVIEW_NOT_RELEASE",
+  "sources": {
+    "gemm_observer.py": "14ee30f47adbb0ddfecc01bd8bc2acfe0048a1c1596a0e32664762193143e67a",
+    "train_gemm5.py": "736cb54571057e174ee2f2503e468cc008e83c2417c07d5391e1468e01821174",
+    "inspect_engineering.py": "224685d14c685ce8a9690a6b04c2c5aa5bb2e401d7bd4a5e22c692391f059203"
+  },
+  "notes": [
+    "Original arguments forwarded once; native14arg contract checks map same A/B/C and original scalar flags",
+    "Thread-local linear/call stack with locked global sequence; same-thread native exactly once; nested monotonic spans",
+    "module.gemm/_sgemm and original static forward/backward descriptors restored before export, also on exception",
+    "Data gate keeps original interface in data_gate; new diagnostic interface is separate",
+    "Only scalar metadata retained; temporary tensor references live within active call context, no copying/printing tensor values",
+    "Reviewed pre-publication additions: actual raw sgemm scalar metadata and ctypes native TID, explicit observer import identity; delegation/math unchanged",
+    "Original data gate/interface, engineering training helper, baseline KML and loss comparator hash match R9; top-level R11 interface does not replace descriptor data interface"
+  ],
+  "blocking_findings": []
+}

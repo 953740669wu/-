@@ -1,0 +1,18 @@
+{
+  "status": "DRAFT_NOT_YET_READY_RELEASE_CONSUMER_BLOCKED",
+  "captured_utc": "2026-11-06T07:43:53.092410+00:00",
+  "source": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\review_gate.py",
+    "bytes": 2897,
+    "sha256": "27447fc7d424eb087a7be7a7235f52317b792bce136cece2e78cc72298b9684c"
+  },
+  "line": 10,
+  "problem": "expected(root) reads S07_ALIGNED_STACK_R7.zip but actual archive is S07_ATOMIC_REPORTS_R7.zip",
+  "reproduction": "Extracted exact expected AST with read-only SHA helper: FileNotFoundError on wrong archive basename",
+  "error": "FileNotFoundError(2, 'No such file or directory')",
+  "actual_archive": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r7_atomic_20261106\\S07_ATOMIC_REPORTS_R7.zip",
+  "actual_archive_exists": true,
+  "required_action": "Author corrects binding path to actual prepared archive and rebuilds/freezes/rechecks deployment before final S01 review; no alias/extra ZIP workaround.",
+  "author_source_modified": false,
+  "new_jobs": 0
+}

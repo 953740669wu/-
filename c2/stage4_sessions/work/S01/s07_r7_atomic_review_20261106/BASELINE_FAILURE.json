@@ -1,0 +1,104 @@
+{
+  "status": "R6_NARROW_FAILURE_EVIDENCE_VERIFIED",
+  "job_id": "2050433",
+  "formal_rank0_bytes": 0,
+  "checks": "FAIL",
+  "accepted_cases": [
+    "normal"
+  ],
+  "not_run_cases": [
+    "collective-timeout",
+    "watchdog"
+  ],
+  "rank0_last_checkpoint": {
+    "event": "checkpoint_end",
+    "time_ns": 1793947526640084489,
+    "monotonic_ns": 3968901811263338,
+    "pid": 2432590,
+    "stage": "broadcast"
+  },
+  "rank0_error": {
+    "event": "worker_error",
+    "time_ns": 1793947526685730052,
+    "monotonic_ns": 3968901856907871,
+    "pid": 2432590,
+    "stage": "broadcast",
+    "error": "RuntimeError: [/pytorch/third_party/gloo/gloo/transport/tcp/pair.cc:525] Read error [127.0.0.1]:60118: Connection reset by peer"
+  },
+  "parent_cleanup": {
+    "event": "cleanup_begin",
+    "time_ns": 1793947526692055450,
+    "monotonic_ns": 3968901863234009,
+    "pid": 2432554,
+    "reason": "child_failed",
+    "exit_codes": [
+      null,
+      17
+    ]
+  },
+  "parent_term": {
+    "event": "signal_sent",
+    "time_ns": 1793947526694632864,
+    "monotonic_ns": 3968901865811403,
+    "pid": 2432554,
+    "child_pid": 2432590,
+    "signal": 15
+  },
+  "error_to_cleanup_ms": 6.326138,
+  "error_to_TERM_ms": 8.903532,
+  "exact_interrupted_write_syscall": "NOT_OBSERVED; truncate-and-interruption is a source-supported mechanism, not a proven syscall location",
+  "original_files_modified": false,
+  "new_jobs": 0,
+  "inputs": [
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\RUN_COMPLETE.json",
+      "bytes": 14163,
+      "sha256": "0fdc170e521db5d06ec28025ee00175a22acacea2edab15df89e5e3189f5f5c1"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\COLLECTION_S00.json",
+      "bytes": 61194,
+      "sha256": "e0a5c5cf960be2fe6a0453f8845f399496ac8b6d8590ad5374e6bb1b2e0a88ae"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\checks.json",
+      "bytes": 630,
+      "sha256": "d6d75a9cd23b13debc4a8b21fdaae24657de73396d25403d4f2c23640756d689"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\rank0.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\rank1.json",
+      "bytes": 10544,
+      "sha256": "fde4dba34eb8f9baacf3f8fd2cd890865ef4c14d7ecc109d4eac3c6b28af7289"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\rank0.events.jsonl",
+      "bytes": 6095,
+      "sha256": "dd7fc0ff8f244d5762efc8a2761f9dd0a5e2d036a802436a710e06a5b0a4e3b9"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\rank1.events.jsonl",
+      "bytes": 5835,
+      "sha256": "2da48959e5ad8af43a66cfbf2800c5aea4349d8826c72c35410a0cfe2297cce9"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\supervisor.events.jsonl",
+      "bytes": 1424,
+      "sha256": "e267e5ddcd246ec1a3e1d8b4f4a2c5a91461041f672a2aaebe49cf9ffbc41bab"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\s07_r6_resume_20261106\\evidence\\received\\payload\\checks_current_job\\crash\\summary.json",
+      "bytes": 366,
+      "sha256": "966eabcc75932b1134eb3b752886257e815d94c7a2eb15f0a96a1a4fb5b25642"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round6_aligned_stack_20261105\\candidate\\comm_probe.py",
+      "bytes": 23318,
+      "sha256": "c9efa0c9d4ba05c8fb4501ce75f2dd60e6268d732c707cc3beef133330a356dd"
+    }
+  ]
+}

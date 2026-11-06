@@ -1,0 +1,82 @@
+{
+  "status": "PROFILE5_DEPLOYMENT_REVIEW_PASS",
+  "deployment_package": {
+    "bytes": 125441,
+    "entries": 27,
+    "files": 26,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\S00_R9_PROFILE5_DEPLOYMENT.zip",
+    "sha256": "e73c3def84745ce62981c0f17f097d3d8bd3aa270423083e32e49700116c96ee",
+    "source_index_sha256": "0b632e9ebb238317346ac7f74682d8f7f66f9ac0ec78cd8c1a446a5d9a43abc9"
+  },
+  "deployment_source_manifest": {
+    "bytes": 2210,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\ARTIFACT_SHA256.json",
+    "sha256": "0b632e9ebb238317346ac7f74682d8f7f66f9ac0ec78cd8c1a446a5d9a43abc9"
+  },
+  "deployment_ready_sha256": "1884c810c45c9469d3cad548598e75643328ef00f1065452f7d25a10fa77b0ba",
+  "bindings": {
+    "code_package_sha256": "15621eaa3328e407059c352d86a0f49ee68bfea39f02a68503ded6f94099abe3",
+    "code_source_manifest_sha256": "2a86fd01cab96a85cb2f0f4c8ed998edb956ef81255dfd5ceb950d41264de741",
+    "deployment_package_sha256": "e73c3def84745ce62981c0f17f097d3d8bd3aa270423083e32e49700116c96ee",
+    "deployment_source_manifest_sha256": "0b632e9ebb238317346ac7f74682d8f7f66f9ac0ec78cd8c1a446a5d9a43abc9",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+    "profile_contract_sha256": "35878e1bfff4fab8f85ad84b540d927570fb09858e300ba664e605080fc8c978",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "resources": {
+    "actual_physical_cores": 36,
+    "allocated_cores": 38,
+    "cleanup_seconds": 30,
+    "closing_seconds": 30,
+    "exclusive": true,
+    "job_seconds": 900,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 2,
+    "stop_new_update_after_seconds": 720,
+    "whole_entry_timeout": 840
+  },
+  "code_and_contract_and_reference_and_descriptor_match": true,
+  "source_review_identical_to_frozen_package": true,
+  "protected_original_files_unchanged": 8,
+  "source_files": 24,
+  "zip_members": 27,
+  "zip_files": 26,
+  "local_test_receipts": 8,
+  "login_test_receipts": 8,
+  "independent_semantic_positive_and_missing_phase_negative": "PASS_WITH_CHECKSUMS_REFRESHED",
+  "independent_exact_review_gate": "PASS_REAL_BINDINGS_AND_OLD_DECISION_WRONG_REFERENCE_WRONG_DEPLOYMENT_INDEX_REJECTED",
+  "command": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "900",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_PROFILE5_20261106T030149Z",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_PROFILE5_20261106T030149Z/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_PROFILE5_20261106T030149Z/run_job.sh",
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  ],
+  "blocking_findings": [],
+  "unrun": [
+    "C2 CPU profiler capability and real 2+3 captures",
+    "real Torch36/KML/all TID profile execution",
+    "native signal-fault cleanup this round",
+    "real first5 loss/checkpoint/zero-update recovery"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "status": "INTERFACE_ONLY_PASS_NOT_EXECUTION_RELEASE",
+  "interface": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\INTERFACE.json",
+    "bytes": 5273,
+    "sha256": "1477124f8b772226c76f8f50cee16c5d34ac34f7d8748d327c4402f82d074f76"
+  },
+  "baseline_kml_sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+  "limits": {
+    "updates": 5,
+    "warmup_steps": [
+      1,
+      2
+    ],
+    "detailed_steps": [
+      3,
+      4,
+      5
+    ],
+    "expected_calls_per_sample": 149,
+    "max_records_per_sample": 256,
+    "max_detail_files": 3,
+    "max_bytes_per_detail_file": 1048576,
+    "batch_size": 64,
+    "statistics_frames": 1600,
+    "training_frames": 320,
+    "full_torch_profiler": false,
+    "no_tensor_value_copies_or_dumps": true
+  }
+}

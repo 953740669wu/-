@@ -1,0 +1,16 @@
+{
+  "status": "DRAFT_READ_ONLY_REVIEW_NOT_RELEASE",
+  "sources": {
+    "gemm_observer.py": "14ee30f47adbb0ddfecc01bd8bc2acfe0048a1c1596a0e32664762193143e67a",
+    "train_gemm5.py": "b3b9203f62fe37f30a71f230898d641a634e68981bf3059d44f2225a60fc3f51",
+    "inspect_engineering.py": "224685d14c685ce8a9690a6b04c2c5aa5bb2e401d7bd4a5e22c692391f059203"
+  },
+  "notes": [
+    "Original arguments forwarded once; native14arg contract checks map same A/B/C and original scalar flags",
+    "Thread-local linear/call stack with locked global sequence; same-thread native exactly once; nested monotonic spans",
+    "module.gemm/_sgemm and original static forward/backward descriptors restored before export, also on exception",
+    "Data gate keeps original interface in data_gate; new diagnostic interface is separate",
+    "Only scalar metadata retained; temporary tensor references live within active call context, no copying/printing tensor values"
+  ],
+  "blocking_findings": []
+}

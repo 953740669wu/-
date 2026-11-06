@@ -1,0 +1,89 @@
+{
+  "status": "GEMM5_DEPLOYMENT_REVIEW_PASS",
+  "deployment_package": {
+    "bytes": 132033,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\S00_R11_GEMM5_DEPLOYMENT.zip",
+    "sha256": "64a45ae7444506984ebb65d7cb3a39930d088be4f1ac1f3fdcc2d89eeb095d3b"
+  },
+  "deployment_source_manifest": {
+    "bytes": 2415,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\ARTIFACT_SHA256.json",
+    "sha256": "2e825fb7663689aee5cf664b8fdcd4bd9a4809c41707352e1a8c8fd1f33075d9"
+  },
+  "deployment_ready_sha256": "b84f89f1968411faf4e72f92102c0e8d72813c7b08a0074aaca283c2ef26ebc6",
+  "bindings": {
+    "code_package_sha256": "d9bd138890e56c5fc6c1dba538c0c78112441849689a82782fdc6856a203e142",
+    "code_source_manifest_sha256": "bda3b37a35880c35bfcec65b80c53624e108de6387f4fa9fd377429b76afffa1",
+    "deployment_package_sha256": "64a45ae7444506984ebb65d7cb3a39930d088be4f1ac1f3fdcc2d89eeb095d3b",
+    "deployment_source_manifest_sha256": "2e825fb7663689aee5cf664b8fdcd4bd9a4809c41707352e1a8c8fd1f33075d9",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "gemm_contract_sha256": "a4876ab4a6b6a3c517fb95bc18183bc89015617cdb49a4f6eb5b3380967edeab",
+    "interface_sha256": "1477124f8b772226c76f8f50cee16c5d34ac34f7d8748d327c4402f82d074f76",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_physical_cores": 36,
+    "allocated_cores": 38,
+    "cleanup_seconds": 30,
+    "closing_seconds": 30,
+    "exclusive": true,
+    "job_seconds": 900,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 2,
+    "stop_new_update_after_seconds": 720,
+    "whole_entry_timeout": 840
+  },
+  "source_files": 26,
+  "zip_members": 29,
+  "zip_files": 28,
+  "local_test_receipts": 9,
+  "linux_login_fixture_receipts": 9,
+  "inherited_byte_identical_helpers": [
+    "cpu36_contract.py",
+    "gate.py",
+    "owned_processes.py",
+    "scheduler_handoff.py",
+    "submit_once.py",
+    "run_job.sh"
+  ],
+  "inherited_prepare_function_AST": "UNCHANGED_EXCEPT_MODULE_CONSTANTS",
+  "original_fixed_units": 16,
+  "original_fixed_file_receipts": 36,
+  "optional_metadata_attempt": "INTERRUPTED_NO_RESULT_PRESERVED; independent bounded SHA replacement and later login metadata gate PASS",
+  "terminal_log_ansi": "Original retained; escape stripping only for token checks, no synthetic JSON or mtime restoration",
+  "exact_actual_review_gate": "CONSUMED_CONCRETE_8_BINDINGS_SUCCESSFULLY",
+  "command": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "900",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_20261106T041202Z/run_job.sh",
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  ],
+  "independent_model_or_mock_suite_runs": 0,
+  "blocking_findings": [],
+  "unrun": [
+    "actual C2 _sgemm ctypes and three149-record pairings",
+    "original first5 loss/actual CPU36/KML/TID/restore",
+    "native signal-fault cleanup this round and final job/PID termination"
+  ]
+}

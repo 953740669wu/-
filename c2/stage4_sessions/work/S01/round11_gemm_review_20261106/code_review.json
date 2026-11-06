@@ -1,0 +1,62 @@
+{
+  "status": "GEMM_CODE_REVIEW_PASS_DEPLOYMENT_PENDING",
+  "package": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\package\\S02_R11_GEMM5_CODE.zip",
+    "bytes": 74859,
+    "sha256": "d9bd138890e56c5fc6c1dba538c0c78112441849689a82782fdc6856a203e142"
+  },
+  "source_manifest": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\SOURCE_SHA256.json",
+    "bytes": 2487,
+    "sha256": "bda3b37a35880c35bfcec65b80c53624e108de6387f4fa9fd377429b76afffa1"
+  },
+  "interface": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\INTERFACE.json",
+    "bytes": 5273,
+    "sha256": "1477124f8b772226c76f8f50cee16c5d34ac34f7d8748d327c4402f82d074f76"
+  },
+  "contract": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\GEMM_CONTRACT.json",
+    "bytes": 4335,
+    "sha256": "a4876ab4a6b6a3c517fb95bc18183bc89015617cdb49a4f6eb5b3380967edeab"
+  },
+  "reference": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\REFERENCE_FIRST5.json",
+    "bytes": 19052,
+    "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "baseline": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\baseline\\kml_ops.py",
+    "bytes": 10255,
+    "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+  },
+  "observer": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\gemm_observer.py",
+    "bytes": 9579,
+    "sha256": "14ee30f47adbb0ddfecc01bd8bc2acfe0048a1c1596a0e32664762193143e67a"
+  },
+  "gemm_ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\GEMM_READY.json",
+    "sha256": "800df62a563aeb9f211a46ed516b985670e182da20485f1d491f46cf550c05e0"
+  },
+  "descriptor": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\ENGINEERING_DESCRIPTOR.json",
+    "bytes": 12222,
+    "sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6"
+  },
+  "source_files": 26,
+  "zip_members": 27,
+  "immutable_reused_files": 17,
+  "source_review_matches_frozen": true,
+  "author_local_fake_cblas_receipts": 9,
+  "test_log_sha256": "3303e1fdcae257a55724e8397c4f3e03de8c8239d72afe6099a2c2f667fe68cc",
+  "new_model_runs": 0,
+  "actual_KML_runs": 0,
+  "blocking_findings": [],
+  "remaining": "Frozen S00 GEMM5 identity/resources/marker/times/cleanup/record collection review",
+  "scope": "Original baseline scalar-only reversible observation; no R10 candidate or A/B, no Torch profiler or new dataset",
+  "unrun": [
+    "actual C2 ctypes/KML149 pairings",
+    "actual first5 loss/CPU36/library/restore and cleanup"
+  ]
+}

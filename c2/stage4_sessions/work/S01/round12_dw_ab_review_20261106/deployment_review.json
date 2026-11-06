@@ -1,0 +1,297 @@
+{
+  "status": "PASS_DEPLOYMENT_PRE_REVIEW",
+  "zip_members": 33,
+  "zip_files": 32,
+  "source_index_entries": 30,
+  "unchanged_helpers": 7,
+  "release_bindings": {
+    "code_package_sha256": "44232f7627cfbcf59fb721acd23af46aed8fa790b20fe743a3c9886717ec4de4",
+    "code_source_manifest_sha256": "f61b8db309b8dad5853c7916d371b4484af609bd7610c096846bb21a7ac866bd",
+    "deployment_package_sha256": "a3f81b40e58e63bde612c95cd04fcb7a2d054746f5977371bc58310ca8beccc8",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "candidate_sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea",
+    "r12_contract_sha256": "16f19bab92e57e2730d801dab5fb012c32d53a37bf4011e516a5467fe5f378df",
+    "reference_epoch25_sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444",
+    "task_card_sha256": "bad48674eee0bfb41be0f5fbd2e2a0807e29dce31bc0e789263fc49665a5bec3",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8",
+    "deployment_source_manifest_sha256": "e51c425815ad7f3ae0a48b27adbae389271f1b2b0201e031c44ee11ff41c0189"
+  },
+  "resources": {
+    "HBM": 0,
+    "actual_physical_cores": 36,
+    "allocated_cores": 38,
+    "cleanup_seconds": 30,
+    "closing_seconds": 30,
+    "exclusive": true,
+    "job_seconds": 900,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "reserved_cores": 2,
+    "stop_new_update_after_seconds": 720,
+    "whole_chain_seconds": 840,
+    "whole_entry_timeout": 840
+  },
+  "workload": {
+    "max_full_encoder_updates": 60,
+    "observed_updates": 20,
+    "perf_updates_each": 25,
+    "performance_pairs": 1,
+    "stage_order": [
+      "target",
+      "strict",
+      "perf_baseline",
+      "perf_candidate"
+    ],
+    "strict_updates_each": 5,
+    "warmup_updates": 5
+  },
+  "exact_review_consumer_accepts": true,
+  "nonoptimized_assertion_chain": true,
+  "shared_absolute_execution_seconds": 840,
+  "cleanup_seconds": 30,
+  "closing_seconds": 30,
+  "local_fixture_checks": 9,
+  "linux_login_fixture_checks": 9,
+  "fixed_units": 16,
+  "fixed_file_receipts": 36,
+  "no_S01_remote_or_model_execution": true,
+  "signal_fault_cleanup": "NOT_RUN",
+  "blockers": [],
+  "inputs": {
+    "deployment_ready": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\S00_DEPLOYMENT_READY.json",
+      "bytes": 8732,
+      "sha256": "a203962e41e06e7f85e6eb42dd12ca4665a79d6d6c22542f70b5b8cb70c4e769"
+    },
+    "checks": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\DEPLOYMENT_CHECKS.json",
+      "bytes": 482,
+      "sha256": "a5cead57667fbc90e5fc4310e5aca941ff467c66469b31448130bdda2585589e"
+    },
+    "code_source_manifest": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\S02_SOURCE_SHA256.json",
+      "bytes": 2492,
+      "sha256": "f61b8db309b8dad5853c7916d371b4484af609bd7610c096846bb21a7ac866bd"
+    },
+    "commands": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\COMMANDS.md",
+      "bytes": 4433,
+      "sha256": "25c1714a75726a9e10e5f0dfd0709bf1e0f74a50ed22044f04e5e8e9fba0ea46"
+    },
+    "deployment_package": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\S00_R12_DW_AB_DEPLOYMENT.zip",
+      "bytes": 150897,
+      "sha256": "a3f81b40e58e63bde612c95cd04fcb7a2d054746f5977371bc58310ca8beccc8"
+    },
+    "deployment_source_manifest": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\ARTIFACT_SHA256.json",
+      "bytes": 2803,
+      "sha256": "e51c425815ad7f3ae0a48b27adbae389271f1b2b0201e031c44ee11ff41c0189"
+    },
+    "descriptor": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\ENGINEERING_DESCRIPTOR.json",
+      "bytes": 12222,
+      "sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6"
+    },
+    "initial_remote_check": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\INITIAL_REMOTE_READONLY.txt",
+      "bytes": 680,
+      "sha256": "23cea8e8ac77f40b4a417dec57029629bbbd6274f69b9a3e70fd590e796299b2"
+    },
+    "linux_login_log": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\LOGIN_DEPLOYMENT_CHECKS.txt",
+      "bytes": 12265,
+      "sha256": "ebd5dc3864e3e8da9209e061cfc6e5ad518f99bd37f6b0a30b49e6b18d4a6f0b"
+    },
+    "local_fixture_log": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\tests_after.txt",
+      "bytes": 1384,
+      "sha256": "db9e843f98f9427495919ebf08699dbbd915bdabef5bbadf0294b63649fdf4a3"
+    },
+    "r12_contract": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\R12_CONTRACT.json",
+      "bytes": 3246,
+      "sha256": "16f19bab92e57e2730d801dab5fb012c32d53a37bf4011e516a5467fe5f378df"
+    },
+    "r12_ready": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\S02_R12_READY.json",
+      "bytes": 4114,
+      "sha256": "98c12351d91c0379ed940cc38e3e76919516290e1402f7fa06fc060f952de60c"
+    },
+    "reference_epoch25": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\REFERENCE_EPOCH25.json",
+      "bytes": 29576,
+      "sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444"
+    },
+    "reference_first5": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\REFERENCE_FIRST5.json",
+      "bytes": 19052,
+      "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+    },
+    "source_manifest": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\ARTIFACT_SHA256.json",
+      "bytes": 2803,
+      "sha256": "e51c425815ad7f3ae0a48b27adbae389271f1b2b0201e031c44ee11ff41c0189"
+    },
+    "task_card": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\TASK_CARD.md",
+      "bytes": 9771,
+      "sha256": "bad48674eee0bfb41be0f5fbd2e2a0807e29dce31bc0e789263fc49665a5bec3"
+    },
+    "deployment:COMMANDS.md": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\COMMANDS.md",
+      "bytes": 4433,
+      "sha256": "25c1714a75726a9e10e5f0dfd0709bf1e0f74a50ed22044f04e5e8e9fba0ea46"
+    },
+    "deployment:ENGINEERING_DESCRIPTOR.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\ENGINEERING_DESCRIPTOR.json",
+      "bytes": 12222,
+      "sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6"
+    },
+    "deployment:EXPOSURE_LEDGER_INITIAL.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\EXPOSURE_LEDGER_INITIAL.json",
+      "bytes": 5808,
+      "sha256": "adcf84752f65b4a527133f5023a61f8bf533a4d0e5f62d327943ea50a67e728b"
+    },
+    "deployment:MINIMAL.diff": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\MINIMAL.diff",
+      "bytes": 27775,
+      "sha256": "36e032fbdfec3ed37931c53780675487560ff2568039f56c9878ae88f5d7bce7"
+    },
+    "deployment:OLD_INPUT_IDENTITIES.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\OLD_INPUT_IDENTITIES.json",
+      "bytes": 2074,
+      "sha256": "cf6ac4c8eba543c846ca421d38877db34b2fdc2d1410b0eab02da0146418d33e"
+    },
+    "deployment:PINNED_INPUTS.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\PINNED_INPUTS.json",
+      "bytes": 1137,
+      "sha256": "37395a6b1ebe4e425d72d9f024fd4cb10f3dcf1ae45b5e8f7030303133860a66"
+    },
+    "deployment:R12_CONTRACT.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\R12_CONTRACT.json",
+      "bytes": 3246,
+      "sha256": "16f19bab92e57e2730d801dab5fb012c32d53a37bf4011e516a5467fe5f378df"
+    },
+    "deployment:REFERENCE_EPOCH25.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\REFERENCE_EPOCH25.json",
+      "bytes": 29576,
+      "sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444"
+    },
+    "deployment:REFERENCE_FIRST5.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\REFERENCE_FIRST5.json",
+      "bytes": 19052,
+      "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+    },
+    "deployment:S02_R12_DW_TWO_COLUMN_TILES.zip": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\S02_R12_DW_TWO_COLUMN_TILES.zip",
+      "bytes": 81080,
+      "sha256": "44232f7627cfbcf59fb721acd23af46aed8fa790b20fe743a3c9886717ec4de4"
+    },
+    "deployment:S02_R12_READY.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\S02_R12_READY.json",
+      "bytes": 4114,
+      "sha256": "98c12351d91c0379ed940cc38e3e76919516290e1402f7fa06fc060f952de60c"
+    },
+    "deployment:S02_SOURCE_SHA256.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\S02_SOURCE_SHA256.json",
+      "bytes": 2492,
+      "sha256": "f61b8db309b8dad5853c7916d371b4484af609bd7610c096846bb21a7ac866bd"
+    },
+    "deployment:TASK_CARD.md": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\TASK_CARD.md",
+      "bytes": 9771,
+      "sha256": "bad48674eee0bfb41be0f5fbd2e2a0807e29dce31bc0e789263fc49665a5bec3"
+    },
+    "deployment:UNCHANGED_HELPERS.json": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\UNCHANGED_HELPERS.json",
+      "bytes": 1903,
+      "sha256": "a283fcd7e3b5a31dd37f86a0a4dbe5b5f164223921ce1d6ed8e17f731803d0d9"
+    },
+    "deployment:check_old_inputs.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\check_old_inputs.py",
+      "bytes": 1349,
+      "sha256": "ee2d582460dcfb75515fc74ecba9fc66abe9e1f15fee51115c7b1b90f2b35743"
+    },
+    "deployment:collect_evidence.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\collect_evidence.py",
+      "bytes": 4052,
+      "sha256": "40d4357cf454cdeae1c1d5bef62d07d176d531cf8d80918fe5cf185b9549166a"
+    },
+    "deployment:cpu36_contract.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\cpu36_contract.py",
+      "bytes": 11171,
+      "sha256": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d"
+    },
+    "deployment:freeze_deployment.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\freeze_deployment.py",
+      "bytes": 5518,
+      "sha256": "d3d74e736b104d1b2ea43326a88709d940ad952edffdf91ff9a5c8c69c7a45b8"
+    },
+    "deployment:gate.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\gate.py",
+      "bytes": 3065,
+      "sha256": "e2a42ec08c4dae8e0263566f73dd7e8c96e090923feb0505274cce400d0d7f15"
+    },
+    "deployment:inspect_metadata.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\inspect_metadata.py",
+      "bytes": 856,
+      "sha256": "d8602287e3edef8415f4935a61eab694a538eb85d3a93e8a6aa9ed9536704df4"
+    },
+    "deployment:owned_processes.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\owned_processes.py",
+      "bytes": 4708,
+      "sha256": "499e3655b5cf59527fce32369e854b8717844f2b5641f37f42ce7dc17b5a2f8a"
+    },
+    "deployment:prepare.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\prepare.py",
+      "bytes": 3741,
+      "sha256": "531c01bc68dcc2de75f4cd254889ab7d801b16c2642b1d06a3801075e3f6733a"
+    },
+    "deployment:r12_outcome.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\r12_outcome.py",
+      "bytes": 7731,
+      "sha256": "7a90fd9989f1ada8bbfae0dc32e185c340bd24ad4b069f92286ed231341d416a"
+    },
+    "deployment:recheck_fixed_inputs.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\recheck_fixed_inputs.py",
+      "bytes": 1910,
+      "sha256": "8b9bfac4df98ca51711cad49bf5cdc04d8db3058d9e0be1e440ef8e27ebd4dc7"
+    },
+    "deployment:review_gate.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\review_gate.py",
+      "bytes": 2226,
+      "sha256": "7250bb031f4c57b25648573abf0a3e648ce8589a3795f4222f1673044748e35f"
+    },
+    "deployment:run_job.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\run_job.py",
+      "bytes": 3454,
+      "sha256": "db97e15641ae259fb2f63d8c8b907e6c1d0961d939033cfabc334e0406a89a65"
+    },
+    "deployment:run_job.sh": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\run_job.sh",
+      "bytes": 410,
+      "sha256": "6187c818756d89c05735cc70a5135cc18325271f91bdce4d7701251aa9dc2670"
+    },
+    "deployment:scheduler_handoff.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\scheduler_handoff.py",
+      "bytes": 6367,
+      "sha256": "f907cbf8286f7bc9035c9e58f986c3b342b2a6f6f5a1c60f97834915f2a7065c"
+    },
+    "deployment:submit_once.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\submit_once.py",
+      "bytes": 2703,
+      "sha256": "e4bf7218e69882e5ad6da0e8c8483fca2cd979b4d7c667318a95691f4aeb8e15"
+    },
+    "deployment:tests/test_r12_deployment.py": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\tests\\test_r12_deployment.py",
+      "bytes": 5859,
+      "sha256": "36f627a0822aeb4cdae12e619822712931503f35fcb390c3cbad08c109150091"
+    },
+    "task_card_original": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\R12_DW_AB_EXECUTION_NEXT_20261106.md",
+      "bytes": 9771,
+      "sha256": "bad48674eee0bfb41be0f5fbd2e2a0807e29dce31bc0e789263fc49665a5bec3"
+    }
+  }
+}
