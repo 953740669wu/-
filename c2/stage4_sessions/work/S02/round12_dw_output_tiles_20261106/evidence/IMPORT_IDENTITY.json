@@ -1,0 +1,21 @@
+{
+  "scope": "POST_SCREEN_IMPORT_IDENTITY_ONLY_NO_GEMM_RERUN; test loader uses same paths; numeric tests explicitly fake _lib/_sgemm",
+  "imports": [
+    {
+      "role": "baseline",
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\baseline\\kml_ops.py",
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+      "gemm_code_filename": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\baseline\\kml_ops.py",
+      "imported_native_lib": false,
+      "LINEAR_DTYPE": "torch.float32"
+    },
+    {
+      "role": "candidate",
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\candidate\\kml_ops.py",
+      "sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea",
+      "gemm_code_filename": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\candidate\\kml_ops.py",
+      "imported_native_lib": false,
+      "LINEAR_DTYPE": "torch.float32"
+    }
+  ]
+}

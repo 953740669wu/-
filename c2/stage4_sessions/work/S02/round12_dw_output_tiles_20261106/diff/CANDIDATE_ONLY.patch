@@ -1,0 +1,25 @@
+--- frozen/baseline/kml_ops.py
++++ candidate/kml_ops.py
+@@ -44,6 +44,22 @@
+     f = _sgemm
+     c = torch.empty(m, n) if out is None else out
+     assert c.is_contiguous() and c.dtype == torch.float32 and c.shape == (m, n)
++    if (a.device.type == b.device.type == c.device.type == 'cpu' and
++            a.dtype == b.dtype == torch.float32 and ta is True and tb is False and
++            type(beta) in (int, float) and beta == 0.0 and out is None and acc32 is False and
++            (m, n, k) == (512, 2048, 13312)):
++        assert a.stride() == (512, 1) and b.stride() == c.stride() == (2048, 1)
++        assert a.element_size() == b.element_size() == c.element_size() == 4
++        assert all(t.data_ptr() % 4 == 0 for t in (a, b, c))
++        assert c.untyped_storage().data_ptr() not in (a.untyped_storage().data_ptr(), b.untyped_storage().data_ptr())
++        assert (k - 1) * a.shape[1] + m - 1 < a.numel()
++        for column in (0, 1024):
++            assert column + 1024 <= n
++            assert (k - 1) * b.shape[1] + column + 1023 < b.numel()
++            assert (m - 1) * n + column + 1023 < c.numel()
++            f(ROW, T, NT, m, 1024, k, 1.0, a.data_ptr(), a.shape[1],
++              b.data_ptr() + column * 4, b.shape[1], 0.0, c.data_ptr() + column * 4, n)
++        return c
+     f(ROW, T if ta else NT, T if tb else NT, m, n, k, 1.0, a.data_ptr(), a.shape[1],
+       b.data_ptr(), b.shape[1], beta if out is not None else 0.0, c.data_ptr(), n)
+     return c

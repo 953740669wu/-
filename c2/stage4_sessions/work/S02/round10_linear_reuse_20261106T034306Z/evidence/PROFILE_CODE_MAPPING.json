@@ -1,0 +1,101 @@
+{
+  "job_id": "2048959",
+  "host": "cn21338",
+  "run_complete_sha256": "73ec2fd385ba3f3e3dc673465487e40307c8ae6a8583c7cbb13cadf315730839",
+  "bindings": {
+    "application_result_0": {
+      "bytes": 485645,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\result.json",
+      "sha256": "f6db93c103d0e8e5b5913b96a5ebad2bafabe27eee906ecf61ea298315be8cd7"
+    },
+    "steps_0": {
+      "bytes": 120202,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\steps.jsonl",
+      "sha256": "31a2f4f0e97d254f6a573426f11821bbbf525c3668547aa15369a743a7ea4b83"
+    },
+    "audit_0": {
+      "bytes": 5995,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\RUN_AUDIT.json",
+      "sha256": "98967ebe41afdf0517fc239470f35f9f37177787bccfed2bf17b5404273c3629"
+    },
+    "events_0": {
+      "bytes": 9122,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\events_step_3.json",
+      "sha256": "631dd754e956431e880748d50805f6a9a76a95cba15133c124fca4cd24cfc2d4"
+    },
+    "events_1": {
+      "bytes": 9119,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\events_step_4.json",
+      "sha256": "75280ced547b37733da594e5a0ca164a467227d2fbee3f289d06e35b289db545"
+    },
+    "events_2": {
+      "bytes": 9120,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\events_step_5.json",
+      "sha256": "dc0142e1dcd2b19c43ae6a47375f448f0bc5decf40dccd4e6867f8a9c08598a3"
+    },
+    "traces_0": {
+      "bytes": 1533488,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\trace_step_3.json",
+      "sha256": "2b93ca1d5975a7f90db90bbdcabc92b6b97e933b006a27a5c8f460957482fcf7"
+    },
+    "traces_1": {
+      "bytes": 1556905,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\trace_step_4.json",
+      "sha256": "dbb6c58dcdfd27e485eacc7a956cae70552a571a285b220fea8d096dd1cf3494"
+    },
+    "traces_2": {
+      "bytes": 1555946,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\evidence\\received\\payload\\outputs\\profile_2048959\\trace_step_5.json",
+      "sha256": "93742d26b4fe6a5faef0a082ee931b3a08b53a206b889726565a9b138c24e27b"
+    },
+    "profile_contract_0": {
+      "bytes": 3156,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\PROFILE_CONTRACT.json",
+      "sha256": "35878e1bfff4fab8f85ad84b540d927570fb09858e300ba664e605080fc8c978"
+    },
+    "reference_first5_0": {
+      "bytes": 19052,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round9_profile5_20261106\\REFERENCE_FIRST5.json",
+      "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+    }
+  },
+  "stats": [
+    {
+      "trace": "trace_step_3.json",
+      "linear_forward": 50,
+      "linear_backward": 50,
+      "backward_reshape_count": 100,
+      "backward_reshape_clone_count": 0,
+      "copy_ancestor_paths": {
+        "_LinearFn/aten::contiguous/aten::clone": 50,
+        "_LinearFn/aten::reshape/aten::clone": 12
+      },
+      "second_backward_reshape_event_us": 1858.9569999973755
+    },
+    {
+      "trace": "trace_step_4.json",
+      "linear_forward": 50,
+      "linear_backward": 50,
+      "backward_reshape_count": 100,
+      "backward_reshape_clone_count": 0,
+      "copy_ancestor_paths": {
+        "_LinearFn/aten::contiguous/aten::clone": 50,
+        "_LinearFn/aten::reshape/aten::clone": 12
+      },
+      "second_backward_reshape_event_us": 1794.9850000001024
+    },
+    {
+      "trace": "trace_step_5.json",
+      "linear_forward": 50,
+      "linear_backward": 50,
+      "backward_reshape_count": 100,
+      "backward_reshape_clone_count": 0,
+      "copy_ancestor_paths": {
+        "_LinearFn/aten::contiguous/aten::clone": 50,
+        "_LinearFn/aten::reshape/aten::clone": 12
+      },
+      "second_backward_reshape_event_us": 1789.887999999337
+    }
+  ],
+  "scope": "Read-only observed clone paths; events have no per-call matrix shape/stride. No exact native KML time or speedup."
+}

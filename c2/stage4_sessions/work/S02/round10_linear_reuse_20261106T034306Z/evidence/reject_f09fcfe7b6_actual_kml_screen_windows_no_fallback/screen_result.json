@@ -1,0 +1,8 @@
+{
+  "status": "FAIL_STOP",
+  "cpu36": {},
+  "new_jobs": 0,
+  "source_manifest_sha256": "bf0dca30aececca6ced8f0d2fcb2b0e8116e4883b38e8fdb7e122a1f532280b4",
+  "error": "ValueError('CPU36/KML requires Linux; no native fallback')",
+  "traceback": "Traceback (most recent call last):\n  File \"E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round10_linear_reuse_20261106T034306Z\\screen_linear.py\", line 28, in <module>\n    cpu36_guard.prepare([int(x) for x in a.expected_cpus.split(',')],a.cpu_contract,result['cpu36'])\n  File \"E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round10_linear_reuse_20261106T034306Z\\cpu36_guard.py\", line 52, in prepare\n    raise ValueError('CPU36/KML requires Linux; no native fallback')\nValueError: CPU36/KML requires Linux; no native fallback\n"
+}

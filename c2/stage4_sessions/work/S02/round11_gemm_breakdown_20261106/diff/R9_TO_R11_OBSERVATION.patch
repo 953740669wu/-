@@ -1,0 +1,531 @@
+--- R9/reference/train_profile5.py
++++ R11/train_gemm5.py
+@@ -1,5 +1,6 @@
+-"""Bounded CPU profile: same first5 updates, warmup2/sample3, no performance acceptance."""
++"""Unmodified baseline,5 updates: warmup2, GEMM/ctypes scalar records3..5."""
+ import argparse
++import ctypes
+ from datetime import datetime,timezone
+ import hashlib
+ import json
+@@ -15,9 +16,9 @@
+ from diagnostic_common import configure_backend,finish_backend
+ import memory_metrics
+ import engineering_training as training
+-import engineering_data
++from data_gate import engineering_data
+ import real_data
+-import profile_probe
++import gemm_observer
+ import profile_contract
+ 
+ ROOT=Path(__file__).resolve().parent
+@@ -47,12 +48,12 @@
+     reference=json.loads((ROOT/'REFERENCE_FIRST5.json').read_text())
+     if args.descriptor_sha256!=reference['descriptor_sha256']:raise ValueError('exact baseline descriptor bytes required')
+     profile_contract.check_data(metadata['description'],reference)
+-    if ROOT.name!='payload' or not ROOT.parent.name.startswith('S02_PROFILE5_') or ROOT.parent.parent!=Path('/home/share/dengqingtian/opt/stage4_sessions/S00'):
+-        raise ValueError('new S00/S02_PROFILE5_*/payload required; never reuse baseline deployment')
+-    if args.output_dir.resolve().parent!=ROOT/'outputs' or args.output_dir.name!='profile_'+os.environ.get('CCS_JOB_ID',''):
+-        raise ValueError('new owned profile job output path required')
++    if ROOT.name!='payload' or not ROOT.parent.name.startswith('S02_GEMM5_') or ROOT.parent.parent!=Path('/home/share/dengqingtian/opt/stage4_sessions/S00'):
++        raise ValueError('new S00/S02_GEMM5_*/payload required; never reuse baseline deployment')
++    if args.output_dir.resolve().parent!=ROOT/'outputs' or args.output_dir.name!='gemm_'+os.environ.get('CCS_JOB_ID',''):
++        raise ValueError('new owned GEMM job output path required')
+     ledger=engineering_data.Exposure(args.output_dir/'EXPOSURE_LEDGER.json',metadata['description'])
+-    result['exposure_path_policy']='profile ledger in fresh job outputs; original descriptor runtime ledger is read-only and NOT USED as output'
++    result['exposure_path_policy']='GEMM ledger in fresh job outputs; original descriptor runtime ledger is read-only and NOT USED as output'
+     result['exposure_ledger']=dict(path=str(ledger.path),initial=metadata['description']['exposure_ledger'])
+     result['data_identity']=metadata['identity']
+     result['cpu36']={}
+@@ -63,15 +64,17 @@
+     runtime,expected=configure_backend(torch,'kml',args.expected_cpus);result['runtime']=runtime
+     cpu36_guard.checkpoint(result['cpu36'],'after_backend',torch)
+     import kml_ops
+-    probe=profile_probe.Probe(torch,args.output_dir,kml_ops)
+-    result['profiling']=dict(warmup_updates=[1,2],sampled_updates=[3,4,5],updates=probe.records,
+-        activity='CPU',record_shapes=False,profile_memory=False,with_stack=False,with_flops=False,
+-        event_limit_per_sample=profile_probe.MAX_EVENTS,kml_markers_per_sample=profile_probe.MAX_KML_MARKERS,
+-        trace_limit_per_sample_bytes=profile_probe.TRACE_BYTES,summary_limit_per_sample_bytes=profile_probe.SUMMARY_BYTES,
+-        maximum_traces=3,maximum_summaries=3,
+-        overhead_scope='setup/start/stop/postprocess/export separately measured; event/marker overhead inside instrumented steps is UNKNOWN without matched unprofiled control; no throughput acceptance',
+-        trace_scope='CPU spans including nested events; do not sum inclusive totals or compare CPU time to wall as a percentage',
+-        kml_scope='Python GEMM envelope, not precise native kernel duration')
++    baseline_path=ROOT/'baseline/kml_ops.py'
++    if real_data.sha(baseline_path)!='e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26':raise ValueError('unmodified baseline KML source required; R10 forbidden')
++    if not isinstance(kml_ops._sgemm,ctypes._CFuncPtr):raise gemm_observer.UnsupportedObservation('original _sgemm must be a ctypes native function, not a Python substitute')
++    if Path(gemm_observer.__file__).resolve()!=ROOT/'gemm_observer.py':raise gemm_observer.UnsupportedObservation('wrong observer module origin')
++    observer=gemm_observer.Observer(kml_ops,args.output_dir)
++    result['gemm_observation']=dict(baseline_kml_sha256=real_data.sha(baseline_path),
++        baseline_import=dict(path=kml_ops.__file__,sha256=real_data.sha(kml_ops.__file__)),
++        observer_import=dict(path=gemm_observer.__file__,sha256=real_data.sha(gemm_observer.__file__)),
++        original_sgemm_type=type(kml_ops._sgemm).__name__,
++        observer_source_sha256=real_data.sha(ROOT/'gemm_observer.py'),detailed_steps=[3,4,5],samples=observer.samples,
++        timing_scope='GEMM envelope and same-thread ctypes wall; outer-minus-ctypes includes prep/counter/alloc/observer; neither is pure microkernel time')
+     tick=time.perf_counter()
+     loaded=engineering_data.load_arrays(metadata,ledger)
+     result['timing']['data_loading_seconds']=time.perf_counter()-tick
+@@ -97,7 +100,7 @@
+     cpu36_guard.checkpoint(result['cpu36'],'initialized',torch)
+     result['val_initial']=dict(status='NOT_RUN_NO_FORMAL_SPLIT')
+     cpu36_guard.checkpoint(result['cpu36'],'initial_val',torch)
+-    records=[];result['steps']=records;result['consumed_frames']=0;stop='profile_update_cap_5'
++    records=[];result['steps']=records;result['consumed_frames']=0;stop='gemm_update_cap_5'
+     with (args.output_dir/'steps.jsonl').open('x',encoding='utf-8') as log:
+         while cursor<frames and step<5:
+             # The outer process is limited to840s. Reserve120s for save/recovery.
+@@ -115,15 +118,23 @@
+             cpu36_guard.checkpoint(result['cpu36'],f'before_train_{step+1}',torch)
+             rss_before=memory_metrics.rss();calls=runtime['kml_gemm_calls']
+             pre_diagnostic=time.perf_counter()-diagnostic_start
+-            tick=time.perf_counter();losses,profile_record=probe.run(step+1,model,opt,values,mask)
+-            profiled_call_wall=time.perf_counter()-tick;elapsed=profile_record['instrumented_step_seconds'];rss_after=memory_metrics.rss()
+-            result['timing']['profiler_outside_step_seconds']+=profile_record['profiler_outside_step_seconds']
++            tick=time.perf_counter()
++            if step+1>=3:
++                with observer.sample(step+1) as sample:
++                    train_tick=time.perf_counter();losses=training.train_step(torch,model,opt,values,mask)
++                    elapsed=time.perf_counter()-train_tick
++                call_wall=time.perf_counter()-tick
++                result['timing']['observation_export_and_hook_seconds']+=call_wall-elapsed
++            else:
++                losses=training.train_step(torch,model,opt,values,mask);elapsed=time.perf_counter()-tick
++                sample=None;call_wall=elapsed
++            rss_after=memory_metrics.rss()
+             diagnostic_start=time.perf_counter()
+             training.validate_update(torch,model,opt,values,step+1)
+             if any(not torch.isfinite(value) for value in losses.values()):raise ValueError('nonfinite training loss')
+             count=runtime['kml_gemm_calls']-calls
+             if count!=reference['steps'][step]['kml_calls']:raise ValueError('actual KML calls differ from baseline first5')
+-            if profile_record['sampled'] and profile_record['kml_markers']!=count:raise ValueError('missing bounded KML markers')
++            if sample is not None and (sample['records']!=count or sample['native_calls']!=count):raise gemm_observer.ObservationError('GEMM/native sample count differs from actual KML calls')
+             replay_metrics=[]
+             for name,value in losses.items():
+                 accepted.compare(torch,'baseline_step_'+str(step+1)+'.'+name,
+@@ -133,14 +144,14 @@
+             diagnostic_seconds=pre_diagnostic+time.perf_counter()-diagnostic_start
+             result['timing']['training_step_seconds']+=elapsed
+             result['timing']['diagnostic_seconds']+=diagnostic_seconds
+-            record=dict(profile=profile_record,profiled_call_wall_seconds=profiled_call_wall,baseline_loss_metrics=replay_metrics,diagnostic_seconds=diagnostic_seconds,step=step,batch_size=len(indices),frame_indices=indices,
++            record=dict(gemm_sample=sample,observed_call_wall_seconds=call_wall,baseline_loss_metrics=replay_metrics,diagnostic_seconds=diagnostic_seconds,step=step,batch_size=len(indices),frame_indices=indices,
+                 frame_ids=[loaded['train']['frame_ids'][i] for i in indices],masked_elements=int(mask.sum()),
+                 mask_sha256=hashlib.sha256(mask.numpy().tobytes()).hexdigest(),
+                 losses={name:value.item() for name,value in losses.items()},loader_seconds=loader_seconds,
+                 step_seconds=elapsed,rss_before=rss_before,rss_after=rss_after,rss_peak_scope='process_lifetime',
+                 kml_calls=count,adamw_step=step,cursor=cursor)
+             log.write(json.dumps(record)+'\n');log.flush();ledger.confirm(step);records.append(record)
+-    if step==5:stop='profile_update_cap_5'
++    if step==5:stop='gemm_update_cap_5'
+     result.update(stop_reason=stop,steps=records,consumed_frames=cursor,elapsed_seconds=time.monotonic()-started)
+     result['val_final']=dict(status='NOT_RUN_NO_FORMAL_SPLIT')
+     cpu36_guard.checkpoint(result['cpu36'],'final_val',torch)
+@@ -172,6 +183,8 @@
+         ledger.value['recovery_probe']['status']='RECOVERY_PROBE_CONFIRMED_NO_UPDATE';ledger.save()
+         cpu36_guard.checkpoint(result['cpu36'],'restore_verified',torch)
+     result['timing']['checkpoint_and_recovery_seconds']=time.perf_counter()-checkpoint_start
++    if observer.active or [x['step'] for x in observer.samples] != list(range(3,step+1)):raise gemm_observer.ObservationError('sample lifecycle mismatch')
++    if any(x['status']!='COMPLETE' for x in observer.samples):raise gemm_observer.ObservationError('incomplete sample records')
+     finish_backend(runtime,expected)
+     cpu36_guard.checkpoint(result['cpu36'],'publish',torch)
+     names=['before_framework','after_framework','after_backend','initialized','initial_val']
+@@ -179,7 +192,7 @@
+     names += ['final_val','checkpoint_saved']+(['restore_verified'] if not STOP_REQUESTED else [])+['publish']
+     if result['cpu36']['errors'] or [x['name'] for x in result['cpu36']['checkpoints']]!=names:raise ValueError('missing pilot CPU36 evidence')
+     incomplete=stop=='BUDGET_INCOMPLETE' or STOP_REQUESTED or step<planned
+-    result['status']='INCOMPLETE' if incomplete else 'PROFILE5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE'
++    result['status']='INCOMPLETE' if incomplete else 'GEMM5_COMPLETE_NOT_PERFORMANCE_ACCEPTANCE'
+     return 3 if incomplete else 0
+ 
+ 
+@@ -197,16 +210,17 @@
+         parser.error('refuse existing pilot outputs')
+     args.output_dir.mkdir(parents=True,exist_ok=True)
+     signal.signal(signal.SIGTERM,request_stop)
+-    result=dict(status='STARTED',started_utc=datetime.now(timezone.utc).isoformat(),protocol=profile_contract.PROTOCOL,data_protocol=engineering_data.PROTOCOL,baseline_job='2043445',**engineering_data.FLAGS,
+-        timing=dict(data_loading_seconds=0.,batch_materialization_seconds=0.,training_step_seconds=0.,diagnostic_seconds=0.,checkpoint_and_recovery_seconds=0.,profiler_outside_step_seconds=0.),
++    result=dict(status='STARTED',started_utc=datetime.now(timezone.utc).isoformat(),protocol=gemm_observer.PROTOCOL,data_protocol=engineering_data.PROTOCOL,baseline_job='2043445',**engineering_data.FLAGS,
++        timing=dict(data_loading_seconds=0.,batch_materialization_seconds=0.,training_step_seconds=0.,diagnostic_seconds=0.,checkpoint_and_recovery_seconds=0.,observation_export_and_hook_seconds=0.),
+         config=dict(belt='16_adjacent',part='pre',precision='fp32',checkpoint=False,compile=False,hbm=False,
+             attention='original_native_SDPA',linear='existing_KML_fp32',batch_size=args.batch_size,
+             max_epochs=1,max_updates=5,gradient_accumulation=False,train_seed=0,subset_seed=2026,
+             lr=1e-4,betas=[0.9,0.999],eps=1e-8,weight_decay=0.01,threads=36))
+     wall_start=time.perf_counter()
+     try:code=main(args,result)
+-    except profile_probe.UnsupportedProfiler as exc:result.update(status='UNSUPPORTED_PROFILER',error=str(exc));code=2
+-    except profile_probe.ProfileLimit as exc:result.update(status='PROFILE_LIMIT_EXCEEDED',error=str(exc));code=2
++    except gemm_observer.UnsupportedObservation as exc:result.update(status='UNSUPPORTED_GEMM_OBSERVATION',error=str(exc));code=2
++    except gemm_observer.ObservationLimit as exc:result.update(status='GEMM_LIMIT_EXCEEDED',error=str(exc));code=2
++    except gemm_observer.ObservationError as exc:result.update(status='GEMM_OBSERVATION_ERROR',error=str(exc));code=2
+     except engineering_data.SourceChanged as exc:result.update(status='SOURCE_CHANGED',error=str(exc));code=2
+     except real_data.DataNotReady as exc:result.update(status='DATA_NOT_READY',error=str(exc));code=2
+     except Exception as exc:result.update(status='ERROR_RUNTIME_OR_STATE',error=repr(exc),traceback=traceback.format_exc());code=2
+--- R9/reference/run_profile5.sh
++++ R11/run_gemm5.sh
+@@ -1,15 +1,15 @@
+ #!/bin/bash
+-# Preparation only: requires NEW coordination authorization/S01 review/S00 deployment; old job marker is invalid.
++# R11 task-card authorization: new S00 deployment/marker and SHA-bound S01 PASS required; old jobs invalid.
+ set -euo pipefail
+ HERE=$(cd -- "$(dirname -- "$0")" && pwd -P)
+ fail() { echo "$*" >&2; exit 2; }
+ [[ -n "${CCS_JOB_ID:-}" && -n "${S02_ENGINEERING_DESCRIPTOR:-}" && -n "${S02_ENGINEERING_DESCRIPTOR_SHA256:-}" ]] || fail 'new job and authoritative ready descriptor/SHA required'
+-[[ "$CCS_JOB_ID" != 2043445 ]] || fail 'original authorization/job already consumed; new reviewed job required'
++[[ "$CCS_JOB_ID" != 2043445 && "$CCS_JOB_ID" != 2048959 ]] || fail 'original authorization/job already consumed; new reviewed job required'
+ [[ "$(hostname)" != login* ]] || fail 'compute allocation required'
+-case "$HERE" in /home/share/dengqingtian/opt/stage4_sessions/S00/S02_PROFILE5_*/payload) ;; *) fail 'owned staging path required' ;; esac
++case "$HERE" in /home/share/dengqingtian/opt/stage4_sessions/S00/S02_GEMM5_*/payload) ;; *) fail 'owned staging path required' ;; esac
+ export OMP_NUM_THREADS=36 MKL_NUM_THREADS=36 OPENBLAS_NUM_THREADS=1 OMP_PLACES=cores OMP_PROC_BIND=close
+ export PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 LINEAR_DTYPE=fp32 HBM=0
+-OUT="$HERE/outputs/profile_${CCS_JOB_ID}"
++OUT="$HERE/outputs/gemm_${CCS_JOB_ID}"
+ if [[ "${1:-}" != --bounded-child ]]; then
+   mkdir -p "$HERE/outputs"
+   mkdir "$OUT" || fail 'refuse existing pilot output; no automatic retry'
+@@ -32,7 +32,7 @@
+ read -r NUMA_NODE ALLOCATED_CPUSET SELECTED_CPUSET <<< "$PLACEMENT"
+ [[ -z "${S02_CPUSET:-}" || "$S02_CPUSET" == "$SELECTED_CPUSET" ]] || fail 'CPU set differs'
+ COMMAND=(numactl --physcpubind="$ALLOCATED_CPUSET" --membind="$NUMA_NODE"
+-  "$C2_PYTHON" -B "$HERE/train_profile5.py" --descriptor "$S02_ENGINEERING_DESCRIPTOR"
++  "$C2_PYTHON" -B "$HERE/train_gemm5.py" --descriptor "$S02_ENGINEERING_DESCRIPTOR"
+   --descriptor-sha256 "$S02_ENGINEERING_DESCRIPTOR_SHA256" --expected-cpus "$SELECTED_CPUSET"
+   --cpu-contract "$OUT/cpu_allocation.json" --batch-size 64 --output-dir "$OUT")
+ printf '%q ' "${COMMAND[@]}" >"$OUT/command.txt"
+--- /dev/null
++++ R11/gemm_observer.py
+@@ -0,0 +1,152 @@
++"""Scalar metadata only, reversible hooks around the unchanged fp32 KML path."""
++from contextlib import contextmanager
++import hashlib
++import json
++import math
++from pathlib import Path
++import threading
++import time
++
++PROTOCOL='ENGINEERING_REAL_CORPUS_GEMM5_V1'
++EXPECTED_CALLS=149
++MAX_RECORDS=256
++FILE_BYTES=1024*1024
++
++
++class ObservationError(RuntimeError):pass
++class ObservationLimit(ObservationError):pass
++class UnsupportedObservation(ObservationError):pass
++
++
++def tensor_metadata(value):
++    return dict(shape=list(value.shape),stride=list(value.stride()),dtype=str(value.dtype),contiguous=value.is_contiguous())
++
++
++def storage(value):return value.untyped_storage().data_ptr()
++
++
++def write_bounded(path,value):
++    raw=(json.dumps(value,separators=(',',':'),allow_nan=False)+'\n').encode()
++    if len(raw)>FILE_BYTES:raise ObservationLimit('GEMM detail file exceeds1MiB; no truncation/retry')
++    with Path(path).open('xb') as stream:stream.write(raw)
++    return dict(path=str(Path(path).resolve()),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
++
++
++class Observer:
++    def __init__(self,module,output):
++        if module._lib is None or not callable(getattr(module,'_sgemm',None)):
++            raise UnsupportedObservation('actual fp32 _sgemm hook unavailable; no backend fallback')
++        if str(module.LINEAR_DTYPE)!='torch.float32':raise UnsupportedObservation('fp32 only')
++        self.module=module;self.output=Path(output);self.local=threading.local();self.lock=threading.Lock()
++        self.active=False;self.samples=[]
++
++    def stack(self):
++        if not hasattr(self.local,'calls'):self.local.calls=[]
++        return self.local.calls
++
++    @contextmanager
++    def linear_context(self,name):
++        before=getattr(self.local,'linear',None);self.local.linear=name
++        try:yield
++        finally:self.local.linear=before
++
++    def outer(self,a,b,*args,**kwargs):
++        before=time.perf_counter_ns();bound=dict(ta=False,tb=False,out=None,beta=0.,acc32=False)
++        names=list(bound)
++        if len(args)>len(names) or set(kwargs)-set(names) or set(names[:len(args)]).intersection(kwargs):
++            raise ObservationError('ambiguous GEMM argument binding')
++        bound.update(zip(names,args));bound.update(kwargs)
++        ta,tb,out,beta,acc32=[bound[k] for k in names]
++        if type(ta) is not bool or type(tb) is not bool or type(acc32) is not bool or acc32 or type(beta) not in (int,float) or not math.isfinite(beta) or str(a.dtype)!='torch.float32' or a.dtype!=b.dtype:
++            raise UnsupportedObservation('only original fp32 GEMM flags supported')
++        if len(a.shape)!=2 or len(b.shape)!=2 or not a.is_contiguous() or not b.is_contiguous():
++            raise ObservationError('original contiguous2D operands required')
++        m,k=(a.shape[1],a.shape[0]) if ta else a.shape;n=b.shape[0] if tb else b.shape[1]
++        if k!=(b.shape[1] if tb else b.shape[0]):raise ObservationError('GEMM inner dimensions differ')
++        stack=self.stack();linear=getattr(self.local,'linear',None)
++        role='forward' if linear=='forward' and not ta and tb else 'dX' if linear=='backward' and not ta and not tb else 'dW' if linear=='backward' and ta and not tb else 'UNKNOWN'
++        with self.lock:
++            self.sequence+=1
++            if self.sequence>MAX_RECORDS:raise ObservationLimit('more than256 GEMM records; stop without extra call')
++            index=self.sequence
++        record=dict(step=self.step,call_index=index,thread_id=threading.get_native_id(),parent_call_index=stack[-1]['record']['call_index'] if stack else None,
++            role=role,linear_context=linear,a=tensor_metadata(a),b=tensor_metadata(b),ta=ta,tb=tb,beta=float(beta),m=int(m),n=int(n),k=int(k),native_calls=0)
++        context=dict(record=record,a=a,b=b,out=out);stack.append(context)
++        record['observer_before_ns']=time.perf_counter_ns()-before
++        record['gemm_start_ns']=time.perf_counter_ns()
++        try:
++            # Preserve exactly the original argument objects, positional/keyword form and order.
++            result=self.original_gemm(a,b,*args,**kwargs)
++            record['gemm_end_ns']=time.perf_counter_ns();after=record['gemm_end_ns']
++            if record['native_calls']!=1:raise ObservationError('GEMM must match exactly one original _sgemm call')
++            if list(result.shape)!=[m,n] or result.data_ptr()!=context['c_pointer']:raise ObservationError('native C/output mapping differs')
++            record['output']=dict(**tensor_metadata(result),aliases_a_storage=storage(result)==storage(a),
++                aliases_b_storage=storage(result)==storage(b),is_given_out=out is not None and result is out)
++            record['gemm_wall_ns']=record['gemm_end_ns']-record['gemm_start_ns']
++            record['outer_minus_ctypes_ns']=record['gemm_wall_ns']-record['ctypes_wall_ns']
++            if not (record['gemm_start_ns']<=record['ctypes_start_ns']<=record['ctypes_end_ns']<=record['gemm_end_ns']):
++                raise ObservationError('native/outer intervals do not nest')
++            record['observer_after_ns']=time.perf_counter_ns()-after
++            record['status']='COMPLETE'
++            return result
++        except BaseException as exc:
++            record.setdefault('gemm_end_ns',time.perf_counter_ns());record['status']='FAILED';record['error']=repr(exc)
++            raise
++        finally:
++            if stack.pop() is not context:raise ObservationError('thread context stack corrupted')
++            with self.lock:self.records.append(record)
++
++    def native(self,*args,**kwargs):
++        entered=time.perf_counter_ns();stack=self.stack()
++        if not stack:raise ObservationError('_sgemm without same-thread outer GEMM')
++        context=stack[-1];record=context['record']
++        if record['native_calls']!=0:raise ObservationError('multiple _sgemm calls for one GEMM')
++        a,b=context['a'],context['b'];out=context['out'];m,n,k=record['m'],record['n'],record['k']
++        expected=(101,112 if record['ta'] else 111,112 if record['tb'] else 111,m,n,k,1.,a.data_ptr(),a.shape[1],b.data_ptr(),b.shape[1],record['beta'] if out is not None else 0.)
++        if kwargs or len(args)!=14 or tuple(args[:12])!=expected or args[13]!=n:
++            raise ObservationError('actual _sgemm args differ from original fp32 contract')
++        context['c_pointer']=args[12]
++        if out is not None and args[12]!=out.data_ptr():raise ObservationError('given C pointer differs')
++        record['sgemm']=dict(layout=args[0],transa=args[1],transb=args[2],m=args[3],n=args[4],k=args[5],
++            alpha=args[6],lda=args[8],ldb=args[10],beta=args[11],ldc=args[13])
++        record['ctypes_thread_id']=threading.get_native_id()
++        record['native_calls']=1;record['ctypes_start_ns']=time.perf_counter_ns()
++        try:return self.original_native(*args,**kwargs)
++        finally:
++            record['ctypes_end_ns']=time.perf_counter_ns();record['ctypes_wall_ns']=record['ctypes_end_ns']-record['ctypes_start_ns']
++            record['observer_sgemm_bookkeeping_ns']=(record['ctypes_start_ns']-entered)+(time.perf_counter_ns()-record['ctypes_end_ns'])
++
++    @contextmanager
++    def sample(self,step):
++        if self.active or step not in (3,4,5) or any(s['step']==step for s in self.samples):
++            raise ObservationError('only one sample each at updates3..5')
++        module=self.module;self.step=step;self.records=[];self.sequence=0
++        self.original_gemm=module.gemm;self.original_native=module._sgemm
++        cls=module._LinearFn;forward_descriptor=cls.__dict__['forward'];backward_descriptor=cls.__dict__['backward']
++        forward,backward=cls.forward,cls.backward
++        def marked_forward(*a,**kw):
++            with self.linear_context('forward'):return forward(*a,**kw)
++        def marked_backward(*a,**kw):
++            with self.linear_context('backward'):return backward(*a,**kw)
++        summary=dict(step=step,status='STARTED',records=0,native_calls=0);self.samples.append(summary)
++        failed=None;self.active=True
++        try:
++            module.gemm=self.outer;module._sgemm=self.native
++            cls.forward=staticmethod(marked_forward);cls.backward=staticmethod(marked_backward)
++            yield summary
++            if self.sequence!=EXPECTED_CALLS or len(self.records)!=EXPECTED_CALLS or any(r['native_calls']!=1 or r.get('status')!='COMPLETE' for r in self.records):
++                raise ObservationError('missing/excess/unpaired GEMM records versus expected149')
++            summary['status']='COMPLETE'
++        except BaseException as exc:
++            failed=exc;summary.update(status='FAILED',error=repr(exc));raise
++        finally:
++            module.gemm=self.original_gemm;module._sgemm=self.original_native
++            cls.forward=forward_descriptor;cls.backward=backward_descriptor;self.active=False
++            summary.update(records=len(self.records),native_calls=sum(r['native_calls'] for r in self.records))
++            payload=dict(protocol=PROTOCOL,step=step,status=summary['status'],clock='time.perf_counter_ns monotonic',
++                timing_scope='per-thread nested spans; ctypes includes Python conversion/native packing/scheduling/compute; outer-minus-ctypes includes prep/counter/alloc/observer. Not pure microkernel or program wall.',
++                records=summary['records'],calls=sorted(self.records,key=lambda r:r['call_index']))
++            try:summary.update(write_bounded(self.output/f'gemm_step_{step}.json',payload))
++            except BaseException as exc:
++                summary.update(status='FAILED',export_error=repr(exc))
++                if failed is None:raise
+--- /dev/null
++++ R11/tests/test_gemm_observer.py
+@@ -0,0 +1,181 @@
++"""LOCAL_FAKE_CBLAS_ONLY: real tensor interface, no actual KML/model run."""
++from concurrent.futures import ThreadPoolExecutor
++import ctypes
++import importlib.util
++import json
++from pathlib import Path
++import random
++import sys
++import tempfile
++import threading
++import unittest
++from unittest.mock import patch
++import numpy as np
++import torch
++
++ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
++import gemm_observer as observer
++
++
++def fixture():
++    spec=importlib.util.spec_from_file_location('fake_cblas_baseline',ROOT/'baseline/kml_ops.py')
++    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
++    assert module._lib is None,'fixture requires environment without KML'
++    calls=[]
++    def native(*args):
++        calls.append(args);_,ta,tb,m,n,k,alpha,ap,lda,bp,ldb,beta,cp,ldc=args
++        def view(ptr,rows,cols):return torch.frombuffer((ctypes.c_float*(rows*cols)).from_address(ptr),dtype=torch.float32).reshape(rows,cols)
++        a=view(ap,k if ta==112 else m,lda);b=view(bp,n if tb==112 else k,ldb);c=view(cp,m,ldc)
++        value=(a.t() if ta==112 else a)@(b.t() if tb==112 else b)
++        if beta==0:c.copy_(value)
++        else:c.mul_(beta).add_(value)
++        return None
++    module._lib=object();module._sgemm=native
++    return module,calls
++
++
++def saved(module):
++    return (module.gemm,module._sgemm,module._LinearFn.__dict__['forward'],module._LinearFn.__dict__['backward'])
++
++
++class ObserverTests(unittest.TestCase):
++    def setUp(self):
++        (ROOT/'evidence').mkdir(exist_ok=True)
++        self.temp=tempfile.TemporaryDirectory(dir=ROOT/'evidence');self.path=Path(self.temp.name)
++        self.module,self.calls=fixture();self.before=saved(self.module)
++        self.obs=observer.Observer(self.module,self.path)
++
++    def tearDown(self):
++        self.assertEqual(saved(self.module),self.before);self.temp.cleanup()
++
++    def test_once_same_arguments_outputs_gradients_and_rng(self):
++        torch.manual_seed(0);random.seed(0);np.random.seed(0)
++        x=torch.randn(2,3,8,requires_grad=True);w=torch.randn(12,8,requires_grad=True);b=torch.randn(12,requires_grad=True)
++        values=[v.detach().clone().requires_grad_() for v in (x,w,b)]
++        expected=self.module._LinearFn.apply(*values);expected.square().mean().backward()
++        initial_calls=len(self.calls);rng=torch.get_rng_state().clone();prng=random.getstate();nrng=np.random.get_state()
++        with patch.object(observer,'EXPECTED_CALLS',3):
++            with self.obs.sample(3):
++                got=self.module._LinearFn.apply(x,w,b);got.square().mean().backward()
++        self.assertEqual(len(self.calls)-initial_calls,3)
++        self.assertTrue(torch.equal(expected,got))
++        for a,bb in zip(values,(x,w,b)):self.assertTrue(torch.equal(a.grad,bb.grad))
++        self.assertTrue(torch.equal(rng,torch.get_rng_state()));self.assertEqual(prng,random.getstate())
++        after=np.random.get_state();self.assertEqual(nrng[0],after[0]);self.assertTrue(np.array_equal(nrng[1],after[1]));self.assertEqual(nrng[2:],after[2:])
++        d=json.loads((self.path/'gemm_step_3.json').read_text());rows=d['calls']
++        self.assertEqual([r['role'] for r in rows],['forward','dX','dW'])
++        self.assertEqual([(r['m'],r['n'],r['k']) for r in rows],[(6,12,8),(6,8,12),(12,8,6)])
++        for r in rows:
++            self.assertEqual(r['native_calls'],1);self.assertGreaterEqual(r['outer_minus_ctypes_ns'],0)
++            self.assertLessEqual(r['gemm_start_ns'],r['ctypes_start_ns']);self.assertLessEqual(r['ctypes_end_ns'],r['gemm_end_ns'])
++            self.assertFalse(r['output']['aliases_a_storage'] or r['output']['aliases_b_storage'])
++        self.assertEqual(self.calls[:3][0][0:7],self.calls[3:][0][0:7])
++
++    def test_positional_keyword_forms_and_unknown_role(self):
++        a=torch.randn(3,4);b=torch.randn(5,4);out=torch.ones(3,5);args_seen=[];original=self.module.gemm
++        def spy(*args,**kwargs):args_seen.append((args,kwargs));return original(*args,**kwargs)
++        self.module.gemm=spy;before=saved(self.module)
++        with patch.object(observer,'EXPECTED_CALLS',1):
++            with self.obs.sample(3):result=self.module.gemm(a,b,False,True,out,1.,False)
++        self.assertIs(result,out);self.assertEqual(saved(self.module),before)
++        self.assertIs(args_seen[0][0][0],a);self.assertIs(args_seen[0][0][1],b)
++        self.assertEqual(args_seen[0][0][2:],(False,True,out,1.,False));self.assertEqual(args_seen[0][1],{})
++        self.assertEqual(json.loads((self.path/'gemm_step_3.json').read_text())['calls'][0]['role'],'UNKNOWN')
++        self.module.gemm=self.before[0]
++
++    def test_exception_restores_all_hooks(self):
++        def fail(*args):raise RuntimeError('controlled native failure')
++        self.module._sgemm=fail;before=saved(self.module)
++        with self.assertRaisesRegex(RuntimeError,'controlled'):
++            with self.obs.sample(3):self.module.gemm(torch.ones(2,3),torch.ones(3,4))
++        self.assertEqual(saved(self.module),before);self.module._sgemm=self.before[1]
++        self.assertEqual(self.obs.samples[0]['status'],'FAILED')
++
++    def test_thread_contexts_do_not_cross(self):
++        barrier=threading.Barrier(2);a=torch.ones(2,3);b=torch.ones(3,4)
++        def work():barrier.wait();return self.module.gemm(a,b)
++        with patch.object(observer,'EXPECTED_CALLS',2):
++            with self.obs.sample(3):
++                with ThreadPoolExecutor(max_workers=2) as pool:values=list(pool.map(lambda _:work(),range(2)))
++        rows=json.loads((self.path/'gemm_step_3.json').read_text())['calls']
++        self.assertEqual(len({r['thread_id'] for r in rows}),2);self.assertEqual([r['call_index'] for r in rows],[1,2])
++        self.assertTrue(all(r['parent_call_index'] is None and r['native_calls']==1 for r in rows))
++        self.assertTrue(all(torch.equal(v,torch.full((2,4),3.)) for v in values))
++
++    def test_missing_duplicate_or_unscoped_native_rejected(self):
++        original=self.module.gemm
++        self.module.gemm=lambda a,b:torch.zeros(a.shape[0],b.shape[1])
++        with self.assertRaisesRegex(observer.ObservationError,'exactly one'):
++            with self.obs.sample(3):self.module.gemm(torch.ones(2,3),torch.ones(3,4))
++        self.module.gemm=original
++        with self.assertRaisesRegex(observer.ObservationError,'same-thread'):
++            with self.obs.sample(4):self.module._sgemm()
++        native=self.module._sgemm
++        def duplicate(*args):native(*args);self.module._sgemm(*args)
++        self.module._sgemm=duplicate
++        with self.assertRaisesRegex(observer.ObservationError,'multiple'):
++            with self.obs.sample(5):self.module.gemm(torch.ones(2,3),torch.ones(3,4))
++        self.module._sgemm=native
++
++    def test_limits_count_mismatch_and_byte_limit(self):
++        a=torch.ones(2,3);b=torch.ones(3,4)
++        with self.assertRaisesRegex(observer.ObservationError,'expected149'):
++            with self.obs.sample(3):self.module.gemm(a,b)
++        with patch.object(observer,'MAX_RECORDS',1),patch.object(observer,'EXPECTED_CALLS',2):
++            before=len(self.calls)
++            with self.assertRaises(observer.ObservationLimit):
++                with self.obs.sample(4):self.module.gemm(a,b);self.module.gemm(a,b)
++            self.assertEqual(len(self.calls)-before,1)
++        with patch.object(observer,'FILE_BYTES',10),patch.object(observer,'EXPECTED_CALLS',1):
++            with self.assertRaises(observer.ObservationLimit):
++                with self.obs.sample(5):self.module.gemm(a,b)
++        self.assertFalse((self.path/'gemm_step_5.json').exists())
++        with self.assertRaises(observer.ObservationError):
++            with self.obs.sample(1):pass
++
++    def test_unsupported_refuses_without_call_or_fallback(self):
++        for name,value in [('_lib',None),('_sgemm',None),('LINEAR_DTYPE',torch.bfloat16)]:
++            with patch.object(self.module,name,value):
++                with self.assertRaises(observer.UnsupportedObservation):observer.Observer(self.module,self.path)
++        with self.assertRaises(observer.UnsupportedObservation):
++            with self.obs.sample(3):self.module.gemm(torch.ones(2,3),torch.ones(3,4),acc32=True)
++        self.assertFalse(self.calls)
++
++    def test_five_adamw_updates_only_last_three_recorded(self):
++        from engineering_training import exact
++        from contextlib import nullcontext
++        torch.manual_seed(4);initial=[torch.randn(12,8),torch.randn(12)];x=torch.randn(6,8)
++        snapshots=[]
++        for enabled in (False,True):
++            params=[torch.nn.Parameter(v.clone()) for v in initial]
++            opt=torch.optim.AdamW(params,lr=1e-4,betas=(.9,.999),eps=1e-8,weight_decay=.01)
++            for step in range(1,6):
++                values=x.clone().requires_grad_();opt.zero_grad(set_to_none=True)
++                with patch.object(observer,'EXPECTED_CALLS',3):
++                    with self.obs.sample(step) if enabled and step>=3 else nullcontext():
++                        output=self.module._LinearFn.apply(values,*params);output.square().mean().backward();opt.step()
++                self.assertEqual(saved(self.module),self.before)
++            snapshots.append(([p.detach().clone() for p in params],opt.state_dict()))
++        self.assertTrue(exact(torch,snapshots[0],snapshots[1]))
++        self.assertEqual([r['step'] for r in self.obs.samples],[3,4,5]);self.assertEqual(len(list(self.path.glob('gemm_step_*.json'))),3)
++
++    def test_nested_calls_keep_parent_intervals(self):
++        original=self.module.gemm;native=self.module._sgemm;inside=False
++        def nested(*args):
++            nonlocal inside
++            if not inside:
++                inside=True
++                try:self.module.gemm(torch.ones(1,2),torch.ones(2,1))
++                finally:inside=False
++            return native(*args)
++        self.module._sgemm=nested
++        with patch.object(observer,'EXPECTED_CALLS',2):
++            with self.obs.sample(3):self.module.gemm(torch.ones(2,3),torch.ones(3,4))
++        rows=json.loads((self.path/'gemm_step_3.json').read_text())['calls']
++        self.assertEqual([r['parent_call_index'] for r in rows],[None,1]);self.module._sgemm=native
++
++
++if __name__=='__main__':
++    torch.set_num_threads(36)
++    print('LOCAL_FAKE_CBLAS_ONLY; NO KML/FULL ENCODER/CLUSTER',flush=True)
++    unittest.main(verbosity=2)

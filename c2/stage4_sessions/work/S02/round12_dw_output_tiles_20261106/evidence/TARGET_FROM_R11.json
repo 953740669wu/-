@@ -1,0 +1,311 @@
+{
+  "job_id": "2049454",
+  "host": "cn21338",
+  "run_complete_sha256": "4459f7848c90092b1bb94718ce85b0da66158c9958cf08c3e93d9766e03c2b35",
+  "bindings": {
+    "application_result": {
+      "bytes": 473373,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\result.json",
+      "sha256": "2e86bc8f23f45ccbb44086cba5be0ff48d3952e2c0465eede0eb61d0dc76a0ab"
+    },
+    "steps": {
+      "bytes": 116123,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\steps.jsonl",
+      "sha256": "69184185ccf036968f591ffeeecd67d328cf5fd5917990d307ecefdfb1b73243"
+    },
+    "audit": {
+      "bytes": 6332,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\RUN_AUDIT.json",
+      "sha256": "8ce06a48cb08da5ca1d9cea6676b8eb6938d04355bf962da4d645ad84a2e34c6"
+    },
+    "review": {
+      "bytes": 8516,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\S01_REVIEW.json",
+      "sha256": "f75a7030f76613d1126960d2d27ace9b8e327d41788a7a3301cd7105ea5723f1"
+    },
+    "reference_first5": {
+      "bytes": 19052,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\REFERENCE_FIRST5.json",
+      "sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+    },
+    "sample_3": {
+      "bytes": 150035,
+      "native_calls": 149,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\gemm_step_3.json",
+      "records": 149,
+      "sha256": "ef3809752f62206c572e3864d185291af59ff10e7622e07594f2074556615f60",
+      "step": 3
+    },
+    "sample_4": {
+      "bytes": 150044,
+      "native_calls": 149,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\gemm_step_4.json",
+      "records": 149,
+      "sha256": "94c99cde67845f7c467637c746a9368b8ad4484b3716b897809484b02d810923",
+      "step": 4
+    },
+    "sample_5": {
+      "bytes": 150040,
+      "native_calls": 149,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\gemm_step_5.json",
+      "records": 149,
+      "sha256": "a0cb1925512fe4edf12e89cb310f964642ba65f61eb09070023cb52cdc1d2509",
+      "step": 5
+    }
+  },
+  "target": [
+    {
+      "step": 3,
+      "calls": 12,
+      "example": {
+        "step": 3,
+        "call_index": 54,
+        "thread_id": 1758130,
+        "parent_call_index": null,
+        "role": "dW",
+        "linear_context": "backward",
+        "a": {
+          "shape": [
+            13312,
+            512
+          ],
+          "stride": [
+            512,
+            1
+          ],
+          "dtype": "torch.float32",
+          "contiguous": true
+        },
+        "b": {
+          "shape": [
+            13312,
+            2048
+          ],
+          "stride": [
+            2048,
+            1
+          ],
+          "dtype": "torch.float32",
+          "contiguous": true
+        },
+        "ta": true,
+        "tb": false,
+        "beta": 0.0,
+        "m": 512,
+        "n": 2048,
+        "k": 13312,
+        "native_calls": 1,
+        "observer_before_ns": 180722,
+        "gemm_start_ns": 3961641681345472,
+        "sgemm": {
+          "layout": 101,
+          "transa": 112,
+          "transb": 111,
+          "m": 512,
+          "n": 2048,
+          "k": 13312,
+          "alpha": 1.0,
+          "lda": 512,
+          "ldb": 2048,
+          "beta": 0.0,
+          "ldc": 2048
+        },
+        "ctypes_thread_id": 1758130,
+        "ctypes_start_ns": 3961641681512704,
+        "ctypes_end_ns": 3961641712824212,
+        "ctypes_wall_ns": 31311508,
+        "observer_sgemm_bookkeeping_ns": 64630,
+        "gemm_end_ns": 3961641712873242,
+        "output": {
+          "shape": [
+            512,
+            2048
+          ],
+          "stride": [
+            2048,
+            1
+          ],
+          "dtype": "torch.float32",
+          "contiguous": true,
+          "aliases_a_storage": false,
+          "aliases_b_storage": false,
+          "is_given_out": false
+        },
+        "gemm_wall_ns": 31527770,
+        "outer_minus_ctypes_ns": 216262,
+        "observer_after_ns": 150381,
+        "status": "COMPLETE"
+      },
+      "ctypes_sum_ns": 374199378
+    },
+    {
+      "step": 4,
+      "calls": 12,
+      "example": {
+        "step": 4,
+        "call_index": 54,
+        "thread_id": 1758130,
+        "parent_call_index": null,
+        "role": "dW",
+        "linear_context": "backward",
+        "a": {
+          "shape": [
+            13312,
+            512
+          ],
+          "stride": [
+            512,
+            1
+          ],
+          "dtype": "torch.float32",
+          "contiguous": true
+        },
+        "b": {
+          "shape": [
+            13312,
+            2048
+          ],
+          "stride": [
+            2048,
+            1
+          ],
+          "dtype": "torch.float32",
+          "contiguous": true
+        },
+        "ta": true,
+        "tb": false,
+        "beta": 0.0,
+        "m": 512,
+        "n": 2048,
+        "k": 13312,
+        "native_calls": 1,
+        "observer_before_ns": 110501,
+        "gemm_start_ns": 3961646988674325,
+        "sgemm": {
+          "layout": 101,
+          "transa": 112,
+          "transb": 111,
+          "m": 512,
+          "n": 2048,
+          "k": 13312,
+          "alpha": 1.0,
+          "lda": 512,
+          "ldb": 2048,
+          "beta": 0.0,
+          "ldc": 2048
+        },
+        "ctypes_thread_id": 1758130,
+        "ctypes_start_ns": 3961646988797076,
+        "ctypes_end_ns": 3961647020548068,
+        "ctypes_wall_ns": 31750992,
+        "observer_sgemm_bookkeeping_ns": 48301,
+        "gemm_end_ns": 3961647020592599,
+        "output": {
+          "shape": [
+            512,
+            2048
+          ],
+          "stride": [
+            2048,
+            1
+          ],
+          "dtype": "torch.float32",
+          "contiguous": true,
+          "aliases_a_storage": false,
+          "aliases_b_storage": false,
+          "is_given_out": false
+        },
+        "gemm_wall_ns": 31918274,
+        "outer_minus_ctypes_ns": 167282,
+        "observer_after_ns": 141101,
+        "status": "COMPLETE"
+      },
+      "ctypes_sum_ns": 377310428
+    },
+    {
+      "step": 5,
+      "calls": 12,
+      "example": {
+        "step": 5,
+        "call_index": 54,
+        "thread_id": 1758130,
+        "parent_call_index": null,
+        "role": "dW",
+        "linear_context": "backward",
+        "a": {
+          "shape": [
+            13312,
+            512
+          ],
+          "stride": [
+            512,
+            1
+          ],
+          "dtype": "torch.float32",
+          "contiguous": true
+        },
+        "b": {
+          "shape": [
+            13312,
+            2048
+          ],
+          "stride": [
+            2048,
+            1
+          ],
+          "dtype": "torch.float32",
+          "contiguous": true
+        },
+        "ta": true,
+        "tb": false,
+        "beta": 0.0,
+        "m": 512,
+        "n": 2048,
+        "k": 13312,
+        "native_calls": 1,
+        "observer_before_ns": 134861,
+        "gemm_start_ns": 3961652090362582,
+        "sgemm": {
+          "layout": 101,
+          "transa": 112,
+          "transb": 111,
+          "m": 512,
+          "n": 2048,
+          "k": 13312,
+          "alpha": 1.0,
+          "lda": 512,
+          "ldb": 2048,
+          "beta": 0.0,
+          "ldc": 2048
+        },
+        "ctypes_thread_id": 1758130,
+        "ctypes_start_ns": 3961652090495054,
+        "ctypes_end_ns": 3961652121301036,
+        "ctypes_wall_ns": 30805982,
+        "observer_sgemm_bookkeeping_ns": 55432,
+        "gemm_end_ns": 3961652121347807,
+        "output": {
+          "shape": [
+            512,
+            2048
+          ],
+          "stride": [
+            2048,
+            1
+          ],
+          "dtype": "torch.float32",
+          "contiguous": true,
+          "aliases_a_storage": false,
+          "aliases_b_storage": false,
+          "is_given_out": false
+        },
+        "gemm_wall_ns": 30985225,
+        "outer_minus_ctypes_ns": 179243,
+        "observer_after_ns": 145611,
+        "status": "COMPLETE"
+      },
+      "ctypes_sum_ns": 378006874
+    }
+  ],
+  "scope": "Actual recorded target metadata, no NPZ/weights/SSH/model execution"
+}

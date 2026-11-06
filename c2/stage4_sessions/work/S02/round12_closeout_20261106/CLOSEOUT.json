@@ -1,0 +1,234 @@
+{
+  "status": "CLOSED_NO_TRAINING_GAIN",
+  "coordinator_disposition": "R12_CLOSED_NO_TRAINING_GAIN",
+  "closed_utc": "2026-11-06T06:24:34.665212+00:00",
+  "task": "S02_R12_CLOSEOUT",
+  "numeric_failure": false,
+  "default_integrated": false,
+  "baseline_kept": true,
+  "tile_search_closed": true,
+  "new_jobs_this_round": 0,
+  "model_runs_this_round": 0,
+  "job_id": "2049894",
+  "host": "cn21338",
+  "original_job_status": "SUCCEEDED",
+  "original_full_updates": 60,
+  "original_retries": 0,
+  "numeric": {
+    "target": {
+      "metrics": 1,
+      "max_abs": 0
+    },
+    "strict": {
+      "metrics": 3895,
+      "max_abs": 0,
+      "updates_each": 5
+    },
+    "perf_baseline": {
+      "metrics": 15,
+      "max_abs": 0
+    },
+    "perf_candidate": {
+      "metrics": 15,
+      "max_abs": 0
+    }
+  },
+  "performance": {
+    "baseline": {
+      "observed_steps": 20,
+      "median_seconds": 4.510239103808999,
+      "range_seconds": [
+        4.320207665674388,
+        4.61845821980387
+      ],
+      "all25_training_seconds": 113.43545715464279,
+      "wall_seconds": 167.4048447823152,
+      "sampled_process_lifetime_HWM_MiB": 6820.1171875
+    },
+    "candidate": {
+      "observed_steps": 20,
+      "median_seconds": 4.628061148105189,
+      "range_seconds": [
+        4.481312453746796,
+        4.926456287037581
+      ],
+      "all25_training_seconds": 117.83301037969068,
+      "wall_seconds": 170.55277104582638,
+      "sampled_process_lifetime_HWM_MiB": 6923.1328125
+    }
+  },
+  "candidate_observed20_median_time_change_percent": 2.6123236836088415,
+  "limitations": [
+    "One exploratory same-node pair; overlapping ranges; no stable-regression claim",
+    "Sampled HWM is process lifetime, not per-step exclusive or whole-job final peak",
+    "Engineering case only; subject/split UNKNOWN; no val/test, scientific or production performance acceptance"
+  ],
+  "read_only_verification": {
+    "bound_assets_verified": 15,
+    "stage_results_metrics": true,
+    "perf25_and_warm5_observe20": true,
+    "recomputed_raw_step_medians": true,
+    "matched_frame_mask_init_normalization": true,
+    "step_native_counts": true,
+    "zero_extra_update_recovery": true,
+    "full_CPU_or_comm_reaudit_this_round": false,
+    "coordinator_all_CPU139_checks_cited": true
+  },
+  "inputs": {
+    "run_complete": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\RUN_COMPLETE.json",
+      "bytes": 11671,
+      "sha256": "489d70ced36d7046bb79810da2d148c9ab31b7ed900fadb66e9f312365805f59"
+    },
+    "coordinator_review": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\JOB2049894_R12_NO_GAIN_REVIEW_20261106.json",
+      "bytes": 2546,
+      "sha256": "c14048bb000307fde18592aa7c0830f1e1f0c0ef6f440e127952b8acbec30ddb"
+    },
+    "task_card": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\AFTER_R12_NO_GAIN_S07_RESUME_20261106.md",
+      "bytes": 10213,
+      "sha256": "9a2c41f21f6f5be38ece42e082e3c221bb5593dbbbc84dbb302ce66ae33fff36"
+    },
+    "frozen_ready": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\R12_READY.json",
+      "bytes": 4114,
+      "sha256": "98c12351d91c0379ed940cc38e3e76919516290e1402f7fa06fc060f952de60c"
+    },
+    "bindings": {
+      "archive": {
+        "bytes": 865426,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\JOB_2049894_evidence.zip",
+        "sha256": "a078da8c80b776f88859f4cd824207b1fc8d98dad15d1a0d2421841f8037ecd7"
+      },
+      "audit": {
+        "bytes": 30122,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\RUN_AUDIT.json",
+        "sha256": "60b465ed487e937ec59d61f851621d47efff836890a85c9fe3153be6c7606350"
+      },
+      "evidence_index": {
+        "bytes": 2113805,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\received\\COLLECTION_S00.json",
+        "sha256": "5074d66ba8a591b8120577c5bc2e33b9ca20f12576090944109c99003c4e0405"
+      },
+      "review": {
+        "bytes": 4857,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\S01_REVIEW.json",
+        "sha256": "ccdf321ea9982f582d17c4663a017efa197ff78aa177ae9843616bb2d8a73d0c"
+      },
+      "deployment_ready": {
+        "bytes": 8732,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\S00_DEPLOYMENT_READY.json",
+        "sha256": "a203962e41e06e7f85e6eb42dd12ca4665a79d6d6c22542f70b5b8cb70c4e769"
+      },
+      "perf_baseline.result": {
+        "bytes": 1635949,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\received\\payload\\outputs\\perf_baseline_2049894\\result.json",
+        "sha256": "74e26d905d917f6fa9ad4e096023db9d79ebf08f719e6215e323127413ad415e"
+      },
+      "perf_baseline.steps": {
+        "bytes": 569406,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\received\\payload\\outputs\\perf_baseline_2049894\\steps.jsonl",
+        "sha256": "63c3483cd716cfc5e3c258ce6ed5e64e564b9145d88503522b19c02ae7504f3a"
+      },
+      "perf_baseline.ledger": {
+        "bytes": 763250,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\received\\payload\\outputs\\perf_baseline_2049894\\EXPOSURE_LEDGER.json",
+        "sha256": "30bdd521b01d2380957b79d65883fe460a3f1e4d4ba3c53c78fb3b8d1fd39d3f"
+      },
+      "perf_candidate.result": {
+        "bytes": 1636096,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\received\\payload\\outputs\\perf_candidate_2049894\\result.json",
+        "sha256": "9b10155afb8226083d64ff5ed9f3fe2d9227130aca5850d02b14c799dfa7b5e3"
+      },
+      "perf_candidate.steps": {
+        "bytes": 569494,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\received\\payload\\outputs\\perf_candidate_2049894\\steps.jsonl",
+        "sha256": "cfc618b3baeee36dc3d8fc669d1b54748e0919fa66cf8198cd8f408e2c7ab726"
+      },
+      "perf_candidate.ledger": {
+        "bytes": 763250,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\received\\payload\\outputs\\perf_candidate_2049894\\EXPOSURE_LEDGER.json",
+        "sha256": "30bdd521b01d2380957b79d65883fe460a3f1e4d4ba3c53c78fb3b8d1fd39d3f"
+      },
+      "strict.result": {
+        "bytes": 1409583,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\received\\payload\\outputs\\strict_2049894\\result.json",
+        "sha256": "9400127898c5b3cb743e85bd5cecbe8c8f0f6b4bb1dffcf892d7bc050c7f3375"
+      },
+      "strict.steps": {
+        "bytes": 227800,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\received\\payload\\outputs\\strict_2049894\\steps.jsonl",
+        "sha256": "c1cded94fb9cc44c1e1cce179174dc6f92b87bd09f95dab2d471357a28ad6399"
+      },
+      "strict.ledger": {
+        "bytes": 162341,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\received\\payload\\outputs\\strict_2049894\\EXPOSURE_LEDGER.json",
+        "sha256": "630c74f323ec391be2e2dce5a5942365c073b7117e36563467a07682e73e9838"
+      },
+      "target.result": {
+        "bytes": 114915,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round12_dw_ab_20261106\\evidence\\received\\payload\\outputs\\target_2049894\\screen_result.json",
+        "sha256": "af98c9905ca6244da2507377a5b136f0a2d938572b64ac5aefbfbcece5101a88"
+      }
+    }
+  },
+  "original_R12_files_unchanged": {
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\AB_PROPOSAL.md": "15443016dbdbc1e031d90d5faba71d0180c30ffe57b3341da40ad9777cdf4358",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\ARCHIVE_FILES.json": "510fb42eaf049855fce5070083b3c83f757daed142d4117203a87eae531e31a1",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\cpu36_contract.py": "3990bb6ba40e7d4e47037aef245c6bc971191e7ae2c4be8701dd329c408a179d",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\cpu36_guard.py": "80635c8c980100612758483ef83bd2b0d7bbda8fdc611384b095f80bbfeba38e",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\DECISION_BEFORE_CODE.md": "58b9da863b63e7e6d7cce67feea558100262e359677dbcede44c363767b13d49",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\diagnostic_common.py": "e3683f15e907c8a041795ccd4b775c78b235cc20bb09492108db4e950da7e705",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\engineering_training.py": "9009e96fe4cc8071048e8aed8d3dc11e20d04f4271c48dbe36472e4218d8e5dc",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\memory_metrics.py": "390f8669dee069e9153ee517419cf26131d59e88bd8c68ab3bd98dc495aa806f",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\profile_contract.py": "15fd272040db36271680e947b2d183e852ed60b343bbcd4ded8f88821d67793d",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\R12_CONTRACT.json": "16f19bab92e57e2730d801dab5fb012c32d53a37bf4011e516a5467fe5f378df",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\R12_READY.json": "98c12351d91c0379ed940cc38e3e76919516290e1402f7fa06fc060f952de60c",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\real_data.py": "6490b5aa7ab8eacc43ba7e4fa13ac64ebd6239671397774025979efdf050c8e0",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\REFERENCE_EPOCH25.json": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\REFERENCE_FIRST5.json": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\REPORT.md": "311d6622e45f6bb113212a5c9963e114ffe0511df7ceba262b8115747420282e",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\runtime_counts.py": "9157461df13a02163f5686642fdfb8ba846f2c48b908a46be0fc0832e9ab355a",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\run_ab_proposal.sh": "8e2d080df8d67a14824f06867505140b8d705116bacf940f0d3b9917c1a445b3",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\screen_target.py": "4724937d9dce3b4f10d8a4b17a5cd2a2f31e65fa0519f7809020a3c5ec56e007",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\SOURCE_SHA256.json": "f61b8db309b8dad5853c7916d371b4484af609bd7610c096846bb21a7ac866bd",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\train_dw_ab.py": "ea64656a18044408ad7a4d81767cd85f6697977e2222d7f59d10dc0bbe9b7418",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\baseline\\kml_ops.py": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\baseline\\s4_models.py": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\candidate\\kml_ops.py": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\data_gate\\engineering_data.py": "fbb89097f2aab0633b5be44e10b3160e4a8a33a2f69b1a889f4930df909e42b3",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\data_gate\\INTERFACE.json": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\diff\\CANDIDATE_ONLY.patch": "3dd99c0d3398eecc8ab2b4cc4fee1276a2e83e70ce94623177bde01d7523ff67",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\FINAL_IDENTITY_CHECK.json": "a59374da9842563e2c22497d987664754ab87be02e32dbb4912f86449758c1cb",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\IMPORT_IDENTITY.json": "6348bdfa20144db670152948e83888ec549f3bad0adc119d87c97dfd29ae653d",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\local_validation.json": "666d26668ef1c41da70123cc7f2065b021f89475536a200d11b7c8e7759cefa3",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\native_screen.json": "8309a9e5066f88a6d830983ba4f85b74ecf5dba25f268e111774eebfea3c2464",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\native_screen_first.log": "f5e198fd8240b7f3ceb6c5320ee7ffd3dd55566f7067e852c2d78c2340781ffe",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\prepare_ab.py": "88fe6456b94b0b0806754a2e3d9bda7517248c5bba03c44fbdeed506b8d64c73",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\PROTECTED_INPUTS.json": "13644bd5478f467b064b7ef1615aa441e79f07aba5a551495d96a34ab8339981",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\publish_delivery.py": "7eeb6c12f945a38c915c9871f2594f0c3ac42af04814aa8e3b8fc2fb662162ce",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\runtime_contract.log": "7c2a07b29a867e76f632fab9fc597bbfa67560a5293e50402dab7cf9c18bb004",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\runtime_contract_final.log": "bad689e161208547c608fd691d40eb13cba98cda08ceddc874c631b960cd964d",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\shell_syntax.json": "b903b3e034ff3602bc6b184672098a0187f86b4a3d3042e8d514019463318a33",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\TARGET_FROM_R11.json": "35d44d6382ac723f19385c2d5a1739a861fc53476f2c63317125e09226b417ea",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\verify_delivery.py": "86c998959bdd443aa82dbddaf581e0869faec7bb600b4a3cf25676bdca8e48fe",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\refusal_052541321278_full_wrong_path\\result.json": "040c63670ac493ac617dd30fb4fa1789f4259d06a08f64bf840e8e57c50f41be",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\refusal_052541321278_target_wrong_platform\\screen_result.json": "af6cbbe8625e5aead0e5f4b279d4eac8c922584406edbe991154143a8abc18ae",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\interfaces\\cluster_runtime.env": "32248af7857b7fd1616b19899c1411a4a59f9378c9231f0ec56f6c922ec2866d",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\package\\PACKAGE_MANIFEST.json": "c1ccb3a26e6c076c99d6977bb6e081e25c0e94ef084f47c5af8636ecb07046d9",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\package\\S02_R12_DW_TWO_COLUMN_TILES.zip": "44232f7627cfbcf59fb721acd23af46aed8fa790b20fe743a3c9886717ec4de4",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\reference\\train_linear_ab_r10.py": "27c9475cb18b0f8463b06215dad2c7874b862159cb7cb51519b83f9d0174fb20",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\tests\\check_equivalence.py": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\tests\\test_dw_tiles.py": "5602078a8c024bec4d07a16935d13e28d851eaaee75945cc18641b1335a0583c",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\tests\\test_runtime_contract.py": "14b8c8611c78f34eceea697c884fb9c1f5ae2839e2ac45c322611f923ef090cd"
+  },
+  "activity": {
+    "local_snapshot_utc": "2026-11-06T06:22:35.2048380Z",
+    "visible_local_python_pythonw_ssh_bash_wsl_dsub": [],
+    "remote_queue_queried": false,
+    "original_job_active": null,
+    "active_job_from_S00_RUN_COMPLETE": "none for 2049894; not a claim about other sessions"
+  },
+  "next": "S02 standby; do not integrate, retile, append A/B or submit. S00/S01 own S07 R6 under separate task section."
+}

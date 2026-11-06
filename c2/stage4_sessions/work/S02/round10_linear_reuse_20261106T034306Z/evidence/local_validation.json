@@ -1,0 +1,71 @@
+{
+  "status": "PASS_LOCAL_NATIVE_INTERFACE_ONLY",
+  "timestamp": "2026-11-06T03:56:39.072209+00:00",
+  "python": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Scripts\\python.exe",
+  "tests": {
+    "targeted_native": 4,
+    "ab_contract": 3,
+    "total": 7
+  },
+  "frozen_comparator_metrics": 115,
+  "max_abs": 0.0,
+  "actual_imports": [
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round10_linear_reuse_20261106T034306Z\\baseline\\kml_ops.py",
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round10_linear_reuse_20261106T034306Z\\candidate\\kml_ops.py",
+      "sha256": "27646c0df40b1dd02d3f27c931e0e72d5e7ec9fea2c7eba2c5beaf76d0553f44"
+    }
+  ],
+  "baseline_sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+  "candidate_sha256": "27646c0df40b1dd02d3f27c931e0e72d5e7ec9fea2c7eba2c5beaf76d0553f44",
+  "preserved_files": [
+    "baseline/kml_ops.py",
+    "baseline/s4_models.py",
+    "cpu36_contract.py",
+    "cpu36_guard.py",
+    "diagnostic_common.py",
+    "engineering_data.py",
+    "engineering_training.py",
+    "INTERFACE.json",
+    "interfaces/cluster_runtime.env",
+    "memory_metrics.py",
+    "profile_contract.py",
+    "real_data.py",
+    "REFERENCE_FIRST5.json",
+    "tests/check_equivalence.py"
+  ],
+  "protected_r9_source_entries": 24,
+  "original_comparator_unchanged": true,
+  "python39_ast": true,
+  "LF": true,
+  "bash_syntax_only": true,
+  "negative_cli_checks": [
+    {
+      "label": "full_entry_wrong_platform_path",
+      "exit": 2,
+      "status": "FAIL_STOP_NO_RETRY",
+      "error": "ValueError('new reviewed S00/S02_LINEAR_R10_*/payload required')",
+      "scope": "EXPECTED_PLATFORM_OR_PATH_REFUSAL_NOT_NUMERIC_FAILURE",
+      "result": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round10_linear_reuse_20261106T034306Z\\evidence\\reject_27c9475cb1_full_entry_wrong_platform_path\\result.json"
+    },
+    {
+      "label": "actual_kml_screen_windows_no_fallback",
+      "exit": 2,
+      "status": "FAIL_STOP",
+      "error": "ValueError('CPU36/KML requires Linux; no native fallback')",
+      "scope": "EXPECTED_PLATFORM_OR_PATH_REFUSAL_NOT_NUMERIC_FAILURE",
+      "result": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round10_linear_reuse_20261106T034306Z\\evidence\\reject_f09fcfe7b6_actual_kml_screen_windows_no_fallback\\screen_result.json"
+    }
+  ],
+  "R9_bound_inputs_verified": 11,
+  "coordinator_review_sha256": "ab691abfd6b8b222019133238f9ca5f674cc4a49569f3d296092abcb9c652d1c",
+  "actual_KML_numeric": "NOT_RUN",
+  "full_encoder_strict": "NOT_RUN",
+  "same_node_AB": "NOT_RUN",
+  "new_jobs": 0,
+  "gain": "NOT_ACCEPTED; R9 only duplicate views, no matrix-copy saving proven",
+  "production_default_changed": false
+}

@@ -1,0 +1,17 @@
+{
+  "status": "FAIL_STOP_NO_RETRY",
+  "protocol": "ENGINEERING_LINEAR_R10_AB_V1",
+  "engineering_only": true,
+  "formal_split_status": "UNKNOWN",
+  "subject_mapping_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "variant": null,
+  "new_jobs": 0,
+  "source_manifest_sha256": "bf0dca30aececca6ced8f0d2fcb2b0e8116e4883b38e8fdb7e122a1f532280b4",
+  "descriptor_sha256": "unused",
+  "host": "DESKTOP-54BJCD6",
+  "job_id": null,
+  "phase": "strict",
+  "error": "ValueError('new reviewed S00/S02_LINEAR_R10_*/payload required')",
+  "traceback": "Traceback (most recent call last):\n  File \"E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round10_linear_reuse_20261106T034306Z\\train_linear_ab.py\", line 193, in <module>\n    try:code=main(a,result)\n             ^^^^^^^^^^^^^^\n  File \"E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round10_linear_reuse_20261106T034306Z\\train_linear_ab.py\", line 60, in main\n    raise ValueError('new reviewed S00/S02_LINEAR_R10_*/payload required')\nValueError: new reviewed S00/S02_LINEAR_R10_*/payload required\n"
+}

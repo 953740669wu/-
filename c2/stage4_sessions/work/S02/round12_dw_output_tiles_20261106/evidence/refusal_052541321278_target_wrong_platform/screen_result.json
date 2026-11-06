@@ -1,0 +1,20 @@
+{
+  "status": "FAIL_CLOSE_FIXED_CANDIDATE",
+  "pid": 110440,
+  "argv": [
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\screen_target.py",
+    "--expected-cpus",
+    "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35",
+    "--cpu-contract",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\REFERENCE_FIRST5.json",
+    "--output-dir",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\refusal_052541321278_target_wrong_platform"
+  ],
+  "protocol": "ENGINEERING_DW_TILES_R12_V1",
+  "phase": "target_screen",
+  "source_manifest_sha256": "f61b8db309b8dad5853c7916d371b4484af609bd7610c096846bb21a7ac866bd",
+  "host": "DESKTOP-54BJCD6",
+  "job_id": null,
+  "error": "ValueError('new reviewed R12 deployment/job required')",
+  "traceback": "Traceback (most recent call last):\n  File \"E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\screen_target.py\", line 24, in <module>\n    raise ValueError('new reviewed R12 deployment/job required')\nValueError: new reviewed R12 deployment/job required\n"
+}

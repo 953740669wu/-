@@ -1,6 +1,6 @@
-任务/轮次：S02 / CHECKPOINT_CLOSEOUT_20261105。
-状态变化：五步数值5315/5315通过、独立五步内存完成；checkpoint保留可选实验方案，暂不默认集成。
-本轮改动：仅更新SESSION_STATUS.md和ROUND_DELTA.md；记录第2—5步中位峰值降13.03%/耗时增36.22%、峰值仍上升；候选及旧失败证据保留，生产默认和代码未改。
-验证增量：本轮无新增实验、模型检查或集群job；依据协调交接与S00的2040203/2040363摘要记录已完成结果，仅检查两份文档内容/格式，不称独立重审原始数据。
-证据：SESSION_STATUS.md / ROUND_DELTA.md / ../S00/SEQUENCE5_MEMORY_REPORT.md、../S00/SEQUENCE5_S07_R3_REPORT.md及各自保存的六行摘要。
-阻塞与下一步：本评估收尾后待命；后续对照基线fp32/CKPT0，仅固定case五步短序列证据，不称稳态，不新增长跑/集群任务或默认集成。
+任务/轮次：S02 / R12_CLOSEOUT_20261106。
+状态变化：R12标CLOSED_NO_TRAINING_GAIN，实际数值通过、非数值FAIL；保持原fp32基线，停止固定分块路线，不集成/不换tile/不追加A/B。
+本轮改动：仅新增round12_closeout_20261106/CLOSEOUT.md及JSON、更新自己的短状态/六行摘要与精确待归档清单；原R12_READY/候选/阈值/证据不改。
+验证增量：只读核15绑定SHA及原target/strict3895/各15项全差0，确认两侧各25步并复算后20步中位4.510239/4.628061秒、候选本次慢2.6123%；本轮模型/本地套件运行0、新job0。
+证据：SESSION_STATUS.md / ROUND_DELTA.md / round12_closeout_20261106/{CLOSEOUT.md,CLOSEOUT.json,ARCHIVE_FILES.json}；来源S00 RUN_COMPLETE及协调JOB2049894_R12_NO_GAIN_REVIEW_20261106.json。
+阻塞与下一步：结案无阻塞、S02无活动job并待命；保留单对探索/范围重叠/HWM口径，不称稳定回退或科学效果；S07 R6由00/01按对应节推进，本窗口不提交。

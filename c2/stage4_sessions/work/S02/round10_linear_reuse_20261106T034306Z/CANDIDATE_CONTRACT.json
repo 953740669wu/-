@@ -1,0 +1,23 @@
+{
+  "candidate": "R10_FP32_BACKWARD_FLATTEN_VIEW_REUSE_ONLY",
+  "status": "LOCAL_NATIVE_INTERFACE_PASS_ACTUAL_KML_AND_ENCODER_PENDING",
+  "baseline_source": "frozen R9 baseline/kml_ops.py",
+  "candidate_source": "candidate/kml_ops.py",
+  "change": "Only reuse the first gy.reshape result for bias-gradient sum when LINEAR_DTYPE and gy.dtype are both fp32; preserve the original flatten dtype/stride and reduction layout.",
+  "not_changed": ["GEMM alpha/beta/transposition", "forward arithmetic/bias order", "weight or output caching", "model/mean loss/AdamW", "data/order/masks/normalization", "fp32/KML/native SDPA", "CPU36/interop defaults", "original numerical thresholds"],
+  "observed_gain_limit": "R9 backward100 reshapes/step had0 clone children. This removes50 duplicate views, not matrix copies. No gain or copy-hotspot resolution accepted.",
+  "alias_precondition": "BLAS A/B operands remain read-only and GEMM output storage does not alias operands; focused actual-KML screen must verify before full gate.",
+  "native_checks": "4 targeted native-substitute tests,115 frozen-comparator metrics max_abs0; 3 A/B gate-contract fixture tests. Not actual KML/full Encoder acceptance.",
+  "next_chain": ["new reviewed actual-KML focused screen", "same-job full Encoder strict5 paired baseline/candidate", "only after gate PASS: isolated fresh baseline perf5 process then candidate perf5 process, warmup2/observe3, no profiler"],
+  "gate_comparisons": ["h/voltage/coarse outputs", "total/component losses", "voltage/image input gradients", "all parameter gradients/parameters/deltas", "AdamW exact step/exp_avg/exp_avg_sq", "model buffers", "original first5 frame/mask/init/scale/KML identity"],
+  "resources": {"allocated_cores": 38, "actual_physical_cores": 36, "reserved_cores": 2, "memory_MB": 24576, "memory_limit_MB": 24576, "exclusive": true, "job_seconds": 900, "whole_chain_seconds": 840, "cleanup_seconds": 30, "closing_seconds": 30},
+  "scope": {"cases": ["s0285", "s0593"], "units": 16, "statistics_frames": 1600, "training_frames_per_role_phase": 320, "batch_size": 64, "train_seed": 0, "updates_per_role_phase": 5, "maximum_full_encoder_updates_entire_proposal": 20, "perf_pairs": 1, "profiler": false},
+  "stops": "First actual numeric FAIL closes this candidate; source/data/CPU/KML/resource/timeout/output conflict stops the chain, no retry/new candidate/threshold relaxation/resource expansion.",
+  "engineering_only": true,
+  "formal_split_status": "UNKNOWN",
+  "subject_mapping_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "execution_authorized": false,
+  "new_jobs_submitted_by_S02": 0,
+  "default_integration": false
+}

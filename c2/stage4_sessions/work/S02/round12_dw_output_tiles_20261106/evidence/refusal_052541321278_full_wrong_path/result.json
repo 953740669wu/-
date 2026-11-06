@@ -1,0 +1,33 @@
+{
+  "status": "FAIL_STOP_NO_RETRY",
+  "pid": 109344,
+  "argv": [
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\train_dw_ab.py",
+    "--expected-cpus",
+    "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35",
+    "--cpu-contract",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\REFERENCE_FIRST5.json",
+    "--output-dir",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\refusal_052541321278_full_wrong_path",
+    "--phase",
+    "strict",
+    "--descriptor",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\REFERENCE_FIRST5.json",
+    "--descriptor-sha256",
+    "unused"
+  ],
+  "protocol": "ENGINEERING_DW_TILES_R12_AB_V1",
+  "engineering_only": true,
+  "formal_split_status": "UNKNOWN",
+  "subject_mapping_status": "UNKNOWN",
+  "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+  "variant": null,
+  "new_jobs": 0,
+  "source_manifest_sha256": "f61b8db309b8dad5853c7916d371b4484af609bd7610c096846bb21a7ac866bd",
+  "descriptor_sha256": "unused",
+  "host": "DESKTOP-54BJCD6",
+  "job_id": null,
+  "phase": "strict",
+  "error": "ValueError('new reviewed S00/S02_DW_R12_*/payload required')",
+  "traceback": "Traceback (most recent call last):\n  File \"E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\train_dw_ab.py\", line 225, in <module>\n    try:code=main(a,result)\n             ^^^^^^^^^^^^^^\n  File \"E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\train_dw_ab.py\", line 60, in main\n    raise ValueError('new reviewed S00/S02_DW_R12_*/payload required')\nValueError: new reviewed S00/S02_DW_R12_*/payload required\n"
+}

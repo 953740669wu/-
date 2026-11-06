@@ -1,0 +1,68 @@
+{
+  "status": "PASS_LOCAL_PREPARED_FAKE_CBLAS_ONLY",
+  "timestamp": "2026-11-06T04:28:15.420583+00:00",
+  "python": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Scripts\\python.exe",
+  "new_observation_tests": 9,
+  "log": "evidence/observer_final.log",
+  "copied_immutable_files": 17,
+  "protected_r9_entries": 24,
+  "R10_unchanged": true,
+  "R10_disposition": "CLOSED_NOT_SELECTED_LOW_BENEFIT",
+  "protocol": "ENGINEERING_REAL_CORPUS_GEMM5_V1",
+  "R11_interface_sha256": "1477124f8b772226c76f8f50cee16c5d34ac34f7d8748d327c4402f82d074f76",
+  "original_data_interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+  "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+  "data_compatibility": "PASS_METADATA_ONLY_NO_NPZ_READ",
+  "baseline_sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+  "observer_sha256": "14ee30f47adbb0ddfecc01bd8bc2acfe0048a1c1596a0e32664762193143e67a",
+  "source_entries": 26,
+  "python39_ast": [
+    "baseline/kml_ops.py",
+    "baseline/s4_models.py",
+    "cpu36_contract.py",
+    "cpu36_guard.py",
+    "data_gate/engineering_data.py",
+    "diagnostic_common.py",
+    "engineering_training.py",
+    "gemm_observer.py",
+    "inspect_engineering.py",
+    "memory_metrics.py",
+    "profile_contract.py",
+    "real_data.py",
+    "reference/train_profile5.py",
+    "tests/check_equivalence.py",
+    "tests/test_engineering_native.py",
+    "tests/test_gemm_observer.py",
+    "train_gemm5.py"
+  ],
+  "LF": true,
+  "bash_syntax_only": true,
+  "no_tensor_value_copy_or_dump_in_observer": true,
+  "negative_cli_checks": [
+    {
+      "label": "missing",
+      "exit": 2,
+      "status": "DATA_NOT_READY",
+      "error": "engineering descriptor path and trusted SHA required",
+      "before_framework": true,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\evidence\\reject_736cb54571_042814967792_missing\\result.json"
+    },
+    {
+      "label": "formal",
+      "exit": 2,
+      "status": "DATA_NOT_READY",
+      "error": "engineering protocol/status required",
+      "before_framework": true,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round11_gemm_breakdown_20261106\\evidence\\reject_736cb54571_042814967792_formal\\result.json"
+    },
+    {
+      "label": "batch32",
+      "exit": 2,
+      "before_framework": true
+    }
+  ],
+  "actual_KML_observation": "NOT_RUN_BY_S02",
+  "full_encoder_runs": 0,
+  "new_jobs": 0,
+  "acceptance": "preparation only; actual first5 loss/CPU/KML/record pairing/restore validation belongs to the unique reviewed S00 job"
+}

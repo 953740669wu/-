@@ -1,0 +1,96 @@
+{
+  "status": "PASS_LOCAL_PREPARED_NOT_C2_PROFILED",
+  "timestamp": "2026-11-06T02:42:23.086392+00:00",
+  "python": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Scripts\\python.exe",
+  "native_fixture_tests": 6,
+  "test_log": "evidence/profile_tests_final.log",
+  "cli_rejections": [
+    {
+      "label": "missing",
+      "exit": 2,
+      "status": "DATA_NOT_READY",
+      "error": "engineering descriptor path and trusted SHA required",
+      "before_framework": true,
+      "result": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round9_profile5_20261106T023240Z\\evidence\\cli_f984646639b0_missing\\result.json"
+    },
+    {
+      "label": "formal_protocol",
+      "exit": 2,
+      "status": "DATA_NOT_READY",
+      "error": "engineering protocol/status required",
+      "before_framework": true,
+      "result": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round9_profile5_20261106T023240Z\\evidence\\cli_f984646639b0_formal_protocol\\result.json"
+    },
+    {
+      "label": "batch32_rejected",
+      "exit": 2,
+      "before_framework": true
+    }
+  ],
+  "unchanged_frozen_files": [
+    "baseline/kml_ops.py",
+    "baseline/s4_models.py",
+    "cpu36_contract.py",
+    "cpu36_guard.py",
+    "diagnostic_common.py",
+    "engineering_data.py",
+    "engineering_training.py",
+    "inspect_engineering.py",
+    "INTERFACE.json",
+    "interfaces/cluster_runtime.env",
+    "memory_metrics.py",
+    "real_data.py",
+    "run_engineering.sh",
+    "tests/check_equivalence.py",
+    "tests/test_engineering_native.py",
+    "train_engineering.py"
+  ],
+  "source_files": 24,
+  "python39_ast": [
+    "baseline/kml_ops.py",
+    "baseline/s4_models.py",
+    "cpu36_contract.py",
+    "cpu36_guard.py",
+    "diagnostic_common.py",
+    "engineering_data.py",
+    "engineering_training.py",
+    "inspect_engineering.py",
+    "memory_metrics.py",
+    "profile_contract.py",
+    "profile_probe.py",
+    "real_data.py",
+    "tests/check_equivalence.py",
+    "tests/test_engineering_native.py",
+    "tests/test_profile5.py",
+    "train_engineering.py",
+    "train_profile5.py"
+  ],
+  "shell_syntax": [
+    {
+      "path": "run_profile5.sh",
+      "sha256": "6628a275c09397abeab73430234cdf9b9b8e70858de9bb12abac9255f47aa04e",
+      "cr_bytes": 0,
+      "exit": 0,
+      "stderr": "",
+      "check": "Git Bash -n only; NOT Linux execution"
+    },
+    {
+      "path": "interfaces/cluster_runtime.env",
+      "sha256": "32248af7857b7fd1616b19899c1411a4a59f9378c9231f0ec56f6c922ec2866d",
+      "cr_bytes": 0,
+      "exit": 0,
+      "stderr": "",
+      "check": "Git Bash -n only; NOT Linux execution"
+    }
+  ],
+  "baseline_bindings_verified": 7,
+  "run_complete_sha256": "8b9f38079c7ea0ffccc61dbf9741eb07fb97184740bd2682e98a0eb59ecde836",
+  "coordinator_review_sha256": "83e37a1ebebc2b7a6d0245e57e97ccb7aa70e4ae90dbf46824ef854bb95b874c",
+  "first5_reference": "PASS_FROM_BOUND_ORIGINAL_STEPS",
+  "real_npz_read": false,
+  "full_encoder_runs": 0,
+  "C2_KML_profile_runs": 0,
+  "new_jobs": 0,
+  "operator_hotspot_conclusion": "UNKNOWN_NOT_PROFILED",
+  "execution_authorization": "NOT_GRANTED_BY_THIS_PACKAGE"
+}

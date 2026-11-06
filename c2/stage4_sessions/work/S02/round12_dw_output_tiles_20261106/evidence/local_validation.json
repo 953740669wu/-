@@ -1,0 +1,65 @@
+{
+  "status": "PASS_LOCAL_SCREEN_FIXED_CANDIDATE_ONLY",
+  "timestamp": "2026-11-06T05:25:41.851428+00:00",
+  "python": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Scripts\\python.exe",
+  "tests": {
+    "candidate_math_ABI": 5,
+    "runtime_contract": 4,
+    "total": 9
+  },
+  "frozen_comparator_metrics": 30,
+  "max_abs": 0.0,
+  "max_relative": 0.0,
+  "baseline_sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+  "candidate_sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea",
+  "actual_import_checks": [
+    {
+      "role": "baseline",
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\baseline\\kml_ops.py",
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+      "gemm_code_filename": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\baseline\\kml_ops.py",
+      "imported_native_lib": false,
+      "LINEAR_DTYPE": "torch.float32"
+    },
+    {
+      "role": "candidate",
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\candidate\\kml_ops.py",
+      "sha256": "8955f1c0bdf8b2b5d233b3eafb321d30ae0dbd184ba595959680434aedafd6ea",
+      "gemm_code_filename": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\candidate\\kml_ops.py",
+      "imported_native_lib": false,
+      "LINEAR_DTYPE": "torch.float32"
+    }
+  ],
+  "protected_r11_files": 26,
+  "reused_files": 14,
+  "R11_bindings_verified": 8,
+  "coordinator_review_sha256": "853dee9333ea3bd10e66f9c2f565248cb224c755f6fb19aa3fc55a4f67059fdb",
+  "new_source_entries": 26,
+  "Python39_AST": true,
+  "LF": true,
+  "bash_syntax": true,
+  "unchanged_functions_except_gemm": true,
+  "no_large_operand_copies_in_dispatch": true,
+  "negative_cli": [
+    {
+      "label": "target_wrong_platform",
+      "scope": "EXPECTED_PATH_REFUSAL_NOT_NUMERIC_FAILURE",
+      "exit": 2,
+      "error": "ValueError('new reviewed R12 deployment/job required')",
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\refusal_052541321278_target_wrong_platform\\screen_result.json"
+    },
+    {
+      "label": "full_wrong_path",
+      "scope": "EXPECTED_PATH_REFUSAL_NOT_NUMERIC_FAILURE",
+      "exit": 2,
+      "error": "ValueError('new reviewed S00/S02_DW_R12_*/payload required')",
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round12_dw_output_tiles_20261106\\evidence\\refusal_052541321278_full_wrong_path\\result.json"
+    }
+  ],
+  "local_backend": "FAKE_CBLAS_NATIVE_TORCH_MATMUL; NOT ACTUAL KML",
+  "actual_KML_target": "NOT_RUN",
+  "full_encoder_strict": "NOT_RUN",
+  "same_node_AB": "NOT_RUN",
+  "new_jobs": 0,
+  "acceptance": "local mathematical/ABI/bounds filter only; unchanged K does not prove KML numerical equivalence or speedup"
+}

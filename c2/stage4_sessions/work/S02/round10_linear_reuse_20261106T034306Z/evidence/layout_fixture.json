@@ -1,0 +1,67 @@
+{
+  "scope": "CONTROLLED_LAYOUT_FIXTURE_NOT_OBSERVED_C2_STRIDES",
+  "layouts": [
+    {
+      "layout": "contiguous",
+      "shape": [
+        64,
+        208,
+        512
+      ],
+      "stride": [
+        106496,
+        512,
+        1
+      ],
+      "reshape_shares_storage": true,
+      "reshape_contiguous": true,
+      "g_shares_flattened": true
+    },
+    {
+      "layout": "sequence_batch_swap",
+      "shape": [
+        208,
+        64,
+        512
+      ],
+      "stride": [
+        512,
+        106496,
+        1
+      ],
+      "reshape_shares_storage": false,
+      "reshape_contiguous": true,
+      "g_shares_flattened": true
+    },
+    {
+      "layout": "feature_slice",
+      "shape": [
+        64,
+        208,
+        512
+      ],
+      "stride": [
+        212992,
+        1024,
+        2
+      ],
+      "reshape_shares_storage": true,
+      "reshape_contiguous": false,
+      "g_shares_flattened": false
+    },
+    {
+      "layout": "padded_rows",
+      "shape": [
+        13312,
+        512
+      ],
+      "stride": [
+        513,
+        1
+      ],
+      "reshape_shares_storage": true,
+      "reshape_contiguous": false,
+      "g_shares_flattened": false
+    }
+  ]
+}

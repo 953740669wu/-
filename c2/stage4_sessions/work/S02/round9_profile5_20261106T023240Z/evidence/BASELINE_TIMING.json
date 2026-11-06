@@ -1,0 +1,86 @@
+{
+  "scope": "S02_READ_ONLY_TIMING_ANALYSIS_JOB2043445",
+  "job_id": "2043445",
+  "host": "cn21341",
+  "bindings": {
+    "application_result": {
+      "bytes": 1709553,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\received\\payload\\outputs\\engineering_2043445\\result.json",
+      "sha256": "6bb313a9171f04dc0e2055cef205c01239cf3752dea6fee73068067669625d78"
+    },
+    "steps": {
+      "bytes": 564457,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\received\\payload\\outputs\\engineering_2043445\\steps.jsonl",
+      "sha256": "8f0654f46457a73b582c548d44ffa7d1a36b19f006b1936d6817272a84763358"
+    },
+    "audit": {
+      "bytes": 3724,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\RUN_AUDIT.json",
+      "sha256": "f49ea22d49aae02d568a9563f30438d0918a5247034615764e98da0b5926c722"
+    },
+    "exposure_ledger": {
+      "bytes": 763274,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\received\\payload\\outputs\\EXPOSURE_LEDGER.json",
+      "sha256": "86d9f6c7c26ca466b73869e95a0565a9662fb16e4bc58d5234456fb05aa83075"
+    },
+    "evidence_index": {
+      "bytes": 884929,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\received\\COLLECTION_S00.json",
+      "sha256": "50c784796813493f05018f54b80b6c9eca02f924373cd1932ec042c9b3044361"
+    },
+    "review": {
+      "bytes": 6450,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\S01_REVIEW.json",
+      "sha256": "da7e84289a905466bc5bfdaa1e9cf7a1b80c41ace0cfaae63488d11ae8f6e408"
+    },
+    "archive": {
+      "bytes": 543118,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\overnight_engineering_20261105\\evidence\\JOB_2043445_evidence.zip",
+      "sha256": "53feb1041cc17472d8ec6777ec8ec64e2d8fd4a286a518be42f2d49298e82b00"
+    }
+  },
+  "timing": {
+    "data_loading_seconds": 0.9140070439316332,
+    "batch_materialization_seconds": 0.022266951855272055,
+    "training_step_seconds": 58.47723744949326,
+    "diagnostic_seconds": 6.842871188186109,
+    "checkpoint_and_recovery_seconds": 4.092292259912938,
+    "wall_seconds": 86.69049982586876,
+    "unattributed_seconds": 16.341824932489544,
+    "diagnostic_scope": "mask/exposure-before-update/CPU-before-and-after/state-validation; other setup/logging in unattributed"
+  },
+  "share_of_python_wall_percent": {
+    "data_loading_seconds": 1.0543335726147125,
+    "batch_materialization_seconds": 0.02568557327504013,
+    "training_step_seconds": 67.45518547817097,
+    "diagnostic_seconds": 7.893449918885081,
+    "checkpoint_and_recovery_seconds": 4.72057753517737,
+    "unattributed_seconds": 18.850767921876816
+  },
+  "step_seconds": {
+    "median": 2.3299436238594353,
+    "first2": [
+      2.8303963500075042,
+      2.355096995830536
+    ],
+    "first5": [
+      2.8303963500075042,
+      2.355096995830536,
+      2.3652227241545916,
+      2.3308421783149242,
+      2.326758263166994
+    ],
+    "remaining23_median": 2.326758263166994
+  },
+  "attribution_unknown": [
+    "native attention forward/backward",
+    "KML linear native kernel versus allocation/transpose/bias",
+    "other backward",
+    "AdamW",
+    "unattributed setup/import/source hashing/ledger/logging"
+  ],
+  "observed_interop": 608,
+  "interop_change": "NOT_PROPOSED_NO_CONTROL",
+  "node_seconds_separate": 96,
+  "new_jobs": 0
+}

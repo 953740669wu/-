@@ -1,0 +1,19 @@
+--- frozen/baseline/kml_ops.py
++++ candidate/kml_ops.py
+@@ -178,13 +178,14 @@
+     @staticmethod
+     def backward(ctx, gy):
+         x2, wc = ctx.saved_tensors
+-        g = gy.reshape(-1, gy.shape[-1]).to(LINEAR_DTYPE).contiguous()
++        gy2 = gy.reshape(-1, gy.shape[-1]) if LINEAR_DTYPE == torch.float32 and gy.dtype == torch.float32 else None
++        g = (gy2 if gy2 is not None else gy.reshape(-1, gy.shape[-1])).to(LINEAR_DTYPE).contiguous()
+         gx = gemm(g, wc).view(ctx.sh) if ctx.needs_input_grad[0] else None
+         gw = None
+         if ctx.needs_input_grad[1]:
+             big = g.dtype == torch.bfloat16 and g.shape[1] * x2.shape[1] >= 2 ** 20
+             gw = gemm(g, x2, ta=True, acc32=True) if big else gemm(g.float(), x2.float(), ta=True)
+-        gb = gy.reshape(-1, gy.shape[-1]).sum(0) if ctx.hasb and ctx.needs_input_grad[2] else None
++        gb = (gy2 if gy2 is not None else gy.reshape(-1, gy.shape[-1])).sum(0) if ctx.hasb and ctx.needs_input_grad[2] else None
+         return gx, gw, gb
+ 
+ 
