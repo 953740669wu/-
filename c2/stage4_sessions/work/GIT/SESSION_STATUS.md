@@ -1,23 +1,21 @@
 # GIT简短状态
 
-- 更新/轮次：2026-11-06T20:53:58+08:00；DIAG_CLOSEOUT_ARCHIVE_PUSH_20261106；本窗口维护。
-- 项目/分支：E:\eitfm_c2_stages2-4_2026-11-03；main跟踪origin/main；HEAD 05ded1bfd2b9339dcb5cd0c6708ec0b29dfa44a5。
-- 目标与进度：98行批准清单加TSV自身共99份，按4scope新提交并普通推送GitHub成功；旧268批及基点f84281c保持原历史，未amend/重复提交。
-- 提交 S01：49edf6edddab8d6614d69c2710f8f9ea270e7b8d；31份、240626字节。
-- 提交 S07：7e4b281e0fe03be4ed8c83485c43b3ee7761d516；53份、361243字节。
-- 提交 COORDINATION：0b3a496fc3ef9ec51c5704cd4797957dba55666e；13份、167189字节。
-- 提交 GIT：05ded1bfd2b9339dcb5cd0c6708ec0b29dfa44a5；2份、4815字节。
-- 核验：98项path/bytes/SHA全匹配，99份Git对象原始大小/SHA及每批/总范围一致，共773873字节；初始漂移0、无遗漏/额外文件、暂存区空，换行原字节保留。
-- TSV批准/实际对象SHA256：0bab92c31d3ad7667a650966644acc07775721020531fd1ba51e9aa21b192202；未刷新批准版本或运行freeze.py。
-- 接受范围：01给ACCEPT_ARCHIVE_WITH_PRESERVED_LIMITATIONS，review_complete=true、execution_authorized=false；仅有限诊断及缺口定稿归档，不称数值/清理实测PASS、训练成功或执行许可。
-- 必须保留：原训练数值FAIL不变，历史证明补齐0；5 SUPPORTED/4 UNSUPPORTED/6 NOT_RECORDED只描述证据范围；真实compute/后代15秒清理仍UNKNOWN_NOT_PROVEN，其他原限制均保留。
-- 55项处置：原DEFER_UNCLOSED_DIAGNOSIS两目录55份已按本批全部归档，记RELEASED_FOR_LIMITED_ARCHIVE_NEW_BATCH；旧冻结台账不改写，当前余项视图扣除55。
-- 继续保留：原524项历史待核、422项明确排除均未纳入，共946项逐路径仍在本地；推送后、结束状态更新前新增0项、旧余项不再pending0项，详最终核对。
-- 并行边界：S02新提案目录不在本批；实际提交总差异无/work/S02/路径；只提交协调任务卡，不追加提案实现。未纳入数据/权重/原始.pt/ZIP/环境/known_hosts或重复副本。
-- 推送：普通git push origin main成功（f84281c..05ded1b）；实时远端main、本地HEAD、origin/main均为05ded1bfd2b9339dcb5cd0c6708ec0b29dfa44a5。
-- origin：GitHub https://github.com/953740669wu/-.git；未改remote/分支、强推/reset/clean或改写作者证据，未执行模型/诊断/测试/DDP/集群/作者审计。
-- 异常/漂移：推送后作者批准文件漂移0项；空fp640.log仍0bytes；后续出现的新材料记NEW_AFTER_SNAPSHOT，不追补本次scope。
-- 本轮结束：只更新Git自己的SESSION_STATUS.md、ROUND_DELTA.md，标为OPERATOR_POST_FREEZE_STATUS_UPDATE_NEXT_BATCH；不自动追加第五次提交。
-- 依据：c2/stage4_sessions/work/COORDINATION/GIT_SUBMIT_DIAG_CLOSEOUT_20261106.md及同名TSV；释放记录在GIT_DIAG_CLOSEOUT_BATCH_20261106/DEFERRED_55_RELEASE.json。
-- 最终逐项余项及核验：E:/Codex/home/visualizations/2026/11/05/01a1a9d7-f74b-7e30-b951-571b11c51ea1/diag_closeout_20261106/remaining_files.json、final_ledger_reconciliation.json、final_verification.json。
-- 活动/下一步：本Git会话进程结束；原旧记录及原8历史缺口不补造。后续S02提案/其它新增按新批准清单另批归档，不清空工作区。
+- 更新/轮次：2026-11-06T23:01:22+08:00；STATIC_SPEC_ARCHIVE_PUSH_20261106；本窗口维护。
+- 项目/分支：E:\eitfm_c2_stages2-4_2026-11-03；main跟踪origin/main；HEAD 51ef5e93aed4dbefcd7f3a51640381e0f971fe3c。
+- 当前目标与进度：36行批准清单+TSV自身共37份，按4scope精确提交并普通推送GitHub成功；旧99/268批及起点05ded1b原历史保持，无amend/重复提交。
+- 提交 S02：933bed8cc90438e9052630cc2592b3e0ead3b474；9份、64349字节。
+- 提交 S01：bceec9f72109df41d9b9a2eb257df63e87992c38；10份、75483字节。
+- 提交 COORDINATION：59589ac0fcb2300029d1d085f76c9735cf60f229；16份、587488字节。
+- 提交 GIT：51ef5e93aed4dbefcd7f3a51640381e0f971fe3c；2份、4426字节。
+- 核验：36项路径/大小/SHA全匹配，37份Git对象原始bytes/SHA、各批及总范围一致，共731746字节；初始漂移0、遗漏0、额外0；暂存区空，现有LF/CRLF字节保留。
+- TSV批准/实际对象SHA256：b9575ab91491a4c12b341c034538f7bffc2faa01a072e4923628ba52bc9c81e9；批准清单和原台账未刷新，freeze.py未执行。
+- 接受边界：02已闭合NO_JUSTIFIED_CANDIDATE静态提案、候选0个；01独立静态审核/MINIMAL_EVIDENCE_SPEC，仅供本地准备规格，不是候选实现、数值/训练/执行PASS。原FAIL/UNKNOWN、完整B64/fp32参考、比较器阈值及原限制保持。
+- B01暂缓：02最新real_dual_ddp_localization_prepare_r1_20261106完整目录23项属于阻断交付，待01技术审核，本批未纳入；02当前短状态只记录事实，不等于准备已接受。
+- 历史/余项：524历史待核、422明确排除及23准备阻断暂缓共969项均仍本地pending；推送后、结束状态更新前快照新增0项、台账不再pending0项，详最终核对。
+- 实际平台与推送：GitHub origin=https://github.com/953740669wu/-.git；普通push成功（05ded1b..51ef5e9），实时远端main/本地HEAD/origin-main均51ef5e93aed4dbefcd7f3a51640381e0f971fe3c；未改remote、分支或全局配置，未强推/reset/clean或覆盖工作区。
+- 执行边界：未运行模型/诊断/作者测试或审计、Torch/autograd/DDP、SSH或集群；未纳入数据/权重/raw张量/ZIP/环境/known_hosts或范围外目录。
+- 异常/漂移：推送后批准作者文件漂移0项；冻结后新材料记NEW_AFTER_SNAPSHOT，不追加到当前批准版本。
+- 结束状态：只更新本目录SESSION_STATUS.md、ROUND_DELTA.md，作为OPERATOR_POST_FREEZE_STATUS_UPDATE_NEXT_BATCH；不自动追加第五次提交。
+- 依据：c2/stage4_sessions/work/COORDINATION/GIT_SUBMIT_STATIC_SPEC_20261106.md及同名TSV；台账GIT_STATIC_SPEC_BATCH_20261106/REMAINDER_DISPOSITION.json保留原字节。
+- 完整核验和逐项余项：E:/Codex/home/visualizations/2026/11/05/01a1a9d7-f74b-7e30-b951-571b11c51ea1/static_spec_20261106/final_verification.json、final_ledger_reconciliation.json、remaining_files.json。
+- 活动/下一步：本Git会话进程结束；01后续B01审核由协调按任务卡接续，当前无执行许可。新接受结果另按新清单归档，不清空工作区。
