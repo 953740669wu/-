@@ -1,0 +1,168 @@
+test_atomic_interrupted_before_replace_preserves_previous (__main__.AtomicReportChecks.test_atomic_interrupted_before_replace_preserves_previous) ... FAIL
+C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\case.py:622: ResourceWarning: unclosed file <_io.BufferedReader name=3>
+  with outcome.testPartExecutor(self):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\case.py:622: ResourceWarning: unclosed file <_io.BufferedReader name=4>
+  with outcome.testPartExecutor(self):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+test_atomic_interrupted_partial_write_preserves_previous (__main__.AtomicReportChecks.test_atomic_interrupted_partial_write_preserves_previous) ... FAIL
+test_atomic_interrupted_write_preserves_previous_checkpoint (__main__.AtomicReportChecks.test_atomic_interrupted_write_preserves_previous_checkpoint) ... FAIL
+test_exception_cleanup_only_removes_owned_temp (__main__.AtomicReportChecks.test_exception_cleanup_only_removes_owned_temp) ... ERROR
+test_first_publication_matches_original_serialization (__main__.AtomicReportChecks.test_first_publication_matches_original_serialization) ... ERROR
+test_flush_failure_preserves_previous (__main__.AtomicReportChecks.test_flush_failure_preserves_previous) ... ERROR
+test_fsync_failure_preserves_previous (__main__.AtomicReportChecks.test_fsync_failure_preserves_previous) ... ERROR
+test_old_interrupted_write_leaves_partial_json (__main__.AtomicReportChecks.test_old_interrupted_write_leaves_partial_json) ... ok
+test_old_interrupted_write_truncates_previous_to_empty (__main__.AtomicReportChecks.test_old_interrupted_write_truncates_previous_to_empty) ... ok
+test_original_reader_rejects_missing_empty_partial_for_both_ranks (__main__.AtomicReportChecks.test_original_reader_rejects_missing_empty_partial_for_both_ranks) ... ok
+test_readiness_still_refuses_existing_publication (__main__.AtomicReportChecks.test_readiness_still_refuses_existing_publication) ... ok
+test_replace_failure_preserves_previous (__main__.AtomicReportChecks.test_replace_failure_preserves_previous) ... ERROR
+test_same_directory_exclusive_temp_and_closed_before_commit (__main__.AtomicReportChecks.test_same_directory_exclusive_temp_and_closed_before_commit) ... ERROR
+test_serialization_failures_preserve_previous (__main__.AtomicReportChecks.test_serialization_failures_preserve_previous) ... 
+  test_serialization_failures_preserve_previous (__main__.AtomicReportChecks.test_serialization_failures_preserve_previous) (bad='float') ... ERROR
+  test_serialization_failures_preserve_previous (__main__.AtomicReportChecks.test_serialization_failures_preserve_previous) (bad='object') ... ERROR
+test_successful_replacement (__main__.AtomicReportChecks.test_successful_replacement) ... ERROR
+test_uncommitted_first_publication_still_rejected (__main__.AtomicReportChecks.test_uncommitted_first_publication_still_rejected) ... FAIL
+test_write_failure_preserves_previous (__main__.AtomicReportChecks.test_write_failure_preserves_previous) ... ERROR
+
+======================================================================
+ERROR: test_exception_cleanup_only_removes_owned_temp (__main__.AtomicReportChecks.test_exception_cleanup_only_removes_owned_temp)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 201, in test_exception_cleanup_only_removes_owned_temp
+    probe.write_rank_report(self.target, dict(stage='new'))
+    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'write_rank_report'
+
+======================================================================
+ERROR: test_first_publication_matches_original_serialization (__main__.AtomicReportChecks.test_first_publication_matches_original_serialization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 124, in test_first_publication_matches_original_serialization
+    probe.write_rank_report(self.target, data)
+    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'write_rank_report'
+
+======================================================================
+ERROR: test_flush_failure_preserves_previous (__main__.AtomicReportChecks.test_flush_failure_preserves_previous)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 159, in test_flush_failure_preserves_previous
+    self.stream_fault('flush')
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 142, in stream_fault
+    real = probe.tempfile.NamedTemporaryFile
+           ^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'tempfile'
+
+======================================================================
+ERROR: test_fsync_failure_preserves_previous (__main__.AtomicReportChecks.test_fsync_failure_preserves_previous)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 164, in test_fsync_failure_preserves_previous
+    probe.write_rank_report(self.target, dict(stage='new'))
+    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'write_rank_report'
+
+======================================================================
+ERROR: test_replace_failure_preserves_previous (__main__.AtomicReportChecks.test_replace_failure_preserves_previous)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 171, in test_replace_failure_preserves_previous
+    probe.write_rank_report(self.target, dict(stage='new'))
+    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'write_rank_report'
+
+======================================================================
+ERROR: test_same_directory_exclusive_temp_and_closed_before_commit (__main__.AtomicReportChecks.test_same_directory_exclusive_temp_and_closed_before_commit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 192, in test_same_directory_exclusive_temp_and_closed_before_commit
+    probe.write_rank_report(self.target, dict(stage='new'))
+    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'write_rank_report'
+
+======================================================================
+ERROR: test_serialization_failures_preserve_previous (__main__.AtomicReportChecks.test_serialization_failures_preserve_previous) (bad='float')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 137, in test_serialization_failures_preserve_previous
+    probe.write_rank_report(self.target, dict(error=bad))
+    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'write_rank_report'
+
+======================================================================
+ERROR: test_serialization_failures_preserve_previous (__main__.AtomicReportChecks.test_serialization_failures_preserve_previous) (bad='object')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 137, in test_serialization_failures_preserve_previous
+    probe.write_rank_report(self.target, dict(error=bad))
+    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'write_rank_report'
+
+======================================================================
+ERROR: test_successful_replacement (__main__.AtomicReportChecks.test_successful_replacement)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 129, in test_successful_replacement
+    probe.write_rank_report(self.target, dict(self.old, error='peer reset'))
+    ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'write_rank_report'
+
+======================================================================
+ERROR: test_write_failure_preserves_previous (__main__.AtomicReportChecks.test_write_failure_preserves_previous)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 156, in test_write_failure_preserves_previous
+    self.stream_fault('write')
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 142, in stream_fault
+    real = probe.tempfile.NamedTemporaryFile
+           ^^^^^^^^^^^^^^
+AttributeError: module 'comm_probe' has no attribute 'tempfile'
+
+======================================================================
+FAIL: test_atomic_interrupted_before_replace_preserves_previous (__main__.AtomicReportChecks.test_atomic_interrupted_before_replace_preserves_previous)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 233, in test_atomic_interrupted_before_replace_preserves_previous
+    remnant = self.interrupted('atomic', 'commit')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 99, in interrupted
+    self.assertTrue(marker.exists(), 'owned child did not reach deterministic fault point')
+AssertionError: False is not true : owned child did not reach deterministic fault point
+
+======================================================================
+FAIL: test_atomic_interrupted_partial_write_preserves_previous (__main__.AtomicReportChecks.test_atomic_interrupted_partial_write_preserves_previous)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 226, in test_atomic_interrupted_partial_write_preserves_previous
+    remnant = self.interrupted('atomic', 'partial')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 99, in interrupted
+    self.assertTrue(marker.exists(), 'owned child did not reach deterministic fault point')
+AssertionError: False is not true : owned child did not reach deterministic fault point
+
+======================================================================
+FAIL: test_atomic_interrupted_write_preserves_previous_checkpoint (__main__.AtomicReportChecks.test_atomic_interrupted_write_preserves_previous_checkpoint)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 217, in test_atomic_interrupted_write_preserves_previous_checkpoint
+    remnant = self.interrupted('atomic', 'zero')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 99, in interrupted
+    self.assertTrue(marker.exists(), 'owned child did not reach deterministic fault point')
+AssertionError: False is not true : owned child did not reach deterministic fault point
+
+======================================================================
+FAIL: test_uncommitted_first_publication_still_rejected (__main__.AtomicReportChecks.test_uncommitted_first_publication_still_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 238, in test_uncommitted_first_publication_still_rejected
+    remnant = self.interrupted('atomic', 'partial', prior=False)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round7_atomic_reports_20261106\tests\test_atomic_reports.py", line 99, in interrupted
+    self.assertTrue(marker.exists(), 'owned child did not reach deterministic fault point')
+AssertionError: False is not true : owned child did not reach deterministic fault point
+
+----------------------------------------------------------------------
+Ran 17 tests in 1.054s
+
+FAILED (failures=4, errors=10)

@@ -1,0 +1,78 @@
+{
+  "checked_utc": "2026-11-05T13:42:52.427340+00:00",
+  "scope": "LOCAL_PYTHON311_STDLIB_FAKE_FRAMEWORK_AND_PROC_FIXTURES; NO_GLOO",
+  "checks": [
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round6_aligned_stack_20261105\\tests\\test_stack_observer.py"
+      ],
+      "methods": 27,
+      "exit_code": 0,
+      "log": "evidence/test_stack_observer.txt"
+    },
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round6_aligned_stack_20261105\\tests\\test_readiness.py"
+      ],
+      "methods": 16,
+      "exit_code": 0,
+      "log": "evidence/test_readiness.txt"
+    },
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round6_aligned_stack_20261105\\tests\\test_diagnostics.py"
+      ],
+      "methods": 6,
+      "exit_code": 0,
+      "log": "evidence/test_diagnostics.txt"
+    },
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round6_aligned_stack_20261105\\tests\\test_job_identity.py"
+      ],
+      "methods": 6,
+      "exit_code": 0,
+      "log": "evidence/test_job_identity.txt"
+    },
+    {
+      "command": [
+        "C:\\Users\\A\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-B",
+        "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\round6_aligned_stack_20261105\\tests\\test_probe.py"
+      ],
+      "methods": 16,
+      "exit_code": 0,
+      "log": "evidence/test_probe.txt"
+    }
+  ],
+  "total": 71,
+  "passed": 70,
+  "skipped": 1,
+  "python39_ast": {
+    "status": "PASS_SYNTAX_ONLY",
+    "files": [
+      "candidate/comm_probe.py",
+      "candidate/cpu36_contract.py",
+      "candidate/run_checks.py",
+      "candidate/stack_observer.py",
+      "tests/test_diagnostics.py",
+      "tests/test_job_identity.py",
+      "tests/test_probe.py",
+      "tests/test_readiness.py",
+      "tests/test_stack_observer.py"
+    ]
+  },
+  "real_local_faulthandler_dump": "ONE_SHOT_TEST_PASSED_CPU_GUARD_STUBBED",
+  "real_owned_helper": "HANGING_STDLIB_CHILD_KILLED_AND_REAPED",
+  "native_linux_proc": "NOT_RUN; fixtures only",
+  "cluster_job_submitted": false,
+  "old2041919_suite": "FAIL_UNCHANGED"
+}

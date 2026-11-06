@@ -1,0 +1,26 @@
+test_helper_log_close_error_does_not_escape (__main__.StackObserverChecks.test_helper_log_close_error_does_not_escape) ... ERROR
+
+======================================================================
+ERROR: test_helper_log_close_error_does_not_escape (__main__.StackObserverChecks.test_helper_log_close_error_does_not_escape)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round6_aligned_stack_20261105\tests\test_stack_observer.py", line 274, in test_helper_log_close_error_does_not_escape
+    receipt = helper.receipt()
+              ^^^^^^^^^^^^^^^^
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round6_aligned_stack_20261105\candidate\stack_observer.py", line 327, in receipt
+    self.log.close(); self.log = None
+    ^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\mock.py", line 1124, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\mock.py", line 1128, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\mock.py", line 1183, in _execute_mock_call
+    raise effect
+OSError: log close failed
+
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+FAILED (errors=1)

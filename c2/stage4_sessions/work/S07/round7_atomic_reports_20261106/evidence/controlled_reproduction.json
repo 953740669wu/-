@@ -1,0 +1,158 @@
+{
+  "scope": "owned short standard-library children; no Torch/Gloo, no original evidence modified",
+  "runs": [
+    {
+      "mode": "old",
+      "phase": "zero",
+      "previous_report": true,
+      "target_exists": true,
+      "target_bytes": 0,
+      "target_preserved": false,
+      "owned_child_terminated_and_reaped": true,
+      "temporary_remnant": null,
+      "evidence_directory": "evidence\\reproduction_old_zero",
+      "files": [
+        {
+          "path": "paused.json",
+          "bytes": 153,
+          "sha256": "b4f0d3b1547c928edae72f912d978579e6309e0ca5847cdcea4cfb772219da6d"
+        },
+        {
+          "path": "rank0.json",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "mode": "old",
+      "phase": "partial",
+      "previous_report": true,
+      "target_exists": true,
+      "target_bytes": 30,
+      "target_preserved": false,
+      "owned_child_terminated_and_reaped": true,
+      "temporary_remnant": null,
+      "evidence_directory": "evidence\\reproduction_old_partial",
+      "files": [
+        {
+          "path": "paused.json",
+          "bytes": 153,
+          "sha256": "062bd3195cf9eb5e107bd1bf08e4713eaea18b614a56ca1098b62288399d5c80"
+        },
+        {
+          "path": "rank0.json",
+          "bytes": 30,
+          "sha256": "2fc0943745e9c4ee13c685b2e311e32b625bee6a728a859c99d57594de5b99e5"
+        }
+      ]
+    },
+    {
+      "mode": "atomic",
+      "phase": "zero",
+      "previous_report": true,
+      "target_exists": true,
+      "target_bytes": 133,
+      "target_preserved": true,
+      "owned_child_terminated_and_reaped": true,
+      "temporary_remnant": ".rank0.json.0d2gw6xm.tmp",
+      "evidence_directory": "evidence\\reproduction_atomic_zero",
+      "files": [
+        {
+          "path": ".rank0.json.0d2gw6xm.tmp",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "paused.json",
+          "bytes": 167,
+          "sha256": "6ad4ea84596f9f410ceee2f75f0cbbfd7af52e5c2e193d255f22d557e0025ae7"
+        },
+        {
+          "path": "rank0.json",
+          "bytes": 133,
+          "sha256": "1c09ab91fc64b1a3b9d46cfab42c6fce314a65952cb229085914205c0cc59a8f"
+        }
+      ]
+    },
+    {
+      "mode": "atomic",
+      "phase": "partial",
+      "previous_report": true,
+      "target_exists": true,
+      "target_bytes": 133,
+      "target_preserved": true,
+      "owned_child_terminated_and_reaped": true,
+      "temporary_remnant": ".rank0.json.9eol0xki.tmp",
+      "evidence_directory": "evidence\\reproduction_atomic_partial",
+      "files": [
+        {
+          "path": ".rank0.json.9eol0xki.tmp",
+          "bytes": 30,
+          "sha256": "2fc0943745e9c4ee13c685b2e311e32b625bee6a728a859c99d57594de5b99e5"
+        },
+        {
+          "path": "paused.json",
+          "bytes": 167,
+          "sha256": "8f2c7ef88cd7ef92923169ea58aa98196d9c84447b466bba98178d7174a302a8"
+        },
+        {
+          "path": "rank0.json",
+          "bytes": 133,
+          "sha256": "1c09ab91fc64b1a3b9d46cfab42c6fce314a65952cb229085914205c0cc59a8f"
+        }
+      ]
+    },
+    {
+      "mode": "atomic",
+      "phase": "commit",
+      "previous_report": true,
+      "target_exists": true,
+      "target_bytes": 133,
+      "target_preserved": true,
+      "owned_child_terminated_and_reaped": true,
+      "temporary_remnant": ".rank0.json.zfabcpf5.tmp",
+      "evidence_directory": "evidence\\reproduction_atomic_commit",
+      "files": [
+        {
+          "path": ".rank0.json.zfabcpf5.tmp",
+          "bytes": 60,
+          "sha256": "5c6719549e31b965a4327ba7f128184e80fb6ee2fd6ea77fffa731eed3fa6827"
+        },
+        {
+          "path": "paused.json",
+          "bytes": 167,
+          "sha256": "bc34a387df6b7479c0d7832b16a83562e55b6987314664c6dcc37f7e235e16c1"
+        },
+        {
+          "path": "rank0.json",
+          "bytes": 133,
+          "sha256": "1c09ab91fc64b1a3b9d46cfab42c6fce314a65952cb229085914205c0cc59a8f"
+        }
+      ]
+    },
+    {
+      "mode": "atomic",
+      "phase": "partial",
+      "previous_report": false,
+      "target_exists": false,
+      "target_bytes": null,
+      "target_preserved": null,
+      "owned_child_terminated_and_reaped": true,
+      "temporary_remnant": ".rank0.json.i2idwvkf.tmp",
+      "evidence_directory": "evidence\\reproduction_atomic_partial_first",
+      "files": [
+        {
+          "path": ".rank0.json.i2idwvkf.tmp",
+          "bytes": 30,
+          "sha256": "2fc0943745e9c4ee13c685b2e311e32b625bee6a728a859c99d57594de5b99e5"
+        },
+        {
+          "path": "paused.json",
+          "bytes": 167,
+          "sha256": "488cfb7f1baf2f14dc4384068838a05a3464cc21bc86844d21fe484b29c9203f"
+        }
+      ]
+    }
+  ]
+}

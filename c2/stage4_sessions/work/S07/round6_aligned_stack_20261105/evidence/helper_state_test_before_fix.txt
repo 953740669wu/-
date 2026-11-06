@@ -1,0 +1,17 @@
+test_nonblocking_timeout_and_cancel_do_not_wait (__main__.StackObserverChecks.test_nonblocking_timeout_and_cancel_do_not_wait) ... FAIL
+
+======================================================================
+FAIL: test_nonblocking_timeout_and_cancel_do_not_wait (__main__.StackObserverChecks.test_nonblocking_timeout_and_cancel_do_not_wait)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round6_aligned_stack_20261105\tests\test_stack_observer.py", line 254, in test_nonblocking_timeout_and_cancel_do_not_wait
+    self.assertEqual(receipt['status'], 'EXITED')
+AssertionError: 'STARTED' != 'EXITED'
+- STARTED
++ EXITED
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.008s
+
+FAILED (failures=1)

@@ -1,0 +1,22 @@
+test_atomic_interrupted_before_replace_preserves_previous (__main__.AtomicReportChecks.test_atomic_interrupted_before_replace_preserves_previous) ... ok
+test_atomic_interrupted_partial_write_preserves_previous (__main__.AtomicReportChecks.test_atomic_interrupted_partial_write_preserves_previous) ... ok
+test_atomic_interrupted_write_preserves_previous_checkpoint (__main__.AtomicReportChecks.test_atomic_interrupted_write_preserves_previous_checkpoint) ... ok
+test_exception_cleanup_only_removes_owned_temp (__main__.AtomicReportChecks.test_exception_cleanup_only_removes_owned_temp) ... ok
+test_first_publication_matches_original_serialization (__main__.AtomicReportChecks.test_first_publication_matches_original_serialization) ... ok
+test_flush_failure_preserves_previous (__main__.AtomicReportChecks.test_flush_failure_preserves_previous) ... ok
+test_fsync_failure_preserves_previous (__main__.AtomicReportChecks.test_fsync_failure_preserves_previous) ... ok
+test_old_interrupted_write_leaves_partial_json (__main__.AtomicReportChecks.test_old_interrupted_write_leaves_partial_json) ... ok
+test_old_interrupted_write_truncates_previous_to_empty (__main__.AtomicReportChecks.test_old_interrupted_write_truncates_previous_to_empty) ... ok
+test_original_reader_rejects_missing_empty_partial_for_both_ranks (__main__.AtomicReportChecks.test_original_reader_rejects_missing_empty_partial_for_both_ranks) ... ok
+test_readiness_still_refuses_existing_publication (__main__.AtomicReportChecks.test_readiness_still_refuses_existing_publication) ... ok
+test_replace_failure_preserves_previous (__main__.AtomicReportChecks.test_replace_failure_preserves_previous) ... ok
+test_same_directory_exclusive_temp_and_closed_before_commit (__main__.AtomicReportChecks.test_same_directory_exclusive_temp_and_closed_before_commit) ... ok
+test_serialization_failures_preserve_previous (__main__.AtomicReportChecks.test_serialization_failures_preserve_previous) ... ok
+test_successful_replacement (__main__.AtomicReportChecks.test_successful_replacement) ... ok
+test_uncommitted_first_publication_still_rejected (__main__.AtomicReportChecks.test_uncommitted_first_publication_still_rejected) ... ok
+test_write_failure_preserves_previous (__main__.AtomicReportChecks.test_write_failure_preserves_previous) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 1.225s
+
+OK

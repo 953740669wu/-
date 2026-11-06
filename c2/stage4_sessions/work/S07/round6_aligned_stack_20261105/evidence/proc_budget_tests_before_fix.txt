@@ -1,0 +1,26 @@
+test_proc_alarm_is_not_swallowed_as_permission_error (__main__.StackObserverChecks.test_proc_alarm_is_not_swallowed_as_permission_error) ... FAIL
+test_proc_rejects_wrong_job_or_oversized_budget (__main__.StackObserverChecks.test_proc_rejects_wrong_job_or_oversized_budget) ... FAIL
+
+======================================================================
+FAIL: test_proc_alarm_is_not_swallowed_as_permission_error (__main__.StackObserverChecks.test_proc_alarm_is_not_swallowed_as_permission_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round6_aligned_stack_20261105\tests\test_stack_observer.py", line 147, in test_proc_alarm_is_not_swallowed_as_permission_error
+    with patch.object(Path, 'open', side_effect=TimeoutError('shared deadline')), self.assertRaises(TimeoutError):
+AssertionError: TimeoutError not raised
+
+======================================================================
+FAIL: test_proc_rejects_wrong_job_or_oversized_budget (__main__.StackObserverChecks.test_proc_rejects_wrong_job_or_oversized_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round6_aligned_stack_20261105\tests\test_stack_observer.py", line 206, in test_proc_rejects_wrong_job_or_oversized_budget
+    identity.assert_not_called()
+  File "C:\Users\A\AppData\Local\Programs\Python\Python311\Lib\unittest\mock.py", line 900, in assert_not_called
+    raise AssertionError(msg)
+AssertionError: Expected 'read_identity' to not have been called. Called 1 times.
+Calls: [call(101), call().__getitem__('ppid'), call().__getitem__().__ne__(100)].
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.027s
+
+FAILED (failures=2)

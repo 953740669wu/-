@@ -1,0 +1,17 @@
+test_absolute_target_and_no_rearm (__main__.StackObserverChecks.test_absolute_target_and_no_rearm) ... FAIL
+
+======================================================================
+FAIL: test_absolute_target_and_no_rearm (__main__.StackObserverChecks.test_absolute_target_and_no_rearm)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S07\round6_aligned_stack_20261105\tests\test_stack_observer.py", line 55, in test_absolute_target_and_no_rearm
+    self.assertEqual(timer.state['cancel_reason'], 'init_end')
+AssertionError: 'finally' != 'init_end'
+- finally
++ init_end
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.006s
+
+FAILED (failures=1)

@@ -1,0 +1,62 @@
+--- R6/candidate/comm_probe.py
++++ R7/candidate/comm_probe.py
+@@ -9,6 +9,7 @@
+ import socket
+ import subprocess
+ import sys
++import tempfile
+ import time
+ import traceback
+ 
+@@ -22,6 +23,26 @@
+ 
+ def write_json(path, data):
+     path.write_text(json.dumps(data, indent=2, allow_nan=False) + '\n', encoding='utf-8')
++
++
++def write_rank_report(path, data):
++    payload = json.dumps(data, indent=2, allow_nan=False) + '\n'
++    temporary = None
++    try:
++        with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', delete=False,
++                                         dir=path.parent, prefix='.' + path.name + '.',
++                                         suffix='.tmp') as stream:
++            temporary = Path(stream.name)
++            stream.write(payload)
++            stream.flush()
++            os.fsync(stream.fileno())
++        os.replace(temporary, path)
++    finally:
++        if temporary is not None:
++            try:
++                temporary.unlink()
++            except FileNotFoundError:
++                pass
+ 
+ 
+ def publish_json(path, data):
+@@ -308,7 +329,7 @@
+         snapshot = cpu36.snapshot_threads(os.getpid())
+         cpu36.validate_snapshot(receipt['selected'], snapshot)
+         record['checkpoints'].append(dict(stage=stage, snapshot=snapshot))
+-        write_json(directory / f'rank{rank}.json', record)
++        write_rank_report(directory / f'rank{rank}.json', record)
+         record_event(event_path, 'checkpoint_end', stage=stage)
+ 
+     try:
+@@ -381,13 +402,13 @@
+         dist.destroy_process_group()
+         checkpoint('finished')
+         record['status'] = 'PASS'
+-        write_json(directory / f'rank{rank}.json', record)
++        write_rank_report(directory / f'rank{rank}.json', record)
+         record_event(event_path, 'worker_exit', exit_code=0)
+         return 0
+     except Exception as exc:
+         record['error'] = f'{type(exc).__name__}: {exc}'
+         record_event(event_path, 'worker_error', stage=record.get('stage'), error=record['error'])
+-        write_json(directory / f'rank{rank}.json', record)
++        write_rank_report(directory / f'rank{rank}.json', record)
+         traceback.print_exc()
+         return 1
+     finally:
