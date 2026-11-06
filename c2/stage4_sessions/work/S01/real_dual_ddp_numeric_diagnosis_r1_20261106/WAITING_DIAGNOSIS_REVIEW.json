@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "task": "S01",
+  "round": "REAL_DUAL_DDP_NUMERIC_DIAG_R1_20261106",
+  "observed_utc": "2026-11-06T10:19:11.015223+00:00",
+  "status": "WAITING_DIAGNOSIS_READY",
+  "review_complete": false,
+  "execution_authorized": false,
+  "training_pass_published": false,
+  "task_card": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\REAL_DUAL_DDP_NUMERIC_DIAG_R1_20261106.md",
+    "bytes": 4130,
+    "sha256": "d1c2c20245ccbb0c199f5cef7a297639722d72bf380efe356eac721caf89bc8f"
+  },
+  "original_final_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_review_20261106\\S01_REVIEW.json",
+    "bytes": 6152,
+    "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+  },
+  "original_FAIL_preserved": true,
+  "diagnosis_ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS_READY.json",
+    "exists": false,
+    "sha256": null
+  },
+  "checklist": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_numeric_diagnosis_r1_20261106\\PRE_REVIEW_CHECKLIST.md",
+    "bytes": 4701,
+    "sha256": "ff0632affeb284ad68f462aa3b074a4e4c9f9f942ea7c79f7c93fbc2dce4486b"
+  },
+  "reviewed_diagnosis_artifacts": [],
+  "checks_status": "NOT_REVIEWED_DEPENDENCY_ABSENT",
+  "supported_causes": [],
+  "excluded_causes": [],
+  "unknown_causes": [
+    "Input/initialization/thread identity",
+    "Global denominators and parameter/input-gradient scaling",
+    "Earliest nonzero deviation and earliest threshold failure",
+    "Batch partition arithmetic versus additional DDP effects",
+    "Precision sensitivity and specific operator root cause"
+  ],
+  "insufficient_evidence": [
+    "07 DIAGNOSIS_READY and its frozen source/configuration/diagnosis/raw metrics/logs/cleanup delivery absent"
+  ],
+  "minimum_next_action": "S07 publishes fixed DIAGNOSIS_READY with actual artifact SHA and bounded diagnosis evidence; S01 resumes this existing review only when requested/delivered. No rerun or job is authorized.",
+  "waiting_policy": {
+    "wait_loop_started": false,
+    "background_monitor_started": false,
+    "exit_after_preparation": true
+  },
+  "activity": {
+    "full_model_runs": 0,
+    "small_numeric_runs": 0,
+    "SSH": 0,
+    "cluster_jobs": 0,
+    "author_source_edits": 0,
+    "git_stage_commit_push": 0
+  },
+  "conclusion": "WAITING only; no diagnosis/root-cause or training acceptance. Original thresholds/frozen packages/final FAIL remain unchanged."
+}

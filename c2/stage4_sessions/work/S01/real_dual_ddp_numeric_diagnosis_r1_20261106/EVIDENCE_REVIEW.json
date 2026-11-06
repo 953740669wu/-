@@ -1,0 +1,624 @@
+{
+  "status": "REVIEWED_PARTIAL_DIAGNOSIS_NO_TRAINING_RELEASE",
+  "reviewed_utc": "2026-11-06T10:41:35.079825+00:00",
+  "ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS_READY.json",
+    "bytes": 3723,
+    "sha256": "de9c6e26ea7d2f280b835e1de44dbc4697d0fee2c0cc69fe66b4fa986bf07dde"
+  },
+  "source_inputs": 17,
+  "evidence_entries": 39,
+  "verified_unique_files": 60,
+  "recomputed_saved_tensor_metrics": [
+    {
+      "name": "activation.encoder.input",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 115.37764081484765,
+      "passed": true
+    },
+    {
+      "name": "activation.val.input",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 115.37764081484765,
+      "passed": true
+    },
+    {
+      "name": "activation.val.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 125.43404811865646,
+      "passed": true
+    },
+    {
+      "name": "activation.pos.input",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 230.7552816296953,
+      "passed": true
+    },
+    {
+      "name": "activation.pos.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 146.69817446849012,
+      "passed": true
+    },
+    {
+      "name": "activation.tf.input",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 230.38109968574778,
+      "passed": true
+    },
+    {
+      "name": "activation.tf.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 198.69282627418823,
+      "passed": true
+    },
+    {
+      "name": "activation.encoder.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 198.69282627418823,
+      "passed": true
+    },
+    {
+      "name": "activation.head_v.input",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 198.69282627418823,
+      "passed": true
+    },
+    {
+      "name": "activation.head_v.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 108.3038020773345,
+      "passed": true
+    },
+    {
+      "name": "activation.head_coarse.input",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 13.775461568436338,
+      "passed": true
+    },
+    {
+      "name": "activation.head_coarse.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 70.66973587647055,
+      "passed": true
+    },
+    {
+      "name": "adjoint.head_coarse.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.008626676742733222,
+      "passed": true
+    },
+    {
+      "name": "adjoint.head_v.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.41525518894195557,
+      "passed": true
+    },
+    {
+      "name": "adjoint.tf.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.32180474317159663,
+      "passed": true
+    },
+    {
+      "name": "adjoint.encoder.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.32180474317159663,
+      "passed": true
+    },
+    {
+      "name": "adjoint.pos.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0018478715447823027,
+      "passed": true
+    },
+    {
+      "name": "adjoint.val.output",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.0018478715447823027,
+      "passed": true
+    },
+    {
+      "name": "loss.voltage",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.1724368780851364,
+      "passed": true
+    },
+    {
+      "name": "loss.coarse",
+      "max_abs": 2.9802322387695312e-08,
+      "l2_relative": 9.776942957208472e-08,
+      "reference_norm": 0.30482250452041626,
+      "passed": true
+    },
+    {
+      "name": "loss.total",
+      "max_abs": 5.960464477539063e-08,
+      "l2_relative": 1.2488941042706684e-07,
+      "reference_norm": 0.47725939750671387,
+      "passed": true
+    },
+    {
+      "name": "parameter.mask_tok",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.19518241727100907,
+      "passed": true
+    },
+    {
+      "name": "parameter.val.weight",
+      "max_abs": 1.9147992134094238e-05,
+      "l2_relative": 9.410191088070238e-05,
+      "reference_norm": 0.2131539446846441,
+      "passed": false
+    },
+    {
+      "name": "parameter.val.bias",
+      "max_abs": 7.450580596923828e-09,
+      "l2_relative": 3.9076666684984195e-08,
+      "reference_norm": 0.21317074996272012,
+      "passed": true
+    },
+    {
+      "name": "parameter.pos.weight",
+      "max_abs": 1.9147992134094238e-05,
+      "l2_relative": 9.410191088070238e-05,
+      "reference_norm": 0.4263078893692882,
+      "passed": false
+    },
+    {
+      "name": "parameter.pos.bias",
+      "max_abs": 7.450580596923828e-09,
+      "l2_relative": 3.9076666684984195e-08,
+      "reference_norm": 0.21317074996272012,
+      "passed": true
+    },
+    {
+      "name": "parameter.tf.weight",
+      "max_abs": 3.723800182342529e-05,
+      "l2_relative": 0.0001142869133502608,
+      "reference_norm": 0.5284964778141917,
+      "passed": false
+    },
+    {
+      "name": "parameter.tf.bias",
+      "max_abs": 5.960464477539063e-08,
+      "l2_relative": 1.1275804948273771e-07,
+      "reference_norm": 0.5915193076226537,
+      "passed": true
+    },
+    {
+      "name": "parameter.head_v.weight",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.3933413710921008,
+      "passed": true
+    },
+    {
+      "name": "parameter.head_v.bias",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.8305103778839111,
+      "passed": true
+    },
+    {
+      "name": "parameter.head_coarse.weight",
+      "max_abs": 1.0244548320770264e-08,
+      "l2_relative": 4.790653294443179e-07,
+      "reference_norm": 0.11883639852631103,
+      "passed": true
+    },
+    {
+      "name": "parameter.head_coarse.bias",
+      "max_abs": 9.313225746154785e-10,
+      "l2_relative": 3.534662494700418e-08,
+      "reference_norm": 0.06901334724728272,
+      "passed": true
+    },
+    {
+      "name": "input.v",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.4152567291185238,
+      "passed": true
+    },
+    {
+      "name": "input.image",
+      "max_abs": 0.0,
+      "l2_relative": 0.0,
+      "reference_norm": 0.008626676742733222,
+      "passed": true
+    }
+  ],
+  "original13_scalar_metrics_reproduced": true,
+  "captured_activations_and_adjoints_byte_equal": {
+    "activation.encoder.input": true,
+    "activation.val.input": true,
+    "activation.val.output": true,
+    "activation.pos.input": true,
+    "activation.pos.output": true,
+    "activation.tf.input": true,
+    "activation.tf.output": true,
+    "activation.encoder.output": true,
+    "activation.head_v.input": true,
+    "activation.head_v.output": true,
+    "activation.head_coarse.input": true,
+    "activation.head_coarse.output": true,
+    "adjoint.head_coarse.output": true,
+    "adjoint.head_v.output": true,
+    "adjoint.tf.output": true,
+    "adjoint.encoder.output": true,
+    "adjoint.pos.output": true,
+    "adjoint.val.output": true
+  },
+  "initialization_digest": "38a200103f7ca459effccbc4c70f17549ae1573ee08bf1d346f00883c6da17d3",
+  "post_init_rng_digest": "49c8acc6455bdd0081eb5c1c9a96e68090d17c22a114a24aba4eaad2b165e3d0",
+  "diagnosis_threading": {
+    "intraop": 8,
+    "interop": 8,
+    "env": {
+      "OMP_NUM_THREADS": null,
+      "MKL_NUM_THREADS": null,
+      "OPENBLAS_NUM_THREADS": null,
+      "OMP_PLACES": null,
+      "OMP_PROC_BIND": null,
+      "GLOO_SOCKET_IFNAME": null,
+      "USE_LIBUV": null,
+      "PYTHONPATH": null
+    }
+  },
+  "pid_identity_evidence_gaps": {
+    "full": {
+      "supervised_pids": [
+        111828
+      ],
+      "recorded_compute_pid": 124816
+    },
+    "sequence": {
+      "supervised_pids": [
+        121848
+      ],
+      "recorded_compute_pid": 117608
+    },
+    "ddp0": {
+      "supervised_pids": [
+        116596,
+        111740
+      ],
+      "recorded_compute_pid": 118980
+    },
+    "ddp1": {
+      "supervised_pids": [
+        116596,
+        111740
+      ],
+      "recorded_compute_pid": 123980
+    }
+  },
+  "float64_contractions_repeated": false,
+  "forward_backward_repeated": false,
+  "metric_reader_torch": "2.7.1+cpu",
+  "metric_reader_threads": 8,
+  "inputs": [
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\REAL_DUAL_DDP_NO_RUN_REVIEW_20261106.json",
+      "bytes": 12285,
+      "sha256": "81eb1ada4d704fc972f96e4cbf5687267efa0804af7f86a4640766d4729ebae8"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\REAL_DUAL_DDP_NUMERIC_DIAG_R1_20261106.md",
+      "bytes": 4130,
+      "sha256": "d1c2c20245ccbb0c199f5cef7a297639722d72bf380efe356eac721caf89bc8f"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_review_20261106\\S01_REVIEW.json",
+      "bytes": 6152,
+      "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\REFERENCE_READY.json",
+      "bytes": 6655,
+      "sha256": "924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\tests\\check_equivalence.py",
+      "bytes": 14614,
+      "sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\round2_20261104T114949Z\\.venv\\Scripts\\python.exe",
+      "bytes": 274712,
+      "sha256": "21bb438c0d4a6f1f164b9a646f6ee000340185e5871180aec06db8d3f07c0082"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\SOURCE_MANIFEST.json",
+      "bytes": 6278,
+      "sha256": "9a124291713f0798df8b4d783f2f8cb36cbeb6f13c0dbe400f9767e1d37db739"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\TRAINING_READY.json",
+      "bytes": 13266,
+      "sha256": "da83cf560c04b663c8c4b1e0fb89d1e56aa9d696ffe88a1a58d3c211428f4bef"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\candidate\\training_graph.py",
+      "bytes": 1190,
+      "sha256": "334015cc1a78ebff277f76d4601ee882e5e65cd075ac53cab0ae6c70cc4446a4"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\candidate\\training_support.py",
+      "bytes": 7921,
+      "sha256": "888ebcc3dd5718991f53cd65b6c2b5bc9a62a93d1ae58b5ae2b766b892e0270e"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\evidence\\API_ACTUAL_LOCAL.json",
+      "bytes": 1597,
+      "sha256": "01a67cfbfa87049b7538a25dc679170997222eb3b6453dcc5f897f4ca1894e23"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\evidence\\tiny_ddp_192181562000000\\rank0.log",
+      "bytes": 1346,
+      "sha256": "8bf66636ff0e7f21c972d027a64685a821fe4247d036d8eb6b1993b66b8012d4"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\evidence\\tiny_ddp_192181562000000\\rank1.log",
+      "bytes": 250,
+      "sha256": "30d126999563a40eea6a6415a199e52ba0ae8afd0c879c385414eb42c00446b4"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\evidence\\tiny_ddp_192181562000000\\result.json",
+      "bytes": 182,
+      "sha256": "29c11f2f469ca6decaf4b2fa0deb38f85c08f944099e6a7405f37d9e2f674d51"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\evidence\\tiny_ddp_192181562000000\\strict_pair_metrics.json",
+      "bytes": 2224,
+      "sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\package\\S07_REAL_DUAL_DDP.zip",
+      "bytes": 59416,
+      "sha256": "d032d67cd76eddbc372ab6f9dd51c8355c4bb1ef3e7469254c2549a3481623a9"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\tests\\torch_checks_worker.py",
+      "bytes": 7740,
+      "sha256": "3fa8a9af637a14c634c3681fb458bb549e421ef55c0e95dc77be36650a7a9fc8"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\training_config.json",
+      "bytes": 1587,
+      "sha256": "c7f0e948e6f16a6ecd02df8a881eabbc6f4836c2f1191646e06452adbda31ffa"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\ARCHIVE_SCOPE.json",
+      "bytes": 6521,
+      "sha256": "eab0c7ff9c165546f9d5d097fec1c61bfcc3f3c7eb730c441fc60bb64db863ef"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS.json",
+      "bytes": 41741,
+      "sha256": "b24834c500da2cb595ad9baf548fad6f922d7c51a773ac27daec1e665202a3e4"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS_READY.json",
+      "bytes": 3723,
+      "sha256": "de9c6e26ea7d2f280b835e1de44dbc4697d0fee2c0cc69fe66b4fa986bf07dde"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\EVIDENCE_MANIFEST.json",
+      "bytes": 11135,
+      "sha256": "8c596027714f4aba4796876750f6ec2aa7ab2b67c615451cad7c31688b6b246b"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\FLOAT64_PURPOSE.json",
+      "bytes": 471,
+      "sha256": "93d22e1b762f8d0897087dccd9882264f5c4958e905efdda998507f372c621f3"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\HYPOTHESES_AND_CHECKS.md",
+      "bytes": 3404,
+      "sha256": "707246915a149a6466ae8936177332e59c3fdf18b945e1e80c2366e298b24fa4"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\PROGRESS.json",
+      "bytes": 161,
+      "sha256": "9a92483d566833fe36953f48ca11fc54ba1306c4881d6622497921bf636885ea"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\REPORT.md",
+      "bytes": 4556,
+      "sha256": "9d77987fc05ba3c4112508f028eda59014b2240b28b019d4dceaa26b6c395fd1"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\RUN_ONCE.json",
+      "bytes": 46,
+      "sha256": "d8b1dad7eedf81d86f2ed0dd61c4f41713960eca9d8408e816efc05fdc976446"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\RUN_ddp.json",
+      "bytes": 725,
+      "sha256": "e343328abe9ba91a399334c7f8c93e3c62225610f9f7d2183329f056d725fa68"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\RUN_fp64.json",
+      "bytes": 329,
+      "sha256": "cfd167f3425ad88f6309ae102199bf3ecc6eff6f3a774d423bdfbaf53a101136"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\RUN_full.json",
+      "bytes": 329,
+      "sha256": "f565bbf99f7bdb7a7bf70aa61fcced4499cea847b073e87496f45f4937a98b16"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\RUN_sequence.json",
+      "bytes": 332,
+      "sha256": "d97c66da27f4bf26baf76685e173eb7faaf5426541d653fdf9d0c740c386dad2"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\SOURCE_INPUTS.json",
+      "bytes": 5132,
+      "sha256": "928640767a49b066e41901c62d763083b5296a18dd8b0d29edb0cb79849580d5"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\diagnostic_worker.py",
+      "bytes": 18418,
+      "sha256": "948fdd8d2f68b9422f65fc3c2a6ab3c1b7958ddd4f2e551dd3132b8545ad6d24"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\AUTOMATIC_STOP_DIAGNOSIS.json",
+      "bytes": 28999,
+      "sha256": "e9aff4a6cadcc0821c5b854f7b44d38f703499ae85585fb81217f1c4dc2233cd"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\AUTOMATIC_STOP_DIAGNOSIS_READY.json",
+      "bytes": 2590,
+      "sha256": "acace1fd0252519780c4c152dd2ae201735bf2e2348278e0c533b56968f8baab"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\AUTOMATIC_STOP_REPORT.md",
+      "bytes": 2722,
+      "sha256": "e9e7e670a54dbc9870b9896cad1e608b99662c91bae18669281d93912671b6cf"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\BEFORE_ROUND_DELTA.md",
+      "bytes": 1124,
+      "sha256": "8412e6690a44e43e931a5bdc133fe3189ca7f533aa9716be9bf50dc7681be2b8"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\BEFORE_SESSION_STATUS.md",
+      "bytes": 3480,
+      "sha256": "159e1a11e40c52a6aeb94dd53418bfa3f93a3909e8fccad6163ae9ae8ca89729"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\FLOAT64_CONTROL.json",
+      "bytes": 3053,
+      "sha256": "a9af0cc527a6ff5e31e038c2964493cdd5f1483c482b48e4c3b4085b1568c5d2"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\FULL_VS_SEQUENCE.json",
+      "bytes": 18389,
+      "sha256": "7c92e0aa59abff8fc58c9bbf15b6521b381bbdb096ab51748b9cb4141ce0d6dc"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\RUN_SOURCES.json",
+      "bytes": 809,
+      "sha256": "a2cda7570377ed69c6f83c62357e6e7d95ce38567ced3277e6ffbf3464b794cc"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\controller.log",
+      "bytes": 776,
+      "sha256": "8a6f6775af449d821012a43f33fca0e1a542740120eec1393843407cb650b242"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\ddp0.log",
+      "bytes": 509,
+      "sha256": "5dce17c19a4e63ae5968f918127eb099aaab55d191e3fcd1b1cbbcf3123ce81f"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\ddp0_initial.json",
+      "bytes": 2660,
+      "sha256": "24d8da58fdf06f695a28103bb0e05142dd1d2b024e4f26cc27cedcc796b7b5b1"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\ddp1.log",
+      "bytes": 509,
+      "sha256": "0fb9ee3834e4616b6c770556efe0c503a9d518c7b7e5158fb9c50412a8b8ec5f"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\ddp1_initial.json",
+      "bytes": 2660,
+      "sha256": "f4fcc709590bf05b9b327b543a3170ab317c5748a476c5662329ae5396b398bb"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\ddp_supervision.json",
+      "bytes": 222,
+      "sha256": "d2d86865a324079743fad54625ee9896308bd79ea5ca9fbc9e7742570cfb3275"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\fp640.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\fp64_supervision.json",
+      "bytes": 166,
+      "sha256": "5017e089681b28f8a26e032d092f74092a1360c2b1e1c0eca14270b5909bb56f"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\full0.log",
+      "bytes": 20,
+      "sha256": "5c1723b709a31dc88e665cc2ee66c09ff0523f1bae66973b61a0a1ce761d58ad"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\full_complete.json",
+      "bytes": 6547,
+      "sha256": "81d17842f3023bd290b6758a7ef2c41f7b3ed84616dd18653dcabfd81a79adcc"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\full_initial.json",
+      "bytes": 2310,
+      "sha256": "2682dddfccfb06bece301090b378beb532a99fc5f9db570a92d49db8f5d562d1"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\full_supervision.json",
+      "bytes": 165,
+      "sha256": "7af25ba861888b0cb0fc7d361b4331779d12c2683303f5d7bfccd7cf580bdb6e"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\sequence0.log",
+      "bytes": 24,
+      "sha256": "799b2edf323ef080e4fe3076053d27c97e48ee2690fdd2ead9e9ca0c36a250c5"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\sequence_complete.json",
+      "bytes": 6582,
+      "sha256": "3a08dd5d3e191c0602d114b9f20324544ba5a0809696e957582ccb1ddcd15b53"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\sequence_initial.json",
+      "bytes": 2314,
+      "sha256": "01babbf0856d9bd35a6cc0746ff01ca0faa51e477281f0d66ace8e50d3ef5e74"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\evidence\\sequence_supervision.json",
+      "bytes": 166,
+      "sha256": "a46009e21d700c9a9e165b59fc52efdbe42aeb4a21808ca188ff0faadd2b4753"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\raw\\full.pt",
+      "bytes": 2953463,
+      "sha256": "9a6ae2017435ae9baba8fa8db25c521aad9e4daec58d7e980aad91be4b462c3d"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\raw\\sequence.pt",
+      "bytes": 2966641,
+      "sha256": "ac6972733693d1332e35223aff1a1a3b207af8d998e2d23db290e2a6daa6cd6c"
+    },
+    {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_numeric_diagnosis_r1_20261106\\run_once.py",
+      "bytes": 14331,
+      "sha256": "693b14327d4aa1da2845ec6c2df3f95bf4a2a9960ebb92d1f792d05316789905"
+    }
+  ],
+  "full_sequence_and_two_prePG_rank_environments_equal": true
+}

@@ -1,6 +1,6 @@
-任务/轮次：S01 / 本地数值诊断R1独立复核完成（2026-11-06）。
-状态变化：WAITING转有限诊断接受，review_complete=true；原数值验收及最终FAIL不变，无训练许可。
-验证增量：60唯一文件SHA、34保存指标复算及原13梯度误差全复现；同输入/初值摘要/8线程、分母与缩放已核。
-有限归因：支持fp32权重收缩分组累计精度差异；首个观测非零coarse loss，首个依赖越阈值tf.weight；新DDP/具体内核仍未知。
-证据不足：实际worker PID与Popen不同，缺15秒内后代终态；当前4计算PID均不存在，历史身份和fp64线程快照仍有限。
-停点与交付：DIAGNOSIS_REVIEW.json列不足和最小下一动作；S01无新增模型/收缩/DDP/集群路径，仅既有指标复算，不改作者源码或共享Git。
+任务/轮次：S01 / 诊断R1只读证据收尾复核完成（2026-11-06）。
+状态变化：WAITING转ACCEPT_ARCHIVE_WITH_PRESERVED_LIMITATIONS，review_complete=true，无执行许可。
+验证增量：68唯一文件SHA、86原字段、40份定向文本和2份raw元数据；15分类5支持/4不支持/6未记录均核。
+结论边界：历史缺口补齐0，E01–E06已如实定稿；父子/后代15秒清理等仍未知，可归档不等于数值或清理实测通过。
+保留与未运行：原DIAGNOSIS_REVIEW/最终FAIL及阈值不变；无新模型/收缩/DDP/数值复算/进程查询/集群/共享Git操作。
+交付与下一步：EVIDENCE_CLOSEOUT_REVIEW.json及ARCHIVE_SCOPE；协调按新精确清单归档有限诊断，不追加268批次，不由归档意见授权训练。

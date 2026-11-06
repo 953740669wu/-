@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "task": "S01",
+  "round": "REAL_DUAL_DDP_EVIDENCE_CLOSEOUT_R1_20261106",
+  "observed_utc": "2026-11-06T12:09:10.586252+00:00",
+  "status": "WAITING_EVIDENCE_CLOSEOUT_READY",
+  "review_complete": false,
+  "execution_authorized": false,
+  "training_pass_published": false,
+  "task_card": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\REAL_DUAL_DDP_EVIDENCE_CLOSEOUT_R1_20261106.md",
+    "bytes": 3308,
+    "sha256": "87acb63df99bbe06a9128fd6bba0d5af7505e03ef2db6d0cbd1361c89163859d"
+  },
+  "prior_diagnosis_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS_REVIEW.json",
+    "bytes": 25271,
+    "sha256": "a18ab449e1d99fd830fb6360d3abd85add53dbdf175081472417634516a47314"
+  },
+  "original_final_FAIL": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_review_20261106\\S01_REVIEW.json",
+    "bytes": 6152,
+    "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+  },
+  "prior_reviews_unchanged": true,
+  "delivery_ready": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_evidence_closeout_r1_20261106\\EVIDENCE_CLOSEOUT_READY.json",
+    "exists": false,
+    "sha256": null
+  },
+  "checklist": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_evidence_closeout_r1_20261106\\PRE_REVIEW_CHECKLIST.md",
+    "bytes": 4064,
+    "sha256": "918e710ea3ef7169c83a5470d02eef71f64a234160c9c70646df6cd061fcb690"
+  },
+  "reviewed_supplement_assets": [],
+  "historical_evidence_completed": [],
+  "limitations_finalized": [],
+  "items_to_review": [
+    {
+      "code": "E01_DDP_NOT_COMPLETED",
+      "prior_limitation": "New DDP stopped before after_pg with10013/10049; no new rank gradient vectors/counts/reducer/input-scaling or sequence-DDP comparison. Additional DDP effects remain unknown.",
+      "closeout_review_status": "NOT_REVIEWED_DEPENDENCY_ABSENT"
+    },
+    {
+      "code": "E02_CLEANUP_PID_BINDING",
+      "prior_limitation": "Popen supervised PIDs differ from compute PIDs. Direct handles were reaped, but actual compute PID/descendant exit timing and ownership were not retained. Current exact-PID check finds none; this does not prove all descendants reaped within15s.",
+      "closeout_review_status": "NOT_REVIEWED_DEPENDENCY_ABSENT"
+    },
+    {
+      "code": "E03_HISTORICAL_IDENTITY",
+      "prior_limitation": "Original failure lacks actual thread counts, initial tensor digest and intermediate tensors; all13 scalar metrics matching cannot establish full historical vector/environment identity.",
+      "closeout_review_status": "NOT_REVIEWED_DEPENDENCY_ABSENT"
+    },
+    {
+      "code": "E04_EXACT_KERNEL",
+      "prior_limitation": "No native kernel/instruction trace; shape/grouping-sensitive fp32 contraction precision is supported, exact implementation cause remains undetermined.",
+      "closeout_review_status": "NOT_REVIEWED_DEPENDENCY_ABSENT"
+    },
+    {
+      "code": "E05_FP64_THREAD_SNAPSHOT",
+      "prior_limitation": "Float64 process used the same interpreter/controller environment and has no thread-changing code, but its own actual thread snapshot was not recorded.",
+      "closeout_review_status": "NOT_REVIEWED_DEPENDENCY_ABSENT"
+    },
+    {
+      "code": "E06_INITIAL_TENSOR_RETENTION",
+      "prior_limitation": "New full/sequence/two rank initialization and RNG digests agree under identical seed/source; initial parameter tensors were not retained for a second direct tensor comparison. This limits direct reinspection, not the observed gradient reproduction.",
+      "closeout_review_status": "NOT_REVIEWED_DEPENDENCY_ABSENT"
+    }
+  ],
+  "archival_opinion": {
+    "status": "PENDING_SUPPLEMENT_REVIEW",
+    "can_archive_as_reviewed_closeout": null,
+    "scope": "No approval of the55 historical files or new supplemental delivery yet; own preparation files only.",
+    "not_numerical_acceptance": true,
+    "not_historical_cleanup_runtime_pass": true,
+    "not_training_authorization": true
+  },
+  "remaining_unknowns": [
+    "Additional new DDP effects and runtime scaling/count validation",
+    "Exact native kernel/instruction",
+    "Complete historical identity",
+    "Actual fp64 thread snapshot",
+    "Contemporaneous actual-worker/descendant cleanup timing"
+  ],
+  "insufficient_evidence": [
+    "07 EVIDENCE_CLOSEOUT_READY and its source-bound supplement/original-field/identity/timeline/search records are absent."
+  ],
+  "minimum_next_action": "S07 publishes fixed EVIDENCE_CLOSEOUT_READY; user resumes original S01 review. Preserve unrecoverable limitations if no contemporaneous originals exist, without rerunning or inventing historical evidence.",
+  "waiting_policy": {
+    "wait_loop_started": false,
+    "background_monitor_started": false,
+    "exit_after_preparation": true
+  },
+  "activity": {
+    "models": 0,
+    "contractions": 0,
+    "DDP": 0,
+    "cluster_jobs": 0,
+    "SSH": 0,
+    "new_process_checks": 0,
+    "author_original_edits": 0,
+    "git_stage_commit_push": 0
+  },
+  "conclusion": "WAITING only. Existing limited-diagnosis review and original training FAIL unchanged; archival opinion deferred."
+}

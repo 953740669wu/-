@@ -1,12 +1,12 @@
 # S01简短状态
 
-- 更新/轮次：2026-11-06；REAL_DUAL_DDP_NUMERIC_DIAG_R1_REVIEWED_WITH_GAPS。
-- 本轮增量：续接WAITING，07 READY已到；11直接绑定、17来源、39证据共60唯一文件bytes/SHA核验，未重复旧完整审核。
-- 独立验证：仅载入已保存full/sequence tiny张量，用原compare复算34指标；原13梯度标量全部复现，val/pos/tf.weight仍3项FAIL，18份前向/adjoint字节相同。
-- 有限结论：支持相同操作数下fp32权重收缩分组累计精度差异；最早观测非零为coarse loss2.98e-8（门槛内），首个依赖顺序越门槛tf.weight；顺序分片/float64不代替原B64。
-- 未知/不足：新DDP权限10013/10049在PG完成前停止，额外影响未知；具体native内核未知，旧环境/初值完整可比性与fp64实际线程快照不足。
-- 清理边界：Popen与worker自报PID不同，缺实际worker/后代15秒内终态原件；10:42:27Z只读查4个已知计算PID均不存在，仅证明当时状态。
-- 固定交付：DIAGNOSIS_REVIEW.json为ACCEPT_PARTIAL_DIAGNOSIS_NOT_TRAINING_ACCEPTANCE、review_complete=true、execution_authorized=false，报告/证据/不足和最小动作已绑定。
-- 保留原件：旧S01_REVIEW最终FAIL SHA=f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74未变；原阈值/冻结包不改，无训练PASS。
-- 本轮未运行：S01 0新forward/backward/收缩/DDP/优化器/完整模型/SSH/集群作业；仅保存指标复算与只读PID核对，无等待监视/信号/提权/重试。
-- 停点与下一步：若07已有PID归属及退出原件仅补既有证据，无则保留缺口；协调另定是否制作最小候选，本轮不修复/重跑/放行。仅写自身R1目录及短状态，精确归档见ARCHIVE_SCOPE，无共享Git操作。
+- 更新/轮次：2026-11-06；REAL_DUAL_DDP_EVIDENCE_CLOSEOUT_R1_COMPLETE_ARCHIVE_WITH_LIMITS。
+- 本轮增量：续接WAITING，07收尾READY已到；10直接绑定、56来源共68唯一文件bytes/SHA核验，86处原字段/源码行/日志相符，40份定向检索及2份raw元数据核对。
+- 归档结论：EVIDENCE_CLOSEOUT_REVIEW为ACCEPT_ARCHIVE_WITH_PRESERVED_LIMITATIONS、review_complete=true、execution_authorized=false；可按有限诊断/缺口保留归档，无需新增实验补历史。
+- 分类核验：15项分类5 SUPPORTED、4 UNSUPPORTED、6 NOT_RECORDED均接受其范围；支持项限PID逻辑关联/5个直接Popen句柄记录等，不代表15项运行通过。
+- 历史补齐：0；E01–E06限制如实定稿。实际父子/后代身份、15秒compute清理、fp64 PID/线程、旧初态/向量、初始权重原张量、具体内核及DDP额外影响仍未知。
+- 表述收窄：07明确将旧全部子进程回收收窄为5个直接句柄回执；后来PID不存在/相对耗时/mtime/hook时间均未被当历史退出事件。UNKNOWN不冒称清理实测失败。
+- 保留原件：原DIAGNOSIS_REVIEW SHA=a18ab449e1d99fd830fb6360d3abd85add53dbdf175081472417634516a47314、原最终FAIL SHA=f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74未变；原阈值与冻结包不改，无数值/清理实测PASS或训练许可。
+- 本轮运行：仅只读SHA/字段/元数据核对；0模型/收缩/DDP/数值复算/Torch导入/张量反序列化/新进程查询/SSH/集群；无监视、提权、作者原件编辑或共享Git操作。
+- 精确归档：07新清单11收尾文件+2自身短状态；01自身清单见ARCHIVE_SCOPE。56来源数不等于旧55待归档清单，不追加已验收268批次。
+- 下一步：协调按保留限制的诊断档案冻结新精确批次，唯一Git窗口据清单归档；后续候选或生命周期记录协议另立任务，本轮不授权执行。
