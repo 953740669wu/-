@@ -1,0 +1,86 @@
+{
+  "protocol": "S02_ENCODER_KML_STATIC_PROPOSAL_V1",
+  "task": "S02",
+  "status": "PROPOSAL_READY",
+  "decision": "NO_JUSTIFIED_CANDIDATE",
+  "candidate_count": 0,
+  "candidate": null,
+  "published_at": "2026-11-06T21:01:56.417579+08:00",
+  "immutable_after_publish": true,
+  "proposal": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_minimal_candidate_proposal_20261106\\PROPOSAL.json",
+    "bytes": 17963,
+    "sha256": "b988cbfec4702e9799ed0a275e3bc8581eb7338d3c6390bc427dfa381c3a9cf4"
+  },
+  "report": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_minimal_candidate_proposal_20261106\\REPORT.md",
+    "bytes": 10007,
+    "sha256": "8ba5747726a286731bfe004b31a5bf646fa96be79c136a93804dea1fba020d4f"
+  },
+  "source_manifest": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_minimal_candidate_proposal_20261106\\evidence\\SOURCE_INPUTS.json",
+    "bytes": 10520,
+    "sha256": "8e0b734ecba00f31b0990a829a26b0cc39fd2e3db597208a1562b0a749ed8cc5"
+  },
+  "actual_B64_call_metadata": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_minimal_candidate_proposal_20261106\\evidence\\R11_EXISTING_CALL_METADATA.json",
+    "bytes": 12514,
+    "sha256": "3671eef04628c0acc93ef7b6a6b9df5c2bcab083abe869b3b4813086c9a18676"
+  },
+  "task_card": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\REAL_DUAL_DDP_MINIMAL_CANDIDATE_PROPOSAL_20261106.md",
+    "bytes": 2777,
+    "sha256": "7110bb72ca9502925d7d1b250dfe5d056eea8b7f2a5a4867815f829b6d53b261"
+  },
+  "frozen_reference": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\REFERENCE_READY.json",
+    "bytes": 6655,
+    "sha256": "924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3"
+  },
+  "original_final_FAIL": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_review_20261106\\S01_REVIEW.json",
+    "bytes": 6152,
+    "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+  },
+  "diagnosis_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS_REVIEW.json",
+    "bytes": 25271,
+    "sha256": "a18ab449e1d99fd830fb6360d3abd85add53dbdf175081472417634516a47314"
+  },
+  "closeout_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_evidence_closeout_r1_20261106\\EVIDENCE_CLOSEOUT_REVIEW.json",
+    "bytes": 36006,
+    "sha256": "33eca31daa73fe62c9a49057e936d4775bf6970d14be7171cce9553cc1eaf359"
+  },
+  "static_source_files": 32,
+  "unknowns": [
+    "M01_FULL_KML_FAILURE",
+    "M02_OPERAND_PARITY",
+    "M03_BACKEND_SCOPE",
+    "M04_FP32_DIRECTION",
+    "M05_DDP_AND_LIFECYCLE"
+  ],
+  "future_regression": "Conditional separately scoped localization first; one justified change only after new proposal review, then unchanged fullB64/fp32 strict5 gate. No execution command or authorization.",
+  "activity": {
+    "model_runs": 0,
+    "tensor_contractions": 0,
+    "tests": 0,
+    "new_DDP": 0,
+    "benchmarks": 0,
+    "SSH": 0,
+    "cluster_jobs": 0,
+    "torch_imports": 0,
+    "tensor_deserializations": 0,
+    "new_process_queries": 0,
+    "installs": 0,
+    "elevation": 0,
+    "candidate_implementations": 0,
+    "original_edits": 0,
+    "git_stage_commit_push": 0,
+    "allowed_work": "standard-library file hashing/JSON-text metadata and documentation only"
+  },
+  "implementation_authorized": false,
+  "execution_authorized": false,
+  "training_acceptance": false,
+  "next": "Coordination reads this READY directly; S02 standby. Existing diagnosis archive limits and original FAIL unchanged."
+}

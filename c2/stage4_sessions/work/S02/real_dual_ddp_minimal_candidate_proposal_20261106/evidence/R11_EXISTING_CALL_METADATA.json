@@ -1,0 +1,541 @@
+{
+  "scope": "READ_ONLY_EXISTING_B64_CALL_RECORDS_NOT_NEW_TEST_OR_PROFILE",
+  "job_id": "2049454",
+  "host": "cn21338",
+  "backend": "kml",
+  "torch": "2.7.1+cpu",
+  "torch_threads": 36,
+  "source_and_data_after": "PASS_SAME_FROZEN_IDENTITIES",
+  "source_bindings": {
+    "code_package_sha256": "d9bd138890e56c5fc6c1dba538c0c78112441849689a82782fdc6856a203e142",
+    "code_source_manifest_sha256": "bda3b37a35880c35bfcec65b80c53624e108de6387f4fa9fd377429b76afffa1",
+    "deployment_package_sha256": "64a45ae7444506984ebb65d7cb3a39930d088be4f1ac1f3fdcc2d89eeb095d3b",
+    "deployment_source_manifest_sha256": "2e825fb7663689aee5cf664b8fdcd4bd9a4809c41707352e1a8c8fd1f33075d9",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "gemm_contract_sha256": "a4876ab4a6b6a3c517fb95bc18183bc89015617cdb49a4f6eb5b3380967edeab",
+    "interface_sha256": "1477124f8b772226c76f8f50cee16c5d34ac34f7d8748d327c4402f82d074f76",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8"
+  },
+  "per_sample_role_counts": [
+    {
+      "forward": 50,
+      "dX": 49,
+      "dW": 50
+    },
+    {
+      "forward": 50,
+      "dX": 49,
+      "dW": 50
+    },
+    {
+      "forward": 50,
+      "dX": 49,
+      "dW": 50
+    }
+  ],
+  "samples": [
+    {
+      "step": 3,
+      "source": {
+        "bytes": 150035,
+        "native_calls": 149,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\gemm_step_3.json",
+        "records": 149,
+        "sha256": "ef3809752f62206c572e3864d185291af59ff10e7622e07594f2074556615f60",
+        "step": 3
+      },
+      "groups": [
+        {
+          "role": "dW",
+          "m": 1,
+          "n": 512,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 1
+        },
+        {
+          "role": "dW",
+          "m": 512,
+          "n": 65,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 1
+        },
+        {
+          "role": "dW",
+          "m": 512,
+          "n": 512,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dW",
+          "m": 512,
+          "n": 2048,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dW",
+          "m": 1536,
+          "n": 512,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dW",
+          "m": 2048,
+          "n": 512,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 512,
+          "k": 1,
+          "ta": false,
+          "tb": false,
+          "count": 1
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 512,
+          "k": 512,
+          "ta": false,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 512,
+          "k": 1536,
+          "ta": false,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 512,
+          "k": 2048,
+          "ta": false,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 2048,
+          "k": 512,
+          "ta": false,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 1,
+          "k": 512,
+          "ta": false,
+          "tb": true,
+          "count": 1
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 512,
+          "k": 65,
+          "ta": false,
+          "tb": true,
+          "count": 1
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 512,
+          "k": 512,
+          "ta": false,
+          "tb": true,
+          "count": 12
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 512,
+          "k": 2048,
+          "ta": false,
+          "tb": true,
+          "count": 12
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 1536,
+          "k": 512,
+          "ta": false,
+          "tb": true,
+          "count": 12
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 2048,
+          "k": 512,
+          "ta": false,
+          "tb": true,
+          "count": 12
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "source": {
+        "bytes": 150044,
+        "native_calls": 149,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\gemm_step_4.json",
+        "records": 149,
+        "sha256": "94c99cde67845f7c467637c746a9368b8ad4484b3716b897809484b02d810923",
+        "step": 4
+      },
+      "groups": [
+        {
+          "role": "dW",
+          "m": 1,
+          "n": 512,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 1
+        },
+        {
+          "role": "dW",
+          "m": 512,
+          "n": 65,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 1
+        },
+        {
+          "role": "dW",
+          "m": 512,
+          "n": 512,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dW",
+          "m": 512,
+          "n": 2048,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dW",
+          "m": 1536,
+          "n": 512,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dW",
+          "m": 2048,
+          "n": 512,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 512,
+          "k": 1,
+          "ta": false,
+          "tb": false,
+          "count": 1
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 512,
+          "k": 512,
+          "ta": false,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 512,
+          "k": 1536,
+          "ta": false,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 512,
+          "k": 2048,
+          "ta": false,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 2048,
+          "k": 512,
+          "ta": false,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 1,
+          "k": 512,
+          "ta": false,
+          "tb": true,
+          "count": 1
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 512,
+          "k": 65,
+          "ta": false,
+          "tb": true,
+          "count": 1
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 512,
+          "k": 512,
+          "ta": false,
+          "tb": true,
+          "count": 12
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 512,
+          "k": 2048,
+          "ta": false,
+          "tb": true,
+          "count": 12
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 1536,
+          "k": 512,
+          "ta": false,
+          "tb": true,
+          "count": 12
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 2048,
+          "k": 512,
+          "ta": false,
+          "tb": true,
+          "count": 12
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "source": {
+        "bytes": 150040,
+        "native_calls": 149,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\round11_gemm_breakdown_20261106\\evidence\\received\\payload\\outputs\\gemm_2049454\\gemm_step_5.json",
+        "records": 149,
+        "sha256": "a0cb1925512fe4edf12e89cb310f964642ba65f61eb09070023cb52cdc1d2509",
+        "step": 5
+      },
+      "groups": [
+        {
+          "role": "dW",
+          "m": 1,
+          "n": 512,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 1
+        },
+        {
+          "role": "dW",
+          "m": 512,
+          "n": 65,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 1
+        },
+        {
+          "role": "dW",
+          "m": 512,
+          "n": 512,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dW",
+          "m": 512,
+          "n": 2048,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dW",
+          "m": 1536,
+          "n": 512,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dW",
+          "m": 2048,
+          "n": 512,
+          "k": 13312,
+          "ta": true,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 512,
+          "k": 1,
+          "ta": false,
+          "tb": false,
+          "count": 1
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 512,
+          "k": 512,
+          "ta": false,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 512,
+          "k": 1536,
+          "ta": false,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 512,
+          "k": 2048,
+          "ta": false,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "dX",
+          "m": 13312,
+          "n": 2048,
+          "k": 512,
+          "ta": false,
+          "tb": false,
+          "count": 12
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 1,
+          "k": 512,
+          "ta": false,
+          "tb": true,
+          "count": 1
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 512,
+          "k": 65,
+          "ta": false,
+          "tb": true,
+          "count": 1
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 512,
+          "k": 512,
+          "ta": false,
+          "tb": true,
+          "count": 12
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 512,
+          "k": 2048,
+          "ta": false,
+          "tb": true,
+          "count": 12
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 1536,
+          "k": 512,
+          "ta": false,
+          "tb": true,
+          "count": 12
+        },
+        {
+          "role": "forward",
+          "m": 13312,
+          "n": 2048,
+          "k": 512,
+          "ta": false,
+          "tb": true,
+          "count": 12
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Original B64 single-domain actual calls; B32/real-model DDP not observed",
+    "Counts cover direct kml_ops.gemm/_sgemm observer only; native F.linear may use additional backend BLAS via shim",
+    "Records prove ABI/call metadata, not floating accumulation implementation or shape-matched B64/B32 numerical failure"
+  ]
+}

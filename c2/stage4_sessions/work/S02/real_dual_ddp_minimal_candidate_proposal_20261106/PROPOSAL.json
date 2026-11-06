@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "task": "S02",
+  "round": "REAL_DUAL_DDP_MINIMAL_CANDIDATE_PROPOSAL_20261106",
+  "created_at": "2026-11-06T21:01:56.417579+08:00",
+  "status": "NO_JUSTIFIED_CANDIDATE",
+  "candidate_count": 0,
+  "candidate": null,
+  "implementation_authorized": false,
+  "execution_authorized": false,
+  "decision": "The shared mathematical dW reduction sensitivity is supported only for recorded Tiny operands. No sufficiently grounded single fp32 Encoder/KML modification is selected.",
+  "formal_reference": "Original complete B64/fp32 Encoder plus both heads, original compare and thresholds; never B32x2",
+  "frozen_reference": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\REFERENCE_READY.json",
+    "bytes": 6655,
+    "sha256": "924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3"
+  },
+  "baseline": {
+    "kml": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\baseline\\kml_ops.py",
+      "bytes": 10255,
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+    },
+    "model": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\baseline\\s4_models.py",
+      "bytes": 14121,
+      "sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2"
+    }
+  },
+  "comparator": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\tests\\check_equivalence.py",
+    "bytes": 14614,
+    "sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e"
+  },
+  "original_final_FAIL": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_review_20261106\\S01_REVIEW.json",
+    "bytes": 6152,
+    "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+  },
+  "diagnosis_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_numeric_diagnosis_r1_20261106\\DIAGNOSIS_REVIEW.json",
+    "bytes": 25271,
+    "sha256": "a18ab449e1d99fd830fb6360d3abd85add53dbdf175081472417634516a47314"
+  },
+  "closeout_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_evidence_closeout_r1_20261106\\EVIDENCE_CLOSEOUT_REVIEW.json",
+    "bytes": 36006,
+    "sha256": "33eca31daa73fe62c9a49057e936d4775bf6970d14be7171cce9553cc1eaf359"
+  },
+  "source_manifest": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_minimal_candidate_proposal_20261106\\evidence\\SOURCE_INPUTS.json",
+    "bytes": 10520,
+    "sha256": "8e0b734ecba00f31b0990a829a26b0cc39fd2e3db597208a1562b0a749ed8cc5"
+  },
+  "actual_B64_call_metadata": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_minimal_candidate_proposal_20261106\\evidence\\R11_EXISTING_CALL_METADATA.json",
+    "bytes": 12514,
+    "sha256": "3671eef04628c0acc93ef7b6a6b9df5c2bcab083abe869b3b4813086c9a18676"
+  },
+  "linear_routes": [
+    {
+      "module": "val",
+      "copies": 1,
+      "I": 1,
+      "O": 512,
+      "L_B64": 13312,
+      "L_rank32": 6656,
+      "input_numel_B64": 13312,
+      "input_numel_rank32": 6656,
+      "route": "original F.linear/native autograd",
+      "dX": "G @ W -> [L,1], reduction512",
+      "dW": "G.T @ X -> [512,1], reductionL",
+      "db": "native autograd bias reduction overL",
+      "observed_R11_direct_gemm": false
+    },
+    {
+      "module": "pos",
+      "copies": 1,
+      "I": 65,
+      "O": 512,
+      "L_B64": 13312,
+      "L_rank32": 6656,
+      "input_numel_B64": 865280,
+      "input_numel_rank32": 432640,
+      "route": "KML _LinearFn",
+      "dX": "None: fixed angles/belt positional features do not require input grad",
+      "dW": "CBLAS T/NT [512,65,L]",
+      "db": "gy.reshape(-1,512).sum(0), PyTorch fp32",
+      "observed_R11_direct_gemm": true
+    },
+    {
+      "module": "tf.layers.*.self_attn packed QKV",
+      "copies": 12,
+      "I": 512,
+      "O": 1536,
+      "L_B64": 13312,
+      "L_rank32": 6656,
+      "input_numel_B64": 6815744,
+      "input_numel_rank32": 3407872,
+      "route": "KML _LinearFn via patched F.linear",
+      "dX": "CBLAS NT/NT [L,512,1536]",
+      "dW": "CBLAS T/NT [1536,512,L]",
+      "db": "gy.reshape(-1,1536).sum(0), PyTorch fp32",
+      "observed_R11_direct_gemm": true
+    },
+    {
+      "module": "tf.layers.*.self_attn.out_proj",
+      "copies": 12,
+      "I": 512,
+      "O": 512,
+      "L_B64": 13312,
+      "L_rank32": 6656,
+      "input_numel_B64": 6815744,
+      "input_numel_rank32": 3407872,
+      "route": "KML _LinearFn via patched F.linear",
+      "dX": "CBLAS NT/NT [L,512,512]",
+      "dW": "CBLAS T/NT [512,512,L]",
+      "db": "gy.reshape(-1,512).sum(0), PyTorch fp32",
+      "observed_R11_direct_gemm": true
+    },
+    {
+      "module": "tf.layers.*.linear1",
+      "copies": 12,
+      "I": 512,
+      "O": 2048,
+      "L_B64": 13312,
+      "L_rank32": 6656,
+      "input_numel_B64": 6815744,
+      "input_numel_rank32": 3407872,
+      "route": "KML _LinearFn",
+      "dX": "CBLAS NT/NT [L,512,2048]",
+      "dW": "CBLAS T/NT [2048,512,L]",
+      "db": "gy.reshape(-1,2048).sum(0), PyTorch fp32",
+      "observed_R11_direct_gemm": true
+    },
+    {
+      "module": "tf.layers.*.linear2",
+      "copies": 12,
+      "I": 2048,
+      "O": 512,
+      "L_B64": 13312,
+      "L_rank32": 6656,
+      "input_numel_B64": 27262976,
+      "input_numel_rank32": 13631488,
+      "route": "KML _LinearFn",
+      "dX": "CBLAS NT/NT [L,2048,512]",
+      "dW": "CBLAS T/NT [512,2048,L]",
+      "db": "gy.reshape(-1,512).sum(0), PyTorch fp32",
+      "observed_R11_direct_gemm": true
+    },
+    {
+      "module": "head_v",
+      "copies": 1,
+      "I": 512,
+      "O": 1,
+      "L_B64": 13312,
+      "L_rank32": 6656,
+      "input_numel_B64": 6815744,
+      "input_numel_rank32": 3407872,
+      "route": "KML _LinearFn",
+      "dX": "CBLAS NT/NT [L,512,1]",
+      "dW": "CBLAS T/NT [1,512,L]",
+      "db": "gy.reshape(-1,1).sum(0), PyTorch fp32",
+      "observed_R11_direct_gemm": true
+    },
+    {
+      "module": "head_coarse after h.mean(1)",
+      "copies": 1,
+      "I": 512,
+      "O": 256,
+      "L_B64": 64,
+      "L_rank32": 32,
+      "input_numel_B64": 32768,
+      "input_numel_rank32": 16384,
+      "route": "original F.linear/native autograd",
+      "dX": "G @ W -> [B,512], reduction256; mean-pool backward distributes to208 tokens",
+      "dW": "G.T @ X -> [256,512], reductionB",
+      "db": "native autograd bias reduction overB",
+      "observed_R11_direct_gemm": false
+    }
+  ],
+  "route_scope": {
+    "B64": "Actual original R11 job2049454 calls plus same frozen source",
+    "rank32": "Static dimensions/dispatch consequences only; not observed real-model runtime",
+    "native_fallback": "Not _LinearFn/direct kml_ops.gemm; on C2 Torch native BLAS may still use loaded shim/KML indirectly, not resolved by149 direct-call records"
+  },
+  "actual_R11_direct_counts": {
+    "forward": 50,
+    "dW": 50,
+    "dX": 49,
+    "per_sample": 149,
+    "samples": 3
+  },
+  "kml_backward": {
+    "source": "baseline/kml_ops.py:179-188",
+    "dX": "gemm(g,wc): NT/NT, alpha1 beta0, reduceO, only when needs_input_grad[0]",
+    "dW": "fp32 gemm(g.float(),x2.float(),ta=True): T/NT, alpha1 beta0, mO nI kL; complete localL, no Python partial accumulation",
+    "db": "gy.reshape(-1,O).sum(0) via Torch; not _sgemm",
+    "ld": "dX ldaO/ldbI/ldcI; dW ldaO/ldbI/ldcI",
+    "acc32": "bf16-only dispatch flag; not a selectable higher-precision accumulator for fp32 _sgemm"
+  },
+  "tiny_mapping": {
+    "source_model": "seed7, width4 Tiny; tf is one Linear(4,4), not12-layer Transformer",
+    "data": "ones v/angles, zero images, only4 masked elements; different from fixed real seed0/masks",
+    "operator": "Native F.linear/autograd, not the custom KML backward; all Tiny relevant inputs below2**16 even if the same dispatcher were patched",
+    "corresponds": [
+      "Algebra dW=G.T@X and partitioning its row reduction length",
+      "Recorded byte-equal Tiny inputs/adjoints and grouped fp32 dW sensitivity",
+      "Tiny native val has semantic counterpart native full val, but output width4 versus512 and full-model adjoints differ"
+    ],
+    "does_not_establish": [
+      "Same implementation/kernel/error in KML",
+      "Full-model forward/adjoint parity",
+      "A mapping from Tiny tf.weight to one actual Transformer parameter",
+      "fp32 candidate or complete-model/DDP repair"
+    ]
+  },
+  "tiny_evidence": {
+    "gradient_failed_names": [
+      "val.weight",
+      "pos.weight",
+      "tf.weight"
+    ],
+    "original_scalar_gradient_metrics": 13,
+    "parameter_prefix_means": "parameter.* entries in diagnostic JSON are gradients, not updated parameters",
+    "earliest_nonzero": {
+      "location": "coarse loss scalar reduction, before backward",
+      "metric": {
+        "name": "loss.coarse",
+        "max_abs": 2.9802322387695312e-08,
+        "l2_relative": 9.776942957208472e-08,
+        "reference_norm": 0.30482250452041626,
+        "passed": true,
+        "exact": false,
+        "torch_equal": false,
+        "shape": [],
+        "dtype": "torch.float32"
+      },
+      "total_loss_metric": {
+        "name": "loss.total",
+        "max_abs": 5.960464477539063e-08,
+        "l2_relative": 1.2488941042706684e-07,
+        "reference_norm": 0.47725939750671387,
+        "passed": true,
+        "exact": false,
+        "torch_equal": false,
+        "shape": [],
+        "dtype": "torch.float32"
+      },
+      "thresholds_passed": true
+    },
+    "earliest_threshold_failure": {
+      "name": "parameter.tf.weight",
+      "max_abs": 3.723800182342529e-05,
+      "l2_relative": 0.0001142869133502608,
+      "reference_norm": 0.5284964778141917,
+      "passed": false,
+      "exact": false,
+      "torch_equal": false,
+      "shape": [
+        4,
+        4
+      ],
+      "dtype": "torch.float32",
+      "error": "parameter.tf.weight: max_abs=3.723800182342529e-05, relative=0.0001142869133502608"
+    },
+    "fp64_control": "Recorded same-operand cause control only: val/pos grouped difference0, tf about6.8278716e-14; not production dtype or reference replacement",
+    "fp64_limit": "Own process/thread snapshot not retained; exact kernel unknown; both fp32 forms differ from fp64"
+  },
+  "unchanged": {
+    "full_B64_reference": true,
+    "precision_fp32": true,
+    "samples_seed_order_masks": true,
+    "normalization": true,
+    "loss": true,
+    "AdamW": true,
+    "thresholds": true,
+    "old_FAIL": true,
+    "production_default": true
+  },
+  "mathematical_invariants_for_any_future_candidate": [
+    "Same X/G pairing and matrix shapes, no omitted terms or batch/drop/pad/reweighting",
+    "Same dX=GW, dW=G.TX, db=sumG and canonical153-parameter coverage",
+    "Original world2 local backward coefficient/global denominators and input-grad divide2, no parameter-grad double division",
+    "Native SDPA/CKPT0/fp32 and original initialized weights/optimizer state/zero-extra-update restore"
+  ],
+  "missing_evidence": [
+    {
+      "id": "M01_FULL_KML_FAILURE",
+      "missing": "No original-threshold full Encoder B64 versus real shard32 KML gradient failure/first failing full-model parameter has been recorded; real model DDP never ran.",
+      "why_needed": "Cannot select a failed full-model dW call from Tiny tf.weight or native Tiny contractions."
+    },
+    {
+      "id": "M02_OPERAND_PARITY",
+      "missing": "No same-identity complete-model X/G tensors or hashes proving equality before the proposed actual KML dW; no full-model dX/db locality evidence.",
+      "why_needed": "Full Encoder native SDPA/layernorm/residual/mean and KML forward/dX can create upstream differences; a dW-only edit may target a downstream symptom."
+    },
+    {
+      "id": "M03_BACKEND_SCOPE",
+      "missing": "No actual KML B64-versus32 contraction control; Tiny original/diagnostic use native Torch, exact kernels unknown. R11 only records actual B64 call metadata.",
+      "why_needed": "Cannot infer KML rounding error or choose KML accumulator/layout settings from a Windows native contraction result."
+    },
+    {
+      "id": "M04_FP32_DIRECTION",
+      "missing": "No evidence a specific allowed fp32 change reduces error relative to the unchanged B64/fp32 reference.",
+      "why_needed": "Both Tiny fp32 forms differ from fp64 control; improving accuracy versus fp64 does not guarantee agreement with the frozen fp32 reference."
+    },
+    {
+      "id": "M05_DDP_AND_LIFECYCLE",
+      "missing": "New diagnostic DDP stopped before PG completion; runtime reducer/scaling comparison, historical compute ownership/15s cleanup, own fp64 thread snapshot and historical vector/init identity remain limited.",
+      "why_needed": "Cannot ascribe all differences to contraction or treat archive closeout as training/runtime acceptance."
+    }
+  ],
+  "falsifiable_decision_conditions": [
+    "If a matched full-model failure is outside direct KML dW (native val/head_coarse, forward/dX/db or reducer), a KML dW-only hypothesis is not supported.",
+    "If actual full-model X or G differ across B64/shards, identical-operand Tiny control cannot localize the full-model cause to dW.",
+    "If actual same-operand KML dW passes unchanged limits, do not select its accumulation path based on Tiny alone.",
+    "If the only proposed remedy changes precision/reference/threshold or lacks an original-fp32 agreement mechanism, it is outside current constraints."
+  ],
+  "future_minimal_regression_if_separately_authorized": [
+    {
+      "stage": "A_RETAIN_AND_REPRODUCE",
+      "plan": "In a NEW isolated directory bind unchanged originals, original compare and initial/settings. Reproduce the original Tiny B64-versusshards failing3/13 as diagnostic positive failure; preserve it. Tiny is never the complete-model reference. No implicit DDP retry."
+    },
+    {
+      "stage": "B_FILL_LOCALIZATION_GAPS_FIRST",
+      "plan": "Separately approve one fixed full-model first-batch B64/shard comparison in actual R4/KML/CPU36 paths, keep original real samples/masks and loss. Record actual route/native ABI plus matched X/G and dX/dW/db attribution; do not search shapes/tiles or assume permission. This is required evidence, not a selected candidate or a command."
+    },
+    {
+      "stage": "C_ONLY_AFTER_NEW_PROPOSAL_REVIEW",
+      "plan": "Only after localization supports ONE allowed fp32 change and coordination/S01 approve a concrete new proposal, compare unchanged baseline and that one isolated change. Reject changed dX/db/alias/bounds/counts/parameter coverage or any threshold failure; no fallback search."
+    },
+    {
+      "stage": "D_FORMAL_GATE_REMAINS",
+      "plan": "Keep unchanged complete B64/fp32 reference for original full-output/loss/input-gradient/all-parameter grad-param-initdelta/AdamW/buffers strict first5 continuous steps. First real FAIL stops later stages; retain original sample/RNG/state/exposure and zero-extra-update restore. Resource/work ceilings require a new explicit task; none authorized now."
+    }
+  ],
+  "retained_evidence_limits": [
+    {
+      "code": "E01_DDP_NOT_COMPLETED",
+      "detail": "New DDP stopped before after_pg with10013/10049; no new rank gradient vectors/counts/reducer/input-scaling or sequence-DDP comparison. Additional DDP effects remain unknown."
+    },
+    {
+      "code": "E02_CLEANUP_PID_BINDING",
+      "detail": "Popen supervised PIDs differ from compute PIDs. Direct handles were reaped, but actual compute PID/descendant exit timing and ownership were not retained. Current exact-PID check finds none; this does not prove all descendants reaped within15s."
+    },
+    {
+      "code": "E03_HISTORICAL_IDENTITY",
+      "detail": "Original failure lacks actual thread counts, initial tensor digest and intermediate tensors; all13 scalar metrics matching cannot establish full historical vector/environment identity."
+    },
+    {
+      "code": "E04_EXACT_KERNEL",
+      "detail": "No native kernel/instruction trace; shape/grouping-sensitive fp32 contraction precision is supported, exact implementation cause remains undetermined."
+    },
+    {
+      "code": "E05_FP64_THREAD_SNAPSHOT",
+      "detail": "Float64 process used the same interpreter/controller environment and has no thread-changing code, but its own actual thread snapshot was not recorded."
+    },
+    {
+      "code": "E06_INITIAL_TENSOR_RETENTION",
+      "detail": "New full/sequence/two rank initialization and RNG digests agree under identical seed/source; initial parameter tensors were not retained for a second direct tensor comparison. This limits direct reinspection, not the observed gradient reproduction."
+    }
+  ],
+  "closeout_scope": "ACCEPT_ARCHIVE_WITH_PRESERVED_LIMITATIONS",
+  "activity": {
+    "model_runs": 0,
+    "tensor_contractions": 0,
+    "tests": 0,
+    "new_DDP": 0,
+    "benchmarks": 0,
+    "SSH": 0,
+    "cluster_jobs": 0,
+    "torch_imports": 0,
+    "tensor_deserializations": 0,
+    "new_process_queries": 0,
+    "installs": 0,
+    "elevation": 0,
+    "candidate_implementations": 0,
+    "original_edits": 0,
+    "git_stage_commit_push": 0,
+    "allowed_work": "standard-library file hashing/JSON-text metadata and documentation only"
+  },
+  "next": "Coordination may accept this no-candidate static proposal. No code, model run, test, contraction, DDP, SSH or job is authorized. Any evidence collection/candidate implementation needs separately scoped review."
+}

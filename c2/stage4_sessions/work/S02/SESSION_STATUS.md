@@ -1,20 +1,20 @@
 # S02简短状态
 
-- 更新：2026-11-06T09:09:10.401322+00:00；本轮REAL_DUAL_DDP_REFERENCE_20261106，S02接口/实现/本地检查/冻结交付完成。
-- 本轮目录：E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\real_dual_ddp_reference_20261106；仅新目录与自身两个状态文件写入，历史源/原件不改。
-- 固定交接：先INTERFACE_READY.json，再REFERENCE_READY.json；状态REFERENCE_READY_FOR_S07_AND_S01_REVIEW_C2_PENDING，供07/01直接读取，不依赖用户转发，发布后源/包冻结。
-- 接口：dual_reference.py提供load_data/initialize/plan/validate_partition/shard/check_identity/MaskStream/B64Reference；CONSUMER_GUIDE.md列实际函数/参数/返回/命令及原名字映射。
-- 模型/后端：复用12份冻结原件，原完整Encoder37995777参数/153名字及双head、mean损失/AdamW/compare原字节不变；单一共享reference_root/baseline，configure_backend仍要求实际KML，R10/R12不加载。
-- 数据/分片：原descriptor b88ea974…/manifest bdd14604…/engineering接口8b1b540b…，16unit/1600帧原归一化；每批前32/后32并集原64、25批不重不补；新分rank与参考暴露记录由07记，不写旧ledger，subject/split UNKNOWN、无val/test。
-- RNG：原seed0 Encoder初始化后状态建私有Generator，25原mask逐批核SHA；DDP/额外参考/恢复不扰动该流。stream恢复核初态/游标/generator对应；参考构造/步骤隔离Torch/Python/NumPy RNG。
-- 严格参考：rank0原完整B64连续1..5步；比较输出/三loss/输入梯度/全参数grad-param-initdelta/AdamW step及一二矩/buffers，canonical键与优化器覆盖/超参数全核；raw输入grad除2、DDP参数grad不再除2。最多一个pending步，成功释放，第5步close释放参考。
-- 本地增量：7项最终helper检查通过，原25批及25mask/153名字/双head覆盖通过；tiny原AdamW连续5步、190项原compare max_abs/relative均0；AST3.9/LF/框架前导入/12源/ZIP逐项SHA通过。Tiny并非完整Encoder/DDP/KML训练。
-- 保留本地失败：首次检查Windows原seed0权重SHA被原C2身份守卫拒绝，原模型只读诊断actual411aa36f…、expected2543d05f…，第一mask一致；原因未归因。最终helper将该平台差异作为拒绝负例，生产initialize守卫未放宽，不能称本地C2初始化通过。
-- 本地环境：已有round2_20261104T114949Z/.venv/Scripts/python.exe（Torch2.7.1+cpu、NumPy2.2.6、local2线程），未安装；实际真实数组/归一化、C2初始化、完整B64训练、KML及真实DDP均NOT_RUN_BY_S02。
-- 包：package/S02_REAL_DUAL_DDP_REFERENCE.zip，62170bytes/18文件，SHA256=df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5。
-- 源索引：SOURCE_SHA256.json 17项，SHA256=6b9cd186d27a5130f22cd2e58a2c6cb231be31c70d5df98dce4c40e92008b757；REFERENCE_READY SHA256=924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3；原baseline模型9ff6417b…/KML e6c5c441…/原compare e9b53136…保持。
-- 证据：REPORT.md / CONSUMER_GUIDE.md / diff/NEW_REFERENCE_ADAPTER.patch / evidence/{LOCAL_CHECKS.json,reference_tests_first.log,WINDOWS_INITIALIZATION_DIAGNOSTIC.json,reference_tests_frozen.log,tiny_adamw_metrics.json,ORIGINAL25_METADATA_CHECK.json,FINAL_IDENTITY_CHECK.json} / package清单。
-- 资源与工作量按本卡：每域32/全局64、每域实际36，总76/72/留4、DDR总24GiB同limit/exclusive/HBM0、总900共享840+30+30、PG120。前5门槛全过才同状态续至25；最多55物理更新，失败即停、不缩步/放宽/重提。
-- 当前活动/依赖：S02本轮新job0/SSH0，检查子进程均结束；未查询远端队列，不推断其它窗口活动job。S02无等待依赖，07接口已见、代码准备中；未见其最终TRAINING_READY或01最终PASS，不宣称获准训练。
-- 实质待核/下一步：原C2/R4 init权重身份、真实数据统计、完整B64对DDP五步原门槛仍待实际环境；历史B64/B32数值风险不豁免。07绑定本REFERENCE_READY→01具体版本最终审核→00唯一job；本窗口不提交。
-- 历史/归档：R12 CLOSED_NO_TRAINING_GAIN保留、原fp32基线不改、checkpoint可选结案/R10低收益关闭保持；精确待归档ARCHIVE_FILES.json排除ZIP/数据/权重/环境，核验后提醒唯一Git窗口归档，未暂存/commit/push。
+- 更新：2026-11-06T22:23:39.562669+08:00；本轮REAL_DUAL_DDP_LOCALIZATION_PREPARE_R1_20261106已完成阻断交付，仅本地标准库准备。
+- 当前目录：E:\eitfm_c2_stages2-4_2026-11-03\c2\stage4_sessions\work\S02\real_dual_ddp_localization_prepare_r1_20261106；仅此新目录及自身状态/摘要写入，29份冻结输入/原规格/compare/原FAIL核SHA不变。
+- 处置：BLOCKED_PREPARATION_WITH_REASON，唯一主阻断B01_UNBOUND_INSTALLED_NATIVE_VJP；不发布PREPARATION_READY，不提供模型/部署/compute入口，不降低dX覆盖，无数值修复候选。
+- 规格：原MINIMAL_EVIDENCE_SPEC SHA=d1da482f2971281996ac70e9133606933277bb31bfead1a48ed64fbbddaf67c2；SPEC_SNAPSHOT逐字节相同。当前卡仅授权本地代码/夹具，300秒/CPU36/24GiB为未来拟议上限，不是执行许可。
+- 可观测性：冻结_LinearFn返回gx/gw/gb可设计被动观察；原生val/head_coarse的实际节点/grad_inputs槽位未有C2绑定来源。已保存C2只有Torch init/DDP/NumPy身份和DDP源，不足以证明native Linear逐算子dX及attention布局。Windows2.7.1 Node hook文档只作设计依据，未当C2证明。
+- 禁止降级：v作为target还有直接loss路径，合并v叶梯度不是val局部VJP；不硬编码AddmmBackward/slot1，不额外backward/autograd.grad/GEMM、不插入改变图/dispatch的替代算子。不宣称被动Node观察普遍不可行，具体缺项仅限枚举记录。
+- 逻辑样本：元数据夹具区分batch-major b*208+t与token-major t*B+b，二维out_proj不能靠shape判首/后32；显式来源/shape/ID次序缺失或重缺样均拒绝。实际Tensor/storage/节点映射尚未实现。
+- 数学保持：未来参考仍原engineering_training.losses mean+B64一次backward；禁止train_step/B64Reference.advance等step helper。顺序32+32按实际全局mask数与coarse16384、系数/参数与输入grad除数均1，不套DDP2/2；本包不导入冻结训练模块/不创建optimizer。
+- 本轮实现：仅candidate/contracts.py与tests/标准库夹具、LOCAL_FIXTURE元数据CLI；没有Torch observer或进程启动/扫描/信号/回收执行器。先写DECISIONS_BEFORE_CODE和测试再实现，不复制全项目。
+- 实际检查：14/14标准库LOCAL_FIXTURE通过，另2种CLI元数据夹具exit0/2；覆盖映射/分母/计数禁step/预算/共同deadline/身份漂移/Popen不能代替exit/残报告/缺observer来源拒绝；Python3.9 AST/LF、来源/ZIP SHA通过，非autograd/KML/Linux验证。
+- 保留量设计：953318436bytes=909.1553MiB，低于extra1GiB、余120423388bytes；包含保守3份参数区及参考/顺序输出输入梯度、256MiB比较和32MiBhash等预算。仅条件性live-byte上界，实际hash/serializer/Tensor保留/24GiB峰值均NOT_RUN。
+- 身份与退出：DECISIONS列未来直接已核解释器/独立session、compute自身PID/PPID/start_ticks/boot_id/nativejob-run/exeSHA及全部后代父链绑定，240/270/300共同截止、path90；当前只检合成proc/事件，actual exit/后代/30秒清理不声称通过。
+- 先后交接：INTERFACE_READY已先发，PREPARATION_BLOCKED.json终态冻结；BLOCKED SHA=ef06bbab565c30b2c81298b48a48a678c847618e4e751d2bc2529c961cdce1d7；SPEC/源/包/报告/检查/NOT_RUN均绑定。
+- 支持包：package/S02_LOCALIZATION_R1_LOCAL_FIXTURE_BLOCKED.zip，24701bytes/11文件；SHA=cede0eedc7699b7c94ca4dc97e9adbcbaaf0b4ec51940acf53890c09702c07d4。仅LOCAL_FIXTURE支持包，不能部署取证；SOURCE_SHA256.json10项。
+- 证据：REPORT.md、DECISIONS_BEFORE_CODE.md、CAPABILITY_ASSESSMENT.json、RETENTION_PROOF.json、LOCAL_CHECKS.json、NOT_RUN.json、USAGE.md、diff/LOCAL_FIXTURE_SUPPORT.diff、evidence/SOURCE_INPUTS.json/LOCAL_FIXTURE_first.log/CLI_FIXTURES.json/FINAL_IDENTITY_CHECK.json及精确ARCHIVE_FILES.json。
+- 未运行/活动：0Torch导入/张量反序列化/模型/收缩/数值比较/新DDP/SSH/部署/集群/安装/提权/进程查询；只运行标准库元数据夹具与文件核查，夹具子进程已结束；未查远端队列，不推断其它任务活动。
+- 历史边界：原完整B64/fp32、153参数、原mean/AdamW/compare/阈值、样本seed/mask/scale/旧FAIL保持；此前NO_JUSTIFIED_CANDIDATE和01有限归档接受不作训练放行，历史compute/后代清理缺口不补造。
+- 实质阻塞/下一步：协调/01审核B01；若有已保存离线C2 Node/nativeLinear VJP槽位/attention来源，可补SHA审查；缺材料另定窄范围。本轮不取源或执行验证，实际运行须完整被动observer/新审核和用户具体授权。S02交阻断后待命，精确归档只含本轮/自身状态、不操作共享Git。

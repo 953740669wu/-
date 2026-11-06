@@ -1,6 +1,6 @@
-任务/轮次：S02 / REAL_DUAL_DDP_REFERENCE_20261106。
-状态变化：先INTERFACE_READY后REFERENCE_READY冻结发布供07/01直读，S02准备完成、实际C2门槛待核；R12结案与原基线保持。
-本轮改动：新固定25批前32/后32与原mask独立RNG、完整B64连续五步参考/原compare适配，核全部153名字及双head/AdamW覆盖、输入梯度除2与快照及时释放，交最小diff/包/SHA。
-验证增量：7项本地helper通过、tiny连续5步190项原阈值差0，25原mask/元数据与源/ZIP核SHA通过；保留首次Windows权重SHA拒绝且不放宽原C2身份门禁；包SHA=df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5。
-证据：SESSION_STATUS.md / ROUND_DELTA.md / real_dual_ddp_reference_20261106/{REFERENCE_READY.json,INTERFACE_READY.json,REPORT.md,CONSUMER_GUIDE.md,SOURCE_SHA256.json,package,diff,evidence,ARCHIVE_FILES.json}。
-阻塞与下一步：S02新job0/无活动计算；真实数据统计/C2 init/完整B64-DDP五步/KML未运行，07绑定本包后01最终SHA审核再00唯一执行；核验后由唯一Git窗口精确归档，S02不提交或代改其它任务。
+任务/轮次：S02 / REAL_DUAL_DDP_LOCALIZATION_PREPARE_R1_20261106。
+状态变化：先交INTERFACE_READY，终态BLOCKED_PREPARATION_WITH_REASON（B01_UNBOUND_INSTALLED_NATIVE_VJP）；未发PREPARATION_READY，无模型入口/数值候选。
+本轮改动：交标准库元数据契约支持包、编码前可行性/逻辑轴/实际身份与有界退出设计、保留量证明和具体阻断；不以合并叶梯度/重算替代native逐算子dX，原mean/B64/阈值与FAIL不改。
+验证增量：14项LOCAL_FIXTURE及2种CLI元数据夹具通过，29冻结来源/新源/ZIP核SHA；条件性保留量909.1553MiB非实测；包SHA=cede0eedc7699b7c94ca4dc97e9adbcbaaf0b4ec51940acf53890c09702c07d4；Torch/模型/收缩/DDP/SSH/job均0。
+证据：SESSION_STATUS.md / ROUND_DELTA.md / real_dual_ddp_localization_prepare_r1_20261106/{PREPARATION_BLOCKED.json,INTERFACE_READY.json,REPORT.md,RETENTION_PROOF.json,LOCAL_CHECKS.json,NOT_RUN.json,SOURCE_SHA256.json,package,diff,evidence,ARCHIVE_FILES.json}。
+阻塞与下一步：已保存C2来源不能绑定原生Linear backward节点/dX槽位及attention样本布局，Windows API/夹具不能补齐；交协调/01判断缺项，S02待命，不获取新源/导入Torch或自动开始实际取证。
