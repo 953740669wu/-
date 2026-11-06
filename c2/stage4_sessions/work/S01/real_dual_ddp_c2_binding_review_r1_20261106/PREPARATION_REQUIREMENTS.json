@@ -1,0 +1,418 @@
+{
+  "schema_version": 1,
+  "task": "S01",
+  "round": "REAL_DUAL_DDP_C2_BINDING_REVIEW_R1_20261106",
+  "status": "STATIC_REQUIREMENTS_FOR_NEXT_COORDINATION_ASSIGNED_LOCAL_PREPARATION",
+  "applies_only_after_new_preparation_assignment": true,
+  "implementation_authorized": false,
+  "execution_authorized": false,
+  "training_authorized": false,
+  "PREPARATION_READY_published": false,
+  "packet": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\SOURCE_BINDING_PACKET.json",
+    "bytes": 21107,
+    "sha256": "b0a0c1e11fb0ba26987f69cfc13b24eb15dc97820f141cfa835857af56edd93f"
+  },
+  "method_addendum": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\REAL_DUAL_DDP_C2_SOURCE_BINDING_R1_20261106.md",
+    "bytes": 4890,
+    "sha256": "528027e6e639a6f389357aafdda9179d22f2f9e3b4a288902d88ea11cfa0c04f"
+  },
+  "original_spec": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_proposal_review_20261106\\MINIMAL_EVIDENCE_SPEC.json",
+    "bytes": 21646,
+    "sha256": "d1da482f2971281996ac70e9133606933277bb31bfead1a48ed64fbbddaf67c2"
+  },
+  "original_spec_rewritten": false,
+  "target_sources": {
+    "_tensor.py": {
+      "local": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\_tensor.py",
+        "bytes": 72403,
+        "sha256": "e4ee029526fbfe0b91d814722e572d1c8a4d181d4a3643dafaf4f7bf266324b0"
+      },
+      "target_path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_tensor.py"
+    },
+    "nn/modules/linear.py": {
+      "local": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\modules\\linear.py",
+        "bytes": 10776,
+        "sha256": "e48ab9e6476de669b3c79e7da9bd91137dbe7218f7a7acc583ce99eb7f1d7825"
+      },
+      "target_path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/linear.py"
+    },
+    "nn/modules/activation.py": {
+      "local": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\modules\\activation.py",
+        "bytes": 57927,
+        "sha256": "6c8b3f79682e6474a0c59189795b75d79e6e3802b52574b3fa7660103fb840ca"
+      },
+      "target_path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/activation.py"
+    },
+    "nn/modules/transformer.py": {
+      "local": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\modules\\transformer.py",
+        "bytes": 49735,
+        "sha256": "40269ff005f7d147c4b410b43d7d83e1f796225a7f54ea8d30bd5f0a044fae38"
+      },
+      "target_path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py"
+    },
+    "nn/functional.py": {
+      "local": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\functional.py",
+        "bytes": 241540,
+        "sha256": "0c02464c208daff72bcfcb3f0eed09a136e0766d926c08c4bfd0038eb977bc28"
+      },
+      "target_path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/functional.py"
+    },
+    "version.py": {
+      "local": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\version.py",
+        "bytes": 270,
+        "sha256": "f4b24de5e1bfa5f4be93c679d043f3b8d38fbf43fca95d5175d5d5df433d493a"
+      },
+      "target_path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/version.py"
+    }
+  },
+  "evidence_scope": "Target API and mathematical observability/layout design accepted under explicit method addendum. Native internal Node/grad_inputs slots are not claimed or required by this method. Actual callbacks/runtime/peak/cleanup remain unverified.",
+  "required_mode": {
+    "training": true,
+    "grad_enabled": true,
+    "batch_first": true,
+    "norm_first": true,
+    "precision": "fp32",
+    "LINEAR_DTYPE": "fp32",
+    "native_SDPA": true,
+    "dropout": 0,
+    "CKPT": false,
+    "compile": false,
+    "autocast": false,
+    "DDP": false
+  },
+  "proposed_observer_interfaces": [
+    {
+      "name": "linear_call_enter",
+      "purpose": "Record actual original X, canonical weight/bias association and callsite/layout provenance before invoking original frozen F.linear dispatcher exactly once.",
+      "input_identity": "Existing tensor objects; no proxy clone/detach/requires_grad input or graph rewrite."
+    },
+    {
+      "name": "linear_call_return",
+      "purpose": "Observe existing Y and register output Tensor hook for G. Return original Y unchanged; no module-only coverage assumption for packed QKV/out_proj."
+    },
+    {
+      "name": "tensor_gradient_hook",
+      "signature": "hook(grad) -> None",
+      "purpose": "Read actual current G or private native-input dX with bounded streaming metadata/hash. Do not mutate/replace gradient, retain its full tensor or launch any backward/GEMM.",
+      "source": {
+        "source": {
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\_tensor.py",
+          "bytes": 72403,
+          "sha256": "e4ee029526fbfe0b91d814722e572d1c8a4d181d4a3643dafaf4f7bf266324b0"
+        },
+        "start_line": 652,
+        "end_line": 700
+      }
+    },
+    {
+      "name": "custom_linear_backward_return",
+      "purpose": "Correlate ctx/callID/parameter names, invoke original frozen backward once, observe its returned gx/gw/gb and needs_input_grad flags, return the original result tuple/objects unchanged. No new Function or recomputation."
+    },
+    {
+      "name": "observer_close_path",
+      "purpose": "After normal backward completion or in finally remove all handles and restore scoped function adapters; no callback-time mutation of an iterated hook registry. Retain scalar/hash identities only, release X/G/graph references."
+    }
+  ],
+  "native_edges": [
+    {
+      "module": "val",
+      "frozen_callsite": {
+        "asset": {
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\baseline\\s4_models.py",
+          "bytes": 14121,
+          "sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2"
+        },
+        "start_line": 101,
+        "end_line": 105
+      },
+      "existing_input": "v[...,None] at the inline val call",
+      "exclusive_consumer_proof": "The newly created view is passed only to val; target Linear.forward calls F.linear(input,weight,bias). The original v target branch does not consume this view.",
+      "requirements": [
+        "requires_grad true, nonleaf existing view and exact val weight/bias mapping",
+        "Record original callsite/source identity, input object/shape/stride and actual role. Object/storage metadata corroborates but never replaces source consumer proof.",
+        "Observe dX on this existing input edge; reject v.grad as substitute."
+      ]
+    },
+    {
+      "module": "head_coarse",
+      "frozen_callsite": {
+        "asset": {
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\engineering_training.py",
+          "bytes": 8430,
+          "sha256": "9009e96fe4cc8071048e8aed8d3dc11e20d04f4271c48dbe36472e4218d8e5dc"
+        },
+        "start_line": 22,
+        "end_line": 27
+      },
+      "existing_input": "h.mean(1) at the inline head_coarse call",
+      "exclusive_consumer_proof": "The freshly created pool result is passed only to head_coarse; shared h is separately used by head_v and is not this private input edge.",
+      "requirements": [
+        "requires_grad true, nonleaf existing mean output and exact head_coarse parameter mapping",
+        "Observe input-edge dX and output-edge G; do not substitute h.grad or image target gradient."
+      ]
+    }
+  ],
+  "hook_API_requirements": {
+    "evidence": {
+      "source": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\_tensor.py",
+        "bytes": 72403,
+        "sha256": "e4ee029526fbfe0b91d814722e572d1c8a4d181d4a3643dafaf4f7bf266324b0"
+      },
+      "start_line": 652,
+      "end_line": 700
+    },
+    "register": "Use Tensor.register_hook, not leaf-only post-accumulate hooks or module backward hooks that inject views.",
+    "timing": "Install before the normal backward, never after node execution has begun; native input hook before its existing F.linear call and G hook immediately on existing output.",
+    "callback": "Read only, returnNone, no mutation or gradient scaling. No retain_grad across all layers, full X/G references in closures or extra forward/backward.",
+    "identity": "Tie every hook/callback to path A/B,shard,callID,canonical parameter and logical layout from these exact sources. Unexplained missing/duplicate callbacks or identity drift reject; pos intentional dX=None is explicit, not missing coverage.",
+    "unexpected_hooks_and_modes": "Record and reject unreviewed/mutating pre-existing module or Tensor hooks, altered input-returning hooks, Tensor subclasses/dispatch modes, tracing/autocast/checkpoint paths or arbitrary consumer reuse. The source-derived dedicated-edge proof applies only to the frozen plain-Tensor callsites and unchanged operator inputs."
+  },
+  "attention_path": {
+    "source_citations": [
+      {
+        "source": {
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\modules\\activation.py",
+          "bytes": 57927,
+          "sha256": "6c8b3f79682e6474a0c59189795b75d79e6e3802b52574b3fa7660103fb840ca"
+        },
+        "start_line": 1257,
+        "end_line": 1258
+      },
+      {
+        "source": {
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\modules\\activation.py",
+          "bytes": 57927,
+          "sha256": "6c8b3f79682e6474a0c59189795b75d79e6e3802b52574b3fa7660103fb840ca"
+        },
+        "start_line": 1335,
+        "end_line": 1344
+      },
+      {
+        "source": {
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\modules\\activation.py",
+          "bytes": 57927,
+          "sha256": "6c8b3f79682e6474a0c59189795b75d79e6e3802b52574b3fa7660103fb840ca"
+        },
+        "start_line": 1372,
+        "end_line": 1395
+      },
+      {
+        "source": {
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\modules\\transformer.py",
+          "bytes": 49735,
+          "sha256": "40269ff005f7d147c4b410b43d7d83e1f796225a7f54ea8d30bd5f0a044fae38"
+        },
+        "start_line": 812,
+        "end_line": 837
+      },
+      {
+        "source": {
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\modules\\transformer.py",
+          "bytes": 49735,
+          "sha256": "40269ff005f7d147c4b410b43d7d83e1f796225a7f54ea8d30bd5f0a044fae38"
+        },
+        "start_line": 904,
+        "end_line": 937
+      },
+      {
+        "source": {
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\functional.py",
+          "bytes": 241540,
+          "sha256": "0c02464c208daff72bcfcb3f0eed09a136e0766d926c08c4bfd0038eb977bc28"
+        },
+        "start_line": 5610,
+        "end_line": 5623
+      },
+      {
+        "source": {
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\functional.py",
+          "bytes": 241540,
+          "sha256": "0c02464c208daff72bcfcb3f0eed09a136e0766d926c08c4bfd0038eb977bc28"
+        },
+        "start_line": 6223,
+        "end_line": 6230
+      },
+      {
+        "source": {
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_c2_source_binding_r1_20261106\\sources\\torch\\nn\\functional.py",
+          "bytes": 241540,
+          "sha256": "0c02464c208daff72bcfcb3f0eed09a136e0766d926c08c4bfd0038eb977bc28"
+        },
+        "start_line": 6406,
+        "end_line": 6422
+      }
+    ],
+    "derivation": "Training excludes inference fused paths; self-attention passes sameQKV, batch-first frontend transposes to[T,B,E]; packed projection is one functional linear. need_weightsFalse uses nativeSDPA, permute[T,B,H,D] then flatten yields out_proj row=t*B+b; output transposes back to[B,T,E].",
+    "observer_effect": "Tensor hooks and passive call adapters must not change modes, tensors or math. Training already excludes inference fastpaths; never switch to eval/no_grad or disable an otherwise-used path just to collect data. Prefer no module hooks; if used, prove no additional branch change under the same frozen training conditions.",
+    "layout_status": "STATIC_SOURCE_DERIVATION_NOT_RUNTIME_OBSERVATION",
+    "layout_table": [
+      {
+        "parameters": "val.weight/bias",
+        "I": 1,
+        "O": 512,
+        "layout": "sample_token",
+        "input_shape": "[B,208,1]",
+        "row": "b*208+t",
+        "route": "native",
+        "X_numel_B64": 13312,
+        "X_numel_B32": 6656,
+        "local_dX": "existing private input Tensor hook"
+      },
+      {
+        "parameters": "pos.weight/bias",
+        "I": 65,
+        "O": 512,
+        "layout": "sample_token",
+        "input_shape": "[B,208,65]",
+        "row": "b*208+t",
+        "route": "direct_KML",
+        "local_dX": "None expected: fixed positional features require no input gradient"
+      },
+      {
+        "parameters": "tf.layers.i.self_attn.in_proj_weight/in_proj_bias; i0..11",
+        "I": 512,
+        "O": 1536,
+        "layout": "token_sample",
+        "input_shape": "[208,B,512]",
+        "row": "t*B+b",
+        "route": "direct_KML",
+        "local_dX": "original _LinearFn.backward gx return"
+      },
+      {
+        "parameters": "tf.layers.i.self_attn.out_proj.weight/bias; i0..11",
+        "I": 512,
+        "O": 512,
+        "layout": "token_sample_flat",
+        "input_shape": "[208*B,512]",
+        "row": "t*B+b",
+        "route": "direct_KML",
+        "local_dX": "original _LinearFn.backward gx return; functional call, not module.forward"
+      },
+      {
+        "parameters": "tf.layers.i.linear1.weight/bias; i0..11",
+        "I": 512,
+        "O": 2048,
+        "layout": "sample_token",
+        "input_shape": "[B,208,512]",
+        "row": "b*208+t",
+        "route": "direct_KML",
+        "local_dX": "original _LinearFn.backward gx return"
+      },
+      {
+        "parameters": "tf.layers.i.linear2.weight/bias; i0..11",
+        "I": 2048,
+        "O": 512,
+        "layout": "sample_token",
+        "input_shape": "[B,208,2048]",
+        "row": "b*208+t",
+        "route": "direct_KML",
+        "local_dX": "original _LinearFn.backward gx return"
+      },
+      {
+        "parameters": "head_v.weight/bias",
+        "I": 512,
+        "O": 1,
+        "layout": "sample_token",
+        "input_shape": "[B,208,512]",
+        "row": "b*208+t",
+        "route": "direct_KML",
+        "local_dX": "original _LinearFn.backward gx return"
+      },
+      {
+        "parameters": "head_coarse.weight/bias",
+        "I": 512,
+        "O": 256,
+        "layout": "sample",
+        "input_shape": "[B,512]",
+        "row": "b",
+        "route": "native",
+        "X_numel_B64": 32768,
+        "X_numel_B32": 16384,
+        "local_dX": "existing private mean-result Tensor hook"
+      }
+    ],
+    "mapping": "For original sample b,token t: sample-major r=b*208+t; token-major r=t*B+b. Under B64first/last32, gather the appropriate b range for each t in original sample-ID order; under B32 use local b and map back to original IDs. Never split the first6656 consecutive token-major rows.",
+    "unrecognized_layout": "Reject source/mode/shape/stride/canonical mapping mismatch. Do not infer an undocumented fastpath or add new compute to discover layout."
+  },
+  "KML_requirements": {
+    "source": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\baseline\\kml_ops.py",
+      "bytes": 10255,
+      "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+    },
+    "backward_lines": [
+      179,
+      188
+    ],
+    "coverage": "Observe the actual F.linear dispatch boundary so packed QKV and functional out_proj are covered. Record directKML/native route; small-native val/coarse remain original native. _LinearFn returns gx/gw/gb, with gxNone for fixed pos features.",
+    "formulas": "dX=G@W, dW=G.T@X, db=sum(G,0); RowMajor101 alpha1 beta0 for direct dX/dW, actual m/n/k/transposes/leading dimensions from frozen code.",
+    "static_expected_per_graph": {
+      "total_linear_forward": 52,
+      "direct_linear_forward": 50,
+      "native_linear_forward": 2,
+      "direct_dW": 50,
+      "direct_dX": 49,
+      "direct_db": 50,
+      "direct_gemm_total": 149
+    },
+    "count_scope": "Derived expectation for same frozen model/requires_grad/routes, not actual B32 evidence or indirect native BLAS count. Counts alone never replace identity/coverage. Correlate call/ctx without holding all tensors. Actual differing counts must be explained or rejected, never filled synthetically."
+  },
+  "inherited_numerical_contract": {
+    "reference": "Original completeB64/fp32 engineering_training.losses means unchanged; never use train_step/B64Reference.advance for this zero-update diagnostic.",
+    "control": "Sequentialfirst32/last32, same original initial state/mask/frame IDs/normalization. Local SSE/global voltage and coarse counts; factors1/1/1, no extra/2. This is not DDP.",
+    "coverage": "All153 canonical parameters incl mask/norm/bias, original3 outputs/losses and v/image input gradients; no omission of failing items or target-gradient paths.",
+    "compare": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\tests\\check_equivalence.py",
+      "bytes": 14614,
+      "sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e"
+    },
+    "thresholds": "Original tensor abs2e-5/state abs2e-6 and relative2e-6 with unchanged near-zero/finite/dtype/shape/exact rules.",
+    "unchanged_FAIL": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_review_20261106\\S01_REVIEW.json",
+      "bytes": 6152,
+      "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+    },
+    "no_training_acceptance": true
+  },
+  "retention_and_exit": {
+    "conditional_retained_bytes": 953318436,
+    "retained_MiB": 909.1553077697754,
+    "retained_limit_bytes": 1073741824,
+    "linear2_X_bytes": 109051904,
+    "hash_workspace_bytes": 33554432,
+    "requirements": "Account actual copies/metadata/handles/caches. Hash canonical logical rows in bounded chunks; no full109MiB tobytes/contiguous observer copy into32MiB workspace, no retained all-layer X/G. Initial/reference/sequential sets and serializer bounds must match actual implementation.",
+    "runtime_memory_peak": "NOT_VERIFIED",
+    "exit": "Keep original proposed common240 execution+30cleanup+30closing within300, per path90, actual creation-bound process/descendant identity and exit evidence; no Popen-only/late-PID-absence proof. No real exit or process test was run in this review."
+  },
+  "next_local_preparation_deliverables": [
+    "A new isolated S02 preparation directory/package with exact source packet, method addendum and original spec SHA bindings; old BLOCKED fixture package unchanged.",
+    "Concrete narrow observer/entry source with call/ctx/parameter/layout mapping and balanced handle cleanup; no full generic framework or hardcoded native slots.",
+    "Updated source-backed coverage table/native private-edge evidence and original numerical/retention/exit admission checks; old role labels alone are not target binding.",
+    "Retention/copy/serializer budget and streaming algorithm explanation, fresh minimal diff/source manifest/interface/NOT_RUN and precise archive scope.",
+    "Only checks explicitly authorized by the next preparation task. Historical14 LOCAL_FIXTURE results do not prove new actual autograd/KML/Linux/peak coverage. New actual model/autograd execution requires separately scoped authorization."
+  ],
+  "completion_conditions": [
+    "All native/private-edge G/dX,customKML gx/gw/gb and functional attention calls mapped with no proxy input, extra backward/GEMM or changed gradient.",
+    "Modes and source-derived layouts/weights proven and implementation refuses unsupported identities; no manufactured callback records.",
+    "Source freeze, passive wrappers exactly-once, original reference/153coverage/factors/thresholds, memory/hash/owned cleanup deadlines independently reviewable.",
+    "Publish PREPARATION_READY only under a later coordination preparation task after concrete code review/authorized local checks; this requirements file is not that READY."
+  ],
+  "remaining_runtime_validations": [
+    "actual targetTensor hook callback shape/order/count and real per-operator capture",
+    "actual canonical row mapping and all153 numerical metrics",
+    "actual module/library maps, KML calls and selected36/Torch36/allTID boundary",
+    "actual extra retention/24GiB peak/serializer/output caps",
+    "actual Linux compute and descendant bounded cleanup"
+  ],
+  "permission_boundary": "This review only recommends static preparation. No implementation, framework import, fixture, source acquisition, SSH, deployment, queue/job or training is authorized by these requirements."
+}

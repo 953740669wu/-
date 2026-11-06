@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "task": "S01",
+  "round": "REAL_DUAL_DDP_PREPARATION_BLOCKER_REVIEW_20261106",
+  "status": "NEEDS_EXPLICIT_METHOD_CLARIFICATION_AND_TARGET_SOURCE_BINDING",
+  "selected_next_option": "REQUEST_SOURCE_ONLY_C2_BINDING_PACKET_WITH_PRIVATE_INPUT_EDGE_METHOD_CLARIFICATION",
+  "implementation_authorized": false,
+  "execution_authorized": false,
+  "source_acquisition_authorized": false,
+  "training_authorized": false,
+  "original_spec": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_proposal_review_20261106\\MINIMAL_EVIDENCE_SPEC.json",
+    "bytes": 21646,
+    "sha256": "d1da482f2971281996ac70e9133606933277bb31bfead1a48ed64fbbddaf67c2"
+  },
+  "original_spec_modified": false,
+  "blocker": "B01_UNBOUND_INSTALLED_NATIVE_VJP",
+  "existing_offline_material_sufficient": false,
+  "objective": "Supply the least target-bound frontend/API evidence needed to review a private-existing-input-edge VJP observer and sample-layout mapping; do not guess native Node slots or replay an experiment.",
+  "proposed_spec_clarification": {
+    "applied": false,
+    "requires_explicit_coordination_approval": true,
+    "original_field": "observation.dX_capture and its return/node-method requirement",
+    "proposal": "Allow an actual mathematical per-linear dX observed on the already-existing nonleaf input tensor edge only when target source and frozen callsite prove this edge is used solely by that one linear operation. Keep local dX coverage/metrics; do not require a named native grad_inputs slot solely as the observation method.",
+    "native_val": "Observe the existing v[...,None] view passed inline to val; never leaf v.grad, because original voltage target also consumes v.",
+    "native_head_coarse": "Observe the existing pooled h.mean(1) tensor passed inline to head_coarse; never shared h.grad, which also receives head_v contributions.",
+    "G": "Observe the actual existing linear output edge adjoint G via a target-supported passive hook; preserve callback arguments/returnNone and tensor values.",
+    "direct_KML": "Keep reviewed passive gx/gw/gb return observation for frozen _LinearFn where available; no extra contraction or backward.",
+    "forbidden": [
+      "new clone/detach/requires_grad proxy input or graph boundary",
+      "using Python reference counts or storage alias as proof of a unique autograd consumer",
+      "merged leaf/shared tensor gradient labeled as local VJP",
+      "hardcoded AddmmBackward0/grad_inputs index",
+      "extra autograd.grad/backward/GEMM or operator replacement"
+    ],
+    "coverage_and_lost_claims": "If the dedicated edge is proved, mathematical local dX coverage is retained. This method does not identify native internal node names/slots or exact kernel instructions; those are not required for the X/G-equal dW localization question. If uniqueness cannot be proved, B01 remains; no silent observation omission.",
+    "fixture_contract_change": "Only in a separately approved new version, replace the slot-specific declared role with verified target-bound dedicated-edge provenance. Do not forge role labels to satisfy current require_observer_coverage; current package/spec stays blocked."
+  },
+  "minimal_materials": [
+    {
+      "id": "P01",
+      "target_path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_tensor.py",
+      "deliver": "Exact existing installed text bytes, absolute path/realpath/bytes/SHA256, acquisition provenance; no upstream replacement",
+      "purpose": "Target Tensor.register_hook input/output-edge API, nonleaf semantics, registration/removal and returnNone/no gradient mutation."
+    },
+    {
+      "id": "P02",
+      "target_path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/linear.py",
+      "deliver": "Exact existing installed text bytes, absolute path/realpath/bytes/SHA256, acquisition provenance; no upstream replacement",
+      "purpose": "Installed nn.Linear.forward passes its actual input/weight/bias to functional.linear without unbound reuse or hidden graph rewrite."
+    },
+    {
+      "id": "P03",
+      "target_path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/activation.py",
+      "deliver": "Exact existing installed text bytes, absolute path/realpath/bytes/SHA256, acquisition provenance; no upstream replacement",
+      "purpose": "Installed MultiheadAttention batch_first/transpose and Python-versus-fastpath selection relevant to frozen training mode."
+    },
+    {
+      "id": "P04",
+      "target_path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py",
+      "deliver": "Exact existing installed text bytes, absolute path/realpath/bytes/SHA256, acquisition provenance; no upstream replacement",
+      "purpose": "Installed Transformer training/grad/fastpath gates and calls into attention/FFN relevant to original12-layer model."
+    },
+    {
+      "id": "P05",
+      "target_path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/functional.py",
+      "deliver": "Exact existing installed text bytes, absolute path/realpath/bytes/SHA256, acquisition provenance; no upstream replacement",
+      "purpose": "Installed packed projection/out_proj reshape/transpose/flatten plus functional.linear binding and logical sample-row provenance."
+    },
+    {
+      "id": "P06",
+      "target_path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/version.py",
+      "deliver": "Exact existing installed text bytes, absolute path/realpath/bytes/SHA256, acquisition provenance; no upstream replacement",
+      "purpose": "Installed target version/git/build identification; same2.7.1 label alone is insufficient."
+    }
+  ],
+  "target_identity_packet": {
+    "reuse_existing_anchors": [
+      {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\RUNTIME_CONTRACT.json",
+        "bytes": 3344,
+        "sha256": "029fddfc7bc31158dc63589eb087c794cd8536282c4d8cecae452805344e8bb0"
+      },
+      {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\SHARED_RUNTIME_IDENTITIES.json",
+        "bytes": 1267,
+        "sha256": "95f2477a74433d05b4c96a0cdde07049ba4240d1353197c3a08cd53e57718443"
+      }
+    ],
+    "expected_torch": "2.7.1+cpu",
+    "expected_python": "Pinned R4Python3.9.9/aarch64 path from existing runtime contract",
+    "expected_torch_init_sha256": "9801e75447c7f585545f989f8a21940b60e0c4cc888effb2f08e739664b4b904",
+    "required": [
+      "Bound acquisition host/time, original absolute path/realpath, bytes/SHA, exact six-file list and package-root/interpreter association",
+      "Actual _C extension and native CPU/autograd implementation library identities: resolved paths/bytes/SHA and ELF/build identifiers where already available; metadata only, no binary download or framework import",
+      "Version.py contents, existing __init__ identity recheck and no cross-platform mixing; record missing/unreadable targets instead of replacing them"
+    ],
+    "not_sufficient": [
+      "WindowsAPI design docs or same version label",
+      "Additional DDP source alone",
+      "Arbitrary64-hex fixture provenance strings",
+      "Upstream tag not tied to installed modified target build"
+    ]
+  },
+  "acquisition": {
+    "selected_method": "After separate permission, S00 performs one targeted read/hash/export of the six existing files and target identity metadata from existing R4 filesystem; no broad environment/disk scan.",
+    "offline_exception": "If the target owner already has the exact bound offline packet, delivery needs no new SSH; none is present in the enumerated records reviewed this round.",
+    "new_SSH_or_remote_file_read_permission": "REQUIRED_IF_PACKET_NOT_ALREADY_OFFLINE; not authorized by this task",
+    "new_model_or_autograd_or_fixture_run_required": false,
+    "new_cluster_job_required": false,
+    "Torch_import_required": false,
+    "new_upstream_source_required": false,
+    "installs_or_elevation_allowed": false,
+    "proposed_bounds": {
+      "text_bytes_max": 2097152,
+      "file_read_deadline_seconds": 60,
+      "no_unbounded_search": true,
+      "no_automatic_retry": true
+    },
+    "failure": "Missing file/root/target identity drift/permission failure/byte cap: preserve partial manifest and stop, no install/elevation/fallback source."
+  },
+  "actual_future_runtime_fields": [
+    "At a later separately authorized diagnostic: actual input/output object and view-edge identity, logical shape/stride/dtype/requires_grad/is_leaf and canonical parameter association, original sample-axis map and per-shard hashes",
+    "Callsite proof that native input is the original dedicated unsqueeze/mean edge, not a cloned proxy or shared v/h leaf; hook registered before the normal backward with no extra computation",
+    "Actual callback coverage/multiplicity for the declared path, record unobservable/mismatched coverage as failure, no synthesized dX",
+    "Target module/library/source identity and selected36 CPU/native job/PID lifecycle remain required by the eventual diagnostic; this source packet does not prove runtime behavior"
+  ],
+  "expected_falsification": [
+    "Source/interpreter/__init__/core identity mismatch invalidates the packet; do not refresh frozen anchors.",
+    "Installed hook API cannot supply passive existing-edge gradients under the proposed method: keep blocked.",
+    "Source/callsite allows another differentiable consumer of that same native input edge or cannot bind view/target branches: keep blocked; no leaf-gradient substitution.",
+    "Attention path/row mapping ambiguous under installed fastpath/training flags: keep layout blockage; no naive split of flattened rows.",
+    "Dedicated-edge method not explicitly approved: original return/node specification still governs and B01 stays."
+  ],
+  "unchanged_original_strict_contract": "Without the proposed method clarification, current spec still needs target-bound native Node/grad_inputs/view-topology proof for both val/head_coarse at relevant layouts. Current Python DDP metadata cannot supply it, and graph.py alone would still not prove a native slot. No new runtime attempt to obtain this is selected or authorized here.",
+  "release_boundary": "Packet + approved method clarification permit fresh static design/implementation review under changed evidence conditions; they do not themselves publish PREPARATION_READY, prove actual C2 VJP/peak/cleanup or authorize the proposed300s model diagnostic.",
+  "no_repeat_assignment": "S02 stays at its valid blocked terminal state until both approved method scope and actual target packet arrive. Do not reassign the same static work or rerun14 fixtures to replace missing target provenance.",
+  "next": "Coordination decides the method clarification and a narrow source-only access authorization; no experiment, new source collection or SSH performed by this review."
+}
