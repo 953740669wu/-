@@ -1,0 +1,67 @@
+{
+  "checked_utc": "2026-11-06T09:46:25.779366+00:00",
+  "status": "VERIFIED_NO_SUBMISSION_HANDOFF",
+  "assets": {
+    "handoff": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\RUN_COMPLETE.json",
+      "bytes": 11392,
+      "sha256": "576c00976d41a80af1d54cc63b1bfbf7021c1681a483b89fcbc0e5ba3890ed32"
+    },
+    "review": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\S01_REVIEW.json",
+      "bytes": 6152,
+      "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+    },
+    "deployment_ready": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\S00_DEPLOYMENT_READY.json",
+      "bytes": 10199,
+      "sha256": "acc2d1e14423a14b94867ff1eeb62459167541cafd753697e267468b91afe706"
+    },
+    "evidence_final_queue": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\NO_SUBMISSION_FINAL_CHECK.json",
+      "bytes": 29983,
+      "sha256": "1ee65d7d0bcdeba1f7c2e37d47fe1856fbbdc71cf10a34ce66695168f7cd3387"
+    },
+    "evidence_protected_history": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\PROTECTED_FINAL_RECHECK.json",
+      "bytes": 2036,
+      "sha256": "f1bbe8466c329ddaa98df430898d57e2b32e5ade50cb360d12573e975edec0c5"
+    },
+    "evidence_release_gate_rejection": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\RELEASE_REJECTED_BY_GATE.json",
+      "bytes": 333,
+      "sha256": "1b8c6bb84a30b5ee8b92567c847b7857d46b001de3673eb41cfe8a985b9e4f08"
+    },
+    "evidence_upstream_local_metrics": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\S07_LOCAL_STRICT_PAIR_METRICS.json",
+      "bytes": 2224,
+      "sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+    },
+    "preparation_receipt": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\FINAL_PREPARATION_RECEIPT.json",
+      "bytes": 4040,
+      "sha256": "e3d963c20f396ab037b209cccc48f4d81f92670666483856a5753f0d77d993a0"
+    }
+  },
+  "checks": {
+    "review": true,
+    "deployment_ready": true,
+    "evidence_final_queue": true,
+    "evidence_protected_history": true,
+    "evidence_release_gate_rejection": true,
+    "evidence_upstream_local_metrics": true,
+    "preparation_receipt": true,
+    "review_same_version": true,
+    "training_package_binding": true,
+    "explicit_no_submission": true,
+    "final_fail_no_authorization": true,
+    "zero_model_work_reported": true,
+    "no_actual_reports": true,
+    "not_run_stages": true,
+    "no_compute_cleanup_applicable": true,
+    "failure_metrics_unchanged": true
+  },
+  "all_passed": true,
+  "weights_or_data_read": false,
+  "source_scope": "S00 local bound terminal no-job records; no independent SSH queue query"
+}

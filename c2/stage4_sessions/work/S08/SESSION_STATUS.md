@@ -1,26 +1,24 @@
 # S08 当前状态
 
-- 任务/轮次：R12_AB_SUMMARY_2049894_20261106。
-- 更新时间：2026-11-06 14:30 Asia/Shanghai。
-- 本轮目标：仅只读整理R12真实同机A/B与无收益边界；不参与S07部署/审核/执行。
-- 状态：AB_SUMMARY_COMPLETE；协调处置R12_CLOSED_NO_TRAINING_GAIN，保留原基线，数值通过与性能无收益分列。
-- 写入范围：仅S08/ab_r12_2049894_20261106及当前短状态/六行摘要；原R12/旧摘要/阈值/生产默认不改。
-- 交付：新目录AB_SUMMARY.md/JSON、METHOD.md、最小统计解析/检查、INPUT_VERIFICATION.json、VALIDATION.json。
-- 固定交接：同目录AB_SUMMARY_READY.json，绑定源交接与本轮摘要/核对记录SHA，可直接读取。
-- 输入身份：R12唯一job2049894/cn21338，32项路径/bytes/SHA/阶段/收集绑定检查通过，原件前后SHA未变。
-- 阶段：target→strict→perf_baseline→perf_candidate；target1项、strict3895项、两perf首次5步各15项原loss记录均差0。
-- 实际工作量：strict两侧各5=10完整更新，两独立perf各25，共60；未缩步、未重试或新增运行。
-- 同机可比性：同job/节点，独立PID，基线先候选后；数据/init/scale/frame/mask/环境/库及38分配36实际2预留一致。
-- 观察窗口：两侧均25步，前5预热、step6—25后20观察；逐步时间及全部25步合计保留在JSON。
-- 后20步中位：baseline4.5102391038秒、candidate4.6280611481秒；候选本次耗时增加2.6123237%，不称提速或稳定回退。
-- 范围：baseline4.320208—4.618458秒、candidate4.481312—4.926456秒；范围重叠，单对顺序试验，无科学/生产性能接受。
-- 全25步训练：113.435457/117.833010秒；perf进程wall167.404845/170.552771秒；分项wall与strict比较开销另列；调度全链471节点秒。
-- 内存：两侧同25步范围各50次采样process-lifetime HWM最大6820.117188/6923.132812MiB；本次无下降，不称单步独占或全job最终峰值。
-- 计数：逻辑149/步均保持；原生baseline149/candidate161，候选每步dispatch12、目标tile24；target原生1/2、strict两侧计数也核过。
-- CPU/恢复：139个完整CPU快照、所有采样TID在selected36；双保存恢复记录参数/AdamW/RNG/cursor/身份一致、前向差0、额外更新0；未读取权重。
-- 验证增量：46项真实统计/同机角色/数值/计数/恢复/身份对账通过；4个LOCAL_FIXTURE统计检查通过，未重跑旧套件。
-- 结论边界：R12_CLOSED_NO_TRAINING_GAIN；不集成、不换tile、不搜索/追加A/B；正式split/subject UNKNOWN，无val/test/科学或生产接受。
-- 活动作业：S08无。R12原交接已SUCCEEDED/exit0且清理；S07当前作业未核，不属本窗口范围。
-- 未运行：训练、BLAS、NPZ/权重读取、集群提交、S07现场工作；未操作共享Git暂存/分支/提交/推送。
-- 下一步：摘要与归档交接完成后待命；S07由00/01按卡推进，S08不追加实验。
-- 待归档：ab_r12_2049894_20261106/ARCHIVE_FILES.txt；原R12通过/无收益原件不在本目录重写。
+- 任务/轮次：REAL_DUAL_DDP_SUMMARY_20261106。
+- 更新时间：2026-11-06 17:46 Asia/Shanghai。
+- 状态：NO_RUN_TERMINAL_SUMMARY_COMPLETE；准备及未提交终态摘要完成，实际C2训练NOT_RUN。
+- 交接：收到00 RUN_COMPLETE，status=NOT_RUN_S01_REVIEW_FAIL_NO_JOB；DDP_SUMMARY.md/JSON绑定该未执行终态，不冒充训练结果。
+- 本轮写入：仅real_dual_ddp_summary_20261106及自身状态；旧R12/R11/R9、训练包、比较器/阈值不改。
+- 拒绝：S01最终FAIL、review_complete=true、execution_authorized=false，B01_LOCAL_STRICT_NUMERICAL_FAILURE。
+- 原本地失败：小B64/双rank比较13项中val.weight/pos.weight/tf.weight 3项失败，原阈值保留；不是C2完整模型/通信结果。
+- 实际提交：job_id=null、NOT_SUBMITTED、new_jobs=0、active_job=null、added_node_seconds=0，按00绑定终态转述，无S08实时队列查询。
+- 实际工作量：全局/物理rank/参考/完整模型更新、本次独特训练帧/参考语料观察均0（本次未提交C2模型范围，非历史曝光清零）。
+- 阶段：Linux26/C2环境/小DDP/完整B64 strict5/继续25步/实际KML-CPU证据/保存恢复均NOT_RUN_S01_FAIL_BEFORE_JOB。
+- 清理：未创建compute workers，NOT_APPLICABLE；不称训练清理实测通过。实际报告、metrics、checkpoint、曝光账本均空。
+- 准备：新协议标量读取/格式适配、准备口径/模板/METHOD；复用旧distribution/clean，旧协议门禁保持。
+- 验证增量：5个LOCAL_FIXTURE通过；15项07冻结元数据/字段、12项S01拒绝身份、16项00未提交终态/绑定核对通过。
+- 版本锚：训练包d032d67cd76eddbc372ab6f9dd51c8355c4bb1ef3e7469254c2549a3481623a9；S01拒绝f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74。
+- 证据：FROZEN_TRAINING_INPUTS.json、S01_REJECTION_VERIFIED.json、NO_RUN_INPUT_VERIFICATION.json；SUMMARY_READY.json精确锚定摘要/停点/归档。
+- 停点：STOP_POINT.md/JSON保留准备与等待过程；约47.5分钟后因最终审核拒绝结束当前依赖等待，非90分钟超时，无后台监视。
+- 计划与实绩分开：32×2/全局64、25全局/50 rank/5参考/55总上限、1600帧+320参考只是原计划，未实际完成。
+- 曝光：旧16unit/1600帧工程曝光保留，不清零、不推断S00准备读取为训练或未触数据；正式subject/split仍UNKNOWN。
+- 时间/同步/内存/恢复：NOT_RUN；提速/扩展效率/稳态收益NOT_MEASURED，无正式val/test或科学/性能接受。
+- 活动与未运行：S08无集群job/训练/BLAS/NPZ或权重读取/共享Git操作；未重跑旧套件，不代00/01执行。
+- 下一步：协调对保留的本地数值失败另定义诊断/新版本审核；本卡不重试/扩预算/放宽门槛，S08待命。
+- 待归档：real_dual_ddp_summary_20261106/ARCHIVE_FILES.txt，只含准备/检查/未提交终态元数据，无真实语料或权重。

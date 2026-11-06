@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "task": "S07",
+  "status": "INTERFACE_READY_REFERENCE_BINDING_PENDING",
+  "directory": "c2/stage4_sessions/work/S07/real_dual_ddp_20261106",
+  "config_relative": "training_config.json",
+  "package_relative": "package/S07_REAL_DUAL_DDP.zip",
+  "reference_dependency": "S02/real_dual_ddp_reference_20261106/REFERENCE_READY.json; consume actual S02 interface without inventing API",
+  "cli": "\"$S07_PY\" -B \"$S07_RUN/candidate/train_ddp.py\" run --config \"$S07_RUN/training_config.json\" --allocation \"$S07_ALLOCATION\" --reference-root \"$S02_REFERENCE_ROOT\" --reference-ready \"$S02_REFERENCE_READY\" --descriptor \"$S02_ENGINEERING_DESCRIPTOR\" --output \"$S07_OUTPUT\" --job-start-ns \"$JOB_START_MONOTONIC_NS\"",
+  "job_start": "Required monotonic_ns from unique job common start; deadline=start+840s, cleanup bound=start+870s, final collection=start+900s. Never reset at application or stage entry.",
+  "training": {
+    "protocol": "REAL_DUAL_DOMAIN_DDP_V1",
+    "world_size": 2,
+    "per_rank_batch": 32,
+    "global_batch": 64,
+    "total_updates": 25,
+    "reference_updates": 5,
+    "total_frames": 1600,
+    "parameter_count": 37995777,
+    "seed": 0,
+    "precision": "fp32",
+    "backend": "gloo",
+    "pg_timeout_seconds": 120,
+    "job_seconds": 900,
+    "application_seconds": 840,
+    "cleanup_seconds": 30,
+    "collection_seconds": 30,
+    "ddp": {
+      "device_ids": null,
+      "output_device": null,
+      "broadcast_buffers": true,
+      "init_sync": true,
+      "bucket_cap_mb": 25,
+      "find_unused_parameters": false,
+      "gradient_as_bucket_view": false,
+      "static_graph": false
+    },
+    "optimizer": {
+      "name": "AdamW",
+      "lr": 0.0001,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-8,
+      "weight_decay": 0.01
+    },
+    "data": {
+      "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+      "manifest_sha256": "bdd146040bddf2ddd47fb9d571d5d2f40e5fa20fbd30d0c0d11239893e647032",
+      "engineering_interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+      "formal_split_status": "UNKNOWN",
+      "subject_mapping_status": "UNKNOWN"
+    },
+    "resources": {
+      "domains": 2,
+      "allocated_per_domain": 38,
+      "selected_per_domain": 36,
+      "reserved_per_domain": 2,
+      "total_allocated": 76,
+      "total_selected": 72,
+      "total_reserved": 4,
+      "ddr_total_mb": 24576,
+      "ddr_limit_mb": 24576,
+      "exclusive": true,
+      "hbm_mb": 0
+    },
+    "freeze": "native SDPA/CKPT0; no mixed precision, accumulation, scheduler, candidate or fallback"
+  },
+  "exit_codes": {
+    "0": "all five strict gates, 25 updates, cross-rank state checks, checkpoint and zero-update restore verified",
+    "1": "fail closed; original error and last committed report; no further updates",
+    "124": "shared application deadline; cleanup within original job budget"
+  },
+  "results": {
+    "formal": [
+      "manifest.json",
+      "participants.json",
+      "ready_rank0.json",
+      "ready_rank1.json",
+      "rank0.json",
+      "rank1.json",
+      "summary.json"
+    ],
+    "per_rank": [
+      "rankN.events.jsonl",
+      "rankN.steps.jsonl",
+      "rankN.exposure.json",
+      "rankN.log",
+      "rankN.checkpoint_index.json"
+    ],
+    "other": [
+      "supervisor.events.jsonl",
+      "gate_metrics.jsonl",
+      "environment/source/CPU/library evidence embedded in rank reports",
+      "raw hidden .rankN.json.*.tmp remnants"
+    ],
+    "weights": "Keep model/optimizer/RNG checkpoints remote; collect only path/bytes/SHA indexes.",
+    "failure": "Missing/empty/corrupt/stale identity reports reject; unexecuted stages NOT_RUN."
+  },
+  "checks": "Actual file/method counts and platform skips will be bound by TRAINING_READY, currently pending. Standard-library tests and optional actual Torch small DDP, no installation.",
+  "freeze_gate": "S02 frozen and local checks -> S07 TRAINING_READY -> S00 deployment -> S01 exact-SHA final PASS -> S00 unique job; S07 never submits"
+}

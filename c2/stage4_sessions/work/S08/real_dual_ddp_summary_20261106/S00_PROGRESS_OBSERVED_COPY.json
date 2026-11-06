@@ -1,0 +1,27 @@
+{
+  "status": "DEPLOYMENT_FROZEN_WAIT_S01_EXACT_PASS",
+  "new_jobs": 0,
+  "active_job": null,
+  "reference_package_sha256": "df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5",
+  "local_deployment_checks": 10,
+  "runtime_boundary": "compute-only HPCKit identity checked in gate, no login fallback",
+  "code_prepared": [
+    "prepare",
+    "gate",
+    "run_job common840+30+30",
+    "native scheduler_handoff unchanged",
+    "owned_processes unchanged",
+    "exact review_gate",
+    "single submit/dedup",
+    "raw collector incl partial weight remote-only"
+  ],
+  "dependency_deadline_utc": "2026-11-06T10:27:03.973166+00:00",
+  "observed_utc": "2026-11-06T09:22:42.313556+00:00",
+  "waiting_for": "S01/real_dual_ddp_review_20261106/S01_REVIEW.json",
+  "ready_for_release": false,
+  "shared_runtime_source": "evidence/C2_INSTALLED_DDP.py",
+  "runtime_contract": "RUNTIME_CONTRACT.json",
+  "published_utc": "2026-11-06T09:38:44.393119+00:00",
+  "upstream_local_numerical_gate": "FAIL_ORIGINAL_THRESHOLDS_PRESERVED",
+  "deployment_ready": "S00_DEPLOYMENT_READY.json"
+}

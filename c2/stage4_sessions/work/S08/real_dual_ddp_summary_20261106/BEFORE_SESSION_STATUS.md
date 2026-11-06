@@ -1,0 +1,26 @@
+# S08 当前状态
+
+- 任务/轮次：R12_AB_SUMMARY_2049894_20261106。
+- 更新时间：2026-11-06 14:30 Asia/Shanghai。
+- 本轮目标：仅只读整理R12真实同机A/B与无收益边界；不参与S07部署/审核/执行。
+- 状态：AB_SUMMARY_COMPLETE；协调处置R12_CLOSED_NO_TRAINING_GAIN，保留原基线，数值通过与性能无收益分列。
+- 写入范围：仅S08/ab_r12_2049894_20261106及当前短状态/六行摘要；原R12/旧摘要/阈值/生产默认不改。
+- 交付：新目录AB_SUMMARY.md/JSON、METHOD.md、最小统计解析/检查、INPUT_VERIFICATION.json、VALIDATION.json。
+- 固定交接：同目录AB_SUMMARY_READY.json，绑定源交接与本轮摘要/核对记录SHA，可直接读取。
+- 输入身份：R12唯一job2049894/cn21338，32项路径/bytes/SHA/阶段/收集绑定检查通过，原件前后SHA未变。
+- 阶段：target→strict→perf_baseline→perf_candidate；target1项、strict3895项、两perf首次5步各15项原loss记录均差0。
+- 实际工作量：strict两侧各5=10完整更新，两独立perf各25，共60；未缩步、未重试或新增运行。
+- 同机可比性：同job/节点，独立PID，基线先候选后；数据/init/scale/frame/mask/环境/库及38分配36实际2预留一致。
+- 观察窗口：两侧均25步，前5预热、step6—25后20观察；逐步时间及全部25步合计保留在JSON。
+- 后20步中位：baseline4.5102391038秒、candidate4.6280611481秒；候选本次耗时增加2.6123237%，不称提速或稳定回退。
+- 范围：baseline4.320208—4.618458秒、candidate4.481312—4.926456秒；范围重叠，单对顺序试验，无科学/生产性能接受。
+- 全25步训练：113.435457/117.833010秒；perf进程wall167.404845/170.552771秒；分项wall与strict比较开销另列；调度全链471节点秒。
+- 内存：两侧同25步范围各50次采样process-lifetime HWM最大6820.117188/6923.132812MiB；本次无下降，不称单步独占或全job最终峰值。
+- 计数：逻辑149/步均保持；原生baseline149/candidate161，候选每步dispatch12、目标tile24；target原生1/2、strict两侧计数也核过。
+- CPU/恢复：139个完整CPU快照、所有采样TID在selected36；双保存恢复记录参数/AdamW/RNG/cursor/身份一致、前向差0、额外更新0；未读取权重。
+- 验证增量：46项真实统计/同机角色/数值/计数/恢复/身份对账通过；4个LOCAL_FIXTURE统计检查通过，未重跑旧套件。
+- 结论边界：R12_CLOSED_NO_TRAINING_GAIN；不集成、不换tile、不搜索/追加A/B；正式split/subject UNKNOWN，无val/test/科学或生产接受。
+- 活动作业：S08无。R12原交接已SUCCEEDED/exit0且清理；S07当前作业未核，不属本窗口范围。
+- 未运行：训练、BLAS、NPZ/权重读取、集群提交、S07现场工作；未操作共享Git暂存/分支/提交/推送。
+- 下一步：摘要与归档交接完成后待命；S07由00/01按卡推进，S08不追加实验。
+- 待归档：ab_r12_2049894_20261106/ARCHIVE_FILES.txt；原R12通过/无收益原件不在本目录重写。

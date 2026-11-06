@@ -1,0 +1,110 @@
+{
+  "checked_utc": "2026-11-06T09:31:05.239362+00:00",
+  "assets": {
+    "training_ready": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\TRAINING_READY.json",
+      "bytes": 13266,
+      "sha256": "da83cf560c04b663c8c4b1e0fb89d1e56aa9d696ffe88a1a58d3c211428f4bef"
+    },
+    "package": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\package\\S07_REAL_DUAL_DDP.zip",
+      "bytes": 59416,
+      "sha256": "d032d67cd76eddbc372ab6f9dd51c8355c4bb1ef3e7469254c2549a3481623a9"
+    },
+    "source_manifest": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\SOURCE_MANIFEST.json",
+      "bytes": 6278,
+      "sha256": "9a124291713f0798df8b4d783f2f8cb36cbeb6f13c0dbe400f9767e1d37db739"
+    },
+    "entry": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\candidate\\train_ddp.py",
+      "bytes": 23484,
+      "sha256": "6a8b3cd69051f149f3b3e6ee786b0ff32a8c3bdf951dfcc635b051df51084e94"
+    },
+    "config": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\training_config.json",
+      "bytes": 1587,
+      "sha256": "c7f0e948e6f16a6ecd02df8a881eabbc6f4836c2f1191646e06452adbda31ffa"
+    },
+    "reference_binding": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\reference_binding.json",
+      "bytes": 3939,
+      "sha256": "2cf2226fb554df7a4d0180798f603828bddbe1c1c6e45aa1debe6e7a30c3925b"
+    },
+    "reference_ready": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\REFERENCE_READY.json",
+      "bytes": 6655,
+      "sha256": "924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3"
+    },
+    "reference_package": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\package\\S02_REAL_DUAL_DDP_REFERENCE.zip",
+      "bytes": 62170,
+      "sha256": "df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5"
+    },
+    "reference_source_manifest": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\SOURCE_SHA256.json",
+      "bytes": 1638,
+      "sha256": "6b9cd186d27a5130f22cd2e58a2c6cb231be31c70d5df98dce4c40e92008b757"
+    },
+    "interface_ready": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\INTERFACE_READY.json",
+      "bytes": 5305,
+      "sha256": "15681f6b5a73d8b4d091f803bb81d1d49e2dd73fd335fb1cb93d92290bc17b4c"
+    },
+    "training_contract": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\TRAINING_CONTRACT.md",
+      "bytes": 4481,
+      "sha256": "9b72cbbb9af09514c2cf937e99486c903d829aedc377e7a21d581042244ee545"
+    },
+    "local_checks": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\evidence\\LOCAL_CHECKS.json",
+      "bytes": 2021,
+      "sha256": "ca520646002fcffd2de25b34c82a2c6acb135f3933da4ada3e137b9d1331933f"
+    }
+  },
+  "checks": {
+    "package": true,
+    "source_manifest": true,
+    "entry": true,
+    "config": true,
+    "reference_binding": true,
+    "reference_ready": true,
+    "reference_package": true,
+    "reference_source_manifest": true,
+    "interface_ready": true,
+    "training_contract": true,
+    "local_checks": true,
+    "identity_schema": true,
+    "early_optimizer_count_before_gate": true,
+    "required_report_fields": true,
+    "task_card": true
+  },
+  "all_passed": true,
+  "producer_status": "TRAINING_CANDIDATE_FROZEN_LOCAL_NUMERICAL_FAIL_REVIEW_REQUIRED",
+  "local_numerical_gate": "FAIL_ORIGINAL_THRESHOLDS_PRESERVED",
+  "strict_pair_failed_metrics": [
+    {
+      "name": "val.weight",
+      "max_abs": 1.9147992134094238e-05,
+      "l2_relative": 9.410191088070238e-05,
+      "reference_norm": 0.2131539446846441,
+      "passed": false
+    },
+    {
+      "name": "pos.weight",
+      "max_abs": 1.9147992134094238e-05,
+      "l2_relative": 9.410191088070238e-05,
+      "reference_norm": 0.4263078893692882,
+      "passed": false
+    },
+    {
+      "name": "tf.weight",
+      "max_abs": 3.723800182342529e-05,
+      "l2_relative": 0.0001142869133502608,
+      "reference_norm": 0.5284964778141917,
+      "passed": false
+    }
+  ],
+  "actual_result": "NOT_RECEIVED",
+  "interpretation": "Metadata/schema compatibility only, not local numerical PASS or S01 execution approval"
+}

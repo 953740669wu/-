@@ -1,0 +1,74 @@
+{
+  "observed_utc": "2026-11-06T09:40:39.604522+00:00",
+  "status": "PREPARED_BLOCKED_BY_FINAL_S01_FAIL_NO_RELEASE",
+  "assets": {
+    "s01_review": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_review_20261106\\S01_REVIEW.json",
+      "bytes": 6152,
+      "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+    },
+    "reason_0": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\evidence\\tiny_ddp_192181562000000\\strict_pair_metrics.json",
+      "bytes": 2224,
+      "sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+    }
+  },
+  "checks": {
+    "final_rejection": true,
+    "training_ready_sha256": true,
+    "training_package_sha256": true,
+    "training_source_manifest_sha256": true,
+    "training_entry_sha256": true,
+    "training_config_sha256": true,
+    "reference_binding_sha256": true,
+    "reference_ready_sha256": true,
+    "reference_package_sha256": true,
+    "reference_source_manifest_sha256": true,
+    "reason_0": true,
+    "local_failure_not_C2_result": true
+  },
+  "all_passed": true,
+  "decision": "FAIL",
+  "review_complete": true,
+  "execution_authorized": false,
+  "reasons": [
+    {
+      "code": "B01_LOCAL_STRICT_NUMERICAL_FAILURE",
+      "message": "Frozen necessary small B64/two-rank gradient control fails 3/13 original-threshold metrics; fail-stop, no waiver.",
+      "evidence": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\evidence\\tiny_ddp_192181562000000\\strict_pair_metrics.json",
+        "bytes": 2224,
+        "sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+      },
+      "failed_metrics": [
+        {
+          "name": "val.weight",
+          "max_abs": 1.9147992134094238e-05,
+          "l2_relative": 9.410191088070238e-05,
+          "reference_norm": 0.2131539446846441,
+          "passed": false
+        },
+        {
+          "name": "pos.weight",
+          "max_abs": 1.9147992134094238e-05,
+          "l2_relative": 9.410191088070238e-05,
+          "reference_norm": 0.4263078893692882,
+          "passed": false
+        },
+        {
+          "name": "tf.weight",
+          "max_abs": 3.723800182342529e-05,
+          "l2_relative": 0.0001142869133502608,
+          "reference_norm": 0.5284964778141917,
+          "passed": false
+        }
+      ]
+    }
+  ],
+  "actual_cluster_training": "NOT_RUN_NO_RELEASE",
+  "actual_C2_numerics": "NOT_RUN",
+  "S08_new_jobs": 0,
+  "actual_result_handoff": "NOT_RECEIVED",
+  "speedup": "NOT_MEASURED",
+  "next_action": "Retain current package and original thresholds; no execution/retry; await coordinator-defined new revision"
+}

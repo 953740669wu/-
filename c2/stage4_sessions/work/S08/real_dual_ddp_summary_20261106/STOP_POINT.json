@@ -1,0 +1,110 @@
+{
+  "status": "NO_RUN_TERMINAL_BOUND_TO_S00_FINAL_S01_FAIL",
+  "stop_reason": "FINAL_REVIEW_REJECTED_CURRENT_FROZEN_VERSION_NO_RELEASE",
+  "stopped_utc": "2026-11-06T09:43:34.750553+00:00",
+  "wait_started_utc": "2026-11-06T08:56:06+00:00",
+  "wait_limit_utc": "2026-11-06T10:26:06+00:00",
+  "elapsed_minutes": 47.47917588333333,
+  "wait_limit_reached": false,
+  "background_monitor": false,
+  "s01_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S01\\real_dual_ddp_review_20261106\\S01_REVIEW.json",
+    "bytes": 6152,
+    "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+  },
+  "s00_received_review": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\S01_REVIEW.json",
+    "bytes": 6152,
+    "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+  },
+  "s01_decision": "FAIL",
+  "review_complete": true,
+  "execution_authorized": false,
+  "reasons": [
+    {
+      "code": "B01_LOCAL_STRICT_NUMERICAL_FAILURE",
+      "message": "Frozen necessary small B64/two-rank gradient control fails 3/13 original-threshold metrics; fail-stop, no waiver.",
+      "evidence": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\evidence\\tiny_ddp_192181562000000\\strict_pair_metrics.json",
+        "bytes": 2224,
+        "sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+      },
+      "failed_metrics": [
+        {
+          "name": "val.weight",
+          "max_abs": 1.9147992134094238e-05,
+          "l2_relative": 9.410191088070238e-05,
+          "reference_norm": 0.2131539446846441,
+          "passed": false
+        },
+        {
+          "name": "pos.weight",
+          "max_abs": 1.9147992134094238e-05,
+          "l2_relative": 9.410191088070238e-05,
+          "reference_norm": 0.4263078893692882,
+          "passed": false
+        },
+        {
+          "name": "tf.weight",
+          "max_abs": 3.723800182342529e-05,
+          "l2_relative": 0.0001142869133502608,
+          "reference_norm": 0.5284964778141917,
+          "passed": false
+        }
+      ]
+    }
+  ],
+  "s00_progress_observed": {
+    "source_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\PROGRESS.json",
+    "bytes": 1109,
+    "sha256": "b03e2aeb0b079760af6f96d3a3d96a87a11bf3468230d5d58fc82a8a0931226e",
+    "snapshot": "S00_PROGRESS_OBSERVED_COPY.json",
+    "declared_status": "DEPLOYMENT_FROZEN_WAIT_S01_EXACT_PASS",
+    "declared_new_jobs": 0,
+    "declared_active_job": null,
+    "scope": "recorded progress, not S08 live queue query"
+  },
+  "run_complete": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\RUN_COMPLETE.json",
+    "bytes": 11392,
+    "sha256": "576c00976d41a80af1d54cc63b1bfbf7021c1681a483b89fcbc0e5ba3890ed32",
+    "received": true
+  },
+  "actual_result_summary_created": true,
+  "actual_stages": {
+    "C2_training": "NOT_RUN_NO_RELEASE",
+    "global_updates": "NOT_RUN",
+    "rank_physical_updates": "NOT_RUN",
+    "full_B64_reference_updates": "NOT_RUN",
+    "C2_strict_gate": "NOT_RUN",
+    "cross_rank_model_sync": "NOT_RUN",
+    "checkpoint_restore": "NOT_RUN"
+  },
+  "observation_scope": "Local upstream failure and final technical rejection only; not actual C2 model training failure or communication conclusion",
+  "training_data_exposure": "No new actual training result/ledger received; existing engineering exposure remains and is not reset; S00 preparation reads not inferred here",
+  "preparation_checks": {
+    "local_fixture_tests": 5,
+    "frozen_training_metadata_checks": 15,
+    "review_rejection_identity_checks": 12
+  },
+  "speedup": "NOT_MEASURED",
+  "scaling_efficiency": "NOT_MEASURED",
+  "steady_state_gain": "NOT_MEASURED",
+  "scientific_acceptance": false,
+  "performance_acceptance": false,
+  "S08_new_cluster_jobs": 0,
+  "S08_active_jobs": [],
+  "S08_weights_or_NPZ_read": false,
+  "next_action": "Coordinator must define any diagnosis/new version for the preserved local numerical failures. No retry/threshold waiver under this card; S08 stands by.",
+  "summary_scope": "NO_EXECUTION_TERMINAL_ONLY_NOT_REAL_TRAINING",
+  "summary": "DDP_SUMMARY.md / DDP_SUMMARY.json",
+  "S00_terminal_job_state": "NOT_SUBMITTED",
+  "S00_reported_actual_updates": {
+    "full_model_updates": 0,
+    "global_updates": 0,
+    "physical_rank_updates": 0,
+    "reference_corpus_observation_frames": 0,
+    "reference_updates": 0,
+    "unique_training_frames": 0
+  }
+}

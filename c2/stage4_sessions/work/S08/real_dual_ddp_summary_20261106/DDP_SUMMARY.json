@@ -1,0 +1,175 @@
+{
+  "status": "NOT_RUN_S01_REVIEW_FAIL_NO_JOB",
+  "summary_kind": "NO_EXECUTION_TERMINAL_RECORD_NOT_REAL_MODEL_TRAINING_RESULT",
+  "source_handoff": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\RUN_COMPLETE.json",
+    "bytes": 11392,
+    "sha256": "576c00976d41a80af1d54cc63b1bfbf7021c1681a483b89fcbc0e5ba3890ed32"
+  },
+  "source_verification": "NO_RUN_INPUT_VERIFICATION.json",
+  "analysis_inputs": {
+    "actual_cluster_results": "NOT_RUN_NO_SUBMISSION",
+    "checkpoint_indices": [],
+    "deployment_dir": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106",
+    "evidence_dir": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence",
+    "exposure_ledgers": [],
+    "not_run_stages": {
+      "C2_native_resource_environment_gate": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+      "C2_small_DDP": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+      "DDP_continuation_to25": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+      "Linux26_preflight": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+      "actual_KML_and_CPU_training_evidence": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+      "checkpoint_restore": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+      "full_B64_strict5": "NOT_RUN_S01_FAIL_BEFORE_JOB"
+    },
+    "preparation_file_index": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\linux_preparation_received\\PRE_SUBMISSION_INDEX.json",
+    "preparation_originals_dir": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\linux_preparation_received",
+    "preparation_receipt": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\FINAL_PREPARATION_RECEIPT.json",
+    "queue_final": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\NO_SUBMISSION_FINAL_CHECK.json",
+    "raw_model_metrics": [],
+    "raw_model_reports": [],
+    "release_rejection": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\RELEASE_REJECTED_BY_GATE.json",
+    "review_file": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\S01_REVIEW.json",
+    "upstream_local_failed_metrics": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\evidence\\S07_LOCAL_STRICT_PAIR_METRICS.json"
+  },
+  "job_id": null,
+  "job_state": "NOT_SUBMITTED",
+  "new_jobs": 0,
+  "active_job": null,
+  "added_node_seconds": 0,
+  "actual_updates": {
+    "full_model_updates": 0,
+    "global_updates": 0,
+    "physical_rank_updates": 0,
+    "reference_corpus_observation_frames": 0,
+    "reference_updates": 0,
+    "unique_training_frames": 0
+  },
+  "not_run_stages": {
+    "C2_native_resource_environment_gate": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+    "C2_small_DDP": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+    "DDP_continuation_to25": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+    "Linux26_preflight": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+    "actual_KML_and_CPU_training_evidence": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+    "checkpoint_restore": "NOT_RUN_S01_FAIL_BEFORE_JOB",
+    "full_B64_strict5": "NOT_RUN_S01_FAIL_BEFORE_JOB"
+  },
+  "review": {
+    "asset": {
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\real_dual_ddp_20261106\\S01_REVIEW.json",
+      "bytes": 6152,
+      "sha256": "f933a3af02a9362b9bce854935cbb18eecebfb38dd761805da163b48ff110f74"
+    },
+    "decision": "FAIL",
+    "review_complete": true,
+    "execution_authorized": false,
+    "rejection": [
+      {
+        "code": "B01_LOCAL_STRICT_NUMERICAL_FAILURE",
+        "evidence": {
+          "bytes": 2224,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\evidence\\tiny_ddp_192181562000000\\strict_pair_metrics.json",
+          "sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+        },
+        "failed_metrics": [
+          {
+            "l2_relative": 9.410191088070238e-05,
+            "max_abs": 1.9147992134094238e-05,
+            "name": "val.weight",
+            "passed": false,
+            "reference_norm": 0.2131539446846441
+          },
+          {
+            "l2_relative": 9.410191088070238e-05,
+            "max_abs": 1.9147992134094238e-05,
+            "name": "pos.weight",
+            "passed": false,
+            "reference_norm": 0.4263078893692882
+          },
+          {
+            "l2_relative": 0.0001142869133502608,
+            "max_abs": 3.723800182342529e-05,
+            "name": "tf.weight",
+            "passed": false,
+            "reference_norm": 0.5284964778141917
+          }
+        ],
+        "message": "Frozen necessary small B64/two-rank gradient control fails 3/13 original-threshold metrics; fail-stop, no waiver."
+      }
+    ]
+  },
+  "proposed_only": {
+    "per_rank_batch": 32,
+    "global_batch": 64,
+    "global_updates": 25,
+    "physical_rank_updates": 50,
+    "reference_updates": 5,
+    "total_physical_max": 55,
+    "unique_training_frames": 1600,
+    "reference_extra_observation_frames": 320,
+    "resources": {
+      "HBM": 0,
+      "actual_per_domain": 36,
+      "actual_physical_cores": 72,
+      "allocated_cores": 76,
+      "allocated_per_domain": 38,
+      "cleanup_seconds": 30,
+      "closing_seconds": 30,
+      "domains": 2,
+      "exclusive": true,
+      "job_seconds": 900,
+      "memory_MB": 24576,
+      "memory_limit_MB": 24576,
+      "pg_timeout_seconds": 120,
+      "reserved_cores": 4,
+      "reserved_per_domain": 2,
+      "whole_entry_timeout": 840
+    }
+  },
+  "local_model_failure_scope": "Local small B64/two-rank comparison3/13 failed; not an actual C2 full-model numerical/communication result",
+  "source_bindings": {
+    "baseline_kml_sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "comparator_sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e",
+    "corpus_manifest_sha256": "bdd146040bddf2ddd47fb9d571d5d2f40e5fa20fbd30d0c0d11239893e647032",
+    "deployment_package_sha256": "8d4fb023b99109850919b904561b0b228cdce50c607b9c26408adf90ce711434",
+    "deployment_source_manifest_sha256": "e4b4111046457c6926681692a846202e9cfb6567601612d99fb8a36780294cba",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "engineering_interface_sha256": "8b1b540b8adeb4f4e49233c262b113c7c437f7a6e30b9f6d13113a96891dc669",
+    "installed_ddp_sha256": "480213c6546cf6c2d522357a59065d38afbaa16196dc8eabaadf752b5bdcae43",
+    "model_sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2",
+    "reference_binding_sha256": "2cf2226fb554df7a4d0180798f603828bddbe1c1c6e45aa1debe6e7a30c3925b",
+    "reference_epoch25_sha256": "572ce966e3de8b54ff234755a6595a0a730dd0920fcd371a234cc7798f641444",
+    "reference_first5_sha256": "2c901021046e0c8ba8adf5a3d461a40fa2a61413bc4c39db8929b840e675e5f8",
+    "reference_package_sha256": "df7275b06d8ee59cd88c0d17c04b0b64f63605ffa1c4410d3d02307ce848eec5",
+    "reference_ready_sha256": "924a972ef708e82bc10e9bf5c0156d7524541cc33f8e738e3734564387c661c3",
+    "reference_source_manifest_sha256": "6b9cd186d27a5130f22cd2e58a2c6cb231be31c70d5df98dce4c40e92008b757",
+    "runtime_contract_sha256": "029fddfc7bc31158dc63589eb087c794cd8536282c4d8cecae452805344e8bb0",
+    "task_card_sha256": "ebabda929df06e0c1366563af0d16ac360c0fdf3cc16b330f3bf2804a088a1ec",
+    "training_config_sha256": "c7f0e948e6f16a6ecd02df8a881eabbc6f4836c2f1191646e06452adbda31ffa",
+    "training_entry_sha256": "6a8b3cd69051f149f3b3e6ee786b0ff32a8c3bdf951dfcc635b051df51084e94",
+    "training_package_sha256": "d032d67cd76eddbc372ab6f9dd51c8355c4bb1ef3e7469254c2549a3481623a9",
+    "training_ready_sha256": "da83cf560c04b663c8c4b1e0fb89d1e56aa9d696ffe88a1a58d3c211428f4bef",
+    "training_source_manifest_sha256": "9a124291713f0798df8b4d783f2f8cb36cbeb6f13c0dbe400f9767e1d37db739",
+    "upstream_local_checks_sha256": "ca520646002fcffd2de25b34c82a2c6acb135f3933da4ada3e137b9d1331933f",
+    "upstream_local_failed_metrics_sha256": "2db66215b4fb2584faabbad888c7677a36aa593b4c3e42e8d5312ed3216c6ee2"
+  },
+  "cleanup": "NOT_APPLICABLE_NO_COMPUTE_WORKERS; all login commands finished",
+  "model_timing": "NOT_RUN",
+  "rank_sync": "NOT_RUN",
+  "RSS_HWM": "NOT_RUN",
+  "checkpoint_restore": "NOT_RUN",
+  "new_training_exposure": "NOT_RUN_NO_JOB; historical engineering exposure unchanged",
+  "speedup": "NOT_MEASURED",
+  "scaling_efficiency": "NOT_MEASURED",
+  "steady_state_gain": "NOT_MEASURED",
+  "scientific_acceptance": false,
+  "performance_acceptance": false,
+  "training_acceptance": false,
+  "S08_checks": {
+    "local_fixture_tests": 5,
+    "frozen_training_metadata": 15,
+    "s01_rejection_identity": 12,
+    "no_run_handoff_checks": 16
+  },
+  "next_action": "Current candidate release stopped. Coordination must define any new diagnosis/revision; no retry, threshold relaxation, new job or edits to S02/S07 payload by S00."
+}

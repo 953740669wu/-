@@ -1,0 +1,45 @@
+{
+  "observed_utc": "2026-11-06T08:59:38.866954+00:00",
+  "status": "PREPARED_NOT_EXECUTED_INTERFACE_REFERENCE_BINDING_PENDING",
+  "training_interface": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S07\\real_dual_ddp_20261106\\INTERFACE_READY.json",
+    "bytes": 4069,
+    "sha256": "2094332a7abf0e9647636d5d6eac2f594edb1c473b0b14adb0e23e48d468e13b"
+  },
+  "producer_status": "INTERFACE_READY_REFERENCE_BINDING_PENDING",
+  "reference_dependency": "S02/real_dual_ddp_reference_20261106/REFERENCE_READY.json; consume actual S02 interface without inventing API",
+  "reported_output_files": {
+    "formal": [
+      "manifest.json",
+      "participants.json",
+      "ready_rank0.json",
+      "ready_rank1.json",
+      "rank0.json",
+      "rank1.json",
+      "summary.json"
+    ],
+    "per_rank": [
+      "rankN.events.jsonl",
+      "rankN.steps.jsonl",
+      "rankN.exposure.json",
+      "rankN.log",
+      "rankN.checkpoint_index.json"
+    ],
+    "other": [
+      "supervisor.events.jsonl",
+      "gate_metrics.jsonl",
+      "environment/source/CPU/library evidence embedded in rank reports",
+      "raw hidden .rankN.json.*.tmp remnants"
+    ],
+    "weights": "Keep model/optimizer/RNG checkpoints remote; collect only path/bytes/SHA indexes.",
+    "failure": "Missing/empty/corrupt/stale identity reports reject; unexecuted stages NOT_RUN."
+  },
+  "report_field_schema": "NOT_YET_PUBLISHED_IN_FROZEN_SOURCE",
+  "actual_run": "NOT_RECEIVED",
+  "actual_updates": null,
+  "actual_frames": null,
+  "speedup": "NOT_MEASURED_NO_SAME_JOB_SINGLE_DOMAIN_CONTROL",
+  "new_cluster_jobs": 0,
+  "checks": "Semantic review plan prepared; no actual runtime or fixture result claimed",
+  "next_action": "Read final TRAINING_READY and concrete result schema, then S00 RUN_COMPLETE.analysis_inputs; obey WORK_STARTED deadline"
+}

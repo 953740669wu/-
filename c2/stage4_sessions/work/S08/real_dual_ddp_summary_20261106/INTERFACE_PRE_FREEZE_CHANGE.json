@@ -1,0 +1,64 @@
+{
+  "observed_utc": "2026-11-06T09:27:33.620911+00:00",
+  "current_sha256": "15681f6b5a73d8b4d091f803bb81d1d49e2dd73fd335fb1cb93d92290bc17b4c",
+  "changes": {
+    "local_small_ddp": {
+      "before": null,
+      "after": "Two rank Gloo/DDP/backward and rank-gradient equality reached; strict complete small B64 comparison has3 failed tensors out of13. No overall local numerical PASS. FileStore timeout and sandbox TCP failures retained."
+    },
+    "expected_delivery_files": {
+      "before": null,
+      "after": 19
+    },
+    "linux_test_environment": {
+      "before": null,
+      "after": {
+        "S07_TEST_ALLOCATION": "current native job authorized allocation.json (both domains); checked before any test child imports Torch",
+        "S07_REFERENCE_ROOT": "exact extracted frozen S02 package root",
+        "S07_REFERENCE_READY": "byte-identical frozen S02 REFERENCE_READY.json sidecar"
+      }
+    },
+    "reference_interface_received": {
+      "before": null,
+      "after": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S02\\real_dual_ddp_reference_20261106\\INTERFACE_READY.json"
+    },
+    "expected_test_methods_by_file": {
+      "before": null,
+      "after": {
+        "test_contracts.py": 7,
+        "test_lifecycle.py": 6,
+        "test_result_identity.py": 4,
+        "test_training_torch.py": 2
+      }
+    },
+    "expected_test_methods": {
+      "before": null,
+      "after": 19
+    },
+    "reference_wrapper_child": {
+      "before": null,
+      "after": "encoder; ddp(*values, mask) trains encoder and both heads; no ddp.module forward bypass"
+    },
+    "status": {
+      "before": "INTERFACE_READY_REFERENCE_BINDING_PENDING",
+      "after": "INTERFACE_READY_LOCAL_NUMERICAL_FAILURE_DISCLOSED"
+    },
+    "expected_archive_files": {
+      "before": null,
+      "after": 20
+    },
+    "checks": {
+      "before": "Actual file/method counts and platform skips will be bound by TRAINING_READY, currently pending. Standard-library tests and optional actual Torch small DDP, no installation.",
+      "after": "19 methods: final Windows17 PASS/1 strict fp32 pair FAIL/1 Linux descendant SKIP. Keep FAIL and original thresholds. Linux requires all19 PASS/zero skip before real training, within shared840 seconds."
+    },
+    "reference_status": {
+      "before": null,
+      "after": "S02 frozen package verified and bound"
+    },
+    "expected_archive_members": {
+      "before": null,
+      "after": 21
+    }
+  },
+  "context": "preliminary interface; final TRAINING_READY not received"
+}
