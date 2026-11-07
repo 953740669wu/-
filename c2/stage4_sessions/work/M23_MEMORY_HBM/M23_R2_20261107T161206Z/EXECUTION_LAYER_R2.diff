@@ -1,0 +1,17 @@
+--- M23_R1/launch.py
++++ M23_R2/launch.py
+@@ -137,6 +137,14 @@
+         need(res["cpu"] == 38 * count and res["mem"] == mem and res["gpu"]["amount"] == 0
+              and res["npu"]["count"] == 0, "native request/allocation differs")
+     memory_controller(context["job_id"], group, mem)
++    toolchain = {}
++    for lib in ("libubsan.so", "libubsan.a"):
++        if Path("/usr/bin/cc").is_file():
++            p = subprocess.run(["/usr/bin/cc", "-print-file-name=" + lib],
++                               capture_output=True, text=True, timeout=5)
++            toolchain[lib] = dict(exit_code=p.returncode, stdout=p.stdout.strip(), stderr=p.stderr,
++                                  readable=Path(p.stdout.strip()).is_file())
++    save(EVIDENCE / "ubsan_availability.json", dict(compiler="/usr/bin/cc", queries=toolchain))
+     return topology(context, count)
+ 
+ 

@@ -1,0 +1,100 @@
+{
+  "date": "2026-11-08",
+  "decision": "ACCEPT_LIMITED_MEMORY_TRADEOFF_KEEP_CKPT0_DEFAULT_HBM_NOT_RUN",
+  "result_sha256": "db34cbf3043df71b90e16e184527bd58dadeca20f9a8bf5945a158c2f77b1199",
+  "candidate_sha256": "2e1223cb8130f4540a9d305a630464febad3fa5e3786493e13fc30d15eae251e",
+  "author_git_rows_verified": 41,
+  "zip_members_verified": 990,
+  "collection_entries_verified": 988,
+  "strict_metric_rows_verified": 19475,
+  "max_recorded_error": 0,
+  "jobs": [
+    {
+      "job_id": "2061049",
+      "domains": 1,
+      "per_rank_recomputed": {
+        "baseline": [
+          {
+            "rank": "node0",
+            "median_peak_MiB": 6830.646484375,
+            "median_step_seconds": 2.4386278425
+          }
+        ],
+        "candidate": [
+          {
+            "rank": "node0",
+            "median_peak_MiB": 5790.115234375,
+            "median_step_seconds": 2.853422421
+          }
+        ]
+      },
+      "four_domain_or_single_span": {
+        "baseline": 2.4386278425,
+        "candidate": 2.853422421
+      },
+      "state": "SUCCEEDED",
+      "cleanup_verified": true
+    },
+    {
+      "job_id": "2061067",
+      "domains": 4,
+      "per_rank_recomputed": {
+        "baseline": [
+          {
+            "rank": "node0",
+            "median_peak_MiB": 6748.80859375,
+            "median_step_seconds": 7.1005209825
+          },
+          {
+            "rank": "node1",
+            "median_peak_MiB": 6892.443359375,
+            "median_step_seconds": 13.4163341635
+          },
+          {
+            "rank": "node2",
+            "median_peak_MiB": 6684.884765625,
+            "median_step_seconds": 7.184517298499999
+          },
+          {
+            "rank": "node3",
+            "median_peak_MiB": 6807.439453125,
+            "median_step_seconds": 7.126497176
+          }
+        ],
+        "candidate": [
+          {
+            "rank": "node0",
+            "median_peak_MiB": 5797.240234375,
+            "median_step_seconds": 8.2648141155
+          },
+          {
+            "rank": "node1",
+            "median_peak_MiB": 5698.29296875,
+            "median_step_seconds": 14.873294345
+          },
+          {
+            "rank": "node2",
+            "median_peak_MiB": 5785.755859375,
+            "median_step_seconds": 8.252498691500001
+          },
+          {
+            "rank": "node3",
+            "median_peak_MiB": 5687.037109375,
+            "median_step_seconds": 8.274556295
+          }
+        ]
+      },
+      "four_domain_or_single_span": {
+        "baseline": 13.4163372135,
+        "candidate": 14.873299665
+      },
+      "state": "SUCCEEDED",
+      "cleanup_verified": true
+    }
+  ],
+  "HBM_training_resident_bytes": 0,
+  "HBM_safety": "UBSAN_RUNTIME_UNAVAILABLE",
+  "numa_followup": "Four-domain baseline node1~13.416s vs others~7.1s; observed imbalance useful to S00, cause undetermined; do not cross-job speedup comparison",
+  "scope": "Local returned original bytes/SHA, step records, CPU36 and terminal/cleanup; no live query/model rerun",
+  "production_default_changed": false
+}

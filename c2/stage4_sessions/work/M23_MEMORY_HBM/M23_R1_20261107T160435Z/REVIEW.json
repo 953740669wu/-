@@ -1,0 +1,332 @@
+{
+  "job_id": "2061049",
+  "state": "SUCCEEDED",
+  "host": "cn21341",
+  "domain_count": 1,
+  "job_exit_code": 0,
+  "queue_seconds": 5.0,
+  "allocation_seconds": 261.0,
+  "candidate_sha256": "2e1223cb8130f4540a9d305a630464febad3fa5e3786493e13fc30d15eae251e",
+  "job_summary": {
+    "finished": 4088981.075584061,
+    "job_id": "2061049",
+    "start": 4088720.802476614,
+    "status": "PASS_DDR_AB",
+    "steps": {
+      "baseline_each_domain": 25,
+      "candidate_each_domain": 25,
+      "strict_each_role": 5
+    }
+  },
+  "strict": [
+    {
+      "rank": "node0",
+      "updates": 5,
+      "numeric_metrics": 3895,
+      "tensor_max_abs": 0.0,
+      "adamw_moment_max_abs": 0.0,
+      "applicable_max_rel_l2": 0.0,
+      "exact_adamw_step_checks": 765,
+      "strict_step1_storage": {
+        "baseline": {
+          "saved_forward_storage_bytes": {
+            "input": 1101824,
+            "weight": 151754752,
+            "other": 3964588744
+          },
+          "other_largest": [
+            {
+              "bytes": 109051904,
+              "representative_view_shape": [
+                13312,
+                2048
+              ],
+              "storages": 12
+            },
+            {
+              "bytes": 81788928,
+              "representative_view_shape": [
+                64,
+                8,
+                208,
+                64
+              ],
+              "storages": 12
+            },
+            {
+              "bytes": 27262976,
+              "representative_view_shape": [
+                13312,
+                512
+              ],
+              "storages": 37
+            },
+            {
+              "bytes": 27262976,
+              "representative_view_shape": [
+                64,
+                208,
+                512
+              ],
+              "storages": 24
+            },
+            {
+              "bytes": 3461120,
+              "representative_view_shape": [
+                13312,
+                65
+              ],
+              "storages": 1
+            },
+            {
+              "bytes": 425984,
+              "representative_view_shape": [
+                64,
+                8,
+                208
+              ],
+              "storages": 12
+            },
+            {
+              "bytes": 131072,
+              "representative_view_shape": [
+                64,
+                512
+              ],
+              "storages": 1
+            },
+            {
+              "bytes": 65536,
+              "representative_view_shape": [
+                64,
+                256
+              ],
+              "storages": 2
+            },
+            {
+              "bytes": 53248,
+              "representative_view_shape": [
+                64,
+                208,
+                1
+              ],
+              "storages": 48
+            },
+            {
+              "bytes": 26468,
+              "representative_view_shape": [
+                6617
+              ],
+              "storages": 2
+            },
+            {
+              "bytes": 13312,
+              "representative_view_shape": [
+                64,
+                208
+              ],
+              "storages": 1
+            }
+          ],
+          "parameter_bytes": 151983108,
+          "parameter_gradient_bytes": 151983108,
+          "optimizer_tensor_bytes": 303966828
+        },
+        "candidate": {
+          "saved_forward_storage_bytes": {
+            "input": 1101824,
+            "weight": 76208128,
+            "other": 2161398472
+          },
+          "other_largest": [
+            {
+              "bytes": 109051904,
+              "representative_view_shape": [
+                13312,
+                2048
+              ],
+              "storages": 6
+            },
+            {
+              "bytes": 81788928,
+              "representative_view_shape": [
+                64,
+                8,
+                208,
+                64
+              ],
+              "storages": 6
+            },
+            {
+              "bytes": 27262976,
+              "representative_view_shape": [
+                13312,
+                512
+              ],
+              "storages": 19
+            },
+            {
+              "bytes": 27262976,
+              "representative_view_shape": [
+                64,
+                208,
+                512
+              ],
+              "storages": 18
+            },
+            {
+              "bytes": 3461120,
+              "representative_view_shape": [
+                13312,
+                65
+              ],
+              "storages": 1
+            },
+            {
+              "bytes": 425984,
+              "representative_view_shape": [
+                64,
+                8,
+                208
+              ],
+              "storages": 6
+            },
+            {
+              "bytes": 131072,
+              "representative_view_shape": [
+                64,
+                512
+              ],
+              "storages": 1
+            },
+            {
+              "bytes": 65536,
+              "representative_view_shape": [
+                64,
+                256
+              ],
+              "storages": 2
+            },
+            {
+              "bytes": 53248,
+              "representative_view_shape": [
+                64,
+                208,
+                1
+              ],
+              "storages": 24
+            },
+            {
+              "bytes": 26468,
+              "representative_view_shape": [
+                6617
+              ],
+              "storages": 2
+            },
+            {
+              "bytes": 13312,
+              "representative_view_shape": [
+                64,
+                208
+              ],
+              "storages": 1
+            }
+          ],
+          "parameter_bytes": 151983108,
+          "parameter_gradient_bytes": 151983108,
+          "optimizer_tensor_bytes": 303966828
+        }
+      }
+    }
+  ],
+  "status": "PASS_DDR_AB",
+  "performance": {
+    "ranks": {
+      "baseline": [
+        {
+          "rank": "node0",
+          "variant": "baseline",
+          "host": "cn21341",
+          "peak_rss_MiB": {
+            "min": 6727.65625,
+            "median": 6830.646484375,
+            "max": 6909.02734375
+          },
+          "step_seconds": {
+            "min": 2.401120288,
+            "median": 2.4386278425,
+            "max": 2.487842668
+          },
+          "hugetlb_bytes": 0,
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 6828068864,
+              "1": 7254016
+            },
+            "hugetlb_bytes": {}
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 6775054336,
+              "1": 7254016
+            },
+            "hugetlb_bytes": {}
+          },
+          "kml_calls_per_step": [
+            149
+          ],
+          "samples": 20
+        }
+      ],
+      "candidate": [
+        {
+          "rank": "node0",
+          "variant": "candidate",
+          "host": "cn21341",
+          "peak_rss_MiB": {
+            "min": 5672.13671875,
+            "median": 5790.115234375,
+            "max": 6011.84765625
+          },
+          "step_seconds": {
+            "min": 2.81259946,
+            "median": 2.853422421,
+            "max": 2.984571687
+          },
+          "hugetlb_bytes": 0,
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 5614465024,
+              "1": 7258112
+            },
+            "hugetlb_bytes": {}
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 5643149312,
+              "1": 7258112
+            },
+            "hugetlb_bytes": {}
+          },
+          "kml_calls_per_step": [
+            173
+          ],
+          "samples": 20
+        }
+      ]
+    },
+    "median_synchronized_step_span_seconds": {
+      "baseline": 2.4386278425,
+      "candidate": 2.853422421
+    },
+    "step_span_change_percent": 17.009343175331182,
+    "per_rank_change": [
+      {
+        "rank": "node0",
+        "median_rss_change_percent": -15.23327627011879,
+        "max_rss_change_percent": -12.98561494783489,
+        "median_step_time_change_percent": 17.009343175331182
+      }
+    ]
+  }
+}

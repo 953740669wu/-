@@ -1,0 +1,192 @@
+{
+  "actual_built_libraries": [],
+  "actual_package_sha256": "3c5a6356d58ca79c303bc73d23ad58e0878d89725d4cf1a53b387d5cb8b16ac9",
+  "actual_package_sha256_by_run": {
+    "M23_R1_20261107T160435Z": "3c5a6356d58ca79c303bc73d23ad58e0878d89725d4cf1a53b387d5cb8b16ac9",
+    "M23_R2_20261107T161206Z": "171ff130143f306ccc120b314610bdfaf3de1f47bde050e5f309dc70b6755c2b"
+  },
+  "actual_submission_commands": [
+    [
+      "dsub",
+      "-J",
+      "-q",
+      "q_hpcai",
+      "-x",
+      "job",
+      "-nl",
+      "cn[21338-21504] !cn21340",
+      "-R",
+      "cpu=38,mem=24576MB",
+      "-RL",
+      "mem=24576MB",
+      "-a",
+      "numa[count=1,distribution=pack]",
+      "-T",
+      "1200",
+      "--env",
+      "none",
+      "--cwd",
+      "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/M23_R1_20261107T160435Z",
+      "-oo",
+      "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/M23_R1_20261107T160435Z/job.log",
+      "bash",
+      "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/M23_R1_20261107T160435Z/run_job.sh",
+      "29a57cf85ad6a903b75949e6904cfc7912d0fe77f3cdb8452817e0e7978a7a2a"
+    ],
+    [
+      "dsub",
+      "-J",
+      "-q",
+      "q_hpcai",
+      "-x",
+      "job",
+      "-nl",
+      "cn[21338-21504] !cn21340",
+      "-R",
+      "cpu=152,mem=98304MB",
+      "-RL",
+      "mem=98304MB",
+      "-a",
+      "numa[count=4,distribution=pack]",
+      "-T",
+      "1800",
+      "--env",
+      "none",
+      "--cwd",
+      "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/M23_R2_20261107T161206Z",
+      "-oo",
+      "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/M23_R2_20261107T161206Z/job.log",
+      "bash",
+      "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/M23_R2_20261107T161206Z/run_job.sh",
+      "6992637f216cfe77f9da867093e80b255040142a905dca12bfeaf31a403ed448"
+    ]
+  ],
+  "authorization": "User approved the complete task card and its independent budget on 2026-11-07 (Asia/Shanghai).",
+  "baseline": {
+    "descriptor_sha256_from_receipt": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "historical_job": "2060326",
+    "initial_weights_sha256_from_receipt": "2543d05f25883b654141cbc5dc1bb093906e3b360f11ec9f5e87cb4f8bad76b5",
+    "local_evidence": "../S00/s05_ab_main_20261107/job-2060326/received",
+    "runtime_reference": "payload/RUNTIME_EXPECTED.json",
+    "thresholds": {
+      "near_zero_and_exact_checks": "Inherited unchanged from comparator.",
+      "relative_l2": 2e-06,
+      "state_abs": 2e-06,
+      "tensor_abs": 2e-05
+    },
+    "verified_comparator_sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e",
+    "verified_engineering_training_sha256": "9009e96fe4cc8071048e8aed8d3dc11e20d04f4271c48dbe36472e4218d8e5dc",
+    "verified_kml_ops_sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "verified_s4_models_sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2"
+  },
+  "budget": {
+    "allocation_seconds_max": 7200,
+    "allocation_seconds_used": 1365,
+    "batch_wall_seconds_max": 28800,
+    "batch_wall_seconds_used": 2077,
+    "candidate_count_max": 2,
+    "candidate_count_used": 1,
+    "job_seconds_max": 1800,
+    "queue_seconds_max": 14400,
+    "queue_seconds_used": 7,
+    "submissions_max": 8,
+    "submissions_used": 2
+  },
+  "candidate_versions": [
+    {
+      "diff_sha256": "28d9ac921f9b9bdfe55b3fc2752d4fcf951d35b82944d77c9865d23ec3ae3af8",
+      "four_domain_run_id": "M23_R2_20261107T161206Z",
+      "id": "M2_CKPT6",
+      "run_id": "M23_R1_20261107T160435Z",
+      "source_sha256": "2e1223cb8130f4540a9d305a630464febad3fa5e3786493e13fc30d15eae251e"
+    }
+  ],
+  "clock": {
+    "basis": "Conservative minute-level accounting from receipt of authorization; access restoration does not reset the deadline.",
+    "budget_start": "2026-11-07T23:57:45+08:00",
+    "deadline": "2026-11-08T07:57:45+08:00",
+    "finished": "2026-11-08T00:32:22.965202+08:00",
+    "timezone": "Asia/Shanghai"
+  },
+  "executed_preflight": {
+    "client": "ssh -o BatchMode=yes -o ConnectTimeout=12 -o ConnectionAttempts=1 -o StrictHostKeyChecking=yes -o UserKnownHostsFile=<confirmed_pool> dengqingtian@10.44.9.4",
+    "initial_attempt_remote_commands_executed": false,
+    "live_readonly_query_completed": true,
+    "logs": [
+      "C2_READONLY_PREFLIGHT.log",
+      "C2_READONLY_DIRECT.log"
+    ],
+    "remote_commands_executed": true,
+    "remote_readonly_requested": "printf M23_LOGIN_OK; hostname; djob -J; djob -J -l 2060643; dsub --help; dnode -J -l cn21340; dqueue -J -l q_hpcai"
+  },
+  "jobs": [
+    {
+      "allocation_seconds": 261,
+      "clean": true,
+      "host": "cn21341",
+      "id": "2061049",
+      "queue_seconds": 5,
+      "run_id": "M23_R1_20261107T160435Z",
+      "state": "SUCCEEDED"
+    },
+    {
+      "allocation_seconds": 1104,
+      "clean": true,
+      "host": "cn21341",
+      "id": "2061067",
+      "queue_seconds": 2,
+      "run_id": "M23_R2_20261107T161206Z",
+      "state": "SUCCEEDED"
+    }
+  ],
+  "remote": {
+    "active_job": null,
+    "created_remote_run": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/M23_R2_20261107T161206Z",
+    "endpoint": "dengqingtian@10.44.9.4",
+    "historical_scheduler_help": {
+      "live_verified": true,
+      "node_list_exclusion_example": "!host15",
+      "verified_sha256": "aaa73551438aad1a25923dbfcdc2c6a9113e1bcdf87a2e9664b0e6d705c76f59"
+    },
+    "known_hosts": "../S00/round12_dw_ab_20261106/evidence/known_hosts_r12_confirmed_pool",
+    "last_observed_00": {
+      "job": "2060643",
+      "live_verified": true,
+      "state": "PENDING",
+      "target": "cn21340"
+    },
+    "login_node": "login03",
+    "owned_root": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM"
+  },
+  "scope": {
+    "excluded_nodes": [
+      "cn21340"
+    ],
+    "exclusive_node": true,
+    "four_domain_if_eligible": {
+      "allocated_cpus": 152,
+      "compute_cpus": 144,
+      "ddr_request_and_limit_MB": 98304,
+      "reserved_cpus": 8,
+      "same_die": true
+    },
+    "hbm_limit_MiB_per_domain": 3800,
+    "hbm_pool_rule": "Cap to available job-domain hugetlb pool, with DDR fallback and prior allocator safety checks.",
+    "performance_updates_per_version_per_domain": 25,
+    "performance_warmup_updates": 5,
+    "queue": "q_hpcai",
+    "single_domain": {
+      "allocated_cpus": 38,
+      "compute_cpus": 36,
+      "ddr_request_and_limit_MB": 24576,
+      "reserved_cpus": 2
+    },
+    "strict_updates_per_version_per_domain": 5,
+    "unique_frames": 1600,
+    "workload": "16-adjacent Encoder B64 fp32 CKPT0, unchanged loss and AdamW"
+  },
+  "session_id": "M23_MEMORY_HBM",
+  "status": "COMPLETE_DDR_MEMORY_TRADEOFF_HBM_SAFETY_BLOCKED",
+  "task_card": "../COORDINATION/MEMORY_HBM_M23_SINGLE_SESSION_R1_20261107.md",
+  "task_card_sha256": "36ad348b1a4189bc8a2c9cd1c29e0a35305e1f401319edeac37b396f883e93c9"
+}

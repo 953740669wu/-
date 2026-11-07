@@ -1,0 +1,383 @@
+--- S00/payload/worker.py
++++ M23/payload/worker.py
+@@ -1,5 +1,6 @@
+ """One original Encoder replica in one bound domain, with the R12 strict comparator."""
+ import argparse
++from contextlib import nullcontext
+ import ctypes
+ import hashlib
+ import json
+@@ -15,6 +16,8 @@
+ from diagnostic_common import configure_backend, finish_backend
+ import engineering_training as training
+ import memory_metrics
++from m23_memory import SavedStorage
++from partial_checkpoint import enable_checkpoint
+ import profile_contract
+ 
+ ROOT = Path(__file__).resolve().parent
+@@ -123,7 +126,7 @@
+     import check_equivalence as accepted
+     definitions = accepted.model_definitions(torch)
+     factory, angles = definitions["Encoder"], definitions["protocol_angles"](16, 1)
+-    roles = ("baseline", "control") if strict else ("baseline",)
++    roles = ("baseline", "candidate") if strict else (args.variant,)
+     models, opts = {}, {}
+     for role in roles:
+         torch.manual_seed(0)
+@@ -133,6 +136,8 @@
+         opts[role] = training.optimizer(torch, model)
+         if sum(p.numel() for p in model.parameters()) != 37995777 or training.model_sha(model) != ref["initialization"]["initial_weights_sha256"]:
+             raise ValueError("original full Encoder/initial state differs")
++    if "candidate" in models:
++        enable_checkpoint(models["candidate"])
+     initial = {n: p.detach().clone() for n, p in models["baseline"].named_parameters()} if strict else None
+     order = list(range(1600))
+     random.Random(0).shuffle(order)
+@@ -175,16 +180,28 @@
+                 release = barrier(args, step) if not strict else None
+                 if time.monotonic() >= args.deadline:
+                     raise TimeoutError("deadline before update")
++                reset = memory_metrics.reset_peak() if not strict else None
++                start_memory = memory_metrics.rss() if reset else None
++                if reset and (not reset["available"] or start_memory["peak_rss_bytes"] != start_memory["rss_bytes"]):
++                    raise RuntimeError("could not reset/verify per-step RSS high-water mark")
++                inventory = SavedStorage(model, values[role]) if strict and step == 1 else None
++                observe = torch.autograd.graph.saved_tensors_hooks(inventory.pack, inventory.unpack) if inventory else nullcontext()
+                 begin = time.monotonic_ns()
+                 try:
+-                    loss = losses[role] = training.train_step(torch, model, opts[role], values[role], mask)
++                    with observe:
++                        loss = losses[role] = training.train_step(torch, model, opts[role], values[role], mask)
+                 finally:
+                     for handle in handles:
+                         handle.remove()
+                 end = time.monotonic_ns()
+                 rss_after = memory_metrics.rss()
+                 training.validate_update(torch, model, opts[role], values[role], step)
+-                if runtime["kml_gemm_calls"] - before != 149 or shapes != known_shapes:
++                if inventory:
++                    result.setdefault("strict_step1_storage", {})[role] = inventory.summary(model, opts[role])
++                logical = runtime["kml_gemm_calls"] - before
++                trace_matches = (logical == 149 and shapes == known_shapes) if role == "baseline" else (
++                    logical == 173 and all(shapes.get(k, 0) >= v for k, v in known_shapes.items()))
++                if not trace_matches:
+                     result["bad_native"] = dict(step=step, role=role, shapes=dict(shapes), logical=runtime["kml_gemm_calls"]-before)
+                     raise ValueError("original native SGEMM trace differs")
+                 for name, item in loss.items():
+@@ -198,16 +215,17 @@
+                 rows.append(dict(role=role, step=step, batch_size=64, frame_indices=ids, frame_ids=frames,
+                                  mask_sha256=mask_sha, losses={k: v.item() for k,v in loss.items()},
+                                  start_ns=begin, end_ns=end, release_ns=release, step_seconds=(end-begin)/1e9,
+-                                 rss_before=rss_before, rss_after=rss_after, native_sgemm_calls=sum(shapes.values()),
++                                 rss_before=rss_before, training_start=start_memory, rss_after=rss_after,
++                                 peak_reset=reset, kml_calls=logical, native_sgemm_calls=sum(shapes.values()),
+                                  native_shapes=dict(shapes), sampled=not strict and step >= 6))
+             if strict:
+                 for key in captures["baseline"]:
+-                    accepted.compare(torch, f"{step}.output.{key}", captures["baseline"][key], captures["control"][key], "tensor", result["metrics"])
++                    accepted.compare(torch, f"{step}.output.{key}", captures["baseline"][key], captures["candidate"][key], "tensor", result["metrics"])
+                 for key in losses["baseline"]:
+-                    accepted.compare(torch, f"{step}.loss.{key}", losses["baseline"][key], losses["control"][key], "tensor", result["metrics"])
++                    accepted.compare(torch, f"{step}.loss.{key}", losses["baseline"][key], losses["candidate"][key], "tensor", result["metrics"])
+                 for i in (0,1):
+-                    accepted.compare(torch, f"{step}.input_grad.{i}", values["baseline"][i].grad, values["control"][i].grad, "tensor", result["metrics"])
+-                compare_models(torch, accepted, models["baseline"], models["control"],
++                    accepted.compare(torch, f"{step}.input_grad.{i}", values["baseline"][i].grad, values["candidate"][i].grad, "tensor", result["metrics"])
++                compare_models(torch, accepted, models["baseline"], models["candidate"],
+                                [opts[role] for role in roles], initial, result["metrics"], f"{step}.")
+             for row in rows:
+                 log.write(json.dumps(row) + "\n")
+@@ -217,28 +235,18 @@
+     if not strict:
+         barrier(args, 26)
+         residency(args.output, "observe_end")
+-        model, opt = models["baseline"], opts["baseline"]
+-        progress = dict(epoch_order=order, cursor=1600, optimizer_updates=25, planned_updates=25, epoch_completed=True)
+-        identity = dict(data=metadata["identity"], baseline_sha256=BASELINE, node=guard["receipt"]["node"])
+-        checkpoint = training.save_checkpoint(torch, args.output / "checkpoints/final.pt", model, opt, identity, progress, normalization)
+-        result["checkpoint"] = checkpoint
+-        ledger.value["recovery_probe"] = dict(status="POSSIBLY_USED_IN_RECOVERY_PROBE", frame_ids=train["frame_ids"][:2])
+-        ledger.save()
+-        result["recovery"] = training.verify_restore(torch, checkpoint, model, opt, factory, identity, progress, normalization,
+-                                                      training.batch(torch, train, [0,1], angles), accepted.compare)
+-        ledger.value["recovery_probe"]["status"] = "RECOVERY_PROBE_CONFIRMED_NO_UPDATE"
+-        ledger.save()
+     data.load_descriptor(args.descriptor, args.descriptor_sha)
+-    result["final_model_sha256"] = training.model_sha(models["baseline"])
++    result["final_model_sha256"] = {role: training.model_sha(model) for role, model in models.items()}
+     finish_backend(runtime, expected)
+     runtime_check(runtime)
+     cpu36_guard.checkpoint(guard, "publish", torch)
+-    result["status"] = "PASS_STRICT_ENCODER5" if strict else "PASS_BASELINE25"
++    result["status"] = "PASS_STRICT_ENCODER5" if strict else "PASS_PERF25"
+ 
+ 
+ if __name__ == "__main__":
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--phase", choices=("strict", "perf"), required=True)
++    parser.add_argument("--variant", choices=("baseline", "candidate"), required=True)
+     for flag in ("descriptor", "allocation", "phase-root", "output"):
+         parser.add_argument("--" + flag, type=Path, required=True)
+     parser.add_argument("--descriptor-sha", required=True)
+@@ -246,7 +254,7 @@
+     args = parser.parse_args()
+     args.output.mkdir(exist_ok=False)
+     result = dict(status="STARTED", job_id=os.environ["CCS_JOB_ID"], host=os.uname().nodename,
+-                  phase=args.phase, pid=os.getpid(), started_ns=time.monotonic_ns(), metrics=[], completed_updates=0)
++                  phase=args.phase, variant=args.variant, pid=os.getpid(), started_ns=time.monotonic_ns(), metrics=[], completed_updates=0)
+     try:
+         run(args, result)
+         code = 0
+--- S00/launch.py
++++ M23/launch.py
+@@ -1,4 +1,4 @@
+-"""One native 152-core job. Verify four whole same-die domains before any replica."""
++"""Verify native resources and run strict then two matched 25-step DDR phases."""
+ import time
+ 
+ START = time.monotonic()
+@@ -27,7 +27,7 @@
+     return json.loads(path.read_bytes())
+ 
+ 
+-def memory_controller(job, native):
++def memory_controller(job, native, mem):
+     proc = Path("/proc/self")
+     for name in ("cgroup", "mountinfo", "status"):
+         (EVIDENCE / ("native." + name)).write_bytes((proc / name).read_bytes())
+@@ -66,7 +66,7 @@
+             # Accept only the exact own container and live native -RL receipt.
+             need(directory == leaf and fstype == "cgroup" and mount == Path("/sys/fs/cgroup/memory")
+                  and re.fullmatch(r"/batch/container_" + re.escape(job) + r"_rg0_[0-9]+_e[0-9]+", str(group))
+-                 and native["replica"] == 1 and native["resReq"]["mem"] == native["resAlloc"]["mem"] == native["resLimit"]["mem"] == 98304,
++                 and native["replica"] == 1 and native["resReq"]["mem"] == native["resAlloc"]["mem"] == native["resLimit"]["mem"] == mem,
+                  "protected controller lacks the exact own native hard-limit binding")
+             save(EVIDENCE / "native_memory_limit.json", dict(job_id=job, group=str(group), controller=fstype,
+                  status="NATIVE_SCHEDULER_LIMIT_WITH_BOUND_CGROUP", kernel_limit_bytes=None,
+@@ -77,25 +77,25 @@
+     effective = min((int(v) for v in limits.values() if v != "max"), default=-1)
+     save(EVIDENCE / "native_memory_limit.json", dict(job_id=job, group=str(group), controller=fstype,
+          limits_bytes=limits, effective_limit_bytes=effective))
+-    need(effective == 98304 * 2**20, "actual inherited DDR hard limit is not 96 GiB")
+-
+-
+-def topology(context):
++    need(effective == mem * 2**20, "actual inherited DDR hard limit differs")
++
++
++def topology(context, count):
+     allowed = context["allowed"]
+-    need(len(allowed) == 152, "require actual 152-core allocation")
++    need(len(allowed) == 38 * count, "wrong allocation core count")
+     nodes = sorted(Path("/sys/devices/system/node").glob("node[0-9]*"), key=lambda p:int(p.name[4:]))
+     ids = [int(p.name[4:]) for p in nodes]
+     cpu_nodes = {n: cpu_list((p / "cpulist").read_text()) for n,p in zip(ids,nodes)}
+     distances = {n: [int(v) for v in (p / "distance").read_text().split()] for n,p in zip(ids,nodes)}
+-    contracts = discover_contracts(allowed, 4)
+-    need(len(contracts) == 4 and sorted(c for r in contracts.values() for c in r["allocated"]) == allowed,
++    contracts = discover_contracts(allowed, count)
++    need(len(contracts) == count and sorted(c for r in contracts.values() for c in r["allocated"]) == allowed,
+          "allocation does not consist of four full CPU36 domains")
+     physical = {}
+     for node, contract in contracts.items():
+         need(contract["allocated"] == cpu_nodes[node] and len(contract["allocated"]) == 38,
+              "partial domain allocation")
+         nearby = {n for i,n in enumerate(ids) if cpu_nodes[n] and distances[node][i] in (10,20)}
+-        need(nearby == set(contracts) and all(distances[node][ids.index(n)] == (10 if n == node else 20) for n in contracts),
++        need(count == 1 or nearby == set(contracts) and all(distances[node][ids.index(n)] == (10 if n == node else 20) for n in contracts),
+              "actual four-domain distance-20 die grouping differs")
+         node_path = Path("/sys/devices/system/node") / f"node{node}"
+         meminfo = (node_path / "meminfo").read_text()
+@@ -109,29 +109,35 @@
+             physical[cpu] = {key: (info / key).read_text().strip() for key in ("physical_package_id","core_id","die_id") if (info / key).is_file()}
+         save(EVIDENCE / f"node{node}.allocation.json", dict(job_id=context["job_id"], host=context["host"], receipt=contract))
+     need(len({v["physical_package_id"] for v in physical.values()}) == 1
+-         and len({(v["physical_package_id"],v["core_id"]) for v in physical.values()}) == 152,
++         and len({(v["physical_package_id"],v["core_id"]) for v in physical.values()}) == 38 * count,
+          "wrong actual physical package/core topology")
+     save(EVIDENCE / "domain_map.json", dict(context=context, contracts=contracts, node_ids=ids, cpu_nodes=cpu_nodes,
+          distances=distances, physical=physical, die_basis="complete CPU-bearing distance-20 group and same physical package"))
++    for n, node_path in zip(ids, nodes):
++        for huge in node_path.glob("hugepages/hugepages-*"):
++            fields = {p.name: p.read_text().strip() for p in sorted(huge.glob("*")) if p.is_file()}
++            save(EVIDENCE / f"node{n}.{huge.name}.json", dict(cpus=cpu_nodes[n], counters=fields))
+     return contracts
+ 
+ 
+ def allocation(binding):
+     context = live_context()
+-    need(context["host"] == binding["host"], "allocated host differs")
++    need(context["host"] not in binding["excluded_hosts"], "excluded host allocated")
++    count = binding["domain_count"]
++    mem = count * 24576
+     req = create_request(ROOT, context)
+-    gate = await_handoff(ROOT, req, context, 152, 98304, binding["wall_seconds"], timeout=35)
++    gate = await_handoff(ROOT, req, context, 38 * count, mem, binding["wall_seconds"], timeout=35)
+     save(EVIDENCE / "scheduler_handoff.json", gate)
+     raw = read(ROOT / "scheduler_allocation.json")["data"]["successData"][0]
+     need(raw["queue"] == "q_hpcai" and raw["execPath"] == str(ROOT)
+          and raw["retryPolicy"] == dict(maxRetryCnt=0, currentRetryTimes=0), "wrong native job scope or retries")
+     group = raw["resGroups"][0]
+-    need([s.replace(" ", "") for s in group["affinityRequest"]] == ["numa[count=4,distribution=pack]"], "native four-domain placement request differs")
++    need([s.replace(" ", "") for s in group["affinityRequest"]] == [f"numa[count={count},distribution=pack]"], "native domain placement request differs")
+     for res in (group["resReq"], group["resAlloc"]):
+-        need(res["cpu"] == 152 and res["mem"] == 98304 and res["gpu"]["amount"] == 0
++        need(res["cpu"] == 38 * count and res["mem"] == mem and res["gpu"]["amount"] == 0
+              and res["npu"]["count"] == 0, "native request/allocation differs")
+-    memory_controller(context["job_id"], group)
+-    return topology(context)
++    memory_controller(context["job_id"], group, mem)
++    return topology(context, count)
+ 
+ 
+ def sample(proc, contracts):
+@@ -152,8 +158,8 @@
+     return dict(at_ns=time.monotonic_ns(), per_cpu=cpu, worker_ticks=ticks)
+ 
+ 
+-def phase(name, contracts, owner, binding, deadline):
+-    out = EVIDENCE / name
++def phase(name, variant, contracts, owner, binding, deadline):
++    out = EVIDENCE / (name if name == "strict" else f"perf_{variant}")
+     out.mkdir()
+     barriers = out / "barriers"
+     barriers.mkdir()
+@@ -169,7 +175,7 @@
+     for node, receipt in contracts.items():
+         rank = f"node{node}"
+         argv = ["/bin/bash", str(ROOT / "run_worker.sh"), ",".join(map(str,receipt["allocated"])), str(node),
+-                "--phase",name,"--descriptor",str(ROOT / "ENGINEERING_DESCRIPTOR.json"),
++                "--phase",name,"--variant",variant,"--descriptor",str(ROOT / "ENGINEERING_DESCRIPTOR.json"),
+                 "--descriptor-sha",binding["descriptor_sha256"],"--allocation",str(EVIDENCE / f"{rank}.allocation.json"),
+                 "--phase-root",str(out),"--output",str(out / rank),"--deadline",str(deadline)]
+         save(out / f"{rank}.command.json", dict(argv=argv))
+@@ -208,9 +214,9 @@
+             time.sleep(.02)
+     need(name != "perf" or step == 27, "incomplete baseline rendezvous")
+     results = [read(out / f"node{n}" / "result.json") for n in contracts]
+-    expected, updates = ("PASS_STRICT_ENCODER5",5) if name == "strict" else ("PASS_BASELINE25",25)
++    expected, updates = ("PASS_STRICT_ENCODER5",5) if name == "strict" else ("PASS_PERF25",25)
+     need(all(r["status"] == expected and r["completed_updates"] == updates and r["job_id"] == os.environ["CCS_JOB_ID"]
+-             and r["host"] == binding["host"] for r in results), "four actual result receipts required")
++             and r["host"] == os.uname().nodename and r["variant"] == variant for r in results), "actual result receipts required")
+     save(out / "phase_receipt.json", dict(status=expected, job_id=os.environ["CCS_JOB_ID"],
+          domains={n:r["final_model_sha256"] for n,r in zip(contracts,results)}))
+ 
+@@ -228,7 +234,7 @@
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        need(0 < wall <= 1800 and binding["mode"] == "baseline", "wrong wall or mode")
++        need(0 < wall <= 1800 and binding["mode"] == "ddr_ckpt6", "wrong wall or mode")
+         libc = ctypes.CDLL(None, use_errno=True)
+         need(libc.prctl(36,1,0,0,0) == 0, "cannot become owned-process subreaper")
+         for sig in (signal.SIGTERM, signal.SIGINT, signal.SIGALRM):
+@@ -236,12 +242,13 @@
+         end = START + wall - 60
+         signal.setitimer(signal.ITIMER_REAL, max(.001, end-time.monotonic()))
+         contracts = allocation(binding)
+-        phase("strict", contracts, owner, binding, end)
++        phase("strict", "baseline", contracts, owner, binding, end)
+         outcome["steps"]["strict_each_role"] = 5
+-        phase("perf", contracts, owner, binding, end)
+-        outcome["steps"]["baseline_each_domain"] = 25
++        for variant in ("baseline", "candidate"):
++            phase("perf", variant, contracts, owner, binding, end)
++            outcome["steps"][variant + "_each_domain"] = 25
+         verify(ROOT, pin)
+-        outcome["status"] = "PASS_FOUR_DOMAIN_BASELINE"
++        outcome["status"] = "PASS_DDR_AB"
+     except BaseException as exc:
+         outcome.update(error=repr(exc), traceback=traceback.format_exc())
+     finally:
+@@ -256,7 +263,7 @@
+             outcome.update(status="FAIL_STOP", cleanup_error=repr(exc))
+         outcome["finished"] = time.monotonic()
+         save(EVIDENCE / "SUMMARY.json", outcome)
+-    return 0 if outcome["status"] == "PASS_FOUR_DOMAIN_BASELINE" else 2
++    return 0 if outcome["status"] == "PASS_DDR_AB" else 2
+ 
+ 
+ if __name__ == "__main__":
+--- S00/prepare.py
++++ M23/prepare.py
+@@ -26,13 +26,13 @@
+ 
+ 
+ def verify(root, pin):
+-    path = root / "NUMA_RUN_BINDING.json"
++    path = root / "M23_RUN_BINDING.json"
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+-    need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/dengqingtian/opt/stage4_sessions/S00")
+-         and root.name.startswith("NUMA_M1_R1_") and binding["user_authorized"] is True,
++    need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM")
++         and root.name.startswith("M23_R") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+-    need(sha(root / "NUMA_M1.zip") == binding["package_sha256"], "package SHA differs")
++    need(sha(root / "M23_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"
+     need(sha(manifest) == binding["source_manifest_sha256"], "source manifest SHA differs")
+     for name, expected in json.loads(manifest.read_bytes()).items():
+--- S00/submit_once.py
++++ M23/submit_once.py
+@@ -17,6 +17,17 @@
+     (ROOT / filename).write_bytes(p.stdout)
+     (ROOT / (filename + ".stderr")).write_bytes(p.stderr)
+     need(p.returncode == 0, "native query failed: " + repr(argv))
++    if argv == ["djob", "-J"]:
++        decoder = json.JSONDecoder()
++        raw = p.stdout.decode().strip()
++        rows = []
++        while raw:
++            page, end = decoder.raw_decode(raw)
++            need(page["code"] == "success" and len(page["data"]) == page["totalElements"],
++                 "incomplete native queue page")
++            rows.extend(page["data"])
++            raw = raw[end:].lstrip()
++        return dict(data=rows, totalElements=len(rows))
+     value = json.loads(p.stdout)
+     need(value["code"] == "success", "native query failed: " + repr(argv))
+     return value
+@@ -50,11 +61,18 @@
+     need(len(live["data"]) == live["totalElements"] <= 20, "incomplete native queue list")
+     for job in live["data"]:
+         row = detail(str(job["jobId"]),f"active_{job['jobId']}.json")
+-        need("NUMA_M1_R1_" not in row.get("execPath","") + row.get("cmd",""), "active M1 job already exists")
++        need("/stage4_sessions/M23_MEMORY_HBM/" not in row.get("execPath","") + row.get("cmd",""),
++             "active M23 job already exists")
+     queue = query(["dqueue","-J","-l","q_hpcai"],"queue_resource.json")["data"][0]
+     need(set(queue["status"]) == {"OPEN","ACTIVE"} and queue["exclusive"] == "job" and queue["requeueTimes"] == 0,
+          "native exclusive queue/retry conditions differ")
+-    query(["dnode","-J","-l",binding["host"]],"host_before_submit.json")
++    for host in binding["excluded_hosts"]:
++        query(["dnode","-J","-l",host],"excluded_node_before_submit.json")
++    dsub = subprocess.run(["dsub", "--help"], capture_output=True, timeout=5, check=True)
++    (ROOT / "native_dsub_help.txt").write_bytes(dsub.stdout + dsub.stderr)
++    need(b"--node-list" in dsub.stdout and b"!host15" in dsub.stdout,
++         "native node exclusion syntax unavailable")
++    detail("2060643", "s00_2060643_before_submit.json")
+     until = datetime.fromisoformat(binding["batch_deadline_utc"])
+     room = (until - datetime.now(timezone.utc)).total_seconds()
+     need(room > binding["wall_seconds"] + 60, "insufficient batch time to execute full job")
+@@ -100,7 +118,7 @@
+             (ROOT/"cancel.stderr").write_bytes(p.stderr)
+             print("QUEUE_CUTOFF",job,p.returncode,flush=True)
+             return
+-        time.sleep(.5)
++        time.sleep(5)
+ 
+ 
+ if __name__ == "__main__":
+--- S00/scheduler_handoff.py
++++ M23/scheduler_handoff.py
+@@ -136,6 +136,6 @@
+     parser.add_argument('--root', type=Path, required=True)
+     parser.add_argument('--job-id', required=True)
+     args = parser.parse_args()
+-    if args.root.resolve().parent != Path('/home/share/dengqingtian/opt/stage4_sessions/S00'):
+-        parser.error('new S00-owned remote staging root required')
++    if args.root.resolve().parent != Path('/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM'):
++        parser.error('M23-owned remote staging root required')
+     publish(args.root.resolve(), args.job_id)

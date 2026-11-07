@@ -1,0 +1,25 @@
+*** Begin Patch
+*** Update File: c2/stage4_sessions/work/M23_MEMORY_HBM/analyze_evidence.py
+@@
+-        output.mkdir()
+-        bundle.extractall(output)
++        if output.exists():
++            for name in names:
++                assert (output / name).read_bytes() == bundle.read(name)
++        else:
++            output.mkdir()
++            bundle.extractall(output)
+@@
+-    assert len({fid for r in rows for fid in r["frame_ids"]}) == 1600
++    assert sorted(i for r in rows for i in r["frame_indices"]) == list(range(1600))
++    assert len({json.dumps(fid, sort_keys=True) for r in rows for fid in r["frame_ids"]}) == 1600
+@@
+-    signatures = {(tuple(r["frame_ids"]), r["mask_sha256"], r["step"])
+-                  for r in rows["baseline"][0]}
+-    assert all({(tuple(r["frame_ids"]), r["mask_sha256"], r["step"]) for r in steps} == signatures
+-               for ranks in rows.values() for steps in ranks)
++    keys = ("frame_indices", "frame_ids", "mask_sha256", "step")
++    signatures = [[row[k] for k in keys] for row in rows["baseline"][0]]
++    assert all([[row[k] for k in keys] for row in steps] == signatures
++               for ranks in rows.values() for steps in ranks)
+*** End Patch
