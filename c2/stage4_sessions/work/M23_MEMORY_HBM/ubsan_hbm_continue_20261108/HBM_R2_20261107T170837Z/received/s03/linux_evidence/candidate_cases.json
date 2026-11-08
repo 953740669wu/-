@@ -1,0 +1,739 @@
+{
+  "scope": "ACTUAL_INCLUDED_C_WITH_OS_AND_FAILURE_SUBSTITUTES",
+  "version": "candidate",
+  "source": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/candidate/hbm_alloc.c",
+  "source_sha256": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+  "executable_sha256": "338a212e902c421809657976d0013cb02ebda0d6c38556849bcacb7fe8356306",
+  "real_hbm": false,
+  "real_kernel_policy": false,
+  "cases": [
+    {
+      "case": "node_negative",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "invalid",
+        "-1"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=1 malloc=0 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": "hbm_alloc: invalid HBM_NODE, arena off\n"
+    },
+    {
+      "case": "node_upper",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "invalid",
+        "128"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=1 malloc=0 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": "hbm_alloc: invalid HBM_NODE, arena off\n"
+    },
+    {
+      "case": "node_conversion_overflow",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "invalid",
+        "999999999999999999999999999999999"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=1 malloc=0 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": "hbm_alloc: invalid HBM_NODE, arena off\n"
+    },
+    {
+      "case": "node_empty",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "invalid",
+        ""
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=1 malloc=0 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": "hbm_alloc: invalid HBM_NODE, arena off\n"
+    },
+    {
+      "case": "node_text",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "invalid",
+        "HBM"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=1 malloc=0 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": "hbm_alloc: invalid HBM_NODE, arena off\n"
+    },
+    {
+      "case": "node_suffix",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "invalid",
+        "16tail"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=1 malloc=0 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": "hbm_alloc: invalid HBM_NODE, arena off\n"
+    },
+    {
+      "case": "node_hex",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "invalid",
+        "0x10"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=1 malloc=0 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": "hbm_alloc: invalid HBM_NODE, arena off\n"
+    },
+    {
+      "case": "node_trailing_space",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "invalid",
+        "16 "
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=1 malloc=0 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": "hbm_alloc: invalid HBM_NODE, arena off\n"
+    },
+    {
+      "case": "node_zero",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "valid",
+        "0"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "node_normal",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "valid",
+        "16"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "node_word_end",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "valid",
+        "63"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "node_word_start",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "valid",
+        "64"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "node_last",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "valid",
+        "127"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "node_plus",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "valid",
+        "+16"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "node_leading_space",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "node",
+        "valid",
+        " 16"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "mb_overflow",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "config",
+        "mb_overflow"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": "hbm_alloc: HBM_MB overflow, arena off\n"
+    },
+    {
+      "case": "mb_last_safe",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "config",
+        "mb_last_safe"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=0 bytes=18446744073708503040 arena=0 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": "hbm_alloc: mmap 17592186044415 MB on node 16 failed: Cannot allocate memory\n"
+    },
+    {
+      "case": "min_overflow",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "config",
+        "min_overflow"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": "hbm_alloc: HBM_MIN_KB overflow, arena off\n"
+    },
+    {
+      "case": "min_last_safe",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "config",
+        "min_last_safe"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "mb_large_capped",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "config",
+        "mb_large_capped"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "sum_max",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "request",
+        "sum_max"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "sum_first_overflow",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "request",
+        "sum_first_overflow"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "sum_last_safe",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "request",
+        "sum_last_safe"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "pointer_wrap",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "request",
+        "pointer_wrap"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "api_sum_max",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "request",
+        "api_sum_max"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=1 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "last_fit",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "request",
+        "last_fit"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "short_tail",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "request",
+        "short_tail"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "grain_below",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "request",
+        "grain_below"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "grain_exact",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "request",
+        "grain_exact"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "grain_above",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "request",
+        "grain_above"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "align_invalid_0",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "align",
+        "invalid",
+        "0"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "align_invalid_1",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "align",
+        "invalid",
+        "1"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "align_invalid_3",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "align",
+        "invalid",
+        "3"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "align_invalid_4",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "align",
+        "invalid",
+        "4"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "align_invalid_24",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "align",
+        "invalid",
+        "24"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "align_invalid_48",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "align",
+        "invalid",
+        "48"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "align_valid_8",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "align",
+        "valid",
+        "8"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "align_valid_16",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "align",
+        "valid",
+        "16"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "align_valid_32",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "align",
+        "valid",
+        "32"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "align_valid_64",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "align",
+        "valid",
+        "64"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "align_valid_128",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "align",
+        "valid",
+        "128"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=1 malloc=0 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "align_valid_4096",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "align",
+        "valid",
+        "4096"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=1 malloc=0 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "free_null",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "api",
+        "free_null"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "free_reuse",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "api",
+        "free_reuse"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "realloc_grow",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "api",
+        "realloc_grow"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=1 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "realloc_shrink",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "api",
+        "realloc_shrink"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=1 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "realloc_failure",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "api",
+        "realloc_failure"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=0 malloc=1 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "ddr_forward",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "api",
+        "ddr_forward"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=0 get=0 set=0 map=0 mbind=0 bytes=0 arena=0 ddr=0 malloc=0 realloc=2 free=2\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "ddr_failure",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "api",
+        "ddr_failure"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=1 malloc=0 realloc=0 free=0\nRESULT PASS\n",
+      "stderr": ""
+    },
+    {
+      "case": "full_fallback",
+      "command": [
+        "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R2_20261107T170837Z/s03/build/bounds_candidate",
+        "api",
+        "full_fallback"
+      ],
+      "passed": true,
+      "expected_failure": false,
+      "expectation_met": true,
+      "exitcode": 0,
+      "stdout": "TRACE opens=1 get=1 set=2 map=1 mbind=1 bytes=67108864 arena=1 ddr=1 malloc=0 realloc=0 free=1\nRESULT PASS\n",
+      "stderr": ""
+    }
+  ],
+  "expectations_met": 50
+}

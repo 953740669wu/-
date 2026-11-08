@@ -1,0 +1,452 @@
+--- previous/c_gate.py
++++ continue/c_gate.py
+@@ -12,7 +12,7 @@
+ from cpu36_contract import discover_contracts
+ 
+ root = Path(sys.argv[1]).resolve()
+-assert root.parent.name.startswith('S03_R2_UBSAN_') and root.name == 'payload'
++assert root.parent.name.startswith('HBM_R') and root.name == 's03'
+ assert sys.platform == 'linux' and not socket.gethostname().startswith('login')
+ assert os.environ.get('CCS_JOB_ID')
+ assert all(not os.environ.get(key) for key in ('LD_PRELOAD', 'LD_LIBRARY_PATH', 'PYTHONPATH', 'KML_BLAS_LIB', 'HBM_NODE'))
+@@ -73,36 +73,19 @@
+         return h.hexdigest()
+     run('compiler_elf', ['readelf', '-h', str(compiler_real)])
+     run('compiler_target', [cc, '-dumpmachine'])
+-    locations = []
+-    for name in ('libubsan.so', 'libubsan.so.1', 'libgcc_s.so.1'):
+-        run('compiler_path_' + name.replace('.', '_'), [cc, '-print-file-name=' + name])
+-        value = (out / ('compiler_path_' + name.replace('.', '_') + '.txt')).read_text().strip()
+-        if Path(value).is_absolute():
+-            if name.startswith('libubsan'):
+-                locations.append(Path(value))
+-            else:
+-                locations.extend(sorted(Path(value).parent.glob('libubsan.so*')))
+-    known = ['/usr/lib64', '/lib64', '/usr/lib/aarch64-linux-gnu', '/lib/aarch64-linux-gnu']
+-    for directory in known:
+-        locations.extend(sorted(Path(directory).glob('libubsan.so*')))
+-    checked = []
+-    found = []
+-    for path in dict.fromkeys(locations):
+-        checked.append(dict(path=str(path), exists=path.is_file(), resolved=str(path.resolve())))
+-        if path.is_file() and path.resolve() not in found:
+-            found.append(path.resolve())
+-    (out / 'runtime_locations.json').write_text(json.dumps(dict(known_directories=known, checked=checked), indent=2) + '\n')
+-    if not found:
+-        summary['blocker'] = 'NO_EXISTING_UBSAN_RUNTIME_IN_FINITE_ALLOWED_LOCATIONS'
+-        raise RuntimeError(summary['blocker'])
+-    # First existing compiler-reported/system runtime; no automatic alternate retry.
+-    runtime = found[0]
++    runtime = Path(sys.argv[2]).resolve(strict=True)
++    assert runtime.parent == root.parent.parent / 'deps/extract/usr/lib64'
++    assert digest(runtime) == sys.argv[3], 'private runtime identity differs'
++    run('compiler_rpm', ['rpm', '-qf', compiler_real.as_posix()])
++    assert 'gcc-10.3.1-66.p02.ky10p.aarch64' in (out/'compiler_rpm.txt').read_text()
++    assert (out/'glibc.txt').read_text().strip() == 'glibc 2.34'
+     run('ubsan_elf', ['readelf', '-h', str(runtime)])
+     run('ubsan_dynamic', ['readelf', '-d', str(runtime)])
+     run('ubsan_ldd', ['ldd', str(runtime)])
+     assert 'AArch64' in (out / 'compiler_elf.txt').read_text()
+     assert 'AArch64' in (out / 'ubsan_elf.txt').read_text()
+     assert 'ELF64' in (out / 'ubsan_elf.txt').read_text()
++    assert 'Library soname: [libubsan.so.1]' in (out / 'ubsan_dynamic.txt').read_text()
+     assert 'not found' not in (out / 'ubsan_ldd.txt').read_text()
+     links = root.parent / 'ubsan_link'
+     links.mkdir()
+@@ -124,7 +107,7 @@
+         run('build_control_' + name, [cc, *flags, str(source), '-o', str(binary)])
+         run('control_' + name + '_ldd', ['ldd', str(binary)])
+         loaded = (out / ('control_' + name + '_ldd.txt')).read_text()
+-        assert 'libubsan' in loaded and 'not found' not in loaded
++        assert str(links/'libubsan.so.1') in loaded and 'not found' not in loaded
+         run('control_' + name, [str(binary)], allowed=(expected_exit,), limit=10)
+         messages = (out / ('control_' + name + '.txt')).read_text()
+         if name == 'negative':
+@@ -137,7 +120,7 @@
+     (out / 'harness_flags.txt').write_text(' '.join(flags) + '\n')
+     run('build_previous', [cc, *flags, '-DS03_SOURCE="../frozen/hbm_alloc.c"', 'tests/bounds_harness.c', '-o', 'build/bounds_previous'])
+     run('previous_harness_ldd', ['ldd', 'build/bounds_previous'])
+-    assert 'libubsan' in (out / 'previous_harness_ldd.txt').read_text() and 'not found' not in (out / 'previous_harness_ldd.txt').read_text()
++    assert str(links/'libubsan.so.1') in (out / 'previous_harness_ldd.txt').read_text() and 'not found' not in (out / 'previous_harness_ldd.txt').read_text()
+     run('previous_cases', ['/usr/bin/python3', '-B', 'tests/run_cases.py', 'build/bounds_previous', '--source', 'frozen/hbm_alloc.c', '--version', 'previous', '--json', str(out / 'previous_cases.json')])
+     previous = json.loads((out / 'previous_cases.json').read_text())
+     rows = previous['cases']
+@@ -147,7 +130,7 @@
+     summary.update(previous_expected_failures=21, previous_controls_passed=29, previous_expectations_met=50)
+     run('build_candidate', [cc, *flags, 'tests/bounds_harness.c', '-o', 'build/bounds_candidate'])
+     run('candidate_harness_ldd', ['ldd', 'build/bounds_candidate'])
+-    assert 'libubsan' in (out / 'candidate_harness_ldd.txt').read_text() and 'not found' not in (out / 'candidate_harness_ldd.txt').read_text()
++    assert str(links/'libubsan.so.1') in (out / 'candidate_harness_ldd.txt').read_text() and 'not found' not in (out / 'candidate_harness_ldd.txt').read_text()
+     run('candidate_cases', ['/usr/bin/python3', '-B', 'tests/run_cases.py', 'build/bounds_candidate', '--source', 'candidate/hbm_alloc.c', '--version', 'candidate', '--json', str(out / 'candidate_cases.json')])
+     candidate = json.loads((out / 'candidate_cases.json').read_text())
+     assert len(candidate['cases']) == candidate['expectations_met'] == 50
+--- previous/payload/worker.py
++++ continue/payload/worker.py
+@@ -1,6 +1,5 @@
+ """One original Encoder replica in one bound domain, with the R12 strict comparator."""
+ import argparse
+-from contextlib import nullcontext
+ import ctypes
+ import hashlib
+ import json
+@@ -16,29 +15,51 @@
+ from diagnostic_common import configure_backend, finish_backend
+ import engineering_training as training
+ import memory_metrics
+-from m23_memory import SavedStorage
+-from partial_checkpoint import enable_checkpoint
+ import profile_contract
+ 
+ ROOT = Path(__file__).resolve().parent
+ BASELINE = "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+ 
+ 
+-def compare_models(torch,accepted,left,right,opts,initial,metrics,prefix):
+-    a=dict(left.named_parameters());b=dict(right.named_parameters())
+-    if set(a)!=set(b):raise ValueError('model parameter keys differ')
+-    for name,p in a.items():
+-        q=b[name]
+-        for key,x,y in [('grad',p.grad,q.grad),('param',p.detach(),q.detach()),
+-                        ('delta',p.detach()-initial[name],q.detach()-initial[name])]:
+-            accepted.compare(torch,prefix+key+'.'+name,x,y,'tensor',metrics)
+-        sa,sb=opts[0].state[p],opts[1].state[q]
+-        if set(sa)!=set(sb) or set(sa)!={'step','exp_avg','exp_avg_sq'}:raise ValueError('optimizer keys differ')
+-        for key,value in sa.items():accepted.compare(torch,prefix+'state.'+name+'.'+key,value,sb[key],
+-                                                   'exact' if key=='step' else 'state',metrics)
+-    aa,bb=left.state_dict(),right.state_dict()
+-    if set(aa)!=set(bb):raise ValueError('model state keys differ')
+-    for name in set(aa)-set(a):accepted.compare(torch,prefix+'buffer.'+name,aa[name],bb[name],'tensor',metrics)
++def tensors(model, optimizer, initial, captured, losses, values):
++    packed = {"output." + name: value for name, value in captured.items()}
++    packed.update(("loss." + name, value) for name, value in losses.items())
++    packed.update((f"input_grad.{i}", values[i].grad.detach()) for i in (0, 1))
++    params = dict(model.named_parameters())
++    for name, p in params.items():
++        packed["grad." + name] = p.grad.detach()
++        packed["param." + name] = p.detach()
++        packed["delta." + name] = p.detach() - initial[name]
++        state = optimizer.state[p]
++        if set(state) != {"step", "exp_avg", "exp_avg_sq"}:
++            raise ValueError("optimizer state keys differ")
++        for key, value in state.items():
++            packed[f"state.{name}.{key}"] = value
++    for name, value in model.state_dict().items():
++        if name not in params:
++            packed["buffer." + name] = value
++    return packed
++
++
++def strict_evidence(torch, accepted, args, result, step, model, opt, initial, captured, loss, values):
++    got = tensors(model, opt, initial, captured, loss, values)
++    path = args.reference / args.output.name / f"strict_step{step}.pt"
++    if args.variant == "baseline":
++        torch.save(got, path)
++        result.setdefault("reference_snapshots", []).append(
++            dict(step=step, bytes=path.stat().st_size, sha256=data.sha(path)))
++        return
++    receipt = json.loads((path.parent / "result.json").read_bytes())
++    pinned = receipt["reference_snapshots"][step-1]
++    if receipt["status"] != "PASS_STRICT_REFERENCE5" or receipt["completed_updates"] != 5 or (
++            path.stat().st_size != pinned["bytes"] or data.sha(path) != pinned["sha256"]):
++        raise ValueError("invalid pinned strict DDR snapshot")
++    ref = torch.load(path, map_location="cpu", mmap=True, weights_only=True)
++    if set(ref) != set(got):
++        raise ValueError("strict tensor keys differ")
++    for name, value in got.items():
++        category = ("exact" if name.endswith(".step") else "state") if name.startswith("state.") else "tensor"
++        accepted.compare(torch, f"{step}.{name}", ref[name], value, category, result["metrics"])
+ 
+ 
+ def write(path, value):
+@@ -66,8 +87,10 @@
+     raise TimeoutError(f"barrier {step} deadline")
+ 
+ 
+-def runtime_check(runtime):
++def runtime_check(runtime, hbm):
+     expected = json.loads((ROOT / "RUNTIME_EXPECTED.json").read_bytes())
++    if hbm:
++        expected["env"]["LD_PRELOAD"] = hbm["path"] + ":" + expected["env"]["LD_PRELOAD"]
+     if any(runtime.get(k) != v for k, v in expected.items()):
+         raise ValueError("frozen R4 framework/KML/OpenMP/shim identity differs")
+     if "libraries_after" in runtime and runtime["libraries_after"] != expected["libraries"]:
+@@ -93,7 +116,19 @@
+     cpu36_guard.checkpoint(guard, "after_framework", torch)
+     runtime, expected = configure_backend(torch, "kml", expected_cpu)
+     result["runtime"] = runtime
+-    runtime_check(runtime)
++    paths = {line.split()[-1] for line in Path("/proc/self/maps").read_text().splitlines()
++             if "libhbm_alloc" in line}
++    hbm = None
++    if args.variant == "candidate":
++        library = os.environ["M23_HBM_LIBRARY"]
++        if paths != {library} or data.sha(library) != os.environ["M23_HBM_LIBRARY_SHA"]:
++            raise ValueError("HBM allocator path/SHA mapping differs")
++        hbm = dict(path=library, sha256=data.sha(library), node=int(os.environ["HBM_NODE"]),
++                   cap_MiB=int(os.environ["HBM_MB"]))
++    elif paths or os.environ.get("HBM_NODE"):
++        raise ValueError("unexpected allocator in DDR worker")
++    result["hbm_allocator"] = hbm
++    runtime_check(runtime, hbm)
+     module = sys.modules["kml_ops"]
+     if data.sha(module.__file__) != BASELINE or module.LINEAR_DTYPE != torch.float32:
+         raise ValueError("wrong original baseline or dtype")
+@@ -126,7 +161,7 @@
+     import check_equivalence as accepted
+     definitions = accepted.model_definitions(torch)
+     factory, angles = definitions["Encoder"], definitions["protocol_angles"](16, 1)
+-    roles = ("baseline", "candidate") if strict else (args.variant,)
++    roles = (args.variant,)
+     models, opts = {}, {}
+     for role in roles:
+         torch.manual_seed(0)
+@@ -136,9 +171,7 @@
+         opts[role] = training.optimizer(torch, model)
+         if sum(p.numel() for p in model.parameters()) != 37995777 or training.model_sha(model) != ref["initialization"]["initial_weights_sha256"]:
+             raise ValueError("original full Encoder/initial state differs")
+-    if "candidate" in models:
+-        enable_checkpoint(models["candidate"])
+-    initial = {n: p.detach().clone() for n, p in models["baseline"].named_parameters()} if strict else None
++    initial = {n: p.detach().clone() for n, p in models[args.variant].named_parameters()} if strict else None
+     order = list(range(1600))
+     random.Random(0).shuffle(order)
+     known_shapes = json.loads((ROOT / "NATIVE_BASELINE_SHAPES.json").read_bytes())
+@@ -184,24 +217,20 @@
+                 start_memory = memory_metrics.rss() if reset else None
+                 if reset and (not reset["available"] or start_memory["peak_rss_bytes"] != start_memory["rss_bytes"]):
+                     raise RuntimeError("could not reset/verify per-step RSS high-water mark")
+-                inventory = SavedStorage(model, values[role]) if strict and step == 1 else None
+-                observe = torch.autograd.graph.saved_tensors_hooks(inventory.pack, inventory.unpack) if inventory else nullcontext()
+                 begin = time.monotonic_ns()
+                 try:
+-                    with observe:
+-                        loss = losses[role] = training.train_step(torch, model, opts[role], values[role], mask)
++                    loss = losses[role] = training.train_step(torch, model, opts[role], values[role], mask)
+                 finally:
+                     for handle in handles:
+                         handle.remove()
+                 end = time.monotonic_ns()
+                 rss_after = memory_metrics.rss()
+                 training.validate_update(torch, model, opts[role], values[role], step)
+-                if inventory:
+-                    result.setdefault("strict_step1_storage", {})[role] = inventory.summary(model, opts[role])
++                actual_huge = rss_after["hugetlb_bytes"]
++                if (not hbm and actual_huge != 0) or (hbm and not 0 < actual_huge <= hbm["cap_MiB"]*2**20):
++                    raise ValueError(f"unexpected training hugetlb bytes {actual_huge}")
+                 logical = runtime["kml_gemm_calls"] - before
+-                trace_matches = (logical == 149 and shapes == known_shapes) if role == "baseline" else (
+-                    logical == 173 and all(shapes.get(k, 0) >= v for k, v in known_shapes.items()))
+-                if not trace_matches:
++                if logical != 149 or shapes != known_shapes:
+                     result["bad_native"] = dict(step=step, role=role, shapes=dict(shapes), logical=runtime["kml_gemm_calls"]-before)
+                     raise ValueError("original native SGEMM trace differs")
+                 for name, item in loss.items():
+@@ -218,18 +247,12 @@
+                                  rss_before=rss_before, training_start=start_memory, rss_after=rss_after,
+                                  peak_reset=reset, kml_calls=logical, native_sgemm_calls=sum(shapes.values()),
+                                  native_shapes=dict(shapes), sampled=not strict and step >= 6))
+-            if strict:
+-                for key in captures["baseline"]:
+-                    accepted.compare(torch, f"{step}.output.{key}", captures["baseline"][key], captures["candidate"][key], "tensor", result["metrics"])
+-                for key in losses["baseline"]:
+-                    accepted.compare(torch, f"{step}.loss.{key}", losses["baseline"][key], losses["candidate"][key], "tensor", result["metrics"])
+-                for i in (0,1):
+-                    accepted.compare(torch, f"{step}.input_grad.{i}", values["baseline"][i].grad, values["candidate"][i].grad, "tensor", result["metrics"])
+-                compare_models(torch, accepted, models["baseline"], models["candidate"],
+-                               [opts[role] for role in roles], initial, result["metrics"], f"{step}.")
+             for row in rows:
+                 log.write(json.dumps(row) + "\n")
+             log.flush()
++            if strict:
++                strict_evidence(torch, accepted, args, result, step, models[args.variant], opts[args.variant],
++                                initial, captures[args.variant], losses[args.variant], values[args.variant])
+             ledger.confirm(step)
+             result["completed_updates"] = step
+     if not strict:
+@@ -238,16 +261,19 @@
+     data.load_descriptor(args.descriptor, args.descriptor_sha)
+     result["final_model_sha256"] = {role: training.model_sha(model) for role, model in models.items()}
+     finish_backend(runtime, expected)
+-    runtime_check(runtime)
++    runtime_check(runtime, hbm)
+     cpu36_guard.checkpoint(guard, "publish", torch)
+-    result["status"] = "PASS_STRICT_ENCODER5" if strict else "PASS_PERF25"
++    if strict:
++        result["status"] = "PASS_STRICT_REFERENCE5" if args.variant == "baseline" else "PASS_STRICT_ENCODER5"
++    else:
++        result["status"] = "PASS_PERF25"
+ 
+ 
+ if __name__ == "__main__":
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--phase", choices=("strict", "perf"), required=True)
+     parser.add_argument("--variant", choices=("baseline", "candidate"), required=True)
+-    for flag in ("descriptor", "allocation", "phase-root", "output"):
++    for flag in ("descriptor", "allocation", "phase-root", "output", "reference"):
+         parser.add_argument("--" + flag, type=Path, required=True)
+     parser.add_argument("--descriptor-sha", required=True)
+     parser.add_argument("--deadline", required=True, type=float)
+--- previous/payload/memory_metrics.py
++++ continue/payload/memory_metrics.py
+@@ -11,8 +11,8 @@
+             if len(parts) != 2 or parts[1] != 'kB' or int(parts[0]) < 0:
+                 raise ValueError('invalid RSS units/value: ' + line)
+             fields[key] = int(parts[0]) * 1024
+-    if set(fields) != {'VmRSS', 'VmHWM', 'HugetlbPages'} or fields['HugetlbPages'] != 0:
+-        raise ValueError('missing process RSS evidence or unexpected hugetlb allocation')
++    if set(fields) != {'VmRSS', 'VmHWM', 'HugetlbPages'}:
++        raise ValueError('missing process RSS evidence')
+     return dict(rss_bytes=fields['VmRSS'], peak_rss_bytes=fields['VmHWM'],
+                 rss_MiB=fields['VmRSS'] / 2**20, peak_rss_MiB=fields['VmHWM'] / 2**20,
+                 hugetlb_bytes=fields['HugetlbPages'])
+--- previous/run_worker.sh
++++ continue/run_worker.sh
+@@ -11,4 +11,8 @@
+     printf 'worker shell did not inherit the exact native allocation\n' >&2
+     exit 2
+ fi
++if [[ -n "\${M23_HBM_LIBRARY:-}" ]]; then
++    exec /usr/bin/numactl --physcpubind="$CPUS" --membind="$NODE" /usr/bin/env \
++      HBM=1 LD_PRELOAD="$M23_HBM_LIBRARY:$LD_PRELOAD" "$C2_PYTHON" -B "$ROOT/payload/worker.py" "$@"
++fi
+ exec /usr/bin/numactl --physcpubind="$CPUS" --membind="$NODE" "$C2_PYTHON" -B "$ROOT/payload/worker.py" "$@"
+--- previous/prepare.py
++++ continue/prepare.py
+@@ -29,8 +29,8 @@
+     path = root / "M23_RUN_BINDING.json"
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+-    need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM")
+-         and root.name.startswith("M23_R") and binding["user_authorized"] is True,
++    need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108")
++         and root.name.startswith("HBM_R") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+     need(sha(root / "M23_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"
+--- previous/scheduler_handoff.py
++++ continue/scheduler_handoff.py
+@@ -136,6 +136,6 @@
+     parser.add_argument('--root', type=Path, required=True)
+     parser.add_argument('--job-id', required=True)
+     args = parser.parse_args()
+-    if args.root.resolve().parent != Path('/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM'):
++    if args.root.resolve().parent != Path('/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108'):
+         parser.error('M23-owned remote staging root required')
+     publish(args.root.resolve(), args.job_id)
+--- previous/launch.py
++++ continue/launch.py
+@@ -13,6 +13,7 @@
+ import sys
+ import traceback
+ 
++from hbm_gate import prepare_hbm, free_pages
+ from owned_processes import Owned, cleanup, process_table
+ from prepare import ROOT, need, save, verify
+ from scheduler_handoff import await_handoff, create_request, live_context
+@@ -137,14 +138,6 @@
+         need(res["cpu"] == 38 * count and res["mem"] == mem and res["gpu"]["amount"] == 0
+              and res["npu"]["count"] == 0, "native request/allocation differs")
+     memory_controller(context["job_id"], group, mem)
+-    toolchain = {}
+-    for lib in ("libubsan.so", "libubsan.a"):
+-        if Path("/usr/bin/cc").is_file():
+-            p = subprocess.run(["/usr/bin/cc", "-print-file-name=" + lib],
+-                               capture_output=True, text=True, timeout=5)
+-            toolchain[lib] = dict(exit_code=p.returncode, stdout=p.stdout.strip(), stderr=p.stderr,
+-                                  readable=Path(p.stdout.strip()).is_file())
+-    save(EVIDENCE / "ubsan_availability.json", dict(compiler="/usr/bin/cc", queries=toolchain))
+     return topology(context, count)
+ 
+ 
+@@ -166,8 +159,8 @@
+     return dict(at_ns=time.monotonic_ns(), per_cpu=cpu, worker_ticks=ticks)
+ 
+ 
+-def phase(name, variant, contracts, owner, binding, deadline):
+-    out = EVIDENCE / (name if name == "strict" else f"perf_{variant}")
++def phase(name, variant, contracts, owner, binding, deadline, placements):
++    out = EVIDENCE / f"{name}_{variant}"
+     out.mkdir()
+     barriers = out / "barriers"
+     barriers.mkdir()
+@@ -185,9 +178,16 @@
+         argv = ["/bin/bash", str(ROOT / "run_worker.sh"), ",".join(map(str,receipt["allocated"])), str(node),
+                 "--phase",name,"--variant",variant,"--descriptor",str(ROOT / "ENGINEERING_DESCRIPTOR.json"),
+                 "--descriptor-sha",binding["descriptor_sha256"],"--allocation",str(EVIDENCE / f"{rank}.allocation.json"),
+-                "--phase-root",str(out),"--output",str(out / rank),"--deadline",str(deadline)]
++                "--phase-root",str(out),"--output",str(out / rank),"--deadline",str(deadline),
++                "--reference",str(EVIDENCE / "strict_baseline")]
+         save(out / f"{rank}.command.json", dict(argv=argv))
+         env = dict(os.environ, M1_PARENT_CPU_LIST=inherited, M1_INHERIT_RECEIPT=str(out / f"{rank}.before_numactl.txt"))
++        if variant == "candidate":
++            cfg = placements[node]
++            need((free_pages(cfg["hbm_node"])-16)*2 >= cfg["cap_MiB"], "HBM pool became smaller after safety gate")
++            env.update(M23_HBM_LIBRARY=cfg["library"], M23_HBM_LIBRARY_SHA=cfg["library_sha256"],
++                       HBM_NODE=str(cfg["hbm_node"]), HBM_MB=str(cfg["cap_MiB"]), HBM_MIN_KB="256", HBM_STATS="1")
++        save(out / f"{rank}.env.json", {k:v for k,v in env.items() if k.startswith(("M23_", "HBM_"))})
+         with (out / f"{rank}.log").open("xb") as log:
+             proc[node] = subprocess.Popen(argv, cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+     os.sched_setaffinity(0, {next(iter(contracts.values()))["reserved"][0]})
+@@ -222,7 +222,9 @@
+             time.sleep(.02)
+     need(name != "perf" or step == 27, "incomplete baseline rendezvous")
+     results = [read(out / f"node{n}" / "result.json") for n in contracts]
+-    expected, updates = ("PASS_STRICT_ENCODER5",5) if name == "strict" else ("PASS_PERF25",25)
++    expected, updates = ("PASS_PERF25",25)
++    if name == "strict":
++        expected, updates = ("PASS_STRICT_REFERENCE5" if variant == "baseline" else "PASS_STRICT_ENCODER5", 5)
+     need(all(r["status"] == expected and r["completed_updates"] == updates and r["job_id"] == os.environ["CCS_JOB_ID"]
+              and r["host"] == os.uname().nodename and r["variant"] == variant for r in results), "actual result receipts required")
+     save(out / "phase_receipt.json", dict(status=expected, job_id=os.environ["CCS_JOB_ID"],
+@@ -242,7 +244,7 @@
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        need(0 < wall <= 1800 and binding["mode"] == "ddr_ckpt6", "wrong wall or mode")
++        need(0 < wall <= 1800 and binding["mode"] == "ckpt0_ddr_hbm", "wrong wall or mode")
+         libc = ctypes.CDLL(None, use_errno=True)
+         need(libc.prctl(36,1,0,0,0) == 0, "cannot become owned-process subreaper")
+         for sig in (signal.SIGTERM, signal.SIGINT, signal.SIGALRM):
+@@ -250,13 +252,17 @@
+         end = START + wall - 60
+         signal.setitimer(signal.ITIMER_REAL, max(.001, end-time.monotonic()))
+         contracts = allocation(binding)
+-        phase("strict", "baseline", contracts, owner, binding, end)
+-        outcome["steps"]["strict_each_role"] = 5
+-        for variant in ("baseline", "candidate"):
+-            phase("perf", variant, contracts, owner, binding, end)
+-            outcome["steps"][variant + "_each_domain"] = 25
++        placements = prepare_hbm(ROOT, EVIDENCE, contracts, binding, end)
++        outcome["hbm_safety"] = "PASS"
++        for name, steps in (("strict", 5), ("perf", 25)):
++            for variant in ("baseline", "candidate"):
++                phase(name, variant, contracts, owner, binding, end, placements)
++                outcome["steps"][f"{name}_{variant}_each_domain"] = steps
++        for node, cfg in placements.items():
++            need(free_pages(cfg["hbm_node"]) == cfg["pool_pages_before"], f"HBM pool not restored for node {node}")
++        outcome["hbm_pool_restored"] = True
+         verify(ROOT, pin)
+-        outcome["status"] = "PASS_DDR_AB"
++        outcome["status"] = "PASS_HBM_AB"
+     except BaseException as exc:
+         outcome.update(error=repr(exc), traceback=traceback.format_exc())
+     finally:
+@@ -267,11 +273,17 @@
+             receipt = cleanup(owner, min(deadline,time.monotonic()+30))
+             save(EVIDENCE / "cleanup.json", receipt)
+             need(receipt["all_reaped"], "owned process cleanup incomplete")
++            snapshots = sorted((EVIDENCE / "strict_baseline").glob("node*/strict_step*.pt"))
++            save(EVIDENCE / "strict_snapshot_cleanup.json",
++                 dict(deleted=[str(p.relative_to(EVIDENCE)) for p in snapshots],
++                      bytes=sum(p.stat().st_size for p in snapshots)))
++            for path in snapshots:
++                path.unlink()
+         except BaseException as exc:
+             outcome.update(status="FAIL_STOP", cleanup_error=repr(exc))
+         outcome["finished"] = time.monotonic()
+         save(EVIDENCE / "SUMMARY.json", outcome)
+-    return 0 if outcome["status"] == "PASS_DDR_AB" else 2
++    return 0 if outcome["status"] == "PASS_HBM_AB" else 2
+ 
+ 
+ if __name__ == "__main__":

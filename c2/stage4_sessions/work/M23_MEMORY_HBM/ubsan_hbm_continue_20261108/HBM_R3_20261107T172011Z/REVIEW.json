@@ -1,0 +1,2149 @@
+{
+  "job_id": "2061358",
+  "scheduler_state": "SUCCEEDED",
+  "host": "cn21762",
+  "domain_count": 4,
+  "exit_code": 0,
+  "queue_seconds": 148.0,
+  "allocation_seconds": 495.0,
+  "cleanup": {
+    "actions": [],
+    "all_reaped": true,
+    "deadline": 4440561.493066517,
+    "finished": 4440534.674284287,
+    "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+    "owned": {
+      "1832078": 444005292,
+      "1832082": 444005295,
+      "1832085": 444005299,
+      "1832090": 444005305,
+      "1839273": 444013150,
+      "1839284": 444013153,
+      "1839297": 444013157,
+      "1839317": 444013161,
+      "1846584": 444021330,
+      "1846588": 444021332,
+      "1846589": 444021336,
+      "1846593": 444021340,
+      "1863921": 444041152,
+      "1863925": 444041155,
+      "1863927": 444041159,
+      "1863931": 444041163
+    },
+    "reaped": [],
+    "remaining_live": [],
+    "remaining_processes": [],
+    "started": 4440531.493074767
+  },
+  "native_pid_cleared": true,
+  "candidate_sha256": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+  "c_gate": {
+    "status": "PASS_NEW_50_C_UBSAN_CASES_AND_ISOLATED_LIBRARY_ONLY",
+    "real_HBM": false,
+    "real_mempolicy": false,
+    "preload_probe": false,
+    "model": false,
+    "ubsan_controls": "PASS_NORMAL_EXIT0_INTENTIONAL_UB_EXIT1_WITH_DIAGNOSTIC",
+    "compiler_sha256": "69e9ed93cb21ec931eaad471cf1b6e940ee0c762b4c71eecef7ac0b30d22f999",
+    "runtime_sha256": "a454036c69151e55228ec086ccc870aca4dc3e64d9a7bcbd1cfd26878c8a106a",
+    "previous_expected_failures": 21,
+    "previous_controls_passed": 29,
+    "previous_expectations_met": 50,
+    "candidate_passed": 50,
+    "library_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+    "steps": [
+      {
+        "label": "compiler",
+        "command": [
+          "/usr/bin/cc",
+          "--version"
+        ],
+        "started": 1794072208.6734953,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831334,
+        "exit_code": 0,
+        "finished": 1794072208.690494
+      },
+      {
+        "label": "uname",
+        "command": [
+          "uname",
+          "-a"
+        ],
+        "started": 1794072208.693591,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831341,
+        "exit_code": 0,
+        "finished": 1794072208.718467
+      },
+      {
+        "label": "glibc",
+        "command": [
+          "getconf",
+          "GNU_LIBC_VERSION"
+        ],
+        "started": 1794072208.7212067,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831353,
+        "exit_code": 0,
+        "finished": 1794072208.7341647
+      },
+      {
+        "label": "source_sha",
+        "command": [
+          "sha256sum",
+          "-c",
+          "ARTIFACT_SHA256.txt"
+        ],
+        "started": 1794072208.736919,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831360,
+        "exit_code": 0,
+        "finished": 1794072208.762326
+      },
+      {
+        "label": "package_integrity",
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "tests/verify_delivery.py",
+          "--json",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/linux_evidence/package_integrity.json"
+        ],
+        "started": 1794072208.765185,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831362,
+        "exit_code": 0,
+        "finished": 1794072208.9912462
+      },
+      {
+        "label": "compiler_elf",
+        "command": [
+          "readelf",
+          "-h",
+          "/usr/bin/gcc"
+        ],
+        "started": 1794072208.9946458,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831363,
+        "exit_code": 0,
+        "finished": 1794072209.0121644
+      },
+      {
+        "label": "compiler_target",
+        "command": [
+          "/usr/bin/cc",
+          "-dumpmachine"
+        ],
+        "started": 1794072209.0150695,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831364,
+        "exit_code": 0,
+        "finished": 1794072209.0331209
+      },
+      {
+        "label": "compiler_rpm",
+        "command": [
+          "rpm",
+          "-qf",
+          "/usr/bin/gcc"
+        ],
+        "started": 1794072209.0388427,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831365,
+        "exit_code": 0,
+        "finished": 1794072209.0808659
+      },
+      {
+        "label": "ubsan_elf",
+        "command": [
+          "readelf",
+          "-h",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/deps/extract/usr/lib64/libubsan.so.1.0.0"
+        ],
+        "started": 1794072209.0855331,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831366,
+        "exit_code": 0,
+        "finished": 1794072209.103026
+      },
+      {
+        "label": "ubsan_dynamic",
+        "command": [
+          "readelf",
+          "-d",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/deps/extract/usr/lib64/libubsan.so.1.0.0"
+        ],
+        "started": 1794072209.106387,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831367,
+        "exit_code": 0,
+        "finished": 1794072209.1240678
+      },
+      {
+        "label": "ubsan_ldd",
+        "command": [
+          "ldd",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/deps/extract/usr/lib64/libubsan.so.1.0.0"
+        ],
+        "started": 1794072209.127319,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831368,
+        "exit_code": 0,
+        "finished": 1794072209.153618
+      },
+      {
+        "label": "build_control_positive",
+        "command": [
+          "/usr/bin/cc",
+          "-std=gnu11",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-pthread",
+          "-fsanitize=undefined",
+          "-fno-sanitize-recover=all",
+          "-L/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/ubsan_link",
+          "-Wl,-rpath,/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/ubsan_link",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/ubsan_positive.c",
+          "-o",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/ubsan_positive"
+        ],
+        "started": 1794072209.1835077,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831373,
+        "exit_code": 0,
+        "finished": 1794072209.42037
+      },
+      {
+        "label": "control_positive_ldd",
+        "command": [
+          "ldd",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/ubsan_positive"
+        ],
+        "started": 1794072209.4242263,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831379,
+        "exit_code": 0,
+        "finished": 1794072209.4663937
+      },
+      {
+        "label": "control_positive",
+        "command": [
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/ubsan_positive"
+        ],
+        "started": 1794072209.4710739,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831384,
+        "exit_code": 0,
+        "finished": 1794072209.4978201
+      },
+      {
+        "label": "build_control_negative",
+        "command": [
+          "/usr/bin/cc",
+          "-std=gnu11",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-pthread",
+          "-fsanitize=undefined",
+          "-fno-sanitize-recover=all",
+          "-L/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/ubsan_link",
+          "-Wl,-rpath,/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/ubsan_link",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/ubsan_negative.c",
+          "-o",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/ubsan_negative"
+        ],
+        "started": 1794072209.5024297,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831385,
+        "exit_code": 0,
+        "finished": 1794072209.7384732
+      },
+      {
+        "label": "control_negative_ldd",
+        "command": [
+          "ldd",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/ubsan_negative"
+        ],
+        "started": 1794072209.7425613,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831399,
+        "exit_code": 0,
+        "finished": 1794072209.7841647
+      },
+      {
+        "label": "control_negative",
+        "command": [
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/ubsan_negative"
+        ],
+        "started": 1794072209.7892008,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831427,
+        "exit_code": 1,
+        "finished": 1794072209.8321517
+      },
+      {
+        "label": "build_previous",
+        "command": [
+          "/usr/bin/cc",
+          "-std=gnu11",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-pthread",
+          "-fsanitize=undefined",
+          "-fno-sanitize-recover=all",
+          "-L/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/ubsan_link",
+          "-Wl,-rpath,/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/ubsan_link",
+          "-DS03_SOURCE=\"../frozen/hbm_alloc.c\"",
+          "tests/bounds_harness.c",
+          "-o",
+          "build/bounds_previous"
+        ],
+        "started": 1794072209.8397386,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831446,
+        "exit_code": 0,
+        "finished": 1794072210.7300596
+      },
+      {
+        "label": "previous_harness_ldd",
+        "command": [
+          "ldd",
+          "build/bounds_previous"
+        ],
+        "started": 1794072210.734303,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831589,
+        "exit_code": 0,
+        "finished": 1794072210.7766776
+      },
+      {
+        "label": "previous_cases",
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "tests/run_cases.py",
+          "build/bounds_previous",
+          "--source",
+          "frozen/hbm_alloc.c",
+          "--version",
+          "previous",
+          "--json",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/linux_evidence/previous_cases.json"
+        ],
+        "started": 1794072210.7821918,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831607,
+        "exit_code": 0,
+        "finished": 1794072211.6105776
+      },
+      {
+        "label": "build_candidate",
+        "command": [
+          "/usr/bin/cc",
+          "-std=gnu11",
+          "-O1",
+          "-g",
+          "-Wall",
+          "-Wextra",
+          "-pthread",
+          "-fsanitize=undefined",
+          "-fno-sanitize-recover=all",
+          "-L/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/ubsan_link",
+          "-Wl,-rpath,/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/ubsan_link",
+          "tests/bounds_harness.c",
+          "-o",
+          "build/bounds_candidate"
+        ],
+        "started": 1794072211.6159203,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831843,
+        "exit_code": 0,
+        "finished": 1794072212.5075076
+      },
+      {
+        "label": "candidate_harness_ldd",
+        "command": [
+          "ldd",
+          "build/bounds_candidate"
+        ],
+        "started": 1794072212.5126731,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831901,
+        "exit_code": 0,
+        "finished": 1794072212.5565028
+      },
+      {
+        "label": "candidate_cases",
+        "command": [
+          "/usr/bin/python3",
+          "-B",
+          "tests/run_cases.py",
+          "build/bounds_candidate",
+          "--source",
+          "candidate/hbm_alloc.c",
+          "--version",
+          "candidate",
+          "--json",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/linux_evidence/candidate_cases.json"
+        ],
+        "started": 1794072212.563107,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831906,
+        "exit_code": 0,
+        "finished": 1794072213.3919683
+      },
+      {
+        "label": "build_library",
+        "command": [
+          "/usr/bin/cc",
+          "-std=gnu11",
+          "-O2",
+          "-fPIC",
+          "-shared",
+          "-pthread",
+          "-Wall",
+          "-Wextra",
+          "candidate/hbm_alloc.c",
+          "-o",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/libhbm_alloc_s03_round2.so"
+        ],
+        "started": 1794072213.3984814,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1831999,
+        "exit_code": 0,
+        "finished": 1794072213.7859094
+      },
+      {
+        "label": "elf_header",
+        "command": [
+          "readelf",
+          "-h",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/libhbm_alloc_s03_round2.so"
+        ],
+        "started": 1794072213.791371,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1832005,
+        "exit_code": 0,
+        "finished": 1794072213.8089676
+      },
+      {
+        "label": "elf_symbols",
+        "command": [
+          "readelf",
+          "-Ws",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/libhbm_alloc_s03_round2.so"
+        ],
+        "started": 1794072213.8139887,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1832006,
+        "exit_code": 0,
+        "finished": 1794072213.83303
+      },
+      {
+        "label": "ldd",
+        "command": [
+          "ldd",
+          "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/libhbm_alloc_s03_round2.so"
+        ],
+        "started": 1794072213.8381035,
+        "affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "pid": 1832007,
+        "exit_code": 0,
+        "finished": 1794072213.8644829
+      }
+    ],
+    "finished_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ]
+  },
+  "hbm_safety": [
+    {
+      "cap_MiB": 3800,
+      "hbm_node": 16,
+      "library": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/libhbm_alloc_s03_round2.so",
+      "library_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+      "placement": {
+        "bulk": {
+          "mapping": "400016c00000-400104400000 rw-p 00000000 00:0e 1307388640                 /anon_hugepage (deleted)",
+          "numa": "400016c00000 bind:16 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N16=1900 kernelpagesize_kB=2048"
+        },
+        "fallback": {
+          "mapping": "400104a40000-400104e41000 rw-p 00000000 00:00 0 ",
+          "numa": "400104a40000 bind:0 anon=514 dirty=514 active=0 N0=514 kernelpagesize_kB=4"
+        },
+        "first": {
+          "mapping": "400016c00000-400104400000 rw-p 00000000 00:0e 1307388640                 /anon_hugepage (deleted)",
+          "numa": "400016c00000 bind:16 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N16=1900 kernelpagesize_kB=2048"
+        },
+        "worker0": {
+          "mapping": "400016c00000-400104400000 rw-p 00000000 00:0e 1307388640                 /anon_hugepage (deleted)",
+          "numa": "400016c00000 bind:16 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N16=1900 kernelpagesize_kB=2048"
+        },
+        "worker1": {
+          "mapping": "400016c00000-400104400000 rw-p 00000000 00:0e 1307388640                 /anon_hugepage (deleted)",
+          "numa": "400016c00000 bind:16 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N16=1900 kernelpagesize_kB=2048"
+        },
+        "worker2": {
+          "mapping": "400016c00000-400104400000 rw-p 00000000 00:0e 1307388640                 /anon_hugepage (deleted)",
+          "numa": "400016c00000 bind:16 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N16=1900 kernelpagesize_kB=2048"
+        },
+        "worker3": {
+          "mapping": "400016c00000-400104400000 rw-p 00000000 00:0e 1307388640                 /anon_hugepage (deleted)",
+          "numa": "400016c00000 bind:16 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N16=1900 kernelpagesize_kB=2048"
+        }
+      },
+      "pool_pages_after": 2020,
+      "pool_pages_before": 2020,
+      "status": "PASS_REAL_HBM_SAFETY"
+    },
+    {
+      "cap_MiB": 3800,
+      "hbm_node": 17,
+      "library": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/libhbm_alloc_s03_round2.so",
+      "library_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+      "placement": {
+        "bulk": {
+          "mapping": "400008600000-4000f5e00000 rw-p 00000000 00:0e 1270204900                 /anon_hugepage (deleted)",
+          "numa": "400008600000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+        },
+        "fallback": {
+          "mapping": "4000f6440000-4000f6841000 rw-p 00000000 00:00 0 ",
+          "numa": "4000f6440000 bind:1 anon=514 dirty=514 active=0 N1=514 kernelpagesize_kB=4"
+        },
+        "first": {
+          "mapping": "400008600000-4000f5e00000 rw-p 00000000 00:0e 1270204900                 /anon_hugepage (deleted)",
+          "numa": "400008600000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+        },
+        "worker0": {
+          "mapping": "400008600000-4000f5e00000 rw-p 00000000 00:0e 1270204900                 /anon_hugepage (deleted)",
+          "numa": "400008600000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+        },
+        "worker1": {
+          "mapping": "400008600000-4000f5e00000 rw-p 00000000 00:0e 1270204900                 /anon_hugepage (deleted)",
+          "numa": "400008600000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+        },
+        "worker2": {
+          "mapping": "400008600000-4000f5e00000 rw-p 00000000 00:0e 1270204900                 /anon_hugepage (deleted)",
+          "numa": "400008600000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+        },
+        "worker3": {
+          "mapping": "400008600000-4000f5e00000 rw-p 00000000 00:0e 1270204900                 /anon_hugepage (deleted)",
+          "numa": "400008600000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+        }
+      },
+      "pool_pages_after": 2020,
+      "pool_pages_before": 2020,
+      "status": "PASS_REAL_HBM_SAFETY"
+    },
+    {
+      "cap_MiB": 3800,
+      "hbm_node": 18,
+      "library": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/libhbm_alloc_s03_round2.so",
+      "library_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+      "placement": {
+        "bulk": {
+          "mapping": "400025600000-400112e00000 rw-p 00000000 00:0e 1212366768                 /anon_hugepage (deleted)",
+          "numa": "400025600000 bind:18 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N18=1900 kernelpagesize_kB=2048"
+        },
+        "fallback": {
+          "mapping": "400113440000-400113841000 rw-p 00000000 00:00 0 ",
+          "numa": "400113440000 bind:2 anon=514 dirty=514 active=0 N2=514 kernelpagesize_kB=4"
+        },
+        "first": {
+          "mapping": "400025600000-400112e00000 rw-p 00000000 00:0e 1212366768                 /anon_hugepage (deleted)",
+          "numa": "400025600000 bind:18 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N18=1900 kernelpagesize_kB=2048"
+        },
+        "worker0": {
+          "mapping": "400025600000-400112e00000 rw-p 00000000 00:0e 1212366768                 /anon_hugepage (deleted)",
+          "numa": "400025600000 bind:18 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N18=1900 kernelpagesize_kB=2048"
+        },
+        "worker1": {
+          "mapping": "400025600000-400112e00000 rw-p 00000000 00:0e 1212366768                 /anon_hugepage (deleted)",
+          "numa": "400025600000 bind:18 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N18=1900 kernelpagesize_kB=2048"
+        },
+        "worker2": {
+          "mapping": "400025600000-400112e00000 rw-p 00000000 00:0e 1212366768                 /anon_hugepage (deleted)",
+          "numa": "400025600000 bind:18 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N18=1900 kernelpagesize_kB=2048"
+        },
+        "worker3": {
+          "mapping": "400025600000-400112e00000 rw-p 00000000 00:0e 1212366768                 /anon_hugepage (deleted)",
+          "numa": "400025600000 bind:18 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N18=1900 kernelpagesize_kB=2048"
+        }
+      },
+      "pool_pages_after": 2020,
+      "pool_pages_before": 2020,
+      "status": "PASS_REAL_HBM_SAFETY"
+    },
+    {
+      "cap_MiB": 3800,
+      "hbm_node": 19,
+      "library": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/libhbm_alloc_s03_round2.so",
+      "library_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+      "placement": {
+        "bulk": {
+          "mapping": "400022a00000-400110200000 rw-p 00000000 00:0e 1212370692                 /anon_hugepage (deleted)",
+          "numa": "400022a00000 bind:19 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N19=1900 kernelpagesize_kB=2048"
+        },
+        "fallback": {
+          "mapping": "400110840000-400110c41000 rw-p 00000000 00:00 0 ",
+          "numa": "400110840000 bind:3 anon=514 dirty=514 active=0 N3=514 kernelpagesize_kB=4"
+        },
+        "first": {
+          "mapping": "400022a00000-400110200000 rw-p 00000000 00:0e 1212370692                 /anon_hugepage (deleted)",
+          "numa": "400022a00000 bind:19 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N19=1900 kernelpagesize_kB=2048"
+        },
+        "worker0": {
+          "mapping": "400022a00000-400110200000 rw-p 00000000 00:0e 1212370692                 /anon_hugepage (deleted)",
+          "numa": "400022a00000 bind:19 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N19=1900 kernelpagesize_kB=2048"
+        },
+        "worker1": {
+          "mapping": "400022a00000-400110200000 rw-p 00000000 00:0e 1212370692                 /anon_hugepage (deleted)",
+          "numa": "400022a00000 bind:19 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N19=1900 kernelpagesize_kB=2048"
+        },
+        "worker2": {
+          "mapping": "400022a00000-400110200000 rw-p 00000000 00:0e 1212370692                 /anon_hugepage (deleted)",
+          "numa": "400022a00000 bind:19 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N19=1900 kernelpagesize_kB=2048"
+        },
+        "worker3": {
+          "mapping": "400022a00000-400110200000 rw-p 00000000 00:0e 1212370692                 /anon_hugepage (deleted)",
+          "numa": "400022a00000 bind:19 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N19=1900 kernelpagesize_kB=2048"
+        }
+      },
+      "pool_pages_after": 2020,
+      "pool_pages_before": 2020,
+      "status": "PASS_REAL_HBM_SAFETY"
+    }
+  ],
+  "summary": {
+    "finished": 4440534.810732532,
+    "hbm_pool_restored": true,
+    "hbm_safety": "PASS",
+    "job_id": "2061358",
+    "start": 4440040.453578195,
+    "status": "PASS_HBM_AB",
+    "steps": {
+      "perf_baseline_each_domain": 25,
+      "perf_candidate_each_domain": 25,
+      "strict_baseline_each_domain": 5,
+      "strict_candidate_each_domain": 5
+    }
+  },
+  "logged_update_rows": 240,
+  "strict": {
+    "node0": {
+      "metric_count": 3895,
+      "exact_adamw_step_count": 765,
+      "tensor_max_abs": 0.0,
+      "state_max_abs": 0.0,
+      "max_applicable_rel_l2": 0.0
+    },
+    "node1": {
+      "metric_count": 3895,
+      "exact_adamw_step_count": 765,
+      "tensor_max_abs": 0.0,
+      "state_max_abs": 0.0,
+      "max_applicable_rel_l2": 0.0
+    },
+    "node2": {
+      "metric_count": 3895,
+      "exact_adamw_step_count": 765,
+      "tensor_max_abs": 0.0,
+      "state_max_abs": 0.0,
+      "max_applicable_rel_l2": 0.0
+    },
+    "node3": {
+      "metric_count": 3895,
+      "exact_adamw_step_count": 765,
+      "tensor_max_abs": 0.0,
+      "state_max_abs": 0.0,
+      "max_applicable_rel_l2": 0.0
+    }
+  },
+  "performance": {
+    "ranks": {
+      "baseline": [
+        {
+          "domain": "node0",
+          "role": "baseline",
+          "samples": 20,
+          "allocator": null,
+          "arena": null,
+          "seconds": {
+            "min": 6.354189168,
+            "median": 6.4494899409999995,
+            "max": 6.644636007
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 6419.7734375,
+            "median": 6655.693359375,
+            "max": 6837.0234375
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 0.0,
+            "median": 0.0,
+            "max": 0.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 4783.99609375,
+            "median": 5884.689453125,
+            "max": 6422.390625
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 6229344256,
+              "1": 24997888,
+              "2": 27242496,
+              "3": 43597824
+            },
+            "hugetlb_bytes": {}
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 5958221824,
+              "1": 24997888,
+              "2": 27242496,
+              "3": 43597824
+            },
+            "hugetlb_bytes": {}
+          }
+        },
+        {
+          "domain": "node1",
+          "role": "baseline",
+          "samples": 20,
+          "allocator": null,
+          "arena": null,
+          "seconds": {
+            "min": 6.288353339,
+            "median": 6.3629325745,
+            "max": 6.463601031
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 6630.16015625,
+            "median": 6769.869140625,
+            "max": 6916.89453125
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 0.0,
+            "median": 0.0,
+            "max": 0.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 6007.67578125,
+            "median": 6484.375,
+            "max": 6631.921875
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 11444224,
+              "1": 6190403584,
+              "2": 27222016,
+              "3": 43503616
+            },
+            "hugetlb_bytes": {}
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 11444224,
+              "1": 6655385600,
+              "2": 27222016,
+              "3": 43503616
+            },
+            "hugetlb_bytes": {}
+          }
+        },
+        {
+          "domain": "node2",
+          "role": "baseline",
+          "samples": 20,
+          "allocator": null,
+          "arena": null,
+          "seconds": {
+            "min": 6.288692522,
+            "median": 6.403368053,
+            "max": 6.510469444
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 6631.59765625,
+            "median": 6760.966796875,
+            "max": 6866.91015625
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 0.0,
+            "median": 0.0,
+            "max": 0.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 5903.921875,
+            "median": 6087.541015625,
+            "max": 6530.17578125
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 11440128,
+              "1": 25042944,
+              "2": 6220914688,
+              "3": 43577344
+            },
+            "hugetlb_bytes": {}
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 11440128,
+              "1": 25042944,
+              "2": 6304333824,
+              "3": 43577344
+            },
+            "hugetlb_bytes": {}
+          }
+        },
+        {
+          "domain": "node3",
+          "role": "baseline",
+          "samples": 20,
+          "allocator": null,
+          "arena": null,
+          "seconds": {
+            "min": 6.253551208,
+            "median": 6.337893698,
+            "max": 6.508794669
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 6683.96875,
+            "median": 6841.0,
+            "max": 6944.55859375
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 0.0,
+            "median": 0.0,
+            "max": 0.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 6371.51953125,
+            "median": 6515.873046875,
+            "max": 6710.83984375
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 11440128,
+              "1": 25018368,
+              "3": 6727012352,
+              "2": 27164672
+            },
+            "hugetlb_bytes": {}
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 11440128,
+              "1": 25018368,
+              "3": 6673989632,
+              "2": 27164672
+            },
+            "hugetlb_bytes": {}
+          }
+        }
+      ],
+      "candidate": [
+        {
+          "domain": "node0",
+          "role": "candidate",
+          "samples": 20,
+          "allocator": {
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/libhbm_alloc_s03_round2.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "node": 16,
+            "cap_MiB": 3800
+          },
+          "arena": {
+            "allocations": 11903,
+            "cumulative_hbm_GB": 451.3,
+            "reused": 11748,
+            "ddr_large_allocations": 23073,
+            "cumulative_ddr_large_GB": 78.1,
+            "bump_high_water_GB": 3.98
+          },
+          "seconds": {
+            "min": 3.150353714,
+            "median": 3.262663239,
+            "max": 3.411464607
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 1665.30859375,
+            "median": 1727.80859375,
+            "max": 1871.63671875
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 3800.0,
+            "median": 3800.0,
+            "max": 3800.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 5280.23046875,
+            "median": 5403.21875,
+            "max": 5567.6328125
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 1460146176,
+              "1": 25026560,
+              "2": 27242496,
+              "3": 43630592
+            },
+            "hugetlb_bytes": {
+              "16": 3984588800
+            }
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 1728540672,
+              "1": 25026560,
+              "2": 27242496,
+              "3": 43630592
+            },
+            "hugetlb_bytes": {
+              "16": 3984588800
+            }
+          }
+        },
+        {
+          "domain": "node1",
+          "role": "candidate",
+          "samples": 20,
+          "allocator": {
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/libhbm_alloc_s03_round2.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "node": 17,
+            "cap_MiB": 3800
+          },
+          "arena": {
+            "allocations": 11903,
+            "cumulative_hbm_GB": 451.3,
+            "reused": 11748,
+            "ddr_large_allocations": 23073,
+            "cumulative_ddr_large_GB": 78.1,
+            "bump_high_water_GB": 3.98
+          },
+          "seconds": {
+            "min": 3.128481515,
+            "median": 3.2625164824999997,
+            "max": 3.409056887
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 1617.109375,
+            "median": 1669.03125,
+            "max": 1719.69921875
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 3800.0,
+            "median": 3800.0,
+            "max": 3800.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 5183.6640625,
+            "median": 5338.3984375,
+            "max": 5442.92578125
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 11456512,
+              "1": 1531473920,
+              "2": 27197440,
+              "3": 43630592
+            },
+            "hugetlb_bytes": {
+              "17": 3984588800
+            }
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 11456512,
+              "1": 1614860288,
+              "2": 27197440,
+              "3": 43630592
+            },
+            "hugetlb_bytes": {
+              "17": 3984588800
+            }
+          }
+        },
+        {
+          "domain": "node2",
+          "role": "candidate",
+          "samples": 20,
+          "allocator": {
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/libhbm_alloc_s03_round2.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "node": 18,
+            "cap_MiB": 3800
+          },
+          "arena": {
+            "allocations": 11903,
+            "cumulative_hbm_GB": 451.3,
+            "reused": 11748,
+            "ddr_large_allocations": 23073,
+            "cumulative_ddr_large_GB": 78.1,
+            "bump_high_water_GB": 3.98
+          },
+          "seconds": {
+            "min": 3.163215288,
+            "median": 3.2661934365,
+            "max": 3.405526919
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 1676.66015625,
+            "median": 1801.654296875,
+            "max": 1885.9375
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 3800.0,
+            "median": 3800.0,
+            "max": 3800.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 5269.0390625,
+            "median": 5511.84375,
+            "max": 5681.9375
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 11456512,
+              "1": 25071616,
+              "2": 1674526720,
+              "3": 43642880
+            },
+            "hugetlb_bytes": {
+              "18": 3984588800
+            }
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 11456512,
+              "1": 25071616,
+              "2": 1730338816,
+              "3": 43642880
+            },
+            "hugetlb_bytes": {
+              "18": 3984588800
+            }
+          }
+        },
+        {
+          "domain": "node3",
+          "role": "candidate",
+          "samples": 20,
+          "allocator": {
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/libhbm_alloc_s03_round2.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "node": 19,
+            "cap_MiB": 3800
+          },
+          "arena": {
+            "allocations": 11903,
+            "cumulative_hbm_GB": 451.3,
+            "reused": 11748,
+            "ddr_large_allocations": 23073,
+            "cumulative_ddr_large_GB": 78.1,
+            "bump_high_water_GB": 3.98
+          },
+          "seconds": {
+            "min": 3.097842847,
+            "median": 3.2234117185,
+            "max": 3.411150219
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 1635.203125,
+            "median": 1660.29296875,
+            "max": 1705.57421875
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 3800.0,
+            "median": 3800.0,
+            "max": 3800.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 5149.5703125,
+            "median": 5306.95703125,
+            "max": 5427.5703125
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 11456512,
+              "1": 25014272,
+              "3": 1592958976,
+              "2": 27226112
+            },
+            "hugetlb_bytes": {
+              "19": 3984588800
+            }
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 11456512,
+              "1": 25014272,
+              "3": 1512665088,
+              "2": 27226112
+            },
+            "hugetlb_bytes": {
+              "19": 3984588800
+            }
+          }
+        }
+      ]
+    },
+    "step_span_seconds": {
+      "baseline": {
+        "min": 6.354189168,
+        "median": 6.4494899409999995,
+        "max": 6.644636007
+      },
+      "candidate": {
+        "min": 3.163219859,
+        "median": 3.2861420895,
+        "max": 3.411464607
+      }
+    },
+    "step_span_change_percent": -49.04803140152691,
+    "throughput_change_percent": 96.26327058734444
+  }
+}

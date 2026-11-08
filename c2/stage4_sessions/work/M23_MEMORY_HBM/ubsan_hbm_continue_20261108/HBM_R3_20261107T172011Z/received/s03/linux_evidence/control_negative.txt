@@ -1,0 +1,6 @@
+/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/ubsan_negative.c:2:63: runtime error: signed integer overflow: 2147483647 + 1 cannot be represented in type 'int'
+    #0 0x400750 in main /home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/ubsan_negative.c:2
+    #1 0x40003103affc  (/usr/lib64/libc.so.6+0x2affc)
+    #2 0x40003103b0d4 in __libc_start_main (/usr/lib64/libc.so.6+0x2b0d4)
+    #3 0x40062c in _start (/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R3_20261107T172011Z/s03/build/ubsan_negative+0x40062c)
+

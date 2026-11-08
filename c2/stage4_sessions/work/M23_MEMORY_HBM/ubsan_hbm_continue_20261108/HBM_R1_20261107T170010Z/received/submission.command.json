@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn[21338-21504] !cn21340",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "1500",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R1_20261107T170010Z",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R1_20261107T170010Z/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R1_20261107T170010Z/run_job.sh",
+    "bb8bfb028ea6a854af91394ed22bcfba109e25fbc6e355a7e8d747b163ed66a5"
+  ],
+  "binding_sha256": "bb8bfb028ea6a854af91394ed22bcfba109e25fbc6e355a7e8d747b163ed66a5",
+  "created_utc": "2026-11-07T17:01:44.952967+00:00"
+}

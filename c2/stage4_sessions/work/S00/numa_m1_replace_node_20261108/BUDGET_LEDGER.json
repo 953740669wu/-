@@ -1,0 +1,360 @@
+{
+  "actual": {
+    "active_job": null,
+    "aggregate_allocated_seconds": 736,
+    "aggregate_queue_seconds": 7584,
+    "cluster_error_retries": 2,
+    "elapsed_batch_seconds": 11293.245708,
+    "evidence_based_performance_candidates": 0,
+    "model_updates": 140,
+    "native_wallclock_reported_seconds": 734,
+    "queue_seconds_after_reset_through_latest_allocation": 3363,
+    "submissions": 5,
+    "training_frame_exposures": 8960
+  },
+  "attempts": [
+    {
+      "actual_submission": {
+        "bytes": 787,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060470\\received\\submission.command.json",
+        "sha256": "2b088135f19ca555e96e54e63699b2a5c0e48cfac4466b3c5465504fbeca88e0"
+      },
+      "allocated_seconds_charged": 1,
+      "binding": {
+        "bytes": 9533,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\NUMA_RUN_BINDING.json",
+        "sha256": "5640e63cb36251c98e1c8bc352e8cec946205f0a6673d0779de8d5c1433304b0"
+      },
+      "bundle": {
+        "bytes": 183725,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060470\\JOB_2060470_evidence.zip",
+        "sha256": "dbdedfd15cb7432d882e9662b5199405cc69ac08208b950a3f284150efa68bff"
+      },
+      "cleanup": "NO_COMPUTE_LAUNCHER_START",
+      "collection_index": {
+        "bytes": 10661,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060470\\received\\COLLECTION_INDEX.json",
+        "sha256": "e7078eb6f25c9c3b39fe8858ba5620d7273c137860079aae68feef4cd0a20980"
+      },
+      "created_utc": "2026-11-07T14:21:38Z",
+      "ended_utc": "2026-11-07T14:21:41Z",
+      "error": "env: '+': No such file or directory",
+      "error_evidence": [
+        {
+          "bytes": 36,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060470\\received\\job.log",
+          "sha256": "63b0130a96a8051cdbd0f866918145cadf43d74c9bbe369cd2cafd006688129e"
+        }
+      ],
+      "host": "cn21340",
+      "job_exit_code": 127,
+      "job_id": "2060470",
+      "model_updates": 0,
+      "native_exit_code": 10001,
+      "native_pids_cleared": true,
+      "package": {
+        "bytes": 75204,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\NUMA_M1.zip",
+        "sha256": "b5c1021b98429ab68b9d84975740bb62749eb968fcaffa65d724f76e0bca9d1a"
+      },
+      "perf_completed_domains": 0,
+      "queue_seconds": 2,
+      "scheduler_terminal": {
+        "bytes": 3852,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060470\\received\\djob_final.json",
+        "sha256": "1b8ad54b14667fd4d522132133d6e4a0b9a36a130bc53fa1b04513be92262428"
+      },
+      "scheduler_wall_seconds": 0,
+      "started_utc": "2026-11-07T14:21:40Z",
+      "state": "FAILED",
+      "strict_completed_domains": 0,
+      "utc_elapsed_seconds": 1,
+      "verified_archive_members": 65,
+      "version": "BASE_R1"
+    },
+    {
+      "actual_submission": {
+        "bytes": 793,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060490\\received\\submission.command.json",
+        "sha256": "1d9d3871e51edf61c294cf740b2bbc2ba8316b23373cd43c27ad88402ccddfd2"
+      },
+      "allocated_seconds_charged": 3,
+      "binding": {
+        "bytes": 9906,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\BASE_R1A\\NUMA_RUN_BINDING.json",
+        "sha256": "72593aa09e076f43752cf703ab461fa3540032012589746ab539bb2a11960da8"
+      },
+      "bundle": {
+        "bytes": 191302,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060490\\JOB_2060490_evidence.zip",
+        "sha256": "a78538befe017bd49f686f3a44e3e4f00748626ee6057aa1a09650b311c9ebf9"
+      },
+      "cleanup": {
+        "bytes": 316,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060490\\received\\job_evidence\\cleanup.json",
+        "sha256": "0aa1de6f5572f4e9883d0fef08bf1bda84259f3f9bc0d102e9ea91e8b82aba46"
+      },
+      "collection_index": {
+        "bytes": 12528,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060490\\received\\COLLECTION_INDEX.json",
+        "sha256": "a96353c31294c5c0e2bb479ad648f3716eaaaf80c92d16341f635f8897bf121e"
+      },
+      "created_utc": "2026-11-07T14:25:01Z",
+      "ended_utc": "2026-11-07T14:25:06Z",
+      "error": "PermissionError on the job's v1 memory.limit_in_bytes",
+      "error_evidence": [
+        {
+          "bytes": 1270,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060490\\received\\job_evidence\\SUMMARY.json",
+          "sha256": "465637abe3afc3ce400d04a3b4f4cfa5ace8b9aee70dd5fc0f371ccf093da917"
+        },
+        {
+          "bytes": 425,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060490\\received\\job_evidence\\native.cgroup",
+          "sha256": "71883b285d7327cc8a474e25b453d962d36c82fb6180962701247d8a193c8e57"
+        }
+      ],
+      "host": "cn21340",
+      "job_exit_code": 2,
+      "job_id": "2060490",
+      "model_updates": 0,
+      "native_exit_code": 10001,
+      "native_pids_cleared": true,
+      "package": {
+        "bytes": 75223,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\BASE_R1A\\NUMA_M1.zip",
+        "sha256": "40b4aaa7f8ce9f2b4aac3d09d9a1433e2dc497192845e55530dec7fbf06bb105"
+      },
+      "perf_completed_domains": 0,
+      "queue_seconds": 2,
+      "scheduler_terminal": {
+        "bytes": 3863,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060490\\received\\djob_final.json",
+        "sha256": "b96e4cd1589e553843eeff13e9657f7a5c94b30122c149ae4758c74285d5b617"
+      },
+      "scheduler_wall_seconds": 3,
+      "started_utc": "2026-11-07T14:25:03Z",
+      "state": "FAILED",
+      "strict_completed_domains": 0,
+      "utc_elapsed_seconds": 3,
+      "verified_archive_members": 76,
+      "version": "BASE_R1A"
+    },
+    {
+      "actual_submission": {
+        "bytes": 793,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060503\\received\\submission.command.json",
+        "sha256": "03ad1a2087c6be483c0631552652a428750259cfdb954554dec425b1683f0091"
+      },
+      "allocated_seconds_charged": 4,
+      "binding": {
+        "bytes": 10051,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\BASE_R1B\\NUMA_RUN_BINDING.json",
+        "sha256": "d159d4de31d424b6550b12c80a48f4b640fd06629fd3d0c4dff56e9d44b46cb5"
+      },
+      "bundle": {
+        "bytes": 208953,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060503\\JOB_2060503_evidence.zip",
+        "sha256": "be4065233fe19a9d050538442856cb392bcd122bdc2bdae737ce3aa8d6ef4f36"
+      },
+      "cleanup": {
+        "bytes": 428,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060503\\received\\job_evidence\\cleanup.json",
+        "sha256": "9b0a696fab3cc9a916af9e3dd3b49045ff1b1fd390ede3e24983c128ed60ca71"
+      },
+      "collection_index": {
+        "bytes": 16044,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060503\\received\\COLLECTION_INDEX.json",
+        "sha256": "0fa6c0c60323ad36fbd898fe0c3a210276165a1e21c6b7d44d13fe23ac58d6d4"
+      },
+      "created_utc": "2026-11-07T14:28:16Z",
+      "ended_utc": "2026-11-07T14:28:22Z",
+      "error": "libnuma: CPU arguments out of range in all four worker launchers",
+      "error_evidence": [
+        {
+          "bytes": 1901,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060503\\received\\job_evidence\\strict\\node0.log",
+          "sha256": "653f8f065b6594df79c147c28c5d9d504ded1eeffa152de4dafead5ca7f0e818"
+        },
+        {
+          "bytes": 1921,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060503\\received\\job_evidence\\strict\\node1.log",
+          "sha256": "1652424d6d19282a7f236720c98de1acf69fef26eb1672a85ac9c86dc3b3b06f"
+        },
+        {
+          "bytes": 1949,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060503\\received\\job_evidence\\strict\\node2.log",
+          "sha256": "6d9839f49d3abea727f159006c087aea8514f8218ca1cb0e5bb7dc187eb9c881"
+        },
+        {
+          "bytes": 1997,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060503\\received\\job_evidence\\strict\\node3.log",
+          "sha256": "b6f3e6762cc93c4dc2c65f99490f1b219563dec12dc32c5df1b3c05deb7c8f2d"
+        }
+      ],
+      "host": "cn21340",
+      "job_exit_code": 2,
+      "job_id": "2060503",
+      "model_updates": 0,
+      "native_exit_code": 10001,
+      "native_pids_cleared": true,
+      "package": {
+        "bytes": 75573,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\BASE_R1B\\NUMA_M1.zip",
+        "sha256": "41ae95ae77fd45655443c157ab6162dbc0ab39549342e303afdcbe7d615cb03f"
+      },
+      "perf_completed_domains": 0,
+      "queue_seconds": 2,
+      "scheduler_terminal": {
+        "bytes": 3864,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\evidence\\job-2060503\\received\\djob_final.json",
+        "sha256": "2dcfc59bd483d312241246769f71567d6db9fccdc552a104f86f36db2c7a3799"
+      },
+      "scheduler_wall_seconds": 3,
+      "started_utc": "2026-11-07T14:28:18Z",
+      "state": "FAILED",
+      "strict_completed_domains": 0,
+      "utc_elapsed_seconds": 4,
+      "verified_archive_members": 96,
+      "version": "BASE_R1B"
+    },
+    {
+      "allocated_seconds_charged": 0,
+      "assigned_node": null,
+      "bundle": {
+        "bytes": 421911,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_replace_node_20261108\\old-2060643\\JOB_2060643_evidence.zip",
+        "sha256": "ab347247973b1ddf38c5061e5d09f44e411ea22456cdc4a5ee1b71f56727b74f"
+      },
+      "created_utc": "2026-11-07T14:50:40Z",
+      "disposition": "CANCELLED_WHILE_PENDING",
+      "ended_utc": "2026-11-07T16:56:56Z",
+      "job_id": "2060643",
+      "model_updates": 0,
+      "native_exit_code": 10003,
+      "native_pids_cleared": true,
+      "queue_seconds": 7576,
+      "state": "FAILED",
+      "version": "CONT_AFF_R1"
+    },
+    {
+      "actual_submission": {
+        "bytes": 804,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_replace_node_20261108\\job-2061246\\received\\submission.command.json",
+        "sha256": "4cd346aecc7bab65d007ff9fe1a0dafd034437b43f1be7aecb80891cf56840fc"
+      },
+      "allocated_seconds_charged": 728,
+      "application_cleanup_confirmed": true,
+      "binding": {
+        "bytes": 12407,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_replace_node_20261108\\NUMA_RUN_BINDING.json",
+        "sha256": "cccb393be2be01e86dc402abe91db8bc0b06ef1151fb98991442ae18ca779b20"
+      },
+      "bundle": {
+        "bytes": 1521904,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_replace_node_20261108\\job-2061246\\JOB_2061246_evidence.zip",
+        "sha256": "f9d3610c405ace77c7d999ac8f315979aee0146a87908aa1d3cddb90c9f43f92"
+      },
+      "created_utc": "2026-11-07T17:00:28Z",
+      "ended_utc": "2026-11-07T17:12:38Z",
+      "host": "cn21341",
+      "job_exit_code": 0,
+      "job_id": "2061246",
+      "model_updates": 140,
+      "native_pids_cleared": true,
+      "package": {
+        "bytes": 76857,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_replace_node_20261108\\NUMA_M1.zip",
+        "sha256": "1be8cab8371f38320fc6be2543d20989ea09ea506f38369918874aa2142437c9"
+      },
+      "perf_domains": 4,
+      "queue_seconds": 2,
+      "started_utc": "2026-11-07T17:00:30Z",
+      "state": "SUCCEEDED",
+      "strict_domains": 4,
+      "training_frame_exposures": 8960,
+      "version": "REPLACE_NODE_R1"
+    }
+  ],
+  "card_sha256": "f84212c5cef88cb26cd77082aeb505549b542953110b7e6f55dc5290d8cc0854",
+  "clock_note": "conservative local backdate covers first handoff/site checks",
+  "continuation": {
+    "card": {
+      "bytes": 5168,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\NUMA_M1_CONTINUE_AFFINITY_S00_20261107.md",
+      "sha256": "6459d95b21cde3cf34fc60654237c70827ffd80feb777b120ac42440652f2388"
+    },
+    "old_error_retry_subcap_superseded": true,
+    "original_deadline_utc": "2026-11-07T20:08:42.1894319+00:00",
+    "previous_result": {
+      "bytes": 27970,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_r1_20261107\\NUMA_RUN_RESULT.json",
+      "sha256": "d141e8de9d4b845cfd87f5d9e8f5bd644d7d638fc4862794fc2247cbf44b54cb"
+    },
+    "received_utc": "2026-11-07T14:49:37.803125+00:00",
+    "remaining_slots_before_run": 3
+  },
+  "deadline_utc": "2026-11-07T20:08:42.1894319+00:00",
+  "last_predecessor_job": "2060326",
+  "limits": {
+    "aggregate_allocated_seconds": 5400,
+    "aggregate_queue_seconds": 7200,
+    "batch_seconds": 21600,
+    "candidates": 2,
+    "error_retries": 2,
+    "max_job_seconds": 1800,
+    "submissions": 6
+  },
+  "owner": "S00",
+  "planned_host": "cn21340",
+  "prior_checkpoint_attempts": [
+    {
+      "allocated_seconds": 1,
+      "bundle_sha256": "dbdedfd15cb7432d882e9662b5199405cc69ac08208b950a3f284150efa68bff",
+      "error": "env: '+': No such file or directory",
+      "job_exit_code": 127,
+      "job_id": "2060470",
+      "model_updates": 0,
+      "queue_seconds": 2,
+      "scheduler_pids_cleared": true,
+      "state": "FAILED",
+      "version": "BASE_R1"
+    },
+    {
+      "allocated_seconds": 3,
+      "application_remaining_processes": [],
+      "bundle_sha256": "a78538befe017bd49f686f3a44e3e4f00748626ee6057aa1a09650b311c9ebf9",
+      "error": "PermissionError on /sys/fs/cgroup/memory/batch/container_2060490_rg0_00000000_e01/memory.limit_in_bytes",
+      "job_exit_code": 2,
+      "job_id": "2060490",
+      "model_updates": 0,
+      "queue_seconds": 2,
+      "scheduler_pids_cleared": true,
+      "state": "FAILED",
+      "version": "BASE_R1A"
+    }
+  ],
+  "queue_rule_change": {
+    "authority_sha256": "be679c46db9f0bf6c13cf6bc7bd0f2964076bf04334f58b53c6f27a7441bf829",
+    "effective_latest_start_utc": "2026-11-07T19:37:42+00:00",
+    "historical_queue_time_retained": true,
+    "job_id": "2060643",
+    "new_observer_pid": 2908925,
+    "new_queue_reset_utc": "2026-11-07T16:00:55+00:00",
+    "new_submission": false,
+    "old_cumulative_cap_superseded": true,
+    "old_observer_pid": 2425156,
+    "original_batch_deadline_unchanged": true,
+    "queue_cutoff_utc": "2026-11-07T20:00:55+00:00",
+    "queue_seconds_from_reset": 14400
+  },
+  "remaining": {
+    "aggregate_allocated_seconds": 4664,
+    "error_retries": 0,
+    "submissions": 1
+  },
+  "started_utc": "2026-11-07T14:08:42.1894319+00:00",
+  "stop_reason": "BASELINE_COMPLETE_NO_VALIDATED_RUNTIME_FIX_FOR_SLOW_DOMAIN",
+  "task": "NUMA_M1_SINGLE_WINDOW_S00_R1_20261107",
+  "user_authorized": true
+}

@@ -1,0 +1,82 @@
+{
+  "batch_deadline_utc": "2026-11-07T23:57:45+00:00",
+  "budget_authority_sha256": "c79f6ef0ce3e939a46550df6d99ec194334b2d3863c8cde0ee78dc1cf0a2618b",
+  "budget_before": {
+    "allocated_seconds": 2649,
+    "candidates": 2,
+    "queue_seconds": 162,
+    "submissions": 5
+  },
+  "candidate_sha256": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+  "dependency": {
+    "compatibility": "Same GCC upstream version/release 10.3.1-66; vendor differs, require actual target controls and C50",
+    "rpm": "libubsan-10.3.1-66.oe2203sp4.aarch64.rpm",
+    "rpm_sha256": "380e65f1c04516660c3626890b69f828d839814b4250268d9842503a3e8919eb",
+    "rpm_url": "https://repo.openeuler.org/openEuler-22.03-LTS-SP4/update/aarch64/Packages/libubsan-10.3.1-66.oe2203sp4.aarch64.rpm",
+    "runtime_sha256": "a454036c69151e55228ec086ccc870aca4dc3e64d9a7bcbd1cfd26878c8a106a",
+    "signing_key_id": "b675600b",
+    "signing_key_sha256": "006e79d37c10e74c24df6d07c4efc4176515cec009daa5ed493b06f5b6ef39c1",
+    "signing_key_url": "https://repo.openeuler.org/openEuler-22.03-LTS-SP4/everything/aarch64/RPM-GPG-KEY-openEuler",
+    "soname": "libubsan.so.1"
+  },
+  "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+  "domain_count": 4,
+  "excluded_hosts": [
+    "cn21340",
+    "cn21341"
+  ],
+  "inherited_original_use": {
+    "allocated_seconds": 1365,
+    "candidates": 1,
+    "queue_seconds": 7,
+    "submissions": 2
+  },
+  "mode": "ckpt0_ddr_hbm",
+  "native_argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn21762 !cn21340 !cn21341",
+    "-R",
+    "cpu=152,mem=98304MB",
+    "-RL",
+    "mem=98304MB",
+    "-a",
+    "numa[count=4,distribution=pack]",
+    "-T",
+    "1800",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R4_20261107T173347Z",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R4_20261107T173347Z/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R4_20261107T173347Z/run_job.sh",
+    "BINDING_SHA256"
+  ],
+  "package_sha256": "2b4b2abeb38d7a33e05ff99c0c9df51bdda85fb15f5b65a889bb87e84d4e563e",
+  "parent_single_domain_job": "2061258",
+  "prior_continuation_jobs": [
+    "2061258",
+    "2061302",
+    "2061358"
+  ],
+  "remaining_queue_seconds": 14238,
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R4_20261107T173347Z",
+  "run_id": "HBM_R4_20261107T173347Z",
+  "s00_live_isolation": {
+    "current_job": "2061246",
+    "current_state": "SUCCEEDED",
+    "last_host": "cn21341"
+  },
+  "selection_basis": "Repeat on the same currently idle cn21762 to quantify within-host run-to-run variation. Second host cn21386 already measured.",
+  "source_manifest_sha256": "b402efb57e27093a1cabe8504b82e4b6ac086055068837beae78a78ac183eec2",
+  "task_card_sha256": "27cbf0b0fcce67ad5d2e304797269c8119926e70f0bd4c6dbf2aa3e1ba2b197c",
+  "user_authorized": true,
+  "wall_seconds": 1800
+}

@@ -1,0 +1,1436 @@
+{
+  "domains": {
+    "0": {
+      "strict": {
+        "rows": 3895,
+        "maximum_abs": 0.0,
+        "maximum_relative_L2": 0.0
+      },
+      "perf_first5": {
+        "rows": 15,
+        "maximum_abs": 0.0,
+        "maximum_relative_L2": 0.0
+      },
+      "affinity": {
+        "strict": {
+          "parent_cpu_count": 152,
+          "inherited_cpu_count": 152,
+          "after_numactl": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37
+          ],
+          "compute_before_torch": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35
+          ],
+          "reserved": [
+            36,
+            37
+          ],
+          "worker_pid": 1257893,
+          "observer": [
+            36
+          ]
+        },
+        "perf": {
+          "parent_cpu_count": 152,
+          "inherited_cpu_count": 152,
+          "after_numactl": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37
+          ],
+          "compute_before_torch": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35
+          ],
+          "reserved": [
+            36,
+            37
+          ],
+          "worker_pid": 1281940,
+          "observer": [
+            36
+          ]
+        }
+      },
+      "affinity_snapshots": {
+        "strict": 24,
+        "perf": 54
+      },
+      "effective_intraop": {
+        "strict": [
+          36
+        ],
+        "perf": [
+          36
+        ]
+      },
+      "sampled_seconds": {
+        "total": 139.82738119799996,
+        "median": 6.9398529,
+        "min": 6.590903441,
+        "max": 7.640065201
+      },
+      "sampled_step_spread_pct": 15.006528063546485,
+      "throughput_frames_s": 9.154144124229001,
+      "sample_hwm_MiB": 6869.78515625,
+      "load_seconds": 0.610255484,
+      "placement": {
+        "initialized": {
+          "anonymous": {
+            "local_MiB": 504.543,
+            "remote_MiB": 0.0,
+            "per_node_kB": {
+              "0": 516652
+            }
+          },
+          "file_backed": {
+            "local_MiB": 88.805,
+            "remote_MiB": 6.754,
+            "per_node_kB": {
+              "0": 90936,
+              "1": 6916
+            }
+          },
+          "other": {
+            "local_MiB": 0.0,
+            "remote_MiB": 0.0,
+            "per_node_kB": {}
+          },
+          "policies_kB": {
+            "interleave:0-1": 13860,
+            "bind:0": 600644
+          }
+        },
+        "observe_start": {
+          "anonymous": {
+            "local_MiB": 4917.938,
+            "remote_MiB": 0.0,
+            "per_node_kB": {
+              "0": 5035968
+            }
+          },
+          "file_backed": {
+            "local_MiB": 99.805,
+            "remote_MiB": 6.918,
+            "per_node_kB": {
+              "0": 102200,
+              "1": 7084
+            }
+          },
+          "other": {
+            "local_MiB": 0.0,
+            "remote_MiB": 0.0,
+            "per_node_kB": {}
+          },
+          "policies_kB": {
+            "interleave:0-1": 14160,
+            "bind:0": 5131092
+          }
+        },
+        "observe_end": {
+          "anonymous": {
+            "local_MiB": 5569.379,
+            "remote_MiB": 0.0,
+            "per_node_kB": {
+              "0": 5703044
+            }
+          },
+          "file_backed": {
+            "local_MiB": 99.805,
+            "remote_MiB": 6.918,
+            "per_node_kB": {
+              "0": 102200,
+              "1": 7084
+            }
+          },
+          "other": {
+            "local_MiB": 0.0,
+            "remote_MiB": 0.0,
+            "per_node_kB": {}
+          },
+          "policies_kB": {
+            "interleave:0-1": 14160,
+            "bind:0": 5798168
+          }
+        }
+      },
+      "final_model_sha256": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555",
+      "cpu_load": {
+        "status": "OBSERVED",
+        "samples": 167,
+        "wall_seconds": 333.744335111,
+        "selected_cpu_busy_pct": 42.83236325470328,
+        "worker_cpu_ticks": 514486,
+        "selected_cpu_busy_ticks": 514609,
+        "residual_nonworker_busy_ticks": 123,
+        "residual_nonworker_busy_pct_of_selected": 0.010237638052052148,
+        "worker_cpu_seconds": 5144.86,
+        "caveat": "Residual includes system/interrupt activity and asynchronous tick sampling."
+      }
+    },
+    "1": {
+      "strict": {
+        "rows": 3895,
+        "maximum_abs": 0.0,
+        "maximum_relative_L2": 0.0
+      },
+      "perf_first5": {
+        "rows": 15,
+        "maximum_abs": 0.0,
+        "maximum_relative_L2": 0.0
+      },
+      "affinity": {
+        "strict": {
+          "parent_cpu_count": 152,
+          "inherited_cpu_count": 152,
+          "after_numactl": [
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75
+          ],
+          "compute_before_torch": [
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73
+          ],
+          "reserved": [
+            74,
+            75
+          ],
+          "worker_pid": 1257896,
+          "observer": [
+            36
+          ]
+        },
+        "perf": {
+          "parent_cpu_count": 152,
+          "inherited_cpu_count": 152,
+          "after_numactl": [
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75
+          ],
+          "compute_before_torch": [
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73
+          ],
+          "reserved": [
+            74,
+            75
+          ],
+          "worker_pid": 1281943,
+          "observer": [
+            36
+          ]
+        }
+      },
+      "affinity_snapshots": {
+        "strict": 24,
+        "perf": 54
+      },
+      "effective_intraop": {
+        "strict": [
+          36
+        ],
+        "perf": [
+          36
+        ]
+      },
+      "sampled_seconds": {
+        "total": 328.683474531,
+        "median": 16.6306791865,
+        "min": 9.87225201,
+        "max": 20.883256254
+      },
+      "sampled_step_spread_pct": 67.0006562375042,
+      "throughput_frames_s": 3.894324172599301,
+      "sample_hwm_MiB": 6918.015625,
+      "load_seconds": 0.624871583,
+      "placement": {
+        "initialized": {
+          "anonymous": {
+            "local_MiB": 504.547,
+            "remote_MiB": 0.0,
+            "per_node_kB": {
+              "1": 516656
+            }
+          },
+          "file_backed": {
+            "local_MiB": 11.02,
+            "remote_MiB": 84.57,
+            "per_node_kB": {
+              "0": 86600,
+              "1": 11284
+            }
+          },
+          "other": {
+            "local_MiB": 0.0,
+            "remote_MiB": 0.0,
+            "per_node_kB": {}
+          },
+          "policies_kB": {
+            "interleave:0-1": 13864,
+            "bind:1": 600676
+          }
+        },
+        "observe_start": {
+          "anonymous": {
+            "local_MiB": 5693.453,
+            "remote_MiB": 0.0,
+            "per_node_kB": {
+              "1": 5830096
+            }
+          },
+          "file_backed": {
+            "local_MiB": 11.184,
+            "remote_MiB": 95.566,
+            "per_node_kB": {
+              "0": 97860,
+              "1": 11452
+            }
+          },
+          "other": {
+            "local_MiB": 0.0,
+            "remote_MiB": 0.0,
+            "per_node_kB": {}
+          },
+          "policies_kB": {
+            "interleave:0-1": 14164,
+            "bind:1": 5925244
+          }
+        },
+        "observe_end": {
+          "anonymous": {
+            "local_MiB": 6318.688,
+            "remote_MiB": 0.0,
+            "per_node_kB": {
+              "1": 6470336
+            }
+          },
+          "file_backed": {
+            "local_MiB": 11.184,
+            "remote_MiB": 95.566,
+            "per_node_kB": {
+              "0": 97860,
+              "1": 11452
+            }
+          },
+          "other": {
+            "local_MiB": 0.0,
+            "remote_MiB": 0.0,
+            "per_node_kB": {}
+          },
+          "policies_kB": {
+            "interleave:0-1": 14164,
+            "bind:1": 6565484
+          }
+        }
+      },
+      "final_model_sha256": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555",
+      "cpu_load": {
+        "status": "OBSERVED",
+        "samples": 167,
+        "wall_seconds": 333.744335111,
+        "selected_cpu_busy_pct": 96.22503939013336,
+        "worker_cpu_ticks": 1156003,
+        "selected_cpu_busy_ticks": 1156089,
+        "residual_nonworker_busy_ticks": 86,
+        "residual_nonworker_busy_pct_of_selected": 0.007158059100598197,
+        "worker_cpu_seconds": 11560.03,
+        "caveat": "Residual includes system/interrupt activity and asynchronous tick sampling."
+      }
+    },
+    "2": {
+      "strict": {
+        "rows": 3895,
+        "maximum_abs": 0.0,
+        "maximum_relative_L2": 0.0
+      },
+      "perf_first5": {
+        "rows": 15,
+        "maximum_abs": 0.0,
+        "maximum_relative_L2": 0.0
+      },
+      "affinity": {
+        "strict": {
+          "parent_cpu_count": 152,
+          "inherited_cpu_count": 152,
+          "after_numactl": [
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113
+          ],
+          "compute_before_torch": [
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111
+          ],
+          "reserved": [
+            112,
+            113
+          ],
+          "worker_pid": 1257902,
+          "observer": [
+            36
+          ]
+        },
+        "perf": {
+          "parent_cpu_count": 152,
+          "inherited_cpu_count": 152,
+          "after_numactl": [
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113
+          ],
+          "compute_before_torch": [
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111
+          ],
+          "reserved": [
+            112,
+            113
+          ],
+          "worker_pid": 1281946,
+          "observer": [
+            36
+          ]
+        }
+      },
+      "affinity_snapshots": {
+        "strict": 24,
+        "perf": 54
+      },
+      "effective_intraop": {
+        "strict": [
+          36
+        ],
+        "perf": [
+          36
+        ]
+      },
+      "sampled_seconds": {
+        "total": 140.101358494,
+        "median": 6.9424517795,
+        "min": 6.724798414,
+        "max": 7.380095762
+      },
+      "sampled_step_spread_pct": 9.354618042880196,
+      "throughput_frames_s": 9.136242601493528,
+      "sample_hwm_MiB": 6947.56640625,
+      "load_seconds": 0.632265894,
+      "placement": {
+        "initialized": {
+          "anonymous": {
+            "local_MiB": 506.555,
+            "remote_MiB": 0.0,
+            "per_node_kB": {
+              "2": 518712
+            }
+          },
+          "file_backed": {
+            "local_MiB": 4.266,
+            "remote_MiB": 91.305,
+            "per_node_kB": {
+              "0": 86580,
+              "1": 6916,
+              "2": 4368
+            }
+          },
+          "other": {
+            "local_MiB": 0.0,
+            "remote_MiB": 0.0,
+            "per_node_kB": {}
+          },
+          "policies_kB": {
+            "interleave:0-1": 13864,
+            "bind:2": 602712
+          }
+        },
+        "observe_start": {
+          "anonymous": {
+            "local_MiB": 6190.574,
+            "remote_MiB": 0.0,
+            "per_node_kB": {
+              "2": 6339148
+            }
+          },
+          "file_backed": {
+            "local_MiB": 4.266,
+            "remote_MiB": 102.43,
+            "per_node_kB": {
+              "0": 97804,
+              "1": 7084,
+              "2": 4368
+            }
+          },
+          "other": {
+            "local_MiB": 0.0,
+            "remote_MiB": 0.0,
+            "per_node_kB": {}
+          },
+          "policies_kB": {
+            "interleave:0-1": 14164,
+            "bind:2": 6434240
+          }
+        },
+        "observe_end": {
+          "anonymous": {
+            "local_MiB": 6348.016,
+            "remote_MiB": 0.0,
+            "per_node_kB": {
+              "2": 6500368
+            }
+          },
+          "file_backed": {
+            "local_MiB": 4.266,
+            "remote_MiB": 102.43,
+            "per_node_kB": {
+              "0": 97804,
+              "1": 7084,
+              "2": 4368
+            }
+          },
+          "other": {
+            "local_MiB": 0.0,
+            "remote_MiB": 0.0,
+            "per_node_kB": {}
+          },
+          "policies_kB": {
+            "interleave:0-1": 14164,
+            "bind:2": 6595460
+          }
+        }
+      },
+      "final_model_sha256": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555",
+      "cpu_load": {
+        "status": "OBSERVED",
+        "samples": 167,
+        "wall_seconds": 333.744335111,
+        "selected_cpu_busy_pct": 43.10634277890374,
+        "worker_cpu_ticks": 517898,
+        "selected_cpu_busy_ticks": 517899,
+        "residual_nonworker_busy_ticks": 1,
+        "residual_nonworker_busy_pct_of_selected": 8.3233106800561e-05,
+        "worker_cpu_seconds": 5178.98,
+        "caveat": "Residual includes system/interrupt activity and asynchronous tick sampling."
+      }
+    },
+    "3": {
+      "strict": {
+        "rows": 3895,
+        "maximum_abs": 0.0,
+        "maximum_relative_L2": 0.0
+      },
+      "perf_first5": {
+        "rows": 15,
+        "maximum_abs": 0.0,
+        "maximum_relative_L2": 0.0
+      },
+      "affinity": {
+        "strict": {
+          "parent_cpu_count": 152,
+          "inherited_cpu_count": 152,
+          "after_numactl": [
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151
+          ],
+          "compute_before_torch": [
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149
+          ],
+          "reserved": [
+            150,
+            151
+          ],
+          "worker_pid": 1257906,
+          "observer": [
+            36
+          ]
+        },
+        "perf": {
+          "parent_cpu_count": 152,
+          "inherited_cpu_count": 152,
+          "after_numactl": [
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151
+          ],
+          "compute_before_torch": [
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149
+          ],
+          "reserved": [
+            150,
+            151
+          ],
+          "worker_pid": 1281950,
+          "observer": [
+            36
+          ]
+        }
+      },
+      "affinity_snapshots": {
+        "strict": 24,
+        "perf": 54
+      },
+      "effective_intraop": {
+        "strict": [
+          36
+        ],
+        "perf": [
+          36
+        ]
+      },
+      "sampled_seconds": {
+        "total": 138.37142568299998,
+        "median": 6.925918755,
+        "min": 6.523690157,
+        "max": 7.336659628
+      },
+      "sampled_step_spread_pct": 11.75053978069808,
+      "throughput_frames_s": 9.250464781163688,
+      "sample_hwm_MiB": 6895.421875,
+      "load_seconds": 0.628282096,
+      "placement": {
+        "initialized": {
+          "anonymous": {
+            "local_MiB": 504.566,
+            "remote_MiB": 0.0,
+            "per_node_kB": {
+              "3": 516676
+            }
+          },
+          "file_backed": {
+            "local_MiB": 4.266,
+            "remote_MiB": 91.289,
+            "per_node_kB": {
+              "0": 86564,
+              "1": 6916,
+              "3": 4368
+            }
+          },
+          "other": {
+            "local_MiB": 0.0,
+            "remote_MiB": 0.0,
+            "per_node_kB": {}
+          },
+          "policies_kB": {
+            "interleave:0-1": 13860,
+            "bind:3": 600664
+          }
+        },
+        "observe_start": {
+          "anonymous": {
+            "local_MiB": 6216.941,
+            "remote_MiB": 0.0,
+            "per_node_kB": {
+              "3": 6366148
+            }
+          },
+          "file_backed": {
+            "local_MiB": 4.266,
+            "remote_MiB": 102.453,
+            "per_node_kB": {
+              "0": 97828,
+              "1": 7084,
+              "3": 4368
+            }
+          },
+          "other": {
+            "local_MiB": 0.0,
+            "remote_MiB": 0.0,
+            "per_node_kB": {}
+          },
+          "policies_kB": {
+            "interleave:0-1": 14160,
+            "bind:3": 6461268
+          }
+        },
+        "observe_end": {
+          "anonymous": {
+            "local_MiB": 6296.258,
+            "remote_MiB": 0.0,
+            "per_node_kB": {
+              "3": 6447368
+            }
+          },
+          "file_backed": {
+            "local_MiB": 4.266,
+            "remote_MiB": 102.453,
+            "per_node_kB": {
+              "0": 97828,
+              "1": 7084,
+              "3": 4368
+            }
+          },
+          "other": {
+            "local_MiB": 0.0,
+            "remote_MiB": 0.0,
+            "per_node_kB": {}
+          },
+          "policies_kB": {
+            "interleave:0-1": 14160,
+            "bind:3": 6542488
+          }
+        }
+      },
+      "final_model_sha256": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555",
+      "cpu_load": {
+        "status": "OBSERVED",
+        "samples": 167,
+        "wall_seconds": 333.744335111,
+        "selected_cpu_busy_pct": 42.62975133421893,
+        "worker_cpu_ticks": 512165,
+        "selected_cpu_busy_ticks": 512176,
+        "residual_nonworker_busy_ticks": 11,
+        "residual_nonworker_busy_pct_of_selected": 0.0009155588404696983,
+        "worker_cpu_seconds": 5121.65,
+        "caveat": "Residual includes system/interrupt activity and asynchronous tick sampling."
+      }
+    }
+  },
+  "strict_domains": 4,
+  "perf_domains": 4,
+  "slowest_domain": "1",
+  "sum_domain_frames_s": 31.435175679485518,
+  "four_times_slowest_frames_s": 15.577296690397205,
+  "measured_common_window_frames_s": 15.076650380630516,
+  "common_window_seconds": 339.597979043,
+  "slowest_below_median_pct": 57.416710417363106,
+  "across_domain_rate_spread_pct": 68.15474057693636,
+  "synchronized_start": {
+    "median_skew_ms": 0.008015000000000001,
+    "max_skew_ms": 0.07095,
+    "per_step": [
+      {
+        "step": 6,
+        "start_skew_ms": 0.00584,
+        "end_spread_ms": 8206.623259
+      },
+      {
+        "step": 7,
+        "start_skew_ms": 0.00582,
+        "end_spread_ms": 14184.479269
+      },
+      {
+        "step": 8,
+        "start_skew_ms": 0.00177,
+        "end_spread_ms": 12615.218909
+      },
+      {
+        "step": 9,
+        "start_skew_ms": 0.00782,
+        "end_spread_ms": 11779.438097
+      },
+      {
+        "step": 10,
+        "start_skew_ms": 0.00592,
+        "end_spread_ms": 12580.492219
+      },
+      {
+        "step": 11,
+        "start_skew_ms": 0.023141,
+        "end_spread_ms": 12716.183121
+      },
+      {
+        "step": 12,
+        "start_skew_ms": 0.00892,
+        "end_spread_ms": 12647.891842
+      },
+      {
+        "step": 13,
+        "start_skew_ms": 0.00185,
+        "end_spread_ms": 14255.147812
+      },
+      {
+        "step": 14,
+        "start_skew_ms": 0.07095,
+        "end_spread_ms": 12655.121975
+      },
+      {
+        "step": 15,
+        "start_skew_ms": 0.00464,
+        "end_spread_ms": 6495.179391
+      },
+      {
+        "step": 16,
+        "start_skew_ms": 0.01179,
+        "end_spread_ms": 6425.083206
+      },
+      {
+        "step": 17,
+        "start_skew_ms": 0.01488,
+        "end_spread_ms": 6529.372048
+      },
+      {
+        "step": 18,
+        "start_skew_ms": 0.00462,
+        "end_spread_ms": 6929.019892
+      },
+      {
+        "step": 19,
+        "start_skew_ms": 0.01299,
+        "end_spread_ms": 8322.312096
+      },
+      {
+        "step": 20,
+        "start_skew_ms": 0.0069,
+        "end_spread_ms": 2551.591733
+      },
+      {
+        "step": 21,
+        "start_skew_ms": 0.01137,
+        "end_spread_ms": 10008.007293
+      },
+      {
+        "step": 22,
+        "start_skew_ms": 0.02629,
+        "end_spread_ms": 9989.527906
+      },
+      {
+        "step": 23,
+        "start_skew_ms": 0.01609,
+        "end_spread_ms": 9465.016541
+      },
+      {
+        "step": 24,
+        "start_skew_ms": 0.00821,
+        "end_spread_ms": 9474.507003
+      },
+      {
+        "step": 25,
+        "start_skew_ms": 0.00213,
+        "end_spread_ms": 2997.433868
+      }
+    ]
+  },
+  "final_model_sha_matches": true,
+  "slow_domain_strict_tail": [
+    {
+      "step": 1,
+      "role": "baseline",
+      "seconds": 10.742923355,
+      "after_other_workers_published": false
+    },
+    {
+      "step": 1,
+      "role": "control",
+      "seconds": 14.038038487,
+      "after_other_workers_published": false
+    },
+    {
+      "step": 2,
+      "role": "baseline",
+      "seconds": 12.797603914,
+      "after_other_workers_published": false
+    },
+    {
+      "step": 2,
+      "role": "control",
+      "seconds": 11.997690227,
+      "after_other_workers_published": false
+    },
+    {
+      "step": 3,
+      "role": "baseline",
+      "seconds": 10.391817227,
+      "after_other_workers_published": false
+    },
+    {
+      "step": 3,
+      "role": "control",
+      "seconds": 29.636600571,
+      "after_other_workers_published": false
+    },
+    {
+      "step": 4,
+      "role": "baseline",
+      "seconds": 37.571638987,
+      "after_other_workers_published": true
+    },
+    {
+      "step": 4,
+      "role": "control",
+      "seconds": 37.635631862,
+      "after_other_workers_published": true
+    },
+    {
+      "step": 5,
+      "role": "baseline",
+      "seconds": 37.613553206,
+      "after_other_workers_published": true
+    },
+    {
+      "step": 5,
+      "role": "control",
+      "seconds": 37.636828948,
+      "after_other_workers_published": true
+    }
+  ],
+  "runtime_memory_evidence": {
+    "allocated_MB": 98304,
+    "controller": "cgroup",
+    "group": "/batch/container_2061246_rg0_00000000_e01",
+    "job_id": "2061246",
+    "kernel_limit_bytes": null,
+    "kernel_read_error": "[Errno 13] Permission denied: '/sys/fs/cgroup/memory/batch/container_2061246_rg0_00000000_e01/memory.limit_in_bytes'",
+    "native_limit_MB": 98304,
+    "request_MB": 98304,
+    "scheduler_evidence": "scheduler_allocation.json",
+    "status": "NATIVE_SCHEDULER_LIMIT_WITH_BOUND_CGROUP"
+  }
+}

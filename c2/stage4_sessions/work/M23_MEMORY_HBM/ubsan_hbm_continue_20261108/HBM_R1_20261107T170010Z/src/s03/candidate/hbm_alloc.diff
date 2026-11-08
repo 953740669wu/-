@@ -1,0 +1,53 @@
+--- frozen/hbm_alloc.c
++++ candidate/hbm_alloc.c
+@@ -39,9 +39,17 @@
+ static void init(void) {
+     const char *nd = getenv("HBM_NODE");
+     if (!nd) return;
++    char *tail;
++    errno = 0;
++    long parsed_node = strtol(nd, &tail, 10);
++    if (errno || tail == nd || *tail || parsed_node < 0 || parsed_node >= 128) {
++        fprintf(stderr, "hbm_alloc: invalid HBM_NODE, arena off\n"); return;
++    }
++    int node = (int)parsed_node;
+     size_t mb = getenv("HBM_MB") ? strtoul(getenv("HBM_MB"), 0, 10) : 3800;
+-    min_req = (getenv("HBM_MIN_KB") ? strtoul(getenv("HBM_MIN_KB"), 0, 10) : 256) << 10;
+-    int node = atoi(nd);
++    size_t min_kb = getenv("HBM_MIN_KB") ? strtoul(getenv("HBM_MIN_KB"), 0, 10) : 256;
++    if (min_kb > (SIZE_MAX >> 10)) { fprintf(stderr, "hbm_alloc: HBM_MIN_KB overflow, arena off\n"); return; }
++    min_req = min_kb << 10;
+     /* Faults are bound to `node`, so a short pool there means SIGBUS mid-run. The reservation at mmap counts only
+        the nodes of the calling thread's mempolicy (5.10: allowed_mems_nr), so bind the thread to `node` just for the
+        mmap: a shortfall is then ENOMEM here. The arena is also sized from the node's free pages (16 kept spare). */
+@@ -52,6 +60,7 @@
+     size_t available_mb = nfree > 16 ? (size_t)(nfree - 16) * 2 : 0;
+     if (available_mb < mb) mb = available_mb;
+     if (mb < 64) { fprintf(stderr, "hbm_alloc: node %d has %ld free hugepages, arena off\n", node, nfree); return; }
++    if (mb > (SIZE_MAX >> 20)) { fprintf(stderr, "hbm_alloc: HBM_MB overflow, arena off\n"); return; }
+     size_t len = mb << 20;
+     unsigned long mask[2] = {0, 0}, old[16] = {0};
+     int oldmode = 0;
+@@ -89,12 +98,13 @@
+ }
+ 
+ static void *arena_get(size_t n) {
++    if (n > SIZE_MAX - HDR - (GRAIN - 1)) return 0;
+     size_t sz = (n + HDR + GRAIN - 1) / GRAIN * GRAIN;
+     char *p = 0;
+     pthread_mutex_lock(&mu);
+     bucket *b = slot(sz);
+     if (b && b->head) { p = (char *)b->head; b->head = b->head->next; n_reuse++; }
+-    else if (bump + sz <= end) { p = bump; bump += sz; if ((size_t)(bump - base) > high) high = bump - base; }
++    else if (sz <= (size_t)(end - bump)) { p = bump; bump += sz; if ((size_t)(bump - base) > high) high = bump - base; }
+     if (p) { ((blk *)p)->size = sz; n_hbm++; b_hbm += sz; }
+     pthread_mutex_unlock(&mu);
+     return p ? p + HDR : 0;
+@@ -109,6 +119,7 @@
+ }
+ 
+ int posix_memalign(void **out, size_t align, size_t n) {
++    if (align < sizeof(void *) || (align & (align - 1))) return EINVAL;
+     pthread_once(&once, init);
+     if (base && n >= min_req && align <= HDR) {
+         void *p = arena_get(n);

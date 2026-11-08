@@ -1,0 +1,20 @@
+--- predeploy/run_worker.sh
++++ frozen/run_worker.sh
+@@ -11,7 +11,7 @@
+     printf 'worker shell did not inherit the exact native allocation\n' >&2
+     exit 2
+ fi
+-if [[ -n "\${M23_HBM_LIBRARY:-}" ]]; then
++if [[ -n "${M23_HBM_LIBRARY:-}" ]]; then
+     exec /usr/bin/numactl --physcpubind="$CPUS" --membind="$NODE" /usr/bin/env \
+       HBM=1 LD_PRELOAD="$M23_HBM_LIBRARY:$LD_PRELOAD" "$C2_PYTHON" -B "$ROOT/payload/worker.py" "$@"
+ fi
+--- predeploy/run_job.sh
++++ frozen/run_job.sh
+@@ -1,5 +1,6 @@
+ #!/bin/bash
+ set -euo pipefail
++ulimit -c 0
+ ROOT=$(cd -- "$(dirname -- "$0")" && pwd -P)
+ [[ "$#" == 1 && "$1" =~ ^[0-9a-f]{64}$ ]]
+ : "${CCS_JOB_ID:?native job ID required}"

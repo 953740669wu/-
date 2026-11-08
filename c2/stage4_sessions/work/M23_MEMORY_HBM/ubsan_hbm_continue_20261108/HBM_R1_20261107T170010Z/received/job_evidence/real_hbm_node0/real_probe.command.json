@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/usr/bin/numactl",
+    "--physcpubind=0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35",
+    "--membind=0",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R1_20261107T170010Z/job_evidence/real_hbm_probe",
+    "3800"
+  ],
+  "hbm": {
+    "HBM_MB": "3800",
+    "HBM_MIN_KB": "256",
+    "HBM_NODE": "16",
+    "HBM_STATS": "1",
+    "LD_PRELOAD": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R1_20261107T170010Z/s03/build/libhbm_alloc_s03_round2.so"
+  }
+}

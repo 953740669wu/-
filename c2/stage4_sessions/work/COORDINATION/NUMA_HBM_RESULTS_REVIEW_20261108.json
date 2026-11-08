@@ -1,0 +1,113 @@
+{
+  "scope": "Local returned evidence and source verification; no SSH, model execution, or Git writes",
+  "errors": [],
+  "sha_refs_checked": 23,
+  "zip_members": 4033,
+  "collection_entries": 4027,
+  "source_files": 255,
+  "hbm": [
+    {
+      "job": "2061258",
+      "host": "cn21386",
+      "domains": 1,
+      "strict_metrics": 3895,
+      "span_median_seconds": {
+        "baseline": 2.2611247485000003,
+        "candidate": 1.7793224799999998
+      },
+      "time_reduction_percent": 21.308079919943456,
+      "source_sha": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+      "library_sha": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d"
+    },
+    {
+      "job": "2061302",
+      "host": "cn21386",
+      "domains": 4,
+      "strict_metrics": 15580,
+      "span_median_seconds": {
+        "baseline": 6.53841682,
+        "candidate": 3.254420434
+      },
+      "time_reduction_percent": 50.22617059155308,
+      "source_sha": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+      "library_sha": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d"
+    },
+    {
+      "job": "2061358",
+      "host": "cn21762",
+      "domains": 4,
+      "strict_metrics": 15580,
+      "span_median_seconds": {
+        "baseline": 6.4494899409999995,
+        "candidate": 3.2861420895
+      },
+      "time_reduction_percent": 49.04803140152691,
+      "source_sha": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+      "library_sha": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d"
+    },
+    {
+      "job": "2061433",
+      "host": "cn21762",
+      "domains": 4,
+      "strict_metrics": 15580,
+      "span_median_seconds": {
+        "baseline": 6.413194919,
+        "candidate": 3.2301215435
+      },
+      "time_reduction_percent": 49.63319243688811,
+      "source_sha": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+      "library_sha": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d"
+    },
+    {
+      "job": "2061475",
+      "host": "cn21762",
+      "domains": 4,
+      "strict_metrics": 15580,
+      "span_median_seconds": {
+        "baseline": 6.465646307,
+        "candidate": 3.2536003659999997
+      },
+      "time_reduction_percent": 49.67865219479288,
+      "source_sha": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+      "library_sha": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d"
+    }
+  ],
+  "hbm_strict_metrics": 66215,
+  "adamw_exact_checks": "13005 reported; source executes original exact comparator; no checkpoint tensors reloaded in coordinator",
+  "repeat_spread_percent": {
+    "baseline": 0.8141114855723081,
+    "candidate": 1.7202044779456729
+  },
+  "numa": {
+    "strict_metrics": 15580,
+    "median_seconds_by_node": [
+      6.9398529,
+      16.6306791865,
+      6.9424517795,
+      6.925918755
+    ],
+    "common_window_seconds": 339.597979043,
+    "common_window_frame_visits_per_second": 15.076650380630516,
+    "candidate_AB_run": false
+  },
+  "hbm_author_manifest_verified_rows": 74,
+  "prior_m23_manifest_verified_rows": 173,
+  "source_results": {
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\M23_MEMORY_HBM\\ubsan_hbm_continue_20261108\\HBM_CONTINUE_RESULT.json": "c2c4ada68d2c0dac0113eb34225899901295d62a711ed12f4634d904cb86e485",
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_replace_node_20261108\\NUMA_RUN_RESULT.json": "34cd9baf6c0f30ae96c705a66a9f36d0408ba7989866eabc7c8e5bf4cb4bcafd"
+  },
+  "decision": "HBM_TESTED_ENGINEERING_PROFILE_ACCEPTED; NUMA_BASELINE_ONLY_NO_PERFORMANCE_FIX",
+  "cancelled_old_job": {
+    "job": "2060643",
+    "source_bundle_sha256": "ab347247973b1ddf38c5061e5d09f44e411ea22456cdc4a5ee1b71f56727b74f",
+    "author_disposition": "CANCELLED_WHILE_PENDING",
+    "native_state": "FAILED",
+    "extracted_receipts": 7
+  },
+  "additional_checks": [
+    "S00 native success and cleanup; old cancellation raw receipts",
+    "5 UBSan positive/negative exit controls",
+    "5 job-level pool restored receipts",
+    "original KML baseline and strict comparator hashes in all 5 payloads"
+  ]
+}
