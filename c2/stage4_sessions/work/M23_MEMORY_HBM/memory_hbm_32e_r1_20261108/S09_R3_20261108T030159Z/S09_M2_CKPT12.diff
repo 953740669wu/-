@@ -1,0 +1,102 @@
+--- /dev/null
++++ 32E_M2/payload/checkpoint_layers.py
+@@ -0,0 +1,5 @@
++def enable_checkpoint(enc):
++    """Same per-layer non-reentrant checkpoint wrapper as the frozen source."""
++    from torch.utils.checkpoint import checkpoint
++    for layer in enc.tf.layers:
++        layer.forward = lambda *a, _f=layer.forward, **k: checkpoint(_f, *a, use_reentrant=False, **k)
+--- 32E_CKPT0/payload/worker.py
++++ 32E_M2/payload/worker.py
+@@ -17,6 +17,7 @@
+ import engineering_training as training
+ import memory_metrics
+ from m23_memory import SavedStorage
++from checkpoint_layers import enable_checkpoint
+ 
+ ROOT = Path(__file__).resolve().parent
+ BASELINE = "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+@@ -116,7 +117,7 @@
+     paths = {line.split()[-1] for line in Path("/proc/self/maps").read_text().splitlines()
+              if "libhbm_alloc" in line}
+     hbm = None
+-    if args.variant == "candidate":
++    if args.variant in ("candidate","ckpt_hbm"):
+         library = os.environ["M23_HBM_LIBRARY"]
+         if paths != {library} or data.sha(library) != os.environ["M23_HBM_LIBRARY_SHA"]:
+             raise ValueError("HBM allocator path/SHA mapping differs")
+@@ -193,6 +194,10 @@
+         if len(reference_steps) != 5:
+             raise ValueError("frozen DDR strict reference incomplete")
+     result["pairing_sha256"] = hashlib.sha256(json.dumps(pairing,sort_keys=True).encode()).hexdigest()
++    checkpoint = args.variant in ("ckpt_ddr","ckpt_hbm")
++    if checkpoint:
++        enable_checkpoint(models[args.variant])
++    result["checkpoint_layers"] = 12 if checkpoint else 0
+     residency(args.output, "initialized")
+     with (args.output / "steps.jsonl").open("x") as log:
+         for step in range(1, planned + 1):
+@@ -230,7 +235,7 @@
+                 if reset and (not reset["available"] or start_memory["peak_rss_bytes"] != start_memory["rss_bytes"]):
+                     raise RuntimeError("could not reset/verify per-step RSS high-water mark")
+                 inventory = SavedStorage(model, values[role]) if (
+-                    strict and role == "baseline" and step == 1 and os.environ.get("S09_INVENTORY") == "1") else None
++                    strict and step == 1 and os.environ.get("S09_INVENTORY") == "1") else None
+                 hooks = torch.autograd.graph.saved_tensors_hooks(inventory.pack, inventory.unpack) if inventory else nullcontext()
+                 begin = time.monotonic_ns()
+                 try:
+@@ -252,7 +257,12 @@
+                     raise ValueError("actual 32E direct KML evidence missing")
+                 if reference_steps:
+                     pinned = reference_steps[(step-1) % 5]
+-                    if pinned["kml_calls"] != logical or pinned["native_shapes"] != shapes:
++                    if checkpoint:
++                        trace_matches = logical > pinned["kml_calls"] and all(
++                            shapes.get(k,0) >= n for k,n in pinned["native_shapes"].items())
++                    else:
++                        trace_matches = logical == pinned["kml_calls"] and shapes == pinned["native_shapes"]
++                    if not trace_matches:
+                         result["bad_native"] = dict(step=step, role=role, shapes=dict(shapes), logical=logical)
+                         raise ValueError("native trace differs from same-job 32E DDR")
+                     if step <= 5:
+@@ -294,7 +304,7 @@
+ if __name__ == "__main__":
+     parser = argparse.ArgumentParser(description=__doc__)
+     parser.add_argument("--phase", choices=("strict", "perf"), required=True)
+-    parser.add_argument("--variant", choices=("baseline", "candidate"), required=True)
++    parser.add_argument("--variant", choices=("baseline", "candidate", "ckpt_ddr", "ckpt_hbm"), required=True)
+     for flag in ("descriptor", "allocation", "phase-root", "output", "reference"):
+         parser.add_argument("--" + flag, type=Path, required=True)
+     parser.add_argument("--descriptor-sha", required=True)
+--- 32E_CKPT0/launch.py
++++ 32E_M2/launch.py
+@@ -182,7 +182,7 @@
+                 "--reference",str(EVIDENCE / "strict_baseline")]
+         save(out / f"{rank}.command.json", dict(argv=argv))
+         env = dict(os.environ, M1_PARENT_CPU_LIST=inherited, M1_INHERIT_RECEIPT=str(out / f"{rank}.before_numactl.txt"))
+-        if variant == "candidate":
++        if variant in ("candidate","ckpt_hbm"):
+             cfg = placements[node]
+             need((free_pages(cfg["hbm_node"])-16)*2 >= cfg["cap_MiB"], "HBM pool became smaller after safety gate")
+             env.update(M23_HBM_LIBRARY=cfg["library"], M23_HBM_LIBRARY_SHA=cfg["library_sha256"],
+@@ -254,7 +254,10 @@
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        need(0 < wall <= 3600 and binding["mode"] == "s09_32e_ckpt0_ddr_hbm", "wrong wall or mode")
++        need(0 < wall <= 3600 and binding["mode"] == "s09_32e_ckpt12_eval", "wrong wall or mode")
++        roles = binding["variants"]
++        need(roles[0] == "baseline" and len(roles) == len(set(roles)) and
++             all(r in {"baseline","candidate","ckpt_ddr","ckpt_hbm"} for r in roles), "wrong variant set")
+         libc = ctypes.CDLL(None, use_errno=True)
+         need(libc.prctl(36,1,0,0,0) == 0, "cannot become owned-process subreaper")
+         for sig in (signal.SIGTERM, signal.SIGINT, signal.SIGALRM):
+@@ -265,7 +268,7 @@
+         placements = prepare_hbm(ROOT, EVIDENCE, contracts, binding, end)
+         outcome["hbm_safety"] = "PASS"
+         for name, steps in (("strict", 5), ("perf", 25)):
+-            for variant in ("baseline", "candidate"):
++            for variant in roles:
+                 phase(name, variant, contracts, owner, binding, end, placements)
+                 outcome["steps"][f"{name}_{variant}_each_domain"] = steps
+             if name == "strict":

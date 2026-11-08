@@ -1,0 +1,39 @@
+{
+  "cap_MiB": 3800,
+  "hbm_node": 17,
+  "library": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R7_20261108T053223Z/job_evidence/libhbm_alloc_s03_round2.so",
+  "library_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+  "placement": {
+    "bulk": {
+      "mapping": "400038200000-400125a00000 rw-p 00000000 00:0e 1299757583                 /anon_hugepage (deleted)",
+      "numa": "400038200000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+    },
+    "fallback": {
+      "mapping": "400126040000-400126441000 rw-p 00000000 00:00 0 ",
+      "numa": "400126040000 bind:1 anon=514 dirty=514 active=0 N1=514 kernelpagesize_kB=4"
+    },
+    "first": {
+      "mapping": "400038200000-400125a00000 rw-p 00000000 00:0e 1299757583                 /anon_hugepage (deleted)",
+      "numa": "400038200000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+    },
+    "worker0": {
+      "mapping": "400038200000-400125a00000 rw-p 00000000 00:0e 1299757583                 /anon_hugepage (deleted)",
+      "numa": "400038200000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+    },
+    "worker1": {
+      "mapping": "400038200000-400125a00000 rw-p 00000000 00:0e 1299757583                 /anon_hugepage (deleted)",
+      "numa": "400038200000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+    },
+    "worker2": {
+      "mapping": "400038200000-400125a00000 rw-p 00000000 00:0e 1299757583                 /anon_hugepage (deleted)",
+      "numa": "400038200000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+    },
+    "worker3": {
+      "mapping": "400038200000-400125a00000 rw-p 00000000 00:0e 1299757583                 /anon_hugepage (deleted)",
+      "numa": "400038200000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+    }
+  },
+  "pool_pages_after": 2020,
+  "pool_pages_before": 2020,
+  "status": "PASS_REAL_HBM_SAFETY"
+}

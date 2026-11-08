@@ -1,0 +1,41 @@
+{
+  "limits": {
+    "batch_wall_seconds": 43200,
+    "queue_seconds": 21600,
+    "allocated_seconds": 14400,
+    "submissions": 10,
+    "job_seconds": 3600,
+    "candidates": 2,
+    "model_updates": 3600,
+    "max_domains": 4,
+    "frame_visits": 115200
+  },
+  "used": {
+    "submissions": 7,
+    "queue_seconds": 19,
+    "allocated_seconds": 12535,
+    "batch_wall_seconds": 14098,
+    "model_updates": 1860,
+    "job_seconds": 2779,
+    "candidates": 1,
+    "max_domains": 4,
+    "frame_visits": 59520
+  },
+  "deadline_bjt": "2026-11-08T22:14:25+08:00",
+  "original_m23_budget_separate": true,
+  "bf16_budget_active": false,
+  "remaining": {
+    "submissions": 3,
+    "queue_seconds": 21581,
+    "allocated_seconds": 1865,
+    "model_updates": 1740,
+    "frame_visits": 55680,
+    "batch_wall_seconds": 29102,
+    "candidates": 1
+  },
+  "matched_triplet_runtime_seconds": [
+    2072,
+    2062,
+    2055
+  ]
+}

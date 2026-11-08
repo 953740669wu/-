@@ -1,0 +1,78 @@
+{
+  "allocator_origin": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R1_20261107T170010Z/s03/build/libhbm_alloc_s03_round2.so",
+  "allocator_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+  "batch_deadline_utc": "2026-11-08T14:14:25+00:00",
+  "budget_authority_sha256": "ac7eae37a974d30834a96b173d7cf6920e8b5c323bfe2e48ac210c19345508e4",
+  "candidate_sha256": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+  "descriptor_sha256": "2d9ef2f224a7b2f2fb2848c4ec39274fe9466ab2f2aaef4757bc35608e1ebe4a",
+  "domain_count": 1,
+  "excluded_hosts": [
+    "cn21341",
+    "cn21385",
+    "cn21386"
+  ],
+  "existing_16e_validation_reference": "M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_CONTINUE_RESULT.json",
+  "m2": {
+    "basis_job": "2063215",
+    "diff_sha256": "7b19d0b8098676ef4da10498f0bba40f7200bc2603bcdc39cc5aa6432a752067",
+    "id": "CKPT12",
+    "original_helper_source_sha256": "524e35817080a3f28a0bc0cda8ecce9c8264b15d73edebe05c5d9d8b9632a0aa",
+    "saved_forward_non_weight_non_input_bytes": 8843629200,
+    "source_sha256": "a55b48fd710fea13b11f9058e2ca568c00f9e6d4e88e7e0f71118f6c7beb2576"
+  },
+  "mode": "s09_32e_ckpt12_eval",
+  "native_argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn21379 !cn21341 !cn21385 !cn21386",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "2700",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R3_20261108T030159Z",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R3_20261108T030159Z/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R3_20261108T030159Z/run_job.sh",
+    "BINDING_SHA256"
+  ],
+  "package_sha256": "eea37182d930e6947673ada27b435fb7ed8b6b90004cd0571affeac2096fd784",
+  "prior_pairing_sha256": "ff390e832df6dde669c3c181e01e5e413a53a1515e3e858ef1cec8bcea9bc164",
+  "protected_jobs": [
+    "2063333"
+  ],
+  "remaining_queue_seconds": 21595,
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R3_20261108T030159Z",
+  "run_id": "S09_R3_20261108T030159Z",
+  "source_manifest_sha256": "cee997a47cc4d32fa12384928cf26c9c0c7a53c8d790c8f29fa6f7e74388b339",
+  "started_bjt": "2026-11-08T10:14:25+08:00",
+  "task_card_sha256": "a051bbb9073f67da1510cef5dde011018be7ebb7c92b635bc002e5187c80e30e",
+  "used_before": {
+    "allocated_seconds": 2212,
+    "candidates": 1,
+    "queue_seconds": 5,
+    "submissions": 2,
+    "updates": 300
+  },
+  "user_authorized": true,
+  "variants": [
+    "baseline",
+    "candidate",
+    "ckpt_ddr",
+    "ckpt_hbm"
+  ],
+  "wall_seconds": 2700,
+  "window": "09"
+}

@@ -1,0 +1,1943 @@
+{
+  "job_id": "2063639",
+  "scheduler_state": "SUCCEEDED",
+  "host": "cn21379",
+  "domain_count": 4,
+  "exit_code": 0,
+  "queue_seconds": 2.0,
+  "allocation_seconds": 2062.0,
+  "cleanup": {
+    "actions": [],
+    "all_reaped": true,
+    "deadline": 4137136.268705119,
+    "finished": 4137108.688651171,
+    "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+    "owned": {
+      "1104106": 413505306,
+      "1104110": 413505308,
+      "1104114": 413505310,
+      "1104118": 413505313,
+      "1120690": 413523740,
+      "1120697": 413523743,
+      "1120708": 413523746,
+      "1120716": 413523750,
+      "1135452": 413539974,
+      "1135456": 413539976,
+      "1135459": 413539980,
+      "1135463": 413539985,
+      "1146390": 413551787,
+      "1146394": 413551789,
+      "1146395": 413551792,
+      "1146399": 413551796,
+      "1212209": 413628928,
+      "1212213": 413628930,
+      "1212216": 413628933,
+      "1212225": 413628939,
+      "1253978": 413676094,
+      "1253982": 413676097,
+      "1253983": 413676100,
+      "1253987": 413676105
+    },
+    "reaped": [],
+    "remaining_live": [],
+    "remaining_processes": [],
+    "started": 4137106.268715359
+  },
+  "native_pid_cleared": true,
+  "candidate_sha256": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+  "c_gate": null,
+  "hbm_safety": [
+    {
+      "cap_MiB": 3800,
+      "hbm_node": 16,
+      "library": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R6_20261108T045541Z/job_evidence/libhbm_alloc_s03_round2.so",
+      "library_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+      "placement": {
+        "bulk": {
+          "mapping": "40001fc00000-40010d400000 rw-p 00000000 00:0e 1299079660                 /anon_hugepage (deleted)",
+          "numa": "40001fc00000 bind:16 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N16=1900 kernelpagesize_kB=2048"
+        },
+        "fallback": {
+          "mapping": "40010da40000-40010de41000 rw-p 00000000 00:00 0 ",
+          "numa": "40010da40000 bind:0 anon=514 dirty=514 active=0 N0=514 kernelpagesize_kB=4"
+        },
+        "first": {
+          "mapping": "40001fc00000-40010d400000 rw-p 00000000 00:0e 1299079660                 /anon_hugepage (deleted)",
+          "numa": "40001fc00000 bind:16 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N16=1900 kernelpagesize_kB=2048"
+        },
+        "worker0": {
+          "mapping": "40001fc00000-40010d400000 rw-p 00000000 00:0e 1299079660                 /anon_hugepage (deleted)",
+          "numa": "40001fc00000 bind:16 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N16=1900 kernelpagesize_kB=2048"
+        },
+        "worker1": {
+          "mapping": "40001fc00000-40010d400000 rw-p 00000000 00:0e 1299079660                 /anon_hugepage (deleted)",
+          "numa": "40001fc00000 bind:16 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N16=1900 kernelpagesize_kB=2048"
+        },
+        "worker2": {
+          "mapping": "40001fc00000-40010d400000 rw-p 00000000 00:0e 1299079660                 /anon_hugepage (deleted)",
+          "numa": "40001fc00000 bind:16 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N16=1900 kernelpagesize_kB=2048"
+        },
+        "worker3": {
+          "mapping": "40001fc00000-40010d400000 rw-p 00000000 00:0e 1299079660                 /anon_hugepage (deleted)",
+          "numa": "40001fc00000 bind:16 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N16=1900 kernelpagesize_kB=2048"
+        }
+      },
+      "pool_pages_after": 2020,
+      "pool_pages_before": 2020,
+      "status": "PASS_REAL_HBM_SAFETY"
+    },
+    {
+      "cap_MiB": 3800,
+      "hbm_node": 17,
+      "library": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R6_20261108T045541Z/job_evidence/libhbm_alloc_s03_round2.so",
+      "library_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+      "placement": {
+        "bulk": {
+          "mapping": "40000a200000-4000f7a00000 rw-p 00000000 00:0e 1298249688                 /anon_hugepage (deleted)",
+          "numa": "40000a200000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+        },
+        "fallback": {
+          "mapping": "4000f8040000-4000f8441000 rw-p 00000000 00:00 0 ",
+          "numa": "4000f8040000 bind:1 anon=514 dirty=514 active=0 N1=514 kernelpagesize_kB=4"
+        },
+        "first": {
+          "mapping": "40000a200000-4000f7a00000 rw-p 00000000 00:0e 1298249688                 /anon_hugepage (deleted)",
+          "numa": "40000a200000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+        },
+        "worker0": {
+          "mapping": "40000a200000-4000f7a00000 rw-p 00000000 00:0e 1298249688                 /anon_hugepage (deleted)",
+          "numa": "40000a200000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+        },
+        "worker1": {
+          "mapping": "40000a200000-4000f7a00000 rw-p 00000000 00:0e 1298249688                 /anon_hugepage (deleted)",
+          "numa": "40000a200000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+        },
+        "worker2": {
+          "mapping": "40000a200000-4000f7a00000 rw-p 00000000 00:0e 1298249688                 /anon_hugepage (deleted)",
+          "numa": "40000a200000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+        },
+        "worker3": {
+          "mapping": "40000a200000-4000f7a00000 rw-p 00000000 00:0e 1298249688                 /anon_hugepage (deleted)",
+          "numa": "40000a200000 bind:17 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N17=1900 kernelpagesize_kB=2048"
+        }
+      },
+      "pool_pages_after": 2020,
+      "pool_pages_before": 2020,
+      "status": "PASS_REAL_HBM_SAFETY"
+    },
+    {
+      "cap_MiB": 3800,
+      "hbm_node": 18,
+      "library": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R6_20261108T045541Z/job_evidence/libhbm_alloc_s03_round2.so",
+      "library_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+      "placement": {
+        "bulk": {
+          "mapping": "400009e00000-4000f7600000 rw-p 00000000 00:0e 1299189101                 /anon_hugepage (deleted)",
+          "numa": "400009e00000 bind:18 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N18=1900 kernelpagesize_kB=2048"
+        },
+        "fallback": {
+          "mapping": "4000f7c40000-4000f8041000 rw-p 00000000 00:00 0 ",
+          "numa": "4000f7c40000 bind:2 anon=514 dirty=514 active=0 N2=514 kernelpagesize_kB=4"
+        },
+        "first": {
+          "mapping": "400009e00000-4000f7600000 rw-p 00000000 00:0e 1299189101                 /anon_hugepage (deleted)",
+          "numa": "400009e00000 bind:18 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N18=1900 kernelpagesize_kB=2048"
+        },
+        "worker0": {
+          "mapping": "400009e00000-4000f7600000 rw-p 00000000 00:0e 1299189101                 /anon_hugepage (deleted)",
+          "numa": "400009e00000 bind:18 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N18=1900 kernelpagesize_kB=2048"
+        },
+        "worker1": {
+          "mapping": "400009e00000-4000f7600000 rw-p 00000000 00:0e 1299189101                 /anon_hugepage (deleted)",
+          "numa": "400009e00000 bind:18 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N18=1900 kernelpagesize_kB=2048"
+        },
+        "worker2": {
+          "mapping": "400009e00000-4000f7600000 rw-p 00000000 00:0e 1299189101                 /anon_hugepage (deleted)",
+          "numa": "400009e00000 bind:18 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N18=1900 kernelpagesize_kB=2048"
+        },
+        "worker3": {
+          "mapping": "400009e00000-4000f7600000 rw-p 00000000 00:0e 1299189101                 /anon_hugepage (deleted)",
+          "numa": "400009e00000 bind:18 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N18=1900 kernelpagesize_kB=2048"
+        }
+      },
+      "pool_pages_after": 2020,
+      "pool_pages_before": 2020,
+      "status": "PASS_REAL_HBM_SAFETY"
+    },
+    {
+      "cap_MiB": 3800,
+      "hbm_node": 19,
+      "library": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R6_20261108T045541Z/job_evidence/libhbm_alloc_s03_round2.so",
+      "library_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+      "placement": {
+        "bulk": {
+          "mapping": "40002e400000-40011bc00000 rw-p 00000000 00:0e 1299602471                 /anon_hugepage (deleted)",
+          "numa": "40002e400000 bind:19 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N19=1900 kernelpagesize_kB=2048"
+        },
+        "fallback": {
+          "mapping": "40011c240000-40011c641000 rw-p 00000000 00:00 0 ",
+          "numa": "40011c240000 bind:3 anon=514 dirty=514 active=0 N3=514 kernelpagesize_kB=4"
+        },
+        "first": {
+          "mapping": "40002e400000-40011bc00000 rw-p 00000000 00:0e 1299602471                 /anon_hugepage (deleted)",
+          "numa": "40002e400000 bind:19 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N19=1900 kernelpagesize_kB=2048"
+        },
+        "worker0": {
+          "mapping": "40002e400000-40011bc00000 rw-p 00000000 00:0e 1299602471                 /anon_hugepage (deleted)",
+          "numa": "40002e400000 bind:19 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N19=1900 kernelpagesize_kB=2048"
+        },
+        "worker1": {
+          "mapping": "40002e400000-40011bc00000 rw-p 00000000 00:0e 1299602471                 /anon_hugepage (deleted)",
+          "numa": "40002e400000 bind:19 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N19=1900 kernelpagesize_kB=2048"
+        },
+        "worker2": {
+          "mapping": "40002e400000-40011bc00000 rw-p 00000000 00:0e 1299602471                 /anon_hugepage (deleted)",
+          "numa": "40002e400000 bind:19 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N19=1900 kernelpagesize_kB=2048"
+        },
+        "worker3": {
+          "mapping": "40002e400000-40011bc00000 rw-p 00000000 00:0e 1299602471                 /anon_hugepage (deleted)",
+          "numa": "40002e400000 bind:19 file=/anon_hugepage\\040(deleted) huge anon=1900 dirty=1900 N19=1900 kernelpagesize_kB=2048"
+        }
+      },
+      "pool_pages_after": 2020,
+      "pool_pages_before": 2020,
+      "status": "PASS_REAL_HBM_SAFETY"
+    }
+  ],
+  "summary": {
+    "finished": 4137108.804179788,
+    "hbm_pool_restored": true,
+    "hbm_safety": "PASS",
+    "job_id": "2063639",
+    "start": 4135047.643397764,
+    "status": "PASS_HBM_AB",
+    "steps": {
+      "perf_baseline_each_domain": 25,
+      "perf_candidate_each_domain": 25,
+      "perf_ckpt_hbm_each_domain": 25,
+      "strict_baseline_each_domain": 5,
+      "strict_candidate_each_domain": 5,
+      "strict_ckpt_hbm_each_domain": 5
+    }
+  },
+  "logged_update_rows": 360,
+  "strict": {
+    "node0": {
+      "metric_count": 3880,
+      "exact_adamw_step_count": 765,
+      "tensor_max_abs": 0.0,
+      "state_max_abs": 0.0,
+      "max_applicable_rel_l2": 0.0
+    },
+    "node1": {
+      "metric_count": 3880,
+      "exact_adamw_step_count": 765,
+      "tensor_max_abs": 0.0,
+      "state_max_abs": 0.0,
+      "max_applicable_rel_l2": 0.0
+    },
+    "node2": {
+      "metric_count": 3880,
+      "exact_adamw_step_count": 765,
+      "tensor_max_abs": 0.0,
+      "state_max_abs": 0.0,
+      "max_applicable_rel_l2": 0.0
+    },
+    "node3": {
+      "metric_count": 3880,
+      "exact_adamw_step_count": 765,
+      "tensor_max_abs": 0.0,
+      "state_max_abs": 0.0,
+      "max_applicable_rel_l2": 0.0
+    }
+  },
+  "strict_by_role": {
+    "candidate": {
+      "node0": {
+        "metric_count": 3880,
+        "exact_adamw_step_count": 765,
+        "tensor_max_abs": 0.0,
+        "state_max_abs": 0.0,
+        "max_applicable_rel_l2": 0.0
+      },
+      "node1": {
+        "metric_count": 3880,
+        "exact_adamw_step_count": 765,
+        "tensor_max_abs": 0.0,
+        "state_max_abs": 0.0,
+        "max_applicable_rel_l2": 0.0
+      },
+      "node2": {
+        "metric_count": 3880,
+        "exact_adamw_step_count": 765,
+        "tensor_max_abs": 0.0,
+        "state_max_abs": 0.0,
+        "max_applicable_rel_l2": 0.0
+      },
+      "node3": {
+        "metric_count": 3880,
+        "exact_adamw_step_count": 765,
+        "tensor_max_abs": 0.0,
+        "state_max_abs": 0.0,
+        "max_applicable_rel_l2": 0.0
+      }
+    },
+    "ckpt_hbm": {
+      "node0": {
+        "metric_count": 3880,
+        "exact_adamw_step_count": 765,
+        "tensor_max_abs": 0.0,
+        "state_max_abs": 0.0,
+        "max_applicable_rel_l2": 0.0
+      },
+      "node1": {
+        "metric_count": 3880,
+        "exact_adamw_step_count": 765,
+        "tensor_max_abs": 0.0,
+        "state_max_abs": 0.0,
+        "max_applicable_rel_l2": 0.0
+      },
+      "node2": {
+        "metric_count": 3880,
+        "exact_adamw_step_count": 765,
+        "tensor_max_abs": 0.0,
+        "state_max_abs": 0.0,
+        "max_applicable_rel_l2": 0.0
+      },
+      "node3": {
+        "metric_count": 3880,
+        "exact_adamw_step_count": 765,
+        "tensor_max_abs": 0.0,
+        "state_max_abs": 0.0,
+        "max_applicable_rel_l2": 0.0
+      }
+    }
+  },
+  "saved_storage": {
+    "baseline": {},
+    "candidate": {},
+    "ckpt_hbm": {}
+  },
+  "pairing": {
+    "protocol": "S09_REAL32_ENGINEERING_B32_V1",
+    "descriptor_sha256": "2d9ef2f224a7b2f2fb2848c4ec39274fe9466ab2f2aaef4757bc35608e1ebe4a",
+    "batch_size": 32,
+    "electrodes": 32,
+    "offset": 5,
+    "tokens": 928,
+    "dtype": "fp32",
+    "checkpoint_layers": 0,
+    "width": 512,
+    "layers": 12,
+    "heads": 8,
+    "feedforward": 2048,
+    "seed": 0,
+    "full_encoder_parameters": 37995777,
+    "initial_weights_sha256": "2543d05f25883b654141cbc5dc1bb093906e3b360f11ec9f5e87cb4f8bad76b5",
+    "angles_sha256": "d86184a4f820c2f034ec1c09bc7feee0be8016abb0336c0dbee434b59b6de988",
+    "normalization": {
+      "image_scale": 0.03546142578125,
+      "scope": "fit_engineering_train_subset_absmax_once",
+      "fit_partition": "train",
+      "train_units": [
+        "s0285_p0_32_skip4_c14",
+        "s0285_p0_32_skip4_c21",
+        "s0285_p1_32_skip4_c15",
+        "s0285_p1_32_skip4_c23",
+        "s0593_p1_32_skip4_c1",
+        "s0593_p1_32_skip4_c18",
+        "s0593_p1_32_skip4_c20",
+        "s0593_p1_32_skip4_c21"
+      ]
+    },
+    "order": [
+      54,
+      608,
+      205,
+      313,
+      141,
+      706,
+      447,
+      56,
+      563,
+      530,
+      375,
+      459,
+      420,
+      67,
+      214,
+      715,
+      786,
+      34,
+      473,
+      791,
+      357,
+      104,
+      232,
+      396,
+      536,
+      69,
+      518,
+      304,
+      615,
+      336,
+      322,
+      793,
+      87,
+      635,
+      474,
+      96,
+      789,
+      579,
+      578,
+      370,
+      760,
+      237,
+      552,
+      278,
+      658,
+      57,
+      72,
+      52,
+      352,
+      181,
+      296,
+      512,
+      631,
+      94,
+      646,
+      622,
+      508,
+      568,
+      708,
+      35,
+      349,
+      781,
+      661,
+      217,
+      517,
+      388,
+      514,
+      393,
+      621,
+      337,
+      321,
+      92,
+      555,
+      30,
+      136,
+      702,
+      612,
+      263,
+      742,
+      651,
+      385,
+      139,
+      492,
+      345,
+      503,
+      592,
+      176,
+      709,
+      421,
+      796,
+      81,
+      549,
+      637,
+      437,
+      354,
+      371,
+      485,
+      521,
+      325,
+      151,
+      466,
+      442,
+      392,
+      61,
+      353,
+      167,
+      500,
+      410,
+      261,
+      769,
+      527,
+      413,
+      448,
+      787,
+      415,
+      431,
+      239,
+      301,
+      445,
+      382,
+      674,
+      251,
+      273,
+      653,
+      572,
+      295,
+      293,
+      137,
+      272,
+      407,
+      524,
+      45,
+      89,
+      629,
+      783,
+      180,
+      632,
+      316,
+      238,
+      243,
+      738,
+      270,
+      668,
+      147,
+      576,
+      797,
+      114,
+      705,
+      283,
+      152,
+      230,
+      664,
+      377,
+      219,
+      614,
+      108,
+      144,
+      109,
+      636,
+      29,
+      78,
+      129,
+      107,
+      381,
+      128,
+      160,
+      699,
+      765,
+      417,
+      584,
+      733,
+      315,
+      368,
+      6,
+      605,
+      124,
+      339,
+      11,
+      403,
+      657,
+      426,
+      116,
+      768,
+      751,
+      732,
+      794,
+      236,
+      48,
+      486,
+      210,
+      211,
+      291,
+      395,
+      99,
+      361,
+      314,
+      159,
+      182,
+      356,
+      260,
+      543,
+      86,
+      528,
+      529,
+      753,
+      687,
+      292,
+      531,
+      28,
+      665,
+      558,
+      276,
+      200,
+      233,
+      49,
+      88,
+      166,
+      140,
+      681,
+      26,
+      570,
+      484,
+      535,
+      158,
+      519,
+      8,
+      5,
+      307,
+      780,
+      595,
+      25,
+      750,
+      117,
+      471,
+      463,
+      156,
+      470,
+      511,
+      90,
+      673,
+      38,
+      178,
+      412,
+      449,
+      363,
+      499,
+      221,
+      735,
+      125,
+      423,
+      598,
+      123,
+      491,
+      685,
+      571,
+      401,
+      146,
+      682,
+      548,
+      743,
+      386,
+      262,
+      562,
+      602,
+      155,
+      134,
+      252,
+      302,
+      757,
+      130,
+      259,
+      402,
+      639,
+      788,
+      10,
+      662,
+      198,
+      792,
+      213,
+      274,
+      638,
+      758,
+      451,
+      541,
+      660,
+      577,
+      17,
+      257,
+      271,
+      522,
+      258,
+      591,
+      235,
+      440,
+      723,
+      550,
+      378,
+      7,
+      590,
+      303,
+      479,
+      115,
+      306,
+      489,
+      264,
+      390,
+      391,
+      240,
+      477,
+      439,
+      666,
+      398,
+      619,
+      464,
+      502,
+      268,
+      764,
+      164,
+      600,
+      659,
+      384,
+      369,
+      312,
+      663,
+      355,
+      331,
+      255,
+      599,
+      472,
+      726,
+      372,
+      326,
+      207,
+      784,
+      647,
+      741,
+      305,
+      344,
+      712,
+      279,
+      185,
+      644,
+      580,
+      389,
+      53,
+      74,
+      538,
+      110,
+      443,
+      328,
+      679,
+      678,
+      588,
+      507,
+      60,
+      611,
+      346,
+      509,
+      269,
+      525,
+      475,
+      554,
+      432,
+      183,
+      98,
+      772,
+      566,
+      609,
+      532,
+      112,
+      450,
+      42,
+      216,
+      725,
+      347,
+      586,
+      299,
+      250,
+      229,
+      438,
+      650,
+      284,
+      201,
+      416,
+      778,
+      197,
+      31,
+      113,
+      476,
+      782,
+      43,
+      701,
+      44,
+      510,
+      460,
+      289,
+      320,
+      756,
+      494,
+      351,
+      376,
+      171,
+      422,
+      19,
+      526,
+      254,
+      618,
+      544,
+      559,
+      677,
+      175,
+      749,
+      594,
+      242,
+      246,
+      575,
+      50,
+      55,
+      212,
+      693,
+      168,
+      206,
+      154,
+      36,
+      373,
+      267,
+      469,
+      604,
+      24,
+      641,
+      374,
+      734,
+      496,
+      775,
+      66,
+      280,
+      202,
+      648,
+      148,
+      777,
+      76,
+      513,
+      454,
+      688,
+      18,
+      567,
+      399,
+      683,
+      551,
+      569,
+      704,
+      404,
+      172,
+      170,
+      642,
+      77,
+      696,
+      4,
+      654,
+      300,
+      686,
+      106,
+      695,
+      275,
+      495,
+      190,
+      222,
+      728,
+      234,
+      462,
+      329,
+      364,
+      253,
+      335,
+      311,
+      359,
+      383,
+      433,
+      630,
+      434,
+      465,
+      290,
+      480,
+      187,
+      546,
+      285,
+      132,
+      348,
+      105,
+      20,
+      21,
+      9,
+      762,
+      785,
+      79,
+      716,
+      58,
+      177,
+      330,
+      539,
+      418,
+      607,
+      334,
+      68,
+      131,
+      441,
+      669,
+      405,
+      409,
+      231,
+      467,
+      680,
+      634,
+      83,
+      406,
+      697,
+      102,
+      186,
+      286,
+      309,
+      203,
+      121,
+      737,
+      100,
+      2,
+      752,
+      218,
+      3,
+      763,
+      427,
+      690,
+      15,
+      694,
+      85,
+      192,
+      425,
+      51,
+      613,
+      319,
+      740,
+      506,
+      692,
+      0,
+      670,
+      540,
+      457,
+      161,
+      795,
+      65,
+      456,
+      169,
+      47,
+      428,
+      411,
+      32,
+      759,
+      387,
+      731,
+      228,
+      767,
+      163,
+      342,
+      196,
+      745,
+      691,
+      424,
+      585,
+      774,
+      135,
+      606,
+      713,
+      360,
+      493,
+      245,
+      138,
+      287,
+      744,
+      652,
+      667,
+      80,
+      468,
+      12,
+      574,
+      157,
+      596,
+      397,
+      675,
+      318,
+      748,
+      582,
+      419,
+      482,
+      13,
+      179,
+      452,
+      120,
+      779,
+      542,
+      350,
+      165,
+      162,
+      59,
+      717,
+      173,
+      583,
+      481,
+      367,
+      623,
+      204,
+      746,
+      624,
+      710,
+      40,
+      478,
+      515,
+      628,
+      184,
+      446,
+      358,
+      724,
+      73,
+      226,
+      71,
+      698,
+      761,
+      435,
+      557,
+      23,
+      62,
+      215,
+      490,
+      126,
+      189,
+      199,
+      22,
+      643,
+      37,
+      671,
+      379,
+      711,
+      689,
+      122,
+      707,
+      620,
+      703,
+      721,
+      27,
+      771,
+      798,
+      547,
+      649,
+      587,
+      46,
+      224,
+      149,
+      766,
+      754,
+      436,
+      719,
+      174,
+      380,
+      225,
+      119,
+      277,
+      16,
+      248,
+      194,
+      343,
+      645,
+      714,
+      498,
+      118,
+      770,
+      332,
+      84,
+      365,
+      656,
+      676,
+      504,
+      461,
+      281,
+      593,
+      429,
+      603,
+      220,
+      241,
+      534,
+      282,
+      537,
+      400,
+      718,
+      729,
+      39,
+      153,
+      133,
+      91,
+      70,
+      487,
+      755,
+      672,
+      627,
+      33,
+      191,
+      193,
+      188,
+      297,
+      247,
+      589,
+      324,
+      799,
+      610,
+      730,
+      455,
+      294,
+      601,
+      739,
+      617,
+      208,
+      553,
+      340,
+      560,
+      127,
+      298,
+      564,
+      308,
+      111,
+      501,
+      520,
+      327,
+      82,
+      93,
+      458,
+      556,
+      145,
+      244,
+      227,
+      581,
+      195,
+      64,
+      720,
+      333,
+      249,
+      341,
+      505,
+      626,
+      1,
+      640,
+      684,
+      727,
+      408,
+      736,
+      95,
+      14,
+      561,
+      63,
+      266,
+      533,
+      453,
+      790,
+      565,
+      209,
+      655,
+      625,
+      323,
+      444,
+      362,
+      103,
+      573,
+      483,
+      338,
+      700,
+      75,
+      747,
+      101,
+      317,
+      150,
+      616,
+      722,
+      545,
+      256,
+      633,
+      97,
+      773,
+      143,
+      288,
+      142,
+      516,
+      223,
+      597,
+      366,
+      488,
+      310,
+      414,
+      497,
+      523,
+      265,
+      41,
+      430,
+      776,
+      394
+    ],
+    "mask_sha256": [
+      "a08548f951514aca183d4f4f2540ab63211fd1df8f052fd780e048b8864f78b1",
+      "43497b4daf9b396f44c65837783d6af124f30c5562d85e92f3808d6a948428e8",
+      "31ad69fe12ec3cf2ecc85459eb05069030dfcece87784e6127de54226959fb1d",
+      "8b9acc1c4005b5f1226a1f24ed2ce376395cb3650ed6784d2c36ce6365983d1d",
+      "9e0053f154adb90625304e291377c8b403918c09d7da7c9b08f4ab07404304ac",
+      "af035cafd995da8734d3a44014c4181539139d13d3dfa260b206437414661204",
+      "aac24fae3306299d06db100f0ff2146c5176d34ebe555c39e8c19f5653f7ab05",
+      "ad67f20296aef77c1fe2a9c4748306ebd62120d2e39555e5bb6e786feb77880c",
+      "c25462573335701f6cc758e27a71e1e4cd7f521a13b8866f4411014e9d5b00c8",
+      "6185b2d220a97b855ef90e5731b4e6c246df6775083f1829f4f0d3584c9e9f17",
+      "75af9f254b3b6581b35de0a84cce1bf4b85922e64913c4951c27d060eb916333",
+      "d839878f884d2fb47a2ced5d1ad129695c0fc59b87adc845ef3cb4b0e7e8fe25",
+      "3ee94b64077aee074ca192afba5052e0cddb1b8c9595be1f489ce96aab3b9748",
+      "6f0cafc51b7fa99bab5f617223a57c0c0124c20bf63bfc20c96e7532a95581c4",
+      "f83f9875b49bebca8ef932bf02bf452993be4af2c6e65b826945c82be92b6c56",
+      "f7817ba0075aa3ed5be734172de14b77058e7807788d33e296c94a6b63198d64",
+      "73ef9cdd52a7a5934e866fa17b7d3151d5c68ff079fca1012f42d7760929fe69",
+      "325bbbc1e17b61fc8ff2358774edd97fad5f29434a3cb4fee0105fefc7f452d6",
+      "a611c33e4b6cdb57e1e3c3a1375063cddef42b809f387b14774bcb40ca5d73ca",
+      "dba60151ea0f0425af319be21d821d430d7cb5c298c9efd83699d0a330bd02c7",
+      "6974709292bcdad60d9fd37ef9f3ab7c38e4eee514e8177d42ff2ad79d73e818",
+      "8a3be668f887024f8de428ac1524073a06c4f4978d313a6770a4cab91cf8170a",
+      "787c88e3c70a170e3841fcefe988589ee06925f5ab83037079b76429eab8faea",
+      "c773d642af946661c0289427bbac908ff33942def184cabef282da0b5b369165",
+      "7573944e0c722e7c6e42d506749f0311da7f7532df1750506c58ddc9a6351e0f"
+    ],
+    "mask_selected": [
+      14802,
+      14866,
+      14860,
+      14869,
+      14827,
+      14532,
+      14898,
+      15042,
+      14693,
+      14846,
+      14818,
+      14848,
+      14769,
+      14889,
+      14825,
+      14978,
+      14776,
+      14918,
+      14782,
+      15005,
+      14791,
+      14817,
+      14942,
+      14760,
+      14759
+    ]
+  },
+  "performance": {
+    "ranks": {
+      "baseline": [
+        {
+          "domain": "node0",
+          "role": "baseline",
+          "samples": 20,
+          "allocator": null,
+          "arena": null,
+          "seconds": {
+            "min": 28.992999025,
+            "median": 29.1167070465,
+            "max": 29.184212236
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 10376.70703125,
+            "median": 10414.009765625,
+            "max": 10477.03125
+          },
+          "ordinary_peak_plus_constant_hugetlb_MiB": {
+            "min": 10376.70703125,
+            "median": 10414.009765625,
+            "max": 10477.03125
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 0.0,
+            "median": 0.0,
+            "max": 0.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 1543.46484375,
+            "median": 1544.470703125,
+            "max": 1665.22265625
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 1674088448,
+              "1": 7266304
+            },
+            "hugetlb_bytes": {}
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 1738706944,
+              "1": 7266304
+            },
+            "hugetlb_bytes": {}
+          }
+        },
+        {
+          "domain": "node1",
+          "role": "baseline",
+          "samples": 20,
+          "allocator": null,
+          "arena": null,
+          "seconds": {
+            "min": 28.507032966,
+            "median": 28.9927991025,
+            "max": 29.148168325
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 10400.87890625,
+            "median": 10419.021484375,
+            "max": 10498.8203125
+          },
+          "ordinary_peak_plus_constant_hugetlb_MiB": {
+            "min": 10400.87890625,
+            "median": 10419.021484375,
+            "max": 10498.8203125
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 0.0,
+            "median": 0.0,
+            "max": 0.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 1549.1484375,
+            "median": 1569.953125,
+            "max": 1650.67578125
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 100311040,
+              "1": 1566556160
+            },
+            "hugetlb_bytes": {}
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 100311040,
+              "1": 1525460992
+            },
+            "hugetlb_bytes": {}
+          }
+        },
+        {
+          "domain": "node2",
+          "role": "baseline",
+          "samples": 20,
+          "allocator": null,
+          "arena": null,
+          "seconds": {
+            "min": 28.980193065,
+            "median": 29.092233812499998,
+            "max": 29.169074657
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 10421.2265625,
+            "median": 10441.615234375,
+            "max": 10461.26953125
+          },
+          "ordinary_peak_plus_constant_hugetlb_MiB": {
+            "min": 10421.2265625,
+            "median": 10441.615234375,
+            "max": 10461.26953125
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 0.0,
+            "median": 0.0,
+            "max": 0.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 1551.33203125,
+            "median": 1571.9921875,
+            "max": 1592.15625
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 100335616,
+              "1": 7266304,
+              "2": 1540030464
+            },
+            "hugetlb_bytes": {}
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 100335616,
+              "1": 7266304,
+              "2": 1541541888
+            },
+            "hugetlb_bytes": {}
+          }
+        },
+        {
+          "domain": "node3",
+          "role": "baseline",
+          "samples": 20,
+          "allocator": null,
+          "arena": null,
+          "seconds": {
+            "min": 28.074573962,
+            "median": 28.7971996925,
+            "max": 29.111179074
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 10458.609375,
+            "median": 10459.82421875,
+            "max": 10500.62890625
+          },
+          "ordinary_peak_plus_constant_hugetlb_MiB": {
+            "min": 10458.609375,
+            "median": 10459.82421875,
+            "max": 10500.62890625
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 0.0,
+            "median": 0.0,
+            "max": 0.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 1589.37890625,
+            "median": 1590.26953125,
+            "max": 1630.890625
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 100347904,
+              "1": 7254016,
+              "3": 1559277568
+            },
+            "hugetlb_bytes": {}
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 100347904,
+              "1": 7254016,
+              "3": 1560784896
+            },
+            "hugetlb_bytes": {}
+          }
+        }
+      ],
+      "candidate": [
+        {
+          "domain": "node0",
+          "role": "candidate",
+          "samples": 20,
+          "allocator": {
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R6_20261108T045541Z/job_evidence/libhbm_alloc_s03_round2.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "node": 16,
+            "cap_MiB": 3800
+          },
+          "arena": {
+            "allocations": 6054,
+            "cumulative_hbm_GB": 582.3,
+            "reused": 5942,
+            "ddr_large_allocations": 28847,
+            "cumulative_ddr_large_GB": 563.6,
+            "bump_high_water_GB": 3.98
+          },
+          "seconds": {
+            "min": 17.216973632,
+            "median": 17.399298831499998,
+            "max": 17.451235966
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 6693.0703125,
+            "median": 6697.841796875,
+            "max": 6698.49609375
+          },
+          "ordinary_peak_plus_constant_hugetlb_MiB": {
+            "min": 10491.0703125,
+            "median": 10495.841796875,
+            "max": 10496.49609375
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 3798.0,
+            "median": 3798.0,
+            "max": 3798.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 5040.0625,
+            "median": 5044.83203125,
+            "max": 5045.375
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 1295208448,
+              "1": 7266304,
+              "3": 8192
+            },
+            "hugetlb_bytes": {
+              "16": 3982491648
+            }
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 1300942848,
+              "1": 7266304,
+              "3": 8192
+            },
+            "hugetlb_bytes": {
+              "16": 3982491648
+            }
+          }
+        },
+        {
+          "domain": "node1",
+          "role": "candidate",
+          "samples": 20,
+          "allocator": {
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R6_20261108T045541Z/job_evidence/libhbm_alloc_s03_round2.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "node": 17,
+            "cap_MiB": 3800
+          },
+          "arena": {
+            "allocations": 6054,
+            "cumulative_hbm_GB": 582.3,
+            "reused": 5942,
+            "ddr_large_allocations": 28847,
+            "cumulative_ddr_large_GB": 563.6,
+            "bump_high_water_GB": 3.98
+          },
+          "seconds": {
+            "min": 17.112138497,
+            "median": 17.335891214,
+            "max": 17.434123555
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 6698.0625,
+            "median": 6700.34375,
+            "max": 6758.6875
+          },
+          "ordinary_peak_plus_constant_hugetlb_MiB": {
+            "min": 10496.0625,
+            "median": 10498.34375,
+            "max": 10556.6875
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 3798.0,
+            "median": 3798.0,
+            "max": 3798.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 5045.40234375,
+            "median": 5046.837890625,
+            "max": 5048.05078125
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 100331520,
+              "1": 1207881728,
+              "3": 8192
+            },
+            "hugetlb_bytes": {
+              "17": 3982491648
+            }
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 100331520,
+              "1": 1210470400,
+              "3": 8192
+            },
+            "hugetlb_bytes": {
+              "17": 3982491648
+            }
+          }
+        },
+        {
+          "domain": "node2",
+          "role": "candidate",
+          "samples": 20,
+          "allocator": {
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R6_20261108T045541Z/job_evidence/libhbm_alloc_s03_round2.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "node": 18,
+            "cap_MiB": 3800
+          },
+          "arena": {
+            "allocations": 6054,
+            "cumulative_hbm_GB": 582.3,
+            "reused": 5942,
+            "ddr_large_allocations": 28847,
+            "cumulative_ddr_large_GB": 563.6,
+            "bump_high_water_GB": 3.98
+          },
+          "seconds": {
+            "min": 17.227620209,
+            "median": 17.330826891,
+            "max": 17.429145806
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 6699.1171875,
+            "median": 6700.970703125,
+            "max": 6758.29296875
+          },
+          "ordinary_peak_plus_constant_hugetlb_MiB": {
+            "min": 10497.1171875,
+            "median": 10498.970703125,
+            "max": 10556.29296875
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 3798.0,
+            "median": 3798.0,
+            "max": 3798.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 5046.14453125,
+            "median": 5047.763671875,
+            "max": 5048.46484375
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 100327424,
+              "1": 7266304,
+              "2": 1201172480,
+              "3": 8192
+            },
+            "hugetlb_bytes": {
+              "18": 3982491648
+            }
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 100327424,
+              "1": 7266304,
+              "2": 1203752960,
+              "3": 8192
+            },
+            "hugetlb_bytes": {
+              "18": 3982491648
+            }
+          }
+        },
+        {
+          "domain": "node3",
+          "role": "candidate",
+          "samples": 20,
+          "allocator": {
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R6_20261108T045541Z/job_evidence/libhbm_alloc_s03_round2.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "node": 19,
+            "cap_MiB": 3800
+          },
+          "arena": {
+            "allocations": 6054,
+            "cumulative_hbm_GB": 582.3,
+            "reused": 5942,
+            "ddr_large_allocations": 28847,
+            "cumulative_ddr_large_GB": 563.6,
+            "bump_high_water_GB": 3.98
+          },
+          "seconds": {
+            "min": 17.193836685,
+            "median": 17.2835050045,
+            "max": 17.395777546
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 6699.23046875,
+            "median": 6700.583984375,
+            "max": 6757.546875
+          },
+          "ordinary_peak_plus_constant_hugetlb_MiB": {
+            "min": 10497.23046875,
+            "median": 10498.583984375,
+            "max": 10555.546875
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 3798.0,
+            "median": 3798.0,
+            "max": 3798.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 5046.19140625,
+            "median": 5047.029296875,
+            "max": 5048.4296875
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 100335616,
+              "1": 7266304,
+              "3": 1201283072
+            },
+            "hugetlb_bytes": {
+              "19": 3982491648
+            }
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 100335616,
+              "1": 7266304,
+              "3": 1203863552
+            },
+            "hugetlb_bytes": {
+              "19": 3982491648
+            }
+          }
+        }
+      ],
+      "ckpt_hbm": [
+        {
+          "domain": "node0",
+          "role": "ckpt_hbm",
+          "samples": 20,
+          "allocator": {
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R6_20261108T045541Z/job_evidence/libhbm_alloc_s03_round2.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "node": 16,
+            "cap_MiB": 3800
+          },
+          "arena": {
+            "allocations": 38801,
+            "cumulative_hbm_GB": 1537.8,
+            "reused": 38557,
+            "ddr_large_allocations": 0,
+            "cumulative_ddr_large_GB": 0.0,
+            "bump_high_water_GB": 3.03
+          },
+          "seconds": {
+            "min": 12.422875254,
+            "median": 12.461707260499999,
+            "max": 12.576622674
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 822.42578125,
+            "median": 823.666015625,
+            "max": 825.1953125
+          },
+          "ordinary_peak_plus_constant_hugetlb_MiB": {
+            "min": 3716.42578125,
+            "median": 3717.666015625,
+            "max": 3719.1953125
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 2894.0,
+            "median": 2894.0,
+            "max": 2894.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 3712.42578125,
+            "median": 3713.666015625,
+            "max": 3715.1953125
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 851324928,
+              "1": 7266304,
+              "3": 8192
+            },
+            "hugetlb_bytes": {
+              "16": 3034578944
+            }
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 854319104,
+              "1": 7266304,
+              "3": 8192
+            },
+            "hugetlb_bytes": {
+              "16": 3034578944
+            }
+          }
+        },
+        {
+          "domain": "node1",
+          "role": "ckpt_hbm",
+          "samples": 20,
+          "allocator": {
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R6_20261108T045541Z/job_evidence/libhbm_alloc_s03_round2.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "node": 17,
+            "cap_MiB": 3800
+          },
+          "arena": {
+            "allocations": 38801,
+            "cumulative_hbm_GB": 1537.8,
+            "reused": 38557,
+            "ddr_large_allocations": 0,
+            "cumulative_ddr_large_GB": 0.0,
+            "bump_high_water_GB": 3.03
+          },
+          "seconds": {
+            "min": 11.892494158,
+            "median": 12.030239339000001,
+            "max": 12.107205336
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 823.69140625,
+            "median": 825.3046875,
+            "max": 825.9140625
+          },
+          "ordinary_peak_plus_constant_hugetlb_MiB": {
+            "min": 3717.69140625,
+            "median": 3719.3046875,
+            "max": 3719.9140625
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 2894.0,
+            "median": 2894.0,
+            "max": 2894.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 3713.69140625,
+            "median": 3715.3046875,
+            "max": 3715.9140625
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 101232640,
+              "1": 758394880,
+              "3": 8192
+            },
+            "hugetlb_bytes": {
+              "17": 3034578944
+            }
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 101232640,
+              "1": 760881152,
+              "3": 8192
+            },
+            "hugetlb_bytes": {
+              "17": 3034578944
+            }
+          }
+        },
+        {
+          "domain": "node2",
+          "role": "ckpt_hbm",
+          "samples": 20,
+          "allocator": {
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R6_20261108T045541Z/job_evidence/libhbm_alloc_s03_round2.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "node": 18,
+            "cap_MiB": 3800
+          },
+          "arena": {
+            "allocations": 38801,
+            "cumulative_hbm_GB": 1537.8,
+            "reused": 38557,
+            "ddr_large_allocations": 0,
+            "cumulative_ddr_large_GB": 0.0,
+            "bump_high_water_GB": 3.03
+          },
+          "seconds": {
+            "min": 11.705219332,
+            "median": 11.923318753,
+            "max": 11.990177686
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 823.05078125,
+            "median": 824.013671875,
+            "max": 824.7578125
+          },
+          "ordinary_peak_plus_constant_hugetlb_MiB": {
+            "min": 3717.05078125,
+            "median": 3718.013671875,
+            "max": 3718.7578125
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 2894.0,
+            "median": 2894.0,
+            "max": 2894.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 3713.05078125,
+            "median": 3714.013671875,
+            "max": 3714.7578125
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 101240832,
+              "1": 7266304,
+              "2": 750243840,
+              "3": 8192
+            },
+            "hugetlb_bytes": {
+              "18": 3034578944
+            }
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 101240832,
+              "1": 7266304,
+              "2": 752128000,
+              "3": 8192
+            },
+            "hugetlb_bytes": {
+              "18": 3034578944
+            }
+          }
+        },
+        {
+          "domain": "node3",
+          "role": "ckpt_hbm",
+          "samples": 20,
+          "allocator": {
+            "path": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R6_20261108T045541Z/job_evidence/libhbm_alloc_s03_round2.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "node": 19,
+            "cap_MiB": 3800
+          },
+          "arena": {
+            "allocations": 38801,
+            "cumulative_hbm_GB": 1537.8,
+            "reused": 38557,
+            "ddr_large_allocations": 0,
+            "cumulative_ddr_large_GB": 0.0,
+            "bump_high_water_GB": 3.03
+          },
+          "seconds": {
+            "min": 11.921057219,
+            "median": 12.0107192835,
+            "max": 12.049960487
+          },
+          "ordinary_peak_rss_MiB": {
+            "min": 823.68359375,
+            "median": 824.462890625,
+            "max": 825.4609375
+          },
+          "ordinary_peak_plus_constant_hugetlb_MiB": {
+            "min": 3717.68359375,
+            "median": 3718.462890625,
+            "max": 3719.4609375
+          },
+          "hbm_resident_at_step_end_MiB": {
+            "min": 2894.0,
+            "median": 2894.0,
+            "max": 2894.0
+          },
+          "simultaneous_step_end_rss_plus_hugetlb_MiB": {
+            "min": 3713.68359375,
+            "median": 3714.462890625,
+            "max": 3715.4609375
+          },
+          "numa_observe_start": {
+            "ordinary_bytes": {
+              "0": 101269504,
+              "1": 7262208,
+              "3": 751398912
+            },
+            "hugetlb_bytes": {
+              "19": 3034578944
+            }
+          },
+          "numa_observe_end": {
+            "ordinary_bytes": {
+              "0": 101269504,
+              "1": 7262208,
+              "3": 753352704
+            },
+            "hugetlb_bytes": {
+              "19": 3034578944
+            }
+          }
+        }
+      ]
+    },
+    "step_span_seconds": {
+      "baseline": {
+        "min": 29.086846154,
+        "median": 29.1375451565,
+        "max": 29.184212236
+      },
+      "candidate": {
+        "min": 17.327096856,
+        "median": 17.399298831499998,
+        "max": 17.451235966
+      },
+      "ckpt_hbm": {
+        "min": 12.422875254,
+        "median": 12.461707260499999,
+        "max": 12.576622674
+      }
+    },
+    "step_span_change_percent": -40.28563923952061,
+    "throughput_change_percent": 67.46390437153063
+  }
+}

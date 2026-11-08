@@ -1,0 +1,276 @@
+{
+  "status": "ACCEPT_BASELINE_AND_MEMORY_CANDIDATE_WITH_STABILITY_FAIL",
+  "delivery_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\M23_MEMORY_HBM\\memory_hbm_32e_r1_20261108\\MEMORY_HBM_32E_RESULT.json",
+  "delivery_sha256": "55495a3f3dcc269370be8903e160ef35afddd092bd0b9eda78b00694c8cbb76d",
+  "local_refs_verified": 32,
+  "remote_refs_not_reread": 2,
+  "zip_members_verified": 5527,
+  "collection_files_verified": 5520,
+  "source_hashes_verified": 194,
+  "git_suggestion_rows_verified": 176,
+  "strict_metric_records": 155200,
+  "strict_max_abs": 0,
+  "strict_max_relative_l2": 0,
+  "exact_adamw_step_checks_from_unchanged_checker_and_pass_receipts": 30600,
+  "totals": {
+    "submissions": 7,
+    "queue_seconds": 19,
+    "allocated_seconds": 12535,
+    "batch_wall_seconds": 14098,
+    "model_updates": 1860,
+    "job_seconds": 2779,
+    "candidates": 1,
+    "max_domains": 4,
+    "frame_visits": 59520
+  },
+  "rounds": [
+    {
+      "job_id": "2063215",
+      "domains": 1,
+      "configurations": {
+        "DDR_CKPT0": {
+          "median_seconds": 8.621893255,
+          "max_joint_peak_estimate_MiB": 10466.23828125,
+          "max_hbm_MiB": 0.0,
+          "max_RSS_MiB": 10466.23828125,
+          "max_step_end_MiB": 1632.87109375
+        },
+        "HBM_CKPT0": {
+          "median_seconds": 6.6370559595,
+          "max_joint_peak_estimate_MiB": 10501.68359375,
+          "max_hbm_MiB": 3798.0,
+          "max_RSS_MiB": 6703.68359375,
+          "max_step_end_MiB": 5050.52734375
+        }
+      }
+    },
+    {
+      "job_id": "2063282",
+      "domains": 4,
+      "configurations": {
+        "DDR_CKPT0": {
+          "median_seconds": 29.151152843,
+          "max_joint_peak_estimate_MiB": 10502.80859375,
+          "max_hbm_MiB": 0.0,
+          "max_RSS_MiB": 10502.80859375,
+          "max_step_end_MiB": 1650.6484375
+        },
+        "HBM_CKPT0": {
+          "median_seconds": 17.403112573,
+          "max_joint_peak_estimate_MiB": 10557.25,
+          "max_hbm_MiB": 3798.0,
+          "max_RSS_MiB": 6759.25,
+          "max_step_end_MiB": 5051.10546875
+        }
+      }
+    },
+    {
+      "job_id": "2063364",
+      "domains": 1,
+      "configurations": {
+        "DDR_CKPT0": {
+          "median_seconds": 9.165996425500001,
+          "max_joint_peak_estimate_MiB": 10503.4296875,
+          "max_hbm_MiB": 0.0,
+          "max_RSS_MiB": 10503.4296875,
+          "max_step_end_MiB": 1793.828125
+        },
+        "HBM_CKPT0": {
+          "median_seconds": 6.33932789,
+          "max_joint_peak_estimate_MiB": 10554.4609375,
+          "max_hbm_MiB": 3798.0,
+          "max_RSS_MiB": 6756.4609375,
+          "max_step_end_MiB": 5045.375
+        },
+        "DDR_CKPT12": {
+          "median_seconds": 11.164485063,
+          "max_joint_peak_estimate_MiB": 3671.42578125,
+          "max_hbm_MiB": 0.0,
+          "max_RSS_MiB": 3671.42578125,
+          "max_step_end_MiB": 1873.93359375
+        },
+        "HBM_CKPT12": {
+          "median_seconds": 6.916199937,
+          "max_joint_peak_estimate_MiB": 3722.68359375,
+          "max_hbm_MiB": 2894.0,
+          "max_RSS_MiB": 828.68359375,
+          "max_step_end_MiB": 3718.68359375
+        }
+      }
+    },
+    {
+      "job_id": "2063431",
+      "domains": 4,
+      "configurations": {
+        "DDR_CKPT0": {
+          "median_seconds": 29.170090063,
+          "max_joint_peak_estimate_MiB": 10496.6328125,
+          "max_hbm_MiB": 0.0,
+          "max_RSS_MiB": 10496.6328125,
+          "max_step_end_MiB": 1680.99609375
+        },
+        "HBM_CKPT0": {
+          "median_seconds": 17.558143837,
+          "max_joint_peak_estimate_MiB": 10560.89453125,
+          "max_hbm_MiB": 3798.0,
+          "max_RSS_MiB": 6762.89453125,
+          "max_step_end_MiB": 5054.6171875
+        },
+        "DDR_CKPT12": {
+          "median_seconds": 36.2785797345,
+          "max_joint_peak_estimate_MiB": 3694.5859375,
+          "max_hbm_MiB": 0.0,
+          "max_RSS_MiB": 3694.5859375,
+          "max_step_end_MiB": 1962.35546875
+        }
+      }
+    },
+    {
+      "job_id": "2063538",
+      "domains": 4,
+      "configurations": {
+        "DDR_CKPT0": {
+          "median_seconds": 29.10209432,
+          "max_joint_peak_estimate_MiB": 10517.9609375,
+          "max_hbm_MiB": 0.0,
+          "max_RSS_MiB": 10517.9609375,
+          "max_step_end_MiB": 1764.3125
+        },
+        "HBM_CKPT0": {
+          "median_seconds": 17.390981033,
+          "max_joint_peak_estimate_MiB": 10558.453125,
+          "max_hbm_MiB": 3798.0,
+          "max_RSS_MiB": 6760.453125,
+          "max_step_end_MiB": 5050.16015625
+        },
+        "HBM_CKPT12": {
+          "median_seconds": 12.870865399,
+          "max_joint_peak_estimate_MiB": 3721.88671875,
+          "max_hbm_MiB": 2894.0,
+          "max_RSS_MiB": 827.88671875,
+          "max_step_end_MiB": 3717.88671875
+        }
+      }
+    },
+    {
+      "job_id": "2063639",
+      "domains": 4,
+      "configurations": {
+        "DDR_CKPT0": {
+          "median_seconds": 29.1375451565,
+          "max_joint_peak_estimate_MiB": 10500.62890625,
+          "max_hbm_MiB": 0.0,
+          "max_RSS_MiB": 10500.62890625,
+          "max_step_end_MiB": 1665.22265625
+        },
+        "HBM_CKPT0": {
+          "median_seconds": 17.399298831499998,
+          "max_joint_peak_estimate_MiB": 10556.6875,
+          "max_hbm_MiB": 3798.0,
+          "max_RSS_MiB": 6758.6875,
+          "max_step_end_MiB": 5048.46484375
+        },
+        "HBM_CKPT12": {
+          "median_seconds": 12.461707260499999,
+          "max_joint_peak_estimate_MiB": 3719.9140625,
+          "max_hbm_MiB": 2894.0,
+          "max_RSS_MiB": 825.9140625,
+          "max_step_end_MiB": 3715.9140625
+        }
+      }
+    },
+    {
+      "job_id": "2063805",
+      "domains": 4,
+      "configurations": {
+        "DDR_CKPT0": {
+          "median_seconds": 29.1199552725,
+          "max_joint_peak_estimate_MiB": 10480.20703125,
+          "max_hbm_MiB": 0.0,
+          "max_RSS_MiB": 10480.20703125,
+          "max_step_end_MiB": 1730.23828125
+        },
+        "HBM_CKPT0": {
+          "median_seconds": 17.4082491325,
+          "max_joint_peak_estimate_MiB": 10555.59765625,
+          "max_hbm_MiB": 3798.0,
+          "max_RSS_MiB": 6757.59765625,
+          "max_step_end_MiB": 5058.44921875
+        },
+        "HBM_CKPT12": {
+          "median_seconds": 12.190892153,
+          "max_joint_peak_estimate_MiB": 3722.546875,
+          "max_hbm_MiB": 2894.0,
+          "max_RSS_MiB": 828.546875,
+          "max_step_end_MiB": 3718.546875
+        }
+      }
+    }
+  ],
+  "four_domain_summary": {
+    "DDR_CKPT0": {
+      "rounds": 5,
+      "median_seconds": 29.1375451565,
+      "round_seconds": [
+        29.151152843,
+        29.170090063,
+        29.10209432,
+        29.1375451565,
+        29.1199552725
+      ],
+      "spread_pct": 0.2333722955418055,
+      "max_joint_peak_estimate_MiB": 10517.9609375,
+      "max_hbm_MiB": 0.0
+    },
+    "HBM_CKPT0": {
+      "rounds": 5,
+      "median_seconds": 17.403112573,
+      "round_seconds": [
+        17.403112573,
+        17.558143837,
+        17.390981033,
+        17.399298831499998,
+        17.4082491325
+      ],
+      "spread_pct": 0.9589445592334773,
+      "max_joint_peak_estimate_MiB": 10560.89453125,
+      "max_hbm_MiB": 3798.0
+    },
+    "DDR_CKPT12": {
+      "rounds": 1,
+      "median_seconds": 36.2785797345,
+      "round_seconds": [
+        36.2785797345
+      ],
+      "spread_pct": null,
+      "max_joint_peak_estimate_MiB": 3694.5859375,
+      "max_hbm_MiB": 0.0
+    },
+    "HBM_CKPT12": {
+      "rounds": 3,
+      "median_seconds": 12.461707260499999,
+      "round_seconds": [
+        12.870865399,
+        12.461707260499999,
+        12.190892153
+      ],
+      "spread_pct": 5.436384268332413,
+      "max_joint_peak_estimate_MiB": 3722.546875,
+      "max_hbm_MiB": 2894.0
+    }
+  },
+  "decision": {
+    "adopted_stable_speed_configuration": "HBM_CKPT0",
+    "memory_candidate_for_full_node_validation": "HBM_CKPT12",
+    "CKPT12_stable_speed_adoption": false,
+    "full_node_dependency_eligible": true,
+    "reason": "Joint four-domain numerical and HBM safety gates pass; existing S00 card explicitly permits performance-rejected version as validation input; preserve 5.4363842683 percent stability failure."
+  },
+  "frozen_candidate_package_sha256": "eea37182d930e6947673ada27b435fb7ed8b6b90004cd0571affeac2096fd784",
+  "checkpoint_source_sha256": "a55b48fd710fea13b11f9058e2ca568c00f9e6d4e88e7e0f71118f6c7beb2576",
+  "limitations": [
+    "Peak is per-process RSS high-water plus constant resident HBM during sampled step, not instantaneous four-domain whole-node peak.",
+    "No tensor snapshots deserialized, no models run, no direct SSH. Exact step checks confirmed through unchanged checker path and successful raw worker results.",
+    "Scope real32 B32 fp32 Encoder on one host; not B64,16 domains,DDP or production default change."
+  ]
+}

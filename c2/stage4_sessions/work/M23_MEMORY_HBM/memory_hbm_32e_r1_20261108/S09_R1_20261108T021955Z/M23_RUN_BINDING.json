@@ -1,0 +1,61 @@
+{
+  "allocator_origin": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R1_20261107T170010Z/s03/build/libhbm_alloc_s03_round2.so",
+  "allocator_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+  "batch_deadline_utc": "2026-11-08T14:14:25+00:00",
+  "budget_authority_sha256": "ac7eae37a974d30834a96b173d7cf6920e8b5c323bfe2e48ac210c19345508e4",
+  "candidate_sha256": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+  "descriptor_sha256": "2d9ef2f224a7b2f2fb2848c4ec39274fe9466ab2f2aaef4757bc35608e1ebe4a",
+  "domain_count": 1,
+  "excluded_hosts": [
+    "cn21341"
+  ],
+  "existing_16e_validation_reference": "M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_CONTINUE_RESULT.json",
+  "mode": "s09_32e_ckpt0_ddr_hbm",
+  "native_argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn[21338-21504] cn21762 !cn21341",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "2700",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R1_20261108T021955Z",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R1_20261108T021955Z/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R1_20261108T021955Z/run_job.sh",
+    "BINDING_SHA256"
+  ],
+  "package_sha256": "1833edbefebe6ef853cc1c627f131339436a18798b487cced7b6ba87f537c120",
+  "protected_jobs": [
+    "2063196"
+  ],
+  "remaining_queue_seconds": 21600,
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108/S09_R1_20261108T021955Z",
+  "run_id": "S09_R1_20261108T021955Z",
+  "source_manifest_sha256": "34004b8ad16b5a034f674349fc97161a410c4f818017b444ae0f62968b5cf86e",
+  "started_bjt": "2026-11-08T10:14:25+08:00",
+  "task_card_sha256": "a051bbb9073f67da1510cef5dde011018be7ebb7c92b635bc002e5187c80e30e",
+  "used_before": {
+    "allocated_seconds": 0,
+    "candidates": 0,
+    "queue_seconds": 0,
+    "submissions": 0,
+    "updates": 0
+  },
+  "user_authorized": true,
+  "wall_seconds": 2700,
+  "window": "09"
+}
