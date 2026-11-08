@@ -1,0 +1,25 @@
+{
+  "owner": "S00",
+  "status": "PREPARED_FOR_USER_COPY_NOT_CONFIRMED_RECEIVED",
+  "authorization_basis": "User explicitly requested next bounded cluster iteration in existing windows; copy prompt communicates this new batch budget",
+  "task_card": "NUMA_STRAGGLER_S00_LONG_R2_20261108.md",
+  "task_card_sha256": "21113a0ecd925a470118c00b1d04ba0462ec34d6279be577af0a886e9df7d24d",
+  "clock": "start at receipt of new batch prompt; fixed absolute deadline then; no reset",
+  "limits": {
+    "batch_wall_seconds": 28800,
+    "queue_seconds": 14400,
+    "allocated_seconds": 7200,
+    "submissions": 8,
+    "job_seconds": 1800,
+    "candidates": 2,
+    "model_updates": 1920,
+    "physical_hosts_max": 2
+  },
+  "budget_is_new_not_old_remainder": true,
+  "max_active_jobs": 1,
+  "performance_nodes_exclusive_and_distinct": true,
+  "s00_preferred_slow_node": "cn21341",
+  "m23_excluded_node": "cn21341",
+  "new_status_entry": "../S00/numa_m1_straggler_r2_20261108/SESSION_STATUS.md",
+  "coordinator_submitted_jobs": 0
+}

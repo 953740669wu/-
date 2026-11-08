@@ -1,0 +1,178 @@
+{
+  "result_sha256": "da70449550c74625328fd961f74c4366f7f2e60a5959ee9e84a75fca1eeea024",
+  "scope": "returned SHA and raw logs; no live SSH or model rerun",
+  "references": 37,
+  "manifest_files": 1440,
+  "zip_members": 1371,
+  "indexed_files": 1367,
+  "strict_metrics": 31160,
+  "runs": [
+    {
+      "job": "2063260",
+      "host": "cn21385",
+      "phase": "perf",
+      "rank_map": {
+        "logical_to_physical": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        },
+        "rotation": 0,
+        "spawn_order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "stage": "perf"
+      },
+      "median_step_seconds_by_physical_domain": [
+        7.5745526524999995,
+        7.580905779,
+        7.6232254355,
+        7.6071025525
+      ],
+      "common_window_frame_visits_per_second": 31.818626184928902,
+      "domain_rate_spread_percent": 0.731963283599956,
+      "synchronized_rate_share_percent": 94.42384971924182,
+      "sampled_hwm_MiB_by_domain": [
+        6903.71875,
+        6920.24609375,
+        6787.8671875,
+        6996.44921875
+      ]
+    },
+    {
+      "job": "2063260",
+      "host": "cn21385",
+      "phase": "perf_rotated",
+      "rank_map": {
+        "logical_to_physical": {
+          "0": 1,
+          "1": 2,
+          "2": 3,
+          "3": 0
+        },
+        "rotation": 1,
+        "spawn_order": [
+          1,
+          2,
+          3,
+          0
+        ],
+        "stage": "perf_rotated"
+      },
+      "median_step_seconds_by_physical_domain": [
+        7.663158511000001,
+        7.6124654320000005,
+        7.558519361,
+        7.653394933
+      ],
+      "common_window_frame_visits_per_second": 31.346980591550658,
+      "domain_rate_spread_percent": 1.3347241723443135,
+      "synchronized_rate_share_percent": 93.39502683273474,
+      "sampled_hwm_MiB_by_domain": [
+        6944.97265625,
+        6922.01171875,
+        6764.06640625,
+        6868.1953125
+      ]
+    },
+    {
+      "job": "2063333",
+      "host": "cn21386",
+      "phase": "perf",
+      "rank_map": {
+        "logical_to_physical": {
+          "0": 0,
+          "1": 1,
+          "2": 2,
+          "3": 3
+        },
+        "rotation": 0,
+        "spawn_order": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "stage": "perf"
+      },
+      "median_step_seconds_by_physical_domain": [
+        7.5874790885,
+        7.654232515,
+        7.5864041785000005,
+        7.5701020435
+      ],
+      "common_window_frame_visits_per_second": 31.448562518786623,
+      "domain_rate_spread_percent": 1.0208416246612764,
+      "synchronized_rate_share_percent": 93.3909777317874,
+      "sampled_hwm_MiB_by_domain": [
+        6923.3359375,
+        6893.92578125,
+        6919.30078125,
+        6896.53125
+      ]
+    },
+    {
+      "job": "2063333",
+      "host": "cn21386",
+      "phase": "perf_rotated",
+      "rank_map": {
+        "logical_to_physical": {
+          "0": 1,
+          "1": 2,
+          "2": 3,
+          "3": 0
+        },
+        "rotation": 1,
+        "spawn_order": [
+          1,
+          2,
+          3,
+          0
+        ],
+        "stage": "perf_rotated"
+      },
+      "median_step_seconds_by_physical_domain": [
+        7.7223508625,
+        7.649001215,
+        7.681879856,
+        7.595038743
+      ],
+      "common_window_frame_visits_per_second": 30.794359929442003,
+      "domain_rate_spread_percent": 1.36550377852265,
+      "synchronized_rate_share_percent": 92.10909636081404,
+      "sampled_hwm_MiB_by_domain": [
+        6820.4921875,
+        6791.9453125,
+        6842.80078125,
+        6896.8515625
+      ]
+    }
+  ],
+  "budget": {
+    "allocated_seconds": 1184,
+    "batch_elapsed_seconds": 3050,
+    "candidates_used": 0,
+    "microprobe_allocated_seconds": 35,
+    "microprobe_allocated_seconds_max": 120,
+    "model_updates": 480,
+    "model_updates_upper_bound": 480,
+    "physical_hosts": [
+      "cn21385",
+      "cn21386"
+    ],
+    "queue_seconds": 879,
+    "submissions": 4,
+    "training_frame_exposures": 30720
+  },
+  "decision": "ACCEPT_TESTED_NODE_AVOIDANCE_NOT_SOFTWARE_FIX",
+  "unresolved": [
+    "cn21341 root cause: unallocated both attempts",
+    "rank and spawn order moved together",
+    "no software candidate or same-host performance AB",
+    "no HBM increment or matched 4-to-1 scaling"
+  ]
+}

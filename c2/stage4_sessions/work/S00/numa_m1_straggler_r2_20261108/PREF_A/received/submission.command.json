@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn21341",
+    "-R",
+    "cpu=152,mem=98304MB",
+    "-RL",
+    "mem=98304MB",
+    "-a",
+    "numa[count=4,distribution=pack]",
+    "-T",
+    "1800",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/NUMA_M1_R2_PREF_A",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/NUMA_M1_R2_PREF_A/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/NUMA_M1_R2_PREF_A/run_job.sh",
+    "e6089688f6d0f8448e639cf615862b1d27e61f2fc38c78b51013fdfd0dc919c2"
+  ],
+  "binding_sha256": "e6089688f6d0f8448e639cf615862b1d27e61f2fc38c78b51013fdfd0dc919c2",
+  "created_utc": "2026-11-08T02:15:38.770768+00:00"
+}

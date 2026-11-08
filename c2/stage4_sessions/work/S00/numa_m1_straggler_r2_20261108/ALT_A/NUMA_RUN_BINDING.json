@@ -1,0 +1,97 @@
+{
+  "allow_preferred_queue": false,
+  "batch_deadline_utc": "2026-11-08T10:10:59+00:00",
+  "current_budget": {
+    "allocated_before": 0,
+    "attempts_before": 1,
+    "queued_before": 724
+  },
+  "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+  "diagnostic": {
+    "actual_job_mapped_host": true,
+    "first_5_warmup": true,
+    "full_updates_max": 240,
+    "microprobe_allocation_budget_seconds": 120,
+    "rank_rotation": [
+      0,
+      1
+    ]
+  },
+  "eligible_hosts": [
+    "cn21385"
+  ],
+  "enable_microprobe": true,
+  "mode": "rank_rotation_ddr",
+  "native_argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn21385",
+    "-R",
+    "cpu=152,mem=98304MB",
+    "-RL",
+    "mem=98304MB",
+    "-a",
+    "numa[count=4,distribution=pack]",
+    "-T",
+    "1800",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/NUMA_M1_R2_ALT_A",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/NUMA_M1_R2_ALT_A/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/NUMA_M1_R2_ALT_A/run_job.sh",
+    "BINDING_SHA256"
+  ],
+  "numeric": {
+    "norm_floor": 1e-12,
+    "norm_waiver": 1e-08,
+    "relative_L2": 2e-06,
+    "state_abs": 2e-06,
+    "strict_each_role": 5,
+    "tensor_abs": 2e-05
+  },
+  "old_numeric_and_source_scope_preserved": true,
+  "package_sha256": "8d4c09f3e92a3f60477a385d7167165ee0761e9d58390f928ae83630308da051",
+  "prior_baseline": {
+    "bytes": 55631,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_replace_node_20261108\\NUMA_RUN_RESULT.json",
+    "sha256": "34cd9baf6c0f30ae96c705a66a9f36d0408ba7989866eabc7c8e5bf4cb4bcafd"
+  },
+  "prior_review": {
+    "bytes": 4310,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\NUMA_HBM_RESULTS_REVIEW_20261108.json",
+    "sha256": "66dcc9d04106038b5970be1f9a04136fd10e164932fcae8eefc2d5fa8db27820"
+  },
+  "queue_attempt_seconds": 900,
+  "queue_cutoff_utc": "2026-11-08T06:18:17+00:00",
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/NUMA_M1_R2_ALT_A",
+  "scope": {
+    "DDR_limit_MB": 98304,
+    "DDR_request_MB": 98304,
+    "HBM": 0,
+    "cores": [
+      152,
+      144,
+      8
+    ],
+    "exclusive": true,
+    "same_die_domains": 4
+  },
+  "source_manifest_sha256": "fabc05fe00fbfb3fcbfcb1b42ecc85c9e7443088047ce9fa0373c7871e7f20d3",
+  "submission_ordinal": 2,
+  "task_card": {
+    "bytes": 9286,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\NUMA_STRAGGLER_S00_LONG_R2_20261108.md",
+    "sha256": "21113a0ecd925a470118c00b1d04ba0462ec34d6279be577af0a886e9df7d24d"
+  },
+  "user_authorized": true,
+  "version": "ALT_A",
+  "wall_seconds": 1800
+}
