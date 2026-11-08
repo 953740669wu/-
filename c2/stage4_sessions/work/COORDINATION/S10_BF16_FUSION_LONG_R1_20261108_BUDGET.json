@@ -1,0 +1,27 @@
+{
+  "window": "10",
+  "owner": "S10_BF16_FUSION",
+  "status": "PREPARED_NOT_CREATED_NOT_CONFIRMED_RECEIVED",
+  "task_card": "S10_BF16_FUSION_LONG_R1_20261108.md",
+  "task_card_sha256": "5cf032ac3dceb3a25d935ce91144e2824bfcb51a7276c051f5fb9bc2a90940f9",
+  "authorization_basis": "User requested a separate single-window long task alongside 00 and 09; user copy prompt conveys complete bounded budget",
+  "limits": {
+    "batch_wall_seconds": 43200,
+    "queue_seconds": 21600,
+    "allocated_seconds": 14400,
+    "submissions": 10,
+    "job_seconds": 1800,
+    "single_domain_200step_pair_job_seconds": 3600,
+    "candidates": 2,
+    "model_updates": 4000,
+    "frame_visits": 256000,
+    "max_domains": 4
+  },
+  "clock": "starts on receipt; fixed absolute deadline then; no reset",
+  "isolation": "native exclusive, different physical node from 00 and 09; exclude cn21341 and current targets",
+  "max_active_jobs": 1,
+  "new_status_entry": "../S10_BF16_FUSION/bf16_fusion_r1_20261108/SESSION_STATUS.md",
+  "old_m23_bf16_card_execution": false,
+  "coordinator_submitted_jobs": 0,
+  "thread_tools_available": false
+}

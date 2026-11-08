@@ -1,0 +1,187 @@
+--- S10_F1_SINGLE/submit_once.py
++++ S10_F1B_SINGLE/submit_once.py
+@@ -74,8 +74,13 @@
+         scope = row.get("execPath", "") + row.get("cmd", "")
+         need("/stage4_sessions/S10_BF16_FUSION/" not in scope, "active S10 job already exists")
+         if "/stage4_sessions/S00/" in scope or "/stage4_sessions/M23_MEMORY_HBM/" in scope:
+-            for target in [job.get("execNodes", "-"), *(group.get("preferNodes", "-") for group in row["resGroups"])]:
+-                need(host not in listed_hosts(target), "selected host belongs to 00/09: " + target)
++            targets = listed_hosts(job.get("execNodes", "-")) | listed_hosts(row.get("taskExecNodes", "-"))
++            if row["state"] == "PENDING":
++                for group in row["resGroups"]:
++                    eligible = listed_hosts(group.get("preferNodes", "-"))
++                    if len(eligible) == 1:
++                        targets.update(eligible)
++            need(host not in targets, "selected host belongs to 00/09: " + repr(sorted(targets)))
+     node, = query(["dnode","-J","-l",host],"selected_node_before_submit.json")["data"]
+     need(node["nodeName"] == host and node["status"] == "OK" and node["runningJobsCount"] == 0
+          and node["nativeResources"]["loadResources"]["cpuFree"] >= 38 * binding["domain_count"]
+--- S10_B1_GATE/kml_abi.py
++++ S10_B1B_GATE/kml_abi.py
+@@ -1,4 +1,5 @@
+ """Compile against an installed, unambiguous KML header and the frozen runtime library."""
++import json
+ from pathlib import Path
+ import re
+ import subprocess
+@@ -29,9 +30,17 @@
+     raw = record(out, "find_header", ["find", "-L", *search_roots, "-name", "kblas.h", "-print"], check=False)
+     headers = sorted({Path(line).resolve(strict=True) for line in raw.decode().splitlines()})
+     save(out / "header_search.json", dict(paths=[str(p) for p in headers], library=str(library), library_sha256=KML_SHA))
+-    need(bool(headers), "installed kblas.h unavailable; BF16 ABI gate blocked")
+-    need(len({sha(path) for path in headers}) == 1, "different installed kblas.h files; ABI ambiguous")
+-    header = headers[0]
++    matched = root / "verified_kml"
++    provenance = (matched / "PROVENANCE.json").read_bytes()
++    receipt = json.loads(provenance)
++    header = matched / "kblas.h"
++    need(receipt["exact_library_sha256"] == KML_SHA and receipt["header_sha256"] == sha(header)
++         and sha(header) == "eb34aa92122daaa109467955f8424a71d377f18629dbcdede280f7e6f6d028c1",
++         "official header or binary identity differs")
++    need(all(sha(path) == sha(header) for path in headers), "installed and exact-release headers disagree")
++    (out / "HEADER_PROVENANCE.json").write_bytes(provenance)
++    if headers:
++        header = headers[0]
+     common = ["/usr/bin/cc", "-I", str(header.parent)]
+     preprocessed = record(out, "preprocess", [*common, "-E", "-P", "-x", "c", str(header)])
+     declarations = re.findall(r"[^;{}]*\bcblas_sbgemm\s*\([^;]*\)\s*;", preprocessed.decode(), flags=re.S)
+@@ -43,8 +52,9 @@
+          and re.search(r"(?:bf16|bfloat16)", declaration, flags=re.I),
+          "installed header does not declare BF16 operands and FP32 alpha, beta and C")
+     private = out / "libs10_qkv_dw.so"
+-    record(out, "compile", [*common, "-std=gnu11", "-O2", "-fPIC", "-shared", "-Wall", "-Wextra",
++    record(out, "compile", [*common, "-std=gnu11", "-march=armv8.6-a+bf16", "-O2", "-fPIC", "-shared", "-Wall", "-Wextra",
+                             "-Werror", "-Wl,-z,defs", f"-Wl,-rpath,{library.parent}",
++                            "-Wl,-rpath-link,/opt/HPCKit/bisheng-lib",
+                             str(root / "s10_qkv_dw.c"), str(library), "-o", str(private)])
+     save(out / "compiled_identity.json", dict(header=str(header), header_sha256=sha(header),
+          declaration=declaration, kml_sha256=KML_SHA, source_sha256=sha(root / "s10_qkv_dw.c"),
+--- S10_B1_GATE/s10_qkv_dw.c
++++ S10_B1B_GATE/s10_qkv_dw.c
+@@ -1,9 +1,12 @@
+ #include <stdint.h>
+ #include <kblas.h>
+ 
+-/* The installed declaration supplies the C ABI. The operands carry BF16 bit patterns. */
++_Static_assert(sizeof(BLASINT) == sizeof(int), "expected LP64 KML integer ABI");
++_Static_assert(sizeof(__bf16) == sizeof(uint16_t), "expected 16-bit BF16 operands");
++
++/* The exact-release declaration supplies the ABI. Torch owns the operand storage. */
+ void s10_qkv_dw(int m, int n, int k, const uint16_t *g, const uint16_t *x, float *out)
+ {
+     cblas_sbgemm(CblasRowMajor, CblasTrans, CblasNoTrans, m, n, k,
+-                 1.0f, (const void *)g, m, (const void *)x, n, 1.0f, out, n);
++                 1.0f, (const __bf16 *)g, m, (const __bf16 *)x, n, 1.0f, out, n);
+ }
+--- S10_B1B_GATE/payload/check_bf16_module.py
++++ S10_B1C_GATE/payload/check_bf16_module.py
+@@ -1,5 +1,6 @@
+ """Apply the old frozen 83 metrics on C2, with the actual BF16 KML QKV dW."""
+ import copy
++import importlib.util
+ import json
+ from pathlib import Path
+ import sys
+@@ -13,7 +14,13 @@
+ FIXTURE = Path(__file__).resolve().parent / "fixture"
+ 
+ 
+-def run(result, library, native_linear):
++def run(result, library, production_kml):
++    native_linear = production_kml._linear
++    spec = importlib.util.spec_from_file_location("s04_fixture_kml", FIXTURE / "candidate/kml_ops.py")
++    fixture_kml = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(fixture_kml)
++    original_helper = fixture_kml.chain_bf16_linear
++    result["fixture_kml_source"] = str(spec.origin)
+     sys.path.insert(0, str(FIXTURE / "tests"))
+     from check_alignment import compare, rewritten, step
+     from common import fixture, tensor_identity
+@@ -31,7 +38,7 @@
+     control = rewritten(reference, "torch_fp32_control")
+     mixed = copy.deepcopy(control)
+     result["fixture_steps"] = 0
+-    with patch.object(F, "linear", native_linear):
++    with patch.object(F, "linear", native_linear), patch.object(production_kml, "chain_bf16_linear", original_helper, create=True):
+         ref = step(reference, data)
+         result["fixture_steps"] += 1
+         got = step(control, data, "torch_fp32_control")
+@@ -49,7 +56,7 @@
+     checked = dweight(g, x)
+     error = (checked.double() - reference_product).norm().item() / reference_product.norm().item()
+     result["abi_fp32_accumulation"] = dict(relative_l2=error, limit=2e-6, shape=[64, 48, 129],
+-                                          out_dtype=str(checked.dtype), stats=dict(dweight.stats))
++                                          out_dtype=str(checked.dtype), stats=dict(dweight.stats), kml_symbol_identity=dweight.kml_symbol_identity)
+     if checked.dtype != torch.float32 or not torch.isfinite(checked).all() or error > 2e-6:
+         raise ValueError("actual sbgemm failed BF16-operands / FP32-C ABI check")
+     dweight.reset()
+@@ -76,7 +83,7 @@
+     def linear(x, w, b=None):
+         return FixtureQKV.apply(x, w, b) if w is target else native_linear(x, w, b)
+ 
+-    with patch.object(F, "linear", linear):
++    with patch.object(F, "linear", linear), patch.object(production_kml, "chain_bf16_linear", original_helper, create=True):
+         actual = step(mixed, data, "torch_fp32_control")
+         result["fixture_steps"] += 1
+     checks = result["bf16_module"] = compare(ref, actual)
+--- S10_B1B_GATE/payload/worker.py
++++ S10_B1C_GATE/payload/worker.py
+@@ -144,7 +144,7 @@
+     cpu36_guard.checkpoint(guard, "after_backend", torch)
+     if args.phase == "module":
+         from check_bf16_module import run as check_module
+-        check_module(result, args.bf16_library, module._linear)
++        check_module(result, args.bf16_library, module)
+         runtime_check(runtime, hbm)
+         cpu36_guard.checkpoint(guard, "after_module", torch)
+         return
+--- S10_B1B_GATE/payload/bf16_dw.py
++++ S10_B1C_GATE/payload/bf16_dw.py
+@@ -1,5 +1,6 @@
+ """S10 mixed-precision QKV dW. All other arithmetic uses the original path."""
+ import ctypes
++import os
+ from pathlib import Path
+ from time import monotonic_ns
+ 
+@@ -10,6 +11,14 @@
+ class QKVWeightGradient:
+     def __init__(self, library):
+         self.library = ctypes.CDLL(str(Path(library).resolve()), mode=ctypes.RTLD_LOCAL)
++        expected = Path(os.environ["KML_BLAS_LIB"]).resolve(strict=True)
++        kml = ctypes.CDLL(str(expected), mode=ctypes.RTLD_LOCAL)
++        bound = self.library.s10_sbgemm_address
++        bound.restype = ctypes.c_void_p
++        bound.argtypes = []
++        if bound() != ctypes.cast(kml.cblas_sbgemm, ctypes.c_void_p).value:
++            raise ValueError("wrapper sbgemm did not bind to the frozen KML symbol")
++        self.kml_symbol_identity = str(expected)
+         self.gemm = self.library.s10_qkv_dw
+         self.gemm.restype = None
+         self.gemm.argtypes = [ctypes.c_int] * 3 + [ctypes.c_void_p] * 3
+--- S10_B1B_GATE/s10_qkv_dw.c
++++ S10_B1C_GATE/s10_qkv_dw.c
+@@ -10,3 +10,8 @@
+     cblas_sbgemm(CblasRowMajor, CblasTrans, CblasNoTrans, m, n, k,
+                  1.0f, (const __bf16 *)g, m, (const __bf16 *)x, n, 1.0f, out, n);
+ }
++
++const void *s10_sbgemm_address(void)
++{
++    return (const void *)cblas_sbgemm;
++}
+--- S10_B1C_GATE/payload/check_bf16_module.py
++++ S10_B1D_GATE/payload/check_bf16_module.py
+@@ -44,7 +44,11 @@
+         got = step(control, data, "torch_fp32_control")
+         result["fixture_steps"] += 1
+     strict = result["fp32_control"] = compare(ref, got, fp32=True)
+-    strict["bitwise"] = all(tensor_identity(ref[k]) == tensor_identity(got[k]) for k in ref)
++    strict["bitwise_mismatch"] = [
++        name for name in ref if not torch.equal(ref[name].reshape(-1).contiguous().view(torch.uint8),
++                                                got[name].reshape(-1).contiguous().view(torch.uint8))
++    ]
++    strict["bitwise"] = not strict["bitwise_mismatch"]
+     if strict["checks"] != 83 or strict["failed"] or not strict["bitwise"]:
+         result["status"] = "REJECTED_MODULE_FP32_CONTROL"
+         return

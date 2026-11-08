@@ -1,0 +1,13 @@
+{
+  "error": "RuntimeError('strict worker failed: {0: 2}')",
+  "finished": 4474074.583287158,
+  "hbm_preflight": "FROZEN_ALLOCATOR_AND_LOCAL_POOL_VERIFIED",
+  "job_id": "2063332",
+  "module": "PASS_MODULE83",
+  "start": 4473934.454449541,
+  "status": "FAIL_STOP",
+  "steps": {
+    "strict_baseline_each_domain": 5
+  },
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1D_GATE/launch.py\", line 264, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements)\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1D_GATE/launch.py\", line 204, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {0: 2}\n"
+}

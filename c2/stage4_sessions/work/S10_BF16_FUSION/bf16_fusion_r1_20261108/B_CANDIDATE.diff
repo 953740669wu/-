@@ -1,0 +1,362 @@
+--- /dev/null
++++ B/payload/bf16_dw.py
+@@ -0,0 +1,74 @@
++"""S10 mixed-precision QKV dW. All other arithmetic uses the original path."""
++import ctypes
++import os
++from pathlib import Path
++from time import monotonic_ns
++
++import torch
++import torch.nn.functional as F
++
++
++class QKVWeightGradient:
++    def __init__(self, library):
++        self.library = ctypes.CDLL(str(Path(library).resolve()), mode=ctypes.RTLD_LOCAL)
++        expected = Path(os.environ["KML_BLAS_LIB"]).resolve(strict=True)
++        kml = ctypes.CDLL(str(expected), mode=ctypes.RTLD_LOCAL)
++        bound = self.library.s10_sbgemm_address
++        bound.restype = ctypes.c_void_p
++        bound.argtypes = []
++        if bound() != ctypes.cast(kml.cblas_sbgemm, ctypes.c_void_p).value:
++            raise ValueError("wrapper sbgemm did not bind to the frozen KML symbol")
++        self.kml_symbol_identity = str(expected)
++        self.gemm = self.library.s10_qkv_dw
++        self.gemm.restype = None
++        self.gemm.argtypes = [ctypes.c_int] * 3 + [ctypes.c_void_p] * 3
++        self.reset()
++
++    def reset(self):
++        self.stats = dict(calls=0, conversions=0, converted_elements=0, pack_ns=0, gemm_ns=0, zero_ns=0)
++
++    def __call__(self, g, x):
++        if not (g.dtype == x.dtype == torch.float32 and g.is_contiguous() and x.is_contiguous()
++                and g.ndim == x.ndim == 2 and len(g) == len(x)):
++            raise ValueError("QKV dW requires matching contiguous fp32 operand rows")
++        start = monotonic_ns()
++        gb = g.to(torch.bfloat16)
++        xb = x.to(torch.bfloat16)
++        packed = monotonic_ns()
++        out = torch.zeros(g.shape[1], x.shape[1], dtype=torch.float32)
++        cleared = monotonic_ns()
++        self.gemm(g.shape[1], x.shape[1], len(g), gb.data_ptr(), xb.data_ptr(), out.data_ptr())
++        end = monotonic_ns()
++        self.stats["calls"] += 1
++        self.stats["conversions"] += 2
++        self.stats["converted_elements"] += g.numel() + x.numel()
++        self.stats["pack_ns"] += packed - start
++        self.stats["zero_ns"] += cleared - packed
++        self.stats["gemm_ns"] += end - cleared
++        return out
++
++    def install_encoder(self, model, kml_ops):
++        selected = {id(layer.self_attn.in_proj_weight) for layer in model.tf.layers}
++        if len(selected) != 12:
++            raise ValueError("expected the 12 original Encoder QKV weights")
++        dweight = self
++
++        class QKVLinear(kml_ops._LinearFn):
++            @staticmethod
++            def backward(ctx, gy):
++                x, w = ctx.saved_tensors
++                rows = gy.reshape(-1, gy.shape[-1])
++                g = rows.contiguous()
++                gx = kml_ops.gemm(g, w).view(ctx.sh) if ctx.needs_input_grad[0] else None
++                gw = dweight(g, x) if ctx.needs_input_grad[1] else None
++                gb = rows.sum(0) if ctx.hasb and ctx.needs_input_grad[2] else None
++                return gx, gw, gb
++
++        linear = F.linear
++
++        def qkv_only(x, w, b=None):
++            if id(w) in selected:
++                return QKVLinear.apply(x, w, b)
++            return linear(x, w, b)
++
++        F.linear = qkv_only
+--- /dev/null
++++ B/s10_qkv_dw.c
+@@ -0,0 +1,17 @@
++#include <stdint.h>
++#include <kblas.h>
++
++_Static_assert(sizeof(BLASINT) == sizeof(int), "expected LP64 KML integer ABI");
++_Static_assert(sizeof(__bf16) == sizeof(uint16_t), "expected 16-bit BF16 operands");
++
++/* The exact-release declaration supplies the ABI. Torch owns the operand storage. */
++void s10_qkv_dw(int m, int n, int k, const uint16_t *g, const uint16_t *x, float *out)
++{
++    cblas_sbgemm(CblasRowMajor, CblasTrans, CblasNoTrans, m, n, k,
++                 1.0f, (const __bf16 *)g, m, (const __bf16 *)x, n, 1.0f, out, n);
++}
++
++const void *s10_sbgemm_address(void)
++{
++    return (const void *)cblas_sbgemm;
++}
+--- F/payload/worker.py
++++ B/payload/worker.py
+@@ -59,8 +59,8 @@
+     if set(ref) != set(got):
+         raise ValueError("strict tensor keys differ")
+     for name, value in got.items():
+-        category = ("exact" if name.endswith(".step") else "state") if name.startswith("state.") else "tensor"
+-        accepted.compare(torch, f"{step}.{name}", ref[name], value, category, result["metrics"])
++        from bf16_full_compare import compare
++        compare(torch, accepted, step, name, ref[name], value, result["metrics"])
+ 
+ 
+ def write(path, value):
+@@ -142,6 +142,12 @@
+ 
+     module._sgemm = count_native
+     cpu36_guard.checkpoint(guard, "after_backend", torch)
++    if args.phase == "module":
++        from check_bf16_module import run as check_module
++        check_module(result, args.bf16_library, module)
++        runtime_check(runtime, hbm)
++        cpu36_guard.checkpoint(guard, "after_module", torch)
++        return
+     metadata = data.load_descriptor(args.descriptor, args.descriptor_sha)
+     profile_contract.check_data(metadata["description"], ref)
+     ledger = data.Exposure(args.output / "EXPOSURE_LEDGER.json", metadata["description"])
+@@ -164,19 +170,23 @@
+         np.random.seed(0)
+         random.seed(0)
+         model = models[role] = factory()
+-        if role == "candidate":
+-            if not torch._C._dispatch_has_kernel_for_dispatch_key("aten::_fused_adamw_", "CPU"):
+-                raise RuntimeError("installed Torch has no fused AdamW CPU kernel")
+-            opts[role] = training.optimizer(torch, model, fused=True)
+-        else:
+-            opts[role] = training.optimizer(torch, model)
++        opts[role] = training.optimizer(torch, model)
+         result["adamw_options"] = dict(opts[role].defaults)
+         if sum(p.numel() for p in model.parameters()) != 37995777 or training.model_sha(model) != ref["initialization"]["initial_weights_sha256"]:
+             raise ValueError("original full Encoder/initial state differs")
+     initial = {n: p.detach().clone() for n, p in models[args.variant].named_parameters()} if strict else None
++    dweight = None
++    if args.variant == "candidate":
++        from bf16_dw import QKVWeightGradient
++        dweight = QKVWeightGradient(args.bf16_library)
++        dweight.install_encoder(models[args.variant], module)
+     order = list(range(1600))
+     random.Random(0).shuffle(order)
+     known_shapes = json.loads((ROOT / "NATIVE_BASELINE_SHAPES.json").read_bytes())
++    if dweight:
++        removed = known_shapes.pop("(101, 112, 111, 1536, 512, 13312, 1.0, 1536, 512, 0.0, 512)")
++        if removed != 12:
++            raise ValueError("original QKV dW count differs")
+     residency(args.output, "initialized")
+     with (args.output / "steps.jsonl").open("x") as log:
+         for step in range(1, planned + 1):
+@@ -211,6 +221,8 @@
+                 cpu36_guard.checkpoint(guard, f"before_{role}_{step}", torch)
+                 rss_before = memory_metrics.rss()
+                 shapes.clear()
++                if dweight:
++                    dweight.reset()
+                 before = runtime["kml_gemm_calls"]
+                 release = barrier(args, step) if not strict else None
+                 if time.monotonic() >= args.deadline:
+@@ -233,11 +245,13 @@
+                 if actual_huge != hbm["cap_MiB"]*2**20:
+                     raise ValueError(f"unexpected training hugetlb bytes {actual_huge}")
+                 logical = runtime["kml_gemm_calls"] - before
+-                if logical != 149 or shapes != known_shapes:
++                expected_sgemm = 137 if dweight else 149
++                if logical != expected_sgemm or shapes != known_shapes or (
++                        dweight and (dweight.stats["calls"], dweight.stats["conversions"]) != (12, 24)):
+                     result["bad_native"] = dict(step=step, role=role, shapes=dict(shapes), logical=runtime["kml_gemm_calls"]-before)
+                     raise ValueError("original native SGEMM trace differs")
+                 for name, item in loss.items():
+-                    if step <= 5:
++                    if step <= 5 and not dweight:
+                         accepted.compare(torch, f"{role}.{step}.baseline_loss.{name}",
+                                          torch.tensor(ref["steps"][step-1]["losses"][name], dtype=torch.float32),
+                                          item, "tensor", result["metrics"])
+@@ -249,7 +263,8 @@
+                                  start_ns=begin, end_ns=end, release_ns=release, step_seconds=(end-begin)/1e9,
+                                  phase_ns=phase_ns, rss_before=rss_before, training_start=start_memory, rss_after=rss_after,
+                                  peak_reset=reset, kml_calls=logical, native_sgemm_calls=sum(shapes.values()),
+-                                 native_shapes=dict(shapes), sampled=not strict and step >= 6))
++                                 native_shapes=dict(shapes), bf16_dw=dict(dweight.stats) if dweight else None,
++                                 finite_grad_and_state=True, adamw_step=step, sampled=not strict and step >= 6))
+             for row in rows:
+                 log.write(json.dumps(row) + "\n")
+             log.flush()
+@@ -258,6 +273,10 @@
+                                 initial, captures[args.variant], losses[args.variant], values[args.variant])
+             ledger.confirm(step)
+             result["completed_updates"] = step
++            if strict and step < planned:
++                with torch.no_grad():
++                    for name, parameter in models[args.variant].named_parameters():
++                        initial[name].copy_(parameter)
+     if not strict:
+         barrier(args, 26)
+         residency(args.output, "observe_end")
+@@ -275,16 +294,19 @@
+     runtime_check(runtime, hbm)
+     cpu36_guard.checkpoint(guard, "publish", torch)
+     if strict:
+-        result["status"] = "PASS_STRICT_REFERENCE5" if args.variant == "baseline" else "PASS_STRICT_ENCODER5"
++        if args.variant == "baseline":
++            result["status"] = "PASS_STRICT_REFERENCE5"
++        else:
++            result["status"] = "PASS_STRICT_ENCODER5" if all(row["passed"] for row in result["metrics"]) else "REJECTED_B_FULL5"
+     else:
+         result["status"] = "PASS_PERF25"
+ 
+ 
+ if __name__ == "__main__":
+     parser = argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument("--phase", choices=("strict", "perf"), required=True)
++    parser.add_argument("--phase", choices=("module", "strict", "perf"), required=True)
+     parser.add_argument("--variant", choices=("baseline", "candidate"), required=True)
+-    for flag in ("descriptor", "allocation", "phase-root", "output", "reference"):
++    for flag in ("descriptor", "allocation", "phase-root", "output", "reference", "bf16-library"):
+         parser.add_argument("--" + flag, type=Path, required=True)
+     parser.add_argument("--descriptor-sha", required=True)
+     parser.add_argument("--deadline", required=True, type=float)
+@@ -294,7 +316,7 @@
+                   phase=args.phase, variant=args.variant, pid=os.getpid(), started_ns=time.monotonic_ns(), metrics=[], completed_updates=0)
+     try:
+         run(args, result)
+-        code = 0
++        code = 0 if result["status"].startswith("PASS_") else 2
+     except Exception as exc:
+         result.update(status="FAIL_STOP", error=repr(exc), traceback=traceback.format_exc())
+         code = 2
+--- /dev/null
++++ B/payload/bf16_full_compare.py
+@@ -0,0 +1,28 @@
++"""Full Encoder B5 gates use the S04 module metric and category limits."""
++import sys
++from pathlib import Path
++
++sys.path.insert(0, str(Path(__file__).resolve().parent / "fixture/tests"))
++from common import metric
++from check_alignment import limits
++
++
++def compare(torch, original, step, name, ref, got, metrics):
++    label = f"{step}.{name}"
++    if name.endswith(".step") or name.startswith("buffer."):
++        original.compare(torch, label, ref, got, "exact", metrics)
++        return
++    if name.startswith("state."):
++        category = name.rsplit(".", 1)[1] + "." + name[6:]
++    elif name.startswith("delta."):
++        category = "update." + name[6:]
++    elif name.startswith("grad."):
++        category = "gradient." + name[5:]
++    elif name.startswith("input_grad."):
++        category = "input_gradient"
++    else:
++        category = name
++    row = metric(label, ref, got, limits(category))
++    row["same_dtype"] = ref.dtype == got.dtype
++    row["passed"] = row["passed"] and row["same_dtype"]
++    metrics.append(row)
+--- /dev/null
++++ B/payload/check_bf16_module.py
+@@ -0,0 +1,97 @@
++"""Apply the old frozen 83 metrics on C2, with the actual BF16 KML QKV dW."""
++import copy
++import importlib.util
++import json
++from pathlib import Path
++import sys
++from unittest.mock import patch
++
++import torch
++import torch.nn.functional as F
++
++from bf16_dw import QKVWeightGradient
++
++FIXTURE = Path(__file__).resolve().parent / "fixture"
++
++
++def run(result, library, production_kml):
++    native_linear = production_kml._linear
++    spec = importlib.util.spec_from_file_location("s04_fixture_kml", FIXTURE / "candidate/kml_ops.py")
++    fixture_kml = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(fixture_kml)
++    original_helper = fixture_kml.chain_bf16_linear
++    result["fixture_kml_source"] = str(spec.origin)
++    sys.path.insert(0, str(FIXTURE / "tests"))
++    from check_alignment import compare, rewritten, step
++    from common import fixture, tensor_identity
++
++    old = json.loads((FIXTURE / "r1_block_numeric.json").read_bytes())
++    inputs = torch.load(FIXTURE / "FROZEN_FIXTURE.pt", weights_only=True, map_location="cpu")
++    reference, _ = fixture()
++    reference.load_state_dict(inputs["state"], strict=True)
++    data = inputs["data"]
++    identity = dict(fixture={k: tensor_identity(t) for k, t in data.items()},
++                    initial={k: tensor_identity(t) for k, t in reference.state_dict().items()})
++    if identity != {key: old[key] for key in identity}:
++        raise ValueError("original fixture tensor SHA differs")
++    result["fixture_identity"] = identity
++    control = rewritten(reference, "torch_fp32_control")
++    mixed = copy.deepcopy(control)
++    result["fixture_steps"] = 0
++    with patch.object(F, "linear", native_linear), patch.object(production_kml, "chain_bf16_linear", original_helper, create=True):
++        ref = step(reference, data)
++        result["fixture_steps"] += 1
++        got = step(control, data, "torch_fp32_control")
++        result["fixture_steps"] += 1
++    strict = result["fp32_control"] = compare(ref, got, fp32=True)
++    strict["bitwise_mismatch"] = [
++        name for name in ref if not torch.equal(ref[name].reshape(-1).contiguous().view(torch.uint8),
++                                                got[name].reshape(-1).contiguous().view(torch.uint8))
++    ]
++    strict["bitwise"] = not strict["bitwise_mismatch"]
++    if strict["checks"] != 83 or strict["failed"] or not strict["bitwise"]:
++        result["status"] = "REJECTED_MODULE_FP32_CONTROL"
++        return
++
++    dweight = QKVWeightGradient(library)
++    rng = torch.Generator().manual_seed(20261108)
++    g, x = torch.randn(129, 64, generator=rng), torch.randn(129, 48, generator=rng)
++    reference_product = g.bfloat16().double().T @ x.bfloat16().double()
++    checked = dweight(g, x)
++    error = (checked.double() - reference_product).norm().item() / reference_product.norm().item()
++    result["abi_fp32_accumulation"] = dict(relative_l2=error, limit=2e-6, shape=[64, 48, 129],
++                                          out_dtype=str(checked.dtype), stats=dict(dweight.stats), kml_symbol_identity=dweight.kml_symbol_identity)
++    if checked.dtype != torch.float32 or not torch.isfinite(checked).all() or error > 2e-6:
++        raise ValueError("actual sbgemm failed BF16-operands / FP32-C ABI check")
++    dweight.reset()
++    target = mixed["block"].self_attn.in_proj_weight
++
++    class FixtureQKV(torch.autograd.Function):
++        @staticmethod
++        def forward(ctx, x, w, b):
++            with torch.enable_grad():
++                x = x.detach().requires_grad_()
++                b = b.detach().requires_grad_()
++                y = native_linear(x, w.detach(), b)
++            ctx.save_for_backward(x, b, y)
++            return y.detach()
++
++        @staticmethod
++        def backward(ctx, g):
++            x, b, y = ctx.saved_tensors
++            dx, db = torch.autograd.grad(y, (x, b), g)
++            dw = dweight(g.reshape(-1, g.shape[-1]).contiguous(),
++                         x.detach().reshape(-1, x.shape[-1]).contiguous())
++            return dx, dw, db
++
++    def linear(x, w, b=None):
++        return FixtureQKV.apply(x, w, b) if w is target else native_linear(x, w, b)
++
++    with patch.object(F, "linear", linear), patch.object(production_kml, "chain_bf16_linear", original_helper, create=True):
++        actual = step(mixed, data, "torch_fp32_control")
++        result["fixture_steps"] += 1
++    checks = result["bf16_module"] = compare(ref, actual)
++    result["bf16_dw"] = dweight.stats
++    if checks["checks"] != 83 or dweight.stats["calls"] != 1 or dweight.stats["conversions"] != 2:
++        raise ValueError("expected 83 frozen metrics and one actual KML BF16 QKV dW")
++    result["status"] = "PASS_MODULE83" if not checks["failed"] else "REJECTED_MODULE83"

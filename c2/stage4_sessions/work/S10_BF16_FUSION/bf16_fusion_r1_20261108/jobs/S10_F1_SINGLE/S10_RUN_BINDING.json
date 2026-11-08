@@ -1,0 +1,82 @@
+{
+  "batch_deadline_utc": "2026-11-08T14:16:59+00:00",
+  "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+  "domain_count": 1,
+  "excluded_hosts": [
+    "cn21341",
+    "cn21379"
+  ],
+  "host": "cn21386",
+  "mode": "f_adamw_hbm",
+  "native_argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-n",
+    "S10_F1_SINGLE",
+    "-nl",
+    "cn21386 !cn21341 !cn21379",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "1200",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_F1_SINGLE",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_F1_SINGLE/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_F1_SINGLE/run_job.sh",
+    "BINDING_SHA256"
+  ],
+  "other_windows": [
+    {
+      "eligible_hosts": [
+        "cn21341"
+      ],
+      "job_id": "2063196",
+      "ordinal": 1,
+      "package_sha256": "df8d3d291a78ae5f986d940cc00b42d36bbb11e4e94840da4a1d9e9cea3e0fed",
+      "queue_attempt_seconds": 720,
+      "state": "PENDING",
+      "submit_utc": "2026-11-08T02:15:38Z",
+      "version": "PREF_A"
+    },
+    {
+      "active_job": "2063215",
+      "deadline_bjt": "2026-11-08T22:14:25+08:00",
+      "host": "cn21379",
+      "queue_seconds": 3,
+      "run_id": "S09_R1_20261108T021955Z",
+      "settled_allocation_seconds": 0,
+      "state": "RUNNING",
+      "submitted": 1,
+      "window": "09"
+    }
+  ],
+  "package_sha256": "428e05a547aeb58ed93375d34bcb772b135de9bbc3fd23aa1c8eb157d4d10f20",
+  "prior_usage": {
+    "allocated_seconds": 0,
+    "frame_visits": 0,
+    "model_updates": 0,
+    "module_fixture_steps": 0,
+    "profile_updates": 0,
+    "queue_seconds": 0,
+    "submissions": 0
+  },
+  "remaining_queue_seconds": 21600,
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_F1_SINGLE",
+  "reverse_performance": false,
+  "run_id": "S10_F1_SINGLE",
+  "source_manifest_sha256": "46a31c9b5429b65febf203174c90d810db0849d10a28e45f82266df88807ebe6",
+  "user_authorized": true,
+  "wall_seconds": 1200
+}

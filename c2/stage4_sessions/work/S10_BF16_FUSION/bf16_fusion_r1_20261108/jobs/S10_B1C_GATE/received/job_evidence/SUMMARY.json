@@ -1,0 +1,10 @@
+{
+  "error": "RuntimeError('module worker failed: {0: 2}')",
+  "finished": 4473812.965803835,
+  "hbm_preflight": "FROZEN_ALLOCATOR_AND_LOCAL_POOL_VERIFIED",
+  "job_id": "2063324",
+  "start": 4473790.493986878,
+  "status": "FAIL_STOP",
+  "steps": {},
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1C_GATE/launch.py\", line 261, in main\n    phase(\"module\", \"candidate\", contracts, owner, binding, end, placements)\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1C_GATE/launch.py\", line 204, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: module worker failed: {0: 2}\n"
+}

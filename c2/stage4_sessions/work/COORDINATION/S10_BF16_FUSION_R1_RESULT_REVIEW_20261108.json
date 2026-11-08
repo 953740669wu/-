@@ -1,0 +1,125 @@
+{
+  "scope": "Returned artifacts and numerical records; no Torch or cluster execution",
+  "result_sha256": "b8931c1b2dd15d9dde5bb543433b457f9aaaf14e1cbbd1e26aa72791bba37ac7",
+  "archive_members": 1268,
+  "indexed_files": 1263,
+  "source_sha_entries": 212,
+  "source_verified_from_payload_zip": [
+    "2063286:payload/fixture/FROZEN_FIXTURE.pt",
+    "2063319:payload/fixture/FROZEN_FIXTURE.pt",
+    "2063324:payload/fixture/FROZEN_FIXTURE.pt",
+    "2063332:payload/fixture/FROZEN_FIXTURE.pt"
+  ],
+  "jobs": [
+    {
+      "job": "2063247",
+      "state": "FAILED",
+      "allocation_seconds": 90,
+      "queue_seconds": 4,
+      "cleanup_passed": true,
+      "pool": {
+        "0": {
+          "after": 2020,
+          "before": 2020
+        }
+      }
+    },
+    {
+      "job": "2063286",
+      "state": "FAILED",
+      "allocation_seconds": 9,
+      "queue_seconds": 2,
+      "cleanup_passed": true,
+      "pool": {
+        "0": {
+          "after": 2020,
+          "before": 2020
+        }
+      }
+    },
+    {
+      "job": "2063319",
+      "state": "FAILED",
+      "allocation_seconds": 23,
+      "queue_seconds": 3,
+      "cleanup_passed": true,
+      "pool": {
+        "0": {
+          "after": 2020,
+          "before": 2020
+        }
+      }
+    },
+    {
+      "job": "2063324",
+      "state": "FAILED",
+      "allocation_seconds": 23,
+      "queue_seconds": 3,
+      "cleanup_passed": true,
+      "pool": {
+        "0": {
+          "after": 2020,
+          "before": 2020
+        }
+      }
+    },
+    {
+      "job": "2063332",
+      "state": "FAILED",
+      "allocation_seconds": 141,
+      "queue_seconds": 2,
+      "cleanup_passed": true,
+      "pool": {
+        "0": {
+          "after": 2020,
+          "before": 2020
+        }
+      }
+    }
+  ],
+  "F": {
+    "records": 792,
+    "failed": [
+      {
+        "name": "2.state.mask_tok.exp_avg_sq",
+        "max_abs": 6.103515625e-05,
+        "l2_relative": 3.716683307269905e-08,
+        "reference_norm": 4300.780019350647,
+        "passed": false
+      }
+    ],
+    "decision": "REJECT_ORIGINAL_STRICT_GATE",
+    "abs_error_divided_by_limit": 30.517578125
+  },
+  "B": {
+    "records": 3865,
+    "failed": 98,
+    "failed_by_category": {
+      "param": 50,
+      "delta": 48
+    },
+    "failed_by_step": {
+      "2": 25,
+      "3": 25,
+      "4": 24,
+      "5": 24
+    },
+    "failure_relative_l2_max": 0.7986366370961479,
+    "decision": "REJECT_FULL_MODEL_NUMERICS"
+  },
+  "module": {
+    "fp32_pass": 83,
+    "bf16_pass": 83,
+    "fp32_abs_all_zero": true,
+    "abi_relative_l2": 9.732138455542648e-08
+  },
+  "full5_input_pairing": "same five batch/frame/mask identities; twelve actual BF16 dW calls per step",
+  "author_manifest_verified_rows": 133,
+  "budget": {
+    "submissions": 5,
+    "allocated_seconds": 286,
+    "queue_seconds": 14
+  },
+  "performance": "NOT_RUN; no new speed/memory/200-step acceptance",
+  "next": "Archive rejected candidates; retain original fp32 CKPT0 HBM; no automatic third candidate"
+}

@@ -1,0 +1,89 @@
+{
+  "batch_deadline_utc": "2026-11-08T14:16:59+00:00",
+  "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+  "domain_count": 1,
+  "excluded_hosts": [
+    "cn21341",
+    "cn21379",
+    "cn21385"
+  ],
+  "host": "cn21762",
+  "mode": "b_qkv_dw_hbm",
+  "native_argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-n",
+    "S10_B1B_GATE",
+    "-nl",
+    "cn21762 !cn21341 !cn21379 !cn21385",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "1800",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1B_GATE",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1B_GATE/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1B_GATE/run_job.sh",
+    "BINDING_SHA256"
+  ],
+  "other_windows": [
+    {
+      "eligible_hosts": [
+        "cn21385"
+      ],
+      "host": "cn21385",
+      "job_id": "2063260",
+      "observed_utc": "2026-11-08T02:31:35Z",
+      "ordinal": 2,
+      "package_sha256": "8d4c09f3e92a3f60477a385d7167165ee0761e9d58390f928ae83630308da051",
+      "phase": "strict",
+      "prior_cleanup_confirmed": true,
+      "prior_terminal": "2063196",
+      "state": "RUNNING",
+      "version": "ALT_A"
+    },
+    {
+      "active_job": "2063282",
+      "excluded_hosts": [
+        "cn21341",
+        "cn21385"
+      ],
+      "host": "cn21379",
+      "queue_seconds": 2,
+      "run_id": "S09_R2_20261108T023304Z",
+      "settled_allocation_seconds": 618,
+      "state": "RUNNING",
+      "submitted": 2,
+      "window": "09"
+    }
+  ],
+  "package_sha256": "f46a7acb3770f306b6552f6302451ad2868891f6aa85267579018cf4ee1cd12a",
+  "prior_usage": {
+    "allocated_seconds": 99,
+    "frame_visits": 448,
+    "model_updates": 7,
+    "module_fixture_steps": 0,
+    "profile_updates": 0,
+    "queue_seconds": 6,
+    "submissions": 2
+  },
+  "remaining_queue_seconds": 21594,
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1B_GATE",
+  "reverse_performance": false,
+  "run_id": "S10_B1B_GATE",
+  "source_manifest_sha256": "aec5a7fd3ee667094b30b9a711dd5ea286db3a7f4acd546050731ed1e90e40a1",
+  "user_authorized": true,
+  "wall_seconds": 1800
+}

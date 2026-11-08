@@ -1,0 +1,1023 @@
+{
+  "summary": {
+    "checks": 3865,
+    "passed": 3767,
+    "failed": 98,
+    "exact_adamw_step_checks": 765,
+    "failed_by_category": {
+      "param": 50,
+      "delta": 48
+    },
+    "failed_by_step": {
+      "2": 25,
+      "3": 25,
+      "4": 24,
+      "5": 24
+    },
+    "failed_tensor_breakdown": {
+      "self_attn.in_proj_bias": 96,
+      "tf.layers.6.norm2.bias": 2
+    },
+    "first_step_nonzero_only_qkv_dW_params_and_moments": 60,
+    "largest_failure": {
+      "name": "5.delta.tf.layers.11.self_attn.in_proj_bias",
+      "reference_norm": 0.0011706670540429739,
+      "max_abs": 0.00010229955660179257,
+      "rms_abs": 2.385541728524023e-05,
+      "l2_relative": 0.7986366370961479,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    "max_loss_relative_l2": 5.028161342317952e-05,
+    "pair_identity": "same initial SHA, all five frame IDs/indices and mask SHA equal",
+    "adamw_updates": {
+      "baseline": 5,
+      "candidate": 5
+    },
+    "result_file": "jobs/S10_B1D_GATE/received/job_evidence/strict_candidate/node0/result.json",
+    "result_sha256": "a93a61a9aa66a570f2ada82019b5cf628ac7d9be3026c71bb801d7af757229be"
+  },
+  "failed_records": [
+    {
+      "name": "2.param.tf.layers.0.self_attn.in_proj_bias",
+      "reference_norm": 0.004439190803905268,
+      "max_abs": 3.95671850128565e-05,
+      "rms_abs": 5.067776183902346e-06,
+      "l2_relative": 0.044741364197346,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.delta.tf.layers.0.self_attn.in_proj_bias",
+      "reference_norm": 0.002338504701934847,
+      "max_abs": 3.95671850128565e-05,
+      "rms_abs": 5.06777617135351e-06,
+      "l2_relative": 0.08493267165248422,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.param.tf.layers.1.self_attn.in_proj_bias",
+      "reference_norm": 0.004485161499218044,
+      "max_abs": 0.00011983717195107602,
+      "rms_abs": 2.7779895486926666e-05,
+      "l2_relative": 0.24274379083180442,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.delta.tf.layers.1.self_attn.in_proj_bias",
+      "reference_norm": 0.002455062429850139,
+      "max_abs": 0.00011983717195107602,
+      "rms_abs": 2.777989549526352e-05,
+      "l2_relative": 0.44346941727516154,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.param.tf.layers.2.self_attn.in_proj_bias",
+      "reference_norm": 0.003966096870202394,
+      "max_abs": 0.00011597971024457365,
+      "rms_abs": 2.0967019856382114e-05,
+      "l2_relative": 0.20719009850031536,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.delta.tf.layers.2.self_attn.in_proj_bias",
+      "reference_norm": 0.0023930750880766993,
+      "max_abs": 0.00011597971024457365,
+      "rms_abs": 2.096701985693049e-05,
+      "l2_relative": 0.34338078454568804,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.param.tf.layers.3.self_attn.in_proj_bias",
+      "reference_norm": 0.0035652926079879116,
+      "max_abs": 0.0001139888190664351,
+      "rms_abs": 2.1033373681942445e-05,
+      "l2_relative": 0.23121146567151354,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.delta.tf.layers.3.self_attn.in_proj_bias",
+      "reference_norm": 0.002308458093444345,
+      "max_abs": 0.0001139888190664351,
+      "rms_abs": 2.103337374319118e-05,
+      "l2_relative": 0.35709399888268867,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.param.tf.layers.4.self_attn.in_proj_bias",
+      "reference_norm": 0.003249853571984531,
+      "max_abs": 0.00013735676839132793,
+      "rms_abs": 3.6009277443482095e-05,
+      "l2_relative": 0.4342563935961245,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.delta.tf.layers.4.self_attn.in_proj_bias",
+      "reference_norm": 0.002294955539332089,
+      "max_abs": 0.00013735676475334913,
+      "rms_abs": 3.6009277406715526e-05,
+      "l2_relative": 0.6149442402074877,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.param.tf.layers.5.self_attn.in_proj_bias",
+      "reference_norm": 0.0032849800479381078,
+      "max_abs": 0.0001283605452044867,
+      "rms_abs": 2.743033639132916e-05,
+      "l2_relative": 0.3272608132829357,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.delta.tf.layers.5.self_attn.in_proj_bias",
+      "reference_norm": 0.0022975878406296824,
+      "max_abs": 0.0001283605452044867,
+      "rms_abs": 2.7430336412486508e-05,
+      "l2_relative": 0.46790169408322085,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.param.tf.layers.6.self_attn.in_proj_bias",
+      "reference_norm": 0.003225743297224065,
+      "max_abs": 0.00010724893945734948,
+      "rms_abs": 2.2834368576450392e-05,
+      "l2_relative": 0.2774308874935155,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.delta.tf.layers.6.self_attn.in_proj_bias",
+      "reference_norm": 0.0022768956222662113,
+      "max_abs": 0.00010724893945734948,
+      "rms_abs": 2.283436856571322e-05,
+      "l2_relative": 0.39304429092081106,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.param.tf.layers.6.norm2.bias",
+      "reference_norm": 0.0021525503830065375,
+      "max_abs": 1.7298501916229725e-05,
+      "rms_abs": 1.0810366138699336e-06,
+      "l2_relative": 0.011363760144811282,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.param.tf.layers.7.self_attn.in_proj_bias",
+      "reference_norm": 0.003135742173141752,
+      "max_abs": 0.00011544428707566112,
+      "rms_abs": 1.8256857229376143e-05,
+      "l2_relative": 0.22818194634418182,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.delta.tf.layers.7.self_attn.in_proj_bias",
+      "reference_norm": 0.002345266873725634,
+      "max_abs": 0.00011544428707566112,
+      "rms_abs": 1.8256857254238288e-05,
+      "l2_relative": 0.30509097335210944,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.param.tf.layers.8.self_attn.in_proj_bias",
+      "reference_norm": 0.0028112687594289763,
+      "max_abs": 0.00010782206663861871,
+      "rms_abs": 1.77918492881951e-05,
+      "l2_relative": 0.2480357792354521,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.delta.tf.layers.8.self_attn.in_proj_bias",
+      "reference_norm": 0.0022923793001162307,
+      "max_abs": 0.00010782207027659751,
+      "rms_abs": 1.7791849329878274e-05,
+      "l2_relative": 0.3041796961713683,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.param.tf.layers.9.self_attn.in_proj_bias",
+      "reference_norm": 0.002661911030140178,
+      "max_abs": 0.00012494609109126031,
+      "rms_abs": 2.6498623657249497e-05,
+      "l2_relative": 0.3901444104561877,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.delta.tf.layers.9.self_attn.in_proj_bias",
+      "reference_norm": 0.0022594819711465905,
+      "max_abs": 0.00012494609109126031,
+      "rms_abs": 2.6498623656216618e-05,
+      "l2_relative": 0.45963177523092724,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.param.tf.layers.10.self_attn.in_proj_bias",
+      "reference_norm": 0.0029202622082789456,
+      "max_abs": 0.0001323870637861546,
+      "rms_abs": 3.3588007712210113e-05,
+      "l2_relative": 0.4507731128435537,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.delta.tf.layers.10.self_attn.in_proj_bias",
+      "reference_norm": 0.002265463456114408,
+      "max_abs": 0.0001323870601481758,
+      "rms_abs": 3.3588007681032545e-05,
+      "l2_relative": 0.581062422865631,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.param.tf.layers.11.self_attn.in_proj_bias",
+      "reference_norm": 0.002973960789989147,
+      "max_abs": 0.00013823056360706687,
+      "rms_abs": 4.131579994307738e-05,
+      "l2_relative": 0.5444732345691429,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "2.delta.tf.layers.11.self_attn.in_proj_bias",
+      "reference_norm": 0.0024026953103300484,
+      "max_abs": 0.00013823056360706687,
+      "rms_abs": 4.1315799931297234e-05,
+      "l2_relative": 0.6739273362643221,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.0.self_attn.in_proj_bias",
+      "reference_norm": 0.006049996757604799,
+      "max_abs": 7.041773642413318e-05,
+      "rms_abs": 8.733577729154944e-06,
+      "l2_relative": 0.05657605429549768,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.delta.tf.layers.0.self_attn.in_proj_bias",
+      "reference_norm": 0.002111814411216715,
+      "max_abs": 3.278276290075155e-05,
+      "rms_abs": 4.048076254192833e-06,
+      "l2_relative": 0.07512570203126197,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.1.self_attn.in_proj_bias",
+      "reference_norm": 0.006151056004856979,
+      "max_abs": 0.00018817993714037584,
+      "rms_abs": 4.850891492119863e-05,
+      "l2_relative": 0.30907756831137645,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.delta.tf.layers.1.self_attn.in_proj_bias",
+      "reference_norm": 0.0022069037685417546,
+      "max_abs": 9.879254866973497e-05,
+      "rms_abs": 2.3101140646113735e-05,
+      "l2_relative": 0.4102472096217384,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.2.self_attn.in_proj_bias",
+      "reference_norm": 0.005445773977606831,
+      "max_abs": 0.0001867399005277548,
+      "rms_abs": 3.592925980616958e-05,
+      "l2_relative": 0.2585736498735259,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.delta.tf.layers.2.self_attn.in_proj_bias",
+      "reference_norm": 0.0022110845218903043,
+      "max_abs": 7.943153104861267e-05,
+      "rms_abs": 1.6370813575806328e-05,
+      "l2_relative": 0.29017535630466557,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.3.self_attn.in_proj_bias",
+      "reference_norm": 0.004827390162085303,
+      "max_abs": 0.00019169575534760952,
+      "rms_abs": 3.175271571292036e-05,
+      "l2_relative": 0.2577888219773329,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.delta.tf.layers.3.self_attn.in_proj_bias",
+      "reference_norm": 0.0021547635975519316,
+      "max_abs": 7.770693628117442e-05,
+      "rms_abs": 1.3624861227970824e-05,
+      "l2_relative": 0.2478152711521614,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.4.self_attn.in_proj_bias",
+      "reference_norm": 0.004358703118426881,
+      "max_abs": 0.00026054515910800546,
+      "rms_abs": 6.462407038595604e-05,
+      "l2_relative": 0.5810755841684528,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.delta.tf.layers.4.self_attn.in_proj_bias",
+      "reference_norm": 0.0021292503432390492,
+      "max_abs": 0.00012318839071667753,
+      "rms_abs": 2.977859999518707e-05,
+      "l2_relative": 0.5481168560513568,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.5.self_attn.in_proj_bias",
+      "reference_norm": 0.004448093367352676,
+      "max_abs": 0.00021078558347653598,
+      "rms_abs": 4.540739842233639e-05,
+      "l2_relative": 0.4000813741845655,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.delta.tf.layers.5.self_attn.in_proj_bias",
+      "reference_norm": 0.00218047686792672,
+      "max_abs": 8.242503827204928e-05,
+      "rms_abs": 1.9040535851077178e-05,
+      "l2_relative": 0.34223410814648497,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.6.self_attn.in_proj_bias",
+      "reference_norm": 0.0043459479793348495,
+      "max_abs": 0.00020666733325924724,
+      "rms_abs": 4.1909061849400345e-05,
+      "l2_relative": 0.377936662354558,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.delta.tf.layers.6.self_attn.in_proj_bias",
+      "reference_norm": 0.0021767041938659027,
+      "max_abs": 0.00010506210674066097,
+      "rms_abs": 2.0577427670440135e-05,
+      "l2_relative": 0.3704992026286214,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.6.norm2.bias",
+      "reference_norm": 0.002792363959580604,
+      "max_abs": 1.7990329070016742e-05,
+      "rms_abs": 1.2397469733349092e-06,
+      "l2_relative": 0.010046065679000122,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.7.self_attn.in_proj_bias",
+      "reference_norm": 0.004236334084012463,
+      "max_abs": 0.00023005918046692386,
+      "rms_abs": 3.4726517633828615e-05,
+      "l2_relative": 0.3212673866026165,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.delta.tf.layers.7.self_attn.in_proj_bias",
+      "reference_norm": 0.002212309151383491,
+      "max_abs": 0.00011461489339126274,
+      "rms_abs": 1.8560453509788542e-05,
+      "l2_relative": 0.3288049716935798,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.8.self_attn.in_proj_bias",
+      "reference_norm": 0.003700574940234357,
+      "max_abs": 0.00017997293616645038,
+      "rms_abs": 3.2174749005885743e-05,
+      "l2_relative": 0.34075447816354276,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.delta.tf.layers.8.self_attn.in_proj_bias",
+      "reference_norm": 0.002158483230674115,
+      "max_abs": 7.215086952783167e-05,
+      "rms_abs": 1.5349102744222494e-05,
+      "l2_relative": 0.27869547799938055,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.9.self_attn.in_proj_bias",
+      "reference_norm": 0.0035110743990662695,
+      "max_abs": 0.00022656188230030239,
+      "rms_abs": 4.8479333735952124e-05,
+      "l2_relative": 0.5411432158988466,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.delta.tf.layers.9.self_attn.in_proj_bias",
+      "reference_norm": 0.002162635390531072,
+      "max_abs": 0.00011125399032607675,
+      "rms_abs": 2.2619820950515557e-05,
+      "l2_relative": 0.40992222466699757,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.10.self_attn.in_proj_bias",
+      "reference_norm": 0.003795173747809775,
+      "max_abs": 0.00023073092597769573,
+      "rms_abs": 6.142440892898544e-05,
+      "l2_relative": 0.6343149257496834,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.delta.tf.layers.10.self_attn.in_proj_bias",
+      "reference_norm": 0.002141867619277943,
+      "max_abs": 0.00010430416659801267,
+      "rms_abs": 2.8490455361279885e-05,
+      "l2_relative": 0.5213175831899693,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.param.tf.layers.11.self_attn.in_proj_bias",
+      "reference_norm": 0.003992724670968331,
+      "max_abs": 0.0002539924898883328,
+      "rms_abs": 7.197776647937959e-05,
+      "l2_relative": 0.7065202446105018,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "3.delta.tf.layers.11.self_attn.in_proj_bias",
+      "reference_norm": 0.002254449436821949,
+      "max_abs": 0.00012114654600736685,
+      "rms_abs": 3.179058254736538e-05,
+      "l2_relative": 0.5526543525528502,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.param.tf.layers.0.self_attn.in_proj_bias",
+      "reference_norm": 0.0072549859210271714,
+      "max_abs": 9.718939691083506e-05,
+      "rms_abs": 1.1663682459122075e-05,
+      "l2_relative": 0.06300785883296017,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.delta.tf.layers.0.self_attn.in_proj_bias",
+      "reference_norm": 0.0014404794295963075,
+      "max_abs": 3.8044084249122534e-05,
+      "rms_abs": 3.9070796097577475e-06,
+      "l2_relative": 0.10630184625151898,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.param.tf.layers.1.self_attn.in_proj_bias",
+      "reference_norm": 0.007396059754734969,
+      "max_abs": 0.00026001621154136956,
+      "rms_abs": 6.0087645639374486e-05,
+      "l2_relative": 0.31840537051888584,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.delta.tf.layers.1.self_attn.in_proj_bias",
+      "reference_norm": 0.0015606174336403572,
+      "max_abs": 7.709806232014671e-05,
+      "rms_abs": 1.5800211633192702e-05,
+      "l2_relative": 0.39679122373026454,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.param.tf.layers.2.self_attn.in_proj_bias",
+      "reference_norm": 0.00662320149998221,
+      "max_abs": 0.00025739948614500463,
+      "rms_abs": 4.9921917949366596e-05,
+      "l2_relative": 0.29540572113317765,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.delta.tf.layers.2.self_attn.in_proj_bias",
+      "reference_norm": 0.0015311770392935989,
+      "max_abs": 7.065958561724983e-05,
+      "rms_abs": 1.6203214789181728e-05,
+      "l2_relative": 0.41473566969916303,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.param.tf.layers.3.self_attn.in_proj_bias",
+      "reference_norm": 0.005871988247942381,
+      "max_abs": 0.00025326760805910453,
+      "rms_abs": 4.335801020310263e-05,
+      "l2_relative": 0.28938750358624443,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.delta.tf.layers.3.self_attn.in_proj_bias",
+      "reference_norm": 0.0014359542517078108,
+      "max_abs": 6.989317080297042e-05,
+      "rms_abs": 1.4019143194280332e-05,
+      "l2_relative": 0.3826277603611085,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.param.tf.layers.4.self_attn.in_proj_bias",
+      "reference_norm": 0.005448358537215178,
+      "max_abs": 0.0003619992930907756,
+      "rms_abs": 8.942930579308955e-05,
+      "l2_relative": 0.6432944256458115,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.delta.tf.layers.4.self_attn.in_proj_bias",
+      "reference_norm": 0.0014801529482817103,
+      "max_abs": 0.0001065704709617421,
+      "rms_abs": 2.670997287147421e-05,
+      "l2_relative": 0.707232907568313,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.param.tf.layers.5.self_attn.in_proj_bias",
+      "reference_norm": 0.005566423766818343,
+      "max_abs": 0.000291290481982287,
+      "rms_abs": 6.0695402219602664e-05,
+      "l2_relative": 0.42734156477919527,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.delta.tf.layers.5.self_attn.in_proj_bias",
+      "reference_norm": 0.001464976981359505,
+      "max_abs": 8.171550143742934e-05,
+      "rms_abs": 1.6890977080444134e-05,
+      "l2_relative": 0.45187631620792396,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.param.tf.layers.6.self_attn.in_proj_bias",
+      "reference_norm": 0.005376138681841382,
+      "max_abs": 0.00030065191094763577,
+      "rms_abs": 5.8126496252979064e-05,
+      "l2_relative": 0.4237398319697518,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.delta.tf.layers.6.self_attn.in_proj_bias",
+      "reference_norm": 0.0013975439828580807,
+      "max_abs": 0.00010746801854111254,
+      "rms_abs": 1.9065727960864977e-05,
+      "l2_relative": 0.5346671664194843,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.param.tf.layers.7.self_attn.in_proj_bias",
+      "reference_norm": 0.005299049886242845,
+      "max_abs": 0.0002721579803619534,
+      "rms_abs": 4.62968889574062e-05,
+      "l2_relative": 0.3424123405015737,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.delta.tf.layers.7.self_attn.in_proj_bias",
+      "reference_norm": 0.001405253028565602,
+      "max_abs": 8.262038500106428e-05,
+      "rms_abs": 1.5137324875857626e-05,
+      "l2_relative": 0.4221727619196104,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.param.tf.layers.8.self_attn.in_proj_bias",
+      "reference_norm": 0.004684108413980516,
+      "max_abs": 0.00025593837199267,
+      "rms_abs": 4.494949097452005e-05,
+      "l2_relative": 0.3760914388976643,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.delta.tf.layers.8.self_attn.in_proj_bias",
+      "reference_norm": 0.0013518450320491751,
+      "max_abs": 7.596543582621962e-05,
+      "rms_abs": 1.625915369270174e-05,
+      "l2_relative": 0.47137509702558095,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.param.tf.layers.9.self_attn.in_proj_bias",
+      "reference_norm": 0.004478158931278494,
+      "max_abs": 0.00031260630930773914,
+      "rms_abs": 6.618536213613151e-05,
+      "l2_relative": 0.5792393460356597,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.delta.tf.layers.9.self_attn.in_proj_bias",
+      "reference_norm": 0.0013358313664770538,
+      "max_abs": 9.290270099882036e-05,
+      "rms_abs": 1.920239175305751e-05,
+      "l2_relative": 0.5633772383718205,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.param.tf.layers.10.self_attn.in_proj_bias",
+      "reference_norm": 0.004750925777033532,
+      "max_abs": 0.0003151129058096558,
+      "rms_abs": 8.247298982588675e-05,
+      "l2_relative": 0.6803448493739587,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.delta.tf.layers.10.self_attn.in_proj_bias",
+      "reference_norm": 0.0012952523859791698,
+      "max_abs": 8.438197983196005e-05,
+      "rms_abs": 2.2233035818008324e-05,
+      "l2_relative": 0.6727287287222884,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.param.tf.layers.11.self_attn.in_proj_bias",
+      "reference_norm": 0.005071756579213347,
+      "max_abs": 0.0003625161771196872,
+      "rms_abs": 9.547018844256446e-05,
+      "l2_relative": 0.7377428113646899,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "4.delta.tf.layers.11.self_attn.in_proj_bias",
+      "reference_norm": 0.0013675222022761439,
+      "max_abs": 0.0001172386109828949,
+      "rms_abs": 2.4978070981923268e-05,
+      "l2_relative": 0.7158468484141068,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.param.tf.layers.0.self_attn.in_proj_bias",
+      "reference_norm": 0.008253813556804528,
+      "max_abs": 0.000128949512145482,
+      "rms_abs": 1.4737125233852463e-05,
+      "l2_relative": 0.06997674342895291,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.delta.tf.layers.0.self_attn.in_proj_bias",
+      "reference_norm": 0.001319916473970164,
+      "max_abs": 3.307846600364428e-05,
+      "rms_abs": 4.130598768335519e-06,
+      "l2_relative": 0.12264847982881544,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.param.tf.layers.1.self_attn.in_proj_bias",
+      "reference_norm": 0.008407605661153186,
+      "max_abs": 0.0003139726504741702,
+      "rms_abs": 7.01444653132788e-05,
+      "l2_relative": 0.3269766070818698,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.delta.tf.layers.1.self_attn.in_proj_bias",
+      "reference_norm": 0.001460372983239928,
+      "max_abs": 7.645454752491787e-05,
+      "rms_abs": 1.6284482701369813e-05,
+      "l2_relative": 0.4370245004674345,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.param.tf.layers.2.self_attn.in_proj_bias",
+      "reference_norm": 0.007608355565587862,
+      "max_abs": 0.0003045352059416473,
+      "rms_abs": 6.0081829814877026e-05,
+      "l2_relative": 0.30949095286729444,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.delta.tf.layers.2.self_attn.in_proj_bias",
+      "reference_norm": 0.001391667440150729,
+      "max_abs": 6.0993246734142303e-05,
+      "rms_abs": 1.1931464089218483e-05,
+      "l2_relative": 0.33601129763887944,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.param.tf.layers.3.self_attn.in_proj_bias",
+      "reference_norm": 0.006726047433842868,
+      "max_abs": 0.00030035427334951237,
+      "rms_abs": 5.411124928290569e-05,
+      "l2_relative": 0.31529947153389626,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.delta.tf.layers.3.self_attn.in_proj_bias",
+      "reference_norm": 0.001295260338965589,
+      "max_abs": 7.022230056463741e-05,
+      "rms_abs": 1.4532598146197724e-05,
+      "l2_relative": 0.43972565544350295,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.param.tf.layers.4.self_attn.in_proj_bias",
+      "reference_norm": 0.0064262131493171845,
+      "max_abs": 0.0004590855533024296,
+      "rms_abs": 0.00011210281860434596,
+      "l2_relative": 0.6836865144134986,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.delta.tf.layers.4.self_attn.in_proj_bias",
+      "reference_norm": 0.0013705627671488046,
+      "max_abs": 0.00011074494977947325,
+      "rms_abs": 2.5133091185723118e-05,
+      "l2_relative": 0.7186916269956304,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.param.tf.layers.5.self_attn.in_proj_bias",
+      "reference_norm": 0.006458511558433685,
+      "max_abs": 0.00035759714955929667,
+      "rms_abs": 7.319025350137135e-05,
+      "l2_relative": 0.44413645119628997,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.delta.tf.layers.5.self_attn.in_proj_bias",
+      "reference_norm": 0.0012632312812512012,
+      "max_abs": 8.782346776570193e-05,
+      "rms_abs": 1.6502761023507574e-05,
+      "l2_relative": 0.5119992762008919,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.param.tf.layers.6.self_attn.in_proj_bias",
+      "reference_norm": 0.006198230070562142,
+      "max_abs": 0.00039436637598555535,
+      "rms_abs": 7.492025563363983e-05,
+      "l2_relative": 0.47372593946878294,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.delta.tf.layers.6.self_attn.in_proj_bias",
+      "reference_norm": 0.0012133157212274892,
+      "max_abs": 9.371446503791958e-05,
+      "rms_abs": 1.9800822131574712e-05,
+      "l2_relative": 0.6395949197578729,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.param.tf.layers.7.self_attn.in_proj_bias",
+      "reference_norm": 0.006085898190792655,
+      "max_abs": 0.0003474447730695829,
+      "rms_abs": 5.921259633543702e-05,
+      "l2_relative": 0.381316000551295,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.delta.tf.layers.7.self_attn.in_proj_bias",
+      "reference_norm": 0.0011626785048203748,
+      "max_abs": 9.469168799114414e-05,
+      "rms_abs": 1.8767671654918618e-05,
+      "l2_relative": 0.6326250157587342,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.param.tf.layers.8.self_attn.in_proj_bias",
+      "reference_norm": 0.005405855739939251,
+      "max_abs": 0.00027160686295246705,
+      "rms_abs": 5.34181111957868e-05,
+      "l2_relative": 0.38727519711253294,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.delta.tf.layers.8.self_attn.in_proj_bias",
+      "reference_norm": 0.0011032187079689905,
+      "max_abs": 6.019531429046765e-05,
+      "rms_abs": 1.283385026552714e-05,
+      "l2_relative": 0.45592242928799204,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.param.tf.layers.9.self_attn.in_proj_bias",
+      "reference_norm": 0.005172780752996041,
+      "max_abs": 0.000366828462574631,
+      "rms_abs": 7.778451411999239e-05,
+      "l2_relative": 0.5893383186563693,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.delta.tf.layers.9.self_attn.in_proj_bias",
+      "reference_norm": 0.0010971269741201887,
+      "max_abs": 7.420953625114635e-05,
+      "rms_abs": 1.699062798480628e-05,
+      "l2_relative": 0.6069433340563335,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.param.tf.layers.10.self_attn.in_proj_bias",
+      "reference_norm": 0.005452581239971944,
+      "max_abs": 0.00036297322367317975,
+      "rms_abs": 0.00010020336265517103,
+      "l2_relative": 0.7202375483138697,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.delta.tf.layers.10.self_attn.in_proj_bias",
+      "reference_norm": 0.0010696849433951743,
+      "max_abs": 7.732605445198715e-05,
+      "rms_abs": 1.991897459194682e-05,
+      "l2_relative": 0.7298047785153491,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.param.tf.layers.11.self_attn.in_proj_bias",
+      "reference_norm": 0.005914969230683116,
+      "max_abs": 0.0004630961047951132,
+      "rms_abs": 0.00011662124795573137,
+      "l2_relative": 0.7727175970452758,
+      "limit": 0.01,
+      "passed": false,
+      "same_dtype": true
+    },
+    {
+      "name": "5.delta.tf.layers.11.self_attn.in_proj_bias",
+      "reference_norm": 0.0011706670540429739,
+      "max_abs": 0.00010229955660179257,
+      "rms_abs": 2.385541728524023e-05,
+      "l2_relative": 0.7986366370961479,
+      "limit": 0.05,
+      "passed": false,
+      "same_dtype": true
+    }
+  ]
+}

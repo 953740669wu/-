@@ -1,0 +1,10 @@
+{
+  "error": "ValueError('installed kblas.h unavailable; BF16 ABI gate blocked')",
+  "finished": 4473241.576719787,
+  "hbm_preflight": "FROZEN_ALLOCATOR_AND_LOCAL_POOL_VERIFIED",
+  "job_id": "2063286",
+  "start": 4473233.369199353,
+  "status": "FAIL_STOP",
+  "steps": {},
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1_GATE/launch.py\", line 260, in main\n    build_bf16(ROOT, EVIDENCE)\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1_GATE/kml_abi.py\", line 32, in build\n    need(bool(headers), \"installed kblas.h unavailable; BF16 ABI gate blocked\")\n  File \"/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1_GATE/prepare.py\", line 25, in need\n    raise ValueError(why)\nValueError: installed kblas.h unavailable; BF16 ABI gate blocked\n"
+}

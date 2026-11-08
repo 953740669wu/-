@@ -1,0 +1,141 @@
+--- accepted/payload/worker.py
++++ F/payload/worker.py
+@@ -6,6 +6,7 @@
+ import os
+ from pathlib import Path
+ import random
++import re
+ import sys
+ import time
+ import traceback
+@@ -53,7 +54,7 @@
+     pinned = receipt["reference_snapshots"][step-1]
+     if receipt["status"] != "PASS_STRICT_REFERENCE5" or receipt["completed_updates"] != 5 or (
+             path.stat().st_size != pinned["bytes"] or data.sha(path) != pinned["sha256"]):
+-        raise ValueError("invalid pinned strict DDR snapshot")
++        raise ValueError("invalid pinned strict HBM snapshot")
+     ref = torch.load(path, map_location="cpu", mmap=True, weights_only=True)
+     if set(ref) != set(got):
+         raise ValueError("strict tensor keys differ")
+@@ -118,16 +119,11 @@
+     result["runtime"] = runtime
+     paths = {line.split()[-1] for line in Path("/proc/self/maps").read_text().splitlines()
+              if "libhbm_alloc" in line}
+-    hbm = None
+-    if args.variant == "candidate":
+-        library = os.environ["M23_HBM_LIBRARY"]
+-        if paths != {library} or data.sha(library) != os.environ["M23_HBM_LIBRARY_SHA"]:
+-            raise ValueError("HBM allocator path/SHA mapping differs")
+-        hbm = dict(path=library, sha256=data.sha(library), node=int(os.environ["HBM_NODE"]),
+-                   cap_MiB=int(os.environ["HBM_MB"]))
+-    elif paths or os.environ.get("HBM_NODE"):
+-        raise ValueError("unexpected allocator in DDR worker")
+-    result["hbm_allocator"] = hbm
++    library = os.environ["S10_HBM_LIBRARY"]
++    if paths != {library} or data.sha(library) != os.environ["S10_HBM_LIBRARY_SHA"]:
++        raise ValueError("HBM allocator path/SHA mapping differs")
++    hbm = result["hbm_allocator"] = dict(path=library, sha256=data.sha(library), node=int(os.environ["HBM_NODE"]),
++                                        cap_MiB=int(os.environ["HBM_MB"]))
+     runtime_check(runtime, hbm)
+     module = sys.modules["kml_ops"]
+     if data.sha(module.__file__) != BASELINE or module.LINEAR_DTYPE != torch.float32:
+@@ -168,7 +164,13 @@
+         np.random.seed(0)
+         random.seed(0)
+         model = models[role] = factory()
+-        opts[role] = training.optimizer(torch, model)
++        if role == "candidate":
++            if not torch._C._dispatch_has_kernel_for_dispatch_key("aten::_fused_adamw_", "CPU"):
++                raise RuntimeError("installed Torch has no fused AdamW CPU kernel")
++            opts[role] = training.optimizer(torch, model, fused=True)
++        else:
++            opts[role] = training.optimizer(torch, model)
++        result["adamw_options"] = dict(opts[role].defaults)
+         if sum(p.numel() for p in model.parameters()) != 37995777 or training.model_sha(model) != ref["initialization"]["initial_weights_sha256"]:
+             raise ValueError("original full Encoder/initial state differs")
+     initial = {n: p.detach().clone() for n, p in models[args.variant].named_parameters()} if strict else None
+@@ -217,9 +219,10 @@
+                 start_memory = memory_metrics.rss() if reset else None
+                 if reset and (not reset["available"] or start_memory["peak_rss_bytes"] != start_memory["rss_bytes"]):
+                     raise RuntimeError("could not reset/verify per-step RSS high-water mark")
++                phase_ns = {}
+                 begin = time.monotonic_ns()
+                 try:
+-                    loss = losses[role] = training.train_step(torch, model, opts[role], values[role], mask)
++                    loss = losses[role] = training.train_step(torch, model, opts[role], values[role], mask, phase_ns=phase_ns)
+                 finally:
+                     for handle in handles:
+                         handle.remove()
+@@ -227,7 +230,7 @@
+                 rss_after = memory_metrics.rss()
+                 training.validate_update(torch, model, opts[role], values[role], step)
+                 actual_huge = rss_after["hugetlb_bytes"]
+-                if (not hbm and actual_huge != 0) or (hbm and not 0 < actual_huge <= hbm["cap_MiB"]*2**20):
++                if actual_huge != hbm["cap_MiB"]*2**20:
+                     raise ValueError(f"unexpected training hugetlb bytes {actual_huge}")
+                 logical = runtime["kml_gemm_calls"] - before
+                 if logical != 149 or shapes != known_shapes:
+@@ -244,7 +247,7 @@
+                 rows.append(dict(role=role, step=step, batch_size=64, frame_indices=ids, frame_ids=frames,
+                                  mask_sha256=mask_sha, losses={k: v.item() for k,v in loss.items()},
+                                  start_ns=begin, end_ns=end, release_ns=release, step_seconds=(end-begin)/1e9,
+-                                 rss_before=rss_before, training_start=start_memory, rss_after=rss_after,
++                                 phase_ns=phase_ns, rss_before=rss_before, training_start=start_memory, rss_after=rss_after,
+                                  peak_reset=reset, kml_calls=logical, native_sgemm_calls=sum(shapes.values()),
+                                  native_shapes=dict(shapes), sampled=not strict and step >= 6))
+             for row in rows:
+@@ -258,6 +261,14 @@
+     if not strict:
+         barrier(args, 26)
+         residency(args.output, "observe_end")
++    placement = [line for line in Path("/proc/self/numa_maps").read_text().splitlines()
++                 if " huge " in line and "/anon_hugepage" in line]
++    resident = [(int(node), int(pages)) for line in placement
++                for node, pages in re.findall(r"\bN(\d+)=(\d+)\b", line)]
++    if resident != [(hbm["node"], hbm["cap_MiB"] // 2)] or not all(
++            f"bind:{hbm['node']}" in line and "kernelpagesize_kB=2048" in line for line in placement):
++        raise ValueError(f"wrong actual HBM placement: {placement}")
++    result["hbm_residency"] = placement
+     data.load_descriptor(args.descriptor, args.descriptor_sha)
+     result["final_model_sha256"] = {role: training.model_sha(model) for role, model in models.items()}
+     finish_backend(runtime, expected)
+--- accepted/payload/engineering_training.py
++++ F/payload/engineering_training.py
+@@ -2,10 +2,11 @@
+ import hashlib
+ from pathlib import Path
+ import random
++from time import monotonic_ns
+ 
+ 
+-def optimizer(torch,model):
+-    return torch.optim.AdamW(model.parameters(),lr=1e-4,betas=(0.9,0.999),eps=1e-8,weight_decay=0.01)
++def optimizer(torch,model,**options):
++    return torch.optim.AdamW(model.parameters(),lr=1e-4,betas=(0.9,0.999),eps=1e-8,weight_decay=0.01,**options)
+ 
+ 
+ def tensor(torch,array):
+@@ -27,13 +28,21 @@
+     return voltage+coarse,voltage,coarse
+ 
+ 
+-def train_step(torch,model,opt,values,mask):
++def train_step(torch,model,opt,values,mask,phase_ns=None):
+     v,image,angles,belt=values
+     v.requires_grad_();image.requires_grad_()
+     opt.zero_grad(set_to_none=True)
++    start = monotonic_ns()
+     total,voltage,coarse=losses(torch,model,v,image,angles,belt,mask)
++    forward_end = monotonic_ns()
+     opt.zero_grad()
+-    total.backward();opt.step()
++    backward_start = monotonic_ns()
++    total.backward()
++    optimizer_start = monotonic_ns()
++    opt.step()
++    if phase_ns is not None:
++        phase_ns.update(forward_loss=forward_end-start, backward=optimizer_start-backward_start,
++                        optimizer=monotonic_ns()-optimizer_start)
+     return dict(total=total.detach(),voltage=voltage.detach(),coarse=coarse.detach())
+ 
+ 

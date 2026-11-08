@@ -1,0 +1,376 @@
+{
+  "status": "CLOSED_BOTH_CANDIDATES_REJECTED_NUMERICAL",
+  "scope": {
+    "window": 10,
+    "model": "16_adjacent Encoder pretraining",
+    "batch": 64,
+    "base": "fp32 CKPT0 HBM",
+    "host": "cn21762",
+    "selected_cores_per_domain": 36,
+    "allocated_cores_per_domain": 38,
+    "reserved_cores_per_domain": 2,
+    "DDR_request_and_limit_MiB_per_domain": 24576,
+    "HBM_MiB_per_domain": 3800,
+    "initial_weights_sha256": "2543d05f25883b654141cbc5dc1bb093906e3b360f11ec9f5e87cb4f8bad76b5",
+    "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+    "production_default_change": false,
+    "engineering_only": true
+  },
+  "baseline_identity": {
+    "hbm_result_sha256": "c2c4ada68d2c0dac0113eb34225899901295d62a711ed12f4634d904cb86e485",
+    "allocator_source_sha256": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+    "allocator_library_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+    "original_kml_ops_sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26",
+    "kml_library_sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c",
+    "original_fp32_comparator_sha256": "e9b53136146c062b0817fd0bf63632ad6c8cde6daa8d862cf78ba10431024a3e"
+  },
+  "F": {
+    "candidate": "torch.optim.AdamW(fused=True) CPU",
+    "job": "2063247",
+    "decision": "REJECT_STRICT_FP32_GATE",
+    "baseline_updates": 5,
+    "candidate_updates": 2,
+    "strict_numeric_records": 792,
+    "failed_records": [
+      {
+        "name": "2.state.mask_tok.exp_avg_sq",
+        "max_abs": 6.103515625e-05,
+        "l2_relative": 3.716683307269905e-08,
+        "reference_norm": 4300.780019350647,
+        "passed": false
+      }
+    ],
+    "absolute_state_limit": 2e-06,
+    "relative_l2_limit": 2e-06,
+    "result_file": "jobs/S10_F1C_SINGLE/received/job_evidence/strict_candidate/node0/result.json",
+    "result_sha256": "6d6a147e9dabec142cc71c03283c340a81ff32af4e156605a4ad1a94cf46f48d",
+    "candidate_diff": "F_CANDIDATE.diff",
+    "source_manifest_sha256": "ad45176a1f1eca5c71d333f93c93cdc4a0099663003c5e50fee095c28ba5e9a0",
+    "whole_step_benefit": "NOT_MEASURED",
+    "single_domain_performance": "NOT_RUN_STRICT_FAILED",
+    "four_domain_performance": "NOT_RUN_STRICT_FAILED",
+    "three_round_stability": "NOT_RUN_STRICT_FAILED"
+  },
+  "B": {
+    "candidate": "QKV weight-gradient only via KML cblas_sbgemm, FP32 accumulation and AdamW",
+    "decision": "REJECT_FULL_ENCODER_5_STEP_GATE",
+    "base": "accepted original HBM because F was rejected",
+    "job": "2063332",
+    "abi": {
+      "header_sha256": "eb34aa92122daaa109467955f8424a71d377f18629dbcdede280f7e6f6d028c1",
+      "native_library_sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c",
+      "wrapper_source_sha256": "5cf98805c676510854437b6eb53108efd6c330162f604552f2e86ec07322aed5",
+      "wrapper_library_sha256": "fe3c8d846e304e21e129d6d3746365f73df34393d6b896b90f6ba747456cb40f",
+      "provenance": "b_run/verified_kml/PROVENANCE.json",
+      "observed": {
+        "relative_l2": 9.732138455542648e-08,
+        "limit": 2e-06,
+        "shape": [
+          64,
+          48,
+          129
+        ],
+        "out_dtype": "torch.float32",
+        "stats": {
+          "calls": 1,
+          "conversions": 2,
+          "converted_elements": 14448,
+          "pack_ns": 73362,
+          "gemm_ns": 981192,
+          "zero_ns": 47901
+        },
+        "kml_symbol_identity": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1"
+      }
+    },
+    "old_P1": {
+      "passed": 57,
+      "failed": 26,
+      "preserved": "source/fixture/evidence/p1_numeric.json"
+    },
+    "module": {
+      "fp32_passed": 83,
+      "fp32_bitwise": true,
+      "bf16_passed": 83,
+      "bf16_failed": 0,
+      "max_update_delta_relative_l2": 0.0466864853655706,
+      "native_counts": {
+        "calls": 1,
+        "conversions": 2,
+        "converted_elements": 69632,
+        "pack_ns": 241516,
+        "gemm_ns": 1333050,
+        "zero_ns": 108702
+      },
+      "result_file": "jobs/S10_B1D_GATE/received/job_evidence/module_candidate/node0/result.json",
+      "result_sha256": "f6e9078747da58e95427be00437a9058f0d9ec58f8cfc0e687a8147f5ab22c0f"
+    },
+    "full5": {
+      "checks": 3865,
+      "passed": 3767,
+      "failed": 98,
+      "exact_adamw_step_checks": 765,
+      "failed_by_category": {
+        "param": 50,
+        "delta": 48
+      },
+      "failed_by_step": {
+        "2": 25,
+        "3": 25,
+        "4": 24,
+        "5": 24
+      },
+      "failed_tensor_breakdown": {
+        "self_attn.in_proj_bias": 96,
+        "tf.layers.6.norm2.bias": 2
+      },
+      "first_step_nonzero_only_qkv_dW_params_and_moments": 60,
+      "largest_failure": {
+        "name": "5.delta.tf.layers.11.self_attn.in_proj_bias",
+        "reference_norm": 0.0011706670540429739,
+        "max_abs": 0.00010229955660179257,
+        "rms_abs": 2.385541728524023e-05,
+        "l2_relative": 0.7986366370961479,
+        "limit": 0.05,
+        "passed": false,
+        "same_dtype": true
+      },
+      "max_loss_relative_l2": 5.028161342317952e-05,
+      "pair_identity": "same initial SHA, all five frame IDs/indices and mask SHA equal",
+      "adamw_updates": {
+        "baseline": 5,
+        "candidate": 5
+      },
+      "result_file": "jobs/S10_B1D_GATE/received/job_evidence/strict_candidate/node0/result.json",
+      "result_sha256": "a93a61a9aa66a570f2ada82019b5cf628ac7d9be3026c71bb801d7af757229be"
+    },
+    "dtype_interface": "B_DTYPE_INTERFACE.md",
+    "full5_per_step": {
+      "sbgemm_calls": [
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "conversions": [
+        24,
+        24,
+        24,
+        24,
+        24
+      ],
+      "converted_elements": [
+        327155712,
+        327155712,
+        327155712,
+        327155712,
+        327155712
+      ],
+      "diagnostic_strict_phase_median_ns": {
+        "pack_ns": 53402743,
+        "zero_ns": 2564275,
+        "gemm_ns": 64697223
+      }
+    },
+    "candidate_diff": "B_CANDIDATE.diff",
+    "source_manifest_sha256": "7148ae814c51dafd12e9c0014a14d9cfe508b6a7c73bf77bb77d8da2c3b597ed",
+    "trajectory_200": {
+      "status": "NOT_RUN_FULL5_REJECTED",
+      "updates_per_side": 0,
+      "protocol": "VALIDATION_PLAN.md",
+      "sampled_mask_sequence_materialized": false
+    },
+    "whole_step_benefit": "NOT_MEASURED",
+    "four_domain_performance": "NOT_RUN_FULL5_REJECTED",
+    "three_round_stability": "NOT_RUN_FULL5_REJECTED"
+  },
+  "comparison": {
+    "single_domain_performance_AB": null,
+    "four_domain_step_and_memory_AB": null,
+    "reason": "F strict FP32 failed and B full Encoder five-step gate failed",
+    "strict_update_HBM_MiB": [
+      3800
+    ],
+    "observed_performance_rounds": 0,
+    "original_route_targets": {
+      "C_16_electrode_frames_per_second_per_domain": 50,
+      "C_32_electrode_frames_per_second_per_domain": 5,
+      "F_non_GEMM_fraction": 0.15,
+      "status": "NOT_MEASURED_IN_S10"
+    },
+    "historical_accepted_HBM_only": {
+      "single_domain_step_seconds": 1.7793224799999998,
+      "four_domain_three_repeat_span_median_seconds": [
+        3.2861420895,
+        3.2301215435,
+        3.2536003659999997
+      ],
+      "cross_job_comparison": false
+    }
+  },
+  "budget": {
+    "start_utc": "2026-11-08T02:16:59+00:00",
+    "deadline_utc": "2026-11-08T14:16:59+00:00",
+    "time_basis": "Earliest recorded workspace clock 10:17:00.85 BJT; conservative 10:16:59 BJT anchor",
+    "limits": {
+      "batch_wall_seconds": 43200,
+      "queue_seconds": 21600,
+      "allocated_seconds": 14400,
+      "submissions": 10,
+      "job_seconds": 1800,
+      "single_domain_200step_pair_job_seconds": 3600,
+      "candidates": 2,
+      "model_updates": 4000,
+      "frame_visits": 256000,
+      "max_domains": 4
+    },
+    "consumed": {
+      "submissions": 5,
+      "allocated_seconds": 286,
+      "queue_seconds": 14,
+      "model_updates": 17,
+      "frame_visits": 1088,
+      "profile_updates": 0,
+      "module_fixture_steps": 6,
+      "scheduler_usage_seconds": 283,
+      "unique_training_frames": 320
+    },
+    "jobs": [
+      {
+        "job_id": "2063247",
+        "run_id": "S10_F1C_SINGLE",
+        "state": "FAILED",
+        "host": "cn21762",
+        "domains": 1,
+        "queue_seconds": 4,
+        "submit_utc": "2026-11-08T02:28:05Z",
+        "start_utc": "2026-11-08T02:28:09Z",
+        "wall_seconds": 1200,
+        "package_sha256": "cc54acc9173e1c75309e5ef73e8674a629cee3abb4c8716acf95da620ac77c3c",
+        "end_utc": "2026-11-08T02:29:39Z",
+        "allocated_seconds": 90,
+        "model_updates": 7,
+        "frame_visits": 448,
+        "strict_baseline_updates": 5,
+        "strict_candidate_updates": 2,
+        "scheduler_usage_seconds": 90,
+        "fixture_steps": 0,
+        "source_evidence_zip_sha256": "e3995c7e1fc3f0d89f67671ac1a08c952d04be8a06d7df9f7a1364786b502dc1",
+        "native_pid_cleared": true,
+        "all_owned_processes_reaped": true,
+        "hbm_pool_restored": true
+      },
+      {
+        "job_id": "2063286",
+        "run_id": "S10_B1_GATE",
+        "state": "FAILED",
+        "host": "cn21762",
+        "domains": 1,
+        "queue_seconds": 2,
+        "submit_utc": "2026-11-08T02:36:33Z",
+        "start_utc": "2026-11-08T02:36:35Z",
+        "end_utc": "2026-11-08T02:36:44Z",
+        "wall_seconds": 1800,
+        "scheduler_usage_seconds": 8,
+        "allocated_seconds": 9,
+        "model_updates": 0,
+        "frame_visits": 0,
+        "fixture_steps": 0,
+        "blocking": "installed kblas.h unavailable",
+        "package_sha256": "780a7f0350245c09b7d5463a25043a215e655e972245022726844e780ea956cf",
+        "source_evidence_zip_sha256": "8381c8d61bc78d93a35cf3f7fe8b72f0a431ff8ebcb28e4c68152ae37c3ac7cc",
+        "native_pid_cleared": true,
+        "all_owned_processes_reaped": true,
+        "hbm_pool_restored": true
+      },
+      {
+        "job_id": "2063319",
+        "run_id": "S10_B1B_GATE",
+        "state": "FAILED",
+        "host": "cn21762",
+        "domains": 1,
+        "queue_seconds": 3,
+        "submit_utc": "2026-11-08T02:43:04Z",
+        "start_utc": "2026-11-08T02:43:07Z",
+        "wall_seconds": 1800,
+        "package_sha256": "f46a7acb3770f306b6552f6302451ad2868891f6aa85267579018cf4ee1cd12a",
+        "end_utc": "2026-11-08T02:43:30Z",
+        "scheduler_usage_seconds": 22,
+        "allocated_seconds": 23,
+        "model_updates": 0,
+        "frame_visits": 0,
+        "fixture_steps": 1,
+        "blocking": "frozen S04 FP32 control helper resolved to production kml_ops module",
+        "source_evidence_zip_sha256": "70adc61c6cde6e3766ce462b21d81f6e3c52173543b167040f74cb1e49563181",
+        "native_pid_cleared": true,
+        "all_owned_processes_reaped": true,
+        "hbm_pool_restored": true
+      },
+      {
+        "job_id": "2063324",
+        "run_id": "S10_B1C_GATE",
+        "state": "FAILED",
+        "host": "cn21762",
+        "domains": 1,
+        "queue_seconds": 3,
+        "submit_utc": "2026-11-08T02:45:49Z",
+        "start_utc": "2026-11-08T02:45:52Z",
+        "wall_seconds": 1800,
+        "package_sha256": "f15b599cdb300d55235f5d00ac65d59326f889814fdea1f00c92219decfbaa8d",
+        "end_utc": "2026-11-08T02:46:15Z",
+        "scheduler_usage_seconds": 23,
+        "allocated_seconds": 23,
+        "model_updates": 0,
+        "frame_visits": 0,
+        "fixture_steps": 2,
+        "blocking": "exact comparison tried a dtype view on the scalar loss",
+        "source_evidence_zip_sha256": "a73cec4d922db77cae011e35b6cd445875d758ad7891ebde9dc01ca11b2513fb",
+        "native_pid_cleared": true,
+        "all_owned_processes_reaped": true,
+        "hbm_pool_restored": true
+      },
+      {
+        "job_id": "2063332",
+        "run_id": "S10_B1D_GATE",
+        "state": "FAILED",
+        "host": "cn21762",
+        "domains": 1,
+        "queue_seconds": 2,
+        "submit_utc": "2026-11-08T02:48:14Z",
+        "start_utc": "2026-11-08T02:48:16Z",
+        "wall_seconds": 1800,
+        "package_sha256": "d9460000b52bfbb130e666165d6b923a90d13d5f4fb996a469b21d4619f09543",
+        "fp32_control": "83/83 bitwise",
+        "bf16_module": "83/83",
+        "end_utc": "2026-11-08T02:50:37Z",
+        "scheduler_usage_seconds": 140,
+        "allocated_seconds": 141,
+        "model_updates": 10,
+        "frame_visits": 640,
+        "fixture_steps": 3,
+        "source_evidence_zip_sha256": "1ae9af65bf36599f90446d42ba63a052fa21a0974aec556b3fc74ab75415fa13",
+        "native_pid_cleared": true,
+        "all_owned_processes_reaped": true,
+        "hbm_pool_restored": true
+      }
+    ],
+    "allocation_accounting": "max(native wallclock usage, native end-start seconds) to avoid rounding undercount",
+    "completed_utc": "2026-11-08T02:54:08.048203+00:00",
+    "elapsed_wall_seconds": 2229
+  },
+  "cleanup": {
+    "active_S10_jobs": 0,
+    "all_five_native_terminal": true,
+    "native_pid_lists_empty": true,
+    "owned_remaining_processes": 0,
+    "hbm_pool_pages_restored_per_job": 2020,
+    "evidence": "EVIDENCE_VERIFICATION.json"
+  },
+  "gate_policy": "original FP32 comparator and original S04 BF16 categories retained",
+  "archive_suggestion": {
+    "tsv": "GIT_ARCHIVE_S10_R1.tsv",
+    "listed_entries": 133,
+    "including_tsv": 134
+  },
+  "candidate_hashes": "CANDIDATE_SHA256.tsv"
+}

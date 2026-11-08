@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "/usr/bin/cc",
+    "-I",
+    "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1C_GATE/verified_kml",
+    "-std=gnu11",
+    "-march=armv8.6-a+bf16",
+    "-O2",
+    "-fPIC",
+    "-shared",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Wl,-z,defs",
+    "-Wl,-rpath,/opt/HPCKit/kml-lib/sme/kblas/multi",
+    "-Wl,-rpath-link,/opt/HPCKit/bisheng-lib",
+    "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1C_GATE/s10_qkv_dw.c",
+    "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+    "-o",
+    "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1C_GATE/job_evidence/kml_abi/libs10_qkv_dw.so"
+  ],
+  "returncode": 0
+}

@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-n",
+    "S10_B1D_GATE",
+    "-nl",
+    "cn21762 !cn21341 !cn21379",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "1800",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1D_GATE",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1D_GATE/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S10_BF16_FUSION/S10_B1D_GATE/run_job.sh",
+    "f2b8aa230ffa0cbc63549fc460f2af853de1663528093b55272e204c08a3e391"
+  ],
+  "binding_sha256": "f2b8aa230ffa0cbc63549fc460f2af853de1663528093b55272e204c08a3e391",
+  "created_utc": "2026-11-08T02:48:14.224309+00:00"
+}
