@@ -1,0 +1,148 @@
+{
+  "allow_preferred_queue": false,
+  "batch_deadline_utc": "2026-11-08T15:12:39+00:00",
+  "candidate_source_sha256": "c1502a0afd31916fcac38139a17a35d346649b8aff7261e73b945fdcd7a0954e",
+  "descriptor_sha256": "b88ea9745147acf7fa70d51dc27c727f22f14e98af5dff1b80a9047e95648cd6",
+  "eligible_hosts": [
+    "cn21385",
+    "cn21762",
+    "cn21387"
+  ],
+  "mode": "ffn_relu_reuse_ab",
+  "native_argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn21385 cn21762 cn21387 !cn21341",
+    "-R",
+    "cpu=152,mem=98304MB",
+    "-RL",
+    "mem=98304MB",
+    "-a",
+    "numa[count=4,distribution=pack]",
+    "-T",
+    "1800",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/NUMA_M1_R3_OPT_RELU_A",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/NUMA_M1_R3_OPT_RELU_A/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/NUMA_M1_R3_OPT_RELU_A/run_job.sh",
+    "BINDING_SHA256"
+  ],
+  "numeric": {
+    "norm_floor": 1e-12,
+    "norm_waiver": 1e-08,
+    "relative_L2": 2e-06,
+    "state_abs": 2e-06,
+    "strict_each_role": 5,
+    "tensor_abs": 2e-05
+  },
+  "package_sha256": "0af2d230f41b99fa31f0d562b55c0c68245ed0c4d4022a29b0caef110156a161",
+  "plan": {
+    "acceptance": {
+      "independent_pairs": 3,
+      "max_repeat_spread_pct": 5,
+      "min_percent_reduction": 10
+    },
+    "baseline_updates": 100,
+    "candidate_calls_per_update": 12,
+    "candidate_updates": 100,
+    "max_updates": 240,
+    "observed": 20,
+    "primary_metric": "fractional decrease of synchronized observation window wall",
+    "strict_updates": 40,
+    "warmup": 5
+  },
+  "queue_seconds_remaining": 27631,
+  "r3_stopped_job": {
+    "allocated_seconds": 0,
+    "binding": {
+      "bytes": 4768,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_root_cause_r3_20261108\\ORIGINAL_A\\NUMA_RUN_BINDING.json",
+      "sha256": "7ea03e9eb6042d68913289151fb0311e368798e22ff8cbba1efb9acfb2a5772a"
+    },
+    "cleanup": {
+      "bytes": 207,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_root_cause_r3_20261108\\ORIGINAL_A\\received\\UNALLOCATED_CLEANUP.json",
+      "sha256": "22746b083a5cae7e973c2e083e7e508f4a932b985b91f21df16e45cd4783bb35"
+    },
+    "cleanup_confirmed": true,
+    "confirmed_updates": 0,
+    "exit_code": 10003,
+    "host": null,
+    "job_id": "2063398",
+    "microprobe_seconds": 0,
+    "model_updates_upper_bound": 0,
+    "native": {
+      "bytes": 2770,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_root_cause_r3_20261108\\ORIGINAL_A\\received\\djob_final.json",
+      "sha256": "0bb58f7528502b89b9ada60af4046fc8b5a22805be286d58aac82f626c96b2e4"
+    },
+    "native_state": "FAILED",
+    "package": {
+      "bytes": 79056,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_root_cause_r3_20261108\\ORIGINAL_A\\NUMA_M1.zip",
+      "sha256": "75e0757c54e905459fa48b84c77c777f30fe91a100c975286b1fb7ca1dd41ea6"
+    },
+    "queue_seconds": 1169,
+    "terminal_confirmed": true,
+    "transfer": {
+      "bytes": 194116,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_root_cause_r3_20261108\\ORIGINAL_A\\JOB_2063398_TRANSFER.tgz",
+      "sha256": "5117a9c01d183ad0a0bc3b8b2d71b7b8180dea6d6fcc9854539832816411b2fb"
+    },
+    "version": "ORIGINAL_A"
+  },
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/NUMA_M1_R3_OPT_RELU_A",
+  "scope": {
+    "DDR_limit_MB": 98304,
+    "DDR_request_MB": 98304,
+    "HBM": 0,
+    "cores": [
+      152,
+      144,
+      8
+    ],
+    "exclusive": true,
+    "same_die_domains": 4
+  },
+  "source_manifest_sha256": "efee50f47ffecf15224fb12935d37a5890baf709d479fb09bba0fbf652c42ab2",
+  "sources": {
+    "ffn_profile": {
+      "bytes": 6412,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\profile_r9_2048959_20261106\\PROFILE_SUMMARY.md",
+      "sha256": "29a041d5b643c15ea3e024f37346850b49372368f7fb0bdf4dbd02e3846df061"
+    },
+    "four_domain": {
+      "bytes": 102210,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_m1_straggler_r2_20261108\\ALT_B\\ANALYSIS.json",
+      "sha256": "2831d7c2c7eea9e7d9d6a45cfa57a441733793e40d35ca800e1583ebc7471379"
+    },
+    "gemm_profile": {
+      "bytes": 6569,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S08\\gemm_r11_2049454_20261106\\GEMM_SUMMARY.md",
+      "sha256": "dfeb285f48c5804602a7393244f8835689f037242a82dd2a6091298a5180ecd3"
+    },
+    "r2_review": {
+      "bytes": 4515,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\NUMA_STRAGGLER_R2_RESULT_REVIEW_20261108.json",
+      "sha256": "084539d314ed5ef95728c6bebbc486823a210ed2d86aaebd713881279adf6c3a"
+    }
+  },
+  "submission_ordinal": 2,
+  "task_card": {
+    "bytes": 6043,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\COORDINATION\\S00_HEALTHY_NODE_OPTIMIZATION_CONTINUE_20261108.md",
+    "sha256": "2d42bf9caa622ac4613fbd836276f815cf04f7d96fd4cd0fc342d1bcbe38ee49"
+  },
+  "user_authorized": true,
+  "version": "RELU_A",
+  "wall_seconds": 1800
+}

@@ -1,0 +1,39 @@
+{
+  "python": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+  "torch": "2.7.1+cpu",
+  "torch_file": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+  "numpy": "1.26.4",
+  "numpy_file": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib64/python3.9/site-packages/numpy/__init__.py",
+  "libraries": [
+    {
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+      "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+    },
+    {
+      "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so",
+      "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a"
+    },
+    {
+      "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so",
+      "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f"
+    },
+    {
+      "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+      "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+    },
+    {
+      "path": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+      "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c"
+    }
+  ],
+  "env": {
+    "KML_BLAS_LIB": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+    "LINEAR_DTYPE": "fp32",
+    "LD_PRELOAD": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+    "OMP_NUM_THREADS": "36",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "36",
+    "OMP_PROC_BIND": "close",
+    "OMP_PLACES": "cores"
+  }
+}

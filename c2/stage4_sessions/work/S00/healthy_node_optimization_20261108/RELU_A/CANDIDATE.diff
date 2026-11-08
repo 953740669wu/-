@@ -1,0 +1,52 @@
+--- /dev/null
++++ RELU_A/payload/ffn_relu_reuse.py
+@@ -0,0 +1,49 @@
++"""Reuse the fresh first FFN projection buffer in the fixed CPU KML Encoder."""
++from types import MethodType
++
++import torch
++import torch.nn.functional as F
++
++import kml_ops
++
++calls = 0
++
++
++class _Projection2D(torch.autograd.Function):
++    @staticmethod
++    def forward(ctx, x, w, b):
++        # Match the original KML linear's input layout, bias and GEMM arguments.
++        shape = x.shape
++        x2 = x.reshape(-1, shape[-1]).to(kml_ops.LINEAR_DTYPE).contiguous()
++        wc = w.to(kml_ops.LINEAR_DTYPE).contiguous()
++        y = b.float().expand(x2.shape[0], w.shape[0]).contiguous()
++        kml_ops.gemm(x2, wc, tb=True, out=y, beta=1.0)
++        ctx.save_for_backward(x2, wc)
++        ctx.sh, ctx.hasb = shape, True
++        return y
++
++    @staticmethod
++    def backward(ctx, grad):
++        return kml_ops._LinearFn.backward(ctx, grad)
++
++
++def _ff_block(layer, x):
++    global calls
++    if x.device.type != "cpu" or x.dtype != torch.float32 or x.shape[-2:] != (208,512) or x.numel()<2**16:
++        raise ValueError("candidate requires the frozen CPU KML Encoder inputs")
++    projection = _Projection2D.apply(x, layer.linear1.weight, layer.linear1.bias)
++    activated = torch.relu_(projection).view(*x.shape[:-1], layer.linear1.out_features)
++    calls += 1
++    return layer.dropout2(layer.linear2(layer.dropout(activated)))
++
++
++def install(model):
++    if kml_ops._lib is None or kml_ops.LINEAR_DTYPE != torch.float32 or len(model.tf.layers) != 12:
++        raise ValueError("frozen 12-layer fp32 KML Encoder required")
++    for layer in model.tf.layers:
++        first = layer.linear1
++        if (type(layer) is not torch.nn.TransformerEncoderLayer or layer.activation is not F.relu
++                or type(first) is not torch.nn.Linear or first.bias is None
++                or (first.in_features, first.out_features) != (512,2048)):
++            raise ValueError("original FFN contract changed")
++        layer._ff_block = MethodType(_ff_block, layer)

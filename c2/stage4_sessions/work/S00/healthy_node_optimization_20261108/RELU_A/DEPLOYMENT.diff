@@ -1,0 +1,284 @@
+--- R2/launch.py
++++ RELU_A/launch.py
+@@ -160,7 +160,7 @@
+     return dict(at_ns=time.monotonic_ns(), per_cpu=cpu, worker_ticks=ticks, scaling_cur_freq_kHz=freq)
+ 
+ 
+-def phase(name, contracts, owner, binding, host, deadline, rotation=0):
++def phase(name, contracts, owner, binding, host, deadline):
+     out = EVIDENCE / name
+     out.mkdir()
+     barriers = out / "barriers"
+@@ -175,15 +175,13 @@
+          allowed=sorted(allocated), allowed_list=inherited))
+     proc = {}
+     ordered = sorted(contracts)
+-    ordered = ordered[rotation:] + ordered[:rotation]
+-    mode = "perf" if name == "perf_rotated" else name
+-    save(out / "rank_map.json", dict(stage=name, rotation=rotation,
++    save(out / "rank_map.json", dict(stage=name,
+          logical_to_physical=dict(enumerate(ordered)), spawn_order=ordered))
+     for logical_rank, node in enumerate(ordered):
+         receipt = contracts[node]
+         rank = f"node{node}"
+         argv = ["/bin/bash", str(ROOT / "run_worker.sh"), ",".join(map(str,receipt["allocated"])), str(node),
+-                "--phase",mode,"--descriptor",str(ROOT / "ENGINEERING_DESCRIPTOR.json"),
++                "--phase",name,"--descriptor",str(ROOT / "ENGINEERING_DESCRIPTOR.json"),
+                 "--descriptor-sha",binding["descriptor_sha256"],"--allocation",str(EVIDENCE / f"{rank}.allocation.json"),
+                 "--phase-root",str(out),"--output",str(out / rank),"--deadline",str(deadline)]
+         save(out / f"{rank}.command.json", dict(argv=argv))
+@@ -195,7 +193,7 @@
+     save(out / "parent_after_spawn.json", dict(pid=os.getpid(), allowed=sorted(os.sched_getaffinity(0)),
+          children={n:p.pid for n,p in proc.items()}))
+     step, sampled_at = 1, 0
+-    barriers_expected = {"strict":0, "perf":26, "probe":8}[mode]
++    barriers_expected = 0 if name == "strict" else 26
+     with (out / "cpu_samples.jsonl").open("x") as samples:
+         while True:
+             now = time.monotonic()
+@@ -224,10 +222,11 @@
+             time.sleep(.02)
+     need(step == barriers_expected + 1, "incomplete same-phase rendezvous")
+     results = [read(out / f"node{n}" / "result.json") for n in contracts]
+-    expected, updates = {"strict":("PASS_STRICT_ENCODER5",5), "perf":("PASS_BASELINE25",25),
+-                         "probe":("PASS_TARGET_MICROPROBE",0)}[mode]
++    expected, updates = {"strict":("PASS_STRICT_ENCODER5",5), "baseline":("PASS_BASELINE25",25),
++                         "candidate":("PASS_CANDIDATE25",25)}[name]
+     need(all(r["status"] == expected and r["completed_updates"] == updates and r["job_id"] == os.environ["CCS_JOB_ID"]
+-             and r["host"] == host for r in results), "four actual result receipts required")
++             and r["host"] == host and r["candidate_source_sha256"] == binding["candidate_source_sha256"]
++             for r in results), "four actual result receipts required")
+     need(all(r["logical_rank"] == ordered.index(n) for n,r in zip(contracts,results)), "actual rank identity differs")
+     save(out / "phase_receipt.json", dict(status=expected, job_id=os.environ["CCS_JOB_ID"],
+          domains={n:r.get("final_model_sha256") for n,r in zip(contracts,results)}))
+@@ -246,7 +245,7 @@
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        need(0 < wall <= 1800 and binding["mode"] == "rank_rotation_ddr", "wrong wall or mode")
++        need(0 < wall <= 1800 and binding["mode"] == "ffn_relu_reuse_ab", "wrong wall or mode")
+         libc = ctypes.CDLL(None, use_errno=True)
+         need(libc.prctl(36,1,0,0,0) == 0, "cannot become owned-process subreaper")
+         for sig in (signal.SIGTERM, signal.SIGINT, signal.SIGALRM):
+@@ -257,23 +256,12 @@
+         outcome["host"] = host
+         phase("strict", contracts, owner, binding, host, end)
+         outcome["steps"]["strict_each_role"] = 5
+-        phase("perf", contracts, owner, binding, host, end)
+-        outcome["steps"]["original_each_domain"] = 25
+-        phase("perf_rotated", contracts, owner, binding, host, end, rotation=1)
+-        outcome["steps"]["rotated_each_domain"] = 25
+-        probe_cap = binding["microprobe_seconds_max"]
+-        need(0 <= probe_cap <= 90, "wrong microprobe budget")
+-        outcome["probe"] = "NOT_RUN_INSUFFICIENT_MICROPROBE_OR_EXECUTION_ROOM"
+-        if probe_cap >= 30 and end - time.monotonic() >= 30:
+-            probe_start = time.monotonic()
+-            outcome["probe"] = "STARTED"
+-            try:
+-                phase("probe", contracts, owner, binding, host, min(end, probe_start + probe_cap))
+-                outcome["probe"] = "PASS_TARGET_MICROPROBE"
+-            finally:
+-                outcome["probe_seconds_before_cleanup"] = time.monotonic() - probe_start
++        phase("baseline", contracts, owner, binding, host, end)
++        outcome["steps"]["baseline_each_domain"] = 25
++        phase("candidate", contracts, owner, binding, host, end)
++        outcome["steps"]["candidate_each_domain"] = 25
+         verify(ROOT, pin)
+-        outcome["status"] = "PASS_DDR_RANK_ROTATION"
++        outcome["status"] = "PASS_SAME_HOST_FFN_RELU_AB"
+     except BaseException as exc:
+         outcome.update(error=repr(exc), traceback=traceback.format_exc())
+     finally:
+@@ -288,7 +276,7 @@
+             outcome.update(status="FAIL_STOP", cleanup_error=repr(exc))
+         outcome["finished"] = time.monotonic()
+         save(EVIDENCE / "SUMMARY.json", outcome)
+-    return 0 if outcome["status"] == "PASS_DDR_RANK_ROTATION" else 2
++    return 0 if outcome["status"] == "PASS_SAME_HOST_FFN_RELU_AB" else 2
+ 
+ 
+ if __name__ == "__main__":
+--- R2/payload/worker.py
++++ RELU_A/payload/worker.py
+@@ -69,40 +69,6 @@
+         raise ValueError("frozen R4 framework/KML/OpenMP/shim identity differs")
+     if "libraries_after" in runtime and runtime["libraries_after"] != expected["libraries"]:
+         raise ValueError("mapped library drift")
+-
+-
+-def target_probe(args, result, torch, module, runtime, expected, guard, shapes):
+-    """Matched original dW and local copy, with common release per sample."""
+-    rng = torch.Generator().manual_seed(2026)
+-    g = torch.randn((13312,512), generator=rng, dtype=torch.float32)
+-    x = torch.randn((13312,2048), generator=rng, dtype=torch.float32)
+-    src = torch.empty(32*1024*1024, dtype=torch.float32).fill_(1.5)
+-    dst = torch.empty_like(src).zero_()
+-    residency(args.output,"probe_initialized")
+-    samples = result["probe"] = []
+-    y = None
+-    for step in range(1,9):
+-        release = barrier(args,step)
+-        cpu36_guard.checkpoint(guard,f"probe_before_{step}",torch)
+-        start = time.monotonic_ns()
+-        if step <= 4:
+-            y = module.gemm(g,x,ta=True)
+-        else:
+-            dst.copy_(src)
+-        end = time.monotonic_ns()
+-        cpu36_guard.checkpoint(guard,f"probe_after_{step}",torch)
+-        samples.append(dict(step=step,kind="KML_DW" if step<=4 else "LOCAL_COPY",
+-                            seconds=(end-start)/1e9,release_ns=release,start_ns=start,end_ns=end,
+-                            warmup=step in (1,5)))
+-    key = str((101,112,111,512,2048,13312,1.0,512,2048,0.0,2048))
+-    if shapes != {key:4} or y is None or tuple(y.shape)!=(512,2048) or not torch.isfinite(y).all() or not torch.equal(src,dst):
+-        raise ValueError("matched actual native dW or local copy contract differs: "+repr(shapes))
+-    result.update(probe_native_shapes=shapes,copy_bytes_per_side=src.numel()*src.element_size(),
+-                  probe_output_sha256=hashlib.sha256(y.numpy().tobytes()).hexdigest())
+-    finish_backend(runtime,expected)
+-    runtime_check(runtime)
+-    residency(args.output,"probe_finished")
+-    result["status"] = "PASS_TARGET_MICROPROBE"
+ 
+ 
+ def run(args, result):
+@@ -147,9 +113,6 @@
+ 
+     module._sgemm = count_native
+     cpu36_guard.checkpoint(guard, "after_backend", torch)
+-    if args.phase == "probe":
+-        target_probe(args,result,torch,module,runtime,expected,guard,shapes)
+-        return
+     metadata = data.load_descriptor(args.descriptor, args.descriptor_sha)
+     profile_contract.check_data(metadata["description"], ref)
+     ledger = data.Exposure(args.output / "EXPOSURE_LEDGER.json", metadata["description"])
+@@ -165,13 +128,24 @@
+     import check_equivalence as accepted
+     definitions = accepted.model_definitions(torch)
+     factory, angles = definitions["Encoder"], definitions["protocol_angles"](16, 1)
+-    roles = ("baseline", "control") if strict else ("baseline",)
++    roles = ("baseline", "candidate") if strict else (args.phase,)
++    import ffn_relu_reuse as candidate
++    candidate_path = Path(candidate.__file__).resolve()
++    if candidate_path != ROOT/"ffn_relu_reuse.py":
++        raise ValueError("candidate imported outside the frozen payload")
++    result["candidate_source_sha256"] = data.sha(candidate_path)
++
++    def candidate_factory():
++        model = factory()
++        candidate.install(model)
++        return model
++
+     models, opts = {}, {}
+     for role in roles:
+         torch.manual_seed(0)
+         np.random.seed(0)
+         random.seed(0)
+-        model = models[role] = factory()
++        model = models[role] = candidate_factory() if role == "candidate" else factory()
+         opts[role] = training.optimizer(torch, model)
+         if sum(p.numel() for p in model.parameters()) != 37995777 or training.model_sha(model) != ref["initialization"]["initial_weights_sha256"]:
+             raise ValueError("original full Encoder/initial state differs")
+@@ -215,6 +189,7 @@
+                 shapes.clear()
+                 native_ns.clear()
+                 before = runtime["kml_gemm_calls"]
++                candidate_before = candidate.calls
+                 release = barrier(args, step) if not strict else None
+                 if time.monotonic() >= args.deadline:
+                     raise TimeoutError("deadline before update")
+@@ -225,6 +200,9 @@
+                     for handle in handles:
+                         handle.remove()
+                 end = time.monotonic_ns()
++                candidate_calls = candidate.calls - candidate_before
++                if candidate_calls != (12 if role == "candidate" else 0):
++                    raise ValueError("unexpected candidate FFN dispatch count")
+                 rss_after = memory_metrics.rss()
+                 training.validate_update(torch, model, opts[role], values[role], step)
+                 if runtime["kml_gemm_calls"] - before != 149 or shapes != known_shapes:
+@@ -242,16 +220,17 @@
+                                  mask_sha256=mask_sha, losses={k: v.item() for k,v in loss.items()},
+                                  start_ns=begin, end_ns=end, release_ns=release, step_seconds=(end-begin)/1e9,
+                                  rss_before=rss_before, rss_after=rss_after, native_sgemm_calls=sum(shapes.values()),
++                                 candidate_ffn_calls=candidate_calls,
+                                  native_shapes=dict(shapes), native_sgemm_ns_by_shape=dict(native_ns),
+                                  sampled=not strict and step >= 6))
+             if strict:
+                 for key in captures["baseline"]:
+-                    accepted.compare(torch, f"{step}.output.{key}", captures["baseline"][key], captures["control"][key], "tensor", result["metrics"])
++                    accepted.compare(torch, f"{step}.output.{key}", captures["baseline"][key], captures["candidate"][key], "tensor", result["metrics"])
+                 for key in losses["baseline"]:
+-                    accepted.compare(torch, f"{step}.loss.{key}", losses["baseline"][key], losses["control"][key], "tensor", result["metrics"])
++                    accepted.compare(torch, f"{step}.loss.{key}", losses["baseline"][key], losses["candidate"][key], "tensor", result["metrics"])
+                 for i in (0,1):
+-                    accepted.compare(torch, f"{step}.input_grad.{i}", values["baseline"][i].grad, values["control"][i].grad, "tensor", result["metrics"])
+-                compare_models(torch, accepted, models["baseline"], models["control"],
++                    accepted.compare(torch, f"{step}.input_grad.{i}", values["baseline"][i].grad, values["candidate"][i].grad, "tensor", result["metrics"])
++                compare_models(torch, accepted, models["baseline"], models["candidate"],
+                                [opts[role] for role in roles], initial, result["metrics"], f"{step}.")
+             for row in rows:
+                 log.write(json.dumps(row) + "\n")
+@@ -261,28 +240,30 @@
+     if not strict:
+         barrier(args, 26)
+         residency(args.output, "observe_end")
+-        model, opt = models["baseline"], opts["baseline"]
++        role, = roles
++        model, opt = models[role], opts[role]
+         progress = dict(epoch_order=order, cursor=1600, optimizer_updates=25, planned_updates=25, epoch_completed=True)
+-        identity = dict(data=metadata["identity"], baseline_sha256=BASELINE, node=guard["receipt"]["node"])
++        identity = dict(data=metadata["identity"], baseline_sha256=BASELINE, node=guard["receipt"]["node"], role=role)
+         checkpoint = training.save_checkpoint(torch, args.output / "checkpoints/final.pt", model, opt, identity, progress, normalization)
+         result["checkpoint"] = checkpoint
+         ledger.value["recovery_probe"] = dict(status="POSSIBLY_USED_IN_RECOVERY_PROBE", frame_ids=train["frame_ids"][:2])
+         ledger.save()
+-        result["recovery"] = training.verify_restore(torch, checkpoint, model, opt, factory, identity, progress, normalization,
++        restore = candidate_factory if role == "candidate" else factory
++        result["recovery"] = training.verify_restore(torch, checkpoint, model, opt, restore, identity, progress, normalization,
+                                                       training.batch(torch, train, [0,1], angles), accepted.compare)
+         ledger.value["recovery_probe"]["status"] = "RECOVERY_PROBE_CONFIRMED_NO_UPDATE"
+         ledger.save()
+     data.load_descriptor(args.descriptor, args.descriptor_sha)
+-    result["final_model_sha256"] = training.model_sha(models["baseline"])
++    result["final_model_sha256"] = training.model_sha(models[roles[0]])
+     finish_backend(runtime, expected)
+     runtime_check(runtime)
+     cpu36_guard.checkpoint(guard, "publish", torch)
+-    result["status"] = "PASS_STRICT_ENCODER5" if strict else "PASS_BASELINE25"
++    result["status"] = {"strict":"PASS_STRICT_ENCODER5","baseline":"PASS_BASELINE25","candidate":"PASS_CANDIDATE25"}[args.phase]
+ 
+ 
+ if __name__ == "__main__":
+     parser = argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument("--phase", choices=("strict", "perf", "probe"), required=True)
++    parser.add_argument("--phase", choices=("strict", "baseline", "candidate"), required=True)
+     for flag in ("descriptor", "allocation", "phase-root", "output"):
+         parser.add_argument("--" + flag, type=Path, required=True)
+     parser.add_argument("--descriptor-sha", required=True)
+--- R2/prepare.py
++++ RELU_A/prepare.py
+@@ -30,7 +30,7 @@
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+     need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/dengqingtian/opt/stage4_sessions/S00")
+-         and root.name.startswith("NUMA_M1_R2_") and binding["user_authorized"] is True,
++         and root.name.startswith("NUMA_M1_R3_OPT_") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+     need(sha(root / "NUMA_M1.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"
+--- R2/submit_once.py
++++ RELU_A/submit_once.py
+@@ -86,10 +86,9 @@
+     until = datetime.fromisoformat(binding["batch_deadline_utc"])
+     room = (until - datetime.now(timezone.utc)).total_seconds()
+     need(room > binding["wall_seconds"] + 60, "insufficient batch time to execute full job")
+-    reset_cutoff = datetime.fromisoformat(binding["queue_cutoff_utc"])
+-    queue_room = (reset_cutoff-datetime.now(timezone.utc)).total_seconds()
+-    need(queue_room > 0, "user-reset queue cutoff elapsed")
+-    stop_queue = time.monotonic() + min(queue_room,room-binding["wall_seconds"]-60,binding["queue_attempt_seconds"])
++    queue_room = binding["queue_seconds_remaining"]
++    need(0 < queue_room <= 28800, "R3 cumulative queue room invalid")
++    stop_queue = time.monotonic() + min(queue_room,room-binding["wall_seconds"]-60)
+     argv = binding["native_argv"]
+     # The source pin is passed as its explicit runtime operand, avoiding a self-hash cycle.
+     argv = [pin if a == "BINDING_SHA256" else a for a in argv]

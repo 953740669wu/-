@@ -1,0 +1,96 @@
+{
+  "status": "ACCEPT_REJECTION_EVIDENCE_NOT_PERFORMANCE_ADOPTION",
+  "result_path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\healthy_node_optimization_20261108\\OPTIMIZATION_RESULT.json",
+  "result_sha256": "8b31a2b35b0a634d3a3ed478d6a5d2c484501102146cefc91bb65ce8452e726d",
+  "verified_refs": 27,
+  "author_manifest_files": 563,
+  "archives": [
+    {
+      "job_id": "2063398",
+      "indexed_files": 77,
+      "zip_members": 78,
+      "state": "FAILED"
+    },
+    {
+      "job_id": "2063448",
+      "indexed_files": 512,
+      "zip_members": 513,
+      "state": "SUCCEEDED"
+    }
+  ],
+  "source_hashes": 30,
+  "strict_records": 15580,
+  "strict_max_abs": 0,
+  "strict_max_relative_L2": 0,
+  "candidate_sha256": "c1502a0afd31916fcac38139a17a35d346649b8aff7261e73b945fdcd7a0954e",
+  "recomputed_domains": {
+    "baseline_0": {
+      "median_seconds": 7.579566173,
+      "total_seconds": 151.70548501500005,
+      "sampled_peak_RSS_MiB": 6894.30859375
+    },
+    "candidate_0": {
+      "median_seconds": 7.523219808,
+      "total_seconds": 150.135116239,
+      "sampled_peak_RSS_MiB": 6633.625
+    },
+    "baseline_1": {
+      "median_seconds": 7.62548715,
+      "total_seconds": 152.556472761,
+      "sampled_peak_RSS_MiB": 6812.37890625
+    },
+    "candidate_1": {
+      "median_seconds": 7.561987825,
+      "total_seconds": 151.02996612700002,
+      "sampled_peak_RSS_MiB": 6711.87109375
+    },
+    "baseline_2": {
+      "median_seconds": 7.6118385845,
+      "total_seconds": 152.282946519,
+      "sampled_peak_RSS_MiB": 6866.828125
+    },
+    "candidate_2": {
+      "median_seconds": 7.5860034845,
+      "total_seconds": 151.59217874499998,
+      "sampled_peak_RSS_MiB": 6711.19921875
+    },
+    "baseline_3": {
+      "median_seconds": 7.5955303475000004,
+      "total_seconds": 152.32186852499999,
+      "sampled_peak_RSS_MiB": 6895.9296875
+    },
+    "candidate_3": {
+      "median_seconds": 7.6033682425,
+      "total_seconds": 151.982066943,
+      "sampled_peak_RSS_MiB": 6737.484375
+    }
+  },
+  "synchronized_spans_seconds": {
+    "baseline": 163.561668649,
+    "candidate": 160.779539397
+  },
+  "time_reduction_pct": 1.7009665375635197,
+  "throughput_frames_s": {
+    "baseline": 31.303177830665295,
+    "candidate": 31.844848039759555
+  },
+  "budget": {
+    "allocated_seconds": 567,
+    "candidates_used": 1,
+    "confirmed_updates": 240,
+    "microprobe_seconds": 0,
+    "physical_hosts": [
+      "cn21385"
+    ],
+    "queue_seconds": 1173,
+    "submissions": 2,
+    "training_frame_visits": 15360
+  },
+  "adopted": false,
+  "limitations": [
+    "One sequential same-host pair; no repeatability or HBM increment acceptance.",
+    "JSON comparisons and hashes verified; no checkpoint tensor deserialization or model rerun.",
+    "Returned native terminal/cleanup evidence verified; coordinator did not query live SSH.",
+    "cn21341 root cause remains unknown; cancellation is not a software fix."
+  ]
+}

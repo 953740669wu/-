@@ -1,0 +1,142 @@
+{
+  "active_job": null,
+  "attempts": [
+    {
+      "allocated_seconds": 0,
+      "binding": {
+        "bytes": 4768,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_root_cause_r3_20261108\\ORIGINAL_A\\NUMA_RUN_BINDING.json",
+        "sha256": "7ea03e9eb6042d68913289151fb0311e368798e22ff8cbba1efb9acfb2a5772a"
+      },
+      "cleanup": {
+        "bytes": 207,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_root_cause_r3_20261108\\ORIGINAL_A\\received\\UNALLOCATED_CLEANUP.json",
+        "sha256": "22746b083a5cae7e973c2e083e7e508f4a932b985b91f21df16e45cd4783bb35"
+      },
+      "cleanup_confirmed": true,
+      "confirmed_updates": 0,
+      "exit_code": 10003,
+      "host": null,
+      "job_id": "2063398",
+      "microprobe_seconds": 0,
+      "model_updates_upper_bound": 0,
+      "native": {
+        "bytes": 2770,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_root_cause_r3_20261108\\ORIGINAL_A\\received\\djob_final.json",
+        "sha256": "0bb58f7528502b89b9ada60af4046fc8b5a22805be286d58aac82f626c96b2e4"
+      },
+      "native_state": "FAILED",
+      "package": {
+        "bytes": 79056,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_root_cause_r3_20261108\\ORIGINAL_A\\NUMA_M1.zip",
+        "sha256": "75e0757c54e905459fa48b84c77c777f30fe91a100c975286b1fb7ca1dd41ea6"
+      },
+      "queue_seconds": 1169,
+      "terminal_confirmed": true,
+      "transfer": {
+        "bytes": 194116,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\numa_root_cause_r3_20261108\\ORIGINAL_A\\JOB_2063398_TRANSFER.tgz",
+        "sha256": "5117a9c01d183ad0a0bc3b8b2d71b7b8180dea6d6fcc9854539832816411b2fb"
+      },
+      "version": "ORIGINAL_A"
+    },
+    {
+      "allocated_seconds": 567,
+      "binding": {
+        "bytes": 5275,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\healthy_node_optimization_20261108\\RELU_A\\NUMA_RUN_BINDING.json",
+        "sha256": "ebbaee78bc31913d32f0ba99b4db84231b71e48fc9a7edc25951efe635918dc3"
+      },
+      "cleanup": {
+        "bytes": 618,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\healthy_node_optimization_20261108\\RELU_A\\received\\job_evidence\\cleanup.json",
+        "sha256": "249fb7d9b9912c1498940a25065fb85e70a811bba92e529031164a87a7ba2532"
+      },
+      "cleanup_confirmed": true,
+      "confirmed_updates": 240,
+      "exit_code": 0,
+      "host": "cn21385",
+      "job_id": "2063448",
+      "microprobe_seconds": 0,
+      "model_updates_upper_bound": 240,
+      "native": {
+        "bytes": 3875,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\healthy_node_optimization_20261108\\RELU_A\\received\\djob_final.json",
+        "sha256": "3b377268c79034427c482fe7c593ac1b43b2b8d56b0e063cfd424744db9e9920"
+      },
+      "native_state": "SUCCEEDED",
+      "package": {
+        "bytes": 78602,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\healthy_node_optimization_20261108\\RELU_A\\NUMA_M1.zip",
+        "sha256": "0af2d230f41b99fa31f0d562b55c0c68245ed0c4d4022a29b0caef110156a161"
+      },
+      "queue_seconds": 4,
+      "terminal_confirmed": true,
+      "transfer": {
+        "bytes": 1778631,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\healthy_node_optimization_20261108\\RELU_A\\JOB_2063448_TRANSFER.tgz",
+        "sha256": "92f01a81a96a22d9240bfbb75a414ab191fa0343cef95760e2d7b7de79daf63d"
+      },
+      "version": "RELU_A"
+    }
+  ],
+  "deadline_utc": "2026-11-08T15:12:39+00:00",
+  "limits": {
+    "allocated_seconds": 7200,
+    "batch_wall_seconds": 43200,
+    "candidates": 2,
+    "hosts": 2,
+    "job_seconds": 1800,
+    "microprobe_allocated_seconds_included": 300,
+    "model_updates": 3200,
+    "queue_seconds": 28800,
+    "submissions": 8
+  },
+  "prior_batches": {
+    "M1": {
+      "allocated_seconds": 736,
+      "queue_seconds": 7584,
+      "submissions": 5
+    },
+    "R2": {
+      "allocated_seconds": 1184,
+      "batch_elapsed_seconds": 3050,
+      "candidates_used": 0,
+      "microprobe_allocated_seconds": 35,
+      "microprobe_allocated_seconds_max": 120,
+      "model_updates": 480,
+      "model_updates_upper_bound": 480,
+      "physical_hosts": [
+        "cn21385",
+        "cn21386"
+      ],
+      "queue_seconds": 879,
+      "submissions": 4,
+      "training_frame_exposures": 30720
+    }
+  },
+  "remaining_at_close": {
+    "allocated_seconds": 6633,
+    "candidate_slots": 1,
+    "microprobe_seconds": 300,
+    "model_updates": 2960,
+    "physical_host_slots": 1,
+    "queue_seconds": 27627,
+    "submissions": 6
+  },
+  "settled_utc": "2026-11-08T03:54:41.239136+00:00",
+  "start_utc": "2026-11-08T03:12:39+00:00",
+  "status": "CLOSED_ALL_TERMINAL",
+  "totals": {
+    "allocated_seconds": 567,
+    "candidates_used": 1,
+    "confirmed_updates": 240,
+    "microprobe_seconds": 0,
+    "physical_hosts": [
+      "cn21385"
+    ],
+    "queue_seconds": 1173,
+    "submissions": 2,
+    "training_frame_visits": 15360
+  }
+}

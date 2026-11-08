@@ -1,0 +1,21 @@
+{
+  "owner": "S00",
+  "status": "PREPARED_USER_REQUESTED_ROOT_CAUSE_CONTINUATION_NOT_CONFIRMED_RECEIVED",
+  "task_card": "NUMA_ROOT_CAUSE_S00_LONG_R3_20261108.md",
+  "task_card_sha256": "76b84bac63fb8aa4650fc5eeacdc5c618a763ba0c5b337f78fec8309312a1dd7",
+  "limits": {
+    "batch_wall_seconds": 43200,
+    "queue_seconds": 28800,
+    "allocated_seconds": 7200,
+    "submissions": 8,
+    "job_seconds": 1800,
+    "microprobe_allocated_seconds_included": 300,
+    "candidates": 2,
+    "hosts": 2,
+    "model_updates": 3200
+  },
+  "required_primary_host": "cn21341 unless evidence identifies the same reproduced cause elsewhere; healthy-node-only run is not completion",
+  "replaces": "R2 workaround accepted as root-task closure; automatically skip original node because pending",
+  "new_status_entry": "../S00/numa_root_cause_r3_20261108/SESSION_STATUS.md",
+  "coordinator_submitted_jobs": 0
+}
