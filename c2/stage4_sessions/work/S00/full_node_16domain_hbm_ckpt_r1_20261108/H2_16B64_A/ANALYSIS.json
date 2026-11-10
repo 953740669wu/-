@@ -1,0 +1,4338 @@
+{
+  "OOM_explicit": false,
+  "SIGBUS_detected": false,
+  "SIGKILL_detected": false,
+  "application": {
+    "active_phase": null,
+    "completed_hbm_rounds": [
+      1,
+      2,
+      3
+    ],
+    "finished": 4501233.164706415,
+    "hbm_pool_restored": true,
+    "hbm_safety": "PASS",
+    "job_id": "2066108",
+    "start": 4500505.000599195,
+    "status": "PASS_FULL_NODE_COMPLETED_PHASES",
+    "steps": {
+      "perf_candidate_r1_each_domain": 25,
+      "perf_candidate_r2_each_domain": 25,
+      "perf_candidate_r3_each_domain": 25,
+      "strict_baseline_each_domain": 5,
+      "strict_candidate_each_domain": 5
+    }
+  },
+  "host": "cn21762",
+  "job_id": "2066108",
+  "native_peak_MiB": 178278,
+  "native_swap_peak_MiB": 0,
+  "phases": {
+    "perf_candidate_r1": {
+      "domain_count": 16,
+      "domains": {
+        "0": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.248747622,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1800.203125,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5600.203125,
+            "step_end_rss_plus_hbm_MiB": [
+              5289.4765625,
+              5482.96484375,
+              5445.34765625,
+              5326.40625,
+              5378.2890625,
+              5353.1875,
+              5412.765625,
+              5411.125,
+              5410.421875,
+              5522.375,
+              5281.31640625,
+              5407.15234375,
+              5357.2265625,
+              5531.6328125,
+              5496.19921875,
+              5327.3984375,
+              5197.72265625,
+              5393.45703125,
+              5420.03515625,
+              5420.12109375
+            ],
+            "step_seconds": [
+              3.170907518,
+              3.377114407,
+              3.245002225,
+              3.222268409,
+              3.218633143,
+              3.379006295,
+              3.252493019,
+              3.258225729,
+              3.203296344,
+              3.283372453,
+              3.338463207,
+              3.331609996,
+              3.239625694,
+              3.181494225,
+              3.20428677,
+              3.292219458,
+              3.320198145,
+              3.27408249,
+              3.242692888,
+              3.188247313
+            ],
+            "sum_seconds": 65.223239728,
+            "visits_per_second": 19.624906786874966
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132349
+        },
+        "1": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.2493644425,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1774.27734375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5574.27734375,
+            "step_end_rss_plus_hbm_MiB": [
+              5232.83203125,
+              5414.625,
+              5393.2265625,
+              5348.828125,
+              5345.49609375,
+              5362.078125,
+              5362.6171875,
+              5435.59765625,
+              5391.74609375,
+              5339.34375,
+              5312.40625,
+              5312.74609375,
+              5364.84765625,
+              5419.1875,
+              5340.25,
+              5367.171875,
+              5394.234375,
+              5419.37109375,
+              5368.98828125,
+              5470.2734375
+            ],
+            "step_seconds": [
+              3.223697141,
+              3.371252496,
+              3.163208615,
+              3.137514216,
+              3.195497858,
+              3.379050325,
+              3.166937396,
+              3.240766579,
+              3.134046455,
+              3.305101794,
+              3.322425857,
+              3.324770681,
+              3.281653047,
+              3.137869749,
+              3.322845469,
+              3.295350725,
+              3.321765494,
+              3.251645518,
+              3.247083367,
+              3.228079264
+            ],
+            "sum_seconds": 65.050562046,
+            "visits_per_second": 19.677001393083398
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132355
+        },
+        "10": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.307378491,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1719.3984375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5519.3984375,
+            "step_end_rss_plus_hbm_MiB": [
+              5258.30859375,
+              5336.671875,
+              5388.6953125,
+              5338.86328125,
+              5337.1484375,
+              5336.93359375,
+              5363.16015625,
+              5233.22265625,
+              5285.4921875,
+              5389.65234375,
+              5363.59375,
+              5363.43359375,
+              5415.51171875,
+              5337.6328125,
+              5441.59375,
+              5415.73828125,
+              5312.83203125,
+              5337.9921875,
+              5311.7578125,
+              5338.01171875
+            ],
+            "step_seconds": [
+              3.526559629,
+              3.278689608,
+              3.417967097,
+              3.233372911,
+              3.315232371,
+              3.499930113,
+              3.347604184,
+              3.292920992,
+              3.287478669,
+              3.253205383,
+              3.498723082,
+              3.365593768,
+              3.357881804,
+              3.300197638,
+              3.274597102,
+              3.637986508,
+              3.270197904,
+              3.290154637,
+              3.314559344,
+              3.266104487
+            ],
+            "sum_seconds": 67.02895723099999,
+            "visits_per_second": 19.09622427197804
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132563
+        },
+        "11": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.4006092165,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1752.375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5552.375,
+            "step_end_rss_plus_hbm_MiB": [
+              5544.0234375,
+              5440.7890625,
+              5389.34765625,
+              5210.6953125,
+              5159.51171875,
+              5375.75,
+              5338.72265625,
+              5391.05859375,
+              5365.78515625,
+              5423.57421875,
+              5447.97265625,
+              5436.49609375,
+              5462.5859375,
+              5339.6640625,
+              5339.78125,
+              5442.8125,
+              5391.09765625,
+              5261.234375,
+              5417.9140625,
+              5446.37109375
+            ],
+            "step_seconds": [
+              3.526604249,
+              3.357801885,
+              3.417967187,
+              3.306394313,
+              3.423155111,
+              3.507002594,
+              3.457015013,
+              3.378021863,
+              3.392028673,
+              3.343484809,
+              3.523237705,
+              3.373942402,
+              3.474338398,
+              3.386675157,
+              3.37730714,
+              3.758397587,
+              3.341658081,
+              3.40918976,
+              3.417267987,
+              3.349632503
+            ],
+            "sum_seconds": 68.52112241699999,
+            "visits_per_second": 18.680371173873734
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132583
+        },
+        "12": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.4598013539999997,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1768.56640625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5568.56640625,
+            "step_end_rss_plus_hbm_MiB": [
+              5333.59375,
+              5358.9609375,
+              5332.8125,
+              5333.28125,
+              5411.8203125,
+              5333.83984375,
+              5360.0546875,
+              5438.2578125,
+              5464.37890625,
+              5334.44921875,
+              5464.5625,
+              5334.625,
+              5360.5,
+              5360.6796875,
+              5360.625,
+              5360.76171875,
+              5386.953125,
+              5361.02734375,
+              5360.92578125,
+              5387.16015625
+            ],
+            "step_seconds": [
+              3.479863136,
+              3.432972072,
+              3.44103813,
+              3.362166221,
+              3.640567434,
+              3.478564578,
+              3.71088808,
+              3.581975926,
+              3.336365909,
+              3.230214322,
+              3.498257946,
+              3.485125041,
+              3.438317198,
+              3.212839646,
+              3.263250507,
+              3.570808101,
+              3.480209705,
+              3.755321462,
+              3.392015931,
+              3.378886746
+            ],
+            "sum_seconds": 69.16964809100001,
+            "visits_per_second": 18.505226429893415
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132591
+        },
+        "13": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.526375305,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1850.125,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5650.125,
+            "step_end_rss_plus_hbm_MiB": [
+              5347.0390625,
+              5425.30078125,
+              5335.2890625,
+              5296.09765625,
+              5285.26171875,
+              5311.484375,
+              5285.4609375,
+              5362.85546875,
+              5285.5546875,
+              5503.97265625,
+              5464.2734375,
+              5401.875,
+              5479.9921875,
+              5348.109375,
+              5400.6953125,
+              5505.07421875,
+              5546.12109375,
+              5520.046875,
+              5357.3046875,
+              5194.6015625
+            ],
+            "step_seconds": [
+              3.625205515,
+              3.535495302,
+              3.471852454,
+              3.470548028,
+              3.666130739,
+              3.475796847,
+              3.715270321,
+              3.62601191,
+              3.336368289,
+              3.272200466,
+              3.57342545,
+              3.502570473,
+              3.557767319,
+              3.308246666,
+              3.288344808,
+              3.612509095,
+              3.525831197,
+              3.78403951,
+              3.526919413,
+              3.453537062
+            ],
+            "sum_seconds": 70.328070864,
+            "visits_per_second": 18.200413921139063
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132595
+        },
+        "14": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.440690387,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1748.40625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5548.40625,
+            "step_end_rss_plus_hbm_MiB": [
+              5391.296875,
+              5391.29296875,
+              5339.3828125,
+              5391.38671875,
+              5339.66015625,
+              5339.65234375,
+              5391.671875,
+              5391.91796875,
+              5340.00390625,
+              5469.78125,
+              5366.13671875,
+              5418.19921875,
+              5418.12890625,
+              5418.38671875,
+              5496.1640625,
+              5444.3984375,
+              5444.4609375,
+              5392.69140625,
+              5418.58203125,
+              5392.66015625
+            ],
+            "step_seconds": [
+              3.502506727,
+              3.433082552,
+              3.44173084,
+              3.439649934,
+              3.651730506,
+              3.377364155,
+              3.672059189,
+              3.545766866,
+              3.2694232,
+              3.260040146,
+              3.520219419,
+              3.392818572,
+              3.438414568,
+              3.224618046,
+              3.26279983,
+              3.522358597,
+              3.487022696,
+              3.757055079,
+              3.512373234,
+              3.380982141
+            ],
+            "sum_seconds": 69.09201629699999,
+            "visits_per_second": 18.526018903512277
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132599
+        },
+        "15": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.5193169775,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1795.58984375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5595.58984375,
+            "step_end_rss_plus_hbm_MiB": [
+              5415.828125,
+              5360.90625,
+              5387.05078125,
+              5411.90625,
+              5360.31640625,
+              5307.96875,
+              5323.046875,
+              5257.8515625,
+              5335.8828125,
+              5464.33203125,
+              5493.0703125,
+              5491.5859375,
+              5278.671875,
+              5257.27734375,
+              5256.72265625,
+              5338.71875,
+              5338.984375,
+              5391.29296875,
+              5360.87109375,
+              5387.60546875
+            ],
+            "step_seconds": [
+              3.512802618,
+              3.535571182,
+              3.468532553,
+              3.470569088,
+              3.555422887,
+              3.406681861,
+              3.71097446,
+              3.622977786,
+              3.375536841,
+              3.300958129,
+              3.619207451,
+              3.484795364,
+              3.561951226,
+              3.241570366,
+              3.34134089,
+              3.527715438,
+              3.525831337,
+              3.7840622,
+              3.526928003,
+              3.45075976
+            ],
+            "sum_seconds": 70.02418943999999,
+            "visits_per_second": 18.279397594409346
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132603
+        },
+        "2": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.2011382885,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1801.58203125,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5601.58203125,
+            "step_end_rss_plus_hbm_MiB": [
+              5465.7890625,
+              5455.49609375,
+              5415.578125,
+              5351.52734375,
+              5404.3203125,
+              5414.0078125,
+              5493.44140625,
+              5494.06640625,
+              5494.453125,
+              5497.578125,
+              5436.05859375,
+              5523.40625,
+              5467.703125,
+              5367.7578125,
+              5257.65625,
+              5361.8203125,
+              5390.12890625,
+              5384.8515625,
+              5366.734375,
+              5285.9140625
+            ],
+            "step_seconds": [
+              3.113404215,
+              3.275538457,
+              3.142795352,
+              3.120355523,
+              3.132103696,
+              3.377703845,
+              3.248686818,
+              3.15660242,
+              3.119408608,
+              3.206340318,
+              3.240270412,
+              3.221747237,
+              3.198281476,
+              3.106549148,
+              3.316908284,
+              3.222684009,
+              3.203995101,
+              3.195426693,
+              3.206694785,
+              3.183521785
+            ],
+            "sum_seconds": 63.989018181999995,
+            "visits_per_second": 20.003432407094845
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132358
+        },
+        "3": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.2309034495,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1744.5546875,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5544.5546875,
+            "step_end_rss_plus_hbm_MiB": [
+              5361.0078125,
+              5359.5234375,
+              5359.08203125,
+              5363.20703125,
+              5453.2578125,
+              5205.9921875,
+              5301.0078125,
+              5338.43359375,
+              5135.05078125,
+              5232.83203125,
+              5384.22265625,
+              5388.38671875,
+              5360.82421875,
+              5102.69921875,
+              5258.1484375,
+              5310.82421875,
+              5351.65625,
+              5414.390625,
+              5362.765625,
+              5348.7109375
+            ],
+            "step_seconds": [
+              3.131157976,
+              3.366803966,
+              3.245924855,
+              3.209633937,
+              3.121000074,
+              3.383611596,
+              3.195037874,
+              3.240772939,
+              3.21342964,
+              3.30443453,
+              3.290893012,
+              3.335630215,
+              3.205752488,
+              3.201309524,
+              3.32143837,
+              3.221886755,
+              3.318231549,
+              3.230398387,
+              3.221046936,
+              3.231408512
+            ],
+            "sum_seconds": 64.98980313500002,
+            "visits_per_second": 19.695397404745496
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132375
+        },
+        "4": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.603332624,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1792.58984375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5592.58984375,
+            "step_end_rss_plus_hbm_MiB": [
+              5389.234375,
+              5490.46875,
+              5459.48828125,
+              5330.34765625,
+              5434.7421875,
+              5187.546875,
+              5248.78515625,
+              5325.078125,
+              5426.33203125,
+              5414.734375,
+              5374.59375,
+              5401.328125,
+              5490.8203125,
+              5487.375,
+              5487.34375,
+              5476.73046875,
+              5371.37890625,
+              5363.375,
+              5483.94921875,
+              5488.5859375
+            ],
+            "step_seconds": [
+              3.641609236,
+              3.632880721,
+              3.705012823,
+              3.602494939,
+              3.551374907,
+              3.844622602,
+              3.400617368,
+              3.607330719,
+              3.55113846,
+              3.623839522,
+              3.525061361,
+              3.620761627,
+              3.565573838,
+              3.614142617,
+              3.500058397,
+              3.321234336,
+              3.660710851,
+              3.604170309,
+              3.302704685,
+              3.344389919
+            ],
+            "sum_seconds": 71.21972923699998,
+            "visits_per_second": 17.972547968281464
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132385
+        },
+        "5": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.3438730705,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1748.15625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5548.15625,
+            "step_end_rss_plus_hbm_MiB": [
+              5315.19921875,
+              5287.18359375,
+              5360.36328125,
+              5334.59375,
+              5366.8515625,
+              5337.796875,
+              5364.19140625,
+              5182.796875,
+              5286.84375,
+              5339.3515625,
+              5389.25,
+              5366.03125,
+              5469.67578125,
+              5418.20703125,
+              5443.98046875,
+              5470.14453125,
+              5340.37890625,
+              5314.6484375,
+              5287.73828125,
+              5313.10546875
+            ],
+            "step_seconds": [
+              3.341379727,
+              3.383568638,
+              3.317769004,
+              3.301225532,
+              3.328652453,
+              3.389785928,
+              3.2555178,
+              3.446248548,
+              3.328648014,
+              3.312122977,
+              3.392239072,
+              3.351183702,
+              3.404343582,
+              3.346366414,
+              3.296474287,
+              3.391336171,
+              3.356120537,
+              3.247664226,
+              3.253476933,
+              3.355422695
+            ],
+            "sum_seconds": 66.79954624000001,
+            "visits_per_second": 19.161806809303258
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132421
+        },
+        "6": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.300109973,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1719.8671875,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5519.8671875,
+            "step_end_rss_plus_hbm_MiB": [
+              5366.6640625,
+              5415.6484375,
+              5415.953125,
+              5331.9921875,
+              5413.25390625,
+              5285.0078125,
+              5288.625,
+              5129.71875,
+              5314.515625,
+              5152.421875,
+              5308.8515625,
+              5360.06640625,
+              5359.9453125,
+              5360.0,
+              5294.71875,
+              5372.51953125,
+              5328.96484375,
+              5130.546875,
+              5316.26953125,
+              5329.7109375
+            ],
+            "step_seconds": [
+              3.302071685,
+              3.3077406,
+              3.220708242,
+              3.269822487,
+              3.231007705,
+              3.386002017,
+              3.199487625,
+              3.426006042,
+              3.272792092,
+              3.303801176,
+              3.359735395,
+              3.343473913,
+              3.352055309,
+              3.335450638,
+              3.242001726,
+              3.296460737,
+              3.348230924,
+              3.295662798,
+              3.214919348,
+              3.298148261
+            ],
+            "sum_seconds": 66.00557871999999,
+            "visits_per_second": 19.39230023919409
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132469
+        },
+        "7": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.2315749245,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1770.4765625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5570.4765625,
+            "step_end_rss_plus_hbm_MiB": [
+              5384.203125,
+              5361.71875,
+              5341.265625,
+              5363.625,
+              5364.12109375,
+              5338.25,
+              5338.44140625,
+              5416.578125,
+              5465.28125,
+              5416.42578125,
+              5442.32421875,
+              5364.484375,
+              5133.0625,
+              5289.12890625,
+              5470.9609375,
+              5466.47265625,
+              5464.94140625,
+              5311.53125,
+              5389.0703125,
+              5312.03125
+            ],
+            "step_seconds": [
+              3.302488225,
+              3.254414705,
+              3.293675531,
+              3.176785732,
+              3.20458374,
+              3.282761713,
+              3.166736906,
+              3.302823327,
+              3.212644376,
+              3.206484297,
+              3.353812233,
+              3.246821099,
+              3.311668934,
+              3.222603241,
+              3.174183186,
+              3.28391706,
+              3.240546608,
+              3.212411124,
+              3.150357192,
+              3.197031284
+            ],
+            "sum_seconds": 64.796750513,
+            "visits_per_second": 19.7540770156861
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132499
+        },
+        "8": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.3662181215,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1800.81640625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5600.81640625,
+            "step_end_rss_plus_hbm_MiB": [
+              5375.8984375,
+              5322.0,
+              5335.26953125,
+              5404.20703125,
+              5403.02734375,
+              5322.54296875,
+              5349.35546875,
+              5360.2578125,
+              5362.81640625,
+              5338.72265625,
+              5340.1640625,
+              5418.19140625,
+              5391.9296875,
+              5184.44140625,
+              5392.671875,
+              5470.7734375,
+              5340.703125,
+              5496.73828125,
+              5366.88671875,
+              5366.98828125
+            ],
+            "step_seconds": [
+              3.515284548,
+              3.351431115,
+              3.412819766,
+              3.331158707,
+              3.296769027,
+              3.506964104,
+              3.386193584,
+              3.381005128,
+              3.321837751,
+              3.320585587,
+              3.4755062,
+              3.296495435,
+              3.417836288,
+              3.391220822,
+              3.270410233,
+              3.761204037,
+              3.296845073,
+              3.406793417,
+              3.332136613,
+              3.29390633
+            ],
+            "sum_seconds": 67.766403765,
+            "visits_per_second": 18.888415629059757
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132515
+        },
+        "9": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.378926107,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1743.625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5543.625,
+            "step_end_rss_plus_hbm_MiB": [
+              5334.8515625,
+              5228.6953125,
+              5359.0078125,
+              5385.41015625,
+              5312.515625,
+              5257.6796875,
+              5389.47265625,
+              5389.9609375,
+              5306.421875,
+              5173.34375,
+              5458.91015625,
+              5432.9609375,
+              5271.05859375,
+              5387.65625,
+              5361.6875,
+              5491.65625,
+              5415.8046875,
+              5359.41796875,
+              5434.93359375,
+              5335.77734375
+            ],
+            "step_seconds": [
+              3.526641459,
+              3.377548347,
+              3.417966067,
+              3.237711932,
+              3.421083981,
+              3.40214124,
+              3.345643093,
+              3.289518011,
+              3.395061207,
+              3.369538404,
+              3.420260115,
+              3.374051781,
+              3.471284002,
+              3.298073644,
+              3.380303867,
+              3.761174187,
+              3.286954604,
+              3.31255158,
+              3.419559422,
+              3.367311354
+            ],
+            "sum_seconds": 67.87437829699999,
+            "visits_per_second": 18.858367945545886
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3132538
+        }
+      },
+      "max_sum_of_step_end_samples_MiB": 86623.015625,
+      "median_synchronized_step_seconds": 3.624994755,
+      "slowest_domain": "4",
+      "slowest_pure_total_vs_median_pct": 5.670890616351998,
+      "slowest_rate_reference_x16": 287.56076749250343,
+      "status": "PASS_PERF25",
+      "step_end_samples_sum_MiB": [
+        85805.24609375,
+        86132.24609375,
+        86057.16015625,
+        85522.375,
+        85769.59375,
+        85069.71875,
+        85610.8203125,
+        85558.77734375,
+        85670.98046875,
+        86012.890625,
+        86327.70703125,
+        86420.96875,
+        86082.484375,
+        85609.8359375,
+        86099.19921875,
+        86623.015625,
+        86016.36328125,
+        85852.61328125,
+        86024.7265625,
+        85817.62890625
+      ],
+      "step_spans_seconds": [
+        3.641628626,
+        3.632907991,
+        3.705031243,
+        3.602522809,
+        3.666252889,
+        3.844649452,
+        3.715349321,
+        3.626125579,
+        3.551163269,
+        3.623863931,
+        3.619302571,
+        3.620777026,
+        3.565597398,
+        3.614155447,
+        3.500102277,
+        3.761352906,
+        3.660728431,
+        3.784199619,
+        3.527023152,
+        3.453702901
+      ],
+      "sum_independent_rates": 304.3159058936751,
+      "sum_per_domain_peak_estimates_MiB": 89130.609375,
+      "synchronized_window_seconds": 89.296449222,
+      "synchronized_window_visits_per_second": 229.34842514381114
+    },
+    "perf_candidate_r2": {
+      "domain_count": 16,
+      "domains": {
+        "0": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.2246331379999997,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1878.91015625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5678.91015625,
+            "step_end_rss_plus_hbm_MiB": [
+              5439.28125,
+              5497.6953125,
+              5466.24609375,
+              5495.19921875,
+              5541.91796875,
+              5499.1328125,
+              5447.671875,
+              5473.203125,
+              5467.57421875,
+              5545.67578125,
+              5575.11328125,
+              5418.41796875,
+              5529.79296875,
+              5457.84765625,
+              5458.125,
+              5510.3671875,
+              5459.6484375,
+              5150.7109375,
+              5392.44140625,
+              5443.74609375
+            ],
+            "step_seconds": [
+              3.22221302,
+              3.31540405,
+              3.397561554,
+              3.227053256,
+              3.257064572,
+              3.263362057,
+              3.202208262,
+              3.127419409,
+              3.230465474,
+              3.208268227,
+              3.197387249,
+              3.330903722,
+              3.312411977,
+              3.191069988,
+              3.219855817,
+              3.169449736,
+              3.251055771,
+              3.209621235,
+              3.16454692,
+              3.438736046
+            ],
+            "sum_seconds": 64.936058342,
+            "visits_per_second": 19.711698441235825
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146043
+        },
+        "1": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.274582056,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1824.07421875,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5624.07421875,
+            "step_end_rss_plus_hbm_MiB": [
+              5179.15234375,
+              5491.37109375,
+              5466.0,
+              5440.21484375,
+              5383.125,
+              5417.1328125,
+              5466.859375,
+              5440.79296875,
+              5388.83984375,
+              5388.8671875,
+              5492.234375,
+              5406.53125,
+              5454.78125,
+              5354.80859375,
+              5406.875,
+              5493.87890625,
+              5520.0703125,
+              5469.25390625,
+              5314.51171875,
+              5415.4921875
+            ],
+            "step_seconds": [
+              3.345135919,
+              3.314168956,
+              3.349457888,
+              3.203560028,
+              3.355534273,
+              3.272443976,
+              3.202175482,
+              3.101120044,
+              3.276720136,
+              3.194186036,
+              3.117480908,
+              3.332392776,
+              3.325602985,
+              3.19581082,
+              3.293915716,
+              3.252797218,
+              3.313620035,
+              3.12305901,
+              3.265888151,
+              3.442368824
+            ],
+            "sum_seconds": 65.27743918099999,
+            "visits_per_second": 19.608612348453825
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146047
+        },
+        "10": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.3482714104999998,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1743.95703125,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5543.95703125,
+            "step_end_rss_plus_hbm_MiB": [
+              5391.67578125,
+              5327.1875,
+              5356.15625,
+              5122.61328125,
+              5327.06640625,
+              5312.3515625,
+              5338.85546875,
+              5391.0234375,
+              5339.04296875,
+              5321.9921875,
+              5270.9296875,
+              5272.48046875,
+              5376.953125,
+              5283.0390625,
+              5386.9140625,
+              5490.6875,
+              5439.90625,
+              5414.6796875,
+              5388.38671875,
+              5388.4296875
+            ],
+            "step_seconds": [
+              3.294154297,
+              3.348284687,
+              3.348258134,
+              3.301992009,
+              3.366350142,
+              3.23006721,
+              3.253231203,
+              3.234004751,
+              3.308824399,
+              3.418767013,
+              3.418867696,
+              3.285730814,
+              3.522440128,
+              3.333934285,
+              3.437392652,
+              3.405763881,
+              3.646548281,
+              3.306862741,
+              3.412340439,
+              3.523546242
+            ],
+            "sum_seconds": 67.39736100399999,
+            "visits_per_second": 18.991841534033252
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146084
+        },
+        "11": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.401706605,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1759.7265625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5559.7265625,
+            "step_end_rss_plus_hbm_MiB": [
+              5329.83984375,
+              5358.17578125,
+              5388.30859375,
+              5415.0546875,
+              5360.9140625,
+              5309.05078125,
+              5361.00390625,
+              5309.56640625,
+              5332.53515625,
+              5335.5625,
+              5309.5,
+              5362.2421875,
+              5309.54296875,
+              5408.43359375,
+              5376.87890625,
+              5377.109375,
+              5429.3984375,
+              5403.67578125,
+              5377.63671875,
+              5403.84765625
+            ],
+            "step_seconds": [
+              3.400305731,
+              3.466232652,
+              3.433969617,
+              3.271326655,
+              3.475519813,
+              3.338543574,
+              3.337907263,
+              3.388166555,
+              3.396687123,
+              3.403107479,
+              3.419555644,
+              3.368478291,
+              3.527755307,
+              3.294264109,
+              3.352021316,
+              3.505415022,
+              3.643816841,
+              3.362154337,
+              3.534698368,
+              3.650307317
+            ],
+            "sum_seconds": 68.57023301400001,
+            "visits_per_second": 18.66699212964118
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146089
+        },
+        "12": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.4065664195,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1810.52734375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5610.52734375,
+            "step_end_rss_plus_hbm_MiB": [
+              5316.15234375,
+              5337.32421875,
+              5415.61328125,
+              5391.76953125,
+              5532.53515625,
+              5524.6171875,
+              5430.6015625,
+              5350.76171875,
+              5420.921875,
+              5508.8515625,
+              5472.375,
+              5483.81640625,
+              5457.765625,
+              5434.87890625,
+              5409.0234375,
+              5323.859375,
+              5427.23046875,
+              5271.828125,
+              5332.06640625,
+              5356.22265625
+            ],
+            "step_seconds": [
+              3.434814037,
+              3.683337266,
+              3.427895147,
+              3.289114,
+              3.403601778,
+              3.475303698,
+              3.409531061,
+              3.458185588,
+              3.349902813,
+              3.570707625,
+              3.27234229,
+              3.308601242,
+              3.348195136,
+              3.252800719,
+              3.384271734,
+              3.442893543,
+              3.380185354,
+              3.485438542,
+              3.393528113,
+              3.500877638
+            ],
+            "sum_seconds": 68.27152732399999,
+            "visits_per_second": 18.74866507563882
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146093
+        },
+        "13": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.441011562,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1809.859375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5609.859375,
+            "step_end_rss_plus_hbm_MiB": [
+              5532.18359375,
+              5428.03515625,
+              5428.58203125,
+              5375.61328125,
+              5546.80078125,
+              5401.32421875,
+              5479.27734375,
+              5505.85546875,
+              5428.15234375,
+              5532.359375,
+              5324.8984375,
+              5350.38671875,
+              5403.3515625,
+              5168.234375,
+              5298.33203125,
+              5480.9609375,
+              5377.42578125,
+              5481.4375,
+              5399.96484375,
+              5399.4921875
+            ],
+            "step_seconds": [
+              3.502372306,
+              3.683270697,
+              3.409963933,
+              3.349668331,
+              3.413375863,
+              3.558925745,
+              3.52126595,
+              3.355806107,
+              3.439126311,
+              3.711786482,
+              3.379974737,
+              3.422518993,
+              3.457328845,
+              3.295230875,
+              3.403913469,
+              3.442896813,
+              3.485834422,
+              3.612130015,
+              3.431697122,
+              3.500790628
+            ],
+            "sum_seconds": 69.377877644,
+            "visits_per_second": 18.44968516575396
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146119
+        },
+        "14": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.4391958225000003,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1850.64453125,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5650.64453125,
+            "step_end_rss_plus_hbm_MiB": [
+              5598.16015625,
+              5572.03515625,
+              5468.5234375,
+              5520.3125,
+              5572.6328125,
+              5521.04296875,
+              5475.859375,
+              5463.56640625,
+              5495.80078125,
+              5546.19140625,
+              5494.4765625,
+              5499.1484375,
+              5446.95703125,
+              5471.16015625,
+              5471.22265625,
+              5392.59765625,
+              5429.42578125,
+              5481.3203125,
+              5377.1875,
+              5501.59375
+            ],
+            "step_seconds": [
+              3.385310477,
+              3.683350016,
+              3.520740576,
+              3.349740611,
+              3.521591568,
+              3.435279521,
+              3.522865243,
+              3.443112124,
+              3.330063518,
+              3.711760702,
+              3.30157387,
+              3.340369574,
+              3.367658259,
+              3.256391156,
+              3.303655689,
+              3.353941803,
+              3.469363472,
+              3.609067946,
+              3.52530644,
+              3.609129905
+            ],
+            "sum_seconds": 69.04027246999999,
+            "visits_per_second": 18.539903656321712
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146146
+        },
+        "15": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.4651221980000004,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1718.95703125,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5518.95703125,
+            "step_end_rss_plus_hbm_MiB": [
+              5383.19140625,
+              5313.515625,
+              5279.5234375,
+              5253.70703125,
+              5306.28515625,
+              5047.421875,
+              5279.765625,
+              5306.15234375,
+              5227.6796875,
+              5362.44921875,
+              5253.83984375,
+              5283.89453125,
+              5176.08203125,
+              5254.12109375,
+              5331.14453125,
+              5279.3359375,
+              5363.23828125,
+              5306.3203125,
+              5228.57421875,
+              5372.9296875
+            ],
+            "step_seconds": [
+              3.504336966,
+              3.683390846,
+              3.527175204,
+              3.456500571,
+              3.52337414,
+              3.569586626,
+              3.52122515,
+              3.46220211,
+              3.444240559,
+              3.711820842,
+              3.356016445,
+              3.339791376,
+              3.461068781,
+              3.321501324,
+              3.389346294,
+              3.460730597,
+              3.468042286,
+              3.612953923,
+              3.424413977,
+              3.612649493
+            ],
+            "sum_seconds": 69.85036751000001,
+            "visits_per_second": 18.324885689638656
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146147
+        },
+        "2": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.249680854,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1795.56640625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5595.56640625,
+            "step_end_rss_plus_hbm_MiB": [
+              5286.5625,
+              5289.41015625,
+              5315.73828125,
+              5145.92578125,
+              5275.9765625,
+              5422.12890625,
+              5396.66015625,
+              5464.76953125,
+              5441.6640625,
+              5336.78125,
+              5283.85546875,
+              5464.62109375,
+              5464.98046875,
+              5491.5625,
+              5055.02734375,
+              5336.76953125,
+              5364.76953125,
+              5365.359375,
+              5469.78125,
+              5417.99609375
+            ],
+            "step_seconds": [
+              3.341409718,
+              3.199231936,
+              3.396753268,
+              3.31640647,
+              3.360919348,
+              3.367763959,
+              3.224655271,
+              3.173045019,
+              3.306779127,
+              3.280695033,
+              3.201661681,
+              3.251017044,
+              3.224445694,
+              3.149808398,
+              3.243871066,
+              3.248344664,
+              3.35073388,
+              3.21664975,
+              3.221746733,
+              3.441312918
+            ],
+            "sum_seconds": 65.51725097699999,
+            "visits_per_second": 19.536839243291016
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146048
+        },
+        "3": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.2985441395,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1792.88671875,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5592.88671875,
+            "step_end_rss_plus_hbm_MiB": [
+              5328.390625,
+              5302.38671875,
+              5357.9921875,
+              5432.3203125,
+              5357.8125,
+              5240.50390625,
+              5250.60546875,
+              5354.65625,
+              5488.8828125,
+              5350.58984375,
+              5390.953125,
+              5391.0234375,
+              5487.390625,
+              5435.5625,
+              5436.02734375,
+              5417.39453125,
+              5463.21875,
+              5478.7265625,
+              5225.9375,
+              5329.60546875
+            ],
+            "step_seconds": [
+              3.326599713,
+              3.318205346,
+              3.353521648,
+              3.31210438,
+              3.352681496,
+              3.335044199,
+              3.227028481,
+              3.155000438,
+              3.303483361,
+              3.293604918,
+              3.159659844,
+              3.222868648,
+              3.317232818,
+              3.153531774,
+              3.220087766,
+              3.149003292,
+              3.31211967,
+              3.136216213,
+              3.268764102,
+              3.444652177
+            ],
+            "sum_seconds": 65.36141028400002,
+            "visits_per_second": 19.583420774403553
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146052
+        },
+        "4": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.6810205185,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1788.28515625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5588.28515625,
+            "step_end_rss_plus_hbm_MiB": [
+              5311.95703125,
+              5312.3828125,
+              5326.48828125,
+              5404.34765625,
+              5379.640625,
+              5457.359375,
+              5457.65234375,
+              5506.75390625,
+              5495.60546875,
+              5483.93359375,
+              5431.7265625,
+              5431.9140625,
+              5483.84765625,
+              5380.125,
+              5314.6796875,
+              5380.13671875,
+              5380.2578125,
+              5484.109375,
+              5465.48828125,
+              5414.19140625
+            ],
+            "step_seconds": [
+              3.535002171,
+              3.597219904,
+              3.784522243,
+              3.765017715,
+              3.844693802,
+              3.638444622,
+              3.683023026,
+              3.73368075,
+              3.480775632,
+              3.589218317,
+              3.695478378,
+              3.565311589,
+              3.679018011,
+              3.576225528,
+              3.588445768,
+              3.702061104,
+              3.694920827,
+              3.863063811,
+              3.668210848,
+              3.846887608
+            ],
+            "sum_seconds": 73.53122165399999,
+            "visits_per_second": 17.40757152142827
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146058
+        },
+        "5": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.3765044834999998,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1774.4453125,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5574.4453125,
+            "step_end_rss_plus_hbm_MiB": [
+              5433.91015625,
+              5365.33984375,
+              5415.96875,
+              5317.8515625,
+              5344.81640625,
+              5397.22265625,
+              5360.5625,
+              5346.57421875,
+              5497.33203125,
+              5294.375,
+              5398.5546875,
+              5450.546875,
+              5503.02734375,
+              5321.234375,
+              5380.9765625,
+              5496.62890625,
+              5431.7265625,
+              5228.390625,
+              5396.6640625,
+              5420.9296875
+            ],
+            "step_seconds": [
+              3.314609054,
+              3.31139316,
+              3.31826399,
+              3.409195986,
+              3.49986327,
+              3.382709462,
+              3.265123499,
+              3.364627728,
+              3.370299505,
+              3.441366157,
+              3.177079692,
+              3.513852046,
+              3.412810391,
+              3.29648549,
+              3.442077484,
+              3.34925087,
+              3.543059856,
+              3.493579674,
+              3.346029256,
+              3.443432411
+            ],
+            "sum_seconds": 67.695108981,
+            "visits_per_second": 18.908308432729722
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146063
+        },
+        "6": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.298534384,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1801.62890625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5601.62890625,
+            "step_end_rss_plus_hbm_MiB": [
+              5467.51171875,
+              5491.66796875,
+              5439.96875,
+              5264.62109375,
+              5342.51953125,
+              5261.40234375,
+              5365.57421875,
+              5469.328125,
+              5391.18359375,
+              5473.72265625,
+              5447.99609375,
+              5451.5078125,
+              5453.66015625,
+              5418.64453125,
+              5254.44140625,
+              5385.421875,
+              5385.390625,
+              5374.82421875,
+              5477.69921875,
+              5498.0078125
+            ],
+            "step_seconds": [
+              3.232728837,
+              3.239108908,
+              3.284690823,
+              3.38960843,
+              3.481419256,
+              3.279440394,
+              3.257507444,
+              3.337019689,
+              3.279211635,
+              3.296664735,
+              3.113920922,
+              3.355907122,
+              3.300447674,
+              3.210483453,
+              3.370411895,
+              3.256413524,
+              3.519508121,
+              3.335400601,
+              3.300404033,
+              3.432433158
+            ],
+            "sum_seconds": 66.27273065399999,
+            "visits_per_second": 19.31412795834064
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146067
+        },
+        "7": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.3124616365,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1826.453125,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5626.453125,
+            "step_end_rss_plus_hbm_MiB": [
+              5404.56640625,
+              5404.87890625,
+              5478.546875,
+              5468.8671875,
+              5545.41015625,
+              5519.86328125,
+              5468.08203125,
+              5548.0625,
+              5614.1796875,
+              5484.20703125,
+              5510.31640625,
+              5574.31640625,
+              5497.2109375,
+              5406.44921875,
+              5484.76953125,
+              5458.81640625,
+              5496.875,
+              5302.90625,
+              5380.953125,
+              5355.3828125
+            ],
+            "step_seconds": [
+              3.336466994,
+              3.318863813,
+              3.279343969,
+              3.396468907,
+              3.482024133,
+              3.263234519,
+              3.254418178,
+              3.329801511,
+              3.265144245,
+              3.429563097,
+              3.150377832,
+              3.393319841,
+              3.269454217,
+              3.204993294,
+              3.30605946,
+              3.336391518,
+              3.520580897,
+              3.305900025,
+              3.295096661,
+              3.421735193
+            ],
+            "sum_seconds": 66.55923830399999,
+            "visits_per_second": 19.230989305403096
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146071
+        },
+        "8": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.3607743325,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1823.98046875,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5623.98046875,
+            "step_end_rss_plus_hbm_MiB": [
+              5262.96484375,
+              5445.01953125,
+              5345.28125,
+              5329.3515625,
+              5389.98046875,
+              5437.0078125,
+              5517.734375,
+              5388.72265625,
+              5447.453125,
+              5467.2421875,
+              5519.1953125,
+              5389.43359375,
+              5441.46484375,
+              5493.5234375,
+              5441.58984375,
+              5496.33203125,
+              5422.04296875,
+              5551.90234375,
+              5415.61328125,
+              5519.9765625
+            ],
+            "step_seconds": [
+              3.38071706,
+              3.348361566,
+              3.430115545,
+              3.275494325,
+              3.366336132,
+              3.180267568,
+              3.228651194,
+              3.283527054,
+              3.308823409,
+              3.396465837,
+              3.338165349,
+              3.287055118,
+              3.523829213,
+              3.355212533,
+              3.435066061,
+              3.518133705,
+              3.529402895,
+              3.306859331,
+              3.534628338,
+              3.648480913
+            ],
+            "sum_seconds": 67.675593146,
+            "visits_per_second": 18.91376108427437
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146075
+        },
+        "9": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.3662452705000003,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1829.30859375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5629.30859375,
+            "step_end_rss_plus_hbm_MiB": [
+              5393.46875,
+              5370.0390625,
+              5396.421875,
+              5422.45703125,
+              5322.8515625,
+              5321.3046875,
+              5347.84375,
+              5322.0859375,
+              5317.0390625,
+              5369.01171875,
+              5525.3046875,
+              5369.3828125,
+              5447.2421875,
+              5401.41796875,
+              5479.58984375,
+              5375.4921875,
+              5363.0390625,
+              5357.7421875,
+              5479.38671875,
+              5454.1484375
+            ],
+            "step_seconds": [
+              3.38073791,
+              3.466237122,
+              3.349506908,
+              3.229058157,
+              3.372470483,
+              3.244282615,
+              3.335708023,
+              3.274129965,
+              3.395971256,
+              3.311917212,
+              3.337057804,
+              3.367571664,
+              3.411814135,
+              3.310552436,
+              3.351923306,
+              3.505379592,
+              3.637161515,
+              3.364918877,
+              3.534658648,
+              3.648535843
+            ],
+            "sum_seconds": 67.82959347100001,
+            "visits_per_second": 18.87081927665177
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3146081
+        }
+      },
+      "max_sum_of_step_end_samples_MiB": 86934.05078125,
+      "median_synchronized_step_seconds": 3.6892261365000003,
+      "slowest_domain": "4",
+      "slowest_pure_total_vs_median_pct": 8.636832783825854,
+      "slowest_rate_reference_x16": 278.5211443428523,
+      "status": "PASS_PERF25",
+      "step_end_samples_sum_MiB": [
+        86058.96875,
+        86306.46484375,
+        86345.359375,
+        85800.2265625,
+        86530.28515625,
+        86088.8671875,
+        86444.609375,
+        86641.875,
+        86793.88671875,
+        86801.8125,
+        86701.26953125,
+        86599.6640625,
+        86934.05078125,
+        86181.04296875,
+        85985.6171875,
+        86695.7890625,
+        86753.6640625,
+        86123.1875,
+        86122.29296875,
+        86691.9921875
+      ],
+      "step_spans_seconds": [
+        3.53503139,
+        3.683512516,
+        3.784535163,
+        3.765045305,
+        3.844711992,
+        3.638460251,
+        3.683045066,
+        3.73369352,
+        3.480822532,
+        3.712050531,
+        3.695491208,
+        3.565348559,
+        3.679035491,
+        3.576233058,
+        3.588467258,
+        3.702092444,
+        3.694939757,
+        3.863082581,
+        3.668250048,
+        3.846907298
+      ],
+      "sum_independent_rates": 302.8081216372397,
+      "sum_per_domain_peak_estimates_MiB": 89629.2109375,
+      "synchronized_window_seconds": 89.105348052,
+      "synchronized_window_visits_per_second": 229.84030080942284
+    },
+    "perf_candidate_r3": {
+      "domain_count": 16,
+      "domains": {
+        "0": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.1927592805,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1929.5703125,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5729.5703125,
+            "step_end_rss_plus_hbm_MiB": [
+              5577.34765625,
+              5532.95703125,
+              5443.76171875,
+              5403.28515625,
+              5442.1328125,
+              5442.421875,
+              5545.859375,
+              5598.28125,
+              5625.54296875,
+              5625.56640625,
+              5649.515625,
+              5676.4921875,
+              5650.4765625,
+              5521.7265625,
+              5534.671875,
+              5549.69921875,
+              5601.1171875,
+              5508.875,
+              5483.0078125,
+              5509.1328125
+            ],
+            "step_seconds": [
+              3.150925243,
+              3.226524627,
+              3.165776637,
+              3.226520362,
+              3.153780081,
+              3.279401146,
+              3.137406037,
+              3.31935162,
+              3.330888094,
+              3.244001454,
+              3.197666319,
+              3.167826462,
+              3.1561632,
+              3.171695834,
+              3.147004664,
+              3.211243521,
+              3.187852242,
+              3.200357433,
+              3.274662065,
+              3.145564999
+            ],
+            "sum_seconds": 64.09461204,
+            "visits_per_second": 19.97047738117489
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159701
+        },
+        "1": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.2322190285,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1827.7890625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5627.7890625,
+            "step_end_rss_plus_hbm_MiB": [
+              5229.6328125,
+              5444.1484375,
+              5470.91015625,
+              5522.65234375,
+              5341.0703125,
+              5419.2890625,
+              5471.54296875,
+              5419.4921875,
+              5550.3359375,
+              5315.35546875,
+              5497.4296875,
+              5497.43359375,
+              5445.44140625,
+              5419.88671875,
+              5445.86328125,
+              5471.76171875,
+              5393.90234375,
+              5419.921875,
+              5498.0546875,
+              5576.01953125
+            ],
+            "step_seconds": [
+              3.227451719,
+              3.283792463,
+              3.285113463,
+              3.153063856,
+              3.154739089,
+              3.364404625,
+              3.191872283,
+              3.236986338,
+              3.34797554,
+              3.402507569,
+              3.308133431,
+              3.176694056,
+              3.181920314,
+              3.252482193,
+              3.106434283,
+              3.173943092,
+              3.268700113,
+              3.13804435,
+              3.275906793,
+              3.150392382
+            ],
+            "sum_seconds": 64.680557952,
+            "visits_per_second": 19.789563363845733
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159708
+        },
+        "10": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.429121228,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1803.52734375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5603.52734375,
+            "step_end_rss_plus_hbm_MiB": [
+              5469.84375,
+              5471.62890625,
+              5522.51953125,
+              5430.578125,
+              5196.6171875,
+              5378.70703125,
+              5430.6484375,
+              5482.8515625,
+              5275.14453125,
+              5525.1640625,
+              5509.015625,
+              5535.03515625,
+              5470.3828125,
+              5507.57421875,
+              5505.94921875,
+              5404.84375,
+              5525.26953125,
+              5525.54296875,
+              5459.41015625,
+              5498.6171875
+            ],
+            "step_seconds": [
+              3.429895483,
+              3.338496135,
+              3.479485559,
+              3.32124009,
+              3.446698091,
+              3.466798706,
+              3.261847586,
+              3.374577288,
+              3.451265556,
+              3.370083951,
+              3.45197917,
+              3.508207576,
+              3.261222821,
+              3.4545372,
+              3.5620342,
+              3.428346973,
+              3.222771766,
+              3.268127768,
+              3.405322758,
+              3.587109808
+            ],
+            "sum_seconds": 68.090048485,
+            "visits_per_second": 18.79863546112733
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159779
+        },
+        "11": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.419052692,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1749.34375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5549.34375,
+            "step_end_rss_plus_hbm_MiB": [
+              5364.76171875,
+              5303.98828125,
+              5304.28125,
+              5278.73828125,
+              5442.42578125,
+              5391.32421875,
+              5408.29296875,
+              5364.7421875,
+              5316.6640625,
+              5405.98046875,
+              5352.1953125,
+              5423.1796875,
+              5331.48828125,
+              5419.65234375,
+              5418.87890625,
+              5470.65625,
+              5331.08203125,
+              5392.51953125,
+              5393.296875,
+              5445.3359375
+            ],
+            "step_seconds": [
+              3.430018963,
+              3.354140058,
+              3.479483859,
+              3.318267206,
+              3.445359494,
+              3.35711765,
+              3.29358495,
+              3.377615502,
+              3.447342674,
+              3.376387479,
+              3.45193044,
+              3.588408498,
+              3.369277427,
+              3.566025776,
+              3.685375892,
+              3.428395163,
+              3.277060009,
+              3.37629042,
+              3.409710221,
+              3.584983042
+            ],
+            "sum_seconds": 68.616774723,
+            "visits_per_second": 18.654330594337164
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159792
+        },
+        "12": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.365722656,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1794.48828125,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5594.48828125,
+            "step_end_rss_plus_hbm_MiB": [
+              5335.20703125,
+              5335.19140625,
+              5410.85546875,
+              5360.1328125,
+              5388.015625,
+              5360.17578125,
+              5411.8125,
+              5359.75390625,
+              5281.48046875,
+              5333.796875,
+              5359.78515625,
+              5360.06640625,
+              5386.6015625,
+              5308.046875,
+              5360.31640625,
+              5386.30859375,
+              5409.92578125,
+              5490.30078125,
+              5358.7890625,
+              5364.85546875
+            ],
+            "step_seconds": [
+              3.270321556,
+              3.37041277,
+              3.467666566,
+              3.385723626,
+              3.184997213,
+              3.361032542,
+              3.282956782,
+              3.314089111,
+              3.41895416,
+              3.403994636,
+              3.323655122,
+              3.595345035,
+              3.314679205,
+              3.375941547,
+              3.371815032,
+              3.286365136,
+              3.476761392,
+              3.413480683,
+              3.250629231,
+              3.255115778
+            ],
+            "sum_seconds": 67.12393712299999,
+            "visits_per_second": 19.06920325091313
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159821
+        },
+        "13": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.3965563244999997,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1740.7734375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5540.7734375,
+            "step_end_rss_plus_hbm_MiB": [
+              5338.171875,
+              5415.7109375,
+              5337.23828125,
+              5311.125,
+              5308.55859375,
+              5314.578125,
+              5363.69140625,
+              5259.76171875,
+              5393.828125,
+              5260.03515625,
+              5234.44140625,
+              5338.92578125,
+              5361.1328125,
+              5309.08984375,
+              5437.9609375,
+              5389.9765625,
+              5436.76953125,
+              5365.06640625,
+              5312.36328125,
+              5358.98828125
+            ],
+            "step_seconds": [
+              3.377302459,
+              3.3704264,
+              3.50073075,
+              3.496299558,
+              3.261153456,
+              3.386432467,
+              3.305932284,
+              3.368001151,
+              3.356921062,
+              3.416792351,
+              3.413020044,
+              3.602512072,
+              3.428043612,
+              3.40305716,
+              3.460991111,
+              3.212268189,
+              3.480847465,
+              3.535314944,
+              3.332376058,
+              3.390055489
+            ],
+            "sum_seconds": 68.09847808200001,
+            "visits_per_second": 18.796308464613592
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159828
+        },
+        "14": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.3020919625,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1761.81640625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5561.81640625,
+            "step_end_rss_plus_hbm_MiB": [
+              5300.91796875,
+              5275.0234375,
+              5275.08203125,
+              5301.1015625,
+              5301.375,
+              5379.37890625,
+              5405.4296875,
+              5327.41796875,
+              5405.5078125,
+              5327.84375,
+              5405.81640625,
+              5457.81640625,
+              5418.76171875,
+              5378.4296875,
+              5301.7578125,
+              5327.8671875,
+              5379.85546875,
+              5380.140625,
+              5380.27734375,
+              5432.27734375
+            ],
+            "step_seconds": [
+              3.26047428,
+              3.366733159,
+              3.49676082,
+              3.476626612,
+              3.213994219,
+              3.361184011,
+              3.210869663,
+              3.269351282,
+              3.318240679,
+              3.301296974,
+              3.302886951,
+              3.596964162,
+              3.295753819,
+              3.299524091,
+              3.350057489,
+              3.202251215,
+              3.43977922,
+              3.483544084,
+              3.229383334,
+              3.291668654
+            ],
+            "sum_seconds": 66.76734471799999,
+            "visits_per_second": 19.171048443011113
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159831
+        },
+        "15": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.380812846,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1853.140625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5653.140625,
+            "step_end_rss_plus_hbm_MiB": [
+              5244.82421875,
+              5413.1796875,
+              5285.21484375,
+              5491.6328125,
+              5464.1875,
+              5412.30078125,
+              5546.98046875,
+              5546.9296875,
+              5542.359375,
+              5542.38671875,
+              5490.93359375,
+              5466.078125,
+              5499.6953125,
+              5524.83203125,
+              5549.13671875,
+              5541.96484375,
+              5494.14453125,
+              5490.5,
+              5365.51171875,
+              5464.421875
+            ],
+            "step_seconds": [
+              3.297051782,
+              3.373676522,
+              3.501560579,
+              3.478337919,
+              3.283198248,
+              3.389665541,
+              3.22678332,
+              3.316501956,
+              3.422303123,
+              3.403982916,
+              3.378900688,
+              3.602627082,
+              3.354585154,
+              3.303003455,
+              3.382725004,
+              3.300588893,
+              3.480870085,
+              3.535326864,
+              3.302482123,
+              3.390131629
+            ],
+            "sum_seconds": 67.724302883,
+            "visits_per_second": 18.90015763191123
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159836
+        },
+        "2": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.2359350774999998,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1825.5859375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5625.5859375,
+            "step_end_rss_plus_hbm_MiB": [
+              5521.58203125,
+              5568.37109375,
+              5521.5390625,
+              5495.87109375,
+              5316.15234375,
+              5470.03125,
+              5467.171875,
+              5507.05859375,
+              5481.04296875,
+              5403.41015625,
+              5403.6875,
+              5429.60546875,
+              5403.89453125,
+              5507.453125,
+              5482.5546875,
+              5429.6484375,
+              5507.7109375,
+              5507.90625,
+              5559.98828125,
+              5560.234375
+            ],
+            "step_seconds": [
+              3.140907207,
+              3.228505973,
+              3.192228446,
+              3.154620222,
+              3.188913984,
+              3.367741038,
+              3.216082532,
+              3.31960564,
+              3.324841146,
+              3.292464381,
+              3.308158891,
+              3.252670416,
+              3.146604087,
+              3.256403186,
+              3.150766428,
+              3.274106367,
+              3.18907483,
+              3.238897684,
+              3.321418525,
+              3.232972471
+            ],
+            "sum_seconds": 64.796983454,
+            "visits_per_second": 19.754006001046086
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159710
+        },
+        "3": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.264397663,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1789.9921875,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5589.9921875,
+            "step_end_rss_plus_hbm_MiB": [
+              5298.66796875,
+              5366.25,
+              5444.3984375,
+              5365.125,
+              5234.68359375,
+              5469.50390625,
+              5469.6328125,
+              5385.96875,
+              5351.12890625,
+              5261.859375,
+              5481.05859375,
+              5340.25390625,
+              5208.29296875,
+              5355.109375,
+              5459.25,
+              5486.0546875,
+              5459.41015625,
+              5485.92578125,
+              5345.67578125,
+              5459.38671875
+            ],
+            "step_seconds": [
+              3.22707594,
+              3.28926077,
+              3.287431527,
+              3.232968937,
+              3.248212385,
+              3.349954676,
+              3.109337995,
+              3.318397602,
+              3.346690923,
+              3.404852264,
+              3.222628602,
+              3.256885258,
+              3.244293402,
+              3.274029865,
+              3.204538817,
+              3.274093137,
+              3.271910068,
+              3.22834543,
+              3.320095907,
+              3.235045117
+            ],
+            "sum_seconds": 65.346048622,
+            "visits_per_second": 19.588024478790956
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159716
+        },
+        "4": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.5799008155000003,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1869.8515625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5669.8515625,
+            "step_end_rss_plus_hbm_MiB": [
+              5435.1015625,
+              5487.2890625,
+              5382.2265625,
+              5613.015625,
+              5564.734375,
+              5564.80078125,
+              5565.07421875,
+              5565.140625,
+              5565.2265625,
+              5565.25390625,
+              5565.33203125,
+              5565.38671875,
+              5565.44140625,
+              5565.50390625,
+              5565.64453125,
+              5565.64453125,
+              5562.69140625,
+              5562.74609375,
+              5562.79296875,
+              5562.84375
+            ],
+            "step_seconds": [
+              3.642945453,
+              3.518849633,
+              3.625050126,
+              3.694111796,
+              3.66671672,
+              3.539004852,
+              3.578581138,
+              3.498171168,
+              3.686164093,
+              3.471600436,
+              3.556312294,
+              3.531794812,
+              3.498127766,
+              3.590481272,
+              3.740091,
+              3.63159327,
+              3.311565344,
+              3.581220493,
+              3.693686472,
+              3.521261316
+            ],
+            "sum_seconds": 71.57732945400001,
+            "visits_per_second": 17.88275714900214
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159725
+        },
+        "5": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.3462556015000002,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1802.62890625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5602.62890625,
+            "step_end_rss_plus_hbm_MiB": [
+              5364.46875,
+              5598.62890625,
+              5503.20703125,
+              5451.3984375,
+              5322.66015625,
+              5322.6328125,
+              5519.26171875,
+              5347.1015625,
+              5389.46484375,
+              5378.59375,
+              5409.47265625,
+              5388.69140625,
+              5477.73046875,
+              5326.44921875,
+              5482.66796875,
+              5334.78515625,
+              5363.921875,
+              5400.328125,
+              5418.109375,
+              5416.4140625
+            ],
+            "step_seconds": [
+              3.20650995,
+              3.480641303,
+              3.304440368,
+              3.258820209,
+              3.350141992,
+              3.514874963,
+              3.256125459,
+              3.389044899,
+              3.342369211,
+              3.455550527,
+              3.40449749,
+              3.388851525,
+              3.360906942,
+              3.418048073,
+              3.341383344,
+              3.354683504,
+              3.290313808,
+              3.262285407,
+              3.338675869,
+              3.322988648
+            ],
+            "sum_seconds": 67.041153491,
+            "visits_per_second": 19.09275024887265
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159733
+        },
+        "6": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.3284101269999997,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1746.36328125,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5546.36328125,
+            "step_end_rss_plus_hbm_MiB": [
+              5426.5234375,
+              5427.10546875,
+              5374.82421875,
+              5375.1484375,
+              5348.53515625,
+              5327.56640625,
+              5378.03515625,
+              5352.13671875,
+              5404.0390625,
+              5336.21484375,
+              5327.5078125,
+              5394.2421875,
+              5323.48828125,
+              5416.06640625,
+              5468.73828125,
+              5337.171875,
+              5389.5546875,
+              5370.08984375,
+              5445.98828125,
+              5328.16796875
+            ],
+            "step_seconds": [
+              3.254121585,
+              3.479116866,
+              3.292640845,
+              3.251005947,
+              3.255632128,
+              3.409424448,
+              3.222749698,
+              3.369757458,
+              3.329944356,
+              3.439413458,
+              3.394222969,
+              3.377523816,
+              3.316213493,
+              3.313016817,
+              3.326875898,
+              3.335261396,
+              3.405905274,
+              3.253418571,
+              3.351879809,
+              3.251859163
+            ],
+            "sum_seconds": 66.62998399499999,
+            "visits_per_second": 19.21057042571184
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159740
+        },
+        "7": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.2375330955,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1851.3828125,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5651.3828125,
+            "step_end_rss_plus_hbm_MiB": [
+              5523.4453125,
+              5465.4921875,
+              5492.80859375,
+              5549.19140625,
+              5497.41015625,
+              5547.3828125,
+              5544.890625,
+              5419.51171875,
+              5547.70703125,
+              5547.8125,
+              5492.37890625,
+              5561.15625,
+              5509.3359375,
+              5360.796875,
+              5287.375,
+              5469.46484375,
+              5436.765625,
+              5521.765625,
+              5522.05859375,
+              5522.49609375
+            ],
+            "step_seconds": [
+              3.138123834,
+              3.322238903,
+              3.221292589,
+              3.246633587,
+              3.221255613,
+              3.379080573,
+              3.140012691,
+              3.36381493,
+              3.227995198,
+              3.346836136,
+              3.264696603,
+              3.371633407,
+              3.236337526,
+              3.249483268,
+              3.234204266,
+              3.238728665,
+              3.395158921,
+              3.152187318,
+              3.177368082,
+              3.22681139
+            ],
+            "sum_seconds": 65.1538935,
+            "visits_per_second": 19.645794460464593
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159747
+        },
+        "8": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.376652163,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1797.984375,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5597.984375,
+            "step_end_rss_plus_hbm_MiB": [
+              5333.078125,
+              5387.0625,
+              5335.98828125,
+              5240.17578125,
+              5396.0625,
+              5417.2421875,
+              5438.3984375,
+              5515.62890625,
+              5438.22265625,
+              5435.765625,
+              5339.26171875,
+              5369.26953125,
+              5358.99609375,
+              5311.6015625,
+              5130.6953125,
+              5360.75390625,
+              5363.7890625,
+              5493.98046875,
+              5285.66796875,
+              5415.69140625
+            ],
+            "step_seconds": [
+              3.455186682,
+              3.350574277,
+              3.475965347,
+              3.278001426,
+              3.349004914,
+              3.466793786,
+              3.214770775,
+              3.331013826,
+              3.37359804,
+              3.366846167,
+              3.4043605,
+              3.553272363,
+              3.171678542,
+              3.562268782,
+              3.686959869,
+              3.423328341,
+              3.246270988,
+              3.369748281,
+              3.379706286,
+              3.587118598
+            ],
+            "sum_seconds": 68.04646779,
+            "visits_per_second": 18.810675139674288
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159753
+        },
+        "9": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 23073,
+            "ddr_large_requested_reported_GB": 78.1,
+            "hbm_allocations": 11903,
+            "hbm_requested_reported_GB": 451.3,
+            "reused": 11748
+          },
+          "exposure_unique_frames": 1600,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {
+            "hbm_step_end_max_MiB": 3800.0,
+            "median_seconds": 3.3393754625,
+            "observe_end_hbm_MiB": 3800,
+            "observe_start_hbm_MiB": 3800,
+            "ordinary_rss_peak_MiB": 1851.62890625,
+            "rss_peak_plus_step_end_hbm_estimate_MiB": 5651.62890625,
+            "step_end_rss_plus_hbm_MiB": [
+              5396.07421875,
+              5444.11328125,
+              5444.1953125,
+              5390.203125,
+              5364.44140625,
+              5364.64453125,
+              5494.70703125,
+              5500.73828125,
+              5500.81640625,
+              5500.8515625,
+              5391.0546875,
+              5443.0,
+              5469.12109375,
+              5469.23828125,
+              5522.0859375,
+              5391.47265625,
+              5365.58203125,
+              5365.28125,
+              5365.5234375,
+              5391.56640625
+            ],
+            "step_seconds": [
+              3.455205702,
+              3.297136272,
+              3.479469459,
+              3.275034523,
+              3.349005204,
+              3.341301814,
+              3.214799165,
+              3.374576938,
+              3.337449111,
+              3.279289336,
+              3.410260639,
+              3.485363648,
+              3.262349039,
+              3.462504926,
+              3.561906751,
+              3.301945711,
+              3.190311128,
+              3.290167574,
+              3.290192662,
+              3.464733019
+            ],
+            "sum_seconds": 67.12300262100001,
+            "visits_per_second": 19.06946873678057
+          },
+          "model_sha": {
+            "candidate": "94faf2e04a70e9d6852a226cb3ffb582b135619a8caaec226df909632eb8b555"
+          },
+          "pid": 3159766
+        }
+      },
+      "max_sum_of_step_end_samples_MiB": 87461.4296875,
+      "median_synchronized_step_seconds": 3.58888167,
+      "slowest_domain": "4",
+      "slowest_pure_total_vs_median_pct": 6.70112126557465,
+      "slowest_rate_reference_x16": 286.1241143840342,
+      "status": "PASS_PERF25",
+      "step_end_samples_sum_MiB": [
+        86159.6484375,
+        86936.140625,
+        86549.05078125,
+        86579.375,
+        85929.0625,
+        86581.98046875,
+        87461.4296875,
+        86952.515625,
+        87068.51171875,
+        86765.890625,
+        86908.88671875,
+        87246.6328125,
+        86880.28125,
+        86701.45703125,
+        86953.546875,
+        86918.07421875,
+        87021.4921875,
+        87280.890625,
+        86756.515625,
+        87306.44921875
+      ],
+      "step_spans_seconds": [
+        3.642966763,
+        3.518909752,
+        3.625209406,
+        3.694161466,
+        3.66673416,
+        3.539020562,
+        3.578641728,
+        3.498227828,
+        3.686178523,
+        3.471623956,
+        3.556336834,
+        3.602742852,
+        3.498152616,
+        3.590494942,
+        3.74011803,
+        3.63168663,
+        3.480903355,
+        3.581293523,
+        3.693713142,
+        3.587268398
+      ],
+      "sum_independent_rates": 306.2037712312773,
+      "sum_per_domain_peak_estimates_MiB": 89795.8671875,
+      "synchronized_window_seconds": 86.530269961,
+      "synchronized_window_visits_per_second": 236.6801815044669
+    },
+    "strict_baseline": {
+      "domain_count": 16,
+      "domains": {
+        "0": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111353
+        },
+        "1": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111357
+        },
+        "10": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111397
+        },
+        "11": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111401
+        },
+        "12": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111405
+        },
+        "13": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111410
+        },
+        "14": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111414
+        },
+        "15": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111418
+        },
+        "2": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111361
+        },
+        "3": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111365
+        },
+        "4": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111370
+        },
+        "5": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111374
+        },
+        "6": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111378
+        },
+        "7": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111382
+        },
+        "8": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111386
+        },
+        "9": {
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "baseline": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3111392
+        }
+      },
+      "status": "PASS_STRICT_REFERENCE5"
+    },
+    "strict_candidate": {
+      "domain_count": 16,
+      "domains": {
+        "0": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121627,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "1": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121631,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "10": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121713,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "11": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121717,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "12": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121721,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "13": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121725,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "14": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121730,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "15": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121734,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "2": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121639,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "3": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121646,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "4": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121654,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "5": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121657,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "6": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121660,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "7": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121673,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "8": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121694,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        },
+        "9": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.98,
+            "ddr_large_fallback_allocations": 21298,
+            "ddr_large_requested_reported_GB": 71.6,
+            "hbm_allocations": 2147,
+            "hbm_requested_reported_GB": 88.7,
+            "reused": 1955
+          },
+          "exposure_unique_frames": 320,
+          "kml_call_counts": [
+            149
+          ],
+          "measurements": {},
+          "model_sha": {
+            "candidate": "752ba90f06ac0563c1e00c7ff52448a88d7b44477aa7a6de66581621b08ee091"
+          },
+          "pid": 3121708,
+          "strict_gate": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          }
+        }
+      },
+      "status": "PASS_STRICT_ENCODER5"
+    }
+  },
+  "scheduler_state": "SUCCEEDED",
+  "status": "PASS_FULL_NODE_COMPLETED_PHASES",
+  "topology": {
+    "bytes": 137279,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_16B64_A\\received\\job_evidence\\domain_map.json",
+    "sha256": "3f57e03ae9af0759b1d7d2fdd1cddf1025741ce3d5d2c2241e9c6bd513033b5b"
+  },
+  "version": "H2_16B64_A",
+  "worker_exit_codes": {
+    "perf_candidate_r1": {
+      "0": 0,
+      "1": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    "perf_candidate_r2": {
+      "0": 0,
+      "1": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    "perf_candidate_r3": {
+      "0": 0,
+      "1": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    "strict_baseline": {
+      "0": 0,
+      "1": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    "strict_candidate": {
+      "0": 0,
+      "1": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    }
+  },
+  "workload": "16B64"
+}

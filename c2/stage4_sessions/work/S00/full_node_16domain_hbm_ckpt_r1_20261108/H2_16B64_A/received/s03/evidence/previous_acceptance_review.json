@@ -1,0 +1,31 @@
+{
+  "scope": "READ_EXISTING_EVIDENCE_ONLY_NOT_NEW_C_EXECUTION",
+  "job": "2034987",
+  "source_sha256": "8ec586c60c97bbcdb437fe848b6d9645ea3cfca850952ff9d94c0d36fdaed35d",
+  "real_kernel_or_hbm_accepted": false,
+  "evidence": {
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\evidence\\s02_r5_s03_c_20261105\\S03\\received\\payload\\linux_evidence\\candidate_faults.json": {
+      "sha256": "c230c56aab2f7909354147eeee2baa439d6567c14d87e0f86d757f41b297d048",
+      "cases": 25,
+      "passed": 25,
+      "failed_cases": []
+    },
+    "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\evidence\\s02_r5_s03_c_20261105\\S03\\received\\payload\\linux_evidence\\frozen_faults.json": {
+      "sha256": "323328cc71095a107fe9c3a127d9a4565a2865ea586a1517155903dcdfd68195",
+      "cases": 25,
+      "passed": 15,
+      "failed_cases": [
+        "pages_0",
+        "pages_15",
+        "read_open_fail",
+        "read_parse_fail",
+        "read_negative",
+        "get_fail",
+        "set_fail",
+        "restore_fail",
+        "map_restore_fail",
+        "set_restore_fail"
+      ]
+    }
+  }
+}

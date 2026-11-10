@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/share/dengqingtian/opt/stage4_sessions/S00/FULL16_R1_H1_32B32_A/inspect_metadata.py", line 12, in <module>
+    metadata=data.load_descriptor(descriptor,json.loads((root/"M23_RUN_BINDING.json").read_bytes())["descriptor_sha256"])
+  File "/usr/lib64/python3.9/pathlib.py", line 1259, in read_bytes
+    with self.open(mode='rb') as f:
+  File "/usr/lib64/python3.9/pathlib.py", line 1252, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/usr/lib64/python3.9/pathlib.py", line 1120, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/share/dengqingtian/opt/stage4_sessions/S00/FULL16_R1_H1_32B32_A/M23_RUN_BINDING.json'

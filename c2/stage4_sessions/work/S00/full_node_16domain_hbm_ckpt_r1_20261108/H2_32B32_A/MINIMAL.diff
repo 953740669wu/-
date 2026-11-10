@@ -1,0 +1,580 @@
+--- accepted32/hbm_gate.py
++++ H2_32B32_A/hbm_gate.py
+@@ -70,18 +70,19 @@
+             str(root / "real_hbm_probe.c"), "-o", str(executable)], min(deadline, time.monotonic()+20))
+     topology = json.loads((evidence / "domain_map.json").read_bytes())
+     placements = {}
++    pairs = topology["hbm_pairs"]
++    cap = binding["hbm_cap_MiB"]
++    need(64 <= cap <= 3800 and cap % 2 == 0, "invalid bound 2MiB-page HBM capacity")
++    initial = {str(node):free_pages(pairs[str(node)]) for node in contracts}
++    save(evidence / "hbm_capacity_before.json", dict(free_pages=initial, cap_MiB=cap, reserve_pages=16,
++         insufficient=[n for n,v in initial.items() if (v-16)*2 < cap]))
++    need(all((v-16)*2 >= cap for v in initial.values()), "whole-node HBM pool below fixed matched capacity")
+     for node, contract in contracts.items():
+-        paired = node + 16
+-        nodes = topology["node_ids"]
+-        distance = topology["distances"][str(node)]
+-        memory_nodes = [n for n in nodes if not topology["cpu_nodes"][str(n)]]
+-        need(paired in memory_nodes and distance[nodes.index(paired)] ==
+-             min(distance[nodes.index(n)] for n in memory_nodes), "paired HBM topology differs")
++        paired = pairs[str(node)]
+         out = evidence / f"real_hbm_node{node}"
+         out.mkdir()
+         before = free_pages(paired)
+-        cap = min(3800, max(0, before - 16) * 2)
+-        need(cap >= 64, "insufficient local HBM pool")
++        need((before-16)*2 >= cap, "local HBM pool changed after capacity check")
+         env = dict(os.environ, LD_PRELOAD=str(library), HBM_NODE=str(paired), HBM_MB=str(cap),
+                    HBM_MIN_KB="256", HBM_STATS="1")
+         cpus = ",".join(map(str, contract["selected"]))
+--- accepted32/inspect_metadata.py
++++ H2_32B32_A/inspect_metadata.py
+@@ -9,6 +9,6 @@
+ if args.output.exists():p.error('refuse overwriting metadata evidence')
+ root=Path(__file__).resolve().parent
+ descriptor=root/'ENGINEERING_DESCRIPTOR.json'
+-metadata=data.load_descriptor(descriptor,json.loads((root/"M23_RUN_BINDING.json").read_bytes())["descriptor_sha256"])
++metadata=data.load_descriptor(descriptor,json.loads((root/"RUN_BINDING.json").read_bytes())["descriptor_sha256"])
+ result=dict(status='ENGINEERING_METADATA_HASH_GATE_PASS',identity=metadata['identity'],npz_arrays_read=False,framework_imported=False)
+ args.output.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8');print(result['status'])
+--- accepted32/launch.py
++++ H2_32B32_A/launch.py
+@@ -1,4 +1,4 @@
+-"""Verify native resources and run strict then two matched 25-step DDR phases."""
++"""Verify a full node, then run the bound DDR/HBM and stability phases."""
+ import time
+ 
+ START = time.monotonic()
+@@ -8,6 +8,7 @@
+ import os
+ from pathlib import Path
+ import re
++import shutil
+ import signal
+ import subprocess
+ import sys
+@@ -17,6 +18,7 @@
+ from owned_processes import Owned, cleanup, process_table
+ from prepare import ROOT, need, save, verify
+ from scheduler_handoff import await_handoff, create_request, live_context
++from topology16 import full_topology
+ 
+ sys.path.insert(0, str(ROOT / "payload"))
+ from cpu36_contract import cpu_list, discover_contracts
+@@ -90,14 +92,14 @@
+     distances = {n: [int(v) for v in (p / "distance").read_text().split()] for n,p in zip(ids,nodes)}
+     contracts = discover_contracts(allowed, count)
+     need(len(contracts) == count and sorted(c for r in contracts.values() for c in r["allocated"]) == allowed,
+-         "allocation does not consist of four full CPU36 domains")
++         "allocation does not contain 16 whole CPU36 domains")
++    targets = [n for n,p in zip(ids,nodes) if not cpu_nodes[n]
++               and (p/"hugepages/hugepages-2048kB/free_hugepages").is_file()]
++    placement = full_topology(cpu_nodes,{n:dict(zip(ids,row)) for n,row in distances.items()},contracts,targets)
+     physical = {}
+     for node, contract in contracts.items():
+         need(contract["allocated"] == cpu_nodes[node] and len(contract["allocated"]) == 38,
+              "partial domain allocation")
+-        nearby = {n for i,n in enumerate(ids) if cpu_nodes[n] and distances[node][i] in (10,20)}
+-        need(count == 1 or nearby == set(contracts) and all(distances[node][ids.index(n)] == (10 if n == node else 20) for n in contracts),
+-             "actual four-domain distance-20 die grouping differs")
+         node_path = Path("/sys/devices/system/node") / f"node{node}"
+         meminfo = (node_path / "meminfo").read_text()
+         (EVIDENCE / f"node{node}.meminfo").write_text(meminfo)
+@@ -109,11 +111,10 @@
+             info = directory / "topology"
+             physical[cpu] = {key: (info / key).read_text().strip() for key in ("physical_package_id","core_id","die_id") if (info / key).is_file()}
+         save(EVIDENCE / f"node{node}.allocation.json", dict(job_id=context["job_id"], host=context["host"], receipt=contract))
+-    need(len({v["physical_package_id"] for v in physical.values()}) == 1
+-         and len({(v["physical_package_id"],v["core_id"]) for v in physical.values()}) == 38 * count,
+-         "wrong actual physical package/core topology")
++    need(len({tuple(s) for r in contracts.values() for s in r["physical_siblings"].values()}) == 608,
++         "608 distinct physical cores required across dies")
+     save(EVIDENCE / "domain_map.json", dict(context=context, contracts=contracts, node_ids=ids, cpu_nodes=cpu_nodes,
+-         distances=distances, physical=physical, die_basis="complete CPU-bearing distance-20 group and same physical package"))
++         distances=distances, physical=physical, **placement))
+     for n, node_path in zip(ids, nodes):
+         for huge in node_path.glob("hugepages/hugepages-*"):
+             fields = {p.name: p.read_text().strip() for p in sorted(huge.glob("*")) if p.is_file()}
+@@ -123,8 +124,10 @@
+ 
+ def allocation(binding):
+     context = live_context()
+-    need(context["host"] not in binding["excluded_hosts"], "excluded host allocated")
++    need(context["host"] in binding["eligible_hosts"] and context["host"] not in binding["excluded_hosts"],
++         "host outside bound eligible set")
+     count = binding["domain_count"]
++    need(count == 16, "full node requires exactly 16 domains")
+     mem = count * 24576
+     req = create_request(ROOT, context)
+     gate = await_handoff(ROOT, req, context, 38 * count, mem, binding["wall_seconds"], timeout=35)
+@@ -159,8 +162,9 @@
+     return dict(at_ns=time.monotonic_ns(), per_cpu=cpu, worker_ticks=ticks)
+ 
+ 
+-def phase(name, variant, contracts, owner, binding, deadline, placements):
+-    out = EVIDENCE / f"{name}_{variant}"
++def phase(name, variant, contracts, owner, binding, deadline, placements, run=None):
++    label = f"{name}_{variant}"
++    out = EVIDENCE / (label if run is None else f"{label}_r{run}")
+     out.mkdir()
+     barriers = out / "barriers"
+     barriers.mkdir()
+@@ -182,13 +186,14 @@
+                 "--reference",str(EVIDENCE / "strict_baseline")]
+         save(out / f"{rank}.command.json", dict(argv=argv))
+         env = dict(os.environ, M1_PARENT_CPU_LIST=inherited, M1_INHERIT_RECEIPT=str(out / f"{rank}.before_numactl.txt"))
+-        if variant in ("candidate","ckpt_hbm"):
++        if variant == "candidate":
+             cfg = placements[node]
+             need((free_pages(cfg["hbm_node"])-16)*2 >= cfg["cap_MiB"], "HBM pool became smaller after safety gate")
+             env.update(M23_HBM_LIBRARY=cfg["library"], M23_HBM_LIBRARY_SHA=cfg["library_sha256"],
+                        HBM_NODE=str(cfg["hbm_node"]), HBM_MB=str(cfg["cap_MiB"]), HBM_MIN_KB="256", HBM_STATS="1")
+-        env["S09_INVENTORY"] = str(int(binding["domain_count"] == 1))
+-        save(out / f"{rank}.env.json", {k:v for k,v in env.items() if k.startswith(("M23_", "HBM_", "S09_"))})
++        env.update(S09_INVENTORY="0", S00_BATCH=str(binding["batch_size"]),
++                   S00_MATCHED_CKPT=str(binding["checkpoint_layers"]))
++        save(out / f"{rank}.env.json", {k:v for k,v in env.items() if k.startswith(("M23_", "HBM_", "S09_", "S00_"))})
+         with (out / f"{rank}.log").open("xb") as log:
+             proc[node] = subprocess.Popen(argv, cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+     os.sched_setaffinity(0, {next(iter(contracts.values()))["reserved"][0]})
+@@ -207,21 +212,25 @@
+                 break
+             if now >= deadline:
+                 raise TimeoutError(name + " shared deadline")
+-            if now - sampled_at >= 2:
++            if now - sampled_at >= 5:
+                 owner.update(process_table())
+                 samples.write(json.dumps(sample(proc, contracts)) + "\n")
+                 samples.flush()
+                 sampled_at = now
+-            if name == "perf" and step <= 26:
++            if step <= (5 if name == "strict" else 26):
+                 ready = {n:barriers / f"{step}.node{n}.ready" for n in proc}
+                 if all(p.is_file() for p in ready.values()):
+                     arrivals = {n:read(p) for n,p in ready.items()}
+                     need(all(r["pid"] == proc[n].pid for n,r in arrivals.items()), "barrier PID differs")
++                    if step == 1 and name == "strict" and variant == "baseline" and binding["electrodes"] == 32:
++                        pairs = [read(out/f"node{n}/PAIRING.json") for n in proc]
++                        need(all(p == pairs[0] for p in pairs), "full-node DDR sample/mask/initial references differ")
++                        save(EVIDENCE / "PAIRING_FROZEN_BEFORE_UPDATE.json", pairs[0])
+                     save(barriers / f"{step}.release", dict(step=step, arrivals=arrivals,
+                          release_at_ns=time.monotonic_ns()+100_000_000))
+                     step += 1
+             time.sleep(.02)
+-    need(name != "perf" or step == 27, "incomplete baseline rendezvous")
++    need(step == (6 if name == "strict" else 27), "incomplete full-node rendezvous")
+     results = [read(out / f"node{n}" / "result.json") for n in contracts]
+     expected, updates = ("PASS_PERF25",25)
+     if name == "strict":
+@@ -245,39 +254,63 @@
+     raise InterruptedError("native signal " + str(signum))
+ 
+ 
++def verify_return(placements, label):
++    actual = {n:free_pages(c["hbm_node"]) for n,c in placements.items()}
++    expected = {n:c["pool_pages_before"] for n,c in placements.items()}
++    save(EVIDENCE / f"pool_return_{label}.json", dict(actual=actual, expected=expected, passed=actual==expected))
++    need(actual == expected, f"HBM pool not restored after {label}")
++
++
+ def main(pin):
+     EVIDENCE.mkdir(exist_ok=False)
+     outcome = dict(status="FAIL_STOP", job_id=os.environ.get("CCS_JOB_ID"), start=START, steps={})
+     owner = Owned(os.getpid())
+-    deadline = START + 1770
++    deadline = START + 120
++    placements = {}
+     try:
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        need(0 < wall <= 3600 and binding["mode"] == "s09_32e_ckpt12_eval", "wrong wall or mode")
+-        roles = binding["variants"]
+-        need(roles[0] == "baseline" and len(roles) == len(set(roles)) and
+-             all(r in {"baseline","candidate","ckpt_ddr","ckpt_hbm"} for r in roles), "wrong variant set")
++        need(120 < wall <= 7200 and binding["mode"] == "full_node_hbm_ckpt", "wrong wall or mode")
++        rounds = binding["hbm_rounds_max"]
++        need(1 <= rounds <= 3 and binding["first_hbm_round"] + rounds - 1 <= 3, "invalid HBM round plan")
++        need(shutil.disk_usage(EVIDENCE).free >= binding["strict_storage_min_bytes"],
++             "insufficient private workspace free space for complete DDR references")
+         libc = ctypes.CDLL(None, use_errno=True)
+         need(libc.prctl(36,1,0,0,0) == 0, "cannot become owned-process subreaper")
+         for sig in (signal.SIGTERM, signal.SIGINT, signal.SIGALRM):
+             signal.signal(sig, stop)
+-        end = START + wall - 60
++        end = START + wall - 120
+         signal.setitimer(signal.ITIMER_REAL, max(.001, end-time.monotonic()))
+         contracts = allocation(binding)
+         placements = prepare_hbm(ROOT, EVIDENCE, contracts, binding, end)
+         outcome["hbm_safety"] = "PASS"
+-        for name, steps in (("strict", 5), ("perf", 25)):
+-            for variant in roles:
+-                phase(name, variant, contracts, owner, binding, end, placements)
+-                outcome["steps"][f"{name}_{variant}_each_domain"] = steps
+-            if name == "strict":
+-                dispose_snapshots()
+-        for node, cfg in placements.items():
+-            need(free_pages(cfg["hbm_node"]) == cfg["pool_pages_before"], f"HBM pool not restored for node {node}")
+-        outcome["hbm_pool_restored"] = True
++        for variant in ("baseline","candidate"):
++            outcome["active_phase"] = f"strict_{variant}"
++            phase("strict", variant, contracts, owner, binding, end, placements)
++            outcome["steps"][f"strict_{variant}_each_domain"] = 5
++        verify_return(placements, "strict")
++        dispose_snapshots()
++        if binding["ddr_perf_control"]:
++            outcome["active_phase"] = "perf_baseline"
++            phase("perf", "baseline", contracts, owner, binding, end, placements)
++            outcome["steps"]["perf_baseline_each_domain"] = 25
++        outcome["completed_hbm_rounds"] = []
++        required_seconds = 0
++        for run in range(binding["first_hbm_round"], binding["first_hbm_round"] + rounds):
++            if required_seconds and end-time.monotonic() < required_seconds:
++                outcome["next_round_deferred"] = dict(round=run, predicted_with_margin_seconds=required_seconds)
++                break
++            outcome["active_phase"] = f"perf_candidate_r{run}"
++            t0 = time.monotonic()
++            phase("perf", "candidate", contracts, owner, binding, end, placements, run)
++            verify_return(placements, f"r{run}")
++            outcome["steps"][f"perf_candidate_r{run}_each_domain"] = 25
++            outcome["completed_hbm_rounds"].append(run)
++            required_seconds = (time.monotonic()-t0)*1.25 + 60
++        outcome["active_phase"] = None
+         verify(ROOT, pin)
+-        outcome["status"] = "PASS_HBM_AB"
++        outcome["status"] = "PASS_FULL_NODE_COMPLETED_PHASES"
+     except BaseException as exc:
+         outcome.update(error=repr(exc), traceback=traceback.format_exc())
+     finally:
+@@ -289,11 +322,20 @@
+             save(EVIDENCE / "cleanup.json", receipt)
+             need(receipt["all_reaped"], "owned process cleanup incomplete")
+             dispose_snapshots()
++            if placements:
++                verify_return(placements, "terminal")
++                outcome["hbm_pool_restored"] = True
++            elif (EVIDENCE / "hbm_capacity_before.json").is_file():
++                topo = read(EVIDENCE / "domain_map.json")
++                expected = read(EVIDENCE / "hbm_capacity_before.json")["free_pages"]
++                actual = {n:free_pages(topo["hbm_pairs"][n]) for n in expected}
++                save(EVIDENCE / "pool_return_after_partial_gate.json", dict(actual=actual, expected=expected, passed=actual==expected))
++                outcome["hbm_pool_restored"] = actual == expected
+         except BaseException as exc:
+             outcome.update(status="FAIL_STOP", cleanup_error=repr(exc))
+         outcome["finished"] = time.monotonic()
+         save(EVIDENCE / "SUMMARY.json", outcome)
+-    return 0 if outcome["status"] == "PASS_HBM_AB" else 2
++    return 0 if outcome["status"] == "PASS_FULL_NODE_COMPLETED_PHASES" else 2
+ 
+ 
+ if __name__ == "__main__":
+--- accepted32/payload/engineering_training.py
++++ H2_32B32_A/payload/engineering_training.py
+@@ -16,9 +16,10 @@
+ 
+ def batch(torch,part,indices,angles):
+     v=tensor(torch,part['v'][indices]);image=tensor(torch,part['y0'][indices])
+-    if v.shape != (32, 928) or image.shape != (32, 1, 64, 64) or angles.shape != (928, 4):
+-        raise ValueError('real 32E B32 tensor contract')
+-    return v,image,angles.expand(32,928,4),torch.ones(32,928,dtype=torch.float32)
++    b=len(indices)
++    if b not in (32,64) or v.shape != (b, 928) or image.shape != (b, 1, 64, 64) or angles.shape != (928, 4):
++        raise ValueError('real 32E B32/B64 tensor contract')
++    return v,image,angles.expand(b,928,4),torch.ones(b,928,dtype=torch.float32)
+ 
+ 
+ def losses(torch,model,v,image,angles,belt,mask):
+--- accepted32/payload/worker.py
++++ H2_32B32_A/payload/worker.py
+@@ -102,6 +102,10 @@
+ def run(args, result):
+     strict = args.phase == "strict"
+     planned = 5 if strict else 25
++    batch = int(os.environ["S00_BATCH"])
++    ckpt_layers = int(os.environ["S00_MATCHED_CKPT"])
++    if batch not in (32,64) or ckpt_layers != 12:
++        raise ValueError("expected a dependency-bound B32 or B64 with CKPT12")
+     expected_cpu = json.loads(args.allocation.read_bytes())["receipt"]["selected"]
+     guard = result["cpu36"] = {}
+     after_numactl = sorted(os.sched_getaffinity(0))
+@@ -171,9 +175,16 @@
+     initial = {n: p.detach().clone() for n, p in models[args.variant].named_parameters()} if strict else None
+     order = list(range(800))
+     random.Random(0).shuffle(order)
+-    masks = [torch.rand(32, 928) < .5 for _ in range(25)]
+-    pairing = dict(protocol="S09_REAL32_ENGINEERING_B32_V1", descriptor_sha256=args.descriptor_sha,
+-                   batch_size=32, electrodes=32, offset=5, tokens=928, dtype="fp32", checkpoint_layers=0,
++    if batch == 64:
++        order = order + order
++        frozen = json.loads((args.descriptor.parent/"B64_SAMPLE_PLAN.json").read_bytes())
++        if order != frozen["order"] or args.descriptor_sha != frozen["descriptor_sha256"] or (
++                training.model_sha(models[args.variant]) != frozen["initial_weights_sha256"]):
++            raise ValueError("independent B64 input or initial identity differs")
++    masks = [torch.rand(batch, 928) < .5 for _ in range(25)]
++    protocol = "S09_REAL32_ENGINEERING_B32_V1" if batch == 32 else "S00_REAL32_ENGINEERING_B64_V1"
++    pairing = dict(protocol=protocol, descriptor_sha256=args.descriptor_sha,
++                   batch_size=batch, electrodes=32, offset=5, tokens=928, dtype="fp32", checkpoint_layers=0,
+                    width=512, layers=12, heads=8, feedforward=2048, seed=0, full_encoder_parameters=37995777,
+                    initial_weights_sha256=training.model_sha(models[args.variant]),
+                    angles_sha256=hashlib.sha256(angles.numpy().tobytes()).hexdigest(),
+@@ -181,7 +192,7 @@
+                    mask_sha256=[hashlib.sha256(mask.numpy().tobytes()).hexdigest() for mask in masks],
+                    mask_selected=[int(mask.sum()) for mask in masks])
+     prior = args.descriptor.parent / "PRIOR_PAIRING.json"
+-    if prior.is_file() and json.loads(prior.read_bytes()) != pairing:
++    if batch == 32 and json.loads(prior.read_bytes()) != pairing:
+         raise ValueError("external 32E reference differs")
+     ref_dir = args.reference / args.output.name
+     if strict and args.variant == "baseline":
+@@ -194,16 +205,14 @@
+         if len(reference_steps) != 5:
+             raise ValueError("frozen DDR strict reference incomplete")
+     result["pairing_sha256"] = hashlib.sha256(json.dumps(pairing,sort_keys=True).encode()).hexdigest()
+-    checkpoint = args.variant in ("ckpt_ddr","ckpt_hbm")
+-    if checkpoint:
+-        enable_checkpoint(models[args.variant])
+-    result["checkpoint_layers"] = 12 if checkpoint else 0
++    enable_checkpoint(models[args.variant])
++    result["checkpoint_layers"] = ckpt_layers
+     residency(args.output, "initialized")
+     with (args.output / "steps.jsonl").open("x") as log:
+         for step in range(1, planned + 1):
+             if time.monotonic() >= args.deadline:
+                 raise TimeoutError("shared stop-new-update deadline")
+-            ids = order[(step-1)*32:step*32]
++            ids = order[(step-1)*batch:step*batch]
+             mask = masks[step-1]
+             frames = [train["frame_ids"][i] for i in ids]
+             mask_sha = pairing["mask_sha256"][step-1]
+@@ -227,7 +236,7 @@
+                 rss_before = memory_metrics.rss()
+                 shapes.clear()
+                 before = runtime["kml_gemm_calls"]
+-                release = barrier(args, step) if not strict else None
++                release = barrier(args, step)
+                 if time.monotonic() >= args.deadline:
+                     raise TimeoutError("deadline before update")
+                 reset = memory_metrics.reset_peak() if not strict else None
+@@ -257,11 +266,7 @@
+                     raise ValueError("actual 32E direct KML evidence missing")
+                 if reference_steps:
+                     pinned = reference_steps[(step-1) % 5]
+-                    if checkpoint:
+-                        trace_matches = logical > pinned["kml_calls"] and all(
+-                            shapes.get(k,0) >= n for k,n in pinned["native_shapes"].items())
+-                    else:
+-                        trace_matches = logical == pinned["kml_calls"] and shapes == pinned["native_shapes"]
++                    trace_matches = logical == pinned["kml_calls"] and shapes == pinned["native_shapes"]
+                     if not trace_matches:
+                         result["bad_native"] = dict(step=step, role=role, shapes=dict(shapes), logical=logical)
+                         raise ValueError("native trace differs from same-job 32E DDR")
+@@ -273,7 +278,7 @@
+                 if not all(torch.isfinite(item) for item in loss.values()):
+                     raise ValueError("nonfinite epoch loss")
+                 cpu36_guard.checkpoint(guard, f"after_{role}_{step}", torch)
+-                rows.append(dict(role=role, step=step, batch_size=32, frame_indices=ids, frame_ids=frames,
++                rows.append(dict(role=role, step=step, batch_size=batch, frame_indices=ids, frame_ids=frames,
+                                  mask_sha256=mask_sha, losses={k: v.item() for k,v in loss.items()},
+                                  start_ns=begin, end_ns=end, release_ns=release, step_seconds=(end-begin)/1e9,
+                                  rss_before=rss_before, training_start=start_memory, rss_after=rss_after,
+--- accepted32/prepare.py
++++ H2_32B32_A/prepare.py
+@@ -26,21 +26,21 @@
+ 
+ 
+ def verify(root, pin):
+-    path = root / "M23_RUN_BINDING.json"
++    path = root / "RUN_BINDING.json"
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+-    need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/memory_hbm_32e_r1_20261108")
+-         and root.name.startswith("S09_R") and binding["user_authorized"] is True,
++    need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/dengqingtian/opt/stage4_sessions/S00")
++         and root.name.startswith("FULL16_R1_") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+-    need(sha(root / "M23_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
++    need(sha(root / "FULL16_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"
+     need(sha(manifest) == binding["source_manifest_sha256"], "source manifest SHA differs")
+     for name, expected in json.loads(manifest.read_bytes()).items():
+         path = root / name
+         need(path.resolve() == path and sha(path) == expected, "source SHA differs: " + name)
+     need(sha(root / "ENGINEERING_DESCRIPTOR.json") == binding["descriptor_sha256"], "descriptor differs")
+-    if binding.get("prior_pairing_sha256"):
+-        need(sha(root / "PRIOR_PAIRING.json") == binding["prior_pairing_sha256"], "prior 32E pairing SHA differs")
++    for name,expected in binding["frozen_sidecars"].items():
++        need(sha(root/name) == expected, "frozen dependency sidecar differs: " + name)
+     return binding
+ 
+ 
+--- accepted32/recheck_fixed_inputs.py
++++ H2_32B32_A/recheck_fixed_inputs.py
+@@ -7,7 +7,7 @@
+ sys.path.insert(0, str(root/"payload"))
+ from data_gate import engineering_data as data
+ 
+-binding = json.loads((root/"M23_RUN_BINDING.json").read_bytes())
++binding = json.loads((root/"RUN_BINDING.json").read_bytes())
+ try:
+     meta = data.load_descriptor(root/"ENGINEERING_DESCRIPTOR.json", binding["descriptor_sha256"])
+     print(json.dumps(dict(status="FIXED32_CURRENT_SOURCE_SHA_PASS", data_contract="REAL32_ENGINEERING",
+--- accepted32/submit_once.py
++++ H2_32B32_A/submit_once.py
+@@ -20,6 +20,7 @@
+     if argv == ["djob", "-J"]:
+         decoder = json.JSONDecoder()
+         raw = p.stdout.decode().strip()
++        need(raw, "empty native queue response")
+         rows = []
+         while raw:
+             page, end = decoder.raw_decode(raw)
+@@ -55,31 +56,43 @@
+     ready = json.loads((ROOT / "site_static.json").read_bytes())
+     need(ready["status"] == "SHA_LF_AST_BASH_PASS" and ready["binding_sha256"] == pin, "static deployment gate missing")
+     for file, expected in (("LOGIN_METADATA_CHECK.json","ENGINEERING_METADATA_HASH_GATE_PASS"),
+-                           ("FIXED_INPUTS_BEFORE.json","FIXED32_CURRENT_SOURCE_SHA_PASS")):
++                           ("FIXED_INPUTS_BEFORE.json",binding["fixed_input_status"])):
+         need(json.loads((ROOT/file).read_bytes())["status"] == expected, "fixed input login check missing")
+     live = query(["djob","-J"],"queue_before_submit.json")
+     need(len(live["data"]) == live["totalElements"] <= 20, "incomplete native queue list")
+     for job in live["data"]:
+         row = detail(str(job["jobId"]),f"active_{job['jobId']}.json")
+-        need("/stage4_sessions/M23_MEMORY_HBM/" not in row.get("execPath","") + row.get("cmd",""),
+-             "active M23 job already exists")
++        if row["state"] in {"SUCCEEDED","FAILED","CANCELLED"}:
++            continue
++        path = row["execPath"]
++        need("/stage4_sessions/S00/" not in path, "active S00 job already exists")
++        if any(s in path for s in ("/M23_MEMORY_HBM/","/S10_BF16_FUSION/")):
++            groups = row["resGroups"]
++            nodes = {n["execNode"] for g in groups for n in g.get("nodeResUsages") or []}
++            preferred = {n.strip() for g in groups for n in g["preferNodes"].split(",")
++                         if not nodes and re.fullmatch(r"cn[0-9]+",n.strip())}
++            need(not (nodes | preferred) & set(binding["eligible_hosts"]), "other-window host conflict")
+     queue = query(["dqueue","-J","-l","q_hpcai"],"queue_resource.json")["data"][0]
+     need(set(queue["status"]) == {"OPEN","ACTIVE"} and queue["exclusive"] == "job" and queue["requeueTimes"] == 0,
+          "native exclusive queue/retry conditions differ")
+-    for host in binding["excluded_hosts"]:
+-        query(["dnode","-J","-l",host],"excluded_node_before_submit.json")
+-    dsub = subprocess.run(["dsub", "--help"], capture_output=True, timeout=5, check=True)
+-    (ROOT / "native_dsub_help.txt").write_bytes(dsub.stdout + dsub.stderr)
+-    need(b"--node-list" in dsub.stdout and b"!host15" in dsub.stdout,
+-         "native node exclusion syntax unavailable")
+-    for job_id in binding["protected_jobs"]:
+-        row = detail(job_id, f"s00_{job_id}_before_submit.json")
+-        if row["state"] == "RUNNING":
+-            need(row.get("taskExecNodes") in binding["excluded_hosts"], "live S00 host absent from exclusions")
++    qualified = []
++    for host in binding["eligible_hosts"]:
++        row, = query(["dnode","-J","-l",host],f"host_{host}_before_submit.json")["data"]
++        topo = row["numaInfo"]
++        res = row["nativeResources"]["loadResources"]
++        need(row["nodeName"] == host and host not in binding["excluded_hosts"]
++             and "q_hpcai" in row["queues"].split(",") and topo["architecture"] == "aarch64"
++             and topo["nNumaNodes"] == 16 and topo["nCoresPerNode"] * topo["nSockets"] == 608
++             and topo["nThreadsPerCore"] == 1,
++             f"node class differs: {host}")
++        if (row["status"] == "OK" and row["runningJobsCount"] == 0 and res["cpuFree"] >= 608
++                and res["memFree"] >= 393216 and res["hugePagesFree"] >= 16*(binding["hbm_cap_MiB"]//2+16)):
++            qualified.append(host)
++    need(qualified, "no eligible host currently shows full-node CPU, DDR and hugepage capacity")
+     until = datetime.fromisoformat(binding["batch_deadline_utc"])
+     room = (until - datetime.now(timezone.utc)).total_seconds()
+-    need(room > binding["wall_seconds"] + 60, "insufficient batch time to execute full job")
+-    stop_queue = time.monotonic() + min(binding["remaining_queue_seconds"],room-binding["wall_seconds"]-60)
++    need(room > binding["wall_seconds"] + 120, "insufficient batch time to execute full job")
++    stop_queue = time.monotonic() + min(binding["remaining_queue_seconds"],room-binding["wall_seconds"]-120)
+     argv = binding["native_argv"]
+     # The source pin is passed as its explicit runtime operand, avoiding a self-hash cycle.
+     argv = [pin if a == "BINDING_SHA256" else a for a in argv]
+@@ -116,7 +129,7 @@
+             return
+         if time.monotonic() >= stop_queue:
+             need(row["state"] == "PENDING","queue cutoff but state not verified pending")
+-            p = subprocess.run(["dkill","-y",job],capture_output=True,timeout=10)
++            p = subprocess.run(["dkill","-y","-s","PENDING",job],capture_output=True,timeout=10)
+             (ROOT/"cancel.stdout").write_bytes(p.stdout)
+             (ROOT/"cancel.stderr").write_bytes(p.stderr)
+             print("QUEUE_CUTOFF",job,p.returncode,flush=True)
+--- accepted32/collect.py
++++ H2_32B32_A/collect.py
+@@ -0,0 +1,47 @@
++"""Preserve one exact terminal job and its raw diagnostic artifacts."""
++import hashlib
++import json
++from pathlib import Path
++import shlex
++import sys
++import zipfile
++
++from prepare import ROOT, need, save, verify
++from submit_once import detail, owned
++
++
++def main(pin):
++    binding = verify(ROOT,pin)
++    job = (ROOT/"job_id.txt").read_text().strip()
++    binding["native_argv"] = [pin if arg == "BINDING_SHA256" else arg for arg in binding["native_argv"]]
++    row = detail(job,"djob_final.json")
++    need(owned(row,binding) and row["state"] in ("SUCCEEDED","FAILED","CANCELLED"),"require owned terminal record")
++    bundle = ROOT / f"JOB_{job}_evidence.zip"
++    archive, index = {}, {}
++    for path in sorted(ROOT.rglob("*")):
++        if not path.is_file():
++            continue
++        need(path.resolve() == path,"unexpected redirected evidence")
++        name = path.relative_to(ROOT).as_posix()
++        omit = path.suffix in {".pt",".pth",".npz"}
++        h = hashlib.sha256()
++        with path.open("rb") as stream:
++            for block in iter(lambda:stream.read(2**20),b""):
++                h.update(block)
++        index[name] = dict(bytes=path.stat().st_size,sha256=h.hexdigest(),archive=not omit)
++        if not omit:
++            archive[name] = path
++    pids = [n["pids"] for g in row["resGroups"] for n in g["nodeResUsages"]]
++    save(ROOT/"COLLECTION_INDEX.json",dict(job_id=job,state=row["state"],pids=pids,files=index))
++    with zipfile.ZipFile(bundle,"x",zipfile.ZIP_DEFLATED) as z:
++        for name,path in archive.items():
++            z.write(path,name)
++        z.write(ROOT/"COLLECTION_INDEX.json","COLLECTION_INDEX.json")
++    receipt = dict(job_id=job,bytes=bundle.stat().st_size,sha256=hashlib.sha256(bundle.read_bytes()).hexdigest(),
++                   members=len(archive)+1,state=row["state"],pids=pids)
++    save(ROOT/"bundle_receipt.json",receipt)
++    print(json.dumps(receipt),flush=True)
++
++
++if __name__ == "__main__":
++    main(sys.argv[1])
+--- accepted32/topology16.py
++++ H2_32B32_A/topology16.py
+@@ -0,0 +1,28 @@
++"""Validate the four dies and derive one HBM target per actual CPU domain."""
++
++
++def full_topology(cpu_nodes, distances, allocated_domains, memory_targets):
++    cpu_domains = {n for n, cpus in cpu_nodes.items() if cpus}
++    if len(cpu_domains) != 16 or set(allocated_domains) != cpu_domains:
++        raise ValueError("require all 16 CPU-bearing NUMA domains on one host")
++    if any(len(cpu_nodes[n]) != 38 for n in cpu_domains):
++        raise ValueError("require 38 CPUs in every physical domain")
++    if any(n not in cpu_nodes or cpu_nodes[n] for n in memory_targets) or len(memory_targets) < 16:
++        raise ValueError("expected at least 16 memory-only HBM page-pool targets")
++    dies, pairs = {}, {}
++    for node in sorted(cpu_domains):
++        d = distances[node]
++        neighbors = tuple(sorted(n for n in cpu_domains if d[n] <= 20))
++        if d[node] != 10 or len(neighbors) != 4 or any(d[n] != 20 for n in neighbors if n != node):
++            raise ValueError(f"node{node}: unverified distance-20 die group")
++        dies[node] = neighbors
++        closest = min(d[n] for n in memory_targets)
++        choices = [n for n in memory_targets if d[n] == closest]
++        if len(choices) != 1:
++            raise ValueError(f"node{node}: closest HBM target is not unique: {choices}")
++        pairs[node] = choices[0]
++    if len(set(dies.values())) != 4 or any(dies[n] != group for group in dies.values() for n in group):
++        raise ValueError("die grouping does not partition into four symmetric groups")
++    if len(set(pairs.values())) != 16:
++        raise ValueError("CPU-to-HBM target pairing is not one-to-one")
++    return dict(die_groups=sorted(set(dies.values())), hbm_pairs=pairs)

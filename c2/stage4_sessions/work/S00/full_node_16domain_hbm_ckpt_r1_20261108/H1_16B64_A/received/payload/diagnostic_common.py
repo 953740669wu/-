@@ -1,0 +1,113 @@
+"""Diagnostic arithmetic and explicit native/KML runtime identity. Python 3.9+."""
+import hashlib
+import os
+from pathlib import Path
+import platform
+import sys
+
+ROOT = Path(__file__).resolve().parent
+
+
+def sha_file(path):
+    digest = hashlib.sha256()
+    with Path(path).open('rb') as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b''):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def tensor_sha(tensor):
+    return hashlib.sha256(tensor.detach().contiguous().numpy().tobytes()).hexdigest()
+
+
+def first_update(parameter, gradient):
+    return -1e-4 * 0.01 * parameter - 1e-4 * gradient / (abs(gradient) + 1e-8)
+
+
+def errors(ref, got):
+    delta = got.double() - ref.double()
+    norm = ref.double().norm().item()
+    return dict(max_abs=delta.abs().max().item() if delta.numel() else 0.,
+                l2_relative=delta.norm().item() / max(norm, 1e-12), reference_norm=norm,
+                exact=bool(ref.equal(got)))
+
+
+def affinity(expected):
+    from cpu36_contract import snapshot_threads, validate_snapshot
+    if len(expected) != 36 or len(set(expected)) != 36:
+        raise RuntimeError('checker requires explicit selected36 CPUs')
+    actual = sorted(os.sched_getaffinity(0))
+    snapshot = snapshot_threads(os.getpid())
+    validate_snapshot(expected, snapshot)
+    caller = next((row for row in snapshot['threads'] if row['tid'] == os.getpid()), None)
+    if not actual or not set(actual) <= set(expected) or caller is None or caller['affinity'] != actual:
+        raise RuntimeError('checker calling-thread affinity evidence invalid')
+    return dict(expected=expected, actual=actual, snapshot=snapshot)
+
+
+def mapped_libraries():
+    paths = set()
+    for line in Path('/proc/self/maps').read_text().splitlines():
+        value = line.split()[-1]
+        if value.startswith('/') and any(token in value.lower() for token in
+                ('libkblas', 'libomp.', 'libgomp', 'libiomp', 'kml_sgemm_shim', 'libopenblas')):
+            paths.add(value)
+    return [dict(path=p, sha256=sha_file(p)) for p in sorted(paths)]
+
+
+def configure_backend(torch, backend, expected_cpus):
+    import numpy
+    record = dict(backend=backend, python=sys.executable, python_version=sys.version,
+                  host=platform.node(), platform=platform.platform(), torch=torch.__version__,
+                  torch_file=torch.__file__, numpy=numpy.__version__, numpy_file=numpy.__file__,
+                  torch_threads=torch.get_num_threads(),
+                  interop_threads=torch.get_num_interop_threads(), torch_config=torch.__config__.show(),
+                  env={k: os.environ.get(k) for k in ('KML_BLAS_LIB', 'LINEAR_DTYPE', 'LD_PRELOAD',
+                      'OMP_NUM_THREADS', 'OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS',
+                      'OMP_PROC_BIND', 'OMP_PLACES')})
+    if backend == 'native':
+        if os.environ.get('KML_BLAS_LIB') or 'kml' in os.environ.get('LD_PRELOAD', '').lower():
+            raise RuntimeError('native control requires an environment without KML/preload')
+        return record, None
+    if sys.platform != 'linux':
+        raise RuntimeError('actual KML mode requires Linux; no native fallback')
+    if not expected_cpus or len(expected_cpus) != 36 or len(set(expected_cpus)) != 36:
+        raise RuntimeError('actual KML mode requires exactly36 explicit selected CPUs')
+    if torch.get_num_threads() != 36:
+        raise RuntimeError('actual PyTorch intra-op threads must be36')
+    record['affinity_before'] = affinity(sorted(expected_cpus))
+    if os.environ.get('LINEAR_DTYPE') != 'fp32' or not os.environ.get('KML_BLAS_LIB'):
+        raise RuntimeError('actual KML mode requires KML_BLAS_LIB and LINEAR_DTYPE=fp32')
+    sys.path.insert(0, str(ROOT / 'baseline'))
+    import kml_ops
+    if Path(kml_ops.__file__).resolve() != (ROOT / 'baseline' / 'kml_ops.py').resolve():
+        raise RuntimeError('wrong kml_ops module origin')
+    if kml_ops._lib is None:
+        raise RuntimeError('actual KML library not loaded')
+    libraries = mapped_libraries()
+    actual_kml = str(Path(os.environ['KML_BLAS_LIB']).resolve())
+    names = [x['path'] for x in libraries]
+    if actual_kml not in names or not any('libomp.so' in p for p in names) or not any('kml_sgemm_shim' in p for p in names):
+        raise RuntimeError('actual KML/OpenMP/shim mappings incomplete')
+    record.update(kml_ops_file=kml_ops.__file__, libraries=libraries,
+                  kml_resolved=actual_kml, kml_gemm_calls=0, kml_shapes={})
+    original = kml_ops.gemm
+    def counted(a, b, *args, **kwargs):
+        record['kml_gemm_calls'] += 1
+        key = str((list(a.shape), list(b.shape), args, kwargs.get('ta', False), kwargs.get('tb', False)))
+        record['kml_shapes'][key] = record['kml_shapes'].get(key, 0) + 1
+        return original(a, b, *args, **kwargs)
+    kml_ops.gemm = counted
+    kml_ops.patch_linear()
+    return record, sorted(expected_cpus)
+
+
+def finish_backend(record, expected_cpus):
+    if expected_cpus is not None:
+        if record['kml_gemm_calls'] == 0:
+            raise RuntimeError('no actual kml_ops GEMM call observed')
+        record['affinity_after'] = affinity(expected_cpus)
+        record['libraries_after'] = mapped_libraries()
+        after = {x['path']:x['sha256'] for x in record['libraries_after']}
+        if any(after.get(x['path']) != x['sha256'] for x in record['libraries']):
+            raise RuntimeError('runtime library changed during diagnostic')

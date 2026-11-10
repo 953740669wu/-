@@ -1,0 +1,1147 @@
+{
+  "acceptance": {
+    "complete_host_config_pairs": [
+      [
+        "cn21762",
+        "32B32"
+      ],
+      [
+        "cn21762",
+        "32B64"
+      ],
+      [
+        "cn21762",
+        "16B64"
+      ],
+      [
+        "cn22035",
+        "32B32"
+      ],
+      [
+        "cn22035",
+        "32B64"
+      ],
+      [
+        "cn22035",
+        "16B64"
+      ]
+    ],
+    "hbm_rounds": 18,
+    "stable_host_config_pairs": [
+      [
+        "cn21762",
+        "16B64"
+      ]
+    ],
+    "stable_workloads_across_both_hosts": []
+  },
+  "active_job": null,
+  "budget": {
+    "absolute_deadline_utc": "2026-11-11T04:33:20Z",
+    "allocation_seconds": 26526,
+    "attempts": [
+      {
+        "allocated_seconds": 4750,
+        "artifact": {
+          "bytes": 14130891,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B32_B\\JOB_2064138_TRANSFER.tgz",
+          "sha256": "2dc302b3f35684799028897e046ba5b69f04a77e502e7fa6d4fae6fe2313bfa8"
+        },
+        "binding": {
+          "bytes": 3434,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B32_B\\RUN_BINDING.json",
+          "sha256": "4755126d673a01840ab76211c2a2d10c1c665a4e77857aed72f94602031afb53"
+        },
+        "charged_updates": 960,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 1915,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B32_B\\received\\job_evidence\\cleanup.json",
+          "sha256": "401a294d5f2f38eda38dcab8e650c789ae35dacf58e6e0e4511d02a74832d149"
+        },
+        "confirmed_updates": 960,
+        "host": "cn22035",
+        "job_id": "2064138",
+        "native": {
+          "bytes": 3886,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B32_B\\received\\djob_final.json",
+          "sha256": "5e6a7cade7945eb1863d5678b3c554a3a661bbf521729b325e398683aeea7dc1"
+        },
+        "queue_seconds": 3,
+        "state": "SUCCEEDED",
+        "terminal": true,
+        "version": "H1_32B32_B",
+        "workload": "32B32"
+      },
+      {
+        "allocated_seconds": 1166,
+        "artifact": {
+          "bytes": 9306657,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_16B64_A\\JOB_2064626_TRANSFER.tgz",
+          "sha256": "34c7eebb5386837fec6130fe677bc1c0f8b2001e55aca5e233494e67f0b44c4d"
+        },
+        "binding": {
+          "bytes": 3294,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_16B64_A\\RUN_BINDING.json",
+          "sha256": "3c1ba3af6f43168a8996fb6aee7951900bce80d343f8853a2f5f8735d126428a"
+        },
+        "charged_updates": 1360,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 2315,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_16B64_A\\received\\job_evidence\\cleanup.json",
+          "sha256": "2a3358e875fedd63d653b407cd7e31e27cc170ed670f7ceb062bf9d6d5d70ab1"
+        },
+        "confirmed_updates": 1360,
+        "host": "cn22035",
+        "job_id": "2064626",
+        "native": {
+          "bytes": 3870,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_16B64_A\\received\\djob_final.json",
+          "sha256": "49045e24062c3bcc7e90a1eef12c2da7d94c0450455b775ab6d60f41a91a145e"
+        },
+        "queue_seconds": 4,
+        "state": "SUCCEEDED",
+        "terminal": true,
+        "version": "H1_16B64_A",
+        "workload": "16B64"
+      },
+      {
+        "allocated_seconds": 2363,
+        "artifact": {
+          "bytes": 12903071,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_32B32_A\\JOB_2064729_TRANSFER.tgz",
+          "sha256": "dc854b9de1cfa31a1b2c408572bbbb1cfda12d9b9ddb2b2d49b6bb8be18681a2"
+        },
+        "binding": {
+          "bytes": 3458,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_32B32_A\\RUN_BINDING.json",
+          "sha256": "9d5530a6b6e04496812d95c28d50ec17c4aa585b5aae92ba2a813011da7165b4"
+        },
+        "charged_updates": 1760,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 2814,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_32B32_A\\received\\job_evidence\\cleanup.json",
+          "sha256": "849102c0d77349274128a7d8181a6a97b310613228e78f358a62dac813fa86b5"
+        },
+        "confirmed_updates": 1760,
+        "host": "cn21762",
+        "job_id": "2064729",
+        "native": {
+          "bytes": 3896,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_32B32_A\\received\\djob_final.json",
+          "sha256": "eb7dc5e0e2d0d2720ad28cc77ae83b0b9ea44edbd0247ba4ac5dc214d2ed5b4f"
+        },
+        "queue_seconds": 2,
+        "state": "SUCCEEDED",
+        "terminal": true,
+        "version": "H2_32B32_A",
+        "workload": "32B32"
+      },
+      {
+        "allocated_seconds": 4445,
+        "artifact": {
+          "bytes": 19910213,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_32B64_A\\JOB_2065151_TRANSFER.tgz",
+          "sha256": "f9b9f770781a8faf894be8f6b18c733e2a6e0fcb55678e93d7172115827a9b0f"
+        },
+        "binding": {
+          "bytes": 3508,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_32B64_A\\RUN_BINDING.json",
+          "sha256": "bc1ec8581162a21dc84a6c65e562811004fbcec31627fe82d7277b6928228538"
+        },
+        "charged_updates": 1760,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 2814,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_32B64_A\\received\\job_evidence\\cleanup.json",
+          "sha256": "0f65096a3bbc7487441e1d28c70f82aafcb635ce91ddd08e7783b16f6e79dbed"
+        },
+        "confirmed_updates": 1760,
+        "host": "cn21762",
+        "job_id": "2065151",
+        "native": {
+          "bytes": 3882,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_32B64_A\\received\\djob_final.json",
+          "sha256": "713e6a9f626eed37632f8177b5cd356bcf20d22698a63bfa1260c114dcf1f3b7"
+        },
+        "queue_seconds": 3,
+        "state": "SUCCEEDED",
+        "terminal": true,
+        "version": "H2_32B64_A",
+        "workload": "32B64"
+      },
+      {
+        "allocated_seconds": 729,
+        "artifact": {
+          "bytes": 8798433,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_16B64_A\\JOB_2066108_TRANSFER.tgz",
+          "sha256": "a619424ac311515b34c51facc9bd308d371557a86e4345ff5da3272fc0aeb5ce"
+        },
+        "binding": {
+          "bytes": 3318,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_16B64_A\\RUN_BINDING.json",
+          "sha256": "d4a077f042883c16b2218c30ba72c3b68db5fa0d25af05e3055a58de295f0fee"
+        },
+        "charged_updates": 1360,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 2398,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_16B64_A\\received\\job_evidence\\cleanup.json",
+          "sha256": "d892dbc8dfe8441a903bf99a54ec095013c6bb2bf7868c46a04eb9f4f7e7e880"
+        },
+        "confirmed_updates": 1360,
+        "host": "cn21762",
+        "job_id": "2066108",
+        "native": {
+          "bytes": 3877,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_16B64_A\\received\\djob_final.json",
+          "sha256": "d4e5bf3a8d129ed3d9652548b06687f2408f047305a0dcd6bd1682e9a7f24852"
+        },
+        "queue_seconds": 4,
+        "state": "SUCCEEDED",
+        "terminal": true,
+        "version": "H2_16B64_A",
+        "workload": "16B64"
+      },
+      {
+        "allocated_seconds": 1371,
+        "artifact": {
+          "bytes": 7169015,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B32_R23\\JOB_2066185_TRANSFER.tgz",
+          "sha256": "5fbc1108d2d99c368a296e4af3aa743db80bc4d3dcfd501cae3c46e97ee11eee"
+        },
+        "binding": {
+          "bytes": 3422,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B32_R23\\RUN_BINDING.json",
+          "sha256": "a5ee9024aeb67bae29f34691965115cb37aa02865beee4f155990374826573ff"
+        },
+        "charged_updates": 960,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 1816,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B32_R23\\received\\job_evidence\\cleanup.json",
+          "sha256": "3014d1025f76270d76d36251cc71e739ed3498d4dd8aa6e182253e95aa69d747"
+        },
+        "confirmed_updates": 960,
+        "host": "cn22035",
+        "job_id": "2066185",
+        "native": {
+          "bytes": 3817,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B32_R23\\received\\djob_final.json",
+          "sha256": "380dd79b6a2c7ca0363cbb2f42dfc0e0d175c8226b44b9a294f622c90605ea73"
+        },
+        "queue_seconds": 4,
+        "state": "SUCCEEDED",
+        "terminal": true,
+        "version": "H1_32B32_R23",
+        "workload": "32B32"
+      },
+      {
+        "allocated_seconds": 5706,
+        "artifact": {
+          "bytes": 17252716,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B64_A\\JOB_2066391_TRANSFER.tgz",
+          "sha256": "045697dcbc94825d997cf7356829958e70df31ba4a45b0ebffce1b8e26ec5924"
+        },
+        "binding": {
+          "bytes": 3508,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B64_A\\RUN_BINDING.json",
+          "sha256": "682661d4f408ae3b9fb869a7047b8d049c606bcb81187131583759388e2db018"
+        },
+        "charged_updates": 960,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 1851,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B64_A\\received\\job_evidence\\cleanup.json",
+          "sha256": "d599a6ca6bfc29ca503ff224c3e1955f84a97558deaf55d044dc24f992e57b9d"
+        },
+        "confirmed_updates": 960,
+        "host": "cn22035",
+        "job_id": "2066391",
+        "native": {
+          "bytes": 3882,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B64_A\\received\\djob_final.json",
+          "sha256": "9ece017e0613048f7df615c8b9ffc8dbcb6f56dfa5668717d113480b46a93d70"
+        },
+        "queue_seconds": 2,
+        "state": "SUCCEEDED",
+        "terminal": true,
+        "version": "H1_32B64_A",
+        "workload": "32B64"
+      },
+      {
+        "allocated_seconds": 5996,
+        "artifact": {
+          "bytes": 17892265,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B64_R23\\JOB_2067131_TRANSFER.tgz",
+          "sha256": "bf29ebd255f5c44551d385b01d865105786afd0660d4aa0d50d515fe9aa1bb7a"
+        },
+        "binding": {
+          "bytes": 3518,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B64_R23\\RUN_BINDING.json",
+          "sha256": "5082eceda55d0815343aac01cff717808f07e797d09d34b1a5a39e9c6944dce1"
+        },
+        "charged_updates": 960,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 1851,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B64_R23\\received\\job_evidence\\cleanup.json",
+          "sha256": "9632d9bf6be541bb919eb9af0bbd8498dbcb9c8fb287b4b209ce57d7e489d6db"
+        },
+        "confirmed_updates": 960,
+        "host": "cn22035",
+        "job_id": "2067131",
+        "native": {
+          "bytes": 3887,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B64_R23\\received\\djob_final.json",
+          "sha256": "91ad290740fb2428e16f5aed8dc650b8ba30b058e9f77c7050f6d4f451d2d97e"
+        },
+        "queue_seconds": 2,
+        "state": "SUCCEEDED",
+        "terminal": true,
+        "version": "H1_32B64_R23",
+        "workload": "32B64"
+      }
+    ],
+    "authorization_summary": "16域，两台串行，依赖09最终联合数值与安全证据，既定预算内自主执行",
+    "dependency": {
+      "bytes": 7333,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\DEPENDENCY_RECEIPT.json",
+      "sha256": "623300081d6b78453f0f0addf818e203e9c8cd9a71e3336fb7e07d211758ce3c"
+    },
+    "dependency_deadline_utc": "2026-11-09T04:33:20Z",
+    "execution_deadline_utc": "2026-11-10T14:20:01+08:00",
+    "execution_started_utc": "2026-11-08T06:20:01Z",
+    "limits": {
+      "absolute_wall_from_authorization_seconds": 259200,
+      "allocated_seconds": 43200,
+      "cleanup_reserve_per_job_seconds": 120,
+      "dependency_wait_seconds": 86400,
+      "evidence_based_revisions": 2,
+      "execution_wall_seconds": 172800,
+      "job_seconds": 7200,
+      "microprobe_seconds_included": 300,
+      "model_updates": 16000,
+      "model_updates_per_job": 4000,
+      "physical_hosts": 2,
+      "queue_seconds": 86400,
+      "submissions": 10
+    },
+    "model_updates": 10080,
+    "paused_utc": "2026-11-08T12:41:52.2088991+08:00",
+    "queue_seconds": 24,
+    "received_utc": "2026-11-08T04:33:20Z",
+    "resources": {
+      "DDR_limit_MB": 393216,
+      "DDR_request_MB": 393216,
+      "GPU": 0,
+      "HBM_max_MiB_per_domain": 3800,
+      "HBM_max_MiB_total": 60800,
+      "allocated_cpus": 608,
+      "compute_cpus": 576,
+      "domains": 16,
+      "exclusive": true,
+      "reserved_cpus": 32
+    },
+    "revisions": [
+      {
+        "fix": "Only align the binding filename in inspect_metadata.py and recheck_fixed_inputs.py",
+        "job_submitted": false,
+        "reason": "Actual Linux metadata gate still opened legacy M23_RUN_BINDING.json",
+        "source_sha256": "a6dcdd2e560b7e0b737cf5155f65c0e8d6699ea7d3fe3567cc65ed226b730df1",
+        "stderr_sha256": "dea824545e2c6dad3403ad1be4eb24aab0535a0544a045dd36f4d30be27d0f77",
+        "version": "H1_32B32_A"
+      }
+    ],
+    "revisions_used": 1,
+    "status": "CLOSED_ALL_TERMINAL",
+    "task_card_sha256": "92f46f011cd2a90d32bcc1f5b9ee3a0422097480f3fdfc6b548ab8186fc25dc0",
+    "user_authorized": true
+  },
+  "cn22035_B64_wall_planning": {
+    "bytes": 2004,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\B64_WALL_PLANNING.json",
+    "sha256": "5c76ecd5e1f1ae0bb6172b9ba0680fc99ab7de3110a7b64eb2693a239c55193e"
+  },
+  "coverage": {
+    "cn21762": {
+      "16B64": {
+        "failures": [],
+        "functional_status": "PASS_16_OF_16",
+        "repeat_spread_pct": 2.7609884232675297,
+        "round_medians_seconds": [
+          3.624994755,
+          3.6892261365000003,
+          3.58888167
+        ],
+        "rounds": {
+          "1": {
+            "ddr_large_fallback_allocations": 369168,
+            "domains": 16,
+            "job_id": "2066108",
+            "max_domain_hbm_end_MiB": 3800,
+            "max_domain_peak_estimate_MiB": 5650.125,
+            "max_rss_peak_MiB": 1850.125,
+            "max_sum_of_step_end_samples_MiB": 86623.015625,
+            "median_synchronized_step_seconds": 3.624994755,
+            "min_domain_hbm_end_MiB": 3800,
+            "package_sha256": "abecb3de40f1edf0adecebe09671a2c8d980946dd41dd0f23587105b0a59e51e",
+            "slowest_domain": "4",
+            "slowest_pure_total_vs_median_pct": 5.670890616351998,
+            "slowest_rate_reference_x16": 287.56076749250343,
+            "sum_independent_rates": 304.3159058936751,
+            "sum_per_domain_peak_estimates_MiB": 89130.609375,
+            "synchronized_window_seconds": 89.296449222,
+            "synchronized_window_visits_per_second": 229.34842514381114
+          },
+          "2": {
+            "ddr_large_fallback_allocations": 369168,
+            "domains": 16,
+            "job_id": "2066108",
+            "max_domain_hbm_end_MiB": 3800,
+            "max_domain_peak_estimate_MiB": 5678.91015625,
+            "max_rss_peak_MiB": 1878.91015625,
+            "max_sum_of_step_end_samples_MiB": 86934.05078125,
+            "median_synchronized_step_seconds": 3.6892261365000003,
+            "min_domain_hbm_end_MiB": 3800,
+            "package_sha256": "abecb3de40f1edf0adecebe09671a2c8d980946dd41dd0f23587105b0a59e51e",
+            "slowest_domain": "4",
+            "slowest_pure_total_vs_median_pct": 8.636832783825854,
+            "slowest_rate_reference_x16": 278.5211443428523,
+            "sum_independent_rates": 302.8081216372397,
+            "sum_per_domain_peak_estimates_MiB": 89629.2109375,
+            "synchronized_window_seconds": 89.105348052,
+            "synchronized_window_visits_per_second": 229.84030080942284
+          },
+          "3": {
+            "ddr_large_fallback_allocations": 369168,
+            "domains": 16,
+            "job_id": "2066108",
+            "max_domain_hbm_end_MiB": 3800,
+            "max_domain_peak_estimate_MiB": 5729.5703125,
+            "max_rss_peak_MiB": 1929.5703125,
+            "max_sum_of_step_end_samples_MiB": 87461.4296875,
+            "median_synchronized_step_seconds": 3.58888167,
+            "min_domain_hbm_end_MiB": 3800,
+            "package_sha256": "abecb3de40f1edf0adecebe09671a2c8d980946dd41dd0f23587105b0a59e51e",
+            "slowest_domain": "4",
+            "slowest_pure_total_vs_median_pct": 6.70112126557465,
+            "slowest_rate_reference_x16": 286.1241143840342,
+            "sum_independent_rates": 306.2037712312773,
+            "sum_per_domain_peak_estimates_MiB": 89795.8671875,
+            "synchronized_window_seconds": 86.530269961,
+            "synchronized_window_visits_per_second": 236.6801815044669
+          }
+        },
+        "same_allocation_controls": [],
+        "stability_status": "PASS",
+        "strict_jobs": [
+          {
+            "domains": 16,
+            "job_id": "2066108",
+            "max_abs": 0.0,
+            "max_relative_L2": 0.0,
+            "metric_records": 62080
+          }
+        ]
+      },
+      "32B32": {
+        "failures": [],
+        "functional_status": "PASS_16_OF_16",
+        "repeat_spread_pct": 15.36627683775943,
+        "round_medians_seconds": [
+          11.904946033,
+          13.241064622500001,
+          11.370647685000002
+        ],
+        "rounds": {
+          "1": {
+            "ddr_large_fallback_allocations": 0,
+            "domains": 16,
+            "job_id": "2064729",
+            "max_domain_hbm_end_MiB": 2894,
+            "max_domain_peak_estimate_MiB": 3721.8828125,
+            "max_rss_peak_MiB": 827.8828125,
+            "max_sum_of_step_end_samples_MiB": 59450.9609375,
+            "median_synchronized_step_seconds": 11.904946033,
+            "min_domain_hbm_end_MiB": 2894,
+            "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+            "slowest_domain": "4",
+            "slowest_pure_total_vs_median_pct": 12.844659691561278,
+            "slowest_rate_reference_x16": 42.54679959970994,
+            "sum_independent_rates": 47.38784645020672,
+            "sum_per_domain_peak_estimates_MiB": 59513.19921875,
+            "synchronized_window_seconds": 253.405884083,
+            "synchronized_window_visits_per_second": 40.4094799813173
+          },
+          "2": {
+            "ddr_large_fallback_allocations": 0,
+            "domains": 16,
+            "job_id": "2064729",
+            "max_domain_hbm_end_MiB": 2894,
+            "max_domain_peak_estimate_MiB": 3721.79296875,
+            "max_rss_peak_MiB": 827.79296875,
+            "max_sum_of_step_end_samples_MiB": 59444.203125,
+            "median_synchronized_step_seconds": 13.241064622500001,
+            "min_domain_hbm_end_MiB": 2894,
+            "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+            "slowest_domain": "4",
+            "slowest_pure_total_vs_median_pct": 21.526672033723983,
+            "slowest_rate_reference_x16": 38.83226568910271,
+            "sum_independent_rates": 47.40986004748446,
+            "sum_per_domain_peak_estimates_MiB": 59508.203125,
+            "synchronized_window_seconds": 275.565194243,
+            "synchronized_window_visits_per_second": 37.159990499272276
+          },
+          "3": {
+            "ddr_large_fallback_allocations": 0,
+            "domains": 16,
+            "job_id": "2064729",
+            "max_domain_hbm_end_MiB": 2894,
+            "max_domain_peak_estimate_MiB": 3722.921875,
+            "max_rss_peak_MiB": 828.921875,
+            "max_sum_of_step_end_samples_MiB": 59453.91015625,
+            "median_synchronized_step_seconds": 11.370647685000002,
+            "min_domain_hbm_end_MiB": 2894,
+            "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+            "slowest_domain": "4",
+            "slowest_pure_total_vs_median_pct": 1.7971169520369257,
+            "slowest_rate_reference_x16": 45.634524123520954,
+            "sum_independent_rates": 47.19310342347856,
+            "sum_per_domain_peak_estimates_MiB": 59515.91015625,
+            "synchronized_window_seconds": 239.619356782,
+            "synchronized_window_visits_per_second": 42.73444406795611
+          }
+        },
+        "same_allocation_controls": [
+          {
+            "ddr": {
+              "ddr_large_fallback_allocations": 0,
+              "domains": 16,
+              "max_domain_hbm_end_MiB": 0,
+              "max_domain_peak_estimate_MiB": 3614.3828125,
+              "max_rss_peak_MiB": 3614.3828125,
+              "max_sum_of_step_end_samples_MiB": 27535.546875,
+              "median_synchronized_step_seconds": 31.632540482499998,
+              "min_domain_hbm_end_MiB": 0,
+              "slowest_domain": "0",
+              "slowest_pure_total_vs_median_pct": 4.567114840234776,
+              "slowest_rate_reference_x16": 16.201141661955706,
+              "sum_independent_rates": 17.188181357290375,
+              "sum_per_domain_peak_estimates_MiB": 56812.9765625,
+              "synchronized_window_seconds": 642.203110985,
+              "synchronized_window_visits_per_second": 15.945111172529305
+            },
+            "hbm": {
+              "ddr_large_fallback_allocations": 0,
+              "domains": 16,
+              "max_domain_hbm_end_MiB": 2894,
+              "max_domain_peak_estimate_MiB": 3721.8828125,
+              "max_rss_peak_MiB": 827.8828125,
+              "max_sum_of_step_end_samples_MiB": 59450.9609375,
+              "median_synchronized_step_seconds": 11.904946033,
+              "min_domain_hbm_end_MiB": 2894,
+              "slowest_domain": "4",
+              "slowest_pure_total_vs_median_pct": 12.844659691561278,
+              "slowest_rate_reference_x16": 42.54679959970994,
+              "sum_independent_rates": 47.38784645020672,
+              "sum_per_domain_peak_estimates_MiB": 59513.19921875,
+              "synchronized_window_seconds": 253.405884083,
+              "synchronized_window_visits_per_second": 40.4094799813173
+            },
+            "job_id": "2064729",
+            "synchronized_step_time_reduction_pct": 62.36487537386968,
+            "synchronized_window_time_reduction_pct": 60.54116217308096
+          }
+        ],
+        "stability_status": "FAIL_SPREAD_GT_5_PERCENT",
+        "strict_jobs": [
+          {
+            "domains": 16,
+            "job_id": "2064729",
+            "max_abs": 0.0,
+            "max_relative_L2": 0.0,
+            "metric_records": 62080
+          }
+        ]
+      },
+      "32B64": {
+        "failures": [],
+        "functional_status": "PASS_16_OF_16",
+        "repeat_spread_pct": 9.300604151761247,
+        "round_medians_seconds": [
+          26.1910693775,
+          28.1823664545,
+          25.699930833
+        ],
+        "rounds": {
+          "1": {
+            "ddr_large_fallback_allocations": 373952,
+            "domains": 16,
+            "job_id": "2065151",
+            "max_domain_hbm_end_MiB": 3800,
+            "max_domain_peak_estimate_MiB": 5788.7578125,
+            "max_rss_peak_MiB": 1988.7578125,
+            "max_sum_of_step_end_samples_MiB": 81341.83203125,
+            "median_synchronized_step_seconds": 26.1910693775,
+            "min_domain_hbm_end_MiB": 3800,
+            "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+            "slowest_domain": "4",
+            "slowest_pure_total_vs_median_pct": 11.731574357800767,
+            "slowest_rate_reference_x16": 39.06777811771807,
+            "sum_independent_rates": 43.24769209200822,
+            "sum_per_domain_peak_estimates_MiB": 92536.67578125,
+            "synchronized_window_seconds": 539.237360461,
+            "synchronized_window_visits_per_second": 37.97956429148645
+          },
+          "2": {
+            "ddr_large_fallback_allocations": 373952,
+            "domains": 16,
+            "job_id": "2065151",
+            "max_domain_hbm_end_MiB": 3800,
+            "max_domain_peak_estimate_MiB": 5784.7734375,
+            "max_rss_peak_MiB": 1984.7734375,
+            "max_sum_of_step_end_samples_MiB": 81299.8125,
+            "median_synchronized_step_seconds": 28.1823664545,
+            "min_domain_hbm_end_MiB": 3800,
+            "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+            "slowest_domain": "4",
+            "slowest_pure_total_vs_median_pct": 17.78373275888527,
+            "slowest_rate_reference_x16": 36.65028073443348,
+            "sum_independent_rates": 43.335917237169205,
+            "sum_per_domain_peak_estimates_MiB": 92506.03515625,
+            "synchronized_window_seconds": 571.132986443,
+            "synchronized_window_visits_per_second": 35.858548685042436
+          },
+          "3": {
+            "ddr_large_fallback_allocations": 373952,
+            "domains": 16,
+            "job_id": "2065151",
+            "max_domain_hbm_end_MiB": 3800,
+            "max_domain_peak_estimate_MiB": 5783.59375,
+            "max_rss_peak_MiB": 1983.59375,
+            "max_sum_of_step_end_samples_MiB": 81299.2734375,
+            "median_synchronized_step_seconds": 25.699930833,
+            "min_domain_hbm_end_MiB": 3800,
+            "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+            "slowest_domain": "4",
+            "slowest_pure_total_vs_median_pct": 9.636720070624438,
+            "slowest_rate_reference_x16": 39.48236877283738,
+            "sum_independent_rates": 43.330812606618295,
+            "sum_per_domain_peak_estimates_MiB": 92495.796875,
+            "synchronized_window_seconds": 531.824163739,
+            "synchronized_window_visits_per_second": 38.508968558357644
+          }
+        },
+        "same_allocation_controls": [
+          {
+            "ddr": {
+              "ddr_large_fallback_allocations": 0,
+              "domains": 16,
+              "max_domain_hbm_end_MiB": 0,
+              "max_domain_peak_estimate_MiB": 5677.94921875,
+              "max_rss_peak_MiB": 5677.94921875,
+              "max_sum_of_step_end_samples_MiB": 29089.59375,
+              "median_synchronized_step_seconds": 61.2054594155,
+              "min_domain_hbm_end_MiB": 0,
+              "slowest_domain": "4",
+              "slowest_pure_total_vs_median_pct": 1.3224865977494282,
+              "slowest_rate_reference_x16": 16.80892540392925,
+              "sum_independent_rates": 17.054819482390723,
+              "sum_per_domain_peak_estimates_MiB": 88976.70703125,
+              "synchronized_window_seconds": 1231.529713464,
+              "synchronized_window_visits_per_second": 16.629724623041888
+            },
+            "hbm": {
+              "ddr_large_fallback_allocations": 373952,
+              "domains": 16,
+              "max_domain_hbm_end_MiB": 3800,
+              "max_domain_peak_estimate_MiB": 5788.7578125,
+              "max_rss_peak_MiB": 1988.7578125,
+              "max_sum_of_step_end_samples_MiB": 81341.83203125,
+              "median_synchronized_step_seconds": 26.1910693775,
+              "min_domain_hbm_end_MiB": 3800,
+              "slowest_domain": "4",
+              "slowest_pure_total_vs_median_pct": 11.731574357800767,
+              "slowest_rate_reference_x16": 39.06777811771807,
+              "sum_independent_rates": 43.24769209200822,
+              "sum_per_domain_peak_estimates_MiB": 92536.67578125,
+              "synchronized_window_seconds": 539.237360461,
+              "synchronized_window_visits_per_second": 37.97956429148645
+            },
+            "job_id": "2065151",
+            "synchronized_step_time_reduction_pct": 57.20795231729405,
+            "synchronized_window_time_reduction_pct": 56.214019477917944
+          }
+        ],
+        "stability_status": "FAIL_SPREAD_GT_5_PERCENT",
+        "strict_jobs": [
+          {
+            "domains": 16,
+            "job_id": "2065151",
+            "max_abs": 0.0,
+            "max_relative_L2": 0.0,
+            "metric_records": 62080
+          }
+        ]
+      }
+    },
+    "cn22035": {
+      "16B64": {
+        "failures": [],
+        "functional_status": "PASS_16_OF_16",
+        "repeat_spread_pct": 28.6293773086725,
+        "round_medians_seconds": [
+          8.532695396000001,
+          10.232301893,
+          7.706129017
+        ],
+        "rounds": {
+          "1": {
+            "ddr_large_fallback_allocations": 369168,
+            "domains": 16,
+            "job_id": "2064626",
+            "max_domain_hbm_end_MiB": 3800,
+            "max_domain_peak_estimate_MiB": 5704.84765625,
+            "max_rss_peak_MiB": 1904.84765625,
+            "max_sum_of_step_end_samples_MiB": 86729.1953125,
+            "median_synchronized_step_seconds": 8.532695396000001,
+            "min_domain_hbm_end_MiB": 3800,
+            "package_sha256": "abecb3de40f1edf0adecebe09671a2c8d980946dd41dd0f23587105b0a59e51e",
+            "slowest_domain": "12",
+            "slowest_pure_total_vs_median_pct": 133.04946863482883,
+            "slowest_rate_reference_x16": 126.8118387640686,
+            "sum_independent_rates": 288.55483829647386,
+            "sum_per_domain_peak_estimates_MiB": 89286.21875,
+            "synchronized_window_seconds": 176.526177842,
+            "synchronized_window_visits_per_second": 116.01678714377792
+          },
+          "2": {
+            "ddr_large_fallback_allocations": 369168,
+            "domains": 16,
+            "job_id": "2064626",
+            "max_domain_hbm_end_MiB": 3800,
+            "max_domain_peak_estimate_MiB": 5674.6875,
+            "max_rss_peak_MiB": 1874.6875,
+            "max_sum_of_step_end_samples_MiB": 86795.77734375,
+            "median_synchronized_step_seconds": 10.232301893,
+            "min_domain_hbm_end_MiB": 3800,
+            "package_sha256": "abecb3de40f1edf0adecebe09671a2c8d980946dd41dd0f23587105b0a59e51e",
+            "slowest_domain": "12",
+            "slowest_pure_total_vs_median_pct": 223.43259120836504,
+            "slowest_rate_reference_x16": 93.64016290957123,
+            "sum_independent_rates": 289.39749121336365,
+            "sum_per_domain_peak_estimates_MiB": 89717.67578125,
+            "synchronized_window_seconds": 230.476271014,
+            "synchronized_window_visits_per_second": 88.85947308109635
+          },
+          "3": {
+            "ddr_large_fallback_allocations": 369168,
+            "domains": 16,
+            "job_id": "2064626",
+            "max_domain_hbm_end_MiB": 3800,
+            "max_domain_peak_estimate_MiB": 5714.8671875,
+            "max_rss_peak_MiB": 1914.8671875,
+            "max_sum_of_step_end_samples_MiB": 86819.5703125,
+            "median_synchronized_step_seconds": 7.706129017,
+            "min_domain_hbm_end_MiB": 3800,
+            "package_sha256": "abecb3de40f1edf0adecebe09671a2c8d980946dd41dd0f23587105b0a59e51e",
+            "slowest_domain": "12",
+            "slowest_pure_total_vs_median_pct": 116.50904957105533,
+            "slowest_rate_reference_x16": 138.82625250059002,
+            "sum_independent_rates": 289.08085837110343,
+            "sum_per_domain_peak_estimates_MiB": 89433.45703125,
+            "synchronized_window_seconds": 160.710226075,
+            "synchronized_window_visits_per_second": 127.43433009945754
+          }
+        },
+        "same_allocation_controls": [],
+        "stability_status": "FAIL_SPREAD_GT_5_PERCENT",
+        "strict_jobs": [
+          {
+            "domains": 16,
+            "job_id": "2064626",
+            "max_abs": 0.0,
+            "max_relative_L2": 0.0,
+            "metric_records": 62080
+          }
+        ]
+      },
+      "32B32": {
+        "failures": [],
+        "functional_status": "PASS_16_OF_16",
+        "repeat_spread_pct": 205.02324352807673,
+        "round_medians_seconds": [
+          89.46395816649999,
+          11.9637132905,
+          11.974463163
+        ],
+        "rounds": {
+          "1": {
+            "ddr_large_fallback_allocations": 0,
+            "domains": 16,
+            "job_id": "2064138",
+            "max_domain_hbm_end_MiB": 2894,
+            "max_domain_peak_estimate_MiB": 3723.5859375,
+            "max_rss_peak_MiB": 829.5859375,
+            "max_sum_of_step_end_samples_MiB": 59456.65234375,
+            "median_synchronized_step_seconds": 89.46395816649999,
+            "min_domain_hbm_end_MiB": 2894,
+            "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+            "slowest_domain": "12",
+            "slowest_pure_total_vs_median_pct": 700.6265638394193,
+            "slowest_rate_reference_x16": 6.008685202134795,
+            "sum_independent_rates": 44.94903018118547,
+            "sum_per_domain_peak_estimates_MiB": 59520.65234375,
+            "synchronized_window_seconds": 1716.508354844,
+            "synchronized_window_visits_per_second": 5.96559869405974
+          },
+          "2": {
+            "ddr_large_fallback_allocations": 0,
+            "domains": 16,
+            "job_id": "2066185",
+            "max_domain_hbm_end_MiB": 2894,
+            "max_domain_peak_estimate_MiB": 3722.49609375,
+            "max_rss_peak_MiB": 828.49609375,
+            "max_sum_of_step_end_samples_MiB": 59453.359375,
+            "median_synchronized_step_seconds": 11.9637132905,
+            "min_domain_hbm_end_MiB": 2894,
+            "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+            "slowest_domain": "8",
+            "slowest_pure_total_vs_median_pct": 30.2649501778391,
+            "slowest_rate_reference_x16": 35.80402604316198,
+            "sum_independent_rates": 45.99552512764406,
+            "sum_per_domain_peak_estimates_MiB": 59517.359375,
+            "synchronized_window_seconds": 314.967751039,
+            "synchronized_window_visits_per_second": 32.51126493496809
+          },
+          "3": {
+            "ddr_large_fallback_allocations": 0,
+            "domains": 16,
+            "job_id": "2066185",
+            "max_domain_hbm_end_MiB": 2894,
+            "max_domain_peak_estimate_MiB": 3721.59765625,
+            "max_rss_peak_MiB": 827.59765625,
+            "max_sum_of_step_end_samples_MiB": 59449.58984375,
+            "median_synchronized_step_seconds": 11.974463163,
+            "min_domain_hbm_end_MiB": 2894,
+            "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+            "slowest_domain": "12",
+            "slowest_pure_total_vs_median_pct": 51.24769926086545,
+            "slowest_rate_reference_x16": 31.126106186474797,
+            "sum_independent_rates": 45.48172311904814,
+            "sum_per_domain_peak_estimates_MiB": 59513.12890625,
+            "synchronized_window_seconds": 372.249369704,
+            "synchronized_window_visits_per_second": 27.508441473366357
+          }
+        },
+        "same_allocation_controls": [
+          {
+            "ddr": {
+              "ddr_large_fallback_allocations": 0,
+              "domains": 16,
+              "max_domain_hbm_end_MiB": 0,
+              "max_domain_peak_estimate_MiB": 3629.8046875,
+              "max_rss_peak_MiB": 3629.8046875,
+              "max_sum_of_step_end_samples_MiB": 26545.0390625,
+              "median_synchronized_step_seconds": 33.752884581,
+              "min_domain_hbm_end_MiB": 0,
+              "slowest_domain": "12",
+              "slowest_pure_total_vs_median_pct": 68.34337105602049,
+              "slowest_rate_reference_x16": 10.144575887212444,
+              "sum_independent_rates": 16.896712915676954,
+              "sum_per_domain_peak_estimates_MiB": 56500.93359375,
+              "synchronized_window_seconds": 1021.303393848,
+              "synchronized_window_visits_per_second": 10.026403575746869
+            },
+            "hbm": {
+              "ddr_large_fallback_allocations": 0,
+              "domains": 16,
+              "max_domain_hbm_end_MiB": 2894,
+              "max_domain_peak_estimate_MiB": 3723.5859375,
+              "max_rss_peak_MiB": 829.5859375,
+              "max_sum_of_step_end_samples_MiB": 59456.65234375,
+              "median_synchronized_step_seconds": 89.46395816649999,
+              "min_domain_hbm_end_MiB": 2894,
+              "slowest_domain": "12",
+              "slowest_pure_total_vs_median_pct": 700.6265638394193,
+              "slowest_rate_reference_x16": 6.008685202134795,
+              "sum_independent_rates": 44.94903018118547,
+              "sum_per_domain_peak_estimates_MiB": 59520.65234375,
+              "synchronized_window_seconds": 1716.508354844,
+              "synchronized_window_visits_per_second": 5.96559869405974
+            },
+            "job_id": "2064138",
+            "synchronized_step_time_reduction_pct": -165.05574050065212,
+            "synchronized_window_time_reduction_pct": -68.0703662774146
+          }
+        ],
+        "stability_status": "FAIL_SPREAD_GT_5_PERCENT",
+        "strict_jobs": [
+          {
+            "domains": 16,
+            "job_id": "2064138",
+            "max_abs": 0.0,
+            "max_relative_L2": 0.0,
+            "metric_records": 62080
+          },
+          {
+            "domains": 16,
+            "job_id": "2066185",
+            "max_abs": 0.0,
+            "max_relative_L2": 0.0,
+            "metric_records": 62080
+          }
+        ]
+      },
+      "32B64": {
+        "failures": [],
+        "functional_status": "PASS_16_OF_16",
+        "repeat_spread_pct": 178.53138058125649,
+        "round_medians_seconds": [
+          27.807779656,
+          28.302078821499997,
+          151.14771603449998
+        ],
+        "rounds": {
+          "1": {
+            "ddr_large_fallback_allocations": 373952,
+            "domains": 16,
+            "job_id": "2066391",
+            "max_domain_hbm_end_MiB": 3800,
+            "max_domain_peak_estimate_MiB": 5785.41015625,
+            "max_rss_peak_MiB": 1985.41015625,
+            "max_sum_of_step_end_samples_MiB": 81317.73828125,
+            "median_synchronized_step_seconds": 27.807779656,
+            "min_domain_hbm_end_MiB": 3800,
+            "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+            "slowest_domain": "12",
+            "slowest_pure_total_vs_median_pct": 251.52969167753093,
+            "slowest_rate_reference_x16": 12.416167448792677,
+            "sum_independent_rates": 41.341483683182275,
+            "sum_per_domain_peak_estimates_MiB": 92520.91015625,
+            "synchronized_window_seconds": 1673.717981286,
+            "synchronized_window_visits_per_second": 12.236231090893943
+          },
+          "2": {
+            "ddr_large_fallback_allocations": 373952,
+            "domains": 16,
+            "job_id": "2067131",
+            "max_domain_hbm_end_MiB": 3800,
+            "max_domain_peak_estimate_MiB": 5785.09375,
+            "max_rss_peak_MiB": 1985.09375,
+            "max_sum_of_step_end_samples_MiB": 81304.8203125,
+            "median_synchronized_step_seconds": 28.302078821499997,
+            "min_domain_hbm_end_MiB": 3800,
+            "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+            "slowest_domain": "12",
+            "slowest_pure_total_vs_median_pct": 70.54368549635721,
+            "slowest_rate_reference_x16": 25.587557857701196,
+            "sum_independent_rates": 41.9866313178825,
+            "sum_per_domain_peak_estimates_MiB": 92502.16796875,
+            "synchronized_window_seconds": 879.411182838,
+            "synchronized_window_visits_per_second": 23.288309723226146
+          },
+          "3": {
+            "ddr_large_fallback_allocations": 373952,
+            "domains": 16,
+            "job_id": "2067131",
+            "max_domain_hbm_end_MiB": 3800,
+            "max_domain_peak_estimate_MiB": 5785.16015625,
+            "max_rss_peak_MiB": 1985.16015625,
+            "max_sum_of_step_end_samples_MiB": 81293.515625,
+            "median_synchronized_step_seconds": 151.14771603449998,
+            "min_domain_hbm_end_MiB": 3800,
+            "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+            "slowest_domain": "12",
+            "slowest_pure_total_vs_median_pct": 454.73939472646225,
+            "slowest_rate_reference_x16": 7.811481736781009,
+            "sum_independent_rates": 41.07746873542871,
+            "sum_per_domain_peak_estimates_MiB": 92495.015625,
+            "synchronized_window_seconds": 2666.378312273,
+            "synchronized_window_visits_per_second": 7.680830550463588
+          }
+        },
+        "same_allocation_controls": [
+          {
+            "ddr": {
+              "ddr_large_fallback_allocations": 0,
+              "domains": 16,
+              "max_domain_hbm_end_MiB": 0,
+              "max_domain_peak_estimate_MiB": 5651.69140625,
+              "max_rss_peak_MiB": 5651.69140625,
+              "max_sum_of_step_end_samples_MiB": 28717.78125,
+              "median_synchronized_step_seconds": 64.523695484,
+              "min_domain_hbm_end_MiB": 0,
+              "slowest_domain": "12",
+              "slowest_pure_total_vs_median_pct": 28.650655421415095,
+              "slowest_rate_reference_x16": 13.330407077685068,
+              "sum_independent_rates": 17.069574020099928,
+              "sum_per_domain_peak_estimates_MiB": 88436.2265625,
+              "synchronized_window_seconds": 1550.7318557,
+              "synchronized_window_visits_per_second": 13.206667500072301
+            },
+            "hbm": {
+              "ddr_large_fallback_allocations": 373952,
+              "domains": 16,
+              "max_domain_hbm_end_MiB": 3800,
+              "max_domain_peak_estimate_MiB": 5785.41015625,
+              "max_rss_peak_MiB": 1985.41015625,
+              "max_sum_of_step_end_samples_MiB": 81317.73828125,
+              "median_synchronized_step_seconds": 27.807779656,
+              "min_domain_hbm_end_MiB": 3800,
+              "slowest_domain": "12",
+              "slowest_pure_total_vs_median_pct": 251.52969167753093,
+              "slowest_rate_reference_x16": 12.416167448792677,
+              "sum_independent_rates": 41.341483683182275,
+              "sum_per_domain_peak_estimates_MiB": 92520.91015625,
+              "synchronized_window_seconds": 1673.717981286,
+              "synchronized_window_visits_per_second": 12.236231090893943
+            },
+            "job_id": "2066391",
+            "synchronized_step_time_reduction_pct": 56.902995949921184,
+            "synchronized_window_time_reduction_pct": -7.930844080744315
+          }
+        ],
+        "stability_status": "FAIL_SPREAD_GT_5_PERCENT",
+        "strict_jobs": [
+          {
+            "domains": 16,
+            "job_id": "2066391",
+            "max_abs": 0.0,
+            "max_relative_L2": 0.0,
+            "metric_records": 62080
+          },
+          {
+            "domains": 16,
+            "job_id": "2067131",
+            "max_abs": 0.0,
+            "max_relative_L2": 0.0,
+            "metric_records": 62080
+          }
+        ]
+      }
+    }
+  },
+  "dependency": {
+    "bytes": 7333,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\DEPENDENCY_RECEIPT.json",
+    "sha256": "623300081d6b78453f0f0addf818e203e9c8cd9a71e3336fb7e07d211758ce3c"
+  },
+  "dependency_09_stability": {
+    "gate_pct": 5,
+    "spread_pct": 5.4363842683,
+    "stable_speed_adopted": false
+  },
+  "generated_utc": "2026-11-08T14:13:56.140050+00:00",
+  "hosts": [
+    "cn21762",
+    "cn22035"
+  ],
+  "job_results": {
+    "2064138": {
+      "bytes": 88087,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B32_B\\ANALYSIS.json",
+      "sha256": "73f4279c0d9da405303590d00a37b5fcb50763bc34940c62fab64b22b3bdd27e"
+    },
+    "2064626": {
+      "bytes": 131190,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_16B64_A\\ANALYSIS.json",
+      "sha256": "85c9208d33c7057316b90ffefa637db78e6de606247ad0be2891942a9ba0d6a3"
+    },
+    "2064729": {
+      "bytes": 163459,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_32B32_A\\ANALYSIS.json",
+      "sha256": "6416f0a7ac932b0ef75c7bb21fbfd68001c0cf53f9cd69988f9d60bd10da7b47"
+    },
+    "2065151": {
+      "bytes": 163881,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_32B64_A\\ANALYSIS.json",
+      "sha256": "04ab87145853c2c3e38a896aab3ebfc388df1db6f45ab40ad0e9fea6f0bcbd56"
+    },
+    "2066108": {
+      "bytes": 131218,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_16B64_A\\ANALYSIS.json",
+      "sha256": "d4cc55fb26ef1c032c18686795082bc3d5f85c5dc02b1b8484bdf5f68d94e794"
+    },
+    "2066185": {
+      "bytes": 94145,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B32_R23\\ANALYSIS.json",
+      "sha256": "dbe5667a5d93e78d91ff607d9e17ceb5554fa44090a70696a47a870514868f74"
+    },
+    "2066391": {
+      "bytes": 88117,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B64_A\\ANALYSIS.json",
+      "sha256": "46e38f9e66909e0a017038434371e21cfc9e2ec9bc6334a07b596e044847165e"
+    },
+    "2067131": {
+      "bytes": 94469,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_32B64_R23\\ANALYSIS.json",
+      "sha256": "53bc3e338d45d87802cfa42af80f002a0512ea1c2cbfbaf1898b1db8d93ba9e0"
+    }
+  },
+  "measurement_limits": [
+    "Per-domain ordinary RSS high-water plus step-end HBM is an estimate, not a synchronized joint peak.",
+    "Sum of step-end samples can have different timestamp per domain within a step.",
+    "One DDR pairing per configuration is a point comparison, not three-pair speed acceptance."
+  ],
+  "model_frame_visits": 527360,
+  "recorded_exit_diagnostics": [
+    {
+      "OOM_explicit": false,
+      "SIGBUS": false,
+      "SIGKILL": false,
+      "job_id": "2064138"
+    },
+    {
+      "OOM_explicit": false,
+      "SIGBUS": false,
+      "SIGKILL": false,
+      "job_id": "2064626"
+    },
+    {
+      "OOM_explicit": false,
+      "SIGBUS": false,
+      "SIGKILL": false,
+      "job_id": "2064729"
+    },
+    {
+      "OOM_explicit": false,
+      "SIGBUS": false,
+      "SIGKILL": false,
+      "job_id": "2065151"
+    },
+    {
+      "OOM_explicit": false,
+      "SIGBUS": false,
+      "SIGKILL": false,
+      "job_id": "2066108"
+    },
+    {
+      "OOM_explicit": false,
+      "SIGBUS": false,
+      "SIGKILL": false,
+      "job_id": "2066185"
+    },
+    {
+      "OOM_explicit": false,
+      "SIGBUS": false,
+      "SIGKILL": false,
+      "job_id": "2066391"
+    },
+    {
+      "OOM_explicit": false,
+      "SIGBUS": false,
+      "SIGKILL": false,
+      "job_id": "2067131"
+    }
+  ],
+  "status": "COMPLETED_18_ROUNDS_STABILITY_PER_HOST",
+  "summary": {
+    "bytes": 9273,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\SUMMARY.md",
+    "sha256": "fd468b3be06f11621efbed78bf48b2843a7f61a74adaad5f974f3b67d635ba35"
+  }
+}

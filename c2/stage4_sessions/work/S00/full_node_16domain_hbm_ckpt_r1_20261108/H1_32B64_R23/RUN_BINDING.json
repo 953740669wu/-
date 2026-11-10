@@ -1,0 +1,102 @@
+{
+  "allocation_contract": {
+    "DDR_limit_MB": 393216,
+    "DDR_request_MB": 393216,
+    "GPU": 0,
+    "HBM_max_MiB_per_domain": 3800,
+    "HBM_max_MiB_total": 60800,
+    "allocated_cpus": 608,
+    "compute_cpus": 576,
+    "domains": 16,
+    "exclusive": true,
+    "reserved_cpus": 32
+  },
+  "allocator_origin": "/home/share/dengqingtian/opt/stage4_sessions/M23_MEMORY_HBM/ubsan_hbm_continue_20261108/HBM_R1_20261107T170010Z/s03/build/libhbm_alloc_s03_round2.so",
+  "allocator_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+  "batch_deadline_utc": "2026-11-10T14:20:01+08:00",
+  "batch_size": 64,
+  "candidate_sha256": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+  "checkpoint_layers": 12,
+  "ddr_perf_control": false,
+  "dependency": {
+    "bytes": 7333,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\DEPENDENCY_RECEIPT.json",
+    "sha256": "623300081d6b78453f0f0addf818e203e9c8cd9a71e3336fb7e07d211758ce3c"
+  },
+  "descriptor_sha256": "2d9ef2f224a7b2f2fb2848c4ec39274fe9466ab2f2aaef4757bc35608e1ebe4a",
+  "domain_count": 16,
+  "electrodes": 32,
+  "eligible_hosts": [
+    "cn22035"
+  ],
+  "excluded_hosts": [
+    "cn21341",
+    "cn21762"
+  ],
+  "existing_16e_validation_reference": {
+    "bytes": 297748,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\M23_MEMORY_HBM\\ubsan_hbm_continue_20261108\\HBM_CONTINUE_RESULT.json",
+    "sha256": "c2c4ada68d2c0dac0113eb34225899901295d62a711ed12f4634d904cb86e485"
+  },
+  "first_hbm_round": 2,
+  "fixed_input_status": "FIXED32_CURRENT_SOURCE_SHA_PASS",
+  "frozen_sidecars": {
+    "B64_SAMPLE_PLAN.json": "696a6a166d6c69978452f62db78c28c10d9745ffb36da119670c86cdbdd926ba",
+    "DEPENDENCY_RECEIPT.json": "623300081d6b78453f0f0addf818e203e9c8cd9a71e3336fb7e07d211758ce3c",
+    "ENGINEERING_DESCRIPTOR.json": "2d9ef2f224a7b2f2fb2848c4ec39274fe9466ab2f2aaef4757bc35608e1ebe4a",
+    "PRIOR_PAIRING.json": "ff390e832df6dde669c3c181e01e5e413a53a1515e3e858ef1cec8bcea9bc164"
+  },
+  "hbm_cap_MiB": 3800,
+  "hbm_rounds_max": 2,
+  "max_model_updates": 960,
+  "mode": "full_node_hbm_ckpt",
+  "native_argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn22035 !cn21341 !cn21762",
+    "-R",
+    "cpu=608,mem=393216MB",
+    "-RL",
+    "mem=393216MB",
+    "-a",
+    "numa[count=16,distribution=pack]",
+    "-T",
+    "7200",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/FULL16_R1_H1_32B64_R23",
+    "-oo",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/FULL16_R1_H1_32B64_R23/job.log",
+    "bash",
+    "/home/share/dengqingtian/opt/stage4_sessions/S00/FULL16_R1_H1_32B64_R23/run_job.sh",
+    "BINDING_SHA256"
+  ],
+  "numerical": {
+    "denominator_floor": 1e-12,
+    "near_zero_norm": 1e-08,
+    "relative_L2": 2e-06,
+    "state_abs": 2e-06,
+    "strict_steps": 5,
+    "tensor_abs": 2e-05
+  },
+  "package_sha256": "904def960f2c08be24539f2bd978fce3f814bf78bc54e3cbaada3dd846b0fc28",
+  "remaining_queue_seconds": 86378,
+  "remote_root": "/home/share/dengqingtian/opt/stage4_sessions/S00/FULL16_R1_H1_32B64_R23",
+  "source_manifest_sha256": "02a243c02bdaed4b25cba7d87cb88874c9b5f5fc3eb1faa113c7b38ef625aef8",
+  "stability": {
+    "rounds": 3,
+    "spread_pct": 5
+  },
+  "strict_storage_min_bytes": 94489280512,
+  "submission_ordinal": 8,
+  "user_authorized": true,
+  "version": "H1_32B64_R23",
+  "wall_seconds": 7200,
+  "workload": "32B64"
+}

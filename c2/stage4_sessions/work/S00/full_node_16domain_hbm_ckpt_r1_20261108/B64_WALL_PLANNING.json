@@ -1,0 +1,52 @@
+{
+  "scope": "Planning estimate from actual worker phase envelopes, not a measurement or numerical acceptance on cn22035 B64.",
+  "phase_wall_seconds": {
+    "H1_32B32_B": {
+      "perf_baseline": 1335.584257525,
+      "perf_candidate_r1": 2170.191253376,
+      "strict_baseline": 392.555425049,
+      "strict_candidate": 830.716556185
+    },
+    "H2_32B32_A": {
+      "perf_baseline": 844.207632427,
+      "perf_candidate_r1": 351.579410579,
+      "perf_candidate_r2": 380.182069029,
+      "perf_candidate_r3": 335.117338045,
+      "strict_baseline": 231.107529913,
+      "strict_candidate": 193.844019814
+    },
+    "H2_32B64_A": {
+      "perf_baseline": 1576.112515603,
+      "perf_candidate_r1": 709.772806558,
+      "perf_candidate_r2": 749.593259447,
+      "perf_candidate_r3": 699.672300402,
+      "strict_baseline": 383.129095482,
+      "strict_candidate": 302.499726618
+    }
+  },
+  "same_cn21762_B64_to_B32_ratios": {
+    "perf_baseline": 1.8669725966251425,
+    "perf_candidate_r1": 2.0188122091367857,
+    "perf_candidate_r2": 1.971669156731907,
+    "perf_candidate_r3": 2.087842737363971,
+    "strict_baseline": 1.6577958131707273,
+    "strict_candidate": 1.5605316424425106
+  },
+  "projected_cn22035_32B64_perf_pair_seconds": 7024.517256335008,
+  "projected_strict_seconds": 1947.1362119112518,
+  "job_seconds": 7200,
+  "minimum_cleanup_seconds": 120,
+  "reassessment": {
+    "basis_job": "2066185",
+    "latest_B32_phase_seconds": {
+      "perf_candidate_r2": 418.269554558,
+      "perf_candidate_r3": 469.105209,
+      "strict_baseline": 240.132458721,
+      "strict_candidate": 224.069280247
+    },
+    "projected_full_pair_and_strict_plus_120s": 4340.674899552198,
+    "projected_three_HBM_rounds_and_full_DDR_strict_plus_120s": 6299.510706892714,
+    "original_slow_round_retained": true,
+    "decision": "Submit bounded full same-allocation B64 on cn22035 with original gates and optional remaining rounds only if time fits."
+  }
+}
