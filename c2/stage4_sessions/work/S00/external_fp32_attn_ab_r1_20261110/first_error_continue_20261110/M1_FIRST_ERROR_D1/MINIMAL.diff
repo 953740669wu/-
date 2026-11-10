@@ -1,0 +1,240 @@
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -104,7 +104,9 @@
+ 
+ def run(args, result):
+     strict = args.phase == "strict"
+-    planned = 5 if strict else 25
++    if not strict:
++        raise ValueError("diagnostic permits only the first strict update")
++    planned = 1
+     batch = int(os.environ["S00_BATCH"])
+     ckpt_layers = int(os.environ["S00_MATCHED_CKPT"])
+     if batch not in (32,64) or ckpt_layers != 12:
+@@ -213,10 +215,12 @@
+         if json.loads((ref_dir / "PAIRING.json").read_bytes()) != pairing:
+             raise ValueError("same-job 32E frame/mask/model pairing differs")
+         reference_steps = [json.loads(line) for line in (ref_dir/"steps.jsonl").read_bytes().splitlines()]
+-        if len(reference_steps) != 5:
++        if len(reference_steps) != planned:
+             raise ValueError("frozen DDR strict reference incomplete")
+     result["pairing_sha256"] = hashlib.sha256(json.dumps(pairing,sort_keys=True).encode()).hexdigest()
+     enable_checkpoint(models[args.variant])
++    from first_error_trace import FirstErrorTrace
++    trace = FirstErrorTrace(args, result, models[args.variant])
+     result["checkpoint_layers"] = ckpt_layers
+     residency(args.output, "initialized")
+     with (args.output / "steps.jsonl").open("x") as log:
+@@ -305,8 +309,7 @@
+                 log.write(json.dumps(row) + "\n")
+             log.flush()
+             if strict:
+-                strict_evidence(torch, accepted, args, result, step, models[args.variant], opts[args.variant],
+-                                initial, captures[args.variant], losses[args.variant], values[args.variant])
++                trace.finish(result, captures[args.variant], accepted)
+             ledger.confirm(step)
+             result["completed_updates"] = step
+     if not strict:
+@@ -322,7 +325,7 @@
+     runtime_check(runtime, hbm, attention)
+     cpu36_guard.checkpoint(guard, "publish", torch, namespace_probe)
+     if strict:
+-        result["status"] = "PASS_STRICT_REFERENCE5" if args.variant == "baseline" else "PASS_STRICT_ENCODER5"
++        result["status"] = "PASS_STRICT_REFERENCE1_DIAGNOSTIC" if args.variant == "baseline" else "DIAGNOSTIC_FIRST_STEP_OBSERVED"
+     else:
+         result["status"] = "PASS_PERF25"
+ 
+--- a/launch.py
++++ b/launch.py
+@@ -222,7 +222,7 @@
+                 samples.write(json.dumps(sample(proc, contracts)) + "\n")
+                 samples.flush()
+                 sampled_at = now
+-            if step <= (5 if name == "strict" else 26):
++            if step == 1:
+                 ready = {n:barriers / f"{step}.node{n}.ready" for n in proc}
+                 if all(p.is_file() for p in ready.values()):
+                     arrivals = {n:read(p) for n,p in ready.items()}
+@@ -235,11 +235,11 @@
+                          release_at_ns=time.monotonic_ns()+100_000_000))
+                     step += 1
+             time.sleep(.02)
+-    need(step == (6 if name == "strict" else 27), "incomplete full-node rendezvous")
++    need(step == 2, "incomplete first-step rendezvous")
+     results = [read(out / f"node{n}" / "result.json") for n in contracts]
+     expected, updates = ("PASS_PERF25",25)
+     if name == "strict":
+-        expected, updates = ("PASS_STRICT_REFERENCE5" if variant == "baseline" else "PASS_STRICT_ENCODER5", 5)
++        expected, updates = ("PASS_STRICT_REFERENCE1_DIAGNOSTIC" if variant == "baseline" else "DIAGNOSTIC_FIRST_STEP_OBSERVED", 1)
+     need(all(r["status"] == expected and r["completed_updates"] == updates and r["job_id"] == os.environ["CCS_JOB_ID"]
+              and r["host"] == os.uname().nodename and r["variant"] == variant for r in results), "actual result receipts required")
+     save(out / "phase_receipt.json", dict(status=expected, job_id=os.environ["CCS_JOB_ID"],
+@@ -247,7 +247,7 @@
+ 
+ 
+ def dispose_snapshots():
+-    paths = sorted((EVIDENCE / "strict_baseline").glob("node*/strict_step*.pt"))
++    paths = sorted((EVIDENCE / "strict_baseline").glob("node*/*.pt"))
+     if paths:
+         save(EVIDENCE / "strict_snapshot_cleanup.json", dict(deleted=[str(p.relative_to(EVIDENCE)) for p in paths],
+              bytes=sum(p.stat().st_size for p in paths)))
+@@ -298,7 +298,8 @@
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        need(120 < wall <= 7200 and binding["mode"] == "external_fp32_attn_ab", "wrong wall or mode")
++        need(120 < wall <= 900 and binding["domain_count"] == 1 and binding["pairs"] == 0
++             and binding["diagnostic_compute_seconds"] == 300, "wrong diagnostic scope or deadline")
+         rounds = binding["pairs"]
+         need(rounds == (0 if binding["domain_count"] == 1 else 3), "invalid pair plan")
+         need(shutil.disk_usage(EVIDENCE).free >= binding["strict_storage_min_bytes"],
+@@ -307,7 +308,7 @@
+         need(libc.prctl(36,1,0,0,0) == 0, "cannot become owned-process subreaper")
+         for sig in (signal.SIGTERM, signal.SIGINT, signal.SIGALRM):
+             signal.signal(sig, stop)
+-        end = START + wall - 120
++        end = min(START + wall - 120, START + binding["diagnostic_compute_seconds"])
+         signal.setitimer(signal.ITIMER_REAL, max(.001, end-time.monotonic()))
+         contracts = allocation(binding)
+         build_attention(binding, end)
+@@ -317,7 +318,7 @@
+             outcome["active_phase"] = f"strict_{variant}"
+             phase("strict", variant, contracts, owner, binding, end, placements)
+             verify_return(placements, f"strict_{variant}")
+-            outcome["steps"][f"strict_{variant}_each_domain"] = 5
++            outcome["steps"][f"strict_{variant}_each_domain"] = 1
+         dispose_snapshots()
+         outcome["completed_pairs"] = []
+         estimate = binding["first_pair_projection_seconds"]
+@@ -336,10 +337,11 @@
+             estimate = (time.monotonic()-t0)*1.15 + 20
+         outcome["active_phase"] = None
+         verify(ROOT, pin)
+-        outcome["status"] = "PASS_FULL_NODE_COMPLETED_PHASES"
++        outcome["status"] = "DIAGNOSTIC_BOTH_ARMS_COMPLETED"
+     except BaseException as exc:
+         outcome.update(error=repr(exc), traceback=traceback.format_exc())
+     finally:
++        outcome["compute_finished"] = time.monotonic()
+         signal.setitimer(signal.ITIMER_REAL, 0)
+         for sig in (signal.SIGINT, signal.SIGTERM):
+             signal.signal(sig, signal.SIG_IGN)
+@@ -361,7 +363,7 @@
+             outcome.update(status="FAIL_STOP", cleanup_error=repr(exc))
+         outcome["finished"] = time.monotonic()
+         save(EVIDENCE / "SUMMARY.json", outcome)
+-    return 0 if outcome["status"] == "PASS_FULL_NODE_COMPLETED_PHASES" else 2
++    return 0 if outcome["status"] == "DIAGNOSTIC_BOTH_ARMS_COMPLETED" else 2
+ 
+ 
+ if __name__ == "__main__":
+--- /dev/null
++++ b/payload/first_error_trace.py
+@@ -0,0 +1,107 @@
++"""Observe the unchanged first update without retaining full per-layer tensors."""
++import hashlib
++import json
++import math
++
++import numpy as np
++import torch
++import torch.nn.functional as F
++
++
++def tensor_sha(x):
++    return hashlib.sha256(x.detach().numpy().tobytes(order='C')).hexdigest()
++
++
++def file_sha(path):
++    return hashlib.sha256(path.read_bytes()).hexdigest()
++
++
++def error(reference, candidate):
++    assert reference.shape == candidate.shape and reference.dtype == candidate.dtype
++    max_abs, worst, delta_squares, ref_squares = -1, None, 0.0, 0.0
++    chunk = 4 if reference.ndim == 4 else reference.shape[0]
++    for start in range(0, reference.shape[0], chunk):
++        a = reference[start:start+chunk].detach().double()
++        d = (candidate[start:start+chunk].detach().double() - a).abs()
++        value, idx = d.reshape(-1).max(0)
++        if value.item() > max_abs:
++            max_abs = value.item()
++            where = list(np.unravel_index(idx.item(), tuple(d.shape)))
++            where[0] += start
++            worst = [int(i) for i in where]
++        delta_squares += d.square().sum().item()
++        ref_squares += a.square().sum().item()
++    return dict(max_abs=max_abs, relative_l2=math.sqrt(delta_squares)/max(math.sqrt(ref_squares),1e-12), worst_index=worst)
++
++
++class FirstErrorTrace:
++    def __init__(self, args, result, model):
++        self.baseline = args.variant == 'baseline'
++        self.output = args.output
++        self.ref = args.reference / args.output.name
++        self.record = result['first_error_trace'] = {}
++        self.layers = {}
++        self.native = F.scaled_dot_product_attention
++        self.hooks = [layer.register_forward_hook(self.layer_hook(i)) for i,layer in enumerate(model.tf.layers)]
++        F.scaled_dot_product_attention = self.sdpa
++
++    def layer_hook(self, i):
++        def sample(_module, _inputs, output):
++            if i in self.layers:
++                return
++            rng = torch.get_rng_state()
++            x = output.detach()
++            assert tuple(x.shape) == (32,928,512)
++            _, tokens, width = x.shape
++            idx = torch.arange(8192, dtype=torch.int64) * x.numel() // 8192
++            self.layers[i] = x[idx//(tokens*width), idx//width%tokens, idx%width]
++            assert torch.equal(rng,torch.get_rng_state())
++        return sample
++
++    def sdpa(self, q, k, v, *args, **kwargs):
++        out = self.native(q,k,v,*args,**kwargs)
++        if 'attention_layer0' in self.record:
++            return out
++        rng = torch.get_rng_state()
++        hashes = {name:tensor_sha(x) for name,x in zip(('q','k','v'),(q,k,v))}
++        path = self.ref/'diagnostic_first_attention.pt'
++        trace = self.record['attention_layer0'] = dict(qkv_sha256=hashes, shape=list(q.shape), dtype=str(q.dtype),
++            qkv_strides={name:list(x.stride()) for name,x in zip(('q','k','v'),(q,k,v))}, output_sha256=tensor_sha(out))
++        if self.baseline:
++            torch.save(out.detach(),path)
++            trace['reference_file_sha256'] = file_sha(path)
++        else:
++            old = json.loads((self.ref/'result.json').read_bytes())['first_error_trace']['attention_layer0']
++            assert hashes==old['qkv_sha256'] and trace['shape']==old['shape'] and trace['dtype']==old['dtype']
++            assert file_sha(path)==old['reference_file_sha256']
++            ref = torch.load(path,map_location='cpu',mmap=True,weights_only=True)
++            trace['same_qkv'] = True
++            trace['output_error'] = error(ref,out)
++            trace['reference_output_sha256'] = old['output_sha256']
++            b,h,_,_ = trace['output_error']['worst_index']
++            if trace['output_error']['max_abs']>0:
++                head = self.output/'layer0_worst_head.npy'
++                np.save(head,np.stack([x[b,h].detach().numpy() for x in (q,k,v,ref,out)]),allow_pickle=False)
++                trace['head_evidence'] = dict(batch=b,head=h,path=head.name,sha256=file_sha(head),
++                                              order=['q','k','v','sdpa_output','m1_output'])
++        assert torch.equal(rng,torch.get_rng_state())
++        return out
++
++    def finish(self, result, captured, accepted):
++        assert len(self.layers)==12 and 'attention_layer0' in self.record
++        for h in self.hooks:
++            h.remove()
++        F.scaled_dot_product_attention = self.native
++        path = self.ref/'strict_step1.pt'
++        hidden = captured['h']
++        self.record['hidden_sha256'] = tensor_sha(hidden)
++        if self.baseline:
++            torch.save(dict(layers=self.layers,hidden=hidden),path)
++            result['reference_snapshots'] = [dict(step=1,bytes=path.stat().st_size,sha256=file_sha(path))]
++        else:
++            old = json.loads((self.ref/'result.json').read_bytes())
++            assert old['status']=='PASS_STRICT_REFERENCE1_DIAGNOSTIC' and old['completed_updates']==1
++            assert file_sha(path)==old['reference_snapshots'][0]['sha256']
++            ref = torch.load(path,map_location='cpu',mmap=True,weights_only=True)
++            self.record['encoder_layer_output_samples'] = [dict(layer=i, n=8192, **error(ref['layers'][i],self.layers[i])) for i in range(12)]
++            accepted.compare(torch,'1.output.h',ref['hidden'],hidden,'tensor',result['metrics'])

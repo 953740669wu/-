@@ -1,0 +1,203 @@
+--- a/launch.py
++++ b/launch.py
+@@ -133,7 +133,7 @@
+     gate = await_handoff(ROOT, req, context, 38 * count, mem, binding["wall_seconds"], timeout=35)
+     save(EVIDENCE / "scheduler_handoff.json", gate)
+     raw = read(ROOT / "scheduler_allocation.json")["data"]["successData"][0]
+-    need(raw["queue"] == "q_hpcai" and raw["execPath"] == str(ROOT)
++    need(raw["queue"] == "q_hpcai" and raw["execPath"] == str(ROOT) and raw["user"] == binding["scheduler_user"]
+          and raw["retryPolicy"] == dict(maxRetryCnt=0, currentRetryTimes=0), "wrong native job scope or retries")
+     group = raw["resGroups"][0]
+     need([s.replace(" ", "") for s in group["affinityRequest"]] == [f"numa[count={count},distribution=pack]"], "native domain placement request differs")
+@@ -162,9 +162,10 @@
+     return dict(at_ns=time.monotonic_ns(), per_cpu=cpu, worker_ticks=ticks)
+ 
+ 
+-def phase(name, variant, contracts, owner, binding, deadline, placements, run=None):
+-    label = f"{name}_{variant}"
++def phase(name, variant, contracts, owner, binding, deadline, placements, arm=None, run=None):
++    label = f"{name}_{variant}" + (f"_{arm}" if arm else "")
+     out = EVIDENCE / (label if run is None else f"{label}_r{run}")
++    deferred_validation = arm == "deferred"
+     out.mkdir()
+     barriers = out / "barriers"
+     barriers.mkdir()
+@@ -192,14 +193,20 @@
+             env.update(M23_HBM_LIBRARY=cfg["library"], M23_HBM_LIBRARY_SHA=cfg["library_sha256"],
+                        HBM_NODE=str(cfg["hbm_node"]), HBM_MB=str(cfg["cap_MiB"]), HBM_MIN_KB="256", HBM_STATS="1")
+         env.update(S09_INVENTORY="0", S00_BATCH=str(binding["batch_size"]),
+-                   S00_MATCHED_CKPT=str(binding["checkpoint_layers"]))
++                   S00_MATCHED_CKPT=str(binding["checkpoint_layers"]),
++                   S00_VALIDATE_AFTER_ALL_UPDATES="1" if deferred_validation else "0")
+         save(out / f"{rank}.env.json", {k:v for k,v in env.items() if k.startswith(("M23_", "HBM_", "S09_", "S00_"))})
+         with (out / f"{rank}.log").open("xb") as log:
+             proc[node] = subprocess.Popen(argv, cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+     os.sched_setaffinity(0, {next(iter(contracts.values()))["reserved"][0]})
+     save(out / "parent_after_spawn.json", dict(pid=os.getpid(), allowed=sorted(os.sched_getaffinity(0)),
+          children={n:p.pid for n,p in proc.items()}))
+-    step, sampled_at = 1, 0
++    keys = []
++    for step in range(1, 6 if name == "strict" else 27):
++        keys.append(step)
++        if deferred_validation and step <= (5 if name == "strict" else 25):
++            keys.append(f"done-{step}")
++    next_key, sampled_at = 0, 0
+     with (out / "cpu_samples.jsonl").open("x") as samples:
+         while True:
+             now = time.monotonic()
+@@ -217,7 +224,8 @@
+                 samples.write(json.dumps(sample(proc, contracts)) + "\n")
+                 samples.flush()
+                 sampled_at = now
+-            if step <= (5 if name == "strict" else 26):
++            if next_key < len(keys):
++                step = keys[next_key]
+                 ready = {n:barriers / f"{step}.node{n}.ready" for n in proc}
+                 if all(p.is_file() for p in ready.values()):
+                     arrivals = {n:read(p) for n,p in ready.items()}
+@@ -227,16 +235,17 @@
+                         need(all(p == pairs[0] for p in pairs), "full-node DDR sample/mask/initial references differ")
+                         save(EVIDENCE / "PAIRING_FROZEN_BEFORE_UPDATE.json", pairs[0])
+                     save(barriers / f"{step}.release", dict(step=step, arrivals=arrivals,
+-                         release_at_ns=time.monotonic_ns()+100_000_000))
+-                    step += 1
++                         release_at_ns=time.monotonic_ns()+(100_000_000 if isinstance(step, int) else 0)))
++                    next_key += 1
+             time.sleep(.02)
+-    need(step == (6 if name == "strict" else 27), "incomplete full-node rendezvous")
++    need(next_key == len(keys), "incomplete full-node rendezvous")
+     results = [read(out / f"node{n}" / "result.json") for n in contracts]
+     expected, updates = ("PASS_PERF25",25)
+     if name == "strict":
+         expected, updates = ("PASS_STRICT_REFERENCE5" if variant == "baseline" else "PASS_STRICT_ENCODER5", 5)
+     need(all(r["status"] == expected and r["completed_updates"] == updates and r["job_id"] == os.environ["CCS_JOB_ID"]
+-             and r["host"] == os.uname().nodename and r["variant"] == variant for r in results), "actual result receipts required")
++             and r["host"] == os.uname().nodename and r["variant"] == variant
++             and r["validation_after_all_updates"] is deferred_validation for r in results), "actual result receipts required")
+     save(out / "phase_receipt.json", dict(status=expected, job_id=os.environ["CCS_JOB_ID"],
+          domains={n:r["final_model_sha256"] for n,r in zip(contracts,results)}))
+ 
+@@ -271,9 +280,9 @@
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        need(120 < wall <= 7200 and binding["mode"] == "full_node_hbm_ckpt", "wrong wall or mode")
+-        rounds = binding["hbm_rounds_max"]
+-        need(1 <= rounds <= 3 and binding["first_hbm_round"] + rounds - 1 <= 3, "invalid HBM round plan")
++        need(120 < wall <= 7200 and binding["mode"] == "full_node_stability_r2", "wrong wall or mode")
++        first, rounds = binding["first_pair"], binding["pairs"]
++        need(1 <= first <= 3 and 1 <= rounds <= 4-first, "invalid pair plan")
+         need(shutil.disk_usage(EVIDENCE).free >= binding["strict_storage_min_bytes"],
+              "insufficient private workspace free space for complete DDR references")
+         libc = ctypes.CDLL(None, use_errno=True)
+@@ -285,28 +294,28 @@
+         contracts = allocation(binding)
+         placements = prepare_hbm(ROOT, EVIDENCE, contracts, binding, end)
+         outcome["hbm_safety"] = "PASS"
+-        for variant in ("baseline","candidate"):
+-            outcome["active_phase"] = f"strict_{variant}"
+-            phase("strict", variant, contracts, owner, binding, end, placements)
+-            outcome["steps"][f"strict_{variant}_each_domain"] = 5
+-        verify_return(placements, "strict")
++        for variant, arm in (("baseline", None), ("candidate", "original"), ("candidate", "deferred")):
++            label = f"strict_{variant}" + (f"_{arm}" if arm else "")
++            outcome["active_phase"] = label
++            phase("strict", variant, contracts, owner, binding, end, placements, arm=arm)
++            verify_return(placements, label)
++            outcome["steps"][label + "_each_domain"] = 5
+         dispose_snapshots()
+-        if binding["ddr_perf_control"]:
+-            outcome["active_phase"] = "perf_baseline"
+-            phase("perf", "baseline", contracts, owner, binding, end, placements)
+-            outcome["steps"]["perf_baseline_each_domain"] = 25
+-        outcome["completed_hbm_rounds"] = []
++        outcome["completed_pairs"] = []
+         required_seconds = 0
+-        for run in range(binding["first_hbm_round"], binding["first_hbm_round"] + rounds):
++        for run in range(first, first+rounds):
+             if required_seconds and end-time.monotonic() < required_seconds:
+-                outcome["next_round_deferred"] = dict(round=run, predicted_with_margin_seconds=required_seconds)
++                outcome["next_pair_deferred"] = dict(pair=run, predicted_with_margin_seconds=required_seconds)
+                 break
+-            outcome["active_phase"] = f"perf_candidate_r{run}"
++            order = ("original", "deferred") if run % 2 else ("deferred", "original")
+             t0 = time.monotonic()
+-            phase("perf", "candidate", contracts, owner, binding, end, placements, run)
+-            verify_return(placements, f"r{run}")
+-            outcome["steps"][f"perf_candidate_r{run}_each_domain"] = 25
+-            outcome["completed_hbm_rounds"].append(run)
++            for arm in order:
++                label = f"perf_candidate_{arm}_r{run}"
++                outcome["active_phase"] = label
++                phase("perf", "candidate", contracts, owner, binding, end, placements, arm=arm, run=run)
++                verify_return(placements, label)
++                outcome["steps"][label + "_each_domain"] = 25
++            outcome["completed_pairs"].append(run)
+             required_seconds = (time.monotonic()-t0)*1.25 + 60
+         outcome["active_phase"] = None
+         verify(ROOT, pin)
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -101,6 +101,8 @@
+ 
+ def run(args, result):
+     strict = args.phase == "strict"
++    deferred_validation = os.environ.get("S00_VALIDATE_AFTER_ALL_UPDATES") == "1"
++    result["validation_after_all_updates"] = deferred_validation
+     planned = 5 if strict else 25
+     batch = int(os.environ["S00_BATCH"])
+     ckpt_layers = int(os.environ["S00_MATCHED_CKPT"])
+@@ -255,7 +257,11 @@
+                         handle.remove()
+                 end = time.monotonic_ns()
+                 rss_after = memory_metrics.rss()
++                if deferred_validation:
++                    barrier(args, f"done-{step}")
++                validation_start = time.monotonic_ns()
+                 training.validate_update(torch, model, opts[role], values[role], step)
++                validation_end = time.monotonic_ns()
+                 actual_huge = rss_after["hugetlb_bytes"]
+                 if (not hbm and actual_huge != 0) or (hbm and not 0 < actual_huge <= hbm["cap_MiB"]*2**20):
+                     raise ValueError(f"unexpected training hugetlb bytes {actual_huge}")
+@@ -281,6 +287,7 @@
+                 rows.append(dict(role=role, step=step, batch_size=batch, frame_indices=ids, frame_ids=frames,
+                                  mask_sha256=mask_sha, losses={k: v.item() for k,v in loss.items()},
+                                  start_ns=begin, end_ns=end, release_ns=release, step_seconds=(end-begin)/1e9,
++                                 validation_start_ns=validation_start, validation_end_ns=validation_end,
+                                  rss_before=rss_before, training_start=start_memory, rss_after=rss_after,
+                                  peak_reset=reset, kml_calls=logical, native_sgemm_calls=sum(shapes.values()),
+                                  native_shapes=dict(shapes), sampled=not strict and step >= 6))
+--- a/prepare.py
++++ b/prepare.py
+@@ -29,8 +29,8 @@
+     path = root / "RUN_BINDING.json"
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+-    need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/dengqingtian/opt/stage4_sessions/S00")
+-         and root.name.startswith("FULL16_R1_") and binding["user_authorized"] is True,
++    need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/wujunyi/opt/stage4_sessions/S00")
++         and root.name.startswith("FULL16_R2_") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+     need(sha(root / "FULL16_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"
+--- a/run_job.sh
++++ b/run_job.sh
+@@ -4,6 +4,6 @@
+ ROOT=$(cd -- "$(dirname -- "$0")" && pwd -P)
+ [[ "$#" == 1 && "$1" =~ ^[0-9a-f]{64}$ ]]
+ : "${CCS_JOB_ID:?native job ID required}"
+-job_env=(PATH=/usr/bin:/bin HOME=/home/share/dengqingtian USER=dengqingtian LC_ALL=C PYTHONUTF8=1)
++job_env=(PATH=/usr/bin:/bin HOME=/home/share/wujunyi USER=wujunyi LC_ALL=C PYTHONUTF8=1)
+ job_env+=(PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 CCS_JOB_ID="$CCS_JOB_ID")
+ exec env -i "${job_env[@]}" /usr/bin/python3 -B "$ROOT/launch.py" "$1"
+--- a/submit_once.py
++++ b/submit_once.py
+@@ -36,7 +36,7 @@
+ 
+ def owned(row, binding):
+     expected = binding["native_argv"]
+-    return (row["execPath"] == str(ROOT) and shlex.split(row["cmd"]) == expected[expected.index("bash"):]
++    return (row["user"] == binding["scheduler_user"] and row["execPath"] == str(ROOT) and shlex.split(row["cmd"]) == expected[expected.index("bash"):]
+             and row["logRedirectPath"]["stdoutRedirectPath"] == str(ROOT / "job.log"))
+ 
+ 

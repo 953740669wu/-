@@ -1,0 +1,226 @@
+{
+  "B64": "NOT_RUN_B32_PREREQUISITE_UNMET",
+  "active_job": null,
+  "actual_hosts": [],
+  "budget": {
+    "bytes": 1440,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\BUDGET_LEDGER.json",
+    "sha256": "690f28c10df69a1f435a408af492e9162d0c023e0b5545ce1376a31a58d3b9e7"
+  },
+  "candidate": {
+    "changed_training_math": false,
+    "diff": {
+      "bytes": 10371,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_A\\MINIMAL.diff",
+      "sha256": "97605c3e76ff2ee2182811c8411eb0666f53d49821733f6c7830edcab460b6a4"
+    },
+    "frozen_deployment": {
+      "bytes": 3477,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_A\\RUN_BINDING.json",
+      "sha256": "fb2008a49ac2da518650be213ad45c9644a2db678e2b3fddc6dec1f4438ac58f"
+    },
+    "id": "C1_DEFER_VALIDATION",
+    "package": {
+      "bytes": 70808,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_A\\FULL16_PAYLOAD.zip",
+      "sha256": "b14c5a5a2ec65342b83bdf3bc5934f87e142a1840cd1dae0f4c68e7fb672539d"
+    },
+    "source_worker_sha256": "4791a4cc6c187847a28d1c85a8c13b735a5cbd93f36f3561f4236a000bf4883a"
+  },
+  "cleaned": {
+    "compute_processes_launched": false,
+    "hbm_allocated": false,
+    "login_helper_exited": true,
+    "native_job_exists": false
+  },
+  "decision": "UNRESOLVED_CANDIDATE_UNTESTED",
+  "evidence_index": [
+    {
+      "bytes": 2097,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\ACTUAL_COMMANDS.md",
+      "sha256": "1ec5300723e625b52d2cfe7e843f41e66f7ff468763778e1dd5974dbe915163f"
+    },
+    {
+      "bytes": 392,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\ACTIVE_JOB.json",
+      "sha256": "7b40be0852400f73b69802310d474230dd5e40035a3712555d59cd3d019dd0fd"
+    },
+    {
+      "bytes": 1440,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\BUDGET_LEDGER.json",
+      "sha256": "690f28c10df69a1f435a408af492e9162d0c023e0b5545ce1376a31a58d3b9e7"
+    },
+    {
+      "bytes": 2157,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\DIAGNOSIS.md",
+      "sha256": "84a8df704a05c96e328df45103108ff956426eb5461c1df58a5da0ae03923573"
+    },
+    {
+      "bytes": 2296,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\R1_TIMING_RECHECK.json",
+      "sha256": "3708059f8364278b979fe00504cdaf8b8b97ba10155bdfdc5e493cb607bdd05d"
+    },
+    {
+      "bytes": 929,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\ROUND_DELTA.md",
+      "sha256": "e88568d141e5c07b94722e6fb36134c3a4e1e4bf9e92ffc5ab0b0a43f4835449"
+    },
+    {
+      "bytes": 1203,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\SESSION_STATUS.md",
+      "sha256": "ebfd7ffb8d66a483938bab42cf0f5bf9f15b3cebf9a7cb57ef0edde6b1df99ef"
+    },
+    {
+      "bytes": 11089,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\freeze_r2.py",
+      "sha256": "0f5eeb426563bf6ca7efd57924b873687451a19bc89c9395bba43d119356d7cf"
+    },
+    {
+      "bytes": 5773,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\R2_PREFLIGHT_EVIDENCE.tgz",
+      "sha256": "9536d5f99e1a85c155afc56a9a1331d3408b0e8d607ad42cb2d74d68a123d4e0"
+    },
+    {
+      "bytes": 368,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\known_hosts_r2_confirmed_pool",
+      "sha256": "28f2889b522468f3d7cb71032553a457beb958ea5be3f004e75b9cbef608dfec"
+    },
+    {
+      "bytes": 36,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\host_keyscan.stderr",
+      "sha256": "fb46e366c2c736feaf4f38b0d5053f41ebbcff0eda08b56907c80aae9f659d80"
+    },
+    {
+      "bytes": 3477,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_A\\RUN_BINDING.json",
+      "sha256": "fb2008a49ac2da518650be213ad45c9644a2db678e2b3fddc6dec1f4438ac58f"
+    },
+    {
+      "bytes": 10371,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_A\\MINIMAL.diff",
+      "sha256": "97605c3e76ff2ee2182811c8411eb0666f53d49821733f6c7830edcab460b6a4"
+    },
+    {
+      "bytes": 70808,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_A\\FULL16_PAYLOAD.zip",
+      "sha256": "b14c5a5a2ec65342b83bdf3bc5934f87e142a1840cd1dae0f4c68e7fb672539d"
+    },
+    {
+      "bytes": 2866,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_A\\SOURCE_SHA256.json",
+      "sha256": "82ecf78b92a7bf7ed0093ad7848a04646c6e3a32f5bf9bda747de5ac7f471969"
+    },
+    {
+      "bytes": 7333,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_A\\DEPENDENCY_RECEIPT.json",
+      "sha256": "623300081d6b78453f0f0addf818e203e9c8cd9a71e3336fb7e07d211758ce3c"
+    },
+    {
+      "bytes": 11517,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_A\\ENGINEERING_DESCRIPTOR.json",
+      "sha256": "2d9ef2f224a7b2f2fb2848c4ec39274fe9466ab2f2aaef4757bc35608e1ebe4a"
+    },
+    {
+      "bytes": 10215,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_A\\PRIOR_PAIRING.json",
+      "sha256": "ff390e832df6dde669c3c181e01e5e413a53a1515e3e858ef1cec8bcea9bc164"
+    },
+    {
+      "bytes": 17738,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\QUEUE_ACCESS_EVIDENCE.json",
+      "sha256": "d03a2decaf453427bcaef5e3fa1153260cc63743357cd17561a0f4fb0088c69d"
+    },
+    {
+      "bytes": 2494,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\queue_access_audit.py",
+      "sha256": "62446b3ccb07d32b374061b2b360e66c49a4384cb9c9a6abda1658c76ad4260b"
+    },
+    {
+      "bytes": 178,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\queue_before_submit.json",
+      "sha256": "82fa34bf28c35892fd562f655dc897d21b7739099430d2e30045493d374a842d"
+    },
+    {
+      "bytes": 0,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\queue_before_submit.json.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 162,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\queue_resource.json",
+      "sha256": "1d69a5d5b5dd75901ee772cebc09f7cb51b47d3327f06f35b903dffc6707b7a0"
+    },
+    {
+      "bytes": 0,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\queue_resource.json.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 750,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\login_submit.log",
+      "sha256": "2d7e4a326fd57e679d6e8dbe2451a285a6654c1f69013b931c85e21ae10501d1"
+    },
+    {
+      "bytes": 8,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\login_submit_pid.txt",
+      "sha256": "977debe10c6802260fc82112e4814bed720a254ab1f8b43206519542e8e3a4d2"
+    },
+    {
+      "bytes": 127,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\site_static.json",
+      "sha256": "5ac5e5a0ac7fe4543e673c191cd0f327d82a70eaeb5a9a3c4739745babc021ea"
+    },
+    {
+      "bytes": 12253,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\LOGIN_METADATA_CHECK.json",
+      "sha256": "59fe11b2eb878dfab087302a5d71fc6c07e197906f0c187adcaec9c9dfa1dcdf"
+    },
+    {
+      "bytes": 12231,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\FIXED_INPUTS_BEFORE.json",
+      "sha256": "b088349504cfe764f51acf194d8cd68fd0f602f1f6c1bc9562a66ed7be00a5fc"
+    },
+    {
+      "bytes": 26,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\SITE_ENTRY_TIME.txt",
+      "sha256": "353b258cfccec803e80d6c281a3f37bab80f3670f42f42802b7c1b94749dafe4"
+    }
+  ],
+  "gates": {
+    "domain_coverage": "NOT_RUN",
+    "fixed_inputs": "PASS",
+    "hbm_safety": "NOT_RUN",
+    "linux_static": "PASS",
+    "metadata": "PASS",
+    "paired_throughput": "NOT_RUN",
+    "strict_five_step": "NOT_RUN",
+    "three_pair_stability": "NOT_RUN"
+  },
+  "historical_diagnosis": {
+    "bytes": 2296,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\R1_TIMING_RECHECK.json",
+    "sha256": "3708059f8364278b979fe00504cdaf8b8b97ba10155bdfdc5e493cb607bdd05d"
+  },
+  "native_submissions": 0,
+  "node_workaround": "NOT_MEASURED",
+  "numerical_thresholds": {
+    "denominator_floor": 1e-12,
+    "near_zero_norm": 1e-08,
+    "relative_L2": 2e-06,
+    "state_abs": 2e-06,
+    "strict_steps": 5,
+    "tensor_abs": 2e-05
+  },
+  "original_r1_result_sha256": "31c76bc59ca4815b85e26aba5629cbf5c150320637368bdeea2a5fa2a1274d38",
+  "resume_condition": "Restore q_hpcai submission access or identify a scheduler-authorized queue and an equivalent eligible node within the unchanged R2 deadline.",
+  "scheduler_admission": {
+    "bytes": 17738,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\QUEUE_ACCESS_EVIDENCE.json",
+    "sha256": "d03a2decaf453427bcaef5e3fa1153260cc63743357cd17561a0f4fb0088c69d"
+  },
+  "stability_threshold": {
+    "rounds": 3,
+    "spread_pct": 5
+  },
+  "status": "BLOCKED_SCHEDULER_QUEUE_ACCESS"
+}

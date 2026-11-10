@@ -1,0 +1,2298 @@
+{
+  "GPU_4090": "NOT_QUERIED_OR_CONNECTED",
+  "active_job": null,
+  "application": {
+    "active_phase": null,
+    "completed_arms": [
+      "A",
+      "B"
+    ],
+    "finished": 977044.316236383,
+    "hbm_pool_restored": true,
+    "hbm_safety": "PASS",
+    "job_id": "2085843",
+    "start": 972840.261913312,
+    "status": "PASS_FULL_NODE_COMPLETED_PHASES",
+    "steps": {}
+  },
+  "arms": {
+    "A": {
+      "cross_window_updates": 1,
+      "domain_count": 16,
+      "domains": {
+        "0": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 238.135083455,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 566.358276627,
+          "pure_train_mean_seconds": 10.871570585666666,
+          "pure_train_median_including_cross_seconds": 10.830473021,
+          "pure_train_median_seconds": 10.830473021,
+          "pure_train_total_seconds": 32.614711756999995,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102740,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node0\\steps.jsonl",
+            "sha256": "5d6bbfb1c239d81158475f3a8e709b0bf37790166cbd7e7dcb6ba1f1984d631e"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            11.11475386,
+            10.961238725,
+            10.677175245,
+            10.85249491,
+            10.736038339
+          ],
+          "worker": {
+            "bytes": 332687,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node0\\result.json",
+            "sha256": "975941e0ee94ae383703e6dc3fda4d1fa4bbc2c0f33caced4963c32ea30a6054"
+          }
+        },
+        "1": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 238.436304655,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 567.219979561,
+          "pure_train_mean_seconds": 10.601744195666667,
+          "pure_train_median_including_cross_seconds": 10.597510339,
+          "pure_train_median_seconds": 10.597510339,
+          "pure_train_total_seconds": 31.805232587,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102757,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node1\\steps.jsonl",
+            "sha256": "8388f98aa84ff904dccadfb3c448aefb612848bfddaf902b52095f9ad98d76d2"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.846202939,
+            10.751030117,
+            10.394435424,
+            10.642976196,
+            10.492166265
+          ],
+          "worker": {
+            "bytes": 333206,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node1\\result.json",
+            "sha256": "fbb39ef4cffee51994ebf926dc16261c3a2f2916baeec0c8e4750ce0f988fd9c"
+          }
+        },
+        "10": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 237.534120957,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 565.9227152349999,
+          "pure_train_mean_seconds": 11.086596322666667,
+          "pure_train_median_including_cross_seconds": 11.019664361,
+          "pure_train_median_seconds": 11.019664361,
+          "pure_train_total_seconds": 33.259788968,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102762,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node10\\steps.jsonl",
+            "sha256": "930965af9ef91ce2650ee21aaedc644556f99cc421cc08baa782373ca9449353"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            11.305984042,
+            11.053019044,
+            11.17308315,
+            11.492726741,
+            11.45264292
+          ],
+          "worker": {
+            "bytes": 335013,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node10\\result.json",
+            "sha256": "3f66ff962fcacb7d247ff417f3ac070559b7167ea33da319ef8d60f9adf513e8"
+          }
+        },
+        "11": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 237.527590429,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 565.9173892929999,
+          "pure_train_mean_seconds": 11.090968244666668,
+          "pure_train_median_including_cross_seconds": 11.022133274,
+          "pure_train_median_seconds": 11.022133274,
+          "pure_train_total_seconds": 33.272904734,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102689,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node11\\steps.jsonl",
+            "sha256": "aa7d15cf7156bee2063df4ace1cfd3292f798da4c6176ddf334c76d7afcd38e4"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            11.308296053,
+            11.059389771,
+            11.176244334,
+            11.492326405,
+            11.457366393
+          ],
+          "worker": {
+            "bytes": 335012,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node11\\result.json",
+            "sha256": "e1d27e0a62feb9116ce9115ce25edfd487fc93311a479baff39bce4c11f78e11"
+          }
+        },
+        "12": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 237.689006579,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 565.2223959620001,
+          "pure_train_mean_seconds": 11.285527684333333,
+          "pure_train_median_including_cross_seconds": 11.264380947,
+          "pure_train_median_seconds": 11.264380947,
+          "pure_train_total_seconds": 33.856583053,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102758,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node12\\steps.jsonl",
+            "sha256": "7671be4d520947a03b67c3ac19c251b756f66dfd00041db4d91a72adf3a50364"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            11.281579576,
+            11.192872613,
+            11.113542471,
+            11.334763257,
+            11.271680115
+          ],
+          "worker": {
+            "bytes": 335011,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node12\\result.json",
+            "sha256": "fa50829b888183897c320ab382592cf34f42cc122f2a6a14816cdfadd98bd990"
+          }
+        },
+        "13": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 237.602760544,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 564.825578479,
+          "pure_train_mean_seconds": 11.43646151,
+          "pure_train_median_including_cross_seconds": 11.265124156,
+          "pure_train_median_seconds": 11.265124156,
+          "pure_train_total_seconds": 34.30938453,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102746,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node13\\steps.jsonl",
+            "sha256": "986d8db98dea52655529eba3759998f54459c511c6fa344afcd0ca56819a6e02"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            11.281853171,
+            11.19485367,
+            11.315069194,
+            11.361955305,
+            11.366657728
+          ],
+          "worker": {
+            "bytes": 335008,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node13\\result.json",
+            "sha256": "2992c087d3231c12a67e5ae08cfd70839f0299c7bdea9933ee9a7a2e2776d196"
+          }
+        },
+        "14": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 237.64614018,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 564.774831605,
+          "pure_train_mean_seconds": 11.442579586666668,
+          "pure_train_median_including_cross_seconds": 11.328532254,
+          "pure_train_median_seconds": 11.328532254,
+          "pure_train_total_seconds": 34.32773876,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102768,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node14\\steps.jsonl",
+            "sha256": "419ced86d68468d22f1fa485f2acfa30e3f2d3cfe9ca30b30bb0ad38a01634fc"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            11.366714254,
+            11.248936219,
+            11.315006203,
+            11.362748676,
+            11.320706467
+          ],
+          "worker": {
+            "bytes": 335009,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node14\\result.json",
+            "sha256": "9269590017578322ffe44ecaaa7de0de9535ef0d3e4ea6ab8e5e5d7e5fb5eef0"
+          }
+        },
+        "15": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 237.610903865,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 564.77902292,
+          "pure_train_mean_seconds": 11.459335469333334,
+          "pure_train_median_including_cross_seconds": 11.328342382,
+          "pure_train_median_seconds": 11.328342382,
+          "pure_train_total_seconds": 34.378006408,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102759,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node15\\steps.jsonl",
+            "sha256": "2f1bd06b7fe0f72c04d1e0bc97f5d299e257de3da3f04ad6c5f91cb52ab6a239"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            11.366650223,
+            11.248398232,
+            11.318278058,
+            11.366618199,
+            11.368492073
+          ],
+          "worker": {
+            "bytes": 335008,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node15\\result.json",
+            "sha256": "84b7878bf1683d68f85f60f3b09573f8894571647626e2ee8e9f7226e478dece"
+          }
+        },
+        "2": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 238.446582494,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 567.229765923,
+          "pure_train_mean_seconds": 10.606440722666667,
+          "pure_train_median_including_cross_seconds": 10.553975272,
+          "pure_train_median_seconds": 10.553975272,
+          "pure_train_total_seconds": 31.819322168,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102757,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node2\\steps.jsonl",
+            "sha256": "ce50f8bc11cbe7087b0cfd159e20e3ac890aab3f38962c16ef97b16803e9f7ef"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.798630136,
+            10.708767606,
+            10.411374577,
+            10.559603604,
+            10.445741248
+          ],
+          "worker": {
+            "bytes": 333799,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node2\\result.json",
+            "sha256": "7326de103b7d5932b861dd4068e0e89341a9c3a751ec33558f70f507c343a3cd"
+          }
+        },
+        "3": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 238.518509165,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 567.339062948,
+          "pure_train_mean_seconds": 10.608300641333333,
+          "pure_train_median_including_cross_seconds": 10.565608469,
+          "pure_train_median_seconds": 10.565608469,
+          "pure_train_total_seconds": 31.824901924,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102736,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node3\\steps.jsonl",
+            "sha256": "aaeb9c2fb3977087be2f3d2c9b6d39b3113e3dc11d5dae182e6acec963a716b3"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.800617334,
+            10.682015256,
+            10.414112684,
+            10.613616728,
+            10.453553223
+          ],
+          "worker": {
+            "bytes": 335004,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node3\\result.json",
+            "sha256": "fb373d499f223d1fb4f61a51852fcbab444428081b803fb27ca23bf1c77a96de"
+          }
+        },
+        "4": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 2,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 160.91632662,
+              "end_ns": 975005112409123,
+              "start_ns": 974756893667107,
+              "step": 8
+            }
+          ],
+          "frame_visits": 64,
+          "frame_visits_per_second": 0.10666666666666667,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 0.691608827,
+          "per_step_barrier_wait_events": 2,
+          "per_step_barrier_wait_seconds": 0.328729827,
+          "pure_train_mean_seconds": 255.76288505899998,
+          "pure_train_median_including_cross_seconds": 248.218742016,
+          "pure_train_median_seconds": 255.76288505899998,
+          "pure_train_total_seconds": 511.52577011799997,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102757,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node4\\steps.jsonl",
+            "sha256": "da92179345a50a2c4acffee8d4d7a240d2ba852d1ea81f4355208814b5953db5"
+          },
+          "unique_frames_in_window": 64,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            267.060398717,
+            324.668805668,
+            271.036216312,
+            247.568113462,
+            248.131638169
+          ],
+          "worker": {
+            "bytes": 319915,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node4\\result.json",
+            "sha256": "693eec2c5f2ebc55905bdc06398f72b9fe7644e20d1d9523457ca9dc1154fd44"
+          }
+        },
+        "5": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 238.698243383,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 568.068858722,
+          "pure_train_mean_seconds": 10.129668896333333,
+          "pure_train_median_including_cross_seconds": 10.036623086,
+          "pure_train_median_seconds": 10.036623086,
+          "pure_train_total_seconds": 30.389006689,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102744,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node5\\steps.jsonl",
+            "sha256": "1e661d42e880fe51920b4b1e96a0902083937688f3626eeb7ec9a5955277a998"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.200231793,
+            9.89120788,
+            9.745550793,
+            10.144628611,
+            9.871102255
+          ],
+          "worker": {
+            "bytes": 335010,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node5\\result.json",
+            "sha256": "377842acc319a0ff1dfc1842ebb39ce08f4e6fad377020dccab5e06984d2d02f"
+          }
+        },
+        "6": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 238.999970319,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 569.070421175,
+          "pure_train_mean_seconds": 9.855270417333333,
+          "pure_train_median_including_cross_seconds": 9.8733554,
+          "pure_train_median_seconds": 9.8733554,
+          "pure_train_total_seconds": 29.565811252000003,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102695,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node6\\steps.jsonl",
+            "sha256": "3de7cb56d3263e877b38d64a67c7e5836782c8380ee737bb87f59a7d61067f87"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.127236393,
+            9.679216398,
+            9.608129411,
+            9.645396614,
+            9.746746355
+          ],
+          "worker": {
+            "bytes": 335005,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node6\\result.json",
+            "sha256": "2a4f889d3541fac9bcc2f1946b96ef7a080ccecefe0302052ad58b78443639d3"
+          }
+        },
+        "7": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 239.180587979,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 569.499413245,
+          "pure_train_mean_seconds": 9.81347232,
+          "pure_train_median_including_cross_seconds": 9.830653843,
+          "pure_train_median_seconds": 9.830653843,
+          "pure_train_total_seconds": 29.44041696,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102728,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node7\\steps.jsonl",
+            "sha256": "eee53464dcb57885a0b74e851e2b2dd3fbb3f8c1ac850d73c071913ab2dc537e"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.121333742,
+            9.621779962,
+            9.518537679,
+            9.596799655,
+            9.607691457
+          ],
+          "worker": {
+            "bytes": 335006,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node7\\result.json",
+            "sha256": "87b10f343258be94fa4ba914ebc52eb89862e1f0b165a624401c5f20ea194d53"
+          }
+        },
+        "8": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 237.558591129,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 565.960156911,
+          "pure_train_mean_seconds": 11.071296609,
+          "pure_train_median_including_cross_seconds": 11.005827234,
+          "pure_train_median_seconds": 11.005827234,
+          "pure_train_total_seconds": 33.213889827,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102727,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node8\\steps.jsonl",
+            "sha256": "faafcab7ef333248a4bf24ec05898f255e3447f4ccd0690562f85270ff3cf446"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            11.29348955,
+            11.042626344,
+            11.082830448,
+            11.420200016,
+            11.428319661
+          ],
+          "worker": {
+            "bytes": 335007,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node8\\result.json",
+            "sha256": "ac4f1a4d9b4a28d0d966ba5e46159bdeced34ed92f5540a9f4da35539ec9c2f0"
+          }
+        },
+        "9": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 12519,
+            "hbm_requested_reported_GB": 492.4,
+            "reused": 12275
+          },
+          "completed_in_window": 3,
+          "cross_window_steps": [],
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 237.556983216,
+          "per_step_barrier_wait_events": 3,
+          "per_step_barrier_wait_seconds": 565.9651749579999,
+          "pure_train_mean_seconds": 11.074282449333333,
+          "pure_train_median_including_cross_seconds": 11.01447553,
+          "pure_train_median_seconds": 11.01447553,
+          "pure_train_total_seconds": 33.222847348,
+          "repeated_frame_visits_since_warmup": 0,
+          "steps": {
+            "bytes": 102744,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node9\\steps.jsonl",
+            "sha256": "e92805d22017db17b2c529229d872b5eb87d2e94abd0676142edf19c8c005b4d"
+          },
+          "unique_frames_in_window": 96,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            11.302042177,
+            11.047717683,
+            11.12662391,
+            11.487251447,
+            11.429199562
+          ],
+          "worker": {
+            "bytes": 335008,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node9\\result.json",
+            "sha256": "f25427fef85009f9f47b0b9686d4347f1a846bdf7e6be57ac700b2c5ae57d5ca"
+          }
+        }
+      },
+      "frame_visits": 1504,
+      "frame_visits_per_second": 2.506666666666667,
+      "least_window_output_domain": "4",
+      "repeated_frame_visits_since_warmup": 0,
+      "slowest_by_pure_median": "4",
+      "updates_reserved": 128,
+      "updates_started": 128,
+      "window": {
+        "close_ns": 974844196082503,
+        "open_ns": 974244196082503
+      }
+    },
+    "B": {
+      "cross_window_updates": 15,
+      "domain_count": 16,
+      "domains": {
+        "0": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 94457,
+            "hbm_requested_reported_GB": 3751.6,
+            "reused": 94213
+          },
+          "completed_in_window": 55,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 4.237224922,
+              "end_ns": 976695955771571,
+              "start_ns": 976685892499902,
+              "step": 61
+            }
+          ],
+          "frame_visits": 1760,
+          "frame_visits_per_second": 2.933333333333333,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 5.982181656,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 10.37474830829091,
+          "pure_train_median_including_cross_seconds": 10.3961343695,
+          "pure_train_median_seconds": 10.40228732,
+          "pure_train_total_seconds": 570.6111569560001,
+          "repeated_frame_visits_since_warmup": 1120,
+          "steps": {
+            "bytes": 782924,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node0\\steps.jsonl",
+            "sha256": "7e21af91d2224e666053474633783add8042007f06cee9eb15635ff42bcd8498"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.971277385,
+            10.956544199,
+            10.830037469,
+            10.732231084,
+            10.617139636
+          ],
+          "worker": {
+            "bytes": 1995902,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node0\\result.json",
+            "sha256": "c9f71dffd053ecc712517e8b718ea30d1b810c7c7e6af21fc85803c7ebeed323"
+          }
+        },
+        "1": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 94457,
+            "hbm_requested_reported_GB": 3751.6,
+            "reused": 94213
+          },
+          "completed_in_window": 55,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 4.14938214,
+              "end_ns": 976695867928789,
+              "start_ns": 976685644399367,
+              "step": 61
+            }
+          ],
+          "frame_visits": 1760,
+          "frame_visits_per_second": 2.933333333333333,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 6.005376649,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 10.4012349624,
+          "pure_train_median_including_cross_seconds": 10.371313026500001,
+          "pure_train_median_seconds": 10.379947651,
+          "pure_train_total_seconds": 572.067922932,
+          "repeated_frame_visits_since_warmup": 1120,
+          "steps": {
+            "bytes": 783011,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node1\\steps.jsonl",
+            "sha256": "895e5e5e3d0edd714d12b2339cf59006575e144756046fea837d53c1825ea328"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.91283963,
+            10.90784901,
+            10.772369289,
+            10.708686936,
+            10.608292196
+          ],
+          "worker": {
+            "bytes": 1998544,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node1\\result.json",
+            "sha256": "77f8f4c649326330237e250259a8299c329746ede061483d676cb5e2b4543367"
+          }
+        },
+        "10": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 92911,
+            "hbm_requested_reported_GB": 3690.1,
+            "reused": 92667
+          },
+          "completed_in_window": 54,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 6.902955862,
+              "end_ns": 976698621502511,
+              "start_ns": 976688974237079,
+              "step": 60
+            }
+          ],
+          "frame_visits": 1728,
+          "frame_visits_per_second": 2.88,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 5.311820319,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 10.677231457481481,
+          "pure_train_median_including_cross_seconds": 10.659867257,
+          "pure_train_median_seconds": 10.6614408895,
+          "pure_train_total_seconds": 576.570498704,
+          "repeated_frame_visits_since_warmup": 1088,
+          "steps": {
+            "bytes": 769992,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node10\\steps.jsonl",
+            "sha256": "64a41303b11d0104712bd07498c71270f3a2db19faca27fb839115901e614cd7"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.931440123,
+            11.077567118,
+            11.035501571,
+            11.3107029,
+            11.417466179
+          ],
+          "worker": {
+            "bytes": 1976209,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node10\\result.json",
+            "sha256": "606df17ac31b42f0946159db3825ed088d7b1f4eba90b52f00dbdcc7b7346774"
+          }
+        },
+        "11": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 92911,
+            "hbm_requested_reported_GB": 3690.1,
+            "reused": 92667
+          },
+          "completed_in_window": 54,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 6.90716836,
+              "end_ns": 976698625715009,
+              "start_ns": 976688968035963,
+              "step": 60
+            }
+          ],
+          "frame_visits": 1728,
+          "frame_visits_per_second": 2.88,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 5.305310321,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 10.67496845061111,
+          "pure_train_median_including_cross_seconds": 10.667211508,
+          "pure_train_median_seconds": 10.6683106535,
+          "pure_train_total_seconds": 576.4482963329999,
+          "repeated_frame_visits_since_warmup": 1088,
+          "steps": {
+            "bytes": 770057,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node11\\steps.jsonl",
+            "sha256": "4d6a5b864c6879d58cf4b917541908092a6ed1ef86641c80c670cb94af7378f1"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.939061156,
+            11.080077873,
+            11.040891554,
+            11.319795732,
+            11.423132975
+          ],
+          "worker": {
+            "bytes": 1976206,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node11\\result.json",
+            "sha256": "48523f4399990e22e3b56ad2e244b97846b811fcbd5ce3447a139515524a0084"
+          }
+        },
+        "12": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 92911,
+            "hbm_requested_reported_GB": 3690.1,
+            "reused": 92667
+          },
+          "completed_in_window": 54,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 4.934835425,
+              "end_ns": 976696653382074,
+              "start_ns": 976686353239512,
+              "step": 60
+            }
+          ],
+          "frame_visits": 1728,
+          "frame_visits_per_second": 2.88,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 5.262142358,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 10.564037662203704,
+          "pure_train_median_including_cross_seconds": 10.504956652,
+          "pure_train_median_seconds": 10.5124026845,
+          "pure_train_total_seconds": 570.458033759,
+          "repeated_frame_visits_since_warmup": 1088,
+          "steps": {
+            "bytes": 770028,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node12\\steps.jsonl",
+            "sha256": "3edc19315222ec738d981a7e3f5b75ab815ca7aa718cca75d053d93da4eb7862"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.846891541,
+            11.195369855,
+            11.229512268,
+            11.240989979,
+            11.452402011
+          ],
+          "worker": {
+            "bytes": 1976206,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node12\\result.json",
+            "sha256": "c4a37166ed75b689f322e5db865c5cf17f6f6334832d7807e85ea7d168537327"
+          }
+        },
+        "13": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 91365,
+            "hbm_requested_reported_GB": 3628.6,
+            "reused": 91121
+          },
+          "completed_in_window": 53,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 3.970833767,
+              "end_ns": 976695689380416,
+              "start_ns": 976685030974529,
+              "step": 59
+            }
+          ],
+          "frame_visits": 1696,
+          "frame_visits_per_second": 2.8266666666666667,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 5.313879356,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 10.786164814849057,
+          "pure_train_median_including_cross_seconds": 10.740448722,
+          "pure_train_median_seconds": 10.741372068,
+          "pure_train_total_seconds": 571.6667351869999,
+          "repeated_frame_visits_since_warmup": 1056,
+          "steps": {
+            "bytes": 757212,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node13\\steps.jsonl",
+            "sha256": "e512f6f7abf18f5cd9d48a2a69684e36d0f3a19cff1252e1c527e05e4b06e3a5"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.968474767,
+            11.167038581,
+            11.182746175,
+            11.239371037,
+            11.407027968
+          ],
+          "worker": {
+            "bytes": 1944330,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node13\\result.json",
+            "sha256": "8ad63755a2a21999be7fc43773b677bfc3ad6b007ef732ac4c86f97d7a796e76"
+          }
+        },
+        "14": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 91365,
+            "hbm_requested_reported_GB": 3628.6,
+            "reused": 91121
+          },
+          "completed_in_window": 53,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 4.004498181,
+              "end_ns": 976695723044830,
+              "start_ns": 976685078497855,
+              "step": 59
+            }
+          ],
+          "frame_visits": 1696,
+          "frame_visits_per_second": 2.8266666666666667,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 5.310511931,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 10.781983028245284,
+          "pure_train_median_including_cross_seconds": 10.746486653000002,
+          "pure_train_median_seconds": 10.748952748,
+          "pure_train_total_seconds": 571.4451004969999,
+          "repeated_frame_visits_since_warmup": 1056,
+          "steps": {
+            "bytes": 757331,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node14\\steps.jsonl",
+            "sha256": "d86492845d31c88794ad845750efa1198fa7f0b20b9b2f4acac1f87c1e92ae56"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.908281228,
+            11.201585979,
+            11.183014909,
+            11.258179101,
+            11.406781755
+          ],
+          "worker": {
+            "bytes": 1944331,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node14\\result.json",
+            "sha256": "c4b9455b6391b31740a9531b58680d413722ada90d8aa3f1f48b7b067caf5710"
+          }
+        },
+        "15": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 91365,
+            "hbm_requested_reported_GB": 3628.6,
+            "reused": 91121
+          },
+          "completed_in_window": 53,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 4.008069431,
+              "end_ns": 976695726616080,
+              "start_ns": 976685089016520,
+              "step": 59
+            }
+          ],
+          "frame_visits": 1696,
+          "frame_visits_per_second": 2.8266666666666667,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 5.262705105,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 10.78301733471698,
+          "pure_train_median_including_cross_seconds": 10.7416216,
+          "pure_train_median_seconds": 10.746932598,
+          "pure_train_total_seconds": 571.4999187399999,
+          "repeated_frame_visits_since_warmup": 1056,
+          "steps": {
+            "bytes": 757284,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node15\\steps.jsonl",
+            "sha256": "8ac2433fe5cd1897d9b12a9ab77073038bc50e3b9fa5cb16c9ba3bd54355bb01"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.971584339,
+            11.206682958,
+            11.233804166,
+            11.264249803,
+            11.458115708
+          ],
+          "worker": {
+            "bytes": 1944336,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node15\\result.json",
+            "sha256": "7ccbba632cbdcccb027f344a1abc85edfc6aec1cf89711538461e7260594be3f"
+          }
+        },
+        "2": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 94457,
+            "hbm_requested_reported_GB": 3751.6,
+            "reused": 94213
+          },
+          "completed_in_window": 55,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 4.005745818,
+              "end_ns": 976695724292467,
+              "start_ns": 976685405787463,
+              "step": 61
+            }
+          ],
+          "frame_visits": 1760,
+          "frame_visits_per_second": 2.933333333333333,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 6.00026055,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 10.3726771174,
+          "pure_train_median_including_cross_seconds": 10.3855576955,
+          "pure_train_median_seconds": 10.386200413,
+          "pure_train_total_seconds": 570.4972414570001,
+          "repeated_frame_visits_since_warmup": 1120,
+          "steps": {
+            "bytes": 782868,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node2\\steps.jsonl",
+            "sha256": "dbc29a4029ac8ca877cd49e4945e87a2d8c2471f2298942e71b0d267bab61ae1"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.910456237,
+            10.91600712,
+            10.750900648,
+            10.713575812,
+            10.602321156
+          ],
+          "worker": {
+            "bytes": 2001668,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node2\\result.json",
+            "sha256": "d0912b248beeb49f063947fbd011aafa4e5c8514ea21020ee42bf0a57eeaab67"
+          }
+        },
+        "3": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 94457,
+            "hbm_requested_reported_GB": 3751.6,
+            "reused": 94213
+          },
+          "completed_in_window": 55,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 2.40755602,
+              "end_ns": 976694126102669,
+              "start_ns": 976683971260859,
+              "step": 61
+            }
+          ],
+          "frame_visits": 1760,
+          "frame_visits_per_second": 2.933333333333333,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 6.006401363,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 10.359216807963636,
+          "pure_train_median_including_cross_seconds": 10.3207350745,
+          "pure_train_median_seconds": 10.320979442,
+          "pure_train_total_seconds": 569.7569244379997,
+          "repeated_frame_visits_since_warmup": 1120,
+          "steps": {
+            "bytes": 782914,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node3\\steps.jsonl",
+            "sha256": "4ff8a558b0ef82b993043664c08174df71cdd72f36bc192f74149717584b550d"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.906022167,
+            10.919185253,
+            10.776043449,
+            10.717022079,
+            10.612840697
+          ],
+          "worker": {
+            "bytes": 2008002,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node3\\result.json",
+            "sha256": "8613f5a37fea66921847c02e387bed533f6e88804bbd6d15df843f8ccad22d93"
+          }
+        },
+        "4": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 48077,
+            "hbm_requested_reported_GB": 1906.8,
+            "reused": 47833
+          },
+          "completed_in_window": 25,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 346.618620679,
+              "end_ns": 977038337167328,
+              "start_ns": 976686032553256,
+              "step": 31
+            }
+          ],
+          "frame_visits": 800,
+          "frame_visits_per_second": 1.3333333333333333,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 0.135053594,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 23.1897516086,
+          "pure_train_median_including_cross_seconds": 23.1587285915,
+          "pure_train_median_seconds": 23.147668276,
+          "pure_train_total_seconds": 579.7437902150001,
+          "repeated_frame_visits_since_warmup": 160,
+          "steps": {
+            "bytes": 397909,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node4\\steps.jsonl",
+            "sha256": "ac58d441cc3ff83be7567eab003e4e7decb82a741eb30ec0c131e327cc5d11ee"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            262.835952202,
+            262.644070221,
+            273.810330114,
+            233.55629686,
+            16.417287633
+          ],
+          "worker": {
+            "bytes": 1054272,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node4\\result.json",
+            "sha256": "913ee75b8590aa09e619e3f5d6b5405eaa6dc78dedc53ae997ae4e9b5e498864"
+          }
+        },
+        "5": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 97549,
+            "hbm_requested_reported_GB": 3874.5,
+            "reused": 97305
+          },
+          "completed_in_window": 57,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 4.411885901,
+              "end_ns": 976696130432550,
+              "start_ns": 976687672662745,
+              "step": 63
+            }
+          ],
+          "frame_visits": 1824,
+          "frame_visits_per_second": 3.04,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 6.39328808,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 9.89583815177193,
+          "pure_train_median_including_cross_seconds": 9.840088477,
+          "pure_train_median_seconds": 9.843065634,
+          "pure_train_total_seconds": 564.062774651,
+          "repeated_frame_visits_since_warmup": 1184,
+          "steps": {
+            "bytes": 808492,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node5\\steps.jsonl",
+            "sha256": "a5cc9041b8341ce9348c44fec14d206dbbae53ad0d97f19f9f29fe767d01da0d"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            9.965252026,
+            9.915259741,
+            9.978668832,
+            10.219613677,
+            9.983019348
+          ],
+          "worker": {
+            "bytes": 2071760,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node5\\result.json",
+            "sha256": "073ec0f3abfdc024f0f1ddca5c77a05654e2011212e35e30593f6550cba0dd96"
+          }
+        },
+        "6": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 100641,
+            "hbm_requested_reported_GB": 3997.5,
+            "reused": 100397
+          },
+          "completed_in_window": 59,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 3.949046176,
+              "end_ns": 976695667592825,
+              "start_ns": 976687107756267,
+              "step": 65
+            }
+          ],
+          "frame_visits": 1888,
+          "frame_visits_per_second": 3.1466666666666665,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 6.756124683,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 9.57326899179661,
+          "pure_train_median_including_cross_seconds": 9.547647763499999,
+          "pure_train_median_seconds": 9.565638297,
+          "pure_train_total_seconds": 564.8228705159997,
+          "repeated_frame_visits_since_warmup": 1248,
+          "steps": {
+            "bytes": 834177,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node6\\steps.jsonl",
+            "sha256": "746f4b9a43f179ab2dea953a777660f5e1ac3a6f6ff783fbf3860d816cf0f358"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            9.875405612,
+            9.855267138,
+            9.829697896,
+            9.605386589,
+            9.841287923
+          ],
+          "worker": {
+            "bytes": 2135502,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node6\\result.json",
+            "sha256": "0d0f6451ffd98cfb379c2b323e9f998dd1f51e165f9fa47029cc7c367bd97fc2"
+          }
+        },
+        "7": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 102187,
+            "hbm_requested_reported_GB": 4059.0,
+            "reused": 101943
+          },
+          "completed_in_window": 61,
+          "cross_window_steps": [],
+          "frame_visits": 1952,
+          "frame_visits_per_second": 3.2533333333333334,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 6.948263179,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 9.341808996114754,
+          "pure_train_median_including_cross_seconds": 9.32710719,
+          "pure_train_median_seconds": 9.32710719,
+          "pure_train_total_seconds": 569.850348763,
+          "repeated_frame_visits_since_warmup": 1312,
+          "steps": {
+            "bytes": 846852,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node7\\steps.jsonl",
+            "sha256": "e64d78370c90d5f906494b5c23eb550c5ef98b12d5939cd329d37cd7aab19d47"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            9.831093978,
+            9.77350481,
+            9.765940493,
+            9.528872216,
+            9.640645072
+          ],
+          "worker": {
+            "bytes": 2167314,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node7\\result.json",
+            "sha256": "cc11aa1f95d0e058300990846c4fe2c7f03f46d074b60d9bf296d2929a97d990"
+          }
+        },
+        "8": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 92911,
+            "hbm_requested_reported_GB": 3690.1,
+            "reused": 92667
+          },
+          "completed_in_window": 54,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 2.080695161,
+              "end_ns": 976693799241810,
+              "start_ns": 976683557858081,
+              "step": 60
+            }
+          ],
+          "frame_visits": 1728,
+          "frame_visits_per_second": 2.88,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 5.34299099,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 10.533279851592592,
+          "pure_train_median_including_cross_seconds": 10.515208366,
+          "pure_train_median_seconds": 10.541229161499999,
+          "pure_train_total_seconds": 568.7971119860002,
+          "repeated_frame_visits_since_warmup": 1088,
+          "steps": {
+            "bytes": 770082,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node8\\steps.jsonl",
+            "sha256": "2239217619e25710c3458d0e6278739e6575f0a87b0a5d0d1c5c542c247ca4d4"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.858980436,
+            10.990423169,
+            11.010866127,
+            11.283728365,
+            11.3761003
+          ],
+          "worker": {
+            "bytes": 1976205,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node8\\result.json",
+            "sha256": "6de0e90f76bcbcbba996f5a74cf6c28dbdc3855f14b2d48da9eef62dcc7291bd"
+          }
+        },
+        "9": {
+          "allocator": {
+            "arena_high_water_reported_GB": 3.03,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 92911,
+            "hbm_requested_reported_GB": 3690.1,
+            "reused": 92667
+          },
+          "completed_in_window": 54,
+          "cross_window_steps": [
+            {
+              "after_close_seconds": 6.898747764,
+              "end_ns": 976698617294413,
+              "start_ns": 976688958799386,
+              "step": 60
+            }
+          ],
+          "frame_visits": 1728,
+          "frame_visits_per_second": 2.88,
+          "hbm_end_MiB": 2894,
+          "opening_wait_seconds": 5.313866006,
+          "per_step_barrier_wait_events": 0,
+          "per_step_barrier_wait_seconds": 0,
+          "pure_train_mean_seconds": 10.669341566037037,
+          "pure_train_median_including_cross_seconds": 10.658171043,
+          "pure_train_median_seconds": 10.658193038,
+          "pure_train_total_seconds": 576.1444445659998,
+          "repeated_frame_visits_since_warmup": 1088,
+          "steps": {
+            "bytes": 770131,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node9\\steps.jsonl",
+            "sha256": "58f15ac869743e25b9d39b5ad709a1776ffb98b2e7c42dc9cb4d99d6a71ac8fb"
+          },
+          "unique_frames_in_window": 800,
+          "warmup_check": {
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 15
+          },
+          "warmup_step_seconds": [
+            10.904596207,
+            11.069314587,
+            11.036302712,
+            11.31518578,
+            11.408084633
+          ],
+          "worker": {
+            "bytes": 1976204,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node9\\result.json",
+            "sha256": "60a3aeb2613775e298a3168744b241055678dadde60f87c85d7e58ed94f6b1bc"
+          }
+        }
+      },
+      "frame_visits": 27232,
+      "frame_visits_per_second": 45.38666666666666,
+      "least_window_output_domain": "4",
+      "repeated_frame_visits_since_warmup": 16992,
+      "slowest_by_pure_median": "4",
+      "updates_reserved": 946,
+      "updates_started": 946,
+      "window": {
+        "close_ns": 976691718546649,
+        "open_ns": 976091718546649
+      }
+    }
+  },
+  "budget": {
+    "allocation_seconds": 4205,
+    "attempts": [
+      {
+        "allocation_seconds": 4205,
+        "archive": {
+          "bytes": 11895630,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\JOB_2085843_TRANSFER.tgz",
+          "sha256": "d730b18feadd0137b149602029a0683a4088224b4d7d1480f615e866859ea3bb"
+        },
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 1114,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\cleanup.json",
+          "sha256": "6ed6f498e6268a5cb56ec38e6c8e437fa5c6f67a79a02c8cf4aaf4614363551b"
+        },
+        "host": "cn22035",
+        "job_id": "2085843",
+        "native": {
+          "bytes": 3851,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\djob_final.json",
+          "sha256": "ee78ac321d7acf2d5f6eb9f1c50dabd039ae5c4b44d6c8569a6d17ed1674e14e"
+        },
+        "queue_seconds": 3,
+        "state": "SUCCEEDED",
+        "terminal": true,
+        "updates_reserved": 1074
+      }
+    ],
+    "cleanup_reserve_seconds": 120,
+    "deadline_utc": "2026-11-12T14:04:34+00:00",
+    "max_allocation_seconds": 7200,
+    "max_submissions": 1,
+    "max_updates": 4000,
+    "queue_seconds": 3,
+    "status": "CLOSED",
+    "updates": 1074
+  },
+  "comparison": {
+    "B_vs_A_pct": 1710.6382978723404,
+    "delta_frame_visits": 25728,
+    "delta_frame_visits_per_second": 42.88,
+    "historical_cn22035_node12_pure_slowest": {
+      "A": false,
+      "B": false
+    },
+    "interpretation": "Observed fixed-order engineering contrast; arm B slow-domain recovery was already visible during synchronized warmup, so the throughput delta does not identify the isolated causal effect of removing the barrier.",
+    "per_domain_delta_frame_visits": {
+      "0": 1664,
+      "1": 1664,
+      "10": 1632,
+      "11": 1632,
+      "12": 1632,
+      "13": 1600,
+      "14": 1600,
+      "15": 1600,
+      "2": 1664,
+      "3": 1664,
+      "4": 736,
+      "5": 1728,
+      "6": 1792,
+      "7": 1856,
+      "8": 1632,
+      "9": 1632
+    },
+    "slow_domain_and_other_contributions": {
+      "12": {
+        "A": {
+          "deficit_vs_mean_other_frames": -2.13333333333334,
+          "deficit_vs_mean_other_frames_per_second": -0.0035555555555555666,
+          "deficit_vs_mean_other_pct": -2.27272727272728,
+          "frame_visits": 96,
+          "frame_visits_per_second": 0.16,
+          "mean_other_domain_visits": 93.86666666666666,
+          "median_other_domain_pure_train_seconds": 11.005827234,
+          "pure_train_median_seconds": 11.264380947
+        },
+        "B": {
+          "deficit_vs_mean_other_frames": -27.73333333333335,
+          "deficit_vs_mean_other_frames_per_second": -0.04622222222222225,
+          "deficit_vs_mean_other_pct": -1.63111668757842,
+          "frame_visits": 1728,
+          "frame_visits_per_second": 2.88,
+          "mean_other_domain_visits": 1700.2666666666667,
+          "median_other_domain_pure_train_seconds": 10.515208366,
+          "pure_train_median_seconds": 10.504956652
+        },
+        "delta_frames": 1632,
+        "delta_frames_per_second": 2.72,
+        "other_15_delta_frames": 24096,
+        "other_15_delta_frames_per_second": 40.16
+      },
+      "4": {
+        "A": {
+          "deficit_vs_mean_other_frames": 32,
+          "deficit_vs_mean_other_frames_per_second": 0.05333333333333334,
+          "deficit_vs_mean_other_pct": 33.333333333333336,
+          "frame_visits": 64,
+          "frame_visits_per_second": 0.10666666666666667,
+          "mean_other_domain_visits": 96,
+          "median_other_domain_pure_train_seconds": 11.005827234,
+          "pure_train_median_seconds": 248.218742016
+        },
+        "B": {
+          "deficit_vs_mean_other_frames": 962.1333333333334,
+          "deficit_vs_mean_other_frames_per_second": 1.6035555555555556,
+          "deficit_vs_mean_other_pct": 54.600484261501215,
+          "frame_visits": 800,
+          "frame_visits_per_second": 1.3333333333333333,
+          "mean_other_domain_visits": 1762.1333333333334,
+          "median_other_domain_pure_train_seconds": 10.504956652,
+          "pure_train_median_seconds": 23.1587285915
+        },
+        "delta_frames": 736,
+        "delta_frames_per_second": 1.2266666666666666,
+        "other_15_delta_frames": 24992,
+        "other_15_delta_frames_per_second": 41.653333333333336
+      }
+    }
+  },
+  "evidence_index": [
+    {
+      "bytes": 2713,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\ACTUAL_COMMANDS.md",
+      "sha256": "eafc1dbad43d510fa4f86e27d282787604b0a7a9b5a03378a419216e79b99ff3"
+    },
+    {
+      "bytes": 1023,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\SESSION_STATUS.md",
+      "sha256": "952f64e7f90916afeb215cf52f0f88900ab7db5ca82994f7fab1398d47edfedc"
+    },
+    {
+      "bytes": 962,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\ROUND_DELTA.md",
+      "sha256": "dd7317c6c02f1f3e03a7bc00c1e542f60641211e70016a8a90ed15c091d6b59d"
+    },
+    {
+      "bytes": 1384,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\BUDGET_LEDGER.json",
+      "sha256": "d6203a227ef67c777b362922a2435d61c7109904c9c503f05040adb19919e463"
+    },
+    {
+      "bytes": 1127,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\ACTIVE_JOB.json",
+      "sha256": "f09bf1351f73569b5faf1371e1750c0e7a57247928cf6b15191e773f02d3c519"
+    },
+    {
+      "bytes": 14133,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\freeze_ab.py",
+      "sha256": "965b7c8da5a8e856322e825bbbcee2aff2f28cea4be2973c5397058b526e46ad"
+    },
+    {
+      "bytes": 2136,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\window_control.py",
+      "sha256": "1dfd31556764a8a5da76d19d6181f07d6c961209becc45d0e4505d495ee2e0bc"
+    },
+    {
+      "bytes": 13350,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\settle_ab.py",
+      "sha256": "910a823e19d47fbdf4bac7c4d2f088c587b955394a3c18bb8b1b0028ffa8bf89"
+    },
+    {
+      "bytes": 5878,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\publish_ab.py",
+      "sha256": "e34cf9325ffe2eb31154c74322b14f82af23753bfb007d2b8442568bd775ffa4"
+    },
+    {
+      "bytes": 2779,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\SUMMARY.md",
+      "sha256": "2eeacd16ae7681f6edf3ccf58bb786b4c06ac2565eccfbc950d07af10bb4442d"
+    },
+    {
+      "bytes": 3806,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\RUN_BINDING.json",
+      "sha256": "db43f6a1ef2b1a8b733bdab9682b2d19dcdc8844fe719759198532114273a92c"
+    },
+    {
+      "bytes": 23555,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\MINIMAL.diff",
+      "sha256": "59b27cc78ce99a4fd8ac40a50a270a9f3f5d5f2e5e07e0eb89bed3a86a77ea84"
+    },
+    {
+      "bytes": 3170,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\SOURCE_SHA256.json",
+      "sha256": "19ea932abb64e3b416187fd97cdcd4fe174cd45f07662227d7972421a8a707f4"
+    },
+    {
+      "bytes": 79542,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\FULL16_PAYLOAD.zip",
+      "sha256": "49ecd7255a91f9199e009d899ebe5c92049fcca981d800d29d60d7547f9dedf9"
+    },
+    {
+      "bytes": 70377,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\ANALYSIS.json",
+      "sha256": "95240a684fea6074e7c10b079b6d32f302bdc138c1d4683c637e03fdd7c2458c"
+    },
+    {
+      "bytes": 11895630,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\JOB_2085843_TRANSFER.tgz",
+      "sha256": "d730b18feadd0137b149602029a0683a4088224b4d7d1480f615e866859ea3bb"
+    },
+    {
+      "bytes": 195426,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\COLLECTION_INDEX.json",
+      "sha256": "ed7fb3df88afc15a29aa6ac839fd76b8b48ac472979fba9c0c71c2670bed36d1"
+    },
+    {
+      "bytes": 3851,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\djob_final.json",
+      "sha256": "ee78ac321d7acf2d5f6eb9f1c50dabd039ae5c4b44d6c8569a6d17ed1674e14e"
+    },
+    {
+      "bytes": 790,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\submission.command.json",
+      "sha256": "5fdc27aaa4927942d764c5dffa3b033dde702e72958eda07dc3f84f7c1316738"
+    },
+    {
+      "bytes": 63041,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\FROZEN_REFERENCE\\steps.jsonl",
+      "sha256": "0e52cb8ba87e58f3d495392f1dea67ac44f9380277987f7c6db62509358db80b"
+    },
+    {
+      "bytes": 10215,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\FROZEN_REFERENCE\\PAIRING.json",
+      "sha256": "ff390e832df6dde669c3c181e01e5e413a53a1515e3e858ef1cec8bcea9bc164"
+    },
+    {
+      "bytes": 1114,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\cleanup.json",
+      "sha256": "6ed6f498e6268a5cb56ec38e6c8e437fa5c6f67a79a02c8cf4aaf4614363551b"
+    },
+    {
+      "bytes": 551,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\pool_return_terminal.json",
+      "sha256": "e13d7142c8e49cf56fa1ac300c05faa5d8d3cd0ac7c8548b51b9a27a9e2a88bb"
+    },
+    {
+      "bytes": 137279,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\domain_map.json",
+      "sha256": "308dd011b9f714d9a99e88640eb95a5ebe3466bd86edd2bde9386f605bcd2bd2"
+    },
+    {
+      "bytes": 335,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\hbm_capacity_before.json",
+      "sha256": "a44c39baff85b15c6d028582615fffb024fd1e3293a1289c42af000ed48e20b9"
+    },
+    {
+      "bytes": 117,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\update_budget_cleanup.json",
+      "sha256": "58ff6f3fa50b33a4cae7b9c73c42e196f1c8f5e3f48e1b430231cd122d349ec0"
+    },
+    {
+      "bytes": 64,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\WINDOW.json",
+      "sha256": "86220594f2193f5cf06def51051ef69aecb975edbc82ca4e4a899ded791b0410"
+    },
+    {
+      "bytes": 386,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\phase_receipt.json",
+      "sha256": "e281a3c3fab7153294730d089a656df8d11f0526cf940c9b6a201baf15a33a0e"
+    },
+    {
+      "bytes": 102740,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node0\\steps.jsonl",
+      "sha256": "5d6bbfb1c239d81158475f3a8e709b0bf37790166cbd7e7dcb6ba1f1984d631e"
+    },
+    {
+      "bytes": 102757,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node1\\steps.jsonl",
+      "sha256": "8388f98aa84ff904dccadfb3c448aefb612848bfddaf902b52095f9ad98d76d2"
+    },
+    {
+      "bytes": 102762,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node10\\steps.jsonl",
+      "sha256": "930965af9ef91ce2650ee21aaedc644556f99cc421cc08baa782373ca9449353"
+    },
+    {
+      "bytes": 102689,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node11\\steps.jsonl",
+      "sha256": "aa7d15cf7156bee2063df4ace1cfd3292f798da4c6176ddf334c76d7afcd38e4"
+    },
+    {
+      "bytes": 102758,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node12\\steps.jsonl",
+      "sha256": "7671be4d520947a03b67c3ac19c251b756f66dfd00041db4d91a72adf3a50364"
+    },
+    {
+      "bytes": 102746,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node13\\steps.jsonl",
+      "sha256": "986d8db98dea52655529eba3759998f54459c511c6fa344afcd0ca56819a6e02"
+    },
+    {
+      "bytes": 102768,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node14\\steps.jsonl",
+      "sha256": "419ced86d68468d22f1fa485f2acfa30e3f2d3cfe9ca30b30bb0ad38a01634fc"
+    },
+    {
+      "bytes": 102759,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node15\\steps.jsonl",
+      "sha256": "2f1bd06b7fe0f72c04d1e0bc97f5d299e257de3da3f04ad6c5f91cb52ab6a239"
+    },
+    {
+      "bytes": 102757,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node2\\steps.jsonl",
+      "sha256": "ce50f8bc11cbe7087b0cfd159e20e3ac890aab3f38962c16ef97b16803e9f7ef"
+    },
+    {
+      "bytes": 102736,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node3\\steps.jsonl",
+      "sha256": "aaeb9c2fb3977087be2f3d2c9b6d39b3113e3dc11d5dae182e6acec963a716b3"
+    },
+    {
+      "bytes": 102757,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node4\\steps.jsonl",
+      "sha256": "da92179345a50a2c4acffee8d4d7a240d2ba852d1ea81f4355208814b5953db5"
+    },
+    {
+      "bytes": 102744,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node5\\steps.jsonl",
+      "sha256": "1e661d42e880fe51920b4b1e96a0902083937688f3626eeb7ec9a5955277a998"
+    },
+    {
+      "bytes": 102695,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node6\\steps.jsonl",
+      "sha256": "3de7cb56d3263e877b38d64a67c7e5836782c8380ee737bb87f59a7d61067f87"
+    },
+    {
+      "bytes": 102728,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node7\\steps.jsonl",
+      "sha256": "eee53464dcb57885a0b74e851e2b2dd3fbb3f8c1ac850d73c071913ab2dc537e"
+    },
+    {
+      "bytes": 102727,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node8\\steps.jsonl",
+      "sha256": "faafcab7ef333248a4bf24ec05898f255e3447f4ccd0690562f85270ff3cf446"
+    },
+    {
+      "bytes": 102744,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node9\\steps.jsonl",
+      "sha256": "e92805d22017db17b2c529229d872b5eb87d2e94abd0676142edf19c8c005b4d"
+    },
+    {
+      "bytes": 332687,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node0\\result.json",
+      "sha256": "975941e0ee94ae383703e6dc3fda4d1fa4bbc2c0f33caced4963c32ea30a6054"
+    },
+    {
+      "bytes": 333206,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node1\\result.json",
+      "sha256": "fbb39ef4cffee51994ebf926dc16261c3a2f2916baeec0c8e4750ce0f988fd9c"
+    },
+    {
+      "bytes": 335013,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node10\\result.json",
+      "sha256": "3f66ff962fcacb7d247ff417f3ac070559b7167ea33da319ef8d60f9adf513e8"
+    },
+    {
+      "bytes": 335012,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node11\\result.json",
+      "sha256": "e1d27e0a62feb9116ce9115ce25edfd487fc93311a479baff39bce4c11f78e11"
+    },
+    {
+      "bytes": 335011,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node12\\result.json",
+      "sha256": "fa50829b888183897c320ab382592cf34f42cc122f2a6a14816cdfadd98bd990"
+    },
+    {
+      "bytes": 335008,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node13\\result.json",
+      "sha256": "2992c087d3231c12a67e5ae08cfd70839f0299c7bdea9933ee9a7a2e2776d196"
+    },
+    {
+      "bytes": 335009,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node14\\result.json",
+      "sha256": "9269590017578322ffe44ecaaa7de0de9535ef0d3e4ea6ab8e5e5d7e5fb5eef0"
+    },
+    {
+      "bytes": 335008,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node15\\result.json",
+      "sha256": "84b7878bf1683d68f85f60f3b09573f8894571647626e2ee8e9f7226e478dece"
+    },
+    {
+      "bytes": 333799,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node2\\result.json",
+      "sha256": "7326de103b7d5932b861dd4068e0e89341a9c3a751ec33558f70f507c343a3cd"
+    },
+    {
+      "bytes": 335004,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node3\\result.json",
+      "sha256": "fb373d499f223d1fb4f61a51852fcbab444428081b803fb27ca23bf1c77a96de"
+    },
+    {
+      "bytes": 319915,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node4\\result.json",
+      "sha256": "693eec2c5f2ebc55905bdc06398f72b9fe7644e20d1d9523457ca9dc1154fd44"
+    },
+    {
+      "bytes": 335010,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node5\\result.json",
+      "sha256": "377842acc319a0ff1dfc1842ebb39ce08f4e6fad377020dccab5e06984d2d02f"
+    },
+    {
+      "bytes": 335005,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node6\\result.json",
+      "sha256": "2a4f889d3541fac9bcc2f1946b96ef7a080ccecefe0302052ad58b78443639d3"
+    },
+    {
+      "bytes": 335006,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node7\\result.json",
+      "sha256": "87b10f343258be94fa4ba914ebc52eb89862e1f0b165a624401c5f20ea194d53"
+    },
+    {
+      "bytes": 335007,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node8\\result.json",
+      "sha256": "ac4f1a4d9b4a28d0d966ba5e46159bdeced34ed92f5540a9f4da35539ec9c2f0"
+    },
+    {
+      "bytes": 335008,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\A\\node9\\result.json",
+      "sha256": "f25427fef85009f9f47b0b9686d4347f1a846bdf7e6be57ac700b2c5ae57d5ca"
+    },
+    {
+      "bytes": 64,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\WINDOW.json",
+      "sha256": "78f22a8983d6110e4771dab8f1e2c8964d84c3cafacac4209bd964b323a0bfed"
+    },
+    {
+      "bytes": 402,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\phase_receipt.json",
+      "sha256": "68fd3970f1702a55da1ac952c51d63ede10e5b87e072238b5717399d1430b97d"
+    },
+    {
+      "bytes": 782924,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node0\\steps.jsonl",
+      "sha256": "7e21af91d2224e666053474633783add8042007f06cee9eb15635ff42bcd8498"
+    },
+    {
+      "bytes": 783011,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node1\\steps.jsonl",
+      "sha256": "895e5e5e3d0edd714d12b2339cf59006575e144756046fea837d53c1825ea328"
+    },
+    {
+      "bytes": 769992,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node10\\steps.jsonl",
+      "sha256": "64a41303b11d0104712bd07498c71270f3a2db19faca27fb839115901e614cd7"
+    },
+    {
+      "bytes": 770057,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node11\\steps.jsonl",
+      "sha256": "4d6a5b864c6879d58cf4b917541908092a6ed1ef86641c80c670cb94af7378f1"
+    },
+    {
+      "bytes": 770028,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node12\\steps.jsonl",
+      "sha256": "3edc19315222ec738d981a7e3f5b75ab815ca7aa718cca75d053d93da4eb7862"
+    },
+    {
+      "bytes": 757212,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node13\\steps.jsonl",
+      "sha256": "e512f6f7abf18f5cd9d48a2a69684e36d0f3a19cff1252e1c527e05e4b06e3a5"
+    },
+    {
+      "bytes": 757331,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node14\\steps.jsonl",
+      "sha256": "d86492845d31c88794ad845750efa1198fa7f0b20b9b2f4acac1f87c1e92ae56"
+    },
+    {
+      "bytes": 757284,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node15\\steps.jsonl",
+      "sha256": "8ac2433fe5cd1897d9b12a9ab77073038bc50e3b9fa5cb16c9ba3bd54355bb01"
+    },
+    {
+      "bytes": 782868,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node2\\steps.jsonl",
+      "sha256": "dbc29a4029ac8ca877cd49e4945e87a2d8c2471f2298942e71b0d267bab61ae1"
+    },
+    {
+      "bytes": 782914,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node3\\steps.jsonl",
+      "sha256": "4ff8a558b0ef82b993043664c08174df71cdd72f36bc192f74149717584b550d"
+    },
+    {
+      "bytes": 397909,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node4\\steps.jsonl",
+      "sha256": "ac58d441cc3ff83be7567eab003e4e7decb82a741eb30ec0c131e327cc5d11ee"
+    },
+    {
+      "bytes": 808492,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node5\\steps.jsonl",
+      "sha256": "a5cc9041b8341ce9348c44fec14d206dbbae53ad0d97f19f9f29fe767d01da0d"
+    },
+    {
+      "bytes": 834177,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node6\\steps.jsonl",
+      "sha256": "746f4b9a43f179ab2dea953a777660f5e1ac3a6f6ff783fbf3860d816cf0f358"
+    },
+    {
+      "bytes": 846852,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node7\\steps.jsonl",
+      "sha256": "e64d78370c90d5f906494b5c23eb550c5ef98b12d5939cd329d37cd7aab19d47"
+    },
+    {
+      "bytes": 770082,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node8\\steps.jsonl",
+      "sha256": "2239217619e25710c3458d0e6278739e6575f0a87b0a5d0d1c5c542c247ca4d4"
+    },
+    {
+      "bytes": 770131,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node9\\steps.jsonl",
+      "sha256": "58f15ac869743e25b9d39b5ad709a1776ffb98b2e7c42dc9cb4d99d6a71ac8fb"
+    },
+    {
+      "bytes": 1995902,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node0\\result.json",
+      "sha256": "c9f71dffd053ecc712517e8b718ea30d1b810c7c7e6af21fc85803c7ebeed323"
+    },
+    {
+      "bytes": 1998544,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node1\\result.json",
+      "sha256": "77f8f4c649326330237e250259a8299c329746ede061483d676cb5e2b4543367"
+    },
+    {
+      "bytes": 1976209,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node10\\result.json",
+      "sha256": "606df17ac31b42f0946159db3825ed088d7b1f4eba90b52f00dbdcc7b7346774"
+    },
+    {
+      "bytes": 1976206,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node11\\result.json",
+      "sha256": "48523f4399990e22e3b56ad2e244b97846b811fcbd5ce3447a139515524a0084"
+    },
+    {
+      "bytes": 1976206,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node12\\result.json",
+      "sha256": "c4a37166ed75b689f322e5db865c5cf17f6f6334832d7807e85ea7d168537327"
+    },
+    {
+      "bytes": 1944330,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node13\\result.json",
+      "sha256": "8ad63755a2a21999be7fc43773b677bfc3ad6b007ef732ac4c86f97d7a796e76"
+    },
+    {
+      "bytes": 1944331,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node14\\result.json",
+      "sha256": "c4b9455b6391b31740a9531b58680d413722ada90d8aa3f1f48b7b067caf5710"
+    },
+    {
+      "bytes": 1944336,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node15\\result.json",
+      "sha256": "7ccbba632cbdcccb027f344a1abc85edfc6aec1cf89711538461e7260594be3f"
+    },
+    {
+      "bytes": 2001668,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node2\\result.json",
+      "sha256": "d0912b248beeb49f063947fbd011aafa4e5c8514ea21020ee42bf0a57eeaab67"
+    },
+    {
+      "bytes": 2008002,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node3\\result.json",
+      "sha256": "8613f5a37fea66921847c02e387bed533f6e88804bbd6d15df843f8ccad22d93"
+    },
+    {
+      "bytes": 1054272,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node4\\result.json",
+      "sha256": "913ee75b8590aa09e619e3f5d6b5405eaa6dc78dedc53ae997ae4e9b5e498864"
+    },
+    {
+      "bytes": 2071760,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node5\\result.json",
+      "sha256": "073ec0f3abfdc024f0f1ddca5c77a05654e2011212e35e30593f6550cba0dd96"
+    },
+    {
+      "bytes": 2135502,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node6\\result.json",
+      "sha256": "0d0f6451ffd98cfb379c2b323e9f998dd1f51e165f9fa47029cc7c367bd97fc2"
+    },
+    {
+      "bytes": 2167314,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node7\\result.json",
+      "sha256": "cc11aa1f95d0e058300990846c4fe2c7f03f46d074b60d9bf296d2929a97d990"
+    },
+    {
+      "bytes": 1976205,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node8\\result.json",
+      "sha256": "6de0e90f76bcbcbba996f5a74cf6c28dbdc3855f14b2d48da9eef62dcc7291bd"
+    },
+    {
+      "bytes": 1976204,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\step_barrier_ab_r1_20261111\\AB_D16\\received\\job_evidence\\B\\node9\\result.json",
+      "sha256": "60a3aeb2613775e298a3168744b241055678dadde60f87c85d7e58ed94f6b1bc"
+    }
+  ],
+  "host": "cn22035",
+  "job_id": "2085843",
+  "logged_updates": 1074,
+  "partial_step_rows": {},
+  "prior_stability_preserved": true,
+  "resources": {
+    "DDR_allocated_MB": 393216,
+    "DDR_limit_MB": 393216,
+    "DDR_requested_MB": 393216,
+    "HBM_before": {
+      "cap_MiB": 3800,
+      "free_pages": {
+        "0": 2020,
+        "1": 2020,
+        "10": 2020,
+        "11": 2020,
+        "12": 2020,
+        "13": 2020,
+        "14": 2020,
+        "15": 2020,
+        "2": 2020,
+        "3": 2020,
+        "4": 2020,
+        "5": 2020,
+        "6": 2020,
+        "7": 2020,
+        "8": 2020,
+        "9": 2020
+      },
+      "insufficient": [],
+      "reserve_pages": 16
+    },
+    "HBM_cap_MiB_per_domain": 3800,
+    "HBM_cpu_domain_mapping": {
+      "0": 16,
+      "1": 17,
+      "10": 26,
+      "11": 27,
+      "12": 28,
+      "13": 29,
+      "14": 30,
+      "15": 31,
+      "2": 18,
+      "3": 19,
+      "4": 20,
+      "5": 21,
+      "6": 22,
+      "7": 23,
+      "8": 24,
+      "9": 25
+    },
+    "actual_domains": 16,
+    "allocated_cpus": 608,
+    "compute_cpus": 576,
+    "exclusive": true,
+    "reserved_cpus": 32
+  },
+  "source": {
+    "allocator_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+    "archived_reference_bundle_sha256": "2dc302b3f35684799028897e046ba5b69f04a77e502e7fa6d4fae6fe2313bfa8",
+    "archived_reference_job": "2064138",
+    "descriptor_sha256": "2d9ef2f224a7b2f2fb2848c4ec39274fe9466ab2f2aaef4757bc35608e1ebe4a",
+    "diff_sha256": "59b27cc78ce99a4fd8ac40a50a270a9f3f5d5f2e5e07e0eb89bed3a86a77ea84",
+    "package_sha256": "49ecd7255a91f9199e009d899ebe5c92049fcca981d800d29d60d7547f9dedf9",
+    "source_manifest_sha256": "19ea932abb64e3b416187fd97cdcd4fe174cd45f07662227d7972421a8a707f4"
+  },
+  "state": "SUCCEEDED",
+  "status": "COMPLETE_ONE_PAIRED_ENGINEERING_RUN"
+}

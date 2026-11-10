@@ -1,0 +1,68 @@
+{
+  "actual_hosts": [
+    "cn22036"
+  ],
+  "allocation_seconds": 323,
+  "attempts": [
+    {
+      "allocation_seconds": 199,
+      "archive": {
+        "bytes": 406814,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\JOB_2086632_TRANSFER.tgz",
+        "sha256": "5c31d36adf53673a349232cd63b06491799025a5b6e4fcaa1e55431a263ab855"
+      },
+      "cleanup": "ALL_REAPED",
+      "host": "cn22036",
+      "job_id": "2086632",
+      "native": {
+        "bytes": 3813,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\received\\djob_final.json",
+        "sha256": "5e78bb9b1f7512d045e10ed95db337a3773fa972d91ddc24c47aede3cdc052f4"
+      },
+      "outcome": "PASS_HBM_LIB_CERT",
+      "queue_seconds": 1,
+      "state": "SUCCEEDED",
+      "terminal": true,
+      "updates": 10,
+      "version": "C1"
+    },
+    {
+      "allocation_seconds": 124,
+      "archive": {
+        "bytes": 357578,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\B1\\JOB_2086656_TRANSFER.tgz",
+        "sha256": "8f23d59dc22defdfa20e49dce3b4e7c9a005d33c365b0a0ce69092fee56ad8e6"
+      },
+      "cleanup": "ALL_REAPED",
+      "host": "cn22036",
+      "job_id": "2086656",
+      "native": {
+        "bytes": 3842,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\B1\\received\\djob_final.json",
+        "sha256": "42b110f24d2233745e99efd66a7eda4d616401b0570f69fc3e2e3de34dee2030"
+      },
+      "outcome": "BF16_REJECTED_NUMERICAL_FAIL",
+      "queue_seconds": 1,
+      "state": "FAILED",
+      "terminal": true,
+      "updates": 6,
+      "version": "B1"
+    }
+  ],
+  "cleanup_reserve_seconds": 120,
+  "deadline_utc": "2026-11-12T17:47:30+00:00",
+  "engineering_retries_used": 0,
+  "four_domain_job_max_seconds": 7200,
+  "max_allocation_seconds": 14400,
+  "max_engineering_retries": 1,
+  "max_hosts": 2,
+  "max_queue_seconds": 86400,
+  "max_submissions": 4,
+  "max_updates": 4000,
+  "mode": "conditional",
+  "queue_seconds": 2,
+  "single_job_max_seconds": 1800,
+  "started_utc": "2026-11-10T17:47:30+00:00",
+  "status": "CLOSED",
+  "updates": 16
+}

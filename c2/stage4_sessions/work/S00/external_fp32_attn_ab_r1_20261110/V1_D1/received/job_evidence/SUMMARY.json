@@ -1,0 +1,9 @@
+{
+  "error": "ValueError('stale/future scheduler handoff')",
+  "finished": 965669.495066908,
+  "job_id": "2085024",
+  "start": 965664.348484919,
+  "status": "FAIL_STOP",
+  "steps": {},
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V1_D1/launch.py\", line 312, in main\n    contracts = allocation(binding)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V1_D1/launch.py\", line 137, in allocation\n    gate = await_handoff(ROOT, req, context, 38 * count, mem, binding[\"wall_seconds\"], timeout=35)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V1_D1/scheduler_handoff.py\", line 76, in await_handoff\n    raise ValueError('stale/future scheduler handoff')\nValueError: stale/future scheduler handoff\n"
+}

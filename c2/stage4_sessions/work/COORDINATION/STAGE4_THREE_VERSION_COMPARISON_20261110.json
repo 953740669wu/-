@@ -1,0 +1,105 @@
+{
+  "scope": "Targeted three-way stage4 comparison; no new tests or changes to code",
+  "comparisons": [
+    {
+      "file": "s4_models.py",
+      "old": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\s4_models.py",
+        "bytes": 14121,
+        "sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2"
+      },
+      "external": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-08\\s4_models.py",
+        "bytes": 25148,
+        "sha256": "85457b52166525ead1fac6c15b0a4229e13ae8a4618e5de1017beac2ebeb6053"
+      },
+      "internal_verified": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_16B64_A\\received\\payload\\baseline\\s4_models.py",
+        "bytes": 14121,
+        "sha256": "9ff6417b80c42cee0df02fc52e1892b20cd7cd0abda36c7272bb8957a42fc2c2"
+      },
+      "internal_equals_old": true,
+      "internal_equals_external": false
+    },
+    {
+      "file": "kml_ops.py",
+      "old": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\kml_ops.py",
+        "bytes": 10255,
+        "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+      },
+      "external": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-08\\kml_ops.py",
+        "bytes": 18171,
+        "sha256": "72a15602eb60fb4bcb0bef824808ece37da773e92c8f89d9c613d96a559e038b"
+      },
+      "internal_verified": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S05\\target_ab_r1_20261107\\payload_src\\baseline\\kml_ops.py",
+        "bytes": 10255,
+        "sha256": "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+      },
+      "internal_equals_old": true,
+      "internal_equals_external": false
+    },
+    {
+      "file": "c2/opt/hbm_alloc.c",
+      "old": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\opt\\hbm_alloc.c",
+        "bytes": 5929,
+        "sha256": "edbf06f54a779271c97d739e4aaca18ffae306ccd20713443ecaee11c388cb15"
+      },
+      "external": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-08\\c2\\opt\\hbm_alloc.c",
+        "bytes": 9566,
+        "sha256": "6e2d50b06f827fc2cdbf85b1ac9b98c668f9dd855a75661357f24c0743ed1544"
+      },
+      "internal_verified": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H1_16B64_A\\received\\s03\\candidate\\hbm_alloc.c",
+        "bytes": 7161,
+        "sha256": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2"
+      },
+      "internal_equals_old": false,
+      "internal_equals_external": false
+    },
+    {
+      "file": "c2/opt/run_node16.sh",
+      "old": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\opt\\run_node16.sh",
+        "bytes": 4271,
+        "sha256": "a21aafcd1a3384f4ab07b146f24f5ebcf0b2a1b25eb35b725e8d26db9c655979"
+      },
+      "external": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-08\\c2\\opt\\run_node16.sh",
+        "bytes": 6450,
+        "sha256": "fd5ceee8a2a4cb555efed80a0e9cf21e9c4cc18d223e2f84deb111117ed72eae"
+      },
+      "internal_verified": "Our task-specific launchers/guards or unaccepted attention candidate; not equivalent to external entrypoint"
+    },
+    {
+      "file": "c2/opt/kml_attn.c",
+      "old": null,
+      "external": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-08\\c2\\opt\\kml_attn.c",
+        "bytes": 26266,
+        "sha256": "8bd18a4380d794eabab20c9387ff1005434ae544e7b64450106cf4b343bdac74"
+      },
+      "internal_verified": "Our task-specific launchers/guards or unaccepted attention candidate; not equivalent to external entrypoint"
+    },
+    {
+      "file": "c2/opt/shm_allreduce.c",
+      "old": null,
+      "external": {
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-08\\c2\\opt\\shm_allreduce.c",
+        "bytes": 5511,
+        "sha256": "59b8bf1e8b33fedbd3d16a8f520a98dcb31dc0d162e4932d45e55222347c1d87"
+      },
+      "internal_verified": "Our task-specific launchers/guards or unaccepted attention candidate; not equivalent to external entrypoint"
+    }
+  ],
+  "checkpoint_internal": {
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\M23_MEMORY_HBM\\memory_hbm_32e_r1_20261108\\S09_R7_20261108T053223Z\\received\\payload\\checkpoint_layers.py",
+    "bytes": 293,
+    "sha256": "a55b48fd710fea13b11f9058e2ca568c00f9e6d4e88e7e0f71118f6c7beb2576"
+  },
+  "conclusion": "External stage4 changed. Internal validated baseline model and KML match old root; validated HBM source differs from both old and external. Existing runtime wrappers and checkpoint implementation are separate task-scoped sources, not a single merged fixed root. Attention candidate still unvalidated."
+}

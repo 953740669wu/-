@@ -1,0 +1,121 @@
+{
+  "allocation_seconds": 1283,
+  "attempts": [
+    {
+      "allocated_seconds": 1278,
+      "artifact": {
+        "bytes": 3700584,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\JOB_2081280_TRANSFER.tgz",
+        "sha256": "436b6d342f3954e1f2568377c58c8d12cd85098f3ca4f91eebdb606f73e5cd98"
+      },
+      "batch": 32,
+      "binding": {
+        "bytes": 4011,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\RUN_BINDING.json",
+        "sha256": "648417a6a846246d426e972bc241a6455b6b86368ce14cd19c5ba3c2c1657072"
+      },
+      "charged_updates": 160,
+      "cleanup": true,
+      "cleanup_source": {
+        "bytes": 2534,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\received\\job_evidence\\cleanup.json",
+        "sha256": "e656dc7d5fa7dfad3b6cf1ae4d7ffa290562fdb46a3642e8ff33662511749a52"
+      },
+      "confirmed_updates": 143,
+      "host": "cn22036",
+      "job_id": "2081280",
+      "native": {
+        "bytes": 4088,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\received\\djob_final.json",
+        "sha256": "c769708a5c99e974ef8011eca9e30db9e2250b8591a6970327a8d79b109ff5a4"
+      },
+      "queue_seconds": 3,
+      "state": "FAILED",
+      "terminal": true,
+      "update_charge_basis": "Maximum updates in reached phases; incomplete final rows may omit in-flight updates",
+      "version": "B32_C1_W1"
+    },
+    {
+      "allocated_seconds": 5,
+      "artifact": {
+        "bytes": 179467,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\JOB_2081519_TRANSFER.tgz",
+        "sha256": "7ce2a6c8bab74430b94188d25a6f57c943433284f063fd0b67fb8e4c7c8f57cc"
+      },
+      "batch": 32,
+      "binding": {
+        "bytes": 4011,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\RUN_BINDING.json",
+        "sha256": "f8eee6715c4387144c77bd06377c3c8f1897c22ac436944ba725aec607c0a4bf"
+      },
+      "charged_updates": 0,
+      "cleanup": true,
+      "cleanup_source": {
+        "bytes": 312,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\received\\job_evidence\\cleanup.json",
+        "sha256": "8fed1027b0b9bb5d25ef62341fe3e4fc0e1667f4bad6c3ff51c0ccc5e4a72635"
+      },
+      "confirmed_updates": 0,
+      "host": "cn22044",
+      "job_id": "2081519",
+      "native": {
+        "bytes": 3748,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\received\\djob_final.json",
+        "sha256": "f5d9f3c30759c80a8971c4703040c183a3a37c7fdfdc5d785295eeeca77a7a98"
+      },
+      "queue_seconds": 4,
+      "state": "FAILED",
+      "terminal": true,
+      "update_charge_basis": "Maximum updates in reached phases; incomplete final rows may omit in-flight updates",
+      "version": "B32_C1_W2"
+    }
+  ],
+  "candidates": [
+    {
+      "actual_deployment": "B32_C1_W1",
+      "actual_deployments": [
+        "B32_C1_W1",
+        "B32_C1_W2"
+      ],
+      "binding": {
+        "bytes": 3477,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_A\\RUN_BINDING.json",
+        "sha256": "fb2008a49ac2da518650be213ad45c9644a2db678e2b3fddc6dec1f4438ac58f"
+      },
+      "deployed_version": "B32_C1_A",
+      "id": "C1_DEFER_VALIDATION",
+      "stage": "STOPPED_BEFORE_COMPLETE_AB"
+    }
+  ],
+  "clock_basis": "First UTC observation on receipt; independent R2 authorization, no R1 carryover",
+  "confirmed_model_updates": 143,
+  "deadline_utc": "2026-11-12T07:23:56+00:00",
+  "limits": {
+    "allocation_seconds": 28800,
+    "candidate_count": 2,
+    "cleanup_reserve_seconds": 120,
+    "host_count": 2,
+    "job_seconds": 7200,
+    "model_updates": 16000,
+    "per_job_updates": 4000,
+    "queue_seconds": 86400,
+    "submissions": 6,
+    "wall_seconds": 172800
+  },
+  "model_updates": 160,
+  "preflight_failures": [
+    {
+      "code": "BATCH.5001",
+      "evidence": {
+        "bytes": 750,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\login_submit.log",
+        "sha256": "2d7e4a326fd57e679d6e8dbe2451a285a6654c1f69013b931c85e21ae10501d1"
+      },
+      "stage": "BEFORE_DSUB"
+    }
+  ],
+  "queue_seconds": 7,
+  "received_utc": "2026-11-10T07:23:56+00:00",
+  "scheduler_user": "wujunyi",
+  "status": "CLOSED_TWO_HOST_CAP_UNRESOLVED"
+}

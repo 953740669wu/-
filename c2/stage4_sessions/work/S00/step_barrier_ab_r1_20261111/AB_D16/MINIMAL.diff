@@ -1,0 +1,466 @@
+--- a/launch.py
++++ b/launch.py
+@@ -11,6 +11,7 @@
+ import shutil
+ import signal
+ import subprocess
++import tempfile
+ import sys
+ import traceback
+ 
+@@ -22,6 +23,7 @@
+ 
+ sys.path.insert(0, str(ROOT / "payload"))
+ from cpu36_contract import cpu_list, discover_contracts
++from window_control import WINDOW_NS, PER_ARM_CAP
+ 
+ EVIDENCE = ROOT / "job_evidence"
+ 
+@@ -133,7 +135,7 @@
+     gate = await_handoff(ROOT, req, context, 38 * count, mem, binding["wall_seconds"], timeout=35)
+     save(EVIDENCE / "scheduler_handoff.json", gate)
+     raw = read(ROOT / "scheduler_allocation.json")["data"]["successData"][0]
+-    need(raw["queue"] == "q_hpcai" and raw["execPath"] == str(ROOT)
++    need(raw["queue"] == "q_hpcai" and raw["execPath"] == str(ROOT) and raw["user"] == binding["scheduler_user"]
+          and raw["retryPolicy"] == dict(maxRetryCnt=0, currentRetryTimes=0), "wrong native job scope or retries")
+     group = raw["resGroups"][0]
+     need([s.replace(" ", "") for s in group["affinityRequest"]] == [f"numa[count={count},distribution=pack]"], "native domain placement request differs")
+@@ -162,9 +164,9 @@
+     return dict(at_ns=time.monotonic_ns(), per_cpu=cpu, worker_ticks=ticks)
+ 
+ 
+-def phase(name, variant, contracts, owner, binding, deadline, placements, run=None):
+-    label = f"{name}_{variant}"
+-    out = EVIDENCE / (label if run is None else f"{label}_r{run}")
++def phase(arm, contracts, owner, binding, deadline, placements, counter):
++    name, variant = "perf", "candidate"
++    out = EVIDENCE / arm
+     out.mkdir()
+     barriers = out / "barriers"
+     barriers.mkdir()
+@@ -183,7 +185,7 @@
+                 "--phase",name,"--variant",variant,"--descriptor",str(ROOT / "ENGINEERING_DESCRIPTOR.json"),
+                 "--descriptor-sha",binding["descriptor_sha256"],"--allocation",str(EVIDENCE / f"{rank}.allocation.json"),
+                 "--phase-root",str(out),"--output",str(out / rank),"--deadline",str(deadline),
+-                "--reference",str(EVIDENCE / "strict_baseline")]
++                "--reference",str(ROOT / "FROZEN_REFERENCE"),"--arm",arm,"--counter",str(counter)]
+         save(out / f"{rank}.command.json", dict(argv=argv))
+         env = dict(os.environ, M1_PARENT_CPU_LIST=inherited, M1_INHERIT_RECEIPT=str(out / f"{rank}.before_numactl.txt"))
+         if variant == "candidate":
+@@ -200,6 +202,7 @@
+     save(out / "parent_after_spawn.json", dict(pid=os.getpid(), allowed=sorted(os.sched_getaffinity(0)),
+          children={n:p.pid for n,p in proc.items()}))
+     step, sampled_at = 1, 0
++    window = None
+     with (out / "cpu_samples.jsonl").open("x") as samples:
+         while True:
+             now = time.monotonic()
+@@ -217,37 +220,28 @@
+                 samples.write(json.dumps(sample(proc, contracts)) + "\n")
+                 samples.flush()
+                 sampled_at = now
+-            if step <= (5 if name == "strict" else 26):
++            if step <= 6 or (arm == "A" and time.monotonic_ns() < window["close_ns"]):
+                 ready = {n:barriers / f"{step}.node{n}.ready" for n in proc}
+                 if all(p.is_file() for p in ready.values()):
+                     arrivals = {n:read(p) for n,p in ready.items()}
+                     need(all(r["pid"] == proc[n].pid for n,r in arrivals.items()), "barrier PID differs")
+-                    if step == 1 and name == "strict" and variant == "baseline" and binding["electrodes"] == 32:
+-                        pairs = [read(out/f"node{n}/PAIRING.json") for n in proc]
+-                        need(all(p == pairs[0] for p in pairs), "full-node DDR sample/mask/initial references differ")
+-                        save(EVIDENCE / "PAIRING_FROZEN_BEFORE_UPDATE.json", pairs[0])
+-                    save(barriers / f"{step}.release", dict(step=step, arrivals=arrivals,
+-                         release_at_ns=time.monotonic_ns()+100_000_000))
++                    release = time.monotonic_ns()+100_000_000
++                    if step == 6:
++                        window = dict(open_ns=release,close_ns=release+WINDOW_NS)
++                        need(window["close_ns"]/1e9 < deadline, "not enough time for a complete 600-second window")
++                        save(out/"WINDOW.json",window)
++                    if step <= 6 or release < window["close_ns"]:
++                        save(barriers / f"{step}.release", dict(step=step, arrivals=arrivals, release_at_ns=release))
+                     step += 1
+             time.sleep(.02)
+-    need(step == (6 if name == "strict" else 27), "incomplete full-node rendezvous")
++    need(window and time.monotonic_ns() >= window["close_ns"], "incomplete fixed window")
+     results = [read(out / f"node{n}" / "result.json") for n in contracts]
+-    expected, updates = ("PASS_PERF25",25)
+-    if name == "strict":
+-        expected, updates = ("PASS_STRICT_REFERENCE5" if variant == "baseline" else "PASS_STRICT_ENCODER5", 5)
+-    need(all(r["status"] == expected and r["completed_updates"] == updates and r["job_id"] == os.environ["CCS_JOB_ID"]
+-             and r["host"] == os.uname().nodename and r["variant"] == variant for r in results), "actual result receipts required")
+-    save(out / "phase_receipt.json", dict(status=expected, job_id=os.environ["CCS_JOB_ID"],
+-         domains={n:r["final_model_sha256"] for n,r in zip(contracts,results)}))
+-
+-
+-def dispose_snapshots():
+-    paths = sorted((EVIDENCE / "strict_baseline").glob("node*/strict_step*.pt"))
+-    if paths:
+-        save(EVIDENCE / "strict_snapshot_cleanup.json", dict(deleted=[str(p.relative_to(EVIDENCE)) for p in paths],
+-             bytes=sum(p.stat().st_size for p in paths)))
+-        for path in paths:
+-            path.unlink()
++    need(all(r["status"] == "PASS_FIXED_WINDOW" and r["completed_updates"] >= 5 and r["window"] == window
++             and r["job_id"] == os.environ["CCS_JOB_ID"] and r["host"] == os.uname().nodename
++             and r["variant"] == variant for r in results), "all 16 fixed-window receipts required")
++    save(out / "phase_receipt.json", dict(status="PASS_FIXED_WINDOW", job_id=os.environ["CCS_JOB_ID"],
++         window=window, updates_reserved=int(counter.read_text()),
++         domains={n:r["completed_updates"] for n,r in zip(contracts,results)}))
+ 
+ 
+ def stop(signum, _):
+@@ -267,15 +261,15 @@
+     owner = Owned(os.getpid())
+     deadline = START + 120
+     placements = {}
++    counters = {}
++    local = None
+     try:
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        need(120 < wall <= 7200 and binding["mode"] == "full_node_hbm_ckpt", "wrong wall or mode")
+-        rounds = binding["hbm_rounds_max"]
+-        need(1 <= rounds <= 3 and binding["first_hbm_round"] + rounds - 1 <= 3, "invalid HBM round plan")
+-        need(shutil.disk_usage(EVIDENCE).free >= binding["strict_storage_min_bytes"],
+-             "insufficient private workspace free space for complete DDR references")
++        need(1200+120 < wall <= 7200 and binding["mode"] == "step_barrier_ab_fixed_window"
++             and binding["window_seconds"] == 600 and binding["max_model_updates"] == 2*PER_ARM_CAP,
++             "wrong authorized A/B scope")
+         libc = ctypes.CDLL(None, use_errno=True)
+         need(libc.prctl(36,1,0,0,0) == 0, "cannot become owned-process subreaper")
+         for sig in (signal.SIGTERM, signal.SIGINT, signal.SIGALRM):
+@@ -285,29 +279,17 @@
+         contracts = allocation(binding)
+         placements = prepare_hbm(ROOT, EVIDENCE, contracts, binding, end)
+         outcome["hbm_safety"] = "PASS"
+-        for variant in ("baseline","candidate"):
+-            outcome["active_phase"] = f"strict_{variant}"
+-            phase("strict", variant, contracts, owner, binding, end, placements)
+-            outcome["steps"][f"strict_{variant}_each_domain"] = 5
+-        verify_return(placements, "strict")
+-        dispose_snapshots()
+-        if binding["ddr_perf_control"]:
+-            outcome["active_phase"] = "perf_baseline"
+-            phase("perf", "baseline", contracts, owner, binding, end, placements)
+-            outcome["steps"]["perf_baseline_each_domain"] = 25
+-        outcome["completed_hbm_rounds"] = []
+-        required_seconds = 0
+-        for run in range(binding["first_hbm_round"], binding["first_hbm_round"] + rounds):
+-            if required_seconds and end-time.monotonic() < required_seconds:
+-                outcome["next_round_deferred"] = dict(round=run, predicted_with_margin_seconds=required_seconds)
+-                break
+-            outcome["active_phase"] = f"perf_candidate_r{run}"
+-            t0 = time.monotonic()
+-            phase("perf", "candidate", contracts, owner, binding, end, placements, run)
+-            verify_return(placements, f"r{run}")
+-            outcome["steps"][f"perf_candidate_r{run}_each_domain"] = 25
+-            outcome["completed_hbm_rounds"].append(run)
+-            required_seconds = (time.monotonic()-t0)*1.25 + 60
++        local = tempfile.TemporaryDirectory(prefix="s00_step_ab_",dir="/dev/shm")
++        outcome["completed_arms"] = []
++        for arm in ("A","B"):
++            if end-time.monotonic() <= (1200 if arm == "A" else 600):
++                raise TimeoutError("not enough time for complete remaining windows")
++            counter = counters[arm] = Path(local.name)/arm
++            counter.write_text("0000")
++            outcome["active_phase"] = arm
++            phase(arm, contracts, owner, binding, end, placements, counter)
++            verify_return(placements, arm)
++            outcome["completed_arms"].append(arm)
+         outcome["active_phase"] = None
+         verify(ROOT, pin)
+         outcome["status"] = "PASS_FULL_NODE_COMPLETED_PHASES"
+@@ -321,7 +303,11 @@
+             receipt = cleanup(owner, min(deadline,time.monotonic()+30))
+             save(EVIDENCE / "cleanup.json", receipt)
+             need(receipt["all_reaped"], "owned process cleanup incomplete")
+-            dispose_snapshots()
++            if local is not None:
++                reservations = {arm:int(counter.read_text()) for arm,counter in counters.items()}
++                local.cleanup()
++                save(EVIDENCE/"update_budget_cleanup.json",dict(reservations=reservations,
++                     path=local.name,removed=not Path(local.name).exists()))
+             if placements:
+                 verify_return(placements, "terminal")
+                 outcome["hbm_pool_restored"] = True
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -3,6 +3,7 @@
+ import ctypes
+ from contextlib import nullcontext
+ import hashlib
++from itertools import count
+ import json
+ import os
+ from pathlib import Path
+@@ -18,6 +19,7 @@
+ import memory_metrics
+ from m23_memory import SavedStorage
+ from checkpoint_layers import enable_checkpoint
++from window_control import Window
+ 
+ ROOT = Path(__file__).resolve().parent
+ BASELINE = "e6c5c4411c453c8168939cd51d737a7e9d8232bdfff05da3967805a5e917ff26"
+@@ -75,20 +77,6 @@
+         (out / f"{label}.{name}").write_bytes((Path("/proc/self") / name).read_bytes())
+ 
+ 
+-def barrier(args, step):
+-    rendezvous = args.phase_root / "barriers"
+-    node = args.output.name
+-    write(rendezvous / f"{step}.{node}.ready", dict(pid=os.getpid(), arrived=time.monotonic_ns()))
+-    release = rendezvous / f"{step}.release"
+-    while time.monotonic() < args.deadline:
+-        if release.is_file():
+-            at = json.loads(release.read_bytes())["release_at_ns"]
+-            time.sleep(max(0, (at - time.monotonic_ns()) / 1e9))
+-            return at
+-        time.sleep(.01)
+-    raise TimeoutError(f"barrier {step} deadline")
+-
+-
+ def runtime_check(runtime, hbm):
+     expected = json.loads((ROOT / "RUNTIME_EXPECTED.json").read_bytes())
+     if hbm:
+@@ -101,7 +89,9 @@
+ 
+ def run(args, result):
+     strict = args.phase == "strict"
+-    planned = 5 if strict else 25
++    if strict or args.variant != "candidate":
++        raise ValueError("fixed-window job requires original HBM performance worker")
++    window = Window(args, result, write)
+     batch = int(os.environ["S00_BATCH"])
+     ckpt_layers = int(os.environ["S00_MATCHED_CKPT"])
+     if batch not in (32,64) or ckpt_layers != 12:
+@@ -194,7 +184,7 @@
+     prior = args.descriptor.parent / "PRIOR_PAIRING.json"
+     if batch == 32 and json.loads(prior.read_bytes()) != pairing:
+         raise ValueError("external 32E reference differs")
+-    ref_dir = args.reference / args.output.name
++    ref_dir = args.reference
+     if strict and args.variant == "baseline":
+         write(args.output / "PAIRING.json", pairing)
+         reference_steps = []
+@@ -209,13 +199,16 @@
+     result["checkpoint_layers"] = ckpt_layers
+     residency(args.output, "initialized")
+     with (args.output / "steps.jsonl").open("x") as log:
+-        for step in range(1, planned + 1):
++        for step in count(1):
++            if window.closed():
++                break
+             if time.monotonic() >= args.deadline:
+                 raise TimeoutError("shared stop-new-update deadline")
+-            ids = order[(step-1)*batch:step*batch]
+-            mask = masks[step-1]
++            slot = (step-1) % 25
++            ids = order[slot*batch:(slot+1)*batch]
++            mask = masks[slot]
+             frames = [train["frame_ids"][i] for i in ids]
+-            mask_sha = pairing["mask_sha256"][step-1]
++            mask_sha = pairing["mask_sha256"][slot]
+             ledger.attempt(step, ids, frames)
+             if not strict and step == 6:
+                 residency(args.output, "observe_start")
+@@ -236,7 +229,9 @@
+                 rss_before = memory_metrics.rss()
+                 shapes.clear()
+                 before = runtime["kml_gemm_calls"]
+-                release = barrier(args, step)
++                release = window.rendezvous(step)
++                if release is None or window.closed():
++                    break
+                 if time.monotonic() >= args.deadline:
+                     raise TimeoutError("deadline before update")
+                 reset = memory_metrics.reset_peak() if not strict else None
+@@ -246,7 +241,12 @@
+                 inventory = SavedStorage(model, values[role]) if (
+                     strict and step == 1 and os.environ.get("S09_INVENTORY") == "1") else None
+                 hooks = torch.autograd.graph.saved_tensors_hooks(inventory.pack, inventory.unpack) if inventory else nullcontext()
++                if not window.reserve_update():
++                    break
+                 begin = time.monotonic_ns()
++                if window.record and begin >= window.record["close_ns"]:
++                    result["reserved_but_not_started"] = step
++                    break
+                 try:
+                     with hooks:
+                         loss = losses[role] = training.train_step(torch, model, opts[role], values[role], mask)
+@@ -269,7 +269,7 @@
+                     trace_matches = logical == pinned["kml_calls"] and shapes == pinned["native_shapes"]
+                     if not trace_matches:
+                         result["bad_native"] = dict(step=step, role=role, shapes=dict(shapes), logical=logical)
+-                        raise ValueError("native trace differs from same-job 32E DDR")
++                        raise ValueError("native trace differs from frozen 32E DDR reference")
+                     if step <= 5:
+                         for name, item in loss.items():
+                             accepted.compare(torch, f"{role}.{step}.reference_loss.{name}",
+@@ -280,10 +280,16 @@
+                 cpu36_guard.checkpoint(guard, f"after_{role}_{step}", torch)
+                 rows.append(dict(role=role, step=step, batch_size=batch, frame_indices=ids, frame_ids=frames,
+                                  mask_sha256=mask_sha, losses={k: v.item() for k,v in loss.items()},
+-                                 start_ns=begin, end_ns=end, release_ns=release, step_seconds=(end-begin)/1e9,
++                                 start_ns=begin, end_ns=end, release_ns=release or None, step_seconds=(end-begin)/1e9,
++                                 sequence_slot=slot+1, sequence_cycle=(step-1)//25,
+                                  rss_before=rss_before, training_start=start_memory, rss_after=rss_after,
+                                  peak_reset=reset, kml_calls=logical, native_sgemm_calls=sum(shapes.values()),
+                                  native_shapes=dict(shapes), sampled=not strict and step >= 6))
++            if not rows:
++                result["prepared_but_not_started"] = step
++                ledger.value["in_flight"] = None
++                ledger.save()
++                break
+             for row in rows:
+                 log.write(json.dumps(row) + "\n")
+             log.flush()
+@@ -292,9 +298,9 @@
+                                 initial, captures[args.variant], losses[args.variant], values[args.variant])
+             ledger.confirm(step)
+             result["completed_updates"] = step
+-    if not strict:
+-        barrier(args, 26)
+-        residency(args.output, "observe_end")
++    if not window.closed():
++        raise RuntimeError("fixed window did not finish")
++    residency(args.output, "observe_end")
+     data.load_descriptor(args.descriptor, args.descriptor_sha)
+     result["final_model_sha256"] = {role: training.model_sha(model) for role, model in models.items()}
+     finish_backend(runtime, expected)
+@@ -303,7 +309,7 @@
+     if strict:
+         result["status"] = "PASS_STRICT_REFERENCE5" if args.variant == "baseline" else "PASS_STRICT_ENCODER5"
+     else:
+-        result["status"] = "PASS_PERF25"
++        result["status"] = "PASS_FIXED_WINDOW"
+ 
+ 
+ if __name__ == "__main__":
+@@ -314,6 +320,8 @@
+         parser.add_argument("--" + flag, type=Path, required=True)
+     parser.add_argument("--descriptor-sha", required=True)
+     parser.add_argument("--deadline", required=True, type=float)
++    parser.add_argument("--arm", choices=("A", "B"), required=True)
++    parser.add_argument("--counter", type=Path, required=True)
+     args = parser.parse_args()
+     args.output.mkdir(exist_ok=False)
+     result = dict(status="STARTED", job_id=os.environ["CCS_JOB_ID"], host=os.uname().nodename,
+--- a/scheduler_handoff.py
++++ b/scheduler_handoff.py
+@@ -71,7 +71,11 @@
+     after = raw_path.stat()
+     if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
+         raise ValueError('scheduler original changed while reading')
+-    now = time.time()
++    first_clock_observation = now = time.time()
++    catch_up = min(deadline, time.monotonic() + 5)
++    while now < header['generated_at'] and time.monotonic() < catch_up:
++        time.sleep(min(0.02, max(0, catch_up-time.monotonic())))
++        now = time.time()
+     if not (request['created_at'] <= header['generated_at'] <= now and now - header['generated_at'] <= 30):
+         raise ValueError('stale/future scheduler handoff')
+     if (header['job_id'] != context['job_id'] or header['nonce'] != request['nonce']
+@@ -95,7 +99,8 @@
+     if len(context['allowed']) != expected_cpu:
+         raise ValueError('unexpected inherited CPU count')
+     return dict(**context, scheduler_evidence=str(raw_path.resolve()), scheduler_sha256=digest(raw),
+-                nonce=request['nonce'], verified_at=now, raw_mtime_ns=after.st_mtime_ns)
++                nonce=request['nonce'], verified_at=now, first_clock_observation=first_clock_observation,
++                raw_mtime_ns=after.st_mtime_ns)
+ 
+ 
+ def publish(root, job_id):
+--- a/prepare.py
++++ b/prepare.py
+@@ -29,8 +29,8 @@
+     path = root / "RUN_BINDING.json"
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+-    need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/dengqingtian/opt/stage4_sessions/S00")
+-         and root.name.startswith("FULL16_R1_") and binding["user_authorized"] is True,
++    need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/wujunyi/opt/stage4_sessions/S00")
++         and root.name.startswith("STEP_AB_R1_") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+     need(sha(root / "FULL16_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"
+--- a/run_job.sh
++++ b/run_job.sh
+@@ -4,6 +4,6 @@
+ ROOT=$(cd -- "$(dirname -- "$0")" && pwd -P)
+ [[ "$#" == 1 && "$1" =~ ^[0-9a-f]{64}$ ]]
+ : "${CCS_JOB_ID:?native job ID required}"
+-job_env=(PATH=/usr/bin:/bin HOME=/home/share/dengqingtian USER=dengqingtian LC_ALL=C PYTHONUTF8=1)
++job_env=(PATH=/usr/bin:/bin HOME=/home/share/wujunyi USER=wujunyi LC_ALL=C PYTHONUTF8=1)
+ job_env+=(PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 CCS_JOB_ID="$CCS_JOB_ID")
+ exec env -i "${job_env[@]}" /usr/bin/python3 -B "$ROOT/launch.py" "$1"
+--- a/submit_once.py
++++ b/submit_once.py
+@@ -36,7 +36,7 @@
+ 
+ def owned(row, binding):
+     expected = binding["native_argv"]
+-    return (row["execPath"] == str(ROOT) and shlex.split(row["cmd"]) == expected[expected.index("bash"):]
++    return (row["user"] == binding["scheduler_user"] and row["execPath"] == str(ROOT) and shlex.split(row["cmd"]) == expected[expected.index("bash"):]
+             and row["logRedirectPath"]["stdoutRedirectPath"] == str(ROOT / "job.log"))
+ 
+ 
+--- /dev/null
++++ b/payload/window_control.py
+@@ -0,0 +1,57 @@
++"""Common fixed window, plus the A-only per-step rendezvous."""
++import fcntl
++import json
++import os
++import time
++
++WINDOW_NS = 600_000_000_000
++PER_ARM_CAP = 2000
++
++
++class Window:
++    def __init__(self, args, result, write):
++        self.args, self.write = args, write
++        self.arm = args.arm
++        self.events = result['barrier_waits'] = []
++        self.record = result['window'] = {}
++
++    def closed(self):
++        return bool(self.record) and time.monotonic_ns() >= self.record['close_ns']
++
++    def rendezvous(self, step):
++        if step > 6 and self.arm == 'B':
++            return None if self.closed() else 0
++        d = self.args.phase_root/'barriers'
++        begin = time.monotonic_ns()
++        self.write(d/f'{step}.{self.args.output.name}.ready',
++                   dict(pid=os.getpid(), arrived=begin))
++        path = d/f'{step}.release'
++        release = None
++        while time.monotonic() < self.args.deadline and not self.closed():
++            if path.is_file():
++                release = json.loads(path.read_bytes())['release_at_ns']
++                if step == 6:
++                    self.record.update(open_ns=release, close_ns=release+WINDOW_NS)
++                time.sleep(max(0,(release-time.monotonic_ns())/1e9))
++                break
++            time.sleep(.01)
++        end = time.monotonic_ns()
++        if self.closed():
++            release = None
++        self.events.append(dict(step=step, start_ns=begin, end_ns=end, release_ns=release))
++        if release is None and not self.closed():
++            raise TimeoutError(f'barrier {step} deadline')
++        return release
++
++    def reserve_update(self):
++        # Common to both arms and local to the one allocated host. No peer rendezvous.
++        with self.args.counter.open('r+b', buffering=0) as f:
++            fcntl.flock(f,fcntl.LOCK_EX)
++            if self.closed():
++                return False
++            used = int(f.read())
++            if used >= PER_ARM_CAP:
++                raise RuntimeError('shared 2000-update arm cap reached before the fixed window ended')
++            f.seek(0)
++            f.write(f'{used+1:04d}'.encode())
++        return True

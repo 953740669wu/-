@@ -1,0 +1,109 @@
+{
+  "allocation_contract": {
+    "DDR_limit_MB": 24576,
+    "DDR_request_MB": 24576,
+    "GPU": 0,
+    "HBM_max_MiB_per_domain": 3800,
+    "HBM_max_MiB_total": 3800,
+    "allocated_cpus": 38,
+    "compute_cpus": 36,
+    "domains": 1,
+    "exclusive": true,
+    "reserved_cpus": 2
+  },
+  "allocator_origin": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/FROZEN_HBM_ALLOCATOR.so",
+  "allocator_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+  "batch_deadline_utc": "2026-11-12T14:04:34+00:00",
+  "batch_size": 32,
+  "candidate_sha256": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+  "checkpoint_layers": 12,
+  "dependency": {
+    "bytes": 7333,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\DEPENDENCY_RECEIPT.json",
+    "sha256": "623300081d6b78453f0f0addf818e203e9c8cd9a71e3336fb7e07d211758ce3c"
+  },
+  "descriptor_sha256": "2d9ef2f224a7b2f2fb2848c4ec39274fe9466ab2f2aaef4757bc35608e1ebe4a",
+  "diff_sha256": "869ebf91564314b2006e3a9622d187c437dca7099bcbd94b929a127c3dc49f63",
+  "dispatch_sha256": "d615796f2ef438669e6e03c3d7f71266ad78a115e6912d211a600503d310a52b",
+  "domain_count": 1,
+  "electrodes": 32,
+  "eligible_hosts": [
+    "cn22036"
+  ],
+  "excluded_hosts": [
+    "cn21341",
+    "cn22044"
+  ],
+  "existing_16e_validation_reference": {
+    "bytes": 297748,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\M23_MEMORY_HBM\\ubsan_hbm_continue_20261108\\HBM_CONTINUE_RESULT.json",
+    "sha256": "c2c4ada68d2c0dac0113eb34225899901295d62a711ed12f4634d904cb86e485"
+  },
+  "external_kernel_sha256": "8bd18a4380d794eabab20c9387ff1005434ae544e7b64450106cf4b343bdac74",
+  "external_kml_ops_sha256": "72a15602eb60fb4bcb0bef824808ece37da773e92c8f89d9c613d96a559e038b",
+  "first_pair_projection_seconds": 0,
+  "fixed_input_status": "FIXED32_CURRENT_SOURCE_SHA_PASS",
+  "frozen_sidecars": {
+    "DEPENDENCY_RECEIPT.json": "623300081d6b78453f0f0addf818e203e9c8cd9a71e3336fb7e07d211758ce3c",
+    "ENGINEERING_DESCRIPTOR.json": "2d9ef2f224a7b2f2fb2848c4ec39274fe9466ab2f2aaef4757bc35608e1ebe4a",
+    "FROZEN_HBM_ALLOCATOR.so": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+    "PRIOR_PAIRING.json": "ff390e832df6dde669c3c181e01e5e413a53a1515e3e858ef1cec8bcea9bc164"
+  },
+  "hbm_cap_MiB": 3800,
+  "kernel_source_sha256": "505408f2836411ff6774a48b42b72f6206d098b07314b8e33f93ec3e782d4387",
+  "max_model_updates": 10,
+  "mode": "external_fp32_attn_ab",
+  "native_argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn22036 !cn21341 !cn22044",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "1800",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1",
+    "-oo",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/job.log",
+    "bash",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/run_job.sh",
+    "BINDING_SHA256"
+  ],
+  "numerical": {
+    "denominator_floor": 1e-12,
+    "near_zero_norm": 1e-08,
+    "relative_L2": 2e-06,
+    "state_abs": 2e-06,
+    "strict_steps": 5,
+    "tensor_abs": 2e-05
+  },
+  "package_sha256": "0cf199ed3c6f3e14ad3bdcfd21e7559dbb185bb421c91acf4e8d321e01da8d57",
+  "pairs": 0,
+  "prior_locking_kml": null,
+  "remaining_queue_seconds": 86398,
+  "remote_root": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1",
+  "review_sha256": "5ee35d5774c2d9b790e18db058e3568606cbbc2173871dacedbdeb436f2cb348",
+  "scheduler_user": "wujunyi",
+  "source_manifest_sha256": "e1af9080910e87746d000747765d367ee6fa28dd6c9836e6054f14e5c7f8b492",
+  "stability": {
+    "rounds": 3,
+    "spread_pct": 5
+  },
+  "strict_storage_min_bytes": 6442450944,
+  "submission_ordinal": 2,
+  "user_authorized": true,
+  "version": "V2_D1",
+  "wall_seconds": 1800,
+  "workload": "32B32"
+}

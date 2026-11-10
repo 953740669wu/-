@@ -1,0 +1,14 @@
+{
+  "active_phase": "strict_candidate",
+  "error": "RuntimeError('strict worker failed: {0: 2}')",
+  "finished": 970454.560532332,
+  "hbm_pool_restored": true,
+  "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+  "job_id": "2085664",
+  "start": 970324.5568459,
+  "status": "FAIL_STOP",
+  "steps": {
+    "strict_baseline_each_domain": 5
+  },
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_NS1_D1/launch.py\", line 318, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_NS1_D1/launch.py\", line 214, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {0: 2}\n"
+}

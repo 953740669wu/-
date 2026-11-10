@@ -1,0 +1,145 @@
+{
+  "OOM_explicit": false,
+  "SIGBUS_detected": false,
+  "actual_domains": 1,
+  "application": {
+    "active_phase": "strict_candidate",
+    "error": "RuntimeError('strict worker failed: {0: 2}')",
+    "finished": 965995.600572791,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2085051",
+    "start": 965885.557745384,
+    "status": "FAIL_STOP",
+    "steps": {
+      "strict_baseline_each_domain": 5
+    },
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/launch.py\", line 318, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/launch.py\", line 214, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {0: 2}\n"
+  },
+  "budget_charge": {
+    "allocated_seconds": 110,
+    "artifact": {
+      "bytes": 301985,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V2_D1\\JOB_2085051_TRANSFER.tgz",
+      "sha256": "8c8ff4bf2c0be97003bb418cd3bc27d5011aebc933d2742802ac7b6285e71f6d"
+    },
+    "binding": {
+      "bytes": 3964,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V2_D1\\RUN_BINDING.json",
+      "sha256": "b24660823c4a04d134763616d2a291b9091cb4b4fb017ebadd11886f795f82d7"
+    },
+    "charged_updates": 10,
+    "cleanup": true,
+    "cleanup_source": {
+      "bytes": 365,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V2_D1\\received\\job_evidence\\cleanup.json",
+      "sha256": "24f718b3f2699487fdb8725ecba0c928f3e94cedb981e0ee6614deab96066f2f"
+    },
+    "confirmed_updates": 5,
+    "domains": 1,
+    "host": "cn22036",
+    "job_id": "2085051",
+    "native": {
+      "bytes": 3804,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V2_D1\\received\\djob_final.json",
+      "sha256": "f34b0696363e8d214eef59b0b950899447f3f251c739937d6a8dded1bf6ea1bf"
+    },
+    "queue_seconds": 3,
+    "state": "FAILED",
+    "terminal": true,
+    "version": "V2_D1"
+  },
+  "build": {
+    "bf16": 0,
+    "bq": 64,
+    "library": {
+      "path": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/job_evidence/libfp32_attn.so",
+      "sha256": "bb3dee0e8c485c62b30e0bb12e2fe90e112f6e88520352d80d2d6a2d9688e6af"
+    },
+    "locking_kml": {
+      "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+      "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690"
+    },
+    "openmp": {
+      "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+      "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+    },
+    "source_sha256": "505408f2836411ff6774a48b42b72f6206d098b07314b8e33f93ec3e782d4387"
+  },
+  "gate": "FAILED_EXECUTION",
+  "host": "cn22036",
+  "job_id": "2085051",
+  "partial_worker_results": {
+    "strict_candidate\\node0\\result.json": {
+      "completed_updates": 0,
+      "dispatch": {
+        "bf16": 0,
+        "bq": 64,
+        "build": {
+          "bf16": 0,
+          "bq": 64,
+          "library": {
+            "path": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/job_evidence/libfp32_attn.so",
+            "sha256": "bb3dee0e8c485c62b30e0bb12e2fe90e112f6e88520352d80d2d6a2d9688e6af"
+          },
+          "locking_kml": {
+            "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+            "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690"
+          },
+          "openmp": {
+            "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+            "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+          },
+          "source_sha256": "505408f2836411ff6774a48b42b72f6206d098b07314b8e33f93ec3e782d4387"
+        },
+        "counts": {
+          "backward": 0,
+          "forward": 0
+        },
+        "fallback": "prohibited",
+        "shim_guard_present": false
+      },
+      "error": "OSError('dlopen() error')",
+      "failed_metrics": [],
+      "rows": 0,
+      "source": {
+        "bytes": 19121,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V2_D1\\received\\job_evidence\\strict_candidate\\node0\\result.json",
+        "sha256": "7cd8e6ca2480e765cff58bbaaef8a349776f278a164e7759ef51b4124a8cd0c9"
+      }
+    }
+  },
+  "phases": {
+    "strict_baseline": {
+      "domain_count": 1,
+      "domains": {
+        "0": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.76,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 8180,
+            "hbm_requested_reported_GB": 309.2,
+            "reused": 7745
+          },
+          "dispatch": null,
+          "end_resident_hbm_MiB": 3582,
+          "max_domain_peak_estimate_MiB": 4413.80859375,
+          "pure_update_median_seconds": 7.49518555,
+          "pure_update_total_seconds": 37.491193665,
+          "step_end_rss_plus_hbm_MiB": [
+            3912.78515625,
+            4276.06640625,
+            4408.73046875,
+            4409.10546875,
+            4409.80859375
+          ],
+          "strict_gate": null
+        }
+      },
+      "status": "PASS_STRICT_REFERENCE5"
+    }
+  },
+  "requested_domains": 1,
+  "version": "V2_D1"
+}

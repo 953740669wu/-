@@ -1,0 +1,53 @@
+{
+  "OOM_explicit": false,
+  "SIGBUS_detected": false,
+  "application": {
+    "error": "ValueError('stale/future scheduler handoff')",
+    "finished": 965669.495066908,
+    "job_id": "2085024",
+    "start": 965664.348484919,
+    "status": "FAIL_STOP",
+    "steps": {},
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V1_D1/launch.py\", line 312, in main\n    contracts = allocation(binding)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V1_D1/launch.py\", line 137, in allocation\n    gate = await_handoff(ROOT, req, context, 38 * count, mem, binding[\"wall_seconds\"], timeout=35)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V1_D1/scheduler_handoff.py\", line 76, in await_handoff\n    raise ValueError('stale/future scheduler handoff')\nValueError: stale/future scheduler handoff\n"
+  },
+  "budget_charge": {
+    "allocated_seconds": 6,
+    "artifact": {
+      "bytes": 197480,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V1_D1\\JOB_2085024_TRANSFER.tgz",
+      "sha256": "66f4259bd4abf8d812774d80797d9bb79e001db0866fd47110e537a4bb43a033"
+    },
+    "binding": {
+      "bytes": 3964,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V1_D1\\RUN_BINDING.json",
+      "sha256": "a32c452c466a58252f7570a5fd69826cae2908c95738288bc22a27456ff7b4b9"
+    },
+    "charged_updates": 0,
+    "cleanup": true,
+    "cleanup_source": {
+      "bytes": 313,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V1_D1\\received\\job_evidence\\cleanup.json",
+      "sha256": "67cf9b5340a401129ae8541fd1e01a6447fa485ce890049623e179905bd454d7"
+    },
+    "confirmed_updates": 0,
+    "domains": 1,
+    "host": "cn22036",
+    "job_id": "2085024",
+    "native": {
+      "bytes": 3711,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V1_D1\\received\\djob_final.json",
+      "sha256": "d772b68030dc8cd6a3cd95f0e581f315a76b79cf495344e8d331665f41c0a6bf"
+    },
+    "queue_seconds": 2,
+    "state": "FAILED",
+    "terminal": true,
+    "version": "V1_D1"
+  },
+  "gate": "FAILED_EXECUTION",
+  "host": "cn22036",
+  "job_id": "2085024",
+  "partial_worker_results": {},
+  "phases": {},
+  "requested_domains": 1,
+  "version": "V1_D1"
+}

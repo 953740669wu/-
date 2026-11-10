@@ -1,0 +1,14 @@
+{
+  "active_phase": "strict_candidate_original",
+  "error": "InterruptedError('native signal 2')",
+  "finished": 945985.721026653,
+  "hbm_pool_restored": true,
+  "hbm_safety": "PASS",
+  "job_id": "2081280",
+  "start": 944708.847720641,
+  "status": "FAIL_STOP",
+  "steps": {
+    "strict_baseline_each_domain": 5
+  },
+  "traceback": "Traceback (most recent call last):\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1456, in is_file\n    return S_ISREG(self.stat().st_mode)\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1232, in stat\n    return self._accessor.stat(self)\nFileNotFoundError: [Errno 2] No such file or directory: '/home/share/wujunyi/opt/stage4_sessions/S00/FULL16_R2_B32_C1_W1/job_evidence/strict_candidate_original/barriers/5.node4.ready'\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/FULL16_R2_B32_C1_W1/launch.py\", line 300, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements, arm=arm)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/FULL16_R2_B32_C1_W1/launch.py\", line 230, in phase\n    if all(p.is_file() for p in ready.values()):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/FULL16_R2_B32_C1_W1/launch.py\", line 230, in <genexpr>\n    if all(p.is_file() for p in ready.values()):\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1456, in is_file\n    return S_ISREG(self.stat().st_mode)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/FULL16_R2_B32_C1_W1/launch.py\", line 263, in stop\n    raise InterruptedError(\"native signal \" + str(signum))\nInterruptedError: native signal 2\n"
+}

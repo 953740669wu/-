@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn22036 !cn21341 !cn22044",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "900",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_FIRST_ERROR_D1",
+    "-oo",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_FIRST_ERROR_D1/job.log",
+    "bash",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_FIRST_ERROR_D1/run_job.sh",
+    "58d607a7118f800c2a766dc85fa64f2023dcecbefaf2968669fc126740872868"
+  ],
+  "binding_sha256": "58d607a7118f800c2a766dc85fa64f2023dcecbefaf2968669fc126740872868",
+  "created_utc": "2026-11-10T15:41:41.961862+00:00"
+}

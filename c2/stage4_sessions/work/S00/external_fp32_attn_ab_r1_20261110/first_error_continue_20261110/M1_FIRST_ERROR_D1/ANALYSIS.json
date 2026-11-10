@@ -1,0 +1,344 @@
+{
+  "application": {
+    "active_phase": "strict_candidate",
+    "compute_finished": 971236.096555185,
+    "error": "RuntimeError('strict worker failed: {0: 2}')",
+    "finished": 971239.181333089,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2085723",
+    "start": 971171.785288177,
+    "status": "FAIL_STOP",
+    "steps": {
+      "strict_baseline_each_domain": 1
+    },
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_FIRST_ERROR_D1/launch.py\", line 319, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_FIRST_ERROR_D1/launch.py\", line 214, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {0: 2}\n"
+  },
+  "baseline_result": {
+    "bytes": 92503,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\first_error_continue_20261110\\M1_FIRST_ERROR_D1\\received\\job_evidence\\strict_baseline\\node0\\result.json",
+    "sha256": "3296fc52cc401b09ba58f9fb94f71d7962a4ff2d3e8e96bb2d6d63a3fa8b01c3"
+  },
+  "budget_charge": {
+    "allocated_seconds": 68,
+    "artifact": {
+      "bytes": 890342,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\first_error_continue_20261110\\M1_FIRST_ERROR_D1\\JOB_2085723_TRANSFER.tgz",
+      "sha256": "03c6c81328f322230b3d267c2091eecbf73f3794a6ee01d8c8997a3cf3d04303"
+    },
+    "binding": {
+      "bytes": 4509,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\first_error_continue_20261110\\M1_FIRST_ERROR_D1\\RUN_BINDING.json",
+      "sha256": "58d607a7118f800c2a766dc85fa64f2023dcecbefaf2968669fc126740872868"
+    },
+    "charged_updates": 2,
+    "cleanup": true,
+    "cleanup_source": {
+      "bytes": 363,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\first_error_continue_20261110\\M1_FIRST_ERROR_D1\\received\\job_evidence\\cleanup.json",
+      "sha256": "6e33f9267c8fa29ebbbc56b36adce50564278ec070b5558a22c33fb409821ab1"
+    },
+    "confirmed_updates": 2,
+    "domains": 1,
+    "host": "cn22036",
+    "job_id": "2085723",
+    "native": {
+      "bytes": 3859,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\first_error_continue_20261110\\M1_FIRST_ERROR_D1\\received\\djob_final.json",
+      "sha256": "1d872e94a145b60cea564fd8d06122c63c8ef14079457443d5db1d7724543980"
+    },
+    "queue_seconds": 1,
+    "state": "FAILED",
+    "terminal": true,
+    "version": "M1_FIRST_ERROR_D1"
+  },
+  "build": {
+    "bf16": 0,
+    "bq": 64,
+    "library": {
+      "path": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_FIRST_ERROR_D1/job_evidence/libfp32_attn.so",
+      "sha256": "72cf3e5ff2a3c47f51fcb3b0107b0b648296630404894e346ed1d0b580640421"
+    },
+    "locking_kml": {
+      "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+      "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690"
+    },
+    "openmp": {
+      "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+      "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+    },
+    "source_sha256": "1569473ddf6fe7fe0ba66f4f5a6137aac7ff10bd4ea5741388dd6429c1933e4a"
+  },
+  "candidate_result": {
+    "bytes": 73664,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\first_error_continue_20261110\\M1_FIRST_ERROR_D1\\received\\job_evidence\\strict_candidate\\node0\\result.json",
+    "sha256": "14726bc9101b7dd1cdbaa7bae1206bb23435cf2f741946483aff6abf4e7f0792"
+  },
+  "compute_cap_pass": true,
+  "diagnostic_compute_seconds": 64.31126700807363,
+  "dispatch": {
+    "bf16": 0,
+    "bq": 64,
+    "build": {
+      "bf16": 0,
+      "bq": 64,
+      "library": {
+        "path": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_FIRST_ERROR_D1/job_evidence/libfp32_attn.so",
+        "sha256": "72cf3e5ff2a3c47f51fcb3b0107b0b648296630404894e346ed1d0b580640421"
+      },
+      "locking_kml": {
+        "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+        "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690"
+      },
+      "openmp": {
+        "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+        "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+      },
+      "source_sha256": "1569473ddf6fe7fe0ba66f4f5a6137aac7ff10bd4ea5741388dd6429c1933e4a"
+    },
+    "counts": {
+      "backward": 12,
+      "forward": 24
+    },
+    "fallback": "prohibited",
+    "locking_namespace": {
+      "gemm_address": 70375962879396,
+      "handle": 187651203616464,
+      "namespace_id": 1,
+      "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+      "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690"
+    },
+    "shim_guard_present": false
+  },
+  "first_attention_head": {
+    "bytes": 1187968,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\first_error_continue_20261110\\M1_FIRST_ERROR_D1\\received\\job_evidence\\strict_candidate\\node0\\layer0_worst_head.npy",
+    "sha256": "1d2b6488f2142bc086c9a07e11940294148f800fec096d8ef5881f0e68b90c11"
+  },
+  "first_error_trace": {
+    "attention_layer0": {
+      "dtype": "torch.float32",
+      "head_evidence": {
+        "batch": 1,
+        "head": 6,
+        "order": [
+          "q",
+          "k",
+          "v",
+          "sdpa_output",
+          "m1_output"
+        ],
+        "path": "layer0_worst_head.npy",
+        "sha256": "1d2b6488f2142bc086c9a07e11940294148f800fec096d8ef5881f0e68b90c11"
+      },
+      "output_error": {
+        "max_abs": 2.6226043701171875e-06,
+        "relative_l2": 7.119053376675676e-07,
+        "worst_index": [
+          1,
+          6,
+          4,
+          19
+        ]
+      },
+      "output_sha256": "05d57c3e28434088869328c577fbb9b06c96080591cb2d96fcfffd9ba106c677",
+      "qkv_sha256": {
+        "k": "df6ffbf4129fcaab3208029e348dfeba484d5e7f7f34b6c55d9cd053756259ad",
+        "q": "3eeaeb2cafc3fe764de0d02855e06224e5f572143a931d8b90bc18e14cdade30",
+        "v": "23cd241a57eee8268169a38d43fed41ee27713b5eed6b667da24131bcd56b085"
+      },
+      "qkv_strides": {
+        "k": [
+          512,
+          64,
+          16384,
+          1
+        ],
+        "q": [
+          512,
+          64,
+          16384,
+          1
+        ],
+        "v": [
+          512,
+          64,
+          16384,
+          1
+        ]
+      },
+      "reference_output_sha256": "6df8fcef721193235dc1a44bbd70b366af87000f361a535cabbad0722779d18f",
+      "same_qkv": true,
+      "shape": [
+        32,
+        8,
+        928,
+        64
+      ]
+    },
+    "encoder_layer_output_samples": [
+      {
+        "layer": 0,
+        "max_abs": 9.5367431640625e-07,
+        "n": 8192,
+        "relative_l2": 1.7275596407002023e-07,
+        "worst_index": [
+          1239
+        ]
+      },
+      {
+        "layer": 1,
+        "max_abs": 2.7418136596679688e-06,
+        "n": 8192,
+        "relative_l2": 6.07698618124592e-07,
+        "worst_index": [
+          7161
+        ]
+      },
+      {
+        "layer": 2,
+        "max_abs": 5.3942203521728516e-06,
+        "n": 8192,
+        "relative_l2": 8.261965386030853e-07,
+        "worst_index": [
+          508
+        ]
+      },
+      {
+        "layer": 3,
+        "max_abs": 7.987022399902344e-06,
+        "n": 8192,
+        "relative_l2": 9.508137309662018e-07,
+        "worst_index": [
+          508
+        ]
+      },
+      {
+        "layer": 4,
+        "max_abs": 9.685754776000977e-06,
+        "n": 8192,
+        "relative_l2": 9.882517140412646e-07,
+        "worst_index": [
+          508
+        ]
+      },
+      {
+        "layer": 5,
+        "max_abs": 1.0877847671508789e-05,
+        "n": 8192,
+        "relative_l2": 1.0053070209262299e-06,
+        "worst_index": [
+          508
+        ]
+      },
+      {
+        "layer": 6,
+        "max_abs": 1.3113021850585938e-05,
+        "n": 8192,
+        "relative_l2": 1.003549842496055e-06,
+        "worst_index": [
+          1022
+        ]
+      },
+      {
+        "layer": 7,
+        "max_abs": 1.3828277587890625e-05,
+        "n": 8192,
+        "relative_l2": 9.594882608944387e-07,
+        "worst_index": [
+          6915
+        ]
+      },
+      {
+        "layer": 8,
+        "max_abs": 1.4483928680419922e-05,
+        "n": 8192,
+        "relative_l2": 9.483418700201379e-07,
+        "worst_index": [
+          5375
+        ]
+      },
+      {
+        "layer": 9,
+        "max_abs": 1.621246337890625e-05,
+        "n": 8192,
+        "relative_l2": 9.202421797961649e-07,
+        "worst_index": [
+          4349
+        ]
+      },
+      {
+        "layer": 10,
+        "max_abs": 1.7642974853515625e-05,
+        "n": 8192,
+        "relative_l2": 8.916775292884172e-07,
+        "worst_index": [
+          6649
+        ]
+      },
+      {
+        "layer": 11,
+        "max_abs": 2.193450927734375e-05,
+        "n": 8192,
+        "relative_l2": 8.861219557363457e-07,
+        "worst_index": [
+          6649
+        ]
+      }
+    ],
+    "hidden_sha256": "a62cd638e42e30965444f6c8945de188bbfbaee719472662f512564d1d6fa123"
+  },
+  "host": "cn22036",
+  "job_id": "2085723",
+  "metrics": [
+    {
+      "l2_relative": 0.0,
+      "max_abs": 0.0,
+      "name": "candidate.1.reference_loss.total",
+      "passed": true,
+      "reference_norm": 11.160235404968262
+    },
+    {
+      "l2_relative": 0.0,
+      "max_abs": 0.0,
+      "name": "candidate.1.reference_loss.voltage",
+      "passed": true,
+      "reference_norm": 4.650878429412842
+    },
+    {
+      "l2_relative": 0.0,
+      "max_abs": 0.0,
+      "name": "candidate.1.reference_loss.coarse",
+      "passed": true,
+      "reference_norm": 6.50935697555542
+    },
+    {
+      "l2_relative": 9.84024827895898e-07,
+      "max_abs": 2.8133392333984375e-05,
+      "name": "1.output.h",
+      "passed": false,
+      "reference_norm": 18151.648703161503
+    }
+  ],
+  "original_hidden_comparison": {
+    "l2_relative": 9.84024827895898e-07,
+    "max_abs": 2.8133392333984375e-05,
+    "name": "1.output.h",
+    "passed": false,
+    "reference_norm": 18151.648703161503
+  },
+  "replayed_hidden_comparison": {
+    "l2_relative": 9.84024827895898e-07,
+    "max_abs": 2.8133392333984375e-05,
+    "name": "1.output.h",
+    "passed": false,
+    "reference_norm": 18151.648703161503
+  },
+  "same_hidden_metric": true,
+  "source_binding": {
+    "bytes": 4509,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\first_error_continue_20261110\\M1_FIRST_ERROR_D1\\RUN_BINDING.json",
+    "sha256": "58d607a7118f800c2a766dc85fa64f2023dcecbefaf2968669fc126740872868"
+  },
+  "state": "FAILED"
+}

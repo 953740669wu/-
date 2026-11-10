@@ -1,0 +1,829 @@
+--- a/launch.py
++++ b/launch.py
+@@ -14,9 +14,9 @@
+ import sys
+ import traceback
+ 
+-from hbm_gate import prepare_hbm, free_pages
++from hbm_gate import execute, prepare_hbm, free_pages
+ from owned_processes import Owned, cleanup, process_table
+-from prepare import ROOT, need, save, verify
++from prepare import ROOT, need, save, sha, verify
+ from scheduler_handoff import await_handoff, create_request, live_context
+ from topology16 import full_topology
+ 
+@@ -95,7 +95,11 @@
+          "allocation does not contain 16 whole CPU36 domains")
+     targets = [n for n,p in zip(ids,nodes) if not cpu_nodes[n]
+                and (p/"hugepages/hugepages-2048kB/free_hugepages").is_file()]
+-    placement = full_topology(cpu_nodes,{n:dict(zip(ids,row)) for n,row in distances.items()},contracts,targets)
++    all_cpu_domains = {n for n,cpus in cpu_nodes.items() if cpus}
++    placement = full_topology(cpu_nodes,{n:dict(zip(ids,row)) for n,row in distances.items()},all_cpu_domains,targets)
++    need(count != 4 or sorted(contracts) in [list(g) for g in placement["die_groups"]],
++         "actual four domains do not form a complete die")
++    placement["hbm_pairs"] = {n:placement["hbm_pairs"][n] for n in contracts}
+     physical = {}
+     for node, contract in contracts.items():
+         need(contract["allocated"] == cpu_nodes[node] and len(contract["allocated"]) == 38,
+@@ -111,8 +115,8 @@
+             info = directory / "topology"
+             physical[cpu] = {key: (info / key).read_text().strip() for key in ("physical_package_id","core_id","die_id") if (info / key).is_file()}
+         save(EVIDENCE / f"node{node}.allocation.json", dict(job_id=context["job_id"], host=context["host"], receipt=contract))
+-    need(len({tuple(s) for r in contracts.values() for s in r["physical_siblings"].values()}) == 608,
+-         "608 distinct physical cores required across dies")
++    need(len({tuple(s) for r in contracts.values() for s in r["physical_siblings"].values()}) == 38*count,
++         "distinct physical cores required across allocated domains")
+     save(EVIDENCE / "domain_map.json", dict(context=context, contracts=contracts, node_ids=ids, cpu_nodes=cpu_nodes,
+          distances=distances, physical=physical, **placement))
+     for n, node_path in zip(ids, nodes):
+@@ -127,13 +131,13 @@
+     need(context["host"] in binding["eligible_hosts"] and context["host"] not in binding["excluded_hosts"],
+          "host outside bound eligible set")
+     count = binding["domain_count"]
+-    need(count == 16, "full node requires exactly 16 domains")
++    need(count in (1,4,16), "invalid authorized domain count")
+     mem = count * 24576
+     req = create_request(ROOT, context)
+     gate = await_handoff(ROOT, req, context, 38 * count, mem, binding["wall_seconds"], timeout=35)
+     save(EVIDENCE / "scheduler_handoff.json", gate)
+     raw = read(ROOT / "scheduler_allocation.json")["data"]["successData"][0]
+-    need(raw["queue"] == "q_hpcai" and raw["execPath"] == str(ROOT)
++    need(raw["queue"] == "q_hpcai" and raw["execPath"] == str(ROOT) and raw["user"] == binding["scheduler_user"]
+          and raw["retryPolicy"] == dict(maxRetryCnt=0, currentRetryTimes=0), "wrong native job scope or retries")
+     group = raw["resGroups"][0]
+     need([s.replace(" ", "") for s in group["affinityRequest"]] == [f"numa[count={count},distribution=pack]"], "native domain placement request differs")
+@@ -186,11 +190,12 @@
+                 "--reference",str(EVIDENCE / "strict_baseline")]
+         save(out / f"{rank}.command.json", dict(argv=argv))
+         env = dict(os.environ, M1_PARENT_CPU_LIST=inherited, M1_INHERIT_RECEIPT=str(out / f"{rank}.before_numactl.txt"))
++        cfg = placements[node]
++        need((free_pages(cfg["hbm_node"])-16)*2 >= cfg["cap_MiB"], "HBM pool became smaller after capacity gate")
++        env.update(M23_HBM_LIBRARY=cfg["library"], M23_HBM_LIBRARY_SHA=cfg["library_sha256"],
++                   HBM_NODE=str(cfg["hbm_node"]), HBM_MB=str(cfg["cap_MiB"]), HBM_MIN_KB="256", HBM_STATS="1")
+         if variant == "candidate":
+-            cfg = placements[node]
+-            need((free_pages(cfg["hbm_node"])-16)*2 >= cfg["cap_MiB"], "HBM pool became smaller after safety gate")
+-            env.update(M23_HBM_LIBRARY=cfg["library"], M23_HBM_LIBRARY_SHA=cfg["library_sha256"],
+-                       HBM_NODE=str(cfg["hbm_node"]), HBM_MB=str(cfg["cap_MiB"]), HBM_MIN_KB="256", HBM_STATS="1")
++            env.update(S00_ATTN_BUILD=str(EVIDENCE/"ATTN_BUILD.json"), KML_ATTN_BF16="0")
+         env.update(S09_INVENTORY="0", S00_BATCH=str(binding["batch_size"]),
+                    S00_MATCHED_CKPT=str(binding["checkpoint_layers"]))
+         save(out / f"{rank}.env.json", {k:v for k,v in env.items() if k.startswith(("M23_", "HBM_", "S09_", "S00_"))})
+@@ -250,6 +255,28 @@
+             path.unlink()
+ 
+ 
++def build_attention(binding, deadline):
++    gomp = Path("/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libgomp-58a43326.so.1.0.0")
++    locking = Path("/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so").resolve(strict=True)
++    library = EVIDENCE/"libfp32_attn.so"
++    obj = EVIDENCE/"kml_attn.o"
++    source = ROOT/"kml_attn.c"
++    runtime = read(ROOT/"payload/RUNTIME_EXPECTED.json")
++    omp, = [r for r in runtime["libraries"] if "libomp.so" in r["path"]]
++    need(str(gomp.resolve(strict=True)) == omp["path"] and sha(gomp) == omp["sha256"],
++         "C build must link the already verified Torch OpenMP runtime")
++    execute(EVIDENCE,"cc_version",["/usr/bin/gcc","--version"],min(deadline,time.monotonic()+10))
++    execute(EVIDENCE,"attn_compile",["/usr/bin/gcc","-O3","-mcpu=native","-fno-math-errno","-fopenmp",
++            "-fPIC","-c",str(source),"-o",str(obj)],min(deadline,time.monotonic()+60))
++    execute(EVIDENCE,"attn_link",["/usr/bin/gcc","-shared","-o",str(library),str(obj),str(gomp),"-ldl","-lm"],
++            min(deadline,time.monotonic()+30))
++    locking_id = dict(path=str(locking),sha256=sha(locking))
++    if binding.get("prior_locking_kml"):
++        need(locking_id == binding["prior_locking_kml"], "locking KML differs from admitted prior phase")
++    save(EVIDENCE/"ATTN_BUILD.json",dict(source_sha256=sha(source),library=dict(path=str(library),sha256=sha(library)),
++         locking_kml=locking_id,openmp=omp,bq=64,bf16=0))
++
++
+ def stop(signum, _):
+     raise InterruptedError("native signal " + str(signum))
+ 
+@@ -271,9 +298,9 @@
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        need(120 < wall <= 7200 and binding["mode"] == "full_node_hbm_ckpt", "wrong wall or mode")
+-        rounds = binding["hbm_rounds_max"]
+-        need(1 <= rounds <= 3 and binding["first_hbm_round"] + rounds - 1 <= 3, "invalid HBM round plan")
++        need(120 < wall <= 7200 and binding["mode"] == "external_fp32_attn_ab", "wrong wall or mode")
++        rounds = binding["pairs"]
++        need(rounds == (0 if binding["domain_count"] == 1 else 3), "invalid pair plan")
+         need(shutil.disk_usage(EVIDENCE).free >= binding["strict_storage_min_bytes"],
+              "insufficient private workspace free space for complete DDR references")
+         libc = ctypes.CDLL(None, use_errno=True)
+@@ -283,31 +310,30 @@
+         end = START + wall - 120
+         signal.setitimer(signal.ITIMER_REAL, max(.001, end-time.monotonic()))
+         contracts = allocation(binding)
++        build_attention(binding, end)
+         placements = prepare_hbm(ROOT, EVIDENCE, contracts, binding, end)
+-        outcome["hbm_safety"] = "PASS"
++        outcome["hbm_safety"] = "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS"
+         for variant in ("baseline","candidate"):
+             outcome["active_phase"] = f"strict_{variant}"
+             phase("strict", variant, contracts, owner, binding, end, placements)
++            verify_return(placements, f"strict_{variant}")
+             outcome["steps"][f"strict_{variant}_each_domain"] = 5
+-        verify_return(placements, "strict")
+         dispose_snapshots()
+-        if binding["ddr_perf_control"]:
+-            outcome["active_phase"] = "perf_baseline"
+-            phase("perf", "baseline", contracts, owner, binding, end, placements)
+-            outcome["steps"]["perf_baseline_each_domain"] = 25
+-        outcome["completed_hbm_rounds"] = []
+-        required_seconds = 0
+-        for run in range(binding["first_hbm_round"], binding["first_hbm_round"] + rounds):
+-            if required_seconds and end-time.monotonic() < required_seconds:
+-                outcome["next_round_deferred"] = dict(round=run, predicted_with_margin_seconds=required_seconds)
+-                break
+-            outcome["active_phase"] = f"perf_candidate_r{run}"
++        outcome["completed_pairs"] = []
++        estimate = binding["first_pair_projection_seconds"]
++        for run in range(1, rounds+1):
++            if end-time.monotonic() < estimate*(rounds-run+1):
++                raise TimeoutError("remaining wall cannot fit all complete paired rounds and cleanup")
+             t0 = time.monotonic()
+-            phase("perf", "candidate", contracts, owner, binding, end, placements, run)
+-            verify_return(placements, f"r{run}")
+-            outcome["steps"][f"perf_candidate_r{run}_each_domain"] = 25
+-            outcome["completed_hbm_rounds"].append(run)
+-            required_seconds = (time.monotonic()-t0)*1.25 + 60
++            order = ("baseline","candidate") if run % 2 else ("candidate","baseline")
++            for variant in order:
++                label = f"perf_{variant}_r{run}"
++                outcome["active_phase"] = label
++                phase("perf", variant, contracts, owner, binding, end, placements, run)
++                verify_return(placements, label)
++                outcome["steps"][label+"_each_domain"] = 25
++            outcome["completed_pairs"].append(run)
++            estimate = (time.monotonic()-t0)*1.15 + 20
+         outcome["active_phase"] = None
+         verify(ROOT, pin)
+         outcome["status"] = "PASS_FULL_NODE_COMPLETED_PHASES"
+--- a/hbm_gate.py
++++ b/hbm_gate.py
+@@ -26,33 +26,6 @@
+                .read_text())
+ 
+ 
+-def probe_placement(out, node, hbm, cap, library):
+-    log = (out / "real_probe.log").read_text()
+-    need("PASS policy_restored=1 worker_threads=4 reuse=1" in log, "missing successful C probe")
+-    pointers = {k: int(v, 16) for k, v in re.findall(r"(first|bulk|fallback|worker[0-3])=(0x[0-9a-f]+)", log)}
+-    need(set(pointers) == {"first", "bulk", "fallback", "worker0", "worker1", "worker2", "worker3"},
+-         "probe pointer receipt incomplete")
+-    maps = (out / "probe.maps").read_text().splitlines()
+-    numa = {int(line.split()[0], 16): line for line in (out / "probe.numa_maps").read_text().splitlines()}
+-    need(any(line.endswith(str(library)) for line in maps), "actual allocator absent from probe maps")
+-    details = {}
+-    for name, pointer in pointers.items():
+-        line = next(line for line in maps if (lambda span: span[0] <= pointer < span[1])(
+-            [int(v, 16) for v in line.split()[0].split("-")]))
+-        start, end = (int(v, 16) for v in line.split()[0].split("-"))
+-        fields = numa[start].split()
+-        resident = {int(k): int(v) for k, v in re.findall(r"\bN(\d+)=(\d+)\b", numa[start])}
+-        if name == "fallback":
+-            need("huge" not in fields and set(resident) == {node}, "fallback not ordinary local DDR")
+-        else:
+-            need("huge" in fields and f"bind:{hbm}" in fields and resident == {hbm: cap // 2}
+-                 and "kernelpagesize_kB=2048" in fields and end-start == cap*2**20,
+-                 "arena not fully touched on exact HBM node")
+-        details[name] = dict(mapping=line, numa=numa[start])
+-    need(len(set(pointers.values())) == len(pointers), "concurrent live buffers alias")
+-    return details
+-
+-
+ def prepare_hbm(root, evidence, contracts, binding, deadline):
+     source = Path(binding["allocator_origin"])
+     need(sha(source) == binding["allocator_sha256"], "frozen 16E normal build SHA differs")
+@@ -65,9 +38,6 @@
+     save(evidence / "allocator_identity.json", dict(source=str(source), sha256=sha(library),
+          candidate_c_sha256=binding["candidate_sha256"], existing_c50_ubsan_evidence_job="2061258",
+          existing_16e_validation_reference=binding["existing_16e_validation_reference"]))
+-    executable = evidence / "real_hbm_probe"
+-    execute(evidence, "build_real_probe", ["/usr/bin/cc", "-std=gnu11", "-O2", "-Wall", "-Wextra", "-pthread",
+-            str(root / "real_hbm_probe.c"), "-o", str(executable)], min(deadline, time.monotonic()+20))
+     topology = json.loads((evidence / "domain_map.json").read_bytes())
+     placements = {}
+     pairs = topology["hbm_pairs"]
+@@ -77,22 +47,5 @@
+     save(evidence / "hbm_capacity_before.json", dict(free_pages=initial, cap_MiB=cap, reserve_pages=16,
+          insufficient=[n for n,v in initial.items() if (v-16)*2 < cap]))
+     need(all((v-16)*2 >= cap for v in initial.values()), "whole-node HBM pool below fixed matched capacity")
+-    for node, contract in contracts.items():
+-        paired = pairs[str(node)]
+-        out = evidence / f"real_hbm_node{node}"
+-        out.mkdir()
+-        before = free_pages(paired)
+-        need((before-16)*2 >= cap, "local HBM pool changed after capacity check")
+-        env = dict(os.environ, LD_PRELOAD=str(library), HBM_NODE=str(paired), HBM_MB=str(cap),
+-                   HBM_MIN_KB="256", HBM_STATS="1")
+-        cpus = ",".join(map(str, contract["selected"]))
+-        execute(out, "real_probe", ["/usr/bin/numactl", "--physcpubind=" + cpus,
+-                "--membind=" + str(node), str(executable), str(cap)], min(deadline, time.monotonic()+90), env)
+-        maps = probe_placement(out, node, paired, cap, library)
+-        after = free_pages(paired)
+-        need(after == before, "HBM pool pages did not return after probe exit")
+-        placements[node] = dict(status="PASS_REAL_HBM_SAFETY", hbm_node=paired, cap_MiB=cap,
+-                                pool_pages_before=before, pool_pages_after=after, placement=maps,
+-                                library=str(library), library_sha256=sha(library))
+-        save(out / "RECEIPT.json", placements[node])
+-    return placements
++    return {node: dict(hbm_node=pairs[str(node)], cap_MiB=cap, pool_pages_before=initial[str(node)],
++                       library=str(library), library_sha256=sha(library)) for node in contracts}
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -89,13 +89,16 @@
+     raise TimeoutError(f"barrier {step} deadline")
+ 
+ 
+-def runtime_check(runtime, hbm):
++def runtime_check(runtime, hbm, attention=None):
+     expected = json.loads((ROOT / "RUNTIME_EXPECTED.json").read_bytes())
+     if hbm:
+         expected["env"]["LD_PRELOAD"] = hbm["path"] + ":" + expected["env"]["LD_PRELOAD"]
+     if any(runtime.get(k) != v for k, v in expected.items()):
+         raise ValueError("frozen R4 framework/KML/OpenMP/shim identity differs")
+-    if "libraries_after" in runtime and runtime["libraries_after"] != expected["libraries"]:
++    libraries = expected["libraries"]
++    if attention:
++        libraries = sorted(libraries + [attention.identity["locking_kml"]], key=lambda row: row["path"])
++    if "libraries_after" in runtime and runtime["libraries_after"] != libraries:
+         raise ValueError("mapped library drift")
+ 
+ 
+@@ -121,7 +124,7 @@
+     paths = {line.split()[-1] for line in Path("/proc/self/maps").read_text().splitlines()
+              if "libhbm_alloc" in line}
+     hbm = None
+-    if args.variant in ("candidate","ckpt_hbm"):
++    if args.variant in ("baseline","candidate"):
+         library = os.environ["M23_HBM_LIBRARY"]
+         if paths != {library} or data.sha(library) != os.environ["M23_HBM_LIBRARY_SHA"]:
+             raise ValueError("HBM allocator path/SHA mapping differs")
+@@ -131,6 +134,13 @@
+         raise ValueError("unexpected allocator in DDR worker")
+     result["hbm_allocator"] = hbm
+     runtime_check(runtime, hbm)
++    attention = None
++    if args.variant == "candidate":
++        from attn_dispatch import Dispatch
++        attention = Dispatch(os.environ["S00_ATTN_BUILD"])
++        attention.install()
++        result["attention"] = dict(build=attention.identity, counts=attention.counts, bf16=0, bq=64,
++                                   shim_guard_present=attention.sm_guard is not None, fallback="prohibited")
+     module = sys.modules["kml_ops"]
+     if data.sha(module.__file__) != BASELINE or module.LINEAR_DTYPE != torch.float32:
+         raise ValueError("wrong original baseline or dtype")
+@@ -246,6 +256,7 @@
+                 inventory = SavedStorage(model, values[role]) if (
+                     strict and step == 1 and os.environ.get("S09_INVENTORY") == "1") else None
+                 hooks = torch.autograd.graph.saved_tensors_hooks(inventory.pack, inventory.unpack) if inventory else nullcontext()
++                attn_before = dict(attention.counts) if attention else None
+                 begin = time.monotonic_ns()
+                 try:
+                     with hooks:
+@@ -255,6 +266,11 @@
+                         handle.remove()
+                 end = time.monotonic_ns()
+                 rss_after = memory_metrics.rss()
++                dispatch = None
++                if attention:
++                    dispatch = {k: v-attn_before[k] for k,v in attention.counts.items()}
++                    if dispatch["forward"] < ckpt_layers or dispatch["backward"] != ckpt_layers:
++                        raise RuntimeError("incomplete actual fused dispatch in model update: " + repr(dispatch))
+                 training.validate_update(torch, model, opts[role], values[role], step)
+                 actual_huge = rss_after["hugetlb_bytes"]
+                 if (not hbm and actual_huge != 0) or (hbm and not 0 < actual_huge <= hbm["cap_MiB"]*2**20):
+@@ -283,7 +299,7 @@
+                                  start_ns=begin, end_ns=end, release_ns=release, step_seconds=(end-begin)/1e9,
+                                  rss_before=rss_before, training_start=start_memory, rss_after=rss_after,
+                                  peak_reset=reset, kml_calls=logical, native_sgemm_calls=sum(shapes.values()),
+-                                 native_shapes=dict(shapes), sampled=not strict and step >= 6))
++                                 native_shapes=dict(shapes), fused_attention=dispatch, sampled=not strict and step >= 6))
+             for row in rows:
+                 log.write(json.dumps(row) + "\n")
+             log.flush()
+@@ -297,8 +313,12 @@
+         residency(args.output, "observe_end")
+     data.load_descriptor(args.descriptor, args.descriptor_sha)
+     result["final_model_sha256"] = {role: training.model_sha(model) for role, model in models.items()}
++    if strict:
++        residency(args.output, "strict_end")
++    if attention:
++        attention.check_maps()
+     finish_backend(runtime, expected)
+-    runtime_check(runtime, hbm)
++    runtime_check(runtime, hbm, attention)
+     cpu36_guard.checkpoint(guard, "publish", torch)
+     if strict:
+         result["status"] = "PASS_STRICT_REFERENCE5" if args.variant == "baseline" else "PASS_STRICT_ENCODER5"
+--- a/prepare.py
++++ b/prepare.py
+@@ -29,8 +29,8 @@
+     path = root / "RUN_BINDING.json"
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+-    need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/dengqingtian/opt/stage4_sessions/S00")
+-         and root.name.startswith("FULL16_R1_") and binding["user_authorized"] is True,
++    need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/wujunyi/opt/stage4_sessions/S00")
++         and root.name.startswith("ATTN_R1_") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+     need(sha(root / "FULL16_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"
+--- a/run_job.sh
++++ b/run_job.sh
+@@ -4,6 +4,6 @@
+ ROOT=$(cd -- "$(dirname -- "$0")" && pwd -P)
+ [[ "$#" == 1 && "$1" =~ ^[0-9a-f]{64}$ ]]
+ : "${CCS_JOB_ID:?native job ID required}"
+-job_env=(PATH=/usr/bin:/bin HOME=/home/share/dengqingtian USER=dengqingtian LC_ALL=C PYTHONUTF8=1)
++job_env=(PATH=/usr/bin:/bin HOME=/home/share/wujunyi USER=wujunyi LC_ALL=C PYTHONUTF8=1)
+ job_env+=(PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 CCS_JOB_ID="$CCS_JOB_ID")
+ exec env -i "${job_env[@]}" /usr/bin/python3 -B "$ROOT/launch.py" "$1"
+--- a/submit_once.py
++++ b/submit_once.py
+@@ -36,7 +36,7 @@
+ 
+ def owned(row, binding):
+     expected = binding["native_argv"]
+-    return (row["execPath"] == str(ROOT) and shlex.split(row["cmd"]) == expected[expected.index("bash"):]
++    return (row["user"] == binding["scheduler_user"] and row["execPath"] == str(ROOT) and shlex.split(row["cmd"]) == expected[expected.index("bash"):]
+             and row["logRedirectPath"]["stdoutRedirectPath"] == str(ROOT / "job.log"))
+ 
+ 
+@@ -86,7 +86,7 @@
+              and topo["nThreadsPerCore"] == 1,
+              f"node class differs: {host}")
+         if (row["status"] == "OK" and row["runningJobsCount"] == 0 and res["cpuFree"] >= 608
+-                and res["memFree"] >= 393216 and res["hugePagesFree"] >= 16*(binding["hbm_cap_MiB"]//2+16)):
++                and res["memFree"] >= 393216 and res["hugePagesFree"] >= binding["domain_count"]*(binding["hbm_cap_MiB"]//2+16)):
+             qualified.append(host)
+     need(qualified, "no eligible host currently shows full-node CPU, DDR and hugepage capacity")
+     until = datetime.fromisoformat(binding["batch_deadline_utc"])
+--- a/external/c2/opt/kml_attn.c
++++ b/kml_attn.c
+@@ -1,10 +1,9 @@
+ /* Fused attention (no mask, no dropout, fp32) for s4_models on C2, called from kml_ops.py through ctypes.
+    One OpenMP loop over (batch x head x query chunk) tiles; each tile runs single-threaded KML SME sgemms on views
+-   of q/k/v (any row stride, unit column stride) with a per-thread score buffer of BQ x Nk, so the N x N scores never
++   of q/k/v (row stride at least head width, unit column stride) with a per-thread score buffer of BQ x Nk, so the N x N scores never
+    reach memory. Forward saves the per-row log-sum-exp; backward recomputes the scores from it (FlashAttention-2
+    style) and loops over query chunks inside one head, so dK/dV accumulate without atomics.
+-   Tensors are addressed as x[b*s0 + h*s1 + n*s2 + i] (i < d). The sgemm pointer comes from Python
+-   (kml_ops._sgemm, KML SME multi): called inside the parallel region it runs on the calling thread only.
++   Tensors are addressed as x[b*s0 + h*s1 + n*s2 + i] (i < d). Each tile calls the locking KML namespace.
+    Build in a job (gcc of the compute nodes):
+      gcc -O3 -mcpu=native -fno-math-errno -fopenmp -fPIC -c kml_attn.c && gcc -shared -o libkml_attn.so kml_attn.o <torch_kml>/torch.libs/libgomp-*.so -ldl
+    Linking against torch's libgomp (BiSheng libomp in sw/torch_kml) keeps a single OpenMP runtime in the process. */
+@@ -21,21 +20,16 @@
+ static sgemm_t sg;
+ enum { ROW = 101, N_ = 111, T_ = 112 };
+ 
+-void kml_attn_init(void *f) { sg = (sgemm_t)f; }
+-
+ /* The tiles need a BLAS whose concurrent single-thread calls run in parallel. On C2 that is only KML's serial
+    thread-safe build, sme/kblas/locking (bench_kblas_concurrent.c, 36 threads: 2.4 TFLOP/s together; nolocking
+    serializes to 0.25, multi inside a parallel region likewise). It shares the soname libkblas.so.1 with the multi
+-   build torch's shim uses, so it is loaded in its own link namespace. Returns 0 on success (else sg is unchanged). */
+-typedef void (*sbgemm_t)(int, int, int, int, int, int, float, const uint16_t *, int, const uint16_t *, int, float, float *, int);
+-static sbgemm_t sbg;
++   build torch's shim uses, so it is loaded in its own link namespace. Returns 0 on success (else the caller must stop). */
+ int kml_attn_load(const char *path) {
+     void *h = dlmopen(LM_ID_NEWLM, path, RTLD_NOW | RTLD_LOCAL);
+     void *f = h ? dlsym(h, "cblas_sgemm") : 0;
+     if (!f) return -1;
+-    sg = (sgemm_t)f; sbg = (sbgemm_t)dlsym(h, "cblas_sbgemm"); return 0;
+-}
+-int kml_attn_has_bf16(void) { return sbg != 0; }
++    sg = (sgemm_t)f; return 0;
++}
+ 
+ /* exp(x) for x <= 0 (scores minus their row max or log-sum-exp): 2^n * e^r, r = x - n ln2, |r| <= ln2/2, degree-6
+    Taylor (rel. error ~1e-7). Written so that gcc vectorizes the loops calling it (fmaxnm, frintx, fma, integer add
+@@ -46,7 +40,7 @@
+     float n = __builtin_rintf(x * 1.44269504f);
+     float r = fmaf(n, -0.693145752f, x); r = fmaf(n, -1.42860677e-6f, r);   /* Cody-Waite ln2 split */
+     float p = 1.0f + r * (1.0f + r * (0.5f + r * (0.166666672f + r * (0.0416666679f + r * (0.00833333377f + r * 0.00138888892f)))));
+-    int32_t i; memcpy(&i, &p, 4); i += (int32_t)n << 23; memcpy(&p, &i, 4);
++    uint32_t i; memcpy(&i, &p, 4); i += (uint32_t)(int32_t)n << 23; memcpy(&p, &i, 4);
+     return p;
+ }
+ 
+@@ -71,17 +65,18 @@
+ static int group(int nchunks) { const char *e = getenv("KML_ATTN_GROUP"); int g = e ? atoi(e) : 1; return g <= 0 ? nchunks : g; }
+ 
+ /* o = softmax(scale q k^T) v; lse[(b*H + h)*Nq + n] */
+-void kml_attn_fwd(int B, int H, int Nq, int Nk, int d, float scale, int bq,
++int kml_attn_fwd(int B, int H, int Nq, int Nk, int d, float scale, int bq,
+                   const float *q, long q0, long q1, long q2, const float *k, long k0, long k1, long k2,
+                   const float *v, long v0, long v1, long v2, float *o, long o0, long o1, long o2, float *lse) {
+     view Q = {q, q0, q1, q2}, K = {k, k0, k1, k2}, V = {v, v0, v1, v2};
+     int nc = (Nq + bq - 1) / bq, lv = nested_off(), gq = group(nc);
+     prof_init();
+-    #pragma omp parallel
++    int failed = 0;
++    #pragma omp parallel reduction(|:failed)
+     {
+         double tg = 0, te = 0;
+         float *s = 0;
+-        if (posix_memalign((void **)&s, 64, sizeof(float) * (size_t)bq * Nk)) s = 0;
++        if (posix_memalign((void **)&s, 64, sizeof(float) * (size_t)bq * Nk)) { s = 0; failed = 1; }
+         #pragma omp for schedule(dynamic, gq)
+         for (long it = 0; it < (long)B * H * nc; it++) {
+             if (!s) continue;
+@@ -114,72 +109,7 @@
+     }
+     omp_set_max_active_levels(lv);
+     prof_print("fwd", B, H, Nq, Nk, bq);
+-}
+-
+-/* Gradients of kml_attn_fwd, first version (KML_ATTN_BWD=1): one task per (b, h), looping over query chunks; dk and
+-   dv are written (beta 0 on the first chunk, then accumulated). Slower than SDPA at 928 tokens: only B*H tasks, and
+-   the dV/dK GEMMs have a transposed A and inner dimension bq. */
+-static void bwd_v1(int B, int H, int Nq, int Nk, int d, float scale, int bq,
+-                  const float *q, long q0, long q1, long q2, const float *k, long k0, long k1, long k2,
+-                  const float *v, long v0, long v1, long v2, const float *o, long o0, long o1, long o2,
+-                  const float *g, long g0, long g1, long g2, const float *lse,
+-                  float *dq, long dq0, long dq1, long dq2, float *dk, long dk0, long dk1, long dk2,
+-                  float *dv, long dv0, long dv1, long dv2) {
+-    view Q = {q, q0, q1, q2}, K = {k, k0, k1, k2}, V = {v, v0, v1, v2}, O = {o, o0, o1, o2}, G = {g, g0, g1, g2};
+-    int lv = nested_off();
+-    prof_init();
+-    #pragma omp parallel
+-    {
+-        double tg = 0, te = 0;
+-        float *p = 0, *dp = 0, *dd = 0;
+-        size_t n = (size_t)bq * Nk;
+-        if (posix_memalign((void **)&p, 64, sizeof(float) * (2 * n + bq))) p = 0;
+-        if (p) { dp = p + n; dd = dp + n; }
+-        #pragma omp for schedule(dynamic, 1)
+-        for (long bh = 0; bh < (long)B * H; bh++) {
+-            if (!p) continue;
+-            int b = bh / H, h = bh % H;
+-            const float *kp = AT(K, b, h), *vp = AT(V, b, h);
+-            float *dkp = dk + (long)b * dk0 + (long)h * dk1, *dvp = dv + (long)b * dv0 + (long)h * dv1;
+-            for (int n0 = 0; n0 < Nq; n0 += bq) {
+-                int m = Nq - n0 < bq ? Nq - n0 : bq;
+-                float beta = n0 ? 1.0f : 0.0f;
+-                const float *qp = AT(Q, b, h) + n0 * q2, *gp = AT(G, b, h) + n0 * g2, *op = AT(O, b, h) + n0 * o2;
+-                const float *l = lse + (size_t)bh * Nq + n0;
+-                TIC(t);
+-                sg(ROW, N_, T_, m, Nk, d, scale, qp, q2, kp, k2, 0.0f, p, Nk);          /* scores */
+-                TOC(tg, t);
+-                for (int i = 0; i < m; i++) {
+-                    float *restrict r = p + (size_t)i * Nk; float li = l[i], acc = 0.0f;
+-                    #pragma omp simd
+-                    for (int j = 0; j < Nk; j++) r[j] = fexp(r[j] - li);
+-                    for (int c = 0; c < d; c++) acc += gp[(long)i * g2 + c] * op[(long)i * o2 + c];
+-                    dd[i] = acc;                                                       /* rowsum(dO * O) */
+-                }
+-                TOC(te, t);
+-                sg(ROW, T_, N_, Nk, d, m, 1.0f, p, Nk, gp, g2, beta, dvp, dv2);         /* dV += P^T dO */
+-                sg(ROW, N_, T_, m, Nk, d, 1.0f, gp, g2, vp, v2, 0.0f, dp, Nk);          /* dP = dO V^T */
+-                TOC(tg, t);
+-                for (int i = 0; i < m; i++) {
+-                    float *r = dp + (size_t)i * Nk, *pr = p + (size_t)i * Nk, di = dd[i];
+-                    for (int j = 0; j < Nk; j++) r[j] = pr[j] * (r[j] - di);           /* dS */
+-                }
+-                TOC(te, t);
+-                sg(ROW, N_, N_, m, d, Nk, scale, dp, Nk, kp, k2, 0.0f, dq + (long)b * dq0 + (long)h * dq1 + (long)n0 * dq2, dq2);
+-                sg(ROW, T_, N_, Nk, d, m, scale, dp, Nk, qp, q2, beta, dkp, dk2);      /* dK += scale dS^T Q */
+-                TOC(tg, t);
+-            }
+-        }
+-        free(p);
+-        if (prof) {
+-            #pragma omp atomic
+-            tg_ += tg;
+-            #pragma omp atomic
+-            te_ += te;
+-        }
+-    }
+-    omp_set_max_active_levels(lv);
+-    prof_print("bwd v1", B, H, Nq, Nk, bq);
++    return failed ? -1 : 0;
+ }
+ 
+ /* Gradients of kml_attn_fwd (default), FlashAttention-2 style in two passes with the scores recomputed in each, so
+@@ -190,30 +120,25 @@
+      pass 2, per (b, h, query block): S = scale Q_blk K^T, P = exp(S - lse), dP = dO_blk V^T, dS = P * (dP - D),
+              dQ_blk = scale dS K;
+    with D = rowsum(dO * O) per query row, computed first. */
+-void kml_attn_bwd(int B, int H, int Nq, int Nk, int d, float scale, int bq,
++int kml_attn_bwd(int B, int H, int Nq, int Nk, int d, float scale, int bq,
+                   const float *q, long q0, long q1, long q2, const float *k, long k0, long k1, long k2,
+                   const float *v, long v0, long v1, long v2, const float *o, long o0, long o1, long o2,
+                   const float *g, long g0, long g1, long g2, const float *lse,
+                   float *dq, long dq0, long dq1, long dq2, float *dk, long dk0, long dk1, long dk2,
+                   float *dv, long dv0, long dv1, long dv2) {
+-    const char *e = getenv("KML_ATTN_BWD");
+-    if (e && atoi(e) == 1) {
+-        bwd_v1(B, H, Nq, Nk, d, scale, bq, q, q0, q1, q2, k, k0, k1, k2, v, v0, v1, v2, o, o0, o1, o2, g, g0, g1, g2,
+-               lse, dq, dq0, dq1, dq2, dk, dk0, dk1, dk2, dv, dv0, dv1, dv2);
+-        return;
+-    }
+     view Q = {q, q0, q1, q2}, K = {k, k0, k1, k2}, V = {v, v0, v1, v2}, O = {o, o0, o1, o2}, G = {g, g0, g1, g2};
+     float *D = malloc(sizeof(float) * (size_t)B * H * Nq);
+-    if (!D) return;
++    if (!D) return -1;
+     int lv = nested_off(), nck = (Nk + bq - 1) / bq, ncq = (Nq + bq - 1) / bq, gk = group(nck), gq = group(ncq);
+     long n1 = (long)B * H * nck, n2 = (long)B * H * ncq;
+     prof_init();
+-    #pragma omp parallel
++    int failed = 0;
++    #pragma omp parallel reduction(|:failed)
+     {
+         double tg = 0, te = 0;
+         size_t n = (size_t)bq * (Nq > Nk ? Nq : Nk);
+         float *p = 0, *dp = 0;
+-        if (posix_memalign((void **)&p, 64, sizeof(float) * 2 * n)) p = 0;
++        if (posix_memalign((void **)&p, 64, sizeof(float) * 2 * n)) { p = 0; failed = 1; }
+         if (p) dp = p + n;
+         #pragma omp for schedule(static)
+         for (long r = 0; r < (long)B * H * Nq; r++) {                    /* D = rowsum(dO * O) */
+@@ -280,181 +205,6 @@
+     free(D);
+     omp_set_max_active_levels(lv);
+     prof_print("bwd", B, H, Nq, Nk, bq);
+-}
+-
+-/* ---------------------------------------------------------------- bf16 variant (kml_attn_fwd_bf / kml_attn_bwd_bf)
+-   The roundings of CUDA flash attention under bf16 autocast: q, k, v, dO, P and dS in bf16; scores, softmax, D and
+-   every GEMM accumulator in fp32 (KML sbgemm: bf16 A/B, fp32 C). In the locking build, 36 concurrent single-thread
+-   sbgemms on these tile shapes run at 5.3-6.1 TFLOP/s against 1.9-2.4 for sgemm (logs/opt_kblas_concurrent2.log).
+-   Inputs and outputs stay fp32 (same views and API as the fp32 kernels); q/k/v/dO are cast once per call into
+-   contiguous (b, h, n, d) bf16 copies. sbgemm's C is always zeroed first (some tiles ignore beta = 0). */
+-static inline uint16_t f2b(float x) {
+-    uint32_t u; memcpy(&u, &x, 4); return (uint16_t)((u + 0x7fffu + ((u >> 16) & 1u)) >> 16);
+-}
+-
+-/* bf16 copy of a strided (B, H, N, d) view into contiguous memory; NULL on allocation failure. */
+-static uint16_t *cast_bhnd(view X, int B, int H, int N, int d) {
+-    uint16_t *y = 0;
+-    if (posix_memalign((void **)&y, 64, sizeof(uint16_t) * (size_t)B * H * N * d)) return 0;
+-    #pragma omp parallel for schedule(static)
+-    for (long r = 0; r < (long)B * H * N; r++) {
+-        long bh = r / N; int b = bh / H, h = bh % H, n = r % N;
+-        const float *x = AT(X, b, h) + (long)n * X.s2; uint16_t *o = y + r * d;
+-        #pragma omp simd
+-        for (int i = 0; i < d; i++) o[i] = f2b(x[i]);
+-    }
+-    return y;
+-}
+-
+-static void zero_rows(float *p, int m, int n, long ld) { for (int i = 0; i < m; i++) memset(p + (long)i * ld, 0, sizeof(float) * n); }
+-
+-void kml_attn_fwd_bf(int B, int H, int Nq, int Nk, int d, float scale, int bq,
+-                     const float *q, long q0, long q1, long q2, const float *k, long k0, long k1, long k2,
+-                     const float *v, long v0, long v1, long v2, float *o, long o0, long o1, long o2, float *lse) {
+-    view Q = {q, q0, q1, q2}, K = {k, k0, k1, k2}, V = {v, v0, v1, v2};
+-    int nc = (Nq + bq - 1) / bq, lv = nested_off(), gq = group(nc);
+-    prof_init();
+-    uint16_t *qb = cast_bhnd(Q, B, H, Nq, d), *kb = cast_bhnd(K, B, H, Nk, d), *vb = cast_bhnd(V, B, H, Nk, d);
+-    if (qb && kb && vb) {
+-        #pragma omp parallel
+-        {
+-            double tg = 0, te = 0;
+-            float *s = 0; uint16_t *pb = 0;
+-            if (posix_memalign((void **)&s, 64, sizeof(float) * (size_t)bq * Nk)) s = 0;
+-            if (posix_memalign((void **)&pb, 64, sizeof(uint16_t) * (size_t)bq * Nk)) pb = 0;
+-            #pragma omp for schedule(dynamic, gq)
+-            for (long it = 0; it < (long)B * H * nc; it++) {
+-                if (!s || !pb) continue;
+-                long bh = it / nc; int c = it % nc, b = bh / H, h = bh % H, n0 = c * bq, m = Nq - n0 < bq ? Nq - n0 : bq;
+-                float *op = o + (long)b * o0 + (long)h * o1 + (long)n0 * o2;
+-                TIC(t);
+-                memset(s, 0, sizeof(float) * (size_t)m * Nk);
+-                sbg(ROW, N_, T_, m, Nk, d, scale, qb + ((size_t)bh * Nq + n0) * d, d, kb + (size_t)bh * Nk * d, d, 0.0f, s, Nk);
+-                TOC(tg, t);
+-                for (int i = 0; i < m; i++) {
+-                    float *r = s + (size_t)i * Nk, mx = r[0], sum = 0.0f; uint16_t *pr = pb + (size_t)i * Nk;
+-                    #pragma omp simd reduction(max:mx)
+-                    for (int j = 1; j < Nk; j++) mx = fmaxf(mx, r[j]);
+-                    #pragma omp simd reduction(+:sum)
+-                    for (int j = 0; j < Nk; j++) { r[j] = fexp(r[j] - mx); sum += r[j]; }
+-                    float inv = 1.0f / sum;
+-                    #pragma omp simd
+-                    for (int j = 0; j < Nk; j++) pr[j] = f2b(r[j] * inv);
+-                    lse[(size_t)bh * Nq + n0 + i] = mx + logf(sum);
+-                }
+-                zero_rows(op, m, d, o2);
+-                TOC(te, t);
+-                sbg(ROW, N_, N_, m, d, Nk, 1.0f, pb, Nk, vb + (size_t)bh * Nk * d, d, 0.0f, op, o2);
+-                TOC(tg, t);
+-            }
+-            free(s); free(pb);
+-            if (prof) {
+-                #pragma omp atomic
+-                tg_ += tg;
+-                #pragma omp atomic
+-                te_ += te;
+-            }
+-        }
+-    }
+-    free(qb); free(kb); free(vb);
+-    omp_set_max_active_levels(lv);
+-    prof_print("fwd bf16", B, H, Nq, Nk, bq);
+-}
+-
+-/* Same two passes as kml_attn_bwd, on the bf16 copies; pass 1 forms S^T and dP^T before either elementwise step. */
+-void kml_attn_bwd_bf(int B, int H, int Nq, int Nk, int d, float scale, int bq,
+-                     const float *q, long q0, long q1, long q2, const float *k, long k0, long k1, long k2,
+-                     const float *v, long v0, long v1, long v2, const float *o, long o0, long o1, long o2,
+-                     const float *g, long g0, long g1, long g2, const float *lse,
+-                     float *dq, long dq0, long dq1, long dq2, float *dk, long dk0, long dk1, long dk2,
+-                     float *dv, long dv0, long dv1, long dv2) {
+-    view Q = {q, q0, q1, q2}, K = {k, k0, k1, k2}, V = {v, v0, v1, v2}, O = {o, o0, o1, o2}, G = {g, g0, g1, g2};
+-    float *D = malloc(sizeof(float) * (size_t)B * H * Nq);
+-    int lv = nested_off(), nck = (Nk + bq - 1) / bq, ncq = (Nq + bq - 1) / bq, gk = group(nck), gq = group(ncq);
+-    long n1 = (long)B * H * nck, n2 = (long)B * H * ncq;
+-    prof_init();
+-    uint16_t *qb = cast_bhnd(Q, B, H, Nq, d), *kb = cast_bhnd(K, B, H, Nk, d), *vb = cast_bhnd(V, B, H, Nk, d),
+-             *gb = cast_bhnd(G, B, H, Nq, d);
+-    if (D && qb && kb && vb && gb) {
+-        #pragma omp parallel
+-        {
+-            double tg = 0, te = 0;
+-            size_t n = (size_t)bq * (Nq > Nk ? Nq : Nk);
+-            float *p = 0, *dp = 0; uint16_t *pb = 0, *sb = 0;
+-            if (posix_memalign((void **)&p, 64, sizeof(float) * 2 * n)) p = 0;
+-            if (posix_memalign((void **)&pb, 64, sizeof(uint16_t) * 2 * n)) pb = 0;
+-            if (p) dp = p + n;
+-            if (pb) sb = pb + n;
+-            #pragma omp for schedule(static)
+-            for (long r = 0; r < (long)B * H * Nq; r++) {                /* D = rowsum(dO * O), fp32 */
+-                long bh = r / Nq; int b = bh / H, h = bh % H, i = r % Nq; float acc = 0.0f;
+-                const float *gp = AT(G, b, h) + (long)i * g2, *op = AT(O, b, h) + (long)i * o2;
+-                #pragma omp simd reduction(+:acc)
+-                for (int c = 0; c < d; c++) acc += gp[c] * op[c];
+-                D[r] = acc;
+-            }
+-            #pragma omp for schedule(dynamic, gk)                          /* pass 1: dK, dV per key block */
+-            for (long it = 0; it < n1; it++) {
+-                if (!p || !pb) continue;
+-                long bh = it / nck; int b = bh / H, h = bh % H, j0 = (it % nck) * bq, mk = Nk - j0 < bq ? Nk - j0 : bq;
+-                const uint16_t *qp = qb + (size_t)bh * Nq * d, *gp = gb + (size_t)bh * Nq * d;
+-                const uint16_t *kbk = kb + ((size_t)bh * Nk + j0) * d, *vbk = vb + ((size_t)bh * Nk + j0) * d;
+-                const float *l = lse + bh * Nq, *dr = D + bh * Nq;
+-                float *dvp = dv + (long)b * dv0 + (long)h * dv1 + (long)j0 * dv2, *dkp = dk + (long)b * dk0 + (long)h * dk1 + (long)j0 * dk2;
+-                TIC(t);
+-                memset(p, 0, sizeof(float) * (size_t)mk * Nq); memset(dp, 0, sizeof(float) * (size_t)mk * Nq);
+-                sbg(ROW, N_, T_, mk, Nq, d, scale, kbk, d, qp, d, 0.0f, p, Nq);            /* S^T */
+-                sbg(ROW, N_, T_, mk, Nq, d, 1.0f, vbk, d, gp, d, 0.0f, dp, Nq);            /* dP^T */
+-                TOC(tg, t);
+-                for (int j = 0; j < mk; j++) {
+-                    float *restrict r = p + (size_t)j * Nq, *restrict e = dp + (size_t)j * Nq;
+-                    uint16_t *restrict pr = pb + (size_t)j * Nq, *restrict sr = sb + (size_t)j * Nq;
+-                    #pragma omp simd
+-                    for (int i = 0; i < Nq; i++) {
+-                        float pv = fexp(r[i] - l[i]);
+-                        pr[i] = f2b(pv); sr[i] = f2b(pv * (e[i] - dr[i]));                  /* P^T, dS^T */
+-                    }
+-                }
+-                zero_rows(dvp, mk, d, dv2); zero_rows(dkp, mk, d, dk2);
+-                TOC(te, t);
+-                sbg(ROW, N_, N_, mk, d, Nq, 1.0f, pb, Nq, gp, d, 0.0f, dvp, dv2);          /* dV = P^T dO */
+-                sbg(ROW, N_, N_, mk, d, Nq, scale, sb, Nq, qp, d, 0.0f, dkp, dk2);         /* dK = scale dS^T Q */
+-                TOC(tg, t);
+-            }
+-            #pragma omp for schedule(dynamic, gq)                          /* pass 2: dQ per query block */
+-            for (long it = 0; it < n2; it++) {
+-                if (!p || !pb) continue;
+-                long bh = it / ncq; int b = bh / H, h = bh % H, i0 = (it % ncq) * bq, m = Nq - i0 < bq ? Nq - i0 : bq;
+-                const uint16_t *qbb = qb + ((size_t)bh * Nq + i0) * d, *gbb = gb + ((size_t)bh * Nq + i0) * d;
+-                const uint16_t *kp = kb + (size_t)bh * Nk * d, *vp = vb + (size_t)bh * Nk * d;
+-                const float *l = lse + bh * Nq + i0, *dr = D + bh * Nq + i0;
+-                float *dqp = dq + (long)b * dq0 + (long)h * dq1 + (long)i0 * dq2;
+-                TIC(t);
+-                memset(p, 0, sizeof(float) * (size_t)m * Nk); memset(dp, 0, sizeof(float) * (size_t)m * Nk);
+-                sbg(ROW, N_, T_, m, Nk, d, scale, qbb, d, kp, d, 0.0f, p, Nk);             /* S */
+-                sbg(ROW, N_, T_, m, Nk, d, 1.0f, gbb, d, vp, d, 0.0f, dp, Nk);             /* dP */
+-                TOC(tg, t);
+-                for (int i = 0; i < m; i++) {
+-                    float *restrict r = dp + (size_t)i * Nk; const float *sr = p + (size_t)i * Nk; float li = l[i], di = dr[i];
+-                    uint16_t *restrict so = sb + (size_t)i * Nk;
+-                    #pragma omp simd
+-                    for (int j = 0; j < Nk; j++) so[j] = f2b(fexp(sr[j] - li) * (r[j] - di));  /* dS */
+-                }
+-                zero_rows(dqp, m, d, dq2);
+-                TOC(te, t);
+-                sbg(ROW, N_, N_, m, d, Nk, scale, sb, Nk, kp, d, 0.0f, dqp, dq2);         /* dQ = scale dS K */
+-                TOC(tg, t);
+-            }
+-            free(p); free(pb);
+-            if (prof) {
+-                #pragma omp atomic
+-                tg_ += tg;
+-                #pragma omp atomic
+-                te_ += te;
+-            }
+-        }
+-    }
+-    free(D); free(qb); free(kb); free(vb); free(gb);
+-    omp_set_max_active_levels(lv);
+-    prof_print("bwd bf16", B, H, Nq, Nk, bq);
+-}
++    return failed ? -1 : 0;
++}
++
+--- /dev/null
++++ b/payload/attn_dispatch.py
+@@ -0,0 +1,97 @@
++"""Isolated FP32 dispatch based on the reviewed external _FusedAttnFn."""
++import ctypes
++import hashlib
++import json
++import math
++from pathlib import Path
++
++import torch
++import torch.nn.functional as F
++
++BQ = 64
++
++
++def view(x):
++    return [x.data_ptr(), *x.stride()[:3]]
++
++
++def output(batch, heads, tokens, width):
++    return torch.empty(tokens, batch, heads, width, dtype=torch.float32, device='cpu').permute(1, 2, 0, 3)
++
++
++class FusedAttention(torch.autograd.Function):
++    @staticmethod
++    def forward(ctx, q, k, v, scale, kernel):
++        b, h, nq, d = q.shape
++        nk = k.shape[2]
++        o = output(b, h, nq, d)
++        lse = torch.empty(b, h, nq, dtype=torch.float32, device='cpu')
++        kernel.call('forward', b, h, nq, nk, d, scale, BQ, *view(q), *view(k), *view(v), *view(o), lse.data_ptr())
++        ctx.save_for_backward(q, k, v, o, lse)
++        ctx.scale, ctx.kernel = scale, kernel
++        return o
++
++    @staticmethod
++    def backward(ctx, grad):
++        q, k, v, o, lse = ctx.saved_tensors
++        b, h, nq, d = q.shape
++        nk = k.shape[2]
++        if grad.stride(-1) != 1 or grad.stride(-2) < d:
++            grad = grad.contiguous()
++        dq, dk, dv = output(b, h, nq, d), output(b, h, nk, d), output(b, h, nk, d)
++        ctx.kernel.call('backward', b, h, nq, nk, d, ctx.scale, BQ, *view(q), *view(k), *view(v),
++                        *view(o), *view(grad), lse.data_ptr(), *view(dq), *view(dk), *view(dv))
++        return dq, dk, dv, None, None
++
++
++class Dispatch:
++    def __init__(self, receipt):
++        info = self.identity = json.loads(Path(receipt).read_bytes())
++        for name in ('library', 'locking_kml'):
++            p = Path(info[name]['path'])
++            if hashlib.sha256(p.read_bytes()).hexdigest() != info[name]['sha256']:
++                raise RuntimeError('attention library identity changed: ' + name)
++        self.lib = ctypes.CDLL(info['library']['path'])
++        load = self.lib.kml_attn_load
++        load.argtypes, load.restype = [ctypes.c_char_p], ctypes.c_int
++        if load(info['locking_kml']['path'].encode()):
++            raise RuntimeError('failed to load the distinct locking KML namespace')
++        v = [ctypes.c_void_p] + [ctypes.c_long] * 3
++        head = [ctypes.c_int] * 5 + [ctypes.c_float, ctypes.c_int]
++        self.forward = self.lib.kml_attn_fwd
++        self.backward = self.lib.kml_attn_bwd
++        self.forward.argtypes = head + v * 4 + [ctypes.c_void_p]
++        self.backward.argtypes = head + v * 5 + [ctypes.c_void_p] + v * 3
++        self.forward.restype = self.backward.restype = ctypes.c_int
++        self.sm_guard = getattr(ctypes.CDLL(None), 'kml_sm_guard', None)
++        if self.sm_guard is not None:
++            self.sm_guard.argtypes, self.sm_guard.restype = [], None
++        self.counts = dict(forward=0, backward=0)
++        self.check_maps()
++
++    def check_maps(self):
++        maps = {line.split()[-1] for line in Path('/proc/self/maps').read_text().splitlines()}
++        if any(self.identity[k]['path'] not in maps for k in ('library','locking_kml')):
++            raise RuntimeError('required fused attention or locking KML mapping missing')
++
++    def call(self, direction, *args):
++        status = getattr(self, direction)(*args)
++        if self.sm_guard is not None:
++            self.sm_guard()
++        if status != 0:
++            raise RuntimeError(f'FP32 fused attention {direction} native status {status}')
++        self.counts[direction] += 1
++
++    def sdpa(self, q, k, v, attn_mask=None, dropout_p=0.0, is_causal=False, scale=None, **kwargs):
++        expected = (32, 8, 928, 64)
++        if attn_mask is not None or dropout_p or is_causal or kwargs or any(
++                x.device.type != 'cpu' or x.dtype != torch.float32 or tuple(x.shape) != expected
++                or x.stride(-1) != 1 or x.stride(-2) < expected[-1] for x in (q, k, v)):
++            raise RuntimeError('unsupported SDPA contract in fused candidate; fallback prohibited')
++        scale = expected[-1] ** -0.5 if scale is None else scale
++        if not math.isfinite(scale):
++            raise RuntimeError('nonfinite attention scale')
++        return FusedAttention.apply(q, k, v, scale, self)
++
++    def install(self):
++        F.scaled_dot_product_attention = self.sdpa

@@ -1,0 +1,184 @@
+--- a/kml_attn.c
++++ b/kml_attn.c
+@@ -9,6 +9,7 @@
+    Linking against torch's libgomp (BiSheng libomp in sw/torch_kml) keeps a single OpenMP runtime in the process. */
+ #define _GNU_SOURCE
+ #include <dlfcn.h>
++#include <link.h>
+ #include <math.h>
+ #include <omp.h>
+ #include <stdint.h>
+@@ -18,6 +19,7 @@
+ 
+ typedef void (*sgemm_t)(int, int, int, int, int, int, float, const float *, int, const float *, int, float, float *, int);
+ static sgemm_t sg;
++static void *locking_handle;
+ enum { ROW = 101, N_ = 111, T_ = 112 };
+ 
+ /* The tiles need a BLAS whose concurrent single-thread calls run in parallel. On C2 that is only KML's serial
+@@ -28,7 +30,24 @@
+     void *h = dlmopen(LM_ID_NEWLM, path, RTLD_NOW | RTLD_LOCAL);
+     void *f = h ? dlsym(h, "cblas_sgemm") : 0;
+     if (!f) return -1;
++    locking_handle = h;
+     sg = (sgemm_t)f; return 0;
++}
++
++int kml_attn_locking_info(void **handle, long *namespace_id, const char **path, void **gemm) {
++    struct link_map *map = NULL;
++    Lmid_t id = LM_ID_BASE;
++    Dl_info symbol;
++    void *symbol_map = NULL;
++    if (!locking_handle || !sg || dlinfo(locking_handle, RTLD_DI_LMID, &id) != 0 || id == LM_ID_BASE ||
++        dlinfo(locking_handle, RTLD_DI_LINKMAP, &map) != 0 || !map || !map->l_name || !*map->l_name ||
++        !dladdr1((void *)sg, &symbol, &symbol_map, RTLD_DL_LINKMAP) || symbol_map != map)
++        return -1;
++    *handle = locking_handle;
++    *namespace_id = id;
++    *path = map->l_name;
++    *gemm = (void *)sg;
++    return 0;
+ }
+ 
+ /* exp(x) for x <= 0 (scores minus their row max or log-sum-exp): 2^n * e^r, r = x - n ln2, |r| <= ln2/2, degree-6
+--- a/payload/attn_dispatch.py
++++ b/payload/attn_dispatch.py
+@@ -56,6 +56,11 @@
+         load.argtypes, load.restype = [ctypes.c_char_p], ctypes.c_int
+         if load(info['locking_kml']['path'].encode()):
+             raise RuntimeError('failed to load the distinct locking KML namespace')
++        self.locking_info = self.lib.kml_attn_locking_info
++        self.locking_info.argtypes = [ctypes.POINTER(ctypes.c_void_p), ctypes.POINTER(ctypes.c_long),
++                                      ctypes.POINTER(ctypes.c_char_p), ctypes.POINTER(ctypes.c_void_p)]
++        self.locking_info.restype = ctypes.c_int
++        self.namespace = self.locking_namespace()
+         v = [ctypes.c_void_p] + [ctypes.c_long] * 3
+         head = [ctypes.c_int] * 5 + [ctypes.c_float, ctypes.c_int]
+         self.forward = self.lib.kml_attn_fwd
+@@ -68,6 +73,19 @@
+             self.sm_guard.argtypes, self.sm_guard.restype = [], None
+         self.counts = dict(forward=0, backward=0)
+         self.check_maps()
++
++    def locking_namespace(self):
++        handle, namespace_id, path, gemm = ctypes.c_void_p(), ctypes.c_long(), ctypes.c_char_p(), ctypes.c_void_p()
++        if self.locking_info(ctypes.byref(handle), ctypes.byref(namespace_id), ctypes.byref(path), ctypes.byref(gemm)):
++            raise RuntimeError('cannot identify the actual isolated locking KML handle and SGEMM owner')
++        expected = self.identity['locking_kml']
++        if (not handle.value or namespace_id.value <= 0 or not path.value or not gemm.value
++                or str(Path(path.value.decode()).resolve(strict=True)) != expected['path']):
++            raise RuntimeError('isolated locking KML handle, namespace, or path differs')
++        receipt = dict(**expected, namespace_id=namespace_id.value, handle=handle.value, gemm_address=gemm.value)
++        if hasattr(self, 'namespace') and self.namespace != receipt:
++            raise RuntimeError('isolated locking KML identity changed within worker')
++        return receipt
+ 
+     def check_maps(self):
+         maps = {line.split()[-1] for line in Path('/proc/self/maps').read_text().splitlines()}
+--- a/payload/cpu36_contract.py
++++ b/payload/cpu36_contract.py
+@@ -108,7 +108,7 @@
+         raise ValueError('invalid/duplicate TID evidence')
+ 
+ 
+-def runtime_info():
++def runtime_info(namespace_probe=None):
+     modules = {}
+     for name in ('torch', 'numpy', 'kml_ops'):
+         module = sys.modules.get(name)
+@@ -116,12 +116,21 @@
+             modules[name] = dict(version=getattr(module, '__version__', None), path=str(Path(module.__file__).resolve()))
+     paths = sorted({line.split()[-1] for line in Path('/proc/self/maps').read_text().splitlines()
+                     if re.search(r'kml|blas|libomp|libgomp|hbm', line, re.I) and line.split()[-1].startswith('/')})
++    namespace = namespace_probe() if namespace_probe else None
++    if namespace and namespace['path'] not in paths:
++        raise ValueError('isolated locking KML is missing from actual process maps')
+     libraries = {}
+     for path in paths:
+         if path not in _HASHES:
+             _HASHES[path] = sha(path)
+         info = dict(sha256=_HASHES[path])
+-        lib = ctypes.CDLL(path, mode=os.RTLD_NOLOAD | os.RTLD_LOCAL)
++        if namespace and path == namespace['path']:
++            if info['sha256'] != namespace['sha256']:
++                raise ValueError('mapped locking KML SHA differs')
++            info.update(namespace)
++            lib = ctypes.CDLL(path, handle=namespace['handle'])
++        else:
++            lib = ctypes.CDLL(path, mode=os.RTLD_NOLOAD | os.RTLD_LOCAL)
+         for name in ('omp_get_max_threads', 'omp_get_dynamic', 'omp_get_proc_bind', 'omp_get_num_places',
+                      'openblas_get_num_threads', 'openblas_get_num_threads64_', 'openblas_get_num_threads_64_'):
+             if hasattr(lib, name):
+--- a/payload/cpu36_guard.py
++++ b/payload/cpu36_guard.py
+@@ -28,14 +28,14 @@
+     contract.validate_checkpoint(record, receipt)
+ 
+ 
+-def checkpoint(state, name, torch=None):
++def checkpoint(state, name, torch=None, namespace_probe=None):
+     record = dict(name=name, pid=os.getpid(), time=time.time(),
+         calling_tid=threading.get_native_id(), calling_affinity=sorted(os.sched_getaffinity(0)),
+         environment={key: os.environ.get(key) for key in contract.ENVIRONMENT},
+         snapshot=contract.snapshot_threads(os.getpid()))
+     if torch is not None:
+         record.update(torch_intraop=torch.get_num_threads(), torch_interop=torch.get_num_interop_threads(),
+-                      parallel_info=torch.__config__.parallel_info(), runtime=contract.runtime_info())
++                      parallel_info=torch.__config__.parallel_info(), runtime=contract.runtime_info(namespace_probe))
+     state['checkpoints'].append(record)
+     try:
+         if state['pid'] != record['pid']:
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -134,12 +134,13 @@
+         raise ValueError("unexpected allocator in DDR worker")
+     result["hbm_allocator"] = hbm
+     runtime_check(runtime, hbm)
+-    attention = None
++    attention = namespace_probe = None
+     if args.variant == "candidate":
+         from attn_dispatch import Dispatch
+         attention = Dispatch(os.environ["S00_ATTN_BUILD"])
+         attention.install()
+-        result["attention"] = dict(build=attention.identity, counts=attention.counts, bf16=0, bq=64,
++        namespace_probe = attention.locking_namespace
++        result["attention"] = dict(build=attention.identity, counts=attention.counts, bf16=0, bq=64, locking_namespace=attention.namespace,
+                                    shim_guard_present=attention.sm_guard is not None, fallback="prohibited")
+     module = sys.modules["kml_ops"]
+     if data.sha(module.__file__) != BASELINE or module.LINEAR_DTYPE != torch.float32:
+@@ -157,7 +158,7 @@
+         return native(*values)
+ 
+     module._sgemm = count_native
+-    cpu36_guard.checkpoint(guard, "after_backend", torch)
++    cpu36_guard.checkpoint(guard, "after_backend", torch, namespace_probe)
+     metadata = data.load_descriptor(args.descriptor, args.descriptor_sha)
+     ledger = data.Exposure(args.output / "EXPOSURE_LEDGER.json", metadata["description"])
+     loading = time.monotonic_ns()
+@@ -242,7 +243,7 @@
+                     for key, layer in (("h", model), ("v", model.head_v), ("coarse", model.head_coarse)):
+                         handles.append(layer.register_forward_hook(capture(key)))
+                 values[role] = training.batch(torch, train, ids, angles)
+-                cpu36_guard.checkpoint(guard, f"before_{role}_{step}", torch)
++                cpu36_guard.checkpoint(guard, f"before_{role}_{step}", torch, namespace_probe)
+                 rss_before = memory_metrics.rss()
+                 shapes.clear()
+                 before = runtime["kml_gemm_calls"]
+@@ -293,7 +294,7 @@
+                                              item, "tensor", result["metrics"])
+                 if not all(torch.isfinite(item) for item in loss.values()):
+                     raise ValueError("nonfinite epoch loss")
+-                cpu36_guard.checkpoint(guard, f"after_{role}_{step}", torch)
++                cpu36_guard.checkpoint(guard, f"after_{role}_{step}", torch, namespace_probe)
+                 rows.append(dict(role=role, step=step, batch_size=batch, frame_indices=ids, frame_ids=frames,
+                                  mask_sha256=mask_sha, losses={k: v.item() for k,v in loss.items()},
+                                  start_ns=begin, end_ns=end, release_ns=release, step_seconds=(end-begin)/1e9,
+@@ -319,7 +320,7 @@
+         attention.check_maps()
+     finish_backend(runtime, expected)
+     runtime_check(runtime, hbm, attention)
+-    cpu36_guard.checkpoint(guard, "publish", torch)
++    cpu36_guard.checkpoint(guard, "publish", torch, namespace_probe)
+     if strict:
+         result["status"] = "PASS_STRICT_REFERENCE5" if args.variant == "baseline" else "PASS_STRICT_ENCODER5"
+     else:

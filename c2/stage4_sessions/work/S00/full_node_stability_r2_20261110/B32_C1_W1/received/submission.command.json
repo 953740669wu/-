@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn22036 !cn21341 !cn22035",
+    "-R",
+    "cpu=608,mem=393216MB",
+    "-RL",
+    "mem=393216MB",
+    "-a",
+    "numa[count=16,distribution=pack]",
+    "-T",
+    "7200",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/FULL16_R2_B32_C1_W1",
+    "-oo",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/FULL16_R2_B32_C1_W1/job.log",
+    "bash",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/FULL16_R2_B32_C1_W1/run_job.sh",
+    "648417a6a846246d426e972bc241a6455b6b86368ce14cd19c5ba3c2c1657072"
+  ],
+  "binding_sha256": "648417a6a846246d426e972bc241a6455b6b86368ce14cd19c5ba3c2c1657072",
+  "created_utc": "2026-11-10T08:20:37.609029+00:00"
+}

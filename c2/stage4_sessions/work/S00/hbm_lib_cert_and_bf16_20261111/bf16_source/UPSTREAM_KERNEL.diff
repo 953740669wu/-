@@ -1,0 +1,405 @@
+--- 11-08/c2/opt/kml_attn.c
++++ bf16_source/kml_attn.c
+@@ -1,15 +1,7 @@
+-/* Fused attention (no mask, no dropout, fp32) for s4_models on C2, called from kml_ops.py through ctypes.
+-   One OpenMP loop over (batch x head x query chunk) tiles; each tile runs single-threaded KML SME sgemms on views
+-   of q/k/v (any row stride, unit column stride) with a per-thread score buffer of BQ x Nk, so the N x N scores never
+-   reach memory. Forward saves the per-row log-sum-exp; backward recomputes the scores from it (FlashAttention-2
+-   style) and loops over query chunks inside one head, so dK/dV accumulate without atomics.
+-   Tensors are addressed as x[b*s0 + h*s1 + n*s2 + i] (i < d). The sgemm pointer comes from Python
+-   (kml_ops._sgemm, KML SME multi): called inside the parallel region it runs on the calling thread only.
+-   Build in a job (gcc of the compute nodes):
+-     gcc -O3 -mcpu=native -fno-math-errno -fopenmp -fPIC -c kml_attn.c && gcc -shared -o libkml_attn.so kml_attn.o <torch_kml>/torch.libs/libgomp-*.so -ldl
+-   Linking against torch's libgomp (BiSheng libomp in sw/torch_kml) keeps a single OpenMP runtime in the process. */
++/* 11-08 BF16 tiles with the frozen C2 locking namespace and checked native ABI. */
+ #define _GNU_SOURCE
+ #include <dlfcn.h>
++#include <link.h>
+ #include <math.h>
+ #include <omp.h>
+ #include <stdint.h>
+@@ -17,25 +9,41 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
+-typedef void (*sgemm_t)(int, int, int, int, int, int, float, const float *, int, const float *, int, float, float *, int);
+-static sgemm_t sg;
++typedef void (*sbgemm_t)(int, int, int, int, int, int, float, const uint16_t *, int, const uint16_t *, int, float, float *, int);
++static sbgemm_t sbg;
++static void *locking_handle;
+ enum { ROW = 101, N_ = 111, T_ = 112 };
+-
+-void kml_attn_init(void *f) { sg = (sgemm_t)f; }
+ 
+ /* The tiles need a BLAS whose concurrent single-thread calls run in parallel. On C2 that is only KML's serial
+    thread-safe build, sme/kblas/locking (bench_kblas_concurrent.c, 36 threads: 2.4 TFLOP/s together; nolocking
+    serializes to 0.25, multi inside a parallel region likewise). It shares the soname libkblas.so.1 with the multi
+-   build torch's shim uses, so it is loaded in its own link namespace. Returns 0 on success (else sg is unchanged). */
+-typedef void (*sbgemm_t)(int, int, int, int, int, int, float, const uint16_t *, int, const uint16_t *, int, float, float *, int);
+-static sbgemm_t sbg;
++   build torch's shim uses, so it is loaded in its own link namespace. Returns 0 on success (else the caller must stop). */
+ int kml_attn_load(const char *path) {
+     void *h = dlmopen(LM_ID_NEWLM, path, RTLD_NOW | RTLD_LOCAL);
+-    void *f = h ? dlsym(h, "cblas_sgemm") : 0;
+-    if (!f) return -1;
+-    sg = (sgemm_t)f; sbg = (sbgemm_t)dlsym(h, "cblas_sbgemm"); return 0;
+-}
+-int kml_attn_has_bf16(void) { return sbg != 0; }
++    void *f = h ? dlsym(h, "cblas_sbgemm") : 0;
++    if (!f) {
++        if (h) dlclose(h);
++        return -1;
++    }
++    locking_handle = h;
++    sbg = (sbgemm_t)f; return 0;
++}
++
++int kml_attn_locking_info(void **handle, long *namespace_id, const char **path, void **gemm) {
++    struct link_map *map = NULL;
++    Lmid_t id = LM_ID_BASE;
++    Dl_info symbol;
++    void *symbol_map = NULL;
++    if (!locking_handle || !sbg || dlinfo(locking_handle, RTLD_DI_LMID, &id) != 0 || id == LM_ID_BASE ||
++        dlinfo(locking_handle, RTLD_DI_LINKMAP, &map) != 0 || !map || !map->l_name || !*map->l_name ||
++        !dladdr1((void *)sbg, &symbol, &symbol_map, RTLD_DL_LINKMAP) || symbol_map != map)
++        return -1;
++    *handle = locking_handle;
++    *namespace_id = id;
++    *path = map->l_name;
++    *gemm = (void *)sbg;
++    return 0;
++}
+ 
+ /* exp(x) for x <= 0 (scores minus their row max or log-sum-exp): 2^n * e^r, r = x - n ln2, |r| <= ln2/2, degree-6
+    Taylor (rel. error ~1e-7). Written so that gcc vectorizes the loops calling it (fmaxnm, frintx, fma, integer add
+@@ -46,7 +54,7 @@
+     float n = __builtin_rintf(x * 1.44269504f);
+     float r = fmaf(n, -0.693145752f, x); r = fmaf(n, -1.42860677e-6f, r);   /* Cody-Waite ln2 split */
+     float p = 1.0f + r * (1.0f + r * (0.5f + r * (0.166666672f + r * (0.0416666679f + r * (0.00833333377f + r * 0.00138888892f)))));
+-    int32_t i; memcpy(&i, &p, 4); i += (int32_t)n << 23; memcpy(&p, &i, 4);
++    uint32_t i; memcpy(&i, &p, 4); i += (uint32_t)(int32_t)n << 23; memcpy(&p, &i, 4);
+     return p;
+ }
+ 
+@@ -69,218 +77,6 @@
+    K/V (or Q/dO) stay in the thread's L2 (768 KB) across them instead of being re-read from memory for every tile;
+    0 = all chunks of a head in one task. Default 1 (one tile per task). */
+ static int group(int nchunks) { const char *e = getenv("KML_ATTN_GROUP"); int g = e ? atoi(e) : 1; return g <= 0 ? nchunks : g; }
+-
+-/* o = softmax(scale q k^T) v; lse[(b*H + h)*Nq + n] */
+-void kml_attn_fwd(int B, int H, int Nq, int Nk, int d, float scale, int bq,
+-                  const float *q, long q0, long q1, long q2, const float *k, long k0, long k1, long k2,
+-                  const float *v, long v0, long v1, long v2, float *o, long o0, long o1, long o2, float *lse) {
+-    view Q = {q, q0, q1, q2}, K = {k, k0, k1, k2}, V = {v, v0, v1, v2};
+-    int nc = (Nq + bq - 1) / bq, lv = nested_off(), gq = group(nc);
+-    prof_init();
+-    #pragma omp parallel
+-    {
+-        double tg = 0, te = 0;
+-        float *s = 0;
+-        if (posix_memalign((void **)&s, 64, sizeof(float) * (size_t)bq * Nk)) s = 0;
+-        #pragma omp for schedule(dynamic, gq)
+-        for (long it = 0; it < (long)B * H * nc; it++) {
+-            if (!s) continue;
+-            int bh = it / nc, c = it % nc, b = bh / H, h = bh % H, n0 = c * bq, m = Nq - n0 < bq ? Nq - n0 : bq;
+-            const float *qp = AT(Q, b, h) + n0 * q2;
+-            TIC(t);
+-            sg(ROW, N_, T_, m, Nk, d, scale, qp, q2, AT(K, b, h), k2, 0.0f, s, Nk);
+-            TOC(tg, t);
+-            for (int i = 0; i < m; i++) {
+-                float *r = s + (size_t)i * Nk, mx = r[0], sum = 0.0f;
+-                #pragma omp simd reduction(max:mx)
+-                for (int j = 1; j < Nk; j++) mx = fmaxf(mx, r[j]);
+-                #pragma omp simd reduction(+:sum)
+-                for (int j = 0; j < Nk; j++) { r[j] = fexp(r[j] - mx); sum += r[j]; }
+-                float inv = 1.0f / sum;
+-                for (int j = 0; j < Nk; j++) r[j] *= inv;
+-                lse[(size_t)bh * Nq + n0 + i] = mx + logf(sum);
+-            }
+-            TOC(te, t);
+-            sg(ROW, N_, N_, m, d, Nk, 1.0f, s, Nk, AT(V, b, h), v2, 0.0f, o + (long)b * o0 + (long)h * o1 + (long)n0 * o2, o2);
+-            TOC(tg, t);
+-        }
+-        free(s);
+-        if (prof) {
+-            #pragma omp atomic
+-            tg_ += tg;
+-            #pragma omp atomic
+-            te_ += te;
+-        }
+-    }
+-    omp_set_max_active_levels(lv);
+-    prof_print("fwd", B, H, Nq, Nk, bq);
+-}
+-
+-/* Gradients of kml_attn_fwd, first version (KML_ATTN_BWD=1): one task per (b, h), looping over query chunks; dk and
+-   dv are written (beta 0 on the first chunk, then accumulated). Slower than SDPA at 928 tokens: only B*H tasks, and
+-   the dV/dK GEMMs have a transposed A and inner dimension bq. */
+-static void bwd_v1(int B, int H, int Nq, int Nk, int d, float scale, int bq,
+-                  const float *q, long q0, long q1, long q2, const float *k, long k0, long k1, long k2,
+-                  const float *v, long v0, long v1, long v2, const float *o, long o0, long o1, long o2,
+-                  const float *g, long g0, long g1, long g2, const float *lse,
+-                  float *dq, long dq0, long dq1, long dq2, float *dk, long dk0, long dk1, long dk2,
+-                  float *dv, long dv0, long dv1, long dv2) {
+-    view Q = {q, q0, q1, q2}, K = {k, k0, k1, k2}, V = {v, v0, v1, v2}, O = {o, o0, o1, o2}, G = {g, g0, g1, g2};
+-    int lv = nested_off();
+-    prof_init();
+-    #pragma omp parallel
+-    {
+-        double tg = 0, te = 0;
+-        float *p = 0, *dp = 0, *dd = 0;
+-        size_t n = (size_t)bq * Nk;
+-        if (posix_memalign((void **)&p, 64, sizeof(float) * (2 * n + bq))) p = 0;
+-        if (p) { dp = p + n; dd = dp + n; }
+-        #pragma omp for schedule(dynamic, 1)
+-        for (long bh = 0; bh < (long)B * H; bh++) {
+-            if (!p) continue;
+-            int b = bh / H, h = bh % H;
+-            const float *kp = AT(K, b, h), *vp = AT(V, b, h);
+-            float *dkp = dk + (long)b * dk0 + (long)h * dk1, *dvp = dv + (long)b * dv0 + (long)h * dv1;
+-            for (int n0 = 0; n0 < Nq; n0 += bq) {
+-                int m = Nq - n0 < bq ? Nq - n0 : bq;
+-                float beta = n0 ? 1.0f : 0.0f;
+-                const float *qp = AT(Q, b, h) + n0 * q2, *gp = AT(G, b, h) + n0 * g2, *op = AT(O, b, h) + n0 * o2;
+-                const float *l = lse + (size_t)bh * Nq + n0;
+-                TIC(t);
+-                sg(ROW, N_, T_, m, Nk, d, scale, qp, q2, kp, k2, 0.0f, p, Nk);          /* scores */
+-                TOC(tg, t);
+-                for (int i = 0; i < m; i++) {
+-                    float *restrict r = p + (size_t)i * Nk; float li = l[i], acc = 0.0f;
+-                    #pragma omp simd
+-                    for (int j = 0; j < Nk; j++) r[j] = fexp(r[j] - li);
+-                    for (int c = 0; c < d; c++) acc += gp[(long)i * g2 + c] * op[(long)i * o2 + c];
+-                    dd[i] = acc;                                                       /* rowsum(dO * O) */
+-                }
+-                TOC(te, t);
+-                sg(ROW, T_, N_, Nk, d, m, 1.0f, p, Nk, gp, g2, beta, dvp, dv2);         /* dV += P^T dO */
+-                sg(ROW, N_, T_, m, Nk, d, 1.0f, gp, g2, vp, v2, 0.0f, dp, Nk);          /* dP = dO V^T */
+-                TOC(tg, t);
+-                for (int i = 0; i < m; i++) {
+-                    float *r = dp + (size_t)i * Nk, *pr = p + (size_t)i * Nk, di = dd[i];
+-                    for (int j = 0; j < Nk; j++) r[j] = pr[j] * (r[j] - di);           /* dS */
+-                }
+-                TOC(te, t);
+-                sg(ROW, N_, N_, m, d, Nk, scale, dp, Nk, kp, k2, 0.0f, dq + (long)b * dq0 + (long)h * dq1 + (long)n0 * dq2, dq2);
+-                sg(ROW, T_, N_, Nk, d, m, scale, dp, Nk, qp, q2, beta, dkp, dk2);      /* dK += scale dS^T Q */
+-                TOC(tg, t);
+-            }
+-        }
+-        free(p);
+-        if (prof) {
+-            #pragma omp atomic
+-            tg_ += tg;
+-            #pragma omp atomic
+-            te_ += te;
+-        }
+-    }
+-    omp_set_max_active_levels(lv);
+-    prof_print("bwd v1", B, H, Nq, Nk, bq);
+-}
+-
+-/* Gradients of kml_attn_fwd (default), FlashAttention-2 style in two passes with the scores recomputed in each, so
+-   every GEMM has the forward shapes (inner dimension d or the full token count, no transposed A) and there are
+-   B*H*chunks independent tasks:
+-     pass 1, per (b, h, key block of bq rows): S^T = scale K_blk Q^T, P^T = exp(S^T - lse), dV_blk = P^T dO,
+-             dP^T = V_blk dO^T, dS^T = P^T * (dP^T - D), dK_blk = scale dS^T Q;
+-     pass 2, per (b, h, query block): S = scale Q_blk K^T, P = exp(S - lse), dP = dO_blk V^T, dS = P * (dP - D),
+-             dQ_blk = scale dS K;
+-   with D = rowsum(dO * O) per query row, computed first. */
+-void kml_attn_bwd(int B, int H, int Nq, int Nk, int d, float scale, int bq,
+-                  const float *q, long q0, long q1, long q2, const float *k, long k0, long k1, long k2,
+-                  const float *v, long v0, long v1, long v2, const float *o, long o0, long o1, long o2,
+-                  const float *g, long g0, long g1, long g2, const float *lse,
+-                  float *dq, long dq0, long dq1, long dq2, float *dk, long dk0, long dk1, long dk2,
+-                  float *dv, long dv0, long dv1, long dv2) {
+-    const char *e = getenv("KML_ATTN_BWD");
+-    if (e && atoi(e) == 1) {
+-        bwd_v1(B, H, Nq, Nk, d, scale, bq, q, q0, q1, q2, k, k0, k1, k2, v, v0, v1, v2, o, o0, o1, o2, g, g0, g1, g2,
+-               lse, dq, dq0, dq1, dq2, dk, dk0, dk1, dk2, dv, dv0, dv1, dv2);
+-        return;
+-    }
+-    view Q = {q, q0, q1, q2}, K = {k, k0, k1, k2}, V = {v, v0, v1, v2}, O = {o, o0, o1, o2}, G = {g, g0, g1, g2};
+-    float *D = malloc(sizeof(float) * (size_t)B * H * Nq);
+-    if (!D) return;
+-    int lv = nested_off(), nck = (Nk + bq - 1) / bq, ncq = (Nq + bq - 1) / bq, gk = group(nck), gq = group(ncq);
+-    long n1 = (long)B * H * nck, n2 = (long)B * H * ncq;
+-    prof_init();
+-    #pragma omp parallel
+-    {
+-        double tg = 0, te = 0;
+-        size_t n = (size_t)bq * (Nq > Nk ? Nq : Nk);
+-        float *p = 0, *dp = 0;
+-        if (posix_memalign((void **)&p, 64, sizeof(float) * 2 * n)) p = 0;
+-        if (p) dp = p + n;
+-        #pragma omp for schedule(static)
+-        for (long r = 0; r < (long)B * H * Nq; r++) {                    /* D = rowsum(dO * O) */
+-            long bh = r / Nq; int b = bh / H, h = bh % H, i = r % Nq; float acc = 0.0f;
+-            const float *gp = AT(G, b, h) + (long)i * g2, *op = AT(O, b, h) + (long)i * o2;
+-            #pragma omp simd reduction(+:acc)
+-            for (int c = 0; c < d; c++) acc += gp[c] * op[c];
+-            D[r] = acc;
+-        }
+-        #pragma omp for schedule(dynamic, gk)                              /* pass 1: dK, dV per key block */
+-        for (long it = 0; it < n1; it++) {
+-            if (!p) continue;
+-            long bh = it / nck; int b = bh / H, h = bh % H, j0 = (it % nck) * bq, mk = Nk - j0 < bq ? Nk - j0 : bq;
+-            const float *qp = AT(Q, b, h), *gp = AT(G, b, h), *l = lse + bh * Nq, *dr = D + bh * Nq;
+-            const float *kb = AT(K, b, h) + (long)j0 * k2, *vb = AT(V, b, h) + (long)j0 * v2;
+-            TIC(t);
+-            sg(ROW, N_, T_, mk, Nq, d, scale, kb, k2, qp, q2, 0.0f, p, Nq);         /* S^T */
+-            TOC(tg, t);
+-            for (int j = 0; j < mk; j++) {
+-                float *restrict r = p + (size_t)j * Nq;
+-                #pragma omp simd
+-                for (int i = 0; i < Nq; i++) r[i] = fexp(r[i] - l[i]);
+-            }
+-            TOC(te, t);
+-            sg(ROW, N_, N_, mk, d, Nq, 1.0f, p, Nq, gp, g2, 0.0f, dv + (long)b * dv0 + (long)h * dv1 + (long)j0 * dv2, dv2);
+-            sg(ROW, N_, T_, mk, Nq, d, 1.0f, vb, v2, gp, g2, 0.0f, dp, Nq);          /* dP^T */
+-            TOC(tg, t);
+-            for (int j = 0; j < mk; j++) {
+-                float *restrict r = dp + (size_t)j * Nq; const float *pr = p + (size_t)j * Nq;
+-                #pragma omp simd
+-                for (int i = 0; i < Nq; i++) r[i] = pr[i] * (r[i] - dr[i]);
+-            }
+-            TOC(te, t);
+-            sg(ROW, N_, N_, mk, d, Nq, scale, dp, Nq, qp, q2, 0.0f, dk + (long)b * dk0 + (long)h * dk1 + (long)j0 * dk2, dk2);
+-            TOC(tg, t);
+-        }
+-        #pragma omp for schedule(dynamic, gq)                              /* pass 2: dQ per query block */
+-        for (long it = 0; it < n2; it++) {
+-            if (!p) continue;
+-            long bh = it / ncq; int b = bh / H, h = bh % H, i0 = (it % ncq) * bq, m = Nq - i0 < bq ? Nq - i0 : bq;
+-            const float *qb = AT(Q, b, h) + (long)i0 * q2, *gb = AT(G, b, h) + (long)i0 * g2, *kp = AT(K, b, h), *vp = AT(V, b, h);
+-            const float *l = lse + bh * Nq + i0, *dr = D + bh * Nq + i0;
+-            TIC(t);
+-            sg(ROW, N_, T_, m, Nk, d, scale, qb, q2, kp, k2, 0.0f, p, Nk);           /* S */
+-            sg(ROW, N_, T_, m, Nk, d, 1.0f, gb, g2, vp, v2, 0.0f, dp, Nk);           /* dP */
+-            TOC(tg, t);
+-            for (int i = 0; i < m; i++) {
+-                float *restrict r = dp + (size_t)i * Nk; const float *sr = p + (size_t)i * Nk; float li = l[i], di = dr[i];
+-                #pragma omp simd
+-                for (int j = 0; j < Nk; j++) r[j] = fexp(sr[j] - li) * (r[j] - di);   /* dS */
+-            }
+-            TOC(te, t);
+-            sg(ROW, N_, N_, m, d, Nk, scale, dp, Nk, kp, k2, 0.0f, dq + (long)b * dq0 + (long)h * dq1 + (long)i0 * dq2, dq2);
+-            TOC(tg, t);
+-        }
+-        free(p);
+-        if (prof) {
+-            #pragma omp atomic
+-            tg_ += tg;
+-            #pragma omp atomic
+-            te_ += te;
+-        }
+-    }
+-    free(D);
+-    omp_set_max_active_levels(lv);
+-    prof_print("bwd", B, H, Nq, Nk, bq);
+-}
+ 
+ /* ---------------------------------------------------------------- bf16 variant (kml_attn_fwd_bf / kml_attn_bwd_bf)
+    The roundings of CUDA flash attention under bf16 autocast: q, k, v, dO, P and dS in bf16; scores, softmax, D and
+@@ -308,20 +104,24 @@
+ 
+ static void zero_rows(float *p, int m, int n, long ld) { for (int i = 0; i < m; i++) memset(p + (long)i * ld, 0, sizeof(float) * n); }
+ 
+-void kml_attn_fwd_bf(int B, int H, int Nq, int Nk, int d, float scale, int bq,
++int kml_attn_fwd_bf(int B, int H, int Nq, int Nk, int d, float scale, int bq,
+                      const float *q, long q0, long q1, long q2, const float *k, long k0, long k1, long k2,
+-                     const float *v, long v0, long v1, long v2, float *o, long o0, long o1, long o2, float *lse) {
++                     const float *v, long v0, long v1, long v2, float *o, long o0, long o1, long o2, float *lse, unsigned long *tiles) {
++    if (!sbg || bq != 16) return -2;
+     view Q = {q, q0, q1, q2}, K = {k, k0, k1, k2}, V = {v, v0, v1, v2};
+     int nc = (Nq + bq - 1) / bq, lv = nested_off(), gq = group(nc);
+     prof_init();
+     uint16_t *qb = cast_bhnd(Q, B, H, Nq, d), *kb = cast_bhnd(K, B, H, Nk, d), *vb = cast_bhnd(V, B, H, Nk, d);
+-    if (qb && kb && vb) {
+-        #pragma omp parallel
++    int failed = !qb || !kb || !vb;
++    unsigned long count = 0;
++    if (!failed) {
++        #pragma omp parallel reduction(|:failed) reduction(+:count)
+         {
+             double tg = 0, te = 0;
+             float *s = 0; uint16_t *pb = 0;
+             if (posix_memalign((void **)&s, 64, sizeof(float) * (size_t)bq * Nk)) s = 0;
+             if (posix_memalign((void **)&pb, 64, sizeof(uint16_t) * (size_t)bq * Nk)) pb = 0;
++            failed = !s || !pb;
+             #pragma omp for schedule(dynamic, gq)
+             for (long it = 0; it < (long)B * H * nc; it++) {
+                 if (!s || !pb) continue;
+@@ -345,6 +145,7 @@
+                 zero_rows(op, m, d, o2);
+                 TOC(te, t);
+                 sbg(ROW, N_, N_, m, d, Nk, 1.0f, pb, Nk, vb + (size_t)bh * Nk * d, d, 0.0f, op, o2);
++                count++;
+                 TOC(tg, t);
+             }
+             free(s); free(pb);
+@@ -359,15 +160,18 @@
+     free(qb); free(kb); free(vb);
+     omp_set_max_active_levels(lv);
+     prof_print("fwd bf16", B, H, Nq, Nk, bq);
++    *tiles = count;
++    return failed ? -1 : 0;
+ }
+ 
+ /* Same two passes as kml_attn_bwd, on the bf16 copies; pass 1 forms S^T and dP^T before either elementwise step. */
+-void kml_attn_bwd_bf(int B, int H, int Nq, int Nk, int d, float scale, int bq,
++int kml_attn_bwd_bf(int B, int H, int Nq, int Nk, int d, float scale, int bq,
+                      const float *q, long q0, long q1, long q2, const float *k, long k0, long k1, long k2,
+                      const float *v, long v0, long v1, long v2, const float *o, long o0, long o1, long o2,
+                      const float *g, long g0, long g1, long g2, const float *lse,
+                      float *dq, long dq0, long dq1, long dq2, float *dk, long dk0, long dk1, long dk2,
+-                     float *dv, long dv0, long dv1, long dv2) {
++                     float *dv, long dv0, long dv1, long dv2, unsigned long *tiles) {
++    if (!sbg || bq != 16) return -2;
+     view Q = {q, q0, q1, q2}, K = {k, k0, k1, k2}, V = {v, v0, v1, v2}, O = {o, o0, o1, o2}, G = {g, g0, g1, g2};
+     float *D = malloc(sizeof(float) * (size_t)B * H * Nq);
+     int lv = nested_off(), nck = (Nk + bq - 1) / bq, ncq = (Nq + bq - 1) / bq, gk = group(nck), gq = group(ncq);
+@@ -375,8 +179,10 @@
+     prof_init();
+     uint16_t *qb = cast_bhnd(Q, B, H, Nq, d), *kb = cast_bhnd(K, B, H, Nk, d), *vb = cast_bhnd(V, B, H, Nk, d),
+              *gb = cast_bhnd(G, B, H, Nq, d);
+-    if (D && qb && kb && vb && gb) {
+-        #pragma omp parallel
++    int failed = !D || !qb || !kb || !vb || !gb;
++    unsigned long count = 0;
++    if (!failed) {
++        #pragma omp parallel reduction(|:failed) reduction(+:count)
+         {
+             double tg = 0, te = 0;
+             size_t n = (size_t)bq * (Nq > Nk ? Nq : Nk);
+@@ -385,6 +191,7 @@
+             if (posix_memalign((void **)&pb, 64, sizeof(uint16_t) * 2 * n)) pb = 0;
+             if (p) dp = p + n;
+             if (pb) sb = pb + n;
++            failed = !p || !pb;
+             #pragma omp for schedule(static)
+             for (long r = 0; r < (long)B * H * Nq; r++) {                /* D = rowsum(dO * O), fp32 */
+                 long bh = r / Nq; int b = bh / H, h = bh % H, i = r % Nq; float acc = 0.0f;
+@@ -419,6 +226,7 @@
+                 TOC(te, t);
+                 sbg(ROW, N_, N_, mk, d, Nq, 1.0f, pb, Nq, gp, d, 0.0f, dvp, dv2);          /* dV = P^T dO */
+                 sbg(ROW, N_, N_, mk, d, Nq, scale, sb, Nq, qp, d, 0.0f, dkp, dk2);         /* dK = scale dS^T Q */
++                count++;
+                 TOC(tg, t);
+             }
+             #pragma omp for schedule(dynamic, gq)                          /* pass 2: dQ per query block */
+@@ -443,6 +251,7 @@
+                 zero_rows(dqp, m, d, dq2);
+                 TOC(te, t);
+                 sbg(ROW, N_, N_, m, d, Nk, scale, sb, Nk, kp, d, 0.0f, dqp, dq2);         /* dQ = scale dS K */
++                count++;
+                 TOC(tg, t);
+             }
+             free(p); free(pb);
+@@ -457,4 +266,6 @@
+     free(D); free(qb); free(kb); free(vb); free(gb);
+     omp_set_max_active_levels(lv);
+     prof_print("bwd bf16", B, H, Nq, Nk, bq);
+-}
++    *tiles = count;
++    return failed ? -1 : 0;
++}

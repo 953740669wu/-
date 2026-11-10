@@ -1,0 +1,650 @@
+{
+  "status": "FAIL_STOP",
+  "job_id": "2085051",
+  "host": "cn22036",
+  "phase": "strict",
+  "variant": "candidate",
+  "pid": 3958228,
+  "started_ns": 965980620478554,
+  "metrics": [],
+  "completed_updates": 0,
+  "cpu36": {
+    "version": "CPU36_MODEL_V1",
+    "pid": 3958228,
+    "job_id": "2085051",
+    "host": "cn22036",
+    "receipt": {
+      "allocated": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "domain_cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "selected": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "reserved": [
+        36,
+        37
+      ],
+      "physical_siblings": {
+        "0": [
+          0
+        ],
+        "1": [
+          1
+        ],
+        "2": [
+          2
+        ],
+        "3": [
+          3
+        ],
+        "4": [
+          4
+        ],
+        "5": [
+          5
+        ],
+        "6": [
+          6
+        ],
+        "7": [
+          7
+        ],
+        "8": [
+          8
+        ],
+        "9": [
+          9
+        ],
+        "10": [
+          10
+        ],
+        "11": [
+          11
+        ],
+        "12": [
+          12
+        ],
+        "13": [
+          13
+        ],
+        "14": [
+          14
+        ],
+        "15": [
+          15
+        ],
+        "16": [
+          16
+        ],
+        "17": [
+          17
+        ],
+        "18": [
+          18
+        ],
+        "19": [
+          19
+        ],
+        "20": [
+          20
+        ],
+        "21": [
+          21
+        ],
+        "22": [
+          22
+        ],
+        "23": [
+          23
+        ],
+        "24": [
+          24
+        ],
+        "25": [
+          25
+        ],
+        "26": [
+          26
+        ],
+        "27": [
+          27
+        ],
+        "28": [
+          28
+        ],
+        "29": [
+          29
+        ],
+        "30": [
+          30
+        ],
+        "31": [
+          31
+        ],
+        "32": [
+          32
+        ],
+        "33": [
+          33
+        ],
+        "34": [
+          34
+        ],
+        "35": [
+          35
+        ],
+        "36": [
+          36
+        ],
+        "37": [
+          37
+        ]
+      },
+      "node": 0
+    },
+    "allocation_file_sha256": "1f913175a919c18c4f8e5fde7003cea95dfdd78362d8830a5c5ddfb1b45c395a",
+    "checkpoints": [
+      {
+        "name": "before_framework",
+        "pid": 3958228,
+        "time": 1794320113.3407998,
+        "calling_tid": 3958228,
+        "calling_affinity": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "environment": {
+          "OMP_NUM_THREADS": "36",
+          "MKL_NUM_THREADS": "36",
+          "OPENBLAS_NUM_THREADS": "1",
+          "OMP_PLACES": "cores",
+          "OMP_PROC_BIND": "close"
+        },
+        "snapshot": {
+          "complete": true,
+          "threads": [
+            {
+              "tid": 3958228,
+              "affinity": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35
+              ],
+              "ticks": 29,
+              "start_ticks": 96597999,
+              "last_cpu": 0,
+              "state": "R"
+            }
+          ],
+          "vanished": [],
+          "errors": []
+        }
+      },
+      {
+        "name": "after_framework",
+        "pid": 3958228,
+        "time": 1794320122.0700278,
+        "calling_tid": 3958228,
+        "calling_affinity": [
+          0
+        ],
+        "environment": {
+          "OMP_NUM_THREADS": "36",
+          "MKL_NUM_THREADS": "36",
+          "OPENBLAS_NUM_THREADS": "1",
+          "OMP_PLACES": "cores",
+          "OMP_PROC_BIND": "close"
+        },
+        "snapshot": {
+          "complete": true,
+          "threads": [
+            {
+              "tid": 3958228,
+              "affinity": [
+                0
+              ],
+              "ticks": 780,
+              "start_ticks": 96597999,
+              "last_cpu": 0,
+              "state": "R"
+            }
+          ],
+          "vanished": [],
+          "errors": []
+        },
+        "torch_intraop": 36,
+        "torch_interop": 608,
+        "parallel_info": "ATen/Parallel:\n\tat::get_num_threads() : 36\n\tat::get_num_interop_threads() : 608\nOpenMP 201511 (a.k.a. OpenMP 4.5)\n\tomp_get_max_threads() : 36\nIntel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\nstd::thread::hardware_concurrency() : 608\nEnvironment variables:\n\tOMP_NUM_THREADS : 36\nATen parallel backend: OpenMP\n",
+        "runtime": {
+          "modules": {
+            "torch": {
+              "version": "2.7.1+cpu",
+              "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py"
+            },
+            "numpy": {
+              "version": "1.26.4",
+              "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy/__init__.py"
+            }
+          },
+          "libraries": {
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so": {
+              "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+            },
+            "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so": {
+              "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a",
+              "openblas_get_num_threads64_": 1,
+              "openblas_get_num_threads_64_": 1
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute-489746be.so": {
+              "sha256": "7f338493638c8b4f8ba0f3d6ef44e272d7ddfc67391282dbc0c25eaf4c82a9c2",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libarm_compute_graph-17c2200a.so": {
+              "sha256": "1712d2c6eba7d87189788766fd56120cf1d1cb42ca53b7809ea14ee27ac7d238",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libgfortran-0b50f350.so.5.0.0": {
+              "sha256": "6e85b148428f0eeb8445270806f25deb8a9e749086157d47a5955bed23189642"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so": {
+              "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_C.cpython-39-aarch64-linux-gnu.so": {
+              "sha256": "0098ec8982bc60ae9511ee3a636d9b9c8f9d3decceb4b44c7e1d446d8b74ab0b",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libc10.so": {
+              "sha256": "34370e00fc38fe83b82685b113358b12afe6959286b8f5fc8125682ce9e0af10"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libshm.so": {
+              "sha256": "0f3cef29d8ca21eaa84e547ce55a7913bf504a9530f00307caa6535a7db1d2c1",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch.so": {
+              "sha256": "340a49fc5a0ed13f02b67f08f62bc1a7e9636a0f277950ef00c8da0ff896a646",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so": {
+              "sha256": "eee755641450652e0c08aeb5d3436f39bd9d3ff89e501a4262b3b0ca5862ac7a",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_global_deps.so": {
+              "sha256": "2cbf6ab7259b743b02eb75babb72548784b1503b280f934eeceefec0fb1816e4"
+            },
+            "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so": {
+              "sha256": "c26b39e44ea1b339ab2828f492dfc8d6ddf854c3da3f5c5f5cf4aa3d06e47912",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36,
+              "openblas_get_num_threads": 36
+            },
+            "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/job_evidence/libhbm_alloc_s03_round2.so": {
+              "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d"
+            },
+            "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so": {
+              "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac",
+              "omp_get_max_threads": 36,
+              "omp_get_dynamic": 0,
+              "omp_get_proc_bind": 3,
+              "omp_get_num_places": 36
+            }
+          }
+        }
+      }
+    ],
+    "errors": []
+  },
+  "runtime": {
+    "backend": "kml",
+    "python": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/bin/python3",
+    "python_version": "3.9.9 (main, Jul 29 2025, 11:26:21) \n[GCC 10.3.1]",
+    "host": "cn22036",
+    "platform": "Linux-5.10.0-285.5.v2403.ky10p.aarch64-aarch64-with-glibc2.34",
+    "torch": "2.7.1+cpu",
+    "torch_file": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/__init__.py",
+    "numpy": "1.26.4",
+    "numpy_file": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib64/python3.9/site-packages/numpy/__init__.py",
+    "torch_threads": 36,
+    "interop_threads": 608,
+    "torch_config": "PyTorch built with:\n  - GCC 11.2\n  - C++ Version: 201703\n  - Intel(R) MKL-DNN v3.7.1 (Git Hash 8d263e693366ef8db40acc569cc7d8edf644556d)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: DEFAULT\n  - Build settings: BLAS_INFO=open, BUILD_TYPE=Release, COMMIT_SHA=e2d141dbde55c2a4370fac5165b0561b6af4798b, CXX_COMPILER=/opt/rh/gcc-toolset-11/root/usr/bin/c++, CXX_FLAGS=-ffunction-sections -fdata-sections -D_GLIBCXX_USE_CXX11_ABI=1 -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_PYTORCH_QNNPACK -DAT_BUILD_ARM_VEC256_WITH_SLEEF -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=open, TORCH_VERSION=2.7.1, USE_CUDA=OFF, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, \n",
+    "env": {
+      "KML_BLAS_LIB": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so",
+      "LINEAR_DTYPE": "fp32",
+      "LD_PRELOAD": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/job_evidence/libhbm_alloc_s03_round2.so:/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+      "OMP_NUM_THREADS": "36",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "36",
+      "OMP_PROC_BIND": "close",
+      "OMP_PLACES": "cores"
+    },
+    "affinity_before": {
+      "expected": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "actual": [
+        0
+      ],
+      "snapshot": {
+        "complete": true,
+        "threads": [
+          {
+            "tid": 3958228,
+            "affinity": [
+              0
+            ],
+            "ticks": 938,
+            "start_ticks": 96597999,
+            "last_cpu": 0,
+            "state": "R"
+          }
+        ],
+        "vanished": [],
+        "errors": []
+      }
+    },
+    "kml_ops_file": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/payload/baseline/kml_ops.py",
+    "libraries": [
+      {
+        "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/S01_payload/lib/libkml_sgemm_shim.so",
+        "sha256": "a52c4da1a87b1a65b11121ecab2b8d0ca3fd2a03a5c92422873592381a92dd73"
+      },
+      {
+        "path": "/home/share/dengqingtian/opt/stage4_sessions/S00/ENV_20261104T130730Z_R4/venv/lib/python3.9/site-packages/numpy.libs/libopenblas64_p-r0-17488984.3.23.dev.so",
+        "sha256": "37bbe4b1cbc29e5c68a3df2d3cfcc5aac97ee66c856f40fabedea760cc3b452a"
+      },
+      {
+        "path": "/home/share/songzhenlong/eitfm/sw/torch_kml/torch.libs/libopenblasp-r0-1a7698bc.3.29.so",
+        "sha256": "6c49b71cca92eda560c81308193c6eafcc7f5ef18716bf800066b1d996f56e8f"
+      },
+      {
+        "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+        "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+      },
+      {
+        "path": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+        "sha256": "c9b2f040c5b4756d426589956059e3865749cd8751eb3914c57d42a9e84ebf3c"
+      }
+    ],
+    "kml_resolved": "/opt/HPCKit/kml-lib/sme/kblas/multi/libkblas.so.1.26.0.RC1",
+    "kml_gemm_calls": 0,
+    "kml_shapes": {}
+  },
+  "hbm_allocator": {
+    "path": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/job_evidence/libhbm_alloc_s03_round2.so",
+    "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+    "node": 16,
+    "cap_MiB": 3800
+  },
+  "attention": {
+    "build": {
+      "bf16": 0,
+      "bq": 64,
+      "library": {
+        "path": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/job_evidence/libfp32_attn.so",
+        "sha256": "bb3dee0e8c485c62b30e0bb12e2fe90e112f6e88520352d80d2d6a2d9688e6af"
+      },
+      "locking_kml": {
+        "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+        "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690"
+      },
+      "openmp": {
+        "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+        "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+      },
+      "source_sha256": "505408f2836411ff6774a48b42b72f6206d098b07314b8e33f93ec3e782d4387"
+    },
+    "counts": {
+      "forward": 0,
+      "backward": 0
+    },
+    "bf16": 0,
+    "bq": 64,
+    "shim_guard_present": false,
+    "fallback": "prohibited"
+  },
+  "error": "OSError('dlopen() error')",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/payload/worker.py\", line 342, in <module>\n    run(args, result)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/payload/worker.py\", line 160, in run\n    cpu36_guard.checkpoint(guard, \"after_backend\", torch)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/payload/cpu36_guard.py\", line 38, in checkpoint\n    parallel_info=torch.__config__.parallel_info(), runtime=contract.runtime_info())\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_V2_D1/payload/cpu36_contract.py\", line 124, in runtime_info\n    lib = ctypes.CDLL(path, mode=os.RTLD_NOLOAD | os.RTLD_LOCAL)\n  File \"/usr/lib64/python3.9/ctypes/__init__.py\", line 374, in __init__\n    self._handle = _dlopen(self._name, mode)\nOSError: dlopen() error\n",
+  "finished_ns": 965991445825870
+}

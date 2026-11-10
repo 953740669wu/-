@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn22035 !cn21341 !cn22044",
+    "-R",
+    "cpu=608,mem=393216MB",
+    "-RL",
+    "mem=393216MB",
+    "-a",
+    "numa[count=16,distribution=pack]",
+    "-T",
+    "7200",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/STEP_AB_R1_20261111_D16",
+    "-oo",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/STEP_AB_R1_20261111_D16/job.log",
+    "bash",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/STEP_AB_R1_20261111_D16/run_job.sh",
+    "db43f6a1ef2b1a8b733bdab9682b2d19dcdc8844fe719759198532114273a92c"
+  ],
+  "binding_sha256": "db43f6a1ef2b1a8b733bdab9682b2d19dcdc8844fe719759198532114273a92c",
+  "created_utc": "2026-11-10T16:08:21.766999+00:00"
+}

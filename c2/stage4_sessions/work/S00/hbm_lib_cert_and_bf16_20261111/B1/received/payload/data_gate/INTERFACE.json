@@ -1,0 +1,204 @@
+{
+  "schema": "S02_OVERNIGHT_ENGINEERING_INTERFACE_V1",
+  "version": 1,
+  "protocol": "ENGINEERING_REAL_CORPUS_PILOT_V1",
+  "flags": {
+    "engineering_only": true,
+    "formal_split_status": "UNKNOWN",
+    "validation_status": "NOT_RUN_NO_FORMAL_SPLIT",
+    "subject_mapping_status": "UNKNOWN"
+  },
+  "source_anchor": {
+    "manifest_path": "/home/share/songzhenlong/eitfm/corpus_shape_20261102/manifest.csv",
+    "manifest_sha256": "bdd146040bddf2ddd47fb9d571d5d2f40e5fa20fbd30d0c0d11239893e647032",
+    "manifest_bytes": 3399057,
+    "units": 14300,
+    "pairs": 1430000,
+    "cases": 143,
+    "code_hash": "d8b2be8d1f",
+    "config_hash": "b1049eac1a",
+    "not_a_formal_freeze": true
+  },
+  "asset_fields": [
+    "path (absolute)",
+    "sha256",
+    "version"
+  ],
+  "descriptor": {
+    "required_top_level": [
+      "protocol",
+      "status",
+      "version",
+      "data_origin",
+      "engineering_only",
+      "formal_split_status",
+      "validation_status",
+      "subject_mapping_status",
+      "interface_sha256",
+      "corpus",
+      "selection",
+      "train",
+      "exposure_ledger",
+      "runtime_exposure_ledger_path"
+    ],
+    "status": "ENGINEERING_DATA_READY",
+    "data_origin": "REAL_CORPUS_ENGINEERING_SAMPLES",
+    "corpus_fields": {
+      "root": "absolute corpus root",
+      "manifest": "asset with bytes=3399057",
+      "code_hash": "d8b2be8d1f",
+      "config_hash": "b1049eac1a"
+    },
+    "selection": {
+      "seed": 2026,
+      "algorithm": "sorted_prefer119_python_random_sample_v1",
+      "cases_txt": "asset of the original119 cases.txt, sha256=f0a3c5bd443b63f06dc69c8bed5e58dd50999a91fddb5222f0c38594ba92d836",
+      "selected_cases": "sorted case IDs",
+      "preferred_scope_used": "boolean"
+    },
+    "unit_fields": [
+      "unit",
+      "case",
+      "subject_id (must be null)",
+      "placement (int)",
+      "contact (int)",
+      "belt (16_adjacent)",
+      "n_pairs (int)",
+      "path (absolute NPZ)",
+      "sidecar_path (absolute same-stem JSON)",
+      "npz_sha256",
+      "sidecar_sha256",
+      "npz_bytes",
+      "sidecar_bytes"
+    ],
+    "train": "flat unit list, ordered by sorted selected case then sorted selected unit; no val/test/split/mapping artifacts",
+    "exposure_ledger": "immutable selected/reserved initial ledger asset; see exposure_ledger_initial schema",
+    "runtime_exposure_ledger_path": "new absolute Linux path under owned payload outputs, never overwrite initial ledger"
+  },
+  "selection_algorithm": [
+    "Filter full anchored manifest by belt16_adjacent/status done/finite true/positive n_pairs and anchored code/config. Do not read NPZ to expand scope after a failure.",
+    "Sort eligible case IDs. Prefer their intersection with the original119 cases.txt. If nonempty use only that preferred pool; otherwise use all eligible cases and set preferred_scope_used=false.",
+    "rng=random.Random(2026); cases=sorted(rng.sample(pool,min(2,len(pool)))); for each case in this sorted order sample min(8,number_of_sorted_eligible_unit_ids) using the same rng, then sort picked unit IDs.",
+    "Check the chosen files/schema/finite without replacing failed choices; missing/bad chosen source stops the handoff. Case labels do not imply distinct subjects."
+  ],
+  "exposure_ledger_initial": {
+    "protocol": "ENGINEERING_REAL_CORPUS_PILOT_V1",
+    "engineering_only": true,
+    "formal_split_status": "UNKNOWN",
+    "subject_mapping_status": "UNKNOWN",
+    "units": "list of {case,unit,npz_sha256,sidecar_sha256,selection_status:SELECTED_RESERVED,usage_status:NOT_STARTED}",
+    "future_test_policy": "Resolve real subjects later and exclude exposed subjects from final test; no current no-leakage guarantee"
+  },
+  "result": {
+    "files": [
+      "result.json",
+      "steps.jsonl",
+      "EXPOSURE_LEDGER.json (descriptor path)",
+      "checkpoints/final.pt (remote only)",
+      "exit_code.txt",
+      "runner_status.json if timeout"
+    ],
+    "status_success": "ENGINEERING_PILOT_COMPLETE_NOT_SCIENTIFIC_ACCEPTANCE",
+    "status_incomplete": "INCOMPLETE",
+    "root_fields": [
+      "protocol",
+      "engineering_only",
+      "formal_split_status",
+      "validation_status",
+      "subject_mapping_status",
+      "source",
+      "data_identity",
+      "config",
+      "planned_updates",
+      "completed_updates",
+      "consumed_frames",
+      "stop_reason",
+      "steps",
+      "runtime",
+      "cpu36",
+      "checkpoint",
+      "recovery",
+      "exposure_ledger",
+      "timing"
+    ],
+    "step_fields": [
+      "step",
+      "batch_size",
+      "frame_indices",
+      "frame_ids",
+      "masked_elements",
+      "mask_sha256",
+      "losses (total/voltage/coarse)",
+      "loader_seconds",
+      "step_seconds",
+      "diagnostic_seconds",
+      "rss_before",
+      "rss_after",
+      "rss_peak_scope=process_lifetime",
+      "kml_calls",
+      "adamw_step",
+      "cursor"
+    ],
+    "timing_fields": [
+      "wall_seconds",
+      "data_loading_seconds",
+      "batch_materialization_seconds",
+      "training_step_seconds",
+      "diagnostic_seconds",
+      "checkpoint_and_recovery_seconds",
+      "unattributed_seconds"
+    ],
+    "exposure_states": [
+      "SELECTED_RESERVED",
+      "LOAD_ATTEMPTED",
+      "LOADED_FOR_ENGINEERING_TRAIN_STATISTICS",
+      "POSSIBLY_USED_IN_INTERRUPTED_UPDATE",
+      "CONSUMED_CONFIRMED"
+    ],
+    "failure_policy": "Persist attempted frame IDs before each update; confirm only after successful update checks/logging. Unknown/interrupted exposure requires conservative future subject exclusion review. No formal val/test."
+  },
+  "resources": {
+    "allocated_cores": 38,
+    "actual_physical_cores": 36,
+    "reserved_cores": 2,
+    "memory_MB": 24576,
+    "memory_limit_MB": 24576,
+    "exclusive": true,
+    "job_seconds": 900,
+    "whole_entry_timeout": 840,
+    "cleanup_seconds": 30
+  },
+  "limits": {
+    "max_cases": 2,
+    "max_units_per_case": 8,
+    "belt": "16_adjacent",
+    "batch_max": 64,
+    "max_epochs": 1,
+    "max_updates": 200,
+    "training_seed": 0,
+    "checkpoint": false,
+    "precision": "fp32",
+    "hbm": false,
+    "compile": false
+  },
+  "data_ready_record": {
+    "status": "DATA_READY",
+    "interface_sha256": "this interface SHA",
+    "descriptor": {
+      "path": "absolute Windows handoff path",
+      "sha256": "descriptor SHA",
+      "bytes": "size"
+    },
+    "manifest_sha256": "anchored manifest SHA",
+    "exposure_ledger": "initial ledger path/SHA"
+  },
+  "code_ready_record": {
+    "status": "CODE_READY",
+    "engineering_only": true,
+    "interface": "path/SHA",
+    "package": "path/bytes/SHA",
+    "source_manifest": "path/SHA",
+    "checks": "path/SHA/status",
+    "report": "path/SHA"
+  }
+}

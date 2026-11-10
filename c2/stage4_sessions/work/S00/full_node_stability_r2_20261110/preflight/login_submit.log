@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/share/dengqingtian/opt/stage4_sessions/S00/FULL16_R2_B32_C1_A/submit_once.py", line 141, in <module>
+    main(sys.argv[1])
+  File "/home/share/dengqingtian/opt/stage4_sessions/S00/FULL16_R2_B32_C1_A/submit_once.py", line 75, in main
+    queue = query(["dqueue","-J","-l","q_hpcai"],"queue_resource.json")["data"][0]
+  File "/home/share/dengqingtian/opt/stage4_sessions/S00/FULL16_R2_B32_C1_A/submit_once.py", line 33, in query
+    need(value["code"] == "success", "native query failed: " + repr(argv))
+  File "/home/share/dengqingtian/opt/stage4_sessions/S00/FULL16_R2_B32_C1_A/prepare.py", line 25, in need
+    raise ValueError(why)
+ValueError: native query failed: ['dqueue', '-J', '-l', 'q_hpcai']

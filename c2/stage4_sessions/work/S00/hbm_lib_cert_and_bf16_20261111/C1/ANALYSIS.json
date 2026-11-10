@@ -1,0 +1,239 @@
+{
+  "active_job": null,
+  "application": {
+    "active_phase": null,
+    "completed_pairs": [],
+    "finished": 979160.614837115,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2086632",
+    "start": 978962.616578441,
+    "status": "PASS_FULL_NODE_COMPLETED_PHASES",
+    "steps": {
+      "strict_baseline_each_domain": 5,
+      "strict_candidate_each_domain": 5
+    }
+  },
+  "archive": {
+    "bytes": 406814,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\JOB_2086632_TRANSFER.tgz",
+    "sha256": "5c31d36adf53673a349232cd63b06491799025a5b6e4fcaa1e55431a263ab855"
+  },
+  "cleanup": {
+    "bytes": 362,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\received\\job_evidence\\cleanup.json",
+    "sha256": "a5ea7a0aa3709dac67acf4936b58ff675495ccc448d5ed6bd797a7f47bcd583b"
+  },
+  "diff": {
+    "bytes": 33046,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\MINIMAL.diff",
+    "sha256": "1df2af49157de71084beee4fd60de61bc7fe0cb7373c4d673a83c64dd84702b0"
+  },
+  "failures": [],
+  "host": "cn22036",
+  "input_descriptor": {
+    "bytes": 11517,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\ENGINEERING_DESCRIPTOR.json",
+    "sha256": "2d9ef2f224a7b2f2fb2848c4ec39274fe9466ab2f2aaef4757bc35608e1ebe4a"
+  },
+  "job_id": "2086632",
+  "mode": "hbm_lib_cert",
+  "native_exit": 0,
+  "negative_cases": {
+    "missing": {
+      "before_any_worker": true,
+      "expected": "missing",
+      "passed": true,
+      "reason": "missing",
+      "requested": "missing_allocator.so"
+    },
+    "outside": {
+      "before_any_worker": true,
+      "expected": "outside_private_lib",
+      "passed": true,
+      "reason": "outside_private_lib",
+      "requested": "../FROZEN_HBM_ALLOCATOR.so"
+    },
+    "wrong_sha": {
+      "before_any_worker": true,
+      "expected": "sha256",
+      "passed": true,
+      "reason": "sha256",
+      "requested": "wrong_sha.so"
+    }
+  },
+  "numerical": {
+    "denominator_floor": 1e-12,
+    "near_zero_norm": 1e-08,
+    "relative_L2": 2e-06,
+    "state_abs": 2e-06,
+    "strict_steps": 5,
+    "tensor_abs": 2e-05
+  },
+  "pairing": {
+    "bytes": 10215,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\PRIOR_PAIRING.json",
+    "sha256": "ff390e832df6dde669c3c181e01e5e413a53a1515e3e858ef1cec8bcea9bc164"
+  },
+  "phases": {
+    "strict_baseline": {
+      "domain_count": 1,
+      "domains": {
+        "0": {
+          "allocator": {
+            "candidate_c_sha256": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+            "existing_16e_validation_reference": {
+              "bytes": 297748,
+              "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\M23_MEMORY_HBM\\ubsan_hbm_continue_20261108\\HBM_CONTINUE_RESULT.json",
+              "sha256": "c2c4ada68d2c0dac0113eb34225899901295d62a711ed12f4634d904cb86e485"
+            },
+            "existing_c50_ubsan_evidence_job": "2061258",
+            "final_preload": "/home/share/wujunyi/opt/stage4_sessions/S00/HBM_CERT_20261111_C1/job_evidence/libhbm_alloc_s03_round2.so",
+            "requested": null,
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "source": "/home/share/wujunyi/opt/stage4_sessions/S00/HBM_CERT_20261111_C1/FROZEN_HBM_ALLOCATOR.so"
+          },
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.76,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 8180,
+            "hbm_requested_reported_GB": 309.2,
+            "reused": 7745
+          },
+          "hbm_resident_MiB": 3582,
+          "maps": [
+            {
+              "bytes": 72923,
+              "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\received\\job_evidence\\strict_baseline\\node0\\after_framework.maps",
+              "sha256": "3605d49582a6936c1af31c14a4bf819703579a062fb13072e1482efed982c661"
+            },
+            {
+              "bytes": 78542,
+              "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\received\\job_evidence\\strict_baseline\\node0\\publish.maps",
+              "sha256": "6337c09fe91ad44383dcb30c5040939961d9c928ca3c3cf812d3ff4d6eaffb1a"
+            }
+          ],
+          "ordinary_rss_peak_MiB": 829.734375,
+          "pairing_sha256": "0868cf0585c1d1181143c8235b41c5594791b0ec1bfff9eea4898b660ba67f12",
+          "rss_peak_plus_step_end_hbm_estimate_MiB": 4411.734375,
+          "step_seconds": [
+            7.575787893,
+            7.503935949,
+            7.472004047,
+            7.483519964,
+            7.496795558
+          ],
+          "steps": {
+            "bytes": 63211,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\received\\job_evidence\\strict_baseline\\node0\\steps.jsonl",
+            "sha256": "f55cbe5b3f65d720809bb528365836684b5b7c136e6e36d80fa7d97c1cfe6f50"
+          },
+          "updates": 5,
+          "worker": {
+            "bytes": 218144,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\received\\job_evidence\\strict_baseline\\node0\\result.json",
+            "sha256": "c19c5289fa1c586d01f45b4ce516c428f9542528b21553334efb53c7b6610f5b"
+          }
+        }
+      }
+    },
+    "strict_candidate": {
+      "domain_count": 1,
+      "domains": {
+        "0": {
+          "allocator": {
+            "candidate_c_sha256": "d1f5dbbfb6aa4a973dcc4d12607f62a8b2be5166690897dfd5ea35e067c7d7a2",
+            "existing_16e_validation_reference": {
+              "bytes": 297748,
+              "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\M23_MEMORY_HBM\\ubsan_hbm_continue_20261108\\HBM_CONTINUE_RESULT.json",
+              "sha256": "c2c4ada68d2c0dac0113eb34225899901295d62a711ed12f4634d904cb86e485"
+            },
+            "existing_c50_ubsan_evidence_job": "2061258",
+            "final_preload": "/home/share/wujunyi/opt/stage4_sessions/S00/HBM_CERT_20261111_C1/job_evidence/hbm_lib_explicit/libhbm_alloc_explicit.so",
+            "requested": "libhbm_alloc_explicit.so",
+            "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+            "source": "/home/share/wujunyi/opt/stage4_sessions/S00/HBM_CERT_20261111_C1/lib/libhbm_alloc_explicit.so"
+          },
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.86,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 24180,
+            "hbm_requested_reported_GB": 365.5,
+            "reused": 23825
+          },
+          "hbm_resident_MiB": 3680,
+          "maps": [
+            {
+              "bytes": 72885,
+              "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\received\\job_evidence\\strict_candidate\\node0\\after_framework.maps",
+              "sha256": "8e424bc0a5a29c7c45a6d64606209b0800772de18b521eed21cba059cf2ddce9"
+            },
+            {
+              "bytes": 78504,
+              "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\received\\job_evidence\\strict_candidate\\node0\\publish.maps",
+              "sha256": "b17bb4dc34a9b5b073b27c0f5ebe9bec6312d8785b9e80e69f15fadbf3060f23"
+            }
+          ],
+          "ordinary_rss_peak_MiB": 1551.13671875,
+          "pairing_sha256": "0868cf0585c1d1181143c8235b41c5594791b0ec1bfff9eea4898b660ba67f12",
+          "rss_peak_plus_step_end_hbm_estimate_MiB": 5231.13671875,
+          "step_seconds": [
+            7.032460244,
+            6.94266692,
+            6.954159583,
+            6.951520827,
+            6.944489313
+          ],
+          "steps": {
+            "bytes": 63247,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\received\\job_evidence\\strict_candidate\\node0\\steps.jsonl",
+            "sha256": "8db7014d752824dc46d20a1408c8d9942a6c1f15587e098900a5b47cff25b7d3"
+          },
+          "strict": {
+            "exact_evidence": "original pinned strict comparator checks one exact AdamW step tensor per parameter per update",
+            "exact_items_passed": true,
+            "exact_optimizer_step_items": 765,
+            "max_abs": 0.0,
+            "max_rel_L2": 0.0,
+            "rows": 3880
+          },
+          "updates": 5,
+          "worker": {
+            "bytes": 927561,
+            "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\received\\job_evidence\\strict_candidate\\node0\\result.json",
+            "sha256": "db97caa3d789d51a0541cda70df6de668838d31d37f5a22cdff361c6fb47bf5d"
+          }
+        }
+      }
+    }
+  },
+  "resources": {
+    "DDR_limit_MB": 24576,
+    "DDR_request_MB": 24576,
+    "GPU": 0,
+    "HBM_cpu_domain_mapping": {
+      "0": 16
+    },
+    "HBM_max_MiB_per_domain": 3800,
+    "HBM_max_MiB_total": 3800,
+    "allocated_cpus": 38,
+    "compute_cpus": 36,
+    "domains": 1,
+    "exclusive": true,
+    "reserved_cpus": 2
+  },
+  "run_binding": {
+    "bytes": 4452,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\RUN_BINDING.json",
+    "sha256": "8877b54b023c4600c616dc324bcdcc4afe360b6a1e915aef7973a135c7a0908d"
+  },
+  "sources": {
+    "bytes": 3148,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\C1\\SOURCE_SHA256.json",
+    "sha256": "64ee7dffc5fee4e136163e61d1250cbec545da6a9d8bbd1b89891fecfb54e1be"
+  },
+  "state": "SUCCEEDED",
+  "status": "PASS_HBM_LIB_CERT"
+}

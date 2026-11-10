@@ -1,0 +1,427 @@
+{
+  "active_job": null,
+  "budget": {
+    "allocation_seconds": 1283,
+    "attempts": [
+      {
+        "allocated_seconds": 1278,
+        "artifact": {
+          "bytes": 3700584,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\JOB_2081280_TRANSFER.tgz",
+          "sha256": "436b6d342f3954e1f2568377c58c8d12cd85098f3ca4f91eebdb606f73e5cd98"
+        },
+        "batch": 32,
+        "binding": {
+          "bytes": 4011,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\RUN_BINDING.json",
+          "sha256": "648417a6a846246d426e972bc241a6455b6b86368ce14cd19c5ba3c2c1657072"
+        },
+        "charged_updates": 160,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 2534,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\received\\job_evidence\\cleanup.json",
+          "sha256": "e656dc7d5fa7dfad3b6cf1ae4d7ffa290562fdb46a3642e8ff33662511749a52"
+        },
+        "confirmed_updates": 143,
+        "host": "cn22036",
+        "job_id": "2081280",
+        "native": {
+          "bytes": 4088,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\received\\djob_final.json",
+          "sha256": "c769708a5c99e974ef8011eca9e30db9e2250b8591a6970327a8d79b109ff5a4"
+        },
+        "queue_seconds": 3,
+        "state": "FAILED",
+        "terminal": true,
+        "update_charge_basis": "Maximum updates in reached phases; incomplete final rows may omit in-flight updates",
+        "version": "B32_C1_W1"
+      },
+      {
+        "allocated_seconds": 5,
+        "artifact": {
+          "bytes": 179467,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\JOB_2081519_TRANSFER.tgz",
+          "sha256": "7ce2a6c8bab74430b94188d25a6f57c943433284f063fd0b67fb8e4c7c8f57cc"
+        },
+        "batch": 32,
+        "binding": {
+          "bytes": 4011,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\RUN_BINDING.json",
+          "sha256": "f8eee6715c4387144c77bd06377c3c8f1897c22ac436944ba725aec607c0a4bf"
+        },
+        "charged_updates": 0,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 312,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\received\\job_evidence\\cleanup.json",
+          "sha256": "8fed1027b0b9bb5d25ef62341fe3e4fc0e1667f4bad6c3ff51c0ccc5e4a72635"
+        },
+        "confirmed_updates": 0,
+        "host": "cn22044",
+        "job_id": "2081519",
+        "native": {
+          "bytes": 3748,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\received\\djob_final.json",
+          "sha256": "f5d9f3c30759c80a8971c4703040c183a3a37c7fdfdc5d785295eeeca77a7a98"
+        },
+        "queue_seconds": 4,
+        "state": "FAILED",
+        "terminal": true,
+        "update_charge_basis": "Maximum updates in reached phases; incomplete final rows may omit in-flight updates",
+        "version": "B32_C1_W2"
+      }
+    ],
+    "candidates": [
+      {
+        "actual_deployment": "B32_C1_W1",
+        "actual_deployments": [
+          "B32_C1_W1",
+          "B32_C1_W2"
+        ],
+        "binding": {
+          "bytes": 3477,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_A\\RUN_BINDING.json",
+          "sha256": "fb2008a49ac2da518650be213ad45c9644a2db678e2b3fddc6dec1f4438ac58f"
+        },
+        "deployed_version": "B32_C1_A",
+        "id": "C1_DEFER_VALIDATION",
+        "stage": "STOPPED_BEFORE_COMPLETE_AB"
+      }
+    ],
+    "clock_basis": "First UTC observation on receipt; independent R2 authorization, no R1 carryover",
+    "confirmed_model_updates": 143,
+    "deadline_utc": "2026-11-12T07:23:56+00:00",
+    "limits": {
+      "allocation_seconds": 28800,
+      "candidate_count": 2,
+      "cleanup_reserve_seconds": 120,
+      "host_count": 2,
+      "job_seconds": 7200,
+      "model_updates": 16000,
+      "per_job_updates": 4000,
+      "queue_seconds": 86400,
+      "submissions": 6,
+      "wall_seconds": 172800
+    },
+    "model_updates": 160,
+    "preflight_failures": [
+      {
+        "code": "BATCH.5001",
+        "evidence": {
+          "bytes": 750,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\login_submit.log",
+          "sha256": "2d7e4a326fd57e679d6e8dbe2451a285a6654c1f69013b931c85e21ae10501d1"
+        },
+        "stage": "BEFORE_DSUB"
+      }
+    ],
+    "queue_seconds": 7,
+    "received_utc": "2026-11-10T07:23:56+00:00",
+    "scheduler_user": "wujunyi",
+    "status": "CLOSED_TWO_HOST_CAP_UNRESOLVED"
+  },
+  "decision": "UNRESOLVED_NO_COMPLETE_PAIRED_AB",
+  "evidence_index": [
+    {
+      "bytes": 5029,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\ACTUAL_COMMANDS.md",
+      "sha256": "99c6876e15fd82873d568b3824dc29960c1f1fc715e1871f2009c30b9095b7bf"
+    },
+    {
+      "bytes": 1416,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\SESSION_STATUS.md",
+      "sha256": "f3dc6105eaead81ddf21d22b6d098a912a120c7900cc9fd134d6aa62be08321a"
+    },
+    {
+      "bytes": 979,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\ROUND_DELTA.md",
+      "sha256": "ba0405a53dfd5991311f6e44a9602db1632912f281f6a0a637182f33bb080ef0"
+    },
+    {
+      "bytes": 2296,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\R1_TIMING_RECHECK.json",
+      "sha256": "3708059f8364278b979fe00504cdaf8b8b97ba10155bdfdc5e493cb607bdd05d"
+    },
+    {
+      "bytes": 4949,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\BUDGET_LEDGER.json",
+      "sha256": "88420933b0e4d61389fb432a8d65beaa86ec128a3ae5d071cd512f9ca533f8a1"
+    },
+    {
+      "bytes": 1484,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\ACTIVE_JOB.json",
+      "sha256": "4990a43aa089c0e1086cc783377dd9d6c36cb7cb31f3fc9edfd595a41f9fae9d"
+    },
+    {
+      "bytes": 3055,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\DIAGNOSIS.md",
+      "sha256": "838a0d078edd165a087183c5e553f94f8476981f9712b14c8953298e9ef3291a"
+    },
+    {
+      "bytes": 12726,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\freeze_r2.py",
+      "sha256": "12fe39f29b3b534fe2c6e714a44fceb637efc12fa54504d22e346b2ecfc353bf"
+    },
+    {
+      "bytes": 10569,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\settle_r2.py",
+      "sha256": "73c61cd15baeffc1be41aae91ba0c77069b65e7fc33cfef1625ed62c6e7d27c9"
+    },
+    {
+      "bytes": 5697,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\publish_r2.py",
+      "sha256": "da9e38d368692c8f60dc5f99fecaa49ba8267798eeacc5537e7ff1889ee0b529"
+    },
+    {
+      "bytes": 5773,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\R2_PREFLIGHT_EVIDENCE.tgz",
+      "sha256": "9536d5f99e1a85c155afc56a9a1331d3408b0e8d607ad42cb2d74d68a123d4e0"
+    },
+    {
+      "bytes": 10880,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\NUMA_STABILITY_BLOCKED_RESULT.json",
+      "sha256": "3f5cb77fdddf2a56aced08c166549b918346488097a3ce8b64149c68b6498e37"
+    },
+    {
+      "bytes": 1440,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\preflight\\BUDGET_LEDGER_BLOCKED.json",
+      "sha256": "690f28c10df69a1f435a408af492e9162d0c023e0b5545ce1376a31a58d3b9e7"
+    },
+    {
+      "bytes": 4011,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\RUN_BINDING.json",
+      "sha256": "648417a6a846246d426e972bc241a6455b6b86368ce14cd19c5ba3c2c1657072"
+    },
+    {
+      "bytes": 12267,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\MINIMAL.diff",
+      "sha256": "6307a54fc7dc6b37a47ba175a585b035acfd0245cd4184b47acbbca88a8a595c"
+    },
+    {
+      "bytes": 2866,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\SOURCE_SHA256.json",
+      "sha256": "bc2a8a17d36051d9c16de474ee78966444128966f0a327bdfd2256574b97b7b7"
+    },
+    {
+      "bytes": 70824,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\FULL16_PAYLOAD.zip",
+      "sha256": "9b44b57a6445091ca8a1c6206cdb0f7703bff1d56956cfc05edec77bb6896407"
+    },
+    {
+      "bytes": 72184,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\FROZEN_HBM_ALLOCATOR.so",
+      "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d"
+    },
+    {
+      "bytes": 7198,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\ANALYSIS.json",
+      "sha256": "a05f08ed942c1579adb7025fe983d415c2b9cde619048237357a0a8a5e32a10d"
+    },
+    {
+      "bytes": 3700584,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\JOB_2081280_TRANSFER.tgz",
+      "sha256": "436b6d342f3954e1f2568377c58c8d12cd85098f3ca4f91eebdb606f73e5cd98"
+    },
+    {
+      "bytes": 4088,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\received\\djob_final.json",
+      "sha256": "c769708a5c99e974ef8011eca9e30db9e2250b8591a6970327a8d79b109ff5a4"
+    },
+    {
+      "bytes": 4011,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\RUN_BINDING.json",
+      "sha256": "f8eee6715c4387144c77bd06377c3c8f1897c22ac436944ba725aec607c0a4bf"
+    },
+    {
+      "bytes": 12267,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\MINIMAL.diff",
+      "sha256": "6307a54fc7dc6b37a47ba175a585b035acfd0245cd4184b47acbbca88a8a595c"
+    },
+    {
+      "bytes": 2866,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\SOURCE_SHA256.json",
+      "sha256": "bc2a8a17d36051d9c16de474ee78966444128966f0a327bdfd2256574b97b7b7"
+    },
+    {
+      "bytes": 70824,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\FULL16_PAYLOAD.zip",
+      "sha256": "81553384c68b618e996903bd98e408026a2a26f97418e17b5a4a410a433e808c"
+    },
+    {
+      "bytes": 72184,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\FROZEN_HBM_ALLOCATOR.so",
+      "sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d"
+    },
+    {
+      "bytes": 1203,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\ANALYSIS.json",
+      "sha256": "660658c94a196ee38561201e764fbb61132618a705e3f8eebf386675115afbc3"
+    },
+    {
+      "bytes": 179467,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\JOB_2081519_TRANSFER.tgz",
+      "sha256": "7ce2a6c8bab74430b94188d25a6f57c943433284f063fd0b67fb8e4c7c8f57cc"
+    },
+    {
+      "bytes": 3748,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\received\\djob_final.json",
+      "sha256": "f5d9f3c30759c80a8971c4703040c183a3a37c7fdfdc5d785295eeeca77a7a98"
+    },
+    {
+      "bytes": 3980,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\CN22036_SLOW_DOMAIN.json",
+      "sha256": "a34bc7dc2d513660960402f6dd2261fe5305fa05246bf240dc53161c5dcea31f"
+    },
+    {
+      "bytes": 1585,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\CN22044_ALLOCATION_MISMATCH.json",
+      "sha256": "99960c1a8003396e6bfc4eeff5d3fc8928bdbf6f248c98e4d9d259839f77124d"
+    },
+    {
+      "bytes": 19672,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\CN22044_NATIVE_TOPOLOGY_AFTER.json",
+      "sha256": "0cd1e5d30ca928c7ec81d71d0fd2661164dfa628a54ab7935fcfac8d6c210508"
+    },
+    {
+      "bytes": 1231,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\SUMMARY.md",
+      "sha256": "ba8099d40625cd7e5ff343b1a192d7ce87326564dc14781e58fdd997eb7e7bb7"
+    },
+    {
+      "bytes": 599,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_ACCEPTANCE.json",
+      "sha256": "bd2a25361132b0d9a5371f2f2fedff76dddf5145b23f6b3c5068671046ae5c01"
+    }
+  ],
+  "jobs": [
+    {
+      "allocated_seconds": 1278,
+      "analysis": {
+        "bytes": 7198,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\ANALYSIS.json",
+        "sha256": "a05f08ed942c1579adb7025fe983d415c2b9cde619048237357a0a8a5e32a10d"
+      },
+      "artifact": {
+        "bytes": 3700584,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\JOB_2081280_TRANSFER.tgz",
+        "sha256": "436b6d342f3954e1f2568377c58c8d12cd85098f3ca4f91eebdb606f73e5cd98"
+      },
+      "batch": 32,
+      "binding": {
+        "bytes": 4011,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\RUN_BINDING.json",
+        "sha256": "648417a6a846246d426e972bc241a6455b6b86368ce14cd19c5ba3c2c1657072"
+      },
+      "candidate_worker_sha256": "4791a4cc6c187847a28d1c85a8c13b735a5cbd93f36f3561f4236a000bf4883a",
+      "charged_updates": 160,
+      "cleanup": true,
+      "cleanup_source": {
+        "bytes": 2534,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\received\\job_evidence\\cleanup.json",
+        "sha256": "e656dc7d5fa7dfad3b6cf1ae4d7ffa290562fdb46a3642e8ff33662511749a52"
+      },
+      "confirmed_updates": 143,
+      "faults": {
+        "OOM_explicit": false,
+        "SIGBUS_detected": false,
+        "SIGKILL_detected": false
+      },
+      "hbm_pool_restored": true,
+      "hbm_safety": "PASS",
+      "host": "cn22036",
+      "job_id": "2081280",
+      "max_abs": null,
+      "max_rel_L2": null,
+      "native": {
+        "bytes": 4088,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\received\\djob_final.json",
+        "sha256": "c769708a5c99e974ef8011eca9e30db9e2250b8591a6970327a8d79b109ff5a4"
+      },
+      "numeric_rows": 0,
+      "queue_seconds": 3,
+      "state": "FAILED",
+      "status": "FAIL_STOP",
+      "terminal": true,
+      "update_charge_basis": "Maximum updates in reached phases; incomplete final rows may omit in-flight updates",
+      "version": "B32_C1_W1"
+    },
+    {
+      "allocated_seconds": 5,
+      "analysis": {
+        "bytes": 1203,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\ANALYSIS.json",
+        "sha256": "660658c94a196ee38561201e764fbb61132618a705e3f8eebf386675115afbc3"
+      },
+      "artifact": {
+        "bytes": 179467,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\JOB_2081519_TRANSFER.tgz",
+        "sha256": "7ce2a6c8bab74430b94188d25a6f57c943433284f063fd0b67fb8e4c7c8f57cc"
+      },
+      "batch": 32,
+      "binding": {
+        "bytes": 4011,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\RUN_BINDING.json",
+        "sha256": "f8eee6715c4387144c77bd06377c3c8f1897c22ac436944ba725aec607c0a4bf"
+      },
+      "candidate_worker_sha256": "4791a4cc6c187847a28d1c85a8c13b735a5cbd93f36f3561f4236a000bf4883a",
+      "charged_updates": 0,
+      "cleanup": true,
+      "cleanup_source": {
+        "bytes": 312,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\received\\job_evidence\\cleanup.json",
+        "sha256": "8fed1027b0b9bb5d25ef62341fe3e4fc0e1667f4bad6c3ff51c0ccc5e4a72635"
+      },
+      "confirmed_updates": 0,
+      "faults": {
+        "OOM_explicit": false,
+        "SIGBUS_detected": false,
+        "SIGKILL_detected": false
+      },
+      "hbm_pool_restored": null,
+      "hbm_safety": null,
+      "host": "cn22044",
+      "job_id": "2081519",
+      "max_abs": null,
+      "max_rel_L2": null,
+      "native": {
+        "bytes": 3748,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\received\\djob_final.json",
+        "sha256": "f5d9f3c30759c80a8971c4703040c183a3a37c7fdfdc5d785295eeeca77a7a98"
+      },
+      "numeric_rows": 0,
+      "queue_seconds": 4,
+      "state": "FAILED",
+      "status": "FAIL_STOP",
+      "terminal": true,
+      "update_charge_basis": "Maximum updates in reached phases; incomplete final rows may omit in-flight updates",
+      "version": "B32_C1_W2"
+    }
+  ],
+  "node_avoidance_separated": true,
+  "outcomes": {
+    "B32": {
+      "batch": 32,
+      "jobs": [
+        {
+          "bytes": 7198,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\ANALYSIS.json",
+          "sha256": "a05f08ed942c1579adb7025fe983d415c2b9cde619048237357a0a8a5e32a10d"
+        },
+        {
+          "bytes": 1203,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W2\\ANALYSIS.json",
+          "sha256": "660658c94a196ee38561201e764fbb61132618a705e3f8eebf386675115afbc3"
+        }
+      ],
+      "pairs": {},
+      "status": "INCOMPLETE_PAIRS"
+    },
+    "B64": {
+      "status": "NOT_RUN"
+    }
+  },
+  "r1_failure_retained": true,
+  "scheduler_user": "wujunyi",
+  "status": "TERMINAL"
+}

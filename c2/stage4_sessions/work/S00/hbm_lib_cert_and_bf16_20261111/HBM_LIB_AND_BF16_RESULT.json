@@ -1,0 +1,135 @@
+{
+  "actual_commands": {
+    "bytes": 2833,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\ACTUAL_COMMANDS.md",
+    "sha256": "f79d43849bcf8c4eb60ac52b9b2609c1dd22917ca65a47b20b423db16cd89553"
+  },
+  "bf16_bq16": {
+    "adopted": false,
+    "candidate_updates_attempted": 1,
+    "candidate_updates_gate_confirmed": 0,
+    "dispatch": {
+      "bf16": 1,
+      "bq": 16,
+      "build": {
+        "bf16": 1,
+        "bq": 16,
+        "library": {
+          "path": "/home/share/wujunyi/opt/stage4_sessions/S00/HBM_CERT_20261111_B1/job_evidence/libbf16_attn.so",
+          "sha256": "6e45af4aabdfdef31781cd71d2f373aec0ab8884e02dc7fdcc12a1a4fbc9d6d2"
+        },
+        "locking_kml": {
+          "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+          "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690"
+        },
+        "openmp": {
+          "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+          "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+        },
+        "source_sha256": "19d527c42ed862d0f13882cfc5d1fc2e84adc5a3123aa2dba504f2396306c842"
+      },
+      "counts": {
+        "backward": 12,
+        "backward_tiles": 356352,
+        "forward": 24,
+        "forward_tiles": 356352
+      },
+      "fallback": "prohibited",
+      "locking_namespace": {
+        "gemm_address": 70375432537240,
+        "handle": 187651029424448,
+        "namespace_id": 1,
+        "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+        "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690",
+        "symbol": "cblas_sbgemm"
+      },
+      "shim_guard_present": false
+    },
+    "first_failure": {
+      "l2_relative": 4.699908693592016e-05,
+      "max_abs": 0.0005245208740234375,
+      "name": "candidate.1.reference_loss.total",
+      "passed": false,
+      "reference_norm": 11.160235404968262
+    },
+    "job_id": "2086656",
+    "last_cpu36_checkpoint": "before_candidate_1",
+    "performance": "NOT_RUN_NUMERICAL_GATE_FAILED",
+    "reference_updates": 5,
+    "report": {
+      "bytes": 11077,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\B1\\ANALYSIS.json",
+      "sha256": "e747469dc095f380d901d4a7bc6f3d18225523cc984706aa64b363870665531b"
+    },
+    "retry": "NOT_RUN_NUMERICAL_GATE_FAILED",
+    "status": "BF16_REJECTED_NUMERICAL_FAIL",
+    "upstream_diff": {
+      "bytes": 21810,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\bf16_source\\UPSTREAM_KERNEL.diff",
+      "sha256": "6fb3bd444272e39d9e524b41af3192ccc9ca4dafae60ee8b607ddd1bede1bf9a"
+    },
+    "upstream_kernel": {
+      "path": "E:/eitfm_c2_stages2-4_2026-11-08/c2/opt/kml_attn.c",
+      "sha256": "8bd18a4380d794eabab20c9387ff1005434ae544e7b64450106cf4b343bdac74"
+    }
+  },
+  "budget": {
+    "actual_hosts": [
+      "cn22036"
+    ],
+    "allocation_seconds": 323,
+    "engineering_retries": 0,
+    "ledger": {
+      "bytes": 2291,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\BUDGET_LEDGER.json",
+      "sha256": "d94300cb16b3fefd8d7786dfa8998d71a0753ab44d1db6428477c8baeac9823d"
+    },
+    "queue_seconds": 2,
+    "submitted": 2,
+    "updates": 16
+  },
+  "formal_entry_modified": false,
+  "hbm_lib": {
+    "formal_entry_minimal_diff": {
+      "bytes": 14542,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\FORMAL_ENTRY_MINIMAL.diff",
+      "sha256": "f4fb67b25dbaa2497c00a2328732a44a5c6cf5cc38147110340e86734c4af2f5"
+    },
+    "formal_entry_review": {
+      "bytes": 2590,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\FORMAL_ENTRY_REVIEW.md",
+      "sha256": "d6ed791d96c3d3deebb4afff0adbd93028f17370a75ff6fb8aefb87ea4f93eab"
+    },
+    "formal_merge": "PENDING_COORDINATOR_REVIEW",
+    "job_id": "2086632",
+    "report": {
+      "bytes": 10237,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\HBM_LIB_CERT_RESULT.json",
+      "sha256": "23cd31191d06b14742dd39b4bd83341b7d70141e9c7552fb0e8986fbda34b6f2"
+    },
+    "status": "PASS_HBM_LIB_CERT"
+  },
+  "not_run": [
+    "four-domain BF16 A/B",
+    "16-domain run",
+    "4090"
+  ],
+  "scope": {
+    "batch": 32,
+    "checkpoint_layers": 12,
+    "electrodes": 32,
+    "engineering_data": true,
+    "fp32_kml_linear": true
+  },
+  "status": "COMPLETE_HBM_CERTIFIED_BF16_REJECTED",
+  "terminal_cleanup": {
+    "active_job": null,
+    "all_owned_reaped": true,
+    "native_queue_evidence": {
+      "bytes": 178,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\hbm_lib_cert_and_bf16_20261111\\B1\\received\\post_job_queue.json",
+      "sha256": "f0fe573f5071d4becbe5bc4ee5edff98905812159a40c2aa5085cb8b870dbd74"
+    },
+    "terminal_hbm_pool_restored": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "OOM_explicit": false,
+  "SIGBUS_detected": false,
+  "SIGKILL_detected": false,
+  "application": {
+    "error": "ValueError('unexpected inherited CPU count')",
+    "finished": 946170.358997017,
+    "job_id": "2081519",
+    "start": 946165.687977314,
+    "status": "FAIL_STOP",
+    "steps": {},
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/FULL16_R2_B32_C1_W2/launch.py\", line 294, in main\n    contracts = allocation(binding)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/FULL16_R2_B32_C1_W2/launch.py\", line 133, in allocation\n    gate = await_handoff(ROOT, req, context, 38 * count, mem, binding[\"wall_seconds\"], timeout=35)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/FULL16_R2_B32_C1_W2/scheduler_handoff.py\", line 96, in await_handoff\n    raise ValueError('unexpected inherited CPU count')\nValueError: unexpected inherited CPU count\n"
+  },
+  "batch": 32,
+  "candidate": "C1_DEFER_VALIDATION",
+  "host": "cn22044",
+  "job_id": "2081519",
+  "native_peak_MiB": 13,
+  "native_swap_peak_MiB": 0,
+  "pairs": {},
+  "phases": {},
+  "scheduler_state": "FAILED",
+  "status": "FAIL_STOP",
+  "version": "B32_C1_W2"
+}

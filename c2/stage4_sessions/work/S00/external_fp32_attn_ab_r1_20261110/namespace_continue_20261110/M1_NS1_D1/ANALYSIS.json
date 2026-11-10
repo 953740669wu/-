@@ -1,0 +1,160 @@
+{
+  "OOM_explicit": false,
+  "SIGBUS_detected": false,
+  "actual_domains": 1,
+  "application": {
+    "active_phase": "strict_candidate",
+    "error": "RuntimeError('strict worker failed: {0: 2}')",
+    "finished": 970454.560532332,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2085664",
+    "start": 970324.5568459,
+    "status": "FAIL_STOP",
+    "steps": {
+      "strict_baseline_each_domain": 5
+    },
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_NS1_D1/launch.py\", line 318, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_NS1_D1/launch.py\", line 214, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {0: 2}\n"
+  },
+  "budget_charge": {
+    "allocated_seconds": 131,
+    "artifact": {
+      "bytes": 311357,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\JOB_2085664_TRANSFER.tgz",
+      "sha256": "fd65ef971ed186431d624ca61e108dbb8718fc3e5d05836d000ffdbb963373ec"
+    },
+    "binding": {
+      "bytes": 4329,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\RUN_BINDING.json",
+      "sha256": "44be42846b7264bc5c32a2d9c5d04328ab336d84dcfef443e3b9c0b6201fe9c2"
+    },
+    "charged_updates": 10,
+    "cleanup": true,
+    "cleanup_source": {
+      "bytes": 363,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\job_evidence\\cleanup.json",
+      "sha256": "f5c7ffe882ab447b73cefb76b5fe7c84228a0846525cbb395de2b0938468977e"
+    },
+    "confirmed_updates": 6,
+    "domains": 1,
+    "host": "cn22036",
+    "job_id": "2085664",
+    "native": {
+      "bytes": 3757,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\djob_final.json",
+      "sha256": "485aa47a17b9eaa1cfb683f75e4a56fe0f3bdb1c907b27d988e3c692f87f73be"
+    },
+    "queue_seconds": 3,
+    "state": "FAILED",
+    "terminal": true,
+    "version": "M1_NS1_D1"
+  },
+  "build": {
+    "bf16": 0,
+    "bq": 64,
+    "library": {
+      "path": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_NS1_D1/job_evidence/libfp32_attn.so",
+      "sha256": "72cf3e5ff2a3c47f51fcb3b0107b0b648296630404894e346ed1d0b580640421"
+    },
+    "locking_kml": {
+      "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+      "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690"
+    },
+    "openmp": {
+      "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+      "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+    },
+    "source_sha256": "1569473ddf6fe7fe0ba66f4f5a6137aac7ff10bd4ea5741388dd6429c1933e4a"
+  },
+  "gate": "REJECTED_NUMERICAL",
+  "host": "cn22036",
+  "job_id": "2085664",
+  "partial_worker_results": {
+    "strict_candidate\\node0\\result.json": {
+      "completed_updates": 0,
+      "dispatch": {
+        "bf16": 0,
+        "bq": 64,
+        "build": {
+          "bf16": 0,
+          "bq": 64,
+          "library": {
+            "path": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_NS1_D1/job_evidence/libfp32_attn.so",
+            "sha256": "72cf3e5ff2a3c47f51fcb3b0107b0b648296630404894e346ed1d0b580640421"
+          },
+          "locking_kml": {
+            "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+            "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690"
+          },
+          "openmp": {
+            "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+            "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+          },
+          "source_sha256": "1569473ddf6fe7fe0ba66f4f5a6137aac7ff10bd4ea5741388dd6429c1933e4a"
+        },
+        "counts": {
+          "backward": 12,
+          "forward": 24
+        },
+        "fallback": "prohibited",
+        "locking_namespace": {
+          "gemm_address": 70376969512356,
+          "handle": 187650808050208,
+          "namespace_id": 1,
+          "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+          "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690"
+        },
+        "shim_guard_present": false
+      },
+      "error": "AssertionError('1.output.h: max_abs=2.8133392333984375e-05, relative=9.84024827895898e-07')",
+      "failed_metrics": [
+        {
+          "l2_relative": 9.84024827895898e-07,
+          "max_abs": 2.8133392333984375e-05,
+          "name": "1.output.h",
+          "passed": false,
+          "reference_norm": 18151.648703161503
+        }
+      ],
+      "rows": 4,
+      "source": {
+        "bytes": 69656,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\job_evidence\\strict_candidate\\node0\\result.json",
+        "sha256": "bfd15a4d90424050b2d0cce9dd3a6b3e3d96109cd3e3bbfa1dfd3d51b6050a12"
+      }
+    }
+  },
+  "phases": {
+    "strict_baseline": {
+      "domain_count": 1,
+      "domains": {
+        "0": {
+          "allocator_stats": {
+            "arena_high_water_reported_GB": 3.76,
+            "ddr_large_fallback_allocations": 0,
+            "ddr_large_requested_reported_GB": 0.0,
+            "hbm_allocations": 8180,
+            "hbm_requested_reported_GB": 309.2,
+            "reused": 7745
+          },
+          "dispatch": null,
+          "end_resident_hbm_MiB": 3582,
+          "max_domain_peak_estimate_MiB": 4408.984375,
+          "pure_update_median_seconds": 6.968925045,
+          "pure_update_total_seconds": 34.858883112,
+          "step_end_rss_plus_hbm_MiB": [
+            3908.9453125,
+            4268.58984375,
+            4401.7265625,
+            4404.375,
+            4404.984375
+          ],
+          "strict_gate": null
+        }
+      },
+      "status": "PASS_STRICT_REFERENCE5"
+    }
+  },
+  "requested_domains": 1,
+  "version": "M1_NS1_D1"
+}

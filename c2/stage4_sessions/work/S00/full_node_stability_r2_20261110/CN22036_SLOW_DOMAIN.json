@@ -1,0 +1,104 @@
+{
+  "cpu_samples": {
+    "bytes": 7595959,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\received\\job_evidence\\strict_candidate_original\\cpu_samples.jsonl",
+    "sha256": "e6cff1cd10ba6944019fdacfae7c8cd70c9f8e70fec087071759cc59a3410303"
+  },
+  "details": {
+    "12": {
+      "raw": {
+        "bytes": 50804,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\received\\job_evidence\\strict_candidate_original\\node12\\steps.jsonl",
+        "sha256": "751c2e3861cb6f027e72c64e8f19f907781ab213e31da2a65f9fa168a857198c"
+      },
+      "steps": [
+        {
+          "hbm_end_MiB": 3094.0,
+          "observed_process_cpu_cores_equivalent": 36.1244850892128,
+          "step": 1,
+          "update_seconds": 11.039325068
+        },
+        {
+          "hbm_end_MiB": 3680.0,
+          "observed_process_cpu_cores_equivalent": 36.15981255399605,
+          "step": 2,
+          "update_seconds": 10.94575917
+        },
+        {
+          "hbm_end_MiB": 3680.0,
+          "observed_process_cpu_cores_equivalent": 35.55032342147178,
+          "step": 3,
+          "update_seconds": 10.966704259
+        }
+      ]
+    },
+    "4": {
+      "raw": {
+        "bytes": 38108,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\received\\job_evidence\\strict_candidate_original\\node4\\steps.jsonl",
+        "sha256": "3e13a61fd2da39cf9ceecb5739c99b4d5c5a8d44245499817b36328646c6c001"
+      },
+      "steps": [
+        {
+          "hbm_end_MiB": 3094.0,
+          "observed_process_cpu_cores_equivalent": 33.61552815175253,
+          "step": 1,
+          "update_seconds": 265.058477039
+        },
+        {
+          "hbm_end_MiB": 3680.0,
+          "observed_process_cpu_cores_equivalent": 33.59773509624572,
+          "step": 2,
+          "update_seconds": 266.773513416
+        },
+        {
+          "hbm_end_MiB": 3680.0,
+          "observed_process_cpu_cores_equivalent": 33.616353392506156,
+          "step": 3,
+          "update_seconds": 273.758199515
+        }
+      ]
+    },
+    "5": {
+      "raw": {
+        "bytes": 50787,
+        "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\received\\job_evidence\\strict_candidate_original\\node5\\steps.jsonl",
+        "sha256": "cd8852d7a2bfa20ecae68174b383c458365f3ecf8e2b1c068905e0c832fecda7"
+      },
+      "steps": [
+        {
+          "hbm_end_MiB": 3094.0,
+          "observed_process_cpu_cores_equivalent": 35.811518268289085,
+          "step": 1,
+          "update_seconds": 10.475886973
+        },
+        {
+          "hbm_end_MiB": 3680.0,
+          "observed_process_cpu_cores_equivalent": 36.14412244712226,
+          "step": 2,
+          "update_seconds": 10.405455978
+        },
+        {
+          "hbm_end_MiB": 3680.0,
+          "observed_process_cpu_cores_equivalent": 35.5345241554659,
+          "step": 3,
+          "update_seconds": 10.539554177
+        }
+      ]
+    }
+  },
+  "host": "cn22036",
+  "job_id": "2081280",
+  "limits": [
+    "Strict update timings include original strict capture work and are not a throughput result.",
+    "Process CPU time counts activity including possible spin; it cannot locate compute or bandwidth cause."
+  ],
+  "page_placement_probe": {
+    "bytes": 2168,
+    "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_stability_r2_20261110\\B32_C1_W1\\received\\job_evidence\\real_hbm_node4\\RECEIPT.json",
+    "sha256": "936f328e9247db48b433ef1dd3bf42f5c40c52374fac5c18841cc704cf93aa79"
+  },
+  "paired_performance_started": false,
+  "stage": "strict_candidate_original",
+  "stop": "INTENTIONAL_NATIVE_STOP_SAME_ALLOCATION_TIME_FORECAST"
+}

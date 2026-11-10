@@ -1,0 +1,58 @@
+{
+  "source_job": "2064729",
+  "source_host": "cn21762",
+  "source_archive": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\full_node_16domain_hbm_ckpt_r1_20261108\\H2_32B32_A\\JOB_2064729_TRANSFER.tgz",
+  "source_archive_sha256": "dc854b9de1cfa31a1b2c408572bbbb1cfda12d9b9ddb2b2d49b6bb8be18681a2",
+  "observed_steps": [
+    6,
+    25
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "sync_median_seconds": 11.904946033,
+      "max_start_skew_ms": 0.234385,
+      "median_post_update_to_next_release_seconds": 0.593648482,
+      "last_finisher_counts": {
+        "4": 19,
+        "5": 1
+      },
+      "domain4_update_total_seconds": 240.67615182200004,
+      "median_domains_finishing_before_last": 15.0,
+      "domain4_hbm_mapping": "40005fe00000 bind:20 file=/anon_hugepage\\040(deleted) huge anon=1447 dirty=1447 N20=1447 kernelpagesize_kB=2048",
+      "per_domain_hbm_step_end_MiB": 2894
+    },
+    {
+      "round": 2,
+      "sync_median_seconds": 13.241064622500001,
+      "max_start_skew_ms": 0.182384,
+      "median_post_update_to_next_release_seconds": 0.554026368,
+      "last_finisher_counts": {
+        "4": 20
+      },
+      "domain4_update_total_seconds": 263.698236976,
+      "median_domains_finishing_before_last": 15.0,
+      "domain4_hbm_mapping": "400074400000 bind:20 file=/anon_hugepage\\040(deleted) huge anon=1447 dirty=1447 N20=1447 kernelpagesize_kB=2048",
+      "per_domain_hbm_step_end_MiB": 2894
+    },
+    {
+      "round": 3,
+      "sync_median_seconds": 11.370647685000002,
+      "max_start_skew_ms": 0.190015,
+      "median_post_update_to_next_release_seconds": 0.57475953,
+      "last_finisher_counts": {
+        "4": 12,
+        "11": 2,
+        "15": 4,
+        "14": 1,
+        "13": 1
+      },
+      "domain4_update_total_seconds": 224.39151490400002,
+      "median_domains_finishing_before_last": 15.0,
+      "domain4_hbm_mapping": "40009a600000 bind:20 file=/anon_hugepage\\040(deleted) huge anon=1447 dirty=1447 N20=1447 kernelpagesize_kB=2048",
+      "per_domain_hbm_step_end_MiB": 2894
+    }
+  ],
+  "spread_percent": 15.36627683775943,
+  "limit": "R1 has no timestamp for validation start/end. Update ending before the last domain only establishes opportunity for overlap."
+}

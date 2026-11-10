@@ -1,0 +1,58 @@
+{
+  "scope": "Read-only verification of terminal evidence and actually run C1/B1 engineering versions",
+  "result_sha256": "02cccb4fdd008dfdd6fabd445cb18a94e2382104a1bd2429de637da7697219cf",
+  "cert_result_sha256": "23cd31191d06b14742dd39b4bd83341b7d70141e9c7552fb0e8986fbda34b6f2",
+  "verified_references": 42,
+  "jobs": {
+    "C1": {
+      "job_id": "2086632",
+      "native_state": "SUCCEEDED",
+      "archive_members": 292,
+      "source_hashes": 33,
+      "binding_sha256": "8877b54b023c4600c616dc324bcdcc4afe360b6a1e915aef7973a135c7a0908d",
+      "allocated_seconds": 199,
+      "cleanup": true,
+      "metrics": 3880,
+      "exact_optimizer_step_items": 765,
+      "residency_mib": [
+        3582,
+        3680
+      ],
+      "status": "PASS_HBM_LIB_CERT"
+    },
+    "B1": {
+      "job_id": "2086656",
+      "native_state": "FAILED",
+      "archive_members": 283,
+      "source_hashes": 34,
+      "binding_sha256": "d2b3a2bc7fca78456cd28343d0be919f47448b8c1cefe732df005b37e73f643f",
+      "allocated_seconds": 124,
+      "cleanup": true,
+      "first_failure": {
+        "name": "candidate.1.reference_loss.total",
+        "max_abs": 0.0005245208740234375,
+        "l2_relative": 4.699908693592016e-05,
+        "reference_norm": 11.160235404968262,
+        "passed": false
+      },
+      "counts": {
+        "forward": 24,
+        "backward": 12,
+        "forward_tiles": 356352,
+        "backward_tiles": 356352
+      },
+      "performance": "NOT_RUN",
+      "status": "BF16_REJECTED_NUMERICAL_FAIL",
+      "last_cpu36_checkpoint": "before_candidate_1"
+    }
+  },
+  "budget": {
+    "submissions": 2,
+    "allocated_seconds": 323,
+    "queue_seconds": 2,
+    "updates_including_bf16_failed_first_update": 16,
+    "deadline_utc": "2026-11-12T17:47:30+00:00"
+  },
+  "formal_entry": "DEFERRED_PENDING_FORMAL_TARGET_REVIEW",
+  "gpu4090": "NOT_QUERIED"
+}

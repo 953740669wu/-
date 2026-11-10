@@ -1,0 +1,414 @@
+{
+  "active_job": null,
+  "actual_libraries": {
+    "bf16": 0,
+    "bq": 64,
+    "library": {
+      "path": "/home/share/wujunyi/opt/stage4_sessions/S00/ATTN_R1_M1_NS1_D1/job_evidence/libfp32_attn.so",
+      "sha256": "72cf3e5ff2a3c47f51fcb3b0107b0b648296630404894e346ed1d0b580640421"
+    },
+    "locking_kml": {
+      "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+      "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690"
+    },
+    "openmp": {
+      "path": "/opt/HPCKit/bisheng-lib/aarch64-unknown-linux-gnu/libomp.so",
+      "sha256": "d336ec367ed4bd0a9594cc49bcef6ca9f8cdc7a44ce403509127af2d4bc0f8ac"
+    },
+    "source_sha256": "1569473ddf6fe7fe0ba66f4f5a6137aac7ff10bd4ea5741388dd6429c1933e4a"
+  },
+  "adoption": "REJECTED",
+  "budget": {
+    "actual_hosts": [
+      "cn22036"
+    ],
+    "allocation_seconds": 247,
+    "attempts": [
+      {
+        "allocated_seconds": 6,
+        "artifact": {
+          "bytes": 197480,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V1_D1\\JOB_2085024_TRANSFER.tgz",
+          "sha256": "66f4259bd4abf8d812774d80797d9bb79e001db0866fd47110e537a4bb43a033"
+        },
+        "binding": {
+          "bytes": 3964,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V1_D1\\RUN_BINDING.json",
+          "sha256": "a32c452c466a58252f7570a5fd69826cae2908c95738288bc22a27456ff7b4b9"
+        },
+        "charged_updates": 0,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 313,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V1_D1\\received\\job_evidence\\cleanup.json",
+          "sha256": "67cf9b5340a401129ae8541fd1e01a6447fa485ce890049623e179905bd454d7"
+        },
+        "confirmed_updates": 0,
+        "domains": 1,
+        "host": "cn22036",
+        "job_id": "2085024",
+        "native": {
+          "bytes": 3711,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V1_D1\\received\\djob_final.json",
+          "sha256": "d772b68030dc8cd6a3cd95f0e581f315a76b79cf495344e8d331665f41c0a6bf"
+        },
+        "queue_seconds": 2,
+        "state": "FAILED",
+        "terminal": true,
+        "version": "V1_D1"
+      },
+      {
+        "allocated_seconds": 110,
+        "artifact": {
+          "bytes": 301985,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V2_D1\\JOB_2085051_TRANSFER.tgz",
+          "sha256": "8c8ff4bf2c0be97003bb418cd3bc27d5011aebc933d2742802ac7b6285e71f6d"
+        },
+        "binding": {
+          "bytes": 3964,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V2_D1\\RUN_BINDING.json",
+          "sha256": "b24660823c4a04d134763616d2a291b9091cb4b4fb017ebadd11886f795f82d7"
+        },
+        "charged_updates": 10,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 365,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V2_D1\\received\\job_evidence\\cleanup.json",
+          "sha256": "24f718b3f2699487fdb8725ecba0c928f3e94cedb981e0ee6614deab96066f2f"
+        },
+        "confirmed_updates": 5,
+        "domains": 1,
+        "host": "cn22036",
+        "job_id": "2085051",
+        "native": {
+          "bytes": 3804,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\V2_D1\\received\\djob_final.json",
+          "sha256": "f34b0696363e8d214eef59b0b950899447f3f251c739937d6a8dded1bf6ea1bf"
+        },
+        "queue_seconds": 3,
+        "state": "FAILED",
+        "terminal": true,
+        "version": "V2_D1"
+      },
+      {
+        "allocated_seconds": 131,
+        "artifact": {
+          "bytes": 311357,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\JOB_2085664_TRANSFER.tgz",
+          "sha256": "fd65ef971ed186431d624ca61e108dbb8718fc3e5d05836d000ffdbb963373ec"
+        },
+        "binding": {
+          "bytes": 4329,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\RUN_BINDING.json",
+          "sha256": "44be42846b7264bc5c32a2d9c5d04328ab336d84dcfef443e3b9c0b6201fe9c2"
+        },
+        "charged_updates": 10,
+        "cleanup": true,
+        "cleanup_source": {
+          "bytes": 363,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\job_evidence\\cleanup.json",
+          "sha256": "f5c7ffe882ab447b73cefb76b5fe7c84228a0846525cbb395de2b0938468977e"
+        },
+        "confirmed_updates": 6,
+        "domains": 1,
+        "host": "cn22036",
+        "job_id": "2085664",
+        "native": {
+          "bytes": 3757,
+          "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\djob_final.json",
+          "sha256": "485aa47a17b9eaa1cfb683f75e4a56fe0f3bdb1c907b27d988e3c692f87f73be"
+        },
+        "queue_seconds": 3,
+        "state": "FAILED",
+        "terminal": true,
+        "version": "M1_NS1_D1"
+      }
+    ],
+    "clock_basis": "First observed UTC timestamp on receipt, independent of R2",
+    "confirmed_model_updates": 11,
+    "deadline_utc": "2026-11-12T14:04:34+00:00",
+    "engineering_revisions": [
+      {
+        "completed_job": "2085051",
+        "id": "CLOCK_HANDOFF"
+      },
+      {
+        "binding_sha256": "44be42846b7264bc5c32a2d9c5d04328ab336d84dcfef443e3b9c0b6201fe9c2",
+        "id": "NS1_ACTUAL_HANDLE",
+        "job_id": "2085664",
+        "math_candidate": "M1_FP32_BQ64",
+        "version": "M1_NS1_D1"
+      }
+    ],
+    "limits": {
+      "allocation_seconds": 21600,
+      "cleanup_reserve_seconds": 120,
+      "host_count": 3,
+      "job_seconds": 7200,
+      "model_updates": 16000,
+      "per_job_updates": 4000,
+      "queue_seconds": 86400,
+      "submissions": 6,
+      "versions": 2,
+      "wall_seconds": 172800
+    },
+    "mathematical_candidates": [
+      {
+        "id": "M1_FP32_BQ64",
+        "previous_kernel_sha256": "505408f2836411ff6774a48b42b72f6206d098b07314b8e33f93ec3e782d4387"
+      }
+    ],
+    "model_updates": 20,
+    "queue_seconds": 8,
+    "received_utc": "2026-11-10T14:04:34+00:00",
+    "status": "REJECTED_NUMERICAL_M1_FP32_BQ64",
+    "versions": [
+      {
+        "binding_sha256": "a32c452c466a58252f7570a5fd69826cae2908c95738288bc22a27456ff7b4b9",
+        "version": "V1_D1"
+      },
+      {
+        "binding_sha256": "b24660823c4a04d134763616d2a291b9091cb4b4fb017ebadd11886f795f82d7",
+        "version": "V2_D1"
+      }
+    ]
+  },
+  "cleanup": {
+    "all_jobs_terminal": true,
+    "no_active_jobs": true,
+    "no_live_descendants": true,
+    "used_hbm_pool_restored": true
+  },
+  "engineering_fix_status": "PASS_ACTUAL_NAMESPACE_AND_CPU36",
+  "evidence_index": [
+    {
+      "bytes": 1845,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\SUMMARY.md",
+      "sha256": "b1dc8e56069831461792c27f5042d263eb413a332bb99d32cb65d73cf85de5b0"
+    },
+    {
+      "bytes": 1006,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\ROUND_DELTA.md",
+      "sha256": "adea9ad529ccb95406f2951c1b7083fa1eb3bb07edfe98a5e5ba07928df97552"
+    },
+    {
+      "bytes": 1151,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\SESSION_STATUS.md",
+      "sha256": "f0c2f2c253672a781755806b4f9913bebb92c1276519b6e4fdcaef88c2f922b1"
+    },
+    {
+      "bytes": 6165,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\BUDGET_LEDGER.json",
+      "sha256": "a5ef0a7afc41b75758cb728ea6bc191b616fec6c07ef0690acdbdc7d8568fcc3"
+    },
+    {
+      "bytes": 1609,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\ACTIVE_JOB.json",
+      "sha256": "539ce6c8af4ed33b99f25ed60aef77b87b6fcd4cf4344a356cd4e7875a5ccf30"
+    },
+    {
+      "bytes": 2030,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\ACTUAL_COMMANDS.md",
+      "sha256": "7caec1f7adcaa0699435427d9004451b7558bfa22c4bdb875e77db5041616893"
+    },
+    {
+      "bytes": 11623,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\freeze_ns.py",
+      "sha256": "d78ea5b3cb14194c011762674df5a56600323e86b29200ee86b26c1c6413eb48"
+    },
+    {
+      "bytes": 1948,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\settle_ns.py",
+      "sha256": "e60de7575ba4744f12233b9a66e6350dceab583bdc731751f5ba25b63b9e6252"
+    },
+    {
+      "bytes": 4329,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\RUN_BINDING.json",
+      "sha256": "44be42846b7264bc5c32a2d9c5d04328ab336d84dcfef443e3b9c0b6201fe9c2"
+    },
+    {
+      "bytes": 9596,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\MINIMAL.diff",
+      "sha256": "e1c62494146952b3c920b88607f9d4e7e9a09e576b608a01d458e405da6dd5fe"
+    },
+    {
+      "bytes": 3048,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\SOURCE_SHA256.json",
+      "sha256": "b348f38dba723e638eb07689ee3922d252770fd0674a2d31a40ed958a3be1011"
+    },
+    {
+      "bytes": 77356,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\FULL16_PAYLOAD.zip",
+      "sha256": "eeef129d0ecd1884ca07f3e85fe25ae33a4ab87679b6275cd46a68ad21a15acf"
+    },
+    {
+      "bytes": 6452,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\ANALYSIS.json",
+      "sha256": "c576d105a3efc6810295fd2f6ace2881e99f6ca1580d39fc6a81a4279aa8e45e"
+    },
+    {
+      "bytes": 311357,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\JOB_2085664_TRANSFER.tgz",
+      "sha256": "fd65ef971ed186431d624ca61e108dbb8718fc3e5d05836d000ffdbb963373ec"
+    },
+    {
+      "bytes": 50002,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\COLLECTION_INDEX.json",
+      "sha256": "77ee5da27535b0462b8ddb4be4f54ee49038a3064602f866e9daeb4040ba8d7c"
+    },
+    {
+      "bytes": 3757,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\djob_final.json",
+      "sha256": "485aa47a17b9eaa1cfb683f75e4a56fe0f3bdb1c907b27d988e3c692f87f73be"
+    },
+    {
+      "bytes": 768,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\submission.command.json",
+      "sha256": "b1bb8e231c59ac46919c8161e43c30b463c68a44cb9b8cf1c6b7dd0a5e842b6e"
+    },
+    {
+      "bytes": 12479,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\kml_attn.c",
+      "sha256": "1569473ddf6fe7fe0ba66f4f5a6137aac7ff10bd4ea5741388dd6429c1933e4a"
+    },
+    {
+      "bytes": 5569,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\payload\\attn_dispatch.py",
+      "sha256": "69ed365b88d29cb365f8b4ea13a85e17c92e287af2ef9bf3040b37c5993265fc"
+    },
+    {
+      "bytes": 218036,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\job_evidence\\strict_baseline\\node0\\result.json",
+      "sha256": "cb72dadd745bbac9ff6746851773050e4e77c2abc0513ab98e0c5cd36c2b0c1a"
+    },
+    {
+      "bytes": 69656,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\job_evidence\\strict_candidate\\node0\\result.json",
+      "sha256": "bfd15a4d90424050b2d0cce9dd3a6b3e3d96109cd3e3bbfa1dfd3d51b6050a12"
+    },
+    {
+      "bytes": 12667,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\job_evidence\\strict_candidate\\node0\\steps.jsonl",
+      "sha256": "d38826be23e07e8a02550206b475498fb39df0817bc6a850e4757a9b587f9a31"
+    },
+    {
+      "bytes": 678,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\job_evidence\\ATTN_BUILD.json",
+      "sha256": "21168dd293f9f4a8e9499fd121d28ad156c5863d116dc564dcb2b74996caf6ce"
+    },
+    {
+      "bytes": 71592,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\job_evidence\\libfp32_attn.so",
+      "sha256": "72cf3e5ff2a3c47f51fcb3b0107b0b648296630404894e346ed1d0b580640421"
+    },
+    {
+      "bytes": 363,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\job_evidence\\cleanup.json",
+      "sha256": "f5c7ffe882ab447b73cefb76b5fe7c84228a0846525cbb395de2b0938468977e"
+    },
+    {
+      "bytes": 89,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\job_evidence\\pool_return_terminal.json",
+      "sha256": "dd2843a7c0029067934609a77cf46fa99ff2b251e56e39edefb2ab606817b573"
+    },
+    {
+      "bytes": 18508,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\FP32_ATTN_AB_RESULT.json",
+      "sha256": "818cca59eb8c0dc205bccbeb26800232aef723434bbda79fccee6e786283bf2e"
+    }
+  ],
+  "historical_4090": "DOCUMENT_REFERENCE_ONLY_BF16_B64_DEMO",
+  "locking_namespace": {
+    "gemm_address": 70376969512356,
+    "handle": 187650808050208,
+    "namespace_id": 1,
+    "path": "/opt/HPCKit/kml-lib/sme/kblas/locking/libkblas.so.1.26.0.RC1",
+    "sha256": "ca30793eb465d79296ddfc2c41f1a04f4bbe095a3eb42805d4a5ff6fa6205690"
+  },
+  "math_candidate": "M1_FP32_BQ64",
+  "mathematical_candidates_used": 1,
+  "original_numerical_thresholds": {
+    "denominator_floor": 1e-12,
+    "near_zero_norm": 1e-08,
+    "relative_L2": 2e-06,
+    "state_abs": 2e-06,
+    "strict_steps": 5,
+    "tensor_abs": 2e-05
+  },
+  "paired_performance": {
+    "four_domains": "NOT_RUN_SINGLE_DOMAIN_NUMERICAL_FAIL",
+    "memory": "NOT_RUN",
+    "sixteen_domains": "NOT_RUN_FOUR_DOMAIN_GATE_UNMET",
+    "slow_domain": "NOT_RUN",
+    "speed": "NOT_RUN"
+  },
+  "prior_failures_preserved": true,
+  "second_math_candidate": {
+    "reason": "The first failing tensor does not isolate a correctable source among exponential approximation, reduction, and GEMM.",
+    "status": "NOT_RUN"
+  },
+  "single_domain": {
+    "actual_domains": 1,
+    "attempted_candidate_updates": 1,
+    "candidate": {
+      "bytes": 69656,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\job_evidence\\strict_candidate\\node0\\result.json",
+      "sha256": "bfd15a4d90424050b2d0cce9dd3a6b3e3d96109cd3e3bbfa1dfd3d51b6050a12"
+    },
+    "fallback": "NONE",
+    "host": "cn22036",
+    "job_id": "2085664",
+    "metrics": [
+      {
+        "l2_relative": 0.0,
+        "max_abs": 0.0,
+        "name": "candidate.1.reference_loss.total",
+        "passed": true,
+        "reference_norm": 11.160235404968262
+      },
+      {
+        "l2_relative": 0.0,
+        "max_abs": 0.0,
+        "name": "candidate.1.reference_loss.voltage",
+        "passed": true,
+        "reference_norm": 4.650878429412842
+      },
+      {
+        "l2_relative": 0.0,
+        "max_abs": 0.0,
+        "name": "candidate.1.reference_loss.coarse",
+        "passed": true,
+        "reference_norm": 6.50935697555542
+      },
+      {
+        "l2_relative": 9.84024827895898e-07,
+        "max_abs": 2.8133392333984375e-05,
+        "name": "1.output.h",
+        "passed": false,
+        "reference_norm": 18151.648703161503
+      }
+    ],
+    "native_backward": 12,
+    "native_forward": 24,
+    "numeric_status": "FAIL_FIRST_STEP",
+    "original_torch_threads": 36,
+    "reference": {
+      "bytes": 218036,
+      "path": "E:\\eitfm_c2_stages2-4_2026-11-03\\c2\\stage4_sessions\\work\\S00\\external_fp32_attn_ab_r1_20261110\\namespace_continue_20261110\\M1_NS1_D1\\received\\job_evidence\\strict_baseline\\node0\\result.json",
+      "sha256": "cb72dadd745bbac9ff6746851773050e4e77c2abc0513ab98e0c5cd36c2b0c1a"
+    },
+    "reference_steps": 5,
+    "strict_steps_passed": 0,
+    "tids_observed_after_backend_and_step": 36
+  },
+  "source_identity": {
+    "allocator_sha256": "89f295754a199dcb6206f8e6217e6cf57651bceed2d364b1a6e4cc83eea6095d",
+    "diff_sha256": "e1c62494146952b3c920b88607f9d4e7e9a09e576b608a01d458e405da6dd5fe",
+    "dispatch_sha256": "69ed365b88d29cb365f8b4ea13a85e17c92e287af2ef9bf3040b37c5993265fc",
+    "external_kernel_sha256": "8bd18a4380d794eabab20c9387ff1005434ae544e7b64450106cf4b343bdac74",
+    "kernel_source_sha256": "1569473ddf6fe7fe0ba66f4f5a6137aac7ff10bd4ea5741388dd6429c1933e4a",
+    "review_sha256": "5ee35d5774c2d9b790e18db058e3568606cbbc2173871dacedbdeb436f2cb348",
+    "unchanged_math_body_sha256": "e4cf503925c22ab3f32b76b1dc767ec91493ccc064113909b515a452cf7699de"
+  },
+  "status": "REJECTED_NUMERICAL_M1_FP32_BQ64"
+}
