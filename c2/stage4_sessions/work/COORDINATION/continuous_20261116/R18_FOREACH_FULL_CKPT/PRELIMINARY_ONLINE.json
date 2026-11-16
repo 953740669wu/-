@@ -1,0 +1,21 @@
+{
+  "version": "R18_FOREACH_FULL_CKPT",
+  "job_id": "2147298",
+  "status": "PROVISIONAL_ONLINE_PENDING_TERMINAL_REVIEW",
+  "scope": "Completed paired domains1/3 only; original full checkpoint and FP32/B32, not a full16 speed claim",
+  "pairs": {
+    "node1": {
+      "baseline_seconds": 109.55234173800001,
+      "candidate_seconds": 104.03817504999999,
+      "elapsed_change_pct": -5.033362683553976
+    },
+    "node3": {
+      "baseline_seconds": 109.09737627900002,
+      "candidate_seconds": 104.69736170599998,
+      "elapsed_change_pct": -4.033107598983554
+    }
+  },
+  "strict5": "3880 metrics passed per completed domain; original thresholds unchanged",
+  "model15_sha256": "61dfe312e03bb0f1714a9d2bec7a168dfed491d31fdb086c4be84a002bacff74",
+  "limitation": "single fixed-order pairs; domain lifecycle background changes; terminal archive and remaining domains pending; no formal entrypoint deployment"
+}

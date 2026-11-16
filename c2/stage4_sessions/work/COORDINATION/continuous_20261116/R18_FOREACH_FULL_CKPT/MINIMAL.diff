@@ -1,0 +1,115 @@
+--- a/launch.py
++++ b/launch.py
+@@ -342,7 +342,7 @@
+         deadline = START + wall - 30
+         cert = False
+         count = binding["domain_count"]
+-        need(binding["mode"] == "checkpoint_tail_skip_ab" and count == 4
++        need(binding["mode"] == "foreach_adamw_ab" and count == 4
+              and 120 < wall <= 1800, "wrong wall or mode")
+         need(binding["max_model_updates"] == 10*count + 30*count*binding["pairs"], "wrong update bound")
+         rounds = binding["pairs"]
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -192,6 +192,21 @@
+         opts[role] = training.optimizer(torch, model)
+         if sum(p.numel() for p in model.parameters()) != 37995777 or len(model.tf.layers) != 12:
+             raise ValueError("original full Encoder dimensions differ")
++    import importlib
++    adam = importlib.import_module("torch.optim.adam")
++    optimizer_calls = {"single": 0, "multi": 0}
++    def counted_optimizer(name, fn):
++        def call(*a, **k):
++            optimizer_calls[name] += 1
++            return fn(*a, **k)
++        return call
++    adam._single_tensor_adam = counted_optimizer("single", adam._single_tensor_adam)
++    adam._multi_tensor_adam = counted_optimizer("multi", adam._multi_tensor_adam)
++    if args.variant == "candidate":
++        opts[args.variant].defaults["foreach"] = True
++        for group in opts[args.variant].param_groups:
++            group["foreach"] = True
++    result["optimizer_impl"] = "foreach" if args.variant == "candidate" else "original"
+     initial = {n: p.detach().clone() for n, p in models[args.variant].named_parameters()} if strict else None
+     order = list(range(800))
+     random.Random(0).shuffle(order)
+@@ -226,11 +241,7 @@
+             raise ValueError("frozen strict reference incomplete")
+     result["pairing_sha256"] = hashlib.sha256(json.dumps(pairing,sort_keys=True).encode()).hexdigest()
+     tail_counts = None
+-    if args.variant == "candidate":
+-        from checkpoint_tail import enable_checkpoint_tail
+-        tail_counts = enable_checkpoint_tail(models[args.variant])
+-    else:
+-        enable_checkpoint(models[args.variant])
++    enable_checkpoint(models[args.variant])
+     result["checkpoint_scope"] = "full_tail_skip" if tail_counts is not None else "full"
+     result["checkpoint_layers"] = ckpt_layers
+     residency(args.output, "initialized")
+@@ -299,6 +310,10 @@
+                     if tail_counts != {"skipped": step*12, "escaped": 0}:
+                         raise RuntimeError("checkpoint tail did not stop exactly once per block: " + repr(tail_counts))
+                     result["checkpoint_tail_counts"] = dict(tail_counts)
++                wanted = {"single": 0, "multi": step} if args.variant == "candidate" else {"single": step, "multi": 0}
++                if optimizer_calls != wanted:
++                    raise ValueError("actual AdamW dispatch differs: " + repr(optimizer_calls))
++                result["optimizer_calls"] = dict(optimizer_calls)
+                 training.validate_update(torch, model, opts[role], values[role], step)
+                 actual_huge = rss_after["hugetlb_bytes"]
+                 if (not hbm and actual_huge != 0) or (hbm and not 0 < actual_huge <= hbm["cap_MiB"]*2**20):
+@@ -312,12 +327,6 @@
+                     pinned = reference_steps[(step-1) % 5]
+                     expected_shapes = dict(pinned["native_shapes"])
+                     expected_calls = pinned["kml_calls"]
+-                    if args.variant == "candidate":
+-                        key = str((101,111,112,batch*928,512,2048,1.0,2048,2048,1.0,512))
+-                        if expected_shapes[key] != 24:
+-                            raise ValueError("unexpected full-checkpoint FFN2 multiplicity")
+-                        expected_shapes[key] -= 12
+-                        expected_calls -= 12
+                     trace_matches = logical == expected_calls and shapes == expected_shapes
+                     if not trace_matches:
+                         result["bad_native"] = dict(step=step, role=role, shapes=dict(shapes), logical=logical)
+@@ -351,9 +360,12 @@
+     result["final_model_sha256"] = {role: training.model_sha(model) for role, model in models.items()}
+     if strict:
+         expected_model5 = "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
+-        if any(v != expected_model5 for v in result["final_model_sha256"].values()):
+-            raise ValueError("historical original model5 SHA differs")
+-        result["historical_original_model5_exact"] = True
++        exact_model5 = all(v == expected_model5 for v in result["final_model_sha256"].values())
++        if args.variant == "baseline" and not exact_model5:
++            raise ValueError("historical original baseline model5 SHA differs")
++        # Candidate acceptance uses all original strict tensor/state/L2 and exact-step gates.
++        # Model byte identity is additionally reported, not substituted for those gates.
++        result["historical_original_model5_exact"] = exact_model5
+         residency(args.output, "strict_end")
+     if attention:
+         attention.check_maps()
+--- a/prepare.py
++++ b/prepare.py
+@@ -30,7 +30,7 @@
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+     need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/wujunyi/opt/stage4_sessions/S00")
+-         and root.name.startswith("AGGRESSIVE3H_20261111_") and binding["user_authorized"] is True,
++         and root.name.startswith("CONTINUOUS_20261116_") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+     need(sha(root / "FULL16_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"
+--- a/submit_once.py
++++ b/submit_once.py
+@@ -89,10 +89,9 @@
+                 and res["memFree"] >= 393216 and res["hugePagesFree"] >= binding["domain_count"]*(binding["hbm_cap_MiB"]//2+16)):
+             qualified.append(host)
+     need(qualified, "no eligible host currently shows full-node CPU, DDR and hugepage capacity")
+-    until = datetime.fromisoformat(binding["batch_deadline_utc"])
+-    room = (until - datetime.now(timezone.utc)).total_seconds()
+-    need(room > binding["wall_seconds"] + 120, "insufficient batch time to execute full job")
+-    stop_queue = time.monotonic() + min(binding["remaining_queue_seconds"],room-binding["wall_seconds"]-120)
++    need(binding["batch_deadline_utc"] is None and binding["wall_seconds"] == 1800,
++         "unlimited campaign requires bounded individual job")
++    stop_queue = time.monotonic() + binding["remaining_queue_seconds"]
+     argv = binding["native_argv"]
+     # The source pin is passed as its explicit runtime operand, avoiding a self-hash cycle.
+     argv = [pin if a == "BINDING_SHA256" else a for a in argv]

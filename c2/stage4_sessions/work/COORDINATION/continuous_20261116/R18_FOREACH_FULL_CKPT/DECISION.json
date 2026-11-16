@@ -1,0 +1,136 @@
+{
+  "version": "R18_FOREACH_FULL_CKPT",
+  "job_id": "2147298",
+  "decision": "PROVISIONAL_USE_MEASURED_DOMAINS_1_3_ONLY_REJECT_UNIFORM_ROLLOUT",
+  "native_state": "SUCCEEDED",
+  "strict5_passed_domains": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "strict_metrics": 15520,
+  "strict_max_abs": 0.0,
+  "strict_max_relative": 0.0,
+  "original_numerical_gates_unchanged": true,
+  "all_model15_pair_hashes_exact": {
+    "node0": true,
+    "node1": true,
+    "node2": true,
+    "node3": true
+  },
+  "comparisons": {
+    "node0": {
+      "sample_seconds": {
+        "baseline": 110.94636639300002,
+        "candidate": 117.748499546,
+        "change_pct": 6.131010301775097
+      },
+      "sample_median_s": {
+        "baseline": 9.581156651499999,
+        "candidate": 9.877349236,
+        "change_pct": 3.091407387161671
+      },
+      "sample_frames_s": {
+        "baseline": 3.4611318286871615,
+        "candidate": 3.261188053186065,
+        "change_pct": -5.776832128839682
+      },
+      "peak_estimate_MiB": {
+        "baseline": 3721.3046875,
+        "candidate": 3846.09375,
+        "change_pct": 3.3533685892254583
+      }
+    },
+    "node1": {
+      "sample_seconds": {
+        "baseline": 109.55234173800001,
+        "candidate": 104.03817504999999,
+        "change_pct": -5.033362683553976
+      },
+      "sample_median_s": {
+        "baseline": 9.2449837885,
+        "candidate": 8.522798105,
+        "change_pct": -7.811648998220422
+      },
+      "sample_frames_s": {
+        "baseline": 3.5051738183594057,
+        "candidate": 3.6909528624031744,
+        "change_pct": 5.300137843969255
+      },
+      "peak_estimate_MiB": {
+        "baseline": 3722.28515625,
+        "candidate": 3848.80078125,
+        "change_pct": 3.3988697719079974
+      }
+    },
+    "node2": {
+      "sample_seconds": {
+        "baseline": 144.815525076,
+        "candidate": 173.82632206199995,
+        "change_pct": 20.032932912942126
+      },
+      "sample_median_s": {
+        "baseline": 12.083931443,
+        "candidate": 14.6225249,
+        "change_pct": 21.008009429502007
+      },
+      "sample_frames_s": {
+        "baseline": 2.6516493987676713,
+        "candidate": 2.2091015643938885,
+        "change_pct": -16.6895304703349
+      },
+      "peak_estimate_MiB": {
+        "baseline": 3721.11328125,
+        "candidate": 3848.44140625,
+        "change_pct": 3.4217750274248004
+      }
+    },
+    "node3": {
+      "sample_seconds": {
+        "baseline": 109.09737627900002,
+        "candidate": 104.69736170599998,
+        "change_pct": -4.033107598983554
+      },
+      "sample_median_s": {
+        "baseline": 9.2049179865,
+        "candidate": 8.5325490705,
+        "change_pct": -7.304453086774931
+      },
+      "sample_frames_s": {
+        "baseline": 3.5197913377676304,
+        "candidate": 3.6677141977876007,
+        "change_pct": 4.202603104131386
+      },
+      "peak_estimate_MiB": {
+        "baseline": 3721.328125,
+        "candidate": 3849.8828125,
+        "change_pct": 3.454537820418624
+      }
+    }
+  },
+  "descriptive_sum_sample_seconds": {
+    "baseline": 474.41160948600003,
+    "candidate": 500.3103583639999,
+    "change_pct": 5.459130501898923,
+    "is_group_wall_throughput": false
+  },
+  "provisional_scope": "Measured domains1/3 in this FP32/B32 full-checkpoint HBM configuration; single-pair evidence only. No full4/full16 general rollout or formal entrypoint deployment.",
+  "rejected_scope": "Uniform foreach enablement: domain0 slower6.13%, domain2 slower20.03%; preserve both regressions.",
+  "caveats": [
+    "Candidate-first fixed order and independent domain lifecycles change background concurrency.",
+    "Do not assume physical domains1/3 remain permanently faster; roll back on contrary evidence.",
+    "Peak memory estimate increased about125-129MiB per domain; HBM safety cap still passed."
+  ],
+  "recorded_updates": 160,
+  "charged_updates": 160,
+  "allocation_seconds": 813.0,
+  "queue_seconds": 1.0,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "archive_sha256": "816310ffa8c7461f0c084e6dbb98296e1c860f725a656c1e344b882c50389c77",
+  "actual_submission_ordinal": 2,
+  "binding_submission_ordinal": 3,
+  "ordinal_note": "R17 was not submitted; frozen binding ordinal skipped its planned slot. Actual native submissions and ledger determine accounting.",
+  "next": "R19 tests denormal flushing against exact completed original reference; do not merge this optimizer change into that diagnostic."
+}
