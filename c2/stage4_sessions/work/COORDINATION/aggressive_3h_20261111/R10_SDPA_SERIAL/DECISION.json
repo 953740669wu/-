@@ -1,0 +1,16 @@
+{
+  "version": "R10_SDPA_SERIAL",
+  "job_id": "2088715",
+  "decision": "REJECT_SERIAL_SDPA_NO_RESOLUTION",
+  "tail_candidate_status": "NOT_REACHED",
+  "historical_model5_gate": "NOT_REACHED",
+  "numerical_decision": "NOT_EVALUATED",
+  "completed_updates": 0,
+  "charged_updates": 1,
+  "allocation_seconds": 115,
+  "queue_seconds": 1,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "reason": "SDPA forward capped at one thread still stalled within original_sdpa, not set_num_threads; 90-second first-update guard stopped it. Do not adopt cap.",
+  "next": "R11_NATIVE_TRACE captures the native training-thread stack at 25 seconds, original 36-thread math and 300-second allocation bound."
+}

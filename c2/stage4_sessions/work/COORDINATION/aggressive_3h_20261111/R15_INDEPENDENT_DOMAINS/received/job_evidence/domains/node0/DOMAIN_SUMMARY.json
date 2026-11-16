@@ -1,0 +1,10 @@
+{
+  "active_phase": "strict_candidate",
+  "error": "TimeoutError('strict shared deadline')",
+  "finished": 994165.620067917,
+  "hbm_pool_restored": true,
+  "node": 0,
+  "started": 993562.397032354,
+  "status": "FAIL_STOP",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/launch.py\", line 229, in phase\n    raise TimeoutError(name + \" shared deadline\")\nTimeoutError: strict shared deadline\n"
+}

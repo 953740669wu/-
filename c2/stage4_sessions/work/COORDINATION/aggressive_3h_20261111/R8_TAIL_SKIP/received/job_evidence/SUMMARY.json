@@ -1,0 +1,12 @@
+{
+  "active_phase": "strict_baseline",
+  "error": "InterruptedError('native signal 2')",
+  "finished": 991284.582023027,
+  "hbm_pool_restored": true,
+  "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+  "job_id": "2088546",
+  "start": 990704.833497408,
+  "status": "FAIL_STOP",
+  "steps": {},
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_TAIL_SKIP/launch.py\", line 367, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_TAIL_SKIP/launch.py\", line 241, in phase\n    time.sleep(.02)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_TAIL_SKIP/launch.py\", line 317, in stop\n    raise InterruptedError(\"native signal \" + str(signum))\nInterruptedError: native signal 2\n"
+}

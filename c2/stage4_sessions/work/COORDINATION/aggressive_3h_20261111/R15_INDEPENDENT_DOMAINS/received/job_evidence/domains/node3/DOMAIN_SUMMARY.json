@@ -1,0 +1,10 @@
+{
+  "active_phase": "perf_baseline",
+  "error": "TimeoutError('perf shared deadline')",
+  "finished": 994160.993354227,
+  "hbm_pool_restored": true,
+  "node": 3,
+  "started": 993562.380329909,
+  "status": "FAIL_STOP",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/launch.py\", line 388, in run_domain\n    phase(\"perf\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements, 1)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/launch.py\", line 229, in phase\n    raise TimeoutError(name + \" shared deadline\")\nTimeoutError: perf shared deadline\n"
+}

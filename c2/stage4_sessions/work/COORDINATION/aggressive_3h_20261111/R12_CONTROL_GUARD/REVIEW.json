@@ -1,0 +1,56 @@
+{
+  "version": "R12_CONTROL_GUARD",
+  "job_id": "2088752",
+  "native_state": "FAILED",
+  "archive_sha256": "38b7f39320a702ee2ce65a2c2f6ea5a2b8896ef7f8a6e8ff1baa421fea8cf9d1",
+  "verified_members": 239,
+  "summary": {
+    "active_phase": "strict_baseline",
+    "error": "TimeoutError('baseline first update exceeded 90 seconds; candidate not reached')",
+    "finished": 992932.173699252,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2088752",
+    "start": 992818.416530638,
+    "status": "FAIL_STOP",
+    "steps": {},
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R12_CONTROL_GUARD/launch.py\", line 377, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R12_CONTROL_GUARD/launch.py\", line 227, in phase\n    raise TimeoutError(\"baseline first update exceeded 90 seconds; candidate not reached\")\nTimeoutError: baseline first update exceeded 90 seconds; candidate not reached\n"
+  },
+  "results": {},
+  "cleanup": {
+    "actions": [
+      {
+        "at": 992929.511190277,
+        "pid": 3002274,
+        "signal": "TERM",
+        "start_ticks": 99282257
+      }
+    ],
+    "all_reaped": true,
+    "deadline": 992957.724388123,
+    "finished": 992932.098403852,
+    "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+    "owned": {
+      "3002274": 99282257
+    },
+    "reaped": [
+      {
+        "exit_code": -15,
+        "pid": 3002274,
+        "wait_status": 15
+      }
+    ],
+    "remaining_live": [],
+    "remaining_processes": [],
+    "started": 992927.724397013
+  },
+  "queue_seconds": null,
+  "native_times": {
+    "createTime": "2026-11-10T21:41:20Z",
+    "startTime": "2026-11-10T21:41:22Z",
+    "lastModifiedTime": "-",
+    "endTime": "2026-11-10T21:43:17Z",
+    "startTimeEstimated": "-",
+    "scheduledTime": "-"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "argv": [
+    "dsub",
+    "-J",
+    "-q",
+    "q_hpcai",
+    "-x",
+    "job",
+    "-nl",
+    "cn22035 !cn21341 !cn22044",
+    "-R",
+    "cpu=38,mem=24576MB",
+    "-RL",
+    "mem=24576MB",
+    "-a",
+    "numa[count=1,distribution=pack]",
+    "-T",
+    "1800",
+    "--env",
+    "none",
+    "--cwd",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F2_DIAG",
+    "-oo",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F2_DIAG/job.log",
+    "bash",
+    "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F2_DIAG/run_job.sh",
+    "73ae80e70c522a5ebe5a3959981fc1a4d9a5c10a25b456414ad60ba4e0a7ad44"
+  ],
+  "binding_sha256": "73ae80e70c522a5ebe5a3959981fc1a4d9a5c10a25b456414ad60ba4e0a7ad44",
+  "created_utc": "2026-11-10T21:22:09.865170+00:00"
+}

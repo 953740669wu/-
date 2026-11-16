@@ -1,0 +1,12 @@
+{
+  "active_phase": "strict_baseline",
+  "error": "TimeoutError('baseline first update exceeded 90 seconds; candidate not reached')",
+  "finished": 991565.934588184,
+  "hbm_pool_restored": true,
+  "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+  "job_id": "2088586",
+  "start": 991449.337891429,
+  "status": "FAIL_STOP",
+  "steps": {},
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F1_TAIL_SKIP/launch.py\", line 373, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F1_TAIL_SKIP/launch.py\", line 227, in phase\n    raise TimeoutError(\"baseline first update exceeded 90 seconds; candidate not reached\")\nTimeoutError: baseline first update exceeded 90 seconds; candidate not reached\n"
+}

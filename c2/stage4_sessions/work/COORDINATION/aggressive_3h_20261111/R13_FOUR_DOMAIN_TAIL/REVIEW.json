@@ -1,0 +1,74 @@
+{
+  "version": "R13_FOUR_DOMAIN_TAIL",
+  "job_id": "2088765",
+  "native_state": "FAILED",
+  "archive_sha256": "d73f75354561d46a8acc20d3fd56846a5b8840f1a4baa1e089212f96daaff7c9",
+  "verified_members": 289,
+  "summary": {
+    "active_phase": "strict_baseline",
+    "error": "InterruptedError('native signal 2')",
+    "finished": 993236.145128709,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2088765",
+    "start": 993030.466913753,
+    "status": "FAIL_STOP",
+    "steps": {},
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R13_FOUR_DOMAIN_TAIL/launch.py\", line 373, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R13_FOUR_DOMAIN_TAIL/launch.py\", line 247, in phase\n    time.sleep(.02)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R13_FOUR_DOMAIN_TAIL/launch.py\", line 323, in stop\n    raise InterruptedError(\"native signal \" + str(signum))\nInterruptedError: native signal 2\n"
+  },
+  "results": {},
+  "cleanup": {
+    "actions": [
+      {
+        "at": 993232.816100592,
+        "pid": 3021317,
+        "signal": "TERM",
+        "start_ticks": 99303529
+      }
+    ],
+    "all_reaped": true,
+    "deadline": 993260.832333571,
+    "finished": 993235.946070332,
+    "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+    "owned": {
+      "3021317": 99303529,
+      "3021325": 99303532,
+      "3021327": 99303537,
+      "3021332": 99303542
+    },
+    "reaped": [
+      {
+        "exit_code": -2,
+        "pid": 3021317,
+        "wait_status": 2
+      },
+      {
+        "exit_code": -2,
+        "pid": 3021325,
+        "wait_status": 2
+      },
+      {
+        "exit_code": -2,
+        "pid": 3021327,
+        "wait_status": 2
+      },
+      {
+        "exit_code": -2,
+        "pid": 3021332,
+        "wait_status": 2
+      }
+    ],
+    "remaining_live": [],
+    "remaining_processes": [],
+    "started": 993230.832342732
+  },
+  "queue_seconds": null,
+  "native_times": {
+    "createTime": "2026-11-10T21:44:53Z",
+    "startTime": "2026-11-10T21:44:54Z",
+    "lastModifiedTime": "-",
+    "endTime": "2026-11-10T21:48:21Z",
+    "startTimeEstimated": "-",
+    "scheduledTime": "-"
+  }
+}

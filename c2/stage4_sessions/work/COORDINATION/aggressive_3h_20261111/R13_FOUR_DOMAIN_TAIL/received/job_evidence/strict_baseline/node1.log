@@ -1,0 +1,11 @@
+hbm_alloc: arena 3800 MB on node 17, requests >= 256 KB
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R13_FOUR_DOMAIN_TAIL/payload/worker.py", line 387, in <module>
+    run(args, result)
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R13_FOUR_DOMAIN_TAIL/payload/worker.py", line 265, in run
+    release = barrier(args, step)
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R13_FOUR_DOMAIN_TAIL/payload/worker.py", line 89, in barrier
+    time.sleep(.01)
+KeyboardInterrupt

@@ -1,0 +1,20 @@
+{
+  "version": "R8_TAIL_SKIP",
+  "job_id": "2088546",
+  "decision": "STOPPED_BASELINE_STALL_CANDIDATE_NOT_REACHED",
+  "numerical_decision": "NOT_EVALUATED",
+  "performance_decision": "NOT_EVALUATED",
+  "completed_updates": 0,
+  "charged_updates": 1,
+  "in_flight_update": 1,
+  "allocation_seconds": 581,
+  "queue_seconds": 0,
+  "first_update_completed": false,
+  "candidate_started": false,
+  "worker_ticks_per_second": 3378.0717752415317,
+  "cpu_sample_count": 114,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "reason": "Original full-checkpoint baseline did not finish first step in more than 8 minutes; stop exact owned job to bound wasted time. Cause unresolved. Neither numeric rejection nor tail-candidate failure.",
+  "next": "R8_F1_TAIL_SKIP on cn22035; both arms same host, unchanged model math and original precision gates; 90-second baseline-first-update watchdog."
+}

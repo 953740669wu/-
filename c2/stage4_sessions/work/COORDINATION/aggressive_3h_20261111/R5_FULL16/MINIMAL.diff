@@ -1,0 +1,101 @@
+--- a/launch.py
++++ b/launch.py
+@@ -192,9 +192,9 @@
+             cfg = placements[node]
+             need((free_pages(cfg["hbm_node"])-16)*2 >= cfg["cap_MiB"], "HBM pool became smaller after safety gate")
+             env.update(M23_HBM_LIBRARY=cfg["library"], M23_HBM_LIBRARY_SHA=cfg["library_sha256"],
+-                       HBM_NODE=str(cfg["hbm_node"]), HBM_MB=str(cfg["cap_MiB"]), HBM_MIN_KB="256", HBM_STATS="1")
++                       HBM_NODE=str(cfg["hbm_node"]), HBM_MB=str(cfg["cap_MiB"]), HBM_MIN_KB=str(binding["hbm_min_request_KiB"][arm]), HBM_STATS="1")
+         env.update(S09_INVENTORY="0", S00_BATCH=str(binding["batch_size"]),
+-                   S00_MATCHED_CKPT=str(binding["checkpoint_layers"]))
++                   S00_MATCHED_CKPT="12" if arm == "A" else "0")
+         save(out / f"{rank}.env.json", {k:v for k,v in env.items() if k.startswith(("M23_", "HBM_", "S09_", "S00_"))})
+         with (out / f"{rank}.log").open("xb") as log:
+             proc[node] = subprocess.Popen(argv, cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+@@ -220,7 +220,7 @@
+                 samples.write(json.dumps(sample(proc, contracts)) + "\n")
+                 samples.flush()
+                 sampled_at = now
+-            if step <= 6 or (arm == "A" and time.monotonic_ns() < window["close_ns"]):
++            if step <= 6:
+                 ready = {n:barriers / f"{step}.node{n}.ready" for n in proc}
+                 if all(p.is_file() for p in ready.values()):
+                     arrivals = {n:read(p) for n,p in ready.items()}
+@@ -267,7 +267,7 @@
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        need(1200+120 < wall <= 7200 and binding["mode"] == "step_barrier_ab_fixed_window"
++        need(1200+120 < wall <= 7200 and binding["mode"] == "adopted_full16_fixed_window"
+              and binding["window_seconds"] == 600 and binding["max_model_updates"] == 2*PER_ARM_CAP,
+              "wrong authorized A/B scope")
+         libc = ctypes.CDLL(None, use_errno=True)
+--- a/payload/window_control.py
++++ b/payload/window_control.py
+@@ -1,4 +1,4 @@
+-"""Common fixed window, plus the A-only per-step rendezvous."""
++"""Common fixed window; both arms advance independently after warmup."""
+ import fcntl
+ import json
+ import os
+@@ -19,7 +19,7 @@
+         return bool(self.record) and time.monotonic_ns() >= self.record['close_ns']
+ 
+     def rendezvous(self, step):
+-        if step > 6 and self.arm == 'B':
++        if step > 6:
+             return None if self.closed() else 0
+         d = self.args.phase_root/'barriers'
+         begin = time.monotonic_ns()
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -94,7 +94,7 @@
+     window = Window(args, result, write)
+     batch = int(os.environ["S00_BATCH"])
+     ckpt_layers = int(os.environ["S00_MATCHED_CKPT"])
+-    if batch not in (32,64) or ckpt_layers != 12:
++    if batch != 32 or ckpt_layers != (12 if args.arm == "A" else 0):
+         raise ValueError("expected a dependency-bound B32 or B64 with CKPT12")
+     expected_cpu = json.loads(args.allocation.read_bytes())["receipt"]["selected"]
+     guard = result["cpu36"] = {}
+@@ -195,7 +195,10 @@
+         if len(reference_steps) != 5:
+             raise ValueError("frozen DDR strict reference incomplete")
+     result["pairing_sha256"] = hashlib.sha256(json.dumps(pairing,sort_keys=True).encode()).hexdigest()
+-    enable_checkpoint(models[args.variant])
++    if args.arm == "A":
++        enable_checkpoint(models[args.variant])
++    result["checkpoint_scope"] = "full" if args.arm == "A" else "none"
++    result["hbm_min_request_KiB"] = int(os.environ["HBM_MIN_KB"])
+     result["checkpoint_layers"] = ckpt_layers
+     residency(args.output, "initialized")
+     with (args.output / "steps.jsonl").open("x") as log:
+@@ -266,7 +269,16 @@
+                     raise ValueError("actual 32E direct KML evidence missing")
+                 if reference_steps:
+                     pinned = reference_steps[(step-1) % 5]
+-                    trace_matches = logical == pinned["kml_calls"] and shapes == pinned["native_shapes"]
++                    expected_shapes = dict(pinned["native_shapes"])
++                    expected_calls = pinned["kml_calls"]
++                    if args.arm == "B":
++                        for width, inputs in ((1536,512),(512,512),(2048,512),(512,2048)):
++                            key = str((101,111,112,batch*928,width,inputs,1.0,inputs,inputs,1.0,width))
++                            if expected_shapes[key] != 24:
++                                raise ValueError("unexpected checkpointed forward multiplicity")
++                            expected_shapes[key] -= 12
++                        expected_calls -= 48
++                    trace_matches = logical == expected_calls and shapes == expected_shapes
+                     if not trace_matches:
+                         result["bad_native"] = dict(step=step, role=role, shapes=dict(shapes), logical=logical)
+                         raise ValueError("native trace differs from frozen 32E DDR reference")
+--- a/prepare.py
++++ b/prepare.py
+@@ -30,7 +30,7 @@
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+     need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/wujunyi/opt/stage4_sessions/S00")
+-         and root.name.startswith("STEP_AB_R1_") and binding["user_authorized"] is True,
++         and root.name.startswith("AGGRESSIVE3H_20261111_R5_") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+     need(sha(root / "FULL16_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"

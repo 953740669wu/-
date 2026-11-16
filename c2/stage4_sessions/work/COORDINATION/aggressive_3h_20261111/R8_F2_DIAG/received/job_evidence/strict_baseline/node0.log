@@ -1,0 +1,28 @@
+hbm_alloc: arena 3800 MB on node 16, requests >= 256 KB
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+Timeout (0:00:30)!
+Thread 0x0000400025b232a0 (most recent call first):
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/functional.py", line 6410 in multi_head_attention_forward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/activation.py", line 1373 in forward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1762 in _call_impl
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1751 in _wrapped_call_impl
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py", line 928 in _sa_block
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py", line 907 in forward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/utils/checkpoint.py", line 495 in checkpoint
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_dynamo/eval_frame.py", line 838 in _fn
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_compile.py", line 51 in inner
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F2_DIAG/payload/checkpoint_layers.py", line 9 in <lambda>
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1762 in _call_impl
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1751 in _wrapped_call_impl
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py", line 514 in forward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1762 in _call_impl
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1751 in _wrapped_call_impl
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F2_DIAG/payload/baseline/s4_models.py", line 105 in forward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1805 in inner
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1857 in _call_impl
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1751 in _wrapped_call_impl
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F2_DIAG/payload/engineering_training.py", line 27 in losses
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F2_DIAG/payload/engineering_training.py", line 37 in train_step
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F2_DIAG/payload/worker.py", line 283 in run
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F2_DIAG/payload/worker.py", line 383 in <module>

@@ -1,0 +1,158 @@
+--- a/launch.py
++++ b/launch.py
+@@ -334,13 +334,13 @@
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        cert = binding["mode"] == "hbm_lib_cert"
++        cert = False
+         count = binding["domain_count"]
+-        need((cert and count == 1 or binding["mode"] == "bf16_bq16" and count in (1,4))
+-             and 120 < wall <= (1800 if count == 1 else 7200), "wrong wall or mode")
++        need(binding["mode"] == "relu_reuse_ab" and count == 1
++             and 120 < wall <= 1800, "wrong wall or mode")
+         need(binding["max_model_updates"] == 10*count + 50*count*binding["pairs"], "wrong update bound")
+         rounds = binding["pairs"]
+-        need(rounds == (0 if binding["domain_count"] == 1 else 3), "invalid pair plan")
++        need(rounds == 1, "one paired measurement only")
+         need(shutil.disk_usage(EVIDENCE).free >= binding["strict_storage_min_bytes"],
+              "insufficient private workspace free space for complete DDR references")
+         libc = ctypes.CDLL(None, use_errno=True)
+@@ -356,15 +356,14 @@
+                  "default/explicit ordering required")
+             check_rejections()
+         else:
+-            need(selections["baseline"] == selections["candidate"], "BF16 pair must use one HBM selection")
+-            build_attention(binding, end)
++            need(selections["baseline"] == selections["candidate"], "pair must use one HBM selection")
+         outcome["hbm_safety"] = "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS"
+         for variant in ("baseline","candidate"):
+             outcome["active_phase"] = f"strict_{variant}"
+             if cert or not placements:
+                 placements = prepare_hbm(ROOT, EVIDENCE, contracts,
+                                          dict(binding, **selections[variant]), end,
+-                                         variant if cert else "candidate")
++                                         "baseline")
+             phase("strict", variant, contracts, owner, binding, end, placements)
+             verify_return(placements, f"strict_{variant}")
+             outcome["steps"][f"strict_{variant}_each_domain"] = 5
+--- a/payload/checkpoint_layers.py
++++ b/payload/checkpoint_layers.py
+@@ -1,5 +1,9 @@
+-def enable_checkpoint(enc):
+-    """Same per-layer non-reentrant checkpoint wrapper as the frozen source."""
++def enable_checkpoint(enc, mode="full"):
++    """Keep attention activations and recompute only FFN in the candidate."""
+     from torch.utils.checkpoint import checkpoint
++    if mode not in ("full", "ffn"):
++        raise ValueError("unknown checkpoint scope")
++    attribute = "forward" if mode == "full" else "_ff_block"
+     for layer in enc.tf.layers:
+-        layer.forward = lambda *a, _f=layer.forward, **k: checkpoint(_f, *a, use_reentrant=False, **k)
++        original = getattr(layer, attribute)
++        setattr(layer, attribute, lambda *a, _f=original, **k: checkpoint(_f, *a, use_reentrant=False, **k))
+--- a/payload/ffn_relu_reuse.py
++++ b/payload/ffn_relu_reuse.py
+@@ -0,0 +1,49 @@
++"""Reuse the fresh first FFN projection buffer in the fixed CPU KML Encoder."""
++from types import MethodType
++
++import torch
++import torch.nn.functional as F
++
++import kml_ops
++
++calls = 0
++
++
++class _Projection2D(torch.autograd.Function):
++    @staticmethod
++    def forward(ctx, x, w, b):
++        # Match the original KML linear's input layout, bias and GEMM arguments.
++        shape = x.shape
++        x2 = x.reshape(-1, shape[-1]).to(kml_ops.LINEAR_DTYPE).contiguous()
++        wc = w.to(kml_ops.LINEAR_DTYPE).contiguous()
++        y = b.float().expand(x2.shape[0], w.shape[0]).contiguous()
++        kml_ops.gemm(x2, wc, tb=True, out=y, beta=1.0)
++        ctx.save_for_backward(x2, wc)
++        ctx.sh, ctx.hasb = shape, True
++        return y
++
++    @staticmethod
++    def backward(ctx, grad):
++        return kml_ops._LinearFn.backward(ctx, grad)
++
++
++def _ff_block(layer, x):
++    global calls
++    if x.device.type != "cpu" or x.dtype != torch.float32 or x.shape[-2:] != (928,512) or x.numel()<2**16:
++        raise ValueError("candidate requires the frozen CPU KML Encoder inputs")
++    projection = _Projection2D.apply(x, layer.linear1.weight, layer.linear1.bias)
++    activated = torch.relu_(projection).view(*x.shape[:-1], layer.linear1.out_features)
++    calls += 1
++    return layer.dropout2(layer.linear2(layer.dropout(activated)))
++
++
++def install(model):
++    if kml_ops._lib is None or kml_ops.LINEAR_DTYPE != torch.float32 or len(model.tf.layers) != 12:
++        raise ValueError("frozen 12-layer fp32 KML Encoder required")
++    for layer in model.tf.layers:
++        first = layer.linear1
++        if (type(layer) is not torch.nn.TransformerEncoderLayer or layer.activation is not F.relu
++                or type(first) is not torch.nn.Linear or first.bias is None
++                or (first.in_features, first.out_features) != (512,2048)):
++            raise ValueError("original FFN contract changed")
++        layer._ff_block = MethodType(_ff_block, layer)
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -184,6 +184,10 @@
+         opts[role] = training.optimizer(torch, model)
+         if sum(p.numel() for p in model.parameters()) != 37995777 or len(model.tf.layers) != 12:
+             raise ValueError("original full Encoder dimensions differ")
++    relu_reuse = None
++    if args.variant == "candidate":
++        import ffn_relu_reuse as relu_reuse
++        relu_reuse.install(models[args.variant])
+     initial = {n: p.detach().clone() for n, p in models[args.variant].named_parameters()} if strict else None
+     order = list(range(800))
+     random.Random(0).shuffle(order)
+@@ -217,7 +221,8 @@
+         if len(reference_steps) != 5:
+             raise ValueError("frozen strict reference incomplete")
+     result["pairing_sha256"] = hashlib.sha256(json.dumps(pairing,sort_keys=True).encode()).hexdigest()
+-    enable_checkpoint(models[args.variant])
++    enable_checkpoint(models[args.variant], "ffn")
++    result["checkpoint_scope"] = "ffn"
+     result["checkpoint_layers"] = ckpt_layers
+     residency(args.output, "initialized")
+     with (args.output / "steps.jsonl").open("x") as log:
+@@ -258,6 +263,7 @@
+                 inventory = SavedStorage(model, values[role]) if (
+                     strict and step == 1 and os.environ.get("S09_INVENTORY") == "1") else None
+                 hooks = torch.autograd.graph.saved_tensors_hooks(inventory.pack, inventory.unpack) if inventory else nullcontext()
++                relu_before = relu_reuse.calls if relu_reuse else 0
+                 attn_before = dict(attention.counts) if attention else None
+                 begin = time.monotonic_ns()
+                 try:
+@@ -273,6 +279,10 @@
+                     dispatch = {k: v-attn_before[k] for k,v in attention.counts.items()}
+                     if dispatch["forward"] < ckpt_layers or dispatch["backward"] != ckpt_layers:
+                         raise RuntimeError("incomplete actual fused dispatch in model update: " + repr(dispatch))
++                if relu_reuse:
++                    if relu_reuse.calls - relu_before != 24:
++                        raise ValueError("ReLU reuse must run for all 12 layers plus checkpoint recomputation")
++                    result["relu_reuse_calls"] = relu_reuse.calls
+                 training.validate_update(torch, model, opts[role], values[role], step)
+                 actual_huge = rss_after["hugetlb_bytes"]
+                 if (not hbm and actual_huge != 0) or (hbm and not 0 < actual_huge <= hbm["cap_MiB"]*2**20):
+--- a/prepare.py
++++ b/prepare.py
+@@ -30,7 +30,7 @@
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+     need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/wujunyi/opt/stage4_sessions/S00")
+-         and root.name.startswith("HBM_CERT_20261111_") and binding["user_authorized"] is True,
++         and root.name.startswith("AGGRESSIVE3H_20261111_") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+     need(sha(root / "FULL16_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"

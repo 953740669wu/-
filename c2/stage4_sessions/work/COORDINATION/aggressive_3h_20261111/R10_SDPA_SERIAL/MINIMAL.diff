@@ -1,0 +1,33 @@
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -145,6 +145,19 @@
+         namespace_probe = attention.locking_namespace
+         result["attention"] = dict(build=attention.identity, counts=attention.counts, bf16=1, bq=16, locking_namespace=attention.namespace,
+                                    shim_guard_present=attention.sm_guard is not None, fallback="prohibited")
++    original_sdpa = torch.nn.functional.scaled_dot_product_attention
++    result["sdpa_thread_cap"] = dict(inside=1, outside=36, calls=0)
++    def serial_sdpa(*a, **k):
++        if torch.get_num_threads() != 36:
++            raise RuntimeError("unexpected outside SDPA thread count")
++        torch.set_num_threads(1)
++        try:
++            answer = original_sdpa(*a, **k)
++            result["sdpa_thread_cap"]["calls"] += 1
++            return answer
++        finally:
++            torch.set_num_threads(36)
++    torch.nn.functional.scaled_dot_product_attention = serial_sdpa
+     module = sys.modules["kml_ops"]
+     if data.sha(module.__file__) != BASELINE or module.LINEAR_DTYPE != torch.float32:
+         raise ValueError("wrong original baseline or dtype")
+@@ -350,6 +363,10 @@
+     data.load_descriptor(args.descriptor, args.descriptor_sha)
+     result["final_model_sha256"] = {role: training.model_sha(model) for role, model in models.items()}
+     if strict:
++        historical = "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
++        result["historical_original_model5_exact"] = all(v == historical for v in result["final_model_sha256"].values())
++        if not result["historical_original_model5_exact"]:
++            raise ValueError("five-step model differs from archived original R1_F1 baseline")
+         residency(args.output, "strict_end")
+     if attention:
+         attention.check_maps()

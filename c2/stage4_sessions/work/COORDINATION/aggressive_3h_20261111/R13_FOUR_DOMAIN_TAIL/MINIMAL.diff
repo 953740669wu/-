@@ -1,0 +1,24 @@
+--- a/launch.py
++++ b/launch.py
+@@ -342,7 +342,7 @@
+         deadline = START + wall - 30
+         cert = False
+         count = binding["domain_count"]
+-        need(binding["mode"] == "checkpoint_tail_skip_ab" and count == 1
++        need(binding["mode"] == "checkpoint_tail_skip_ab" and count == 4
+              and 120 < wall <= 1800, "wrong wall or mode")
+         need(binding["max_model_updates"] == 10*count + 50*count*binding["pairs"], "wrong update bound")
+         rounds = binding["pairs"]
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -350,6 +350,10 @@
+     data.load_descriptor(args.descriptor, args.descriptor_sha)
+     result["final_model_sha256"] = {role: training.model_sha(model) for role, model in models.items()}
+     if strict:
++        expected_model5 = "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
++        if any(v != expected_model5 for v in result["final_model_sha256"].values()):
++            raise ValueError("historical original model5 SHA differs")
++        result["historical_original_model5_exact"] = True
+         residency(args.output, "strict_end")
+     if attention:
+         attention.check_maps()

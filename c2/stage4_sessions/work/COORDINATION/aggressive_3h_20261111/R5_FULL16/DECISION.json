@@ -1,0 +1,53 @@
+{
+  "decision": "REJECTED_FOR_FULL16",
+  "version": "R5_FULL16",
+  "job_id": "2088138",
+  "comparison": {
+    "throughput_change_pct": -24.468085106382976,
+    "delta_frames_s": -11.04,
+    "per_domain_delta_frames_s": {
+      "0": -0.7999999999999998,
+      "1": -0.7466666666666666,
+      "2": -0.6400000000000001,
+      "3": -0.6933333333333329,
+      "4": -0.21333333333333337,
+      "5": -0.6933333333333334,
+      "6": -0.7466666666666666,
+      "7": -0.6399999999999997,
+      "8": -0.6933333333333334,
+      "9": -0.7466666666666666,
+      "10": -0.7466666666666666,
+      "11": -0.7466666666666666,
+      "12": -0.7466666666666666,
+      "13": -0.7466666666666666,
+      "14": -0.7466666666666666,
+      "15": -0.6933333333333334
+    }
+  },
+  "fixed_window_seconds": 600,
+  "baseline": {
+    "configuration": "HBM3800/min256/full checkpoint/16xCPU36",
+    "frame_visits": 27072,
+    "frames_s": 45.12
+  },
+  "candidate": {
+    "configuration": "HBM3800/min256/CKPT0/16xCPU36",
+    "frame_visits": 20448,
+    "frames_s": 34.08
+  },
+  "numerical_scope": "480 first-five-step frozen-reference loss comparisons passed across both arms and all16 domains; complete single-domain state equivalence inherited from R1_F1 and R3_THREEWAY, not a repeated full16 state comparison.",
+  "memory_MiB": {
+    "A": [
+      3719.6015625,
+      3725.5625
+    ],
+    "B": [
+      10498.6953125,
+      10561.2890625
+    ]
+  },
+  "interpretation": "All16 domains regress. Domain4 accounts for -0.2133 fps and other15 for -10.8267 fps. Increased activation/DDR footprint is the working explanation, not hardware-counter attribution.",
+  "keep": "Full16 keeps full-layer checkpoint; single-domain R3 CKPT0 adoption remains scoped to single domain.",
+  "next": "R8 tail-replay skip retains full checkpoint and avoids extra cached activations; original numerical gate first.",
+  "cleanup_passed": true
+}

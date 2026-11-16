@@ -1,0 +1,15 @@
+--- a/launch.py
++++ b/launch.py
+@@ -219,6 +219,12 @@
+             if all(code == 0 for code in codes.values()):
+                 save(out / "exit_codes.json", codes)
+                 break
++            if name == "strict" and variant == "baseline" and step == 2:
++                released = read(barriers / "1.release")["release_at_ns"] / 1e9
++                if now - released > 90 and any(
++                    (out / f"node{n}" / "steps.jsonl").stat().st_size == 0 for n in proc
++                ):
++                    raise TimeoutError("baseline first update exceeded 90 seconds; candidate not reached")
+             if now >= deadline:
+                 raise TimeoutError(name + " shared deadline")
+             if now - sampled_at >= 5:

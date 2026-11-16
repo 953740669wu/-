@@ -1,0 +1,30 @@
+{
+  "version": "R8_F3_PASSIVE",
+  "job_id": "2088615",
+  "decision": "REJECT_PASSIVE_WAIT_NO_RESOLUTION",
+  "tail_candidate_status": "NOT_REACHED",
+  "numerical_decision": "NOT_EVALUATED",
+  "completed_updates": 0,
+  "charged_updates": 1,
+  "allocation_seconds": 117,
+  "queue_seconds": 1,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "inter_native_gaps_seconds": [
+    0.012935884,
+    30.011196015,
+    0.007568788,
+    0.015190466,
+    0.008347387,
+    29.993655538,
+    0.006951571,
+    0.014886076,
+    0.008456101,
+    29.996569429,
+    0.007547871,
+    0.015239133,
+    0.009629738
+  ],
+  "reason": "OMP_WAIT_POLICY=PASSIVE/GOMP_SPINCOUNT=0/KMP_BLOCKTIME=0 did not remove approximately 30-second SDPA intervals. Baseline first update hit 90-second protection. Do not retain ineffective runtime policy.",
+  "next": "R9_FFN_TAIL: original accepted FFN-only checkpoint baseline; attention outside checkpoint; candidate removes unused FFN2 replay. Default wait policy, original precision gates."
+}

@@ -1,0 +1,15 @@
+{
+  "version": "R8_F1_TAIL_SKIP",
+  "job_id": "2088586",
+  "decision": "BASELINE_FIRST_UPDATE_WATCHDOG_CANDIDATE_NOT_REACHED",
+  "numerical_decision": "NOT_EVALUATED",
+  "performance_decision": "NOT_EVALUATED",
+  "completed_updates": 0,
+  "charged_updates": 1,
+  "allocation_seconds": 118,
+  "queue_seconds": 0,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "reason": "Original full-checkpoint baseline still did not complete first step on cn22035; 90-second watchdog worked. Host-only explanation unsupported; exact operator unresolved.",
+  "next": "R8_F2_DIAG adds first-step native entry/exit and 30-second traceback; original math and precision gates unchanged."
+}

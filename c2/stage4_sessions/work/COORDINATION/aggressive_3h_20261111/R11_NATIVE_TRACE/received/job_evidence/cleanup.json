@@ -1,0 +1,27 @@
+{
+  "actions": [
+    {
+      "at": 992630.049115869,
+      "pid": 2975417,
+      "signal": "TERM",
+      "start_ticks": 99252207
+    }
+  ],
+  "all_reaped": true,
+  "deadline": 992658.351331793,
+  "finished": 992632.627292642,
+  "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+  "owned": {
+    "2975417": 99252207
+  },
+  "reaped": [
+    {
+      "exit_code": -15,
+      "pid": 2975417,
+      "wait_status": 15
+    }
+  ],
+  "remaining_live": [],
+  "remaining_processes": [],
+  "started": 992628.351339953
+}

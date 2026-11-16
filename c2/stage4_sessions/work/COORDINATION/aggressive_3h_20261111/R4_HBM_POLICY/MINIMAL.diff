@@ -1,0 +1,110 @@
+--- a/launch.py
++++ b/launch.py
+@@ -194,7 +194,7 @@
+         cfg = placements[node]
+         need((free_pages(cfg["hbm_node"])-16)*2 >= cfg["cap_MiB"], "HBM pool became smaller after capacity gate")
+         env.update(M23_HBM_LIBRARY=cfg["library"], M23_HBM_LIBRARY_SHA=cfg["library_sha256"],
+-                   HBM_NODE=str(cfg["hbm_node"]), HBM_MB=str(cfg["cap_MiB"]), HBM_MIN_KB="256", HBM_STATS="1")
++                   HBM_NODE=str(cfg["hbm_node"]), HBM_MB=str(cfg["cap_MiB"]), HBM_MIN_KB="256" if variant == "baseline" else "8192", HBM_STATS="1")
+         requested = binding["hbm_selections"][variant]["HBM_LIB"]
+         if requested is not None:
+             env["HBM_LIB"] = requested
+@@ -334,13 +334,13 @@
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        cert = binding["mode"] == "hbm_lib_cert"
++        cert = False
+         count = binding["domain_count"]
+-        need((cert and count == 1 or binding["mode"] == "bf16_bq16" and count in (1,4))
+-             and 120 < wall <= (1800 if count == 1 else 7200), "wrong wall or mode")
++        need(binding["mode"] == "hbm_large_activation_priority" and count == 1
++             and 120 < wall <= 1800, "wrong wall or mode")
+         need(binding["max_model_updates"] == 10*count + 50*count*binding["pairs"], "wrong update bound")
+         rounds = binding["pairs"]
+-        need(rounds == (0 if binding["domain_count"] == 1 else 3), "invalid pair plan")
++        need(rounds == 1, "one paired measurement only")
+         need(shutil.disk_usage(EVIDENCE).free >= binding["strict_storage_min_bytes"],
+              "insufficient private workspace free space for complete DDR references")
+         libc = ctypes.CDLL(None, use_errno=True)
+@@ -356,15 +356,14 @@
+                  "default/explicit ordering required")
+             check_rejections()
+         else:
+-            need(selections["baseline"] == selections["candidate"], "BF16 pair must use one HBM selection")
+-            build_attention(binding, end)
++            need(selections["baseline"] == selections["candidate"], "pair must use one HBM selection")
+         outcome["hbm_safety"] = "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS"
+         for variant in ("baseline","candidate"):
+             outcome["active_phase"] = f"strict_{variant}"
+             if cert or not placements:
+                 placements = prepare_hbm(ROOT, EVIDENCE, contracts,
+                                          dict(binding, **selections[variant]), end,
+-                                         variant if cert else "candidate")
++                                         "baseline")
+             phase("strict", variant, contracts, owner, binding, end, placements)
+             verify_return(placements, f"strict_{variant}")
+             outcome["steps"][f"strict_{variant}_each_domain"] = 5
+@@ -375,7 +374,7 @@
+             if end-time.monotonic() < estimate*(rounds-run+1):
+                 raise TimeoutError("remaining wall cannot fit all complete paired rounds and cleanup")
+             t0 = time.monotonic()
+-            order = ("baseline","candidate") if run % 2 else ("candidate","baseline")
++            order = ("candidate","baseline")
+             for variant in order:
+                 label = f"perf_{variant}_r{run}"
+                 outcome["active_phase"] = label
+--- a/payload/checkpoint_layers.py
++++ b/payload/checkpoint_layers.py
+@@ -1,5 +1,9 @@
+-def enable_checkpoint(enc):
+-    """Same per-layer non-reentrant checkpoint wrapper as the frozen source."""
++def enable_checkpoint(enc, mode="full"):
++    """Keep attention activations and recompute only FFN in the candidate."""
+     from torch.utils.checkpoint import checkpoint
++    if mode not in ("full", "ffn"):
++        raise ValueError("unknown checkpoint scope")
++    attribute = "forward" if mode == "full" else "_ff_block"
+     for layer in enc.tf.layers:
+-        layer.forward = lambda *a, _f=layer.forward, **k: checkpoint(_f, *a, use_reentrant=False, **k)
++        original = getattr(layer, attribute)
++        setattr(layer, attribute, lambda *a, _f=original, **k: checkpoint(_f, *a, use_reentrant=False, **k))
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -107,7 +107,7 @@
+     planned = 5 if strict else 25
+     batch = int(os.environ["S00_BATCH"])
+     ckpt_layers = int(os.environ["S00_MATCHED_CKPT"])
+-    if batch not in (32,64) or ckpt_layers != 12:
++    if batch != 32 or ckpt_layers != 0:
+         raise ValueError("expected a dependency-bound B32 or B64 with CKPT12")
+     expected_cpu = json.loads(args.allocation.read_bytes())["receipt"]["selected"]
+     guard = result["cpu36"] = {}
+@@ -133,6 +133,7 @@
+                    cap_MiB=int(os.environ["HBM_MB"]))
+     elif paths or os.environ.get("HBM_NODE"):
+         raise ValueError("unexpected allocator in DDR worker")
++    hbm["min_request_KiB"] = int(os.environ["HBM_MIN_KB"])
+     result["hbm_allocator"] = hbm
+     runtime_check(runtime, hbm)
+     attention = namespace_probe = None
+@@ -217,7 +218,7 @@
+         if len(reference_steps) != 5:
+             raise ValueError("frozen strict reference incomplete")
+     result["pairing_sha256"] = hashlib.sha256(json.dumps(pairing,sort_keys=True).encode()).hexdigest()
+-    enable_checkpoint(models[args.variant])
++    result["checkpoint_scope"] = "none"
+     result["checkpoint_layers"] = ckpt_layers
+     residency(args.output, "initialized")
+     with (args.output / "steps.jsonl").open("x") as log:
+--- a/prepare.py
++++ b/prepare.py
+@@ -30,7 +30,7 @@
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+     need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/wujunyi/opt/stage4_sessions/S00")
+-         and root.name.startswith("HBM_CERT_20261111_") and binding["user_authorized"] is True,
++         and root.name.startswith("AGGRESSIVE3H_20261111_") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+     need(sha(root / "FULL16_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"

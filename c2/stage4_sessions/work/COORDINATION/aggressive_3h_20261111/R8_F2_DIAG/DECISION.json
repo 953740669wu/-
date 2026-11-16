@@ -1,0 +1,33 @@
+{
+  "version": "R8_F2_DIAG",
+  "job_id": "2088597",
+  "decision": "DIAGNOSED_BASELINE_SDPA_LONG_WAIT_CANDIDATE_NOT_REACHED",
+  "numerical_decision": "NOT_EVALUATED",
+  "performance_decision": "NOT_EVALUATED",
+  "completed_updates": 0,
+  "charged_updates": 1,
+  "allocation_seconds": 117,
+  "queue_seconds": 0,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "completed_native_calls": 14,
+  "native_call_max_seconds": 0.012442354,
+  "inter_native_gaps_seconds": [
+    0.012444446,
+    30.01016693,
+    0.007197339,
+    0.014955071,
+    0.007797463,
+    29.980243028,
+    0.006482667,
+    0.014662252,
+    0.007795511,
+    30.025513131,
+    0.006641843,
+    0.014700041,
+    0.008019067
+  ],
+  "traceback_location": "torch.nn.functional.multi_head_attention_forward:6410 scaled_dot_product_attention; first layer original checkpoint forward",
+  "reason": "Baseline advanced about one layer every 30 seconds; not a complete deadlock. Native KML calls were short. Host-only explanation unsupported. Thread-wait contention is a hypothesis pending next experiment.",
+  "next": "R8_F3_PASSIVE uses OMP_WAIT_POLICY=PASSIVE/GOMP_SPINCOUNT=0/KMP_BLOCKTIME=0 in both arms, retaining 90-second first-step watchdog and strict gates."
+}

@@ -1,0 +1,24 @@
+{
+  "decision": "PROVISIONALLY_ADOPTED",
+  "job_id": "2087424",
+  "scope": "cn22036 single domain CPU36 real32 B32 FP32 original SDPA S03 HBM3800; FFN-only checkpoint on all 12 layers",
+  "precision": "original gates unchanged; 3880 numerical records zero and 765 exact AdamW step checks; strict5 and perf25 final model SHA equal",
+  "median_step_seconds": {
+    "baseline": 6.9554219905,
+    "candidate": 6.520879432
+  },
+  "step_time_reduction_pct": 6.249846349039245,
+  "throughput_frames_s": {
+    "baseline": 4.600227288264183,
+    "candidate": 4.90690106534779
+  },
+  "memory_estimate_MiB": {
+    "baseline": 3719.44921875,
+    "candidate": 8063.59765625
+  },
+  "risk": "single A then B pair only; no long-term/full-node stability confirmation; extra DDR activation storage",
+  "source_binding": "R1_F1/RUN_BINDING.json",
+  "install": "enable_checkpoint(model, \"ffn\") using R1_F1 received/payload/checkpoint_layers.py",
+  "rollback": "same module enable_checkpoint(model, \"full\") before first forward; recreate model to change installed wrappers",
+  "next": "R2_STACK tests same FFN baseline versus FFN plus fresh-buffer ReLU; original R2 unlaunched and superseded"
+}

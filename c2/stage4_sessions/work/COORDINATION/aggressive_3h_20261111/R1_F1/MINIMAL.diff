@@ -1,0 +1,96 @@
+--- a/launch.py
++++ b/launch.py
+@@ -334,13 +334,13 @@
+         binding = verify(ROOT, pin)
+         wall = binding["wall_seconds"]
+         deadline = START + wall - 30
+-        cert = binding["mode"] == "hbm_lib_cert"
++        cert = False
+         count = binding["domain_count"]
+-        need((cert and count == 1 or binding["mode"] == "bf16_bq16" and count in (1,4))
+-             and 120 < wall <= (1800 if count == 1 else 7200), "wrong wall or mode")
++        need(binding["mode"] == "ffn_checkpoint_ab" and count == 1
++             and 120 < wall <= 1800, "wrong wall or mode")
+         need(binding["max_model_updates"] == 10*count + 50*count*binding["pairs"], "wrong update bound")
+         rounds = binding["pairs"]
+-        need(rounds == (0 if binding["domain_count"] == 1 else 3), "invalid pair plan")
++        need(rounds == 1, "one paired measurement only")
+         need(shutil.disk_usage(EVIDENCE).free >= binding["strict_storage_min_bytes"],
+              "insufficient private workspace free space for complete DDR references")
+         libc = ctypes.CDLL(None, use_errno=True)
+@@ -356,15 +356,14 @@
+                  "default/explicit ordering required")
+             check_rejections()
+         else:
+-            need(selections["baseline"] == selections["candidate"], "BF16 pair must use one HBM selection")
+-            build_attention(binding, end)
++            need(selections["baseline"] == selections["candidate"], "pair must use one HBM selection")
+         outcome["hbm_safety"] = "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS"
+         for variant in ("baseline","candidate"):
+             outcome["active_phase"] = f"strict_{variant}"
+             if cert or not placements:
+                 placements = prepare_hbm(ROOT, EVIDENCE, contracts,
+                                          dict(binding, **selections[variant]), end,
+-                                         variant if cert else "candidate")
++                                         "baseline")
+             phase("strict", variant, contracts, owner, binding, end, placements)
+             verify_return(placements, f"strict_{variant}")
+             outcome["steps"][f"strict_{variant}_each_domain"] = 5
+--- a/payload/checkpoint_layers.py
++++ b/payload/checkpoint_layers.py
+@@ -1,5 +1,9 @@
+-def enable_checkpoint(enc):
+-    """Same per-layer non-reentrant checkpoint wrapper as the frozen source."""
++def enable_checkpoint(enc, mode="full"):
++    """Keep attention activations and recompute only FFN in the candidate."""
+     from torch.utils.checkpoint import checkpoint
++    if mode not in ("full", "ffn"):
++        raise ValueError("unknown checkpoint scope")
++    attribute = "forward" if mode == "full" else "_ff_block"
+     for layer in enc.tf.layers:
+-        layer.forward = lambda *a, _f=layer.forward, **k: checkpoint(_f, *a, use_reentrant=False, **k)
++        original = getattr(layer, attribute)
++        setattr(layer, attribute, lambda *a, _f=original, **k: checkpoint(_f, *a, use_reentrant=False, **k))
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -217,7 +217,9 @@
+         if len(reference_steps) != 5:
+             raise ValueError("frozen strict reference incomplete")
+     result["pairing_sha256"] = hashlib.sha256(json.dumps(pairing,sort_keys=True).encode()).hexdigest()
+-    enable_checkpoint(models[args.variant])
++    scope = "ffn" if args.variant == "candidate" else "full"
++    enable_checkpoint(models[args.variant], scope)
++    result["checkpoint_scope"] = scope
+     result["checkpoint_layers"] = ckpt_layers
+     residency(args.output, "initialized")
+     with (args.output / "steps.jsonl").open("x") as log:
+@@ -284,7 +286,17 @@
+                     raise ValueError("actual 32E direct KML evidence missing")
+                 if reference_steps:
+                     pinned = reference_steps[(step-1) % 5]
+-                    trace_matches = logical == pinned["kml_calls"] and shapes == pinned["native_shapes"]
++                    expected_shapes = dict(pinned["native_shapes"])
++                    expected_calls = pinned["kml_calls"]
++                    if scope == "ffn":
++                        # Only the QKV and attention output forward GEMMs stop being recomputed.
++                        for width in (1536, 512):
++                            key = str((101, 111, 112, batch*928, width, 512, 1.0, 512, 512, 1.0, width))
++                            if expected_shapes[key] != 24:
++                                raise ValueError("unexpected frozen attention forward multiplicity")
++                            expected_shapes[key] -= 12
++                        expected_calls -= 24
++                    trace_matches = logical == expected_calls and shapes == expected_shapes
+                     if not trace_matches:
+                         result["bad_native"] = dict(step=step, role=role, shapes=dict(shapes), logical=logical)
+                         raise ValueError("native trace differs from same-job 32E DDR")
+--- a/prepare.py
++++ b/prepare.py
+@@ -30,7 +30,7 @@
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+     need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/wujunyi/opt/stage4_sessions/S00")
+-         and root.name.startswith("HBM_CERT_20261111_") and binding["user_authorized"] is True,
++         and root.name.startswith("AGGRESSIVE3H_20261111_") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+     need(sha(root / "FULL16_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"

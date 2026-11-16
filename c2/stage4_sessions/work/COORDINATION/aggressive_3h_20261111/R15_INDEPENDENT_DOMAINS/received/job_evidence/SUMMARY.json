@@ -1,0 +1,11 @@
+{
+  "error": "InterruptedError('native signal 14')",
+  "finished": 994167.896999498,
+  "hbm_pool_restored": true,
+  "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+  "job_id": "2088845",
+  "start": 993556.663628774,
+  "status": "FAIL_STOP",
+  "steps": {},
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/launch.py\", line 414, in main\n    owner.update(process_table())\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/owned_processes.py\", line 12, in process_table\n    for p in Path('/proc').glob('[0-9]*/stat'):\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1177, in glob\n    for p in selector.select_from(self):\n  File \"/usr/lib64/python3.9/pathlib.py\", line 575, in _select_from\n    for p in self.successor._select_from(path, is_dir, exists, scandir):\n  File \"/usr/lib64/python3.9/pathlib.py\", line 543, in _select_from\n    if (is_dir if self.dironly else exists)(path):\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1424, in exists\n    self.stat()\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1232, in stat\n    return self._accessor.stat(self)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/launch.py\", line 323, in stop\n    raise InterruptedError(\"native signal \" + str(signum))\nInterruptedError: native signal 14\n"
+}

@@ -1,0 +1,36 @@
+{
+  "decision": "REJECTED_NO_SPEED_GAIN",
+  "version": "R4_HBM_POLICY",
+  "job_id": "2088005",
+  "checkpoint_scope": "none",
+  "hbm_min_request_KiB": 8192,
+  "comparison": {
+    "sample_median_s": {
+      "baseline": 6.221891365,
+      "candidate": 6.66618052,
+      "candidate_change_pct": 7.140741117713167
+    },
+    "sample_total_s": {
+      "baseline": 124.43718963500001,
+      "candidate": 133.042453598,
+      "candidate_change_pct": 6.915347403972261
+    },
+    "all_steps_total_s": {
+      "baseline": 155.96373339599998,
+      "candidate": 166.58535612799997,
+      "candidate_change_pct": 6.810315770674169
+    },
+    "observed_peak_estimate_MiB": {
+      "baseline": 10497.55078125,
+      "candidate": 10431.4296875,
+      "candidate_change_pct": -0.6298716255614734
+    }
+  },
+  "reason": "Numerical gate passes and final models match, but 20-step total time increases 6.915%; only 66MiB memory saved.",
+  "keep": "R3_THREEWAY HBM_MIN_KB=256, CKPT0",
+  "performance_order": [
+    "candidate",
+    "baseline"
+  ],
+  "long_term_stability": "not retested per user authorization"
+}

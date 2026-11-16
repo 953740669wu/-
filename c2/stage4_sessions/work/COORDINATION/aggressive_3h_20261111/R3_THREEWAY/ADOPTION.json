@@ -1,0 +1,113 @@
+{
+  "decision": "PROVISIONALLY_ADOPTED",
+  "version": "R3_THREEWAY",
+  "job_id": "2087708",
+  "checkpoint_scope": "none",
+  "hbm_min_request_KiB": 256,
+  "scope": "single domain cn22036 CPU36 real32 B32 FP32 original KML/SDPA, S03 HBM3800, CKPT0",
+  "reference": "original DDR CKPT0 and prior adopted HBM FFN in the same allocation",
+  "comparison": {
+    "baseline_to_ckpt_hbm": {
+      "sample_total_s": {
+        "before": 167.96347950199998,
+        "after": 131.03379613599998,
+        "change_pct": -21.98673394686389
+      },
+      "sample_median_s": {
+        "before": 8.1593857415,
+        "after": 6.530113798,
+        "change_pct": -19.968071067081063
+      },
+      "all_steps_total_s": {
+        "before": 213.61548310299997,
+        "after": 164.21013497599998,
+        "change_pct": -23.128168150235616
+      },
+      "observed_peak_estimate_MiB": {
+        "before": 10503.1015625,
+        "after": 8060.17578125,
+        "change_pct": -23.259089391005784
+      },
+      "pure_training_frames_s": {
+        "before": 3.810352118791272,
+        "after": 4.884236119785037,
+        "change_pct": 28.183327091944044
+      },
+      "frames_s_with_interstep_checks": {
+        "before": 3.5686109608837464,
+        "after": 4.508468213882159,
+        "change_pct": 26.336780985665698
+      }
+    },
+    "baseline_to_candidate": {
+      "sample_total_s": {
+        "before": 167.96347950199998,
+        "after": 125.26279244400001,
+        "change_pct": -25.422602094577062
+      },
+      "sample_median_s": {
+        "before": 8.1593857415,
+        "after": 6.229316519999999,
+        "change_pct": -23.65458972828488
+      },
+      "all_steps_total_s": {
+        "before": 213.61548310299997,
+        "after": 156.91885499800003,
+        "change_pct": -26.541441323175185
+      },
+      "observed_peak_estimate_MiB": {
+        "before": 10503.1015625,
+        "after": 10496.44921875,
+        "change_pct": -0.06333694585750616
+      },
+      "pure_training_frames_s": {
+        "before": 3.810352118791272,
+        "after": 5.109258603556347,
+        "change_pct": 34.08888323888335
+      },
+      "frames_s_with_interstep_checks": {
+        "before": 3.5686109608837464,
+        "after": 4.74253245889449,
+        "change_pct": 32.89575442317278
+      }
+    },
+    "ckpt_hbm_to_candidate": {
+      "sample_total_s": {
+        "before": 131.03379613599998,
+        "after": 125.26279244400001,
+        "change_pct": -4.404210106231099
+      },
+      "sample_median_s": {
+        "before": 6.530113798,
+        "after": 6.229316519999999,
+        "change_pct": -4.606309894509453
+      },
+      "all_steps_total_s": {
+        "before": 164.21013497599998,
+        "after": 156.91885499800003,
+        "change_pct": -4.440213132438875
+      },
+      "observed_peak_estimate_MiB": {
+        "before": 8060.17578125,
+        "after": 10496.44921875,
+        "change_pct": 30.226058384078748
+      },
+      "pure_training_frames_s": {
+        "before": 4.884236119785037,
+        "after": 5.109258603556347,
+        "change_pct": 4.607117228829094
+      },
+      "frames_s_with_interstep_checks": {
+        "before": 4.508468213882159,
+        "after": 4.74253245889449,
+        "change_pct": 5.191657873767785
+      }
+    }
+  },
+  "precision": "Two five-step comparisons passed original gates, 7760 numerical records plus 1530 exact optimizer-step checks; all three final model hashes equal after strict5 and perf25",
+  "risk": "one fixed-order triple; DDR timing varied; full16 effect not yet tested; performance memory estimate 10.25GiB/domain",
+  "source_binding": "R3_THREEWAY/RUN_BINDING.json",
+  "install": "Original encoder without checkpoint wrappers; S03 HBM3800 and original FP32 KML. ReLU reuse remains rejected.",
+  "rollback": "R1_F1 FFN checkpoint for 7.87GiB/domain, or original whole-layer checkpoint for 3.63GiB/domain",
+  "next": "R4 large-activation HBM placement, then actual full16 comparison"
+}

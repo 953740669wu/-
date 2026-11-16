@@ -1,0 +1,18 @@
+{
+  "version": "R14_DOMAIN1_TAIL",
+  "job_id": "2088802",
+  "decision": "DOMAIN1_ONLY_BASELINE_STILL_SLOW",
+  "tail_candidate_status": "NOT_REACHED",
+  "numerical_decision": "NOT_EVALUATED",
+  "completed_updates": 0,
+  "charged_updates": 1,
+  "allocation_seconds": 114,
+  "queue_seconds": 2,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "native_allocated_cpus": 152,
+  "active_compute_cpus": 36,
+  "active_node": 1,
+  "reason": "Domain1 alone also hit 90-second first-step watchdog. R13 healthy domain1 cannot be treated as permanently healthy; concurrent work/resource state remains relevant and cause unresolved.",
+  "next": "R15_INDEPENDENT_DOMAINS gives each of four domains an independent strict5 -> strict5 -> paired perf15 lifecycle, retaining all failed domains. Original numerical gates unchanged; perf3warm12sample is explicitly new protocol."
+}

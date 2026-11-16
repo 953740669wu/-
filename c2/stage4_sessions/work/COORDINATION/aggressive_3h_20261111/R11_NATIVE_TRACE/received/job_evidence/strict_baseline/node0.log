@@ -1,0 +1,125 @@
+hbm_alloc: arena 3800 MB on node 16, requests >= 256 KB
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+NATIVE_SDPA_TRACE_BEGIN
+/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R11_NATIVE_TRACE/job_evidence/libnative_trace.so(+0x988)[0x400203920988]
+linux-vdso.so.1(__kernel_rt_sigreturn+0x0)[0x40003be9796c]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(Sleef_expf4_u10+0x30)[0x400048528050]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(+0x42e6f18)[0x400044eb6f18]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(+0x42e803c)[0x400044eb803c]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/../../torch.libs/libgomp-58a43326.so.1.0.0(GOMP_parallel+0xdc)[0x40004caea170]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(+0x4415fd4)[0x400044fe5fd4]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(+0x442dc0c)[0x400044ffdc0c]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(+0x44790fc)[0x4000450490fc]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(_ZN2at6native39_scaled_dot_product_flash_attention_cpuERKNS_6TensorES3_S3_dbRKSt8optionalIS1_ES4_IdE+0x370)[0x400042925460]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(+0x2481b94)[0x400043051b94]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(_ZN2at4_ops43_scaled_dot_product_flash_attention_for_cpu10redispatchEN3c1014DispatchKeySetERKNS_6TensorES6_S6_dbRKSt8optionalIS4_ES7_IdE+0xd0)[0x400042b75280]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(+0x4bb8c94)[0x400045788c94]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(+0x4bb9358)[0x400045789358]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(_ZN2at4_ops43_scaled_dot_product_flash_attention_for_cpu4callERKNS_6TensorES4_S4_dbRKSt8optionalIS2_ES5_IdE+0x1f4)[0x400042c38104]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(_ZN2at6native28scaled_dot_product_attentionERKNS_6TensorES3_S3_RKSt8optionalIS1_EdbS4_IdEb+0x520)[0x400042923500]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(+0x27e11bc)[0x4000433b11bc]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_cpu.so(_ZN2at4_ops28scaled_dot_product_attention4callERKNS_6TensorES4_S4_RKSt8optionalIS2_EdbS5_IdEb+0x204)[0x400042dc2b74]
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/lib/libtorch_python.so(+0x5a3d60)[0x400040013d60]
+/usr/lib64/libpython3.9.so.1.0(+0xe6714)[0x40003c016714]
+/usr/lib64/libpython3.9.so.1.0(_PyObject_MakeTpCall+0x98)[0x40003bfd9258]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x6d70)[0x40003bf9ebd0]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x58a0)[0x40003bf9d700]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(+0xac20c)[0x40003bfdc20c]
+/usr/lib64/libpython3.9.so.1.0(PyVectorcall_Call+0xe4)[0x40003bfd8cf4]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x13c8)[0x40003bf99228]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(+0xac20c)[0x40003bfdc20c]
+/usr/lib64/libpython3.9.so.1.0(PyVectorcall_Call+0xe4)[0x40003bfd8cf4]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x13c8)[0x40003bf99228]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(_PyObject_FastCallDictTstate+0x120)[0x40003bfd94e0]
+/usr/lib64/libpython3.9.so.1.0(_PyObject_Call_Prepend+0x118)[0x40003bfd9748]
+/usr/lib64/libpython3.9.so.1.0(+0x107248)[0x40003c037248]
+/usr/lib64/libpython3.9.so.1.0(_PyObject_MakeTpCall+0x98)[0x40003bfd9258]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x6ff4)[0x40003bf9ee54]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(+0xac20c)[0x40003bfdc20c]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x58a0)[0x40003bf9d700]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(+0xac20c)[0x40003bfdc20c]
+/usr/lib64/libpython3.9.so.1.0(PyVectorcall_Call+0xe4)[0x40003bfd8cf4]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x13c8)[0x40003bf99228]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(PyVectorcall_Call+0xe4)[0x40003bfd8cf4]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x13c8)[0x40003bf99228]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(PyVectorcall_Call+0xe4)[0x40003bfd8cf4]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x13c8)[0x40003bf99228]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(PyVectorcall_Call+0xe4)[0x40003bfd8cf4]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x13c8)[0x40003bf99228]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(PyVectorcall_Call+0xe4)[0x40003bfd8cf4]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x13c8)[0x40003bf99228]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(+0xac20c)[0x40003bfdc20c]
+/usr/lib64/libpython3.9.so.1.0(PyVectorcall_Call+0xe4)[0x40003bfd8cf4]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x13c8)[0x40003bf99228]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(_PyObject_FastCallDictTstate+0x120)[0x40003bfd94e0]
+/usr/lib64/libpython3.9.so.1.0(_PyObject_Call_Prepend+0x118)[0x40003bfd9748]
+/usr/lib64/libpython3.9.so.1.0(+0x107248)[0x40003c037248]
+/usr/lib64/libpython3.9.so.1.0(_PyObject_MakeTpCall+0x98)[0x40003bfd9258]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x6ff4)[0x40003bf9ee54]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(+0xac164)[0x40003bfdc164]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x13c8)[0x40003bf99228]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(+0xac164)[0x40003bfdc164]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x13c8)[0x40003bf99228]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+/usr/lib64/libpython3.9.so.1.0(_PyObject_FastCallDictTstate+0x6c)[0x40003bfd942c]
+/usr/lib64/libpython3.9.so.1.0(_PyObject_Call_Prepend+0x118)[0x40003bfd9748]
+/usr/lib64/libpython3.9.so.1.0(+0x107248)[0x40003c037248]
+/usr/lib64/libpython3.9.so.1.0(_PyObject_MakeTpCall+0x98)[0x40003bfd9258]
+/usr/lib64/libpython3.9.so.1.0(_PyEval_EvalFrameDefault+0x8768)[0x40003bfa05c8]
+/usr/lib64/libpython3.9.so.1.0(+0x16f944)[0x40003c09f944]
+/usr/lib64/libpython3.9.so.1.0(_PyFunction_Vectorcall+0x94)[0x40003bfd8fd4]
+Timeout (0:00:30)!
+Thread 0x000040003bea82a0 (most recent call first):
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/functional.py", line 6410 in multi_head_attention_forward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/activation.py", line 1373 in forward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1762 in _call_impl
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1751 in _wrapped_call_impl
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py", line 928 in _sa_block
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py", line 907 in forward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/utils/checkpoint.py", line 495 in checkpoint
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_dynamo/eval_frame.py", line 838 in _fn
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_compile.py", line 51 in inner
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R11_NATIVE_TRACE/payload/checkpoint_layers.py", line 9 in <lambda>
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1762 in _call_impl
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1751 in _wrapped_call_impl
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py", line 514 in forward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1762 in _call_impl
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1751 in _wrapped_call_impl
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R11_NATIVE_TRACE/payload/baseline/s4_models.py", line 105 in forward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1805 in inner
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1857 in _call_impl
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1751 in _wrapped_call_impl
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R11_NATIVE_TRACE/payload/engineering_training.py", line 27 in losses
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R11_NATIVE_TRACE/payload/engineering_training.py", line 37 in train_step
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R11_NATIVE_TRACE/payload/worker.py", line 286 in run
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R11_NATIVE_TRACE/payload/worker.py", line 387 in <module>

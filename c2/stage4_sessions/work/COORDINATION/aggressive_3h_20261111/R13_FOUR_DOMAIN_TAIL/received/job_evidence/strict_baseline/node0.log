@@ -1,0 +1,53 @@
+hbm_alloc: arena 3800 MB on node 16, requests >= 256 KB
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R13_FOUR_DOMAIN_TAIL/payload/worker.py", line 387, in <module>
+    run(args, result)
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R13_FOUR_DOMAIN_TAIL/payload/worker.py", line 283, in run
+    loss = losses[role] = training.train_step(torch, model, opts[role], values[role], mask)
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R13_FOUR_DOMAIN_TAIL/payload/engineering_training.py", line 37, in train_step
+    total,voltage,coarse=losses(torch,model,v,image,angles,belt,mask)
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R13_FOUR_DOMAIN_TAIL/payload/engineering_training.py", line 27, in losses
+    h=model(v,angles,belt,mask)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1857, in _call_impl
+    return inner()
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1805, in inner
+    result = forward_call(*args, **kwargs)
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R13_FOUR_DOMAIN_TAIL/payload/baseline/s4_models.py", line 105, in forward
+    return self.tf(t)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py", line 514, in forward
+    output = mod(
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R13_FOUR_DOMAIN_TAIL/payload/checkpoint_layers.py", line 9, in <lambda>
+    setattr(layer, attribute, lambda *a, _f=original, **k: checkpoint(_f, *a, use_reentrant=False, **k))
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_compile.py", line 51, in inner
+    return disable_fn(*args, **kwargs)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_dynamo/eval_frame.py", line 838, in _fn
+    return fn(*args, **kwargs)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/utils/checkpoint.py", line 495, in checkpoint
+    ret = function(*args, **kwargs)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py", line 907, in forward
+    x = x + self._sa_block(
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py", line 928, in _sa_block
+    x = self.self_attn(
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/activation.py", line 1373, in forward
+    attn_output, attn_output_weights = F.multi_head_attention_forward(
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/functional.py", line 6410, in multi_head_attention_forward
+    attn_output = scaled_dot_product_attention(
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/utils/checkpoint.py", line 1100, in pack_hook
+    def pack_hook(x):
+KeyboardInterrupt

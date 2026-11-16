@@ -1,0 +1,509 @@
+{
+  "version": "R15_INDEPENDENT_DOMAINS",
+  "job_id": "2088845",
+  "native_state": "FAILED",
+  "archive_sha256": "20db7a40dac39587f9ef74f2835f1d97750129e5e2d5a8c9898e91feb4a28a99",
+  "verified_members": 796,
+  "summary": {
+    "error": "InterruptedError('native signal 14')",
+    "finished": 994167.896999498,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2088845",
+    "start": 993556.663628774,
+    "status": "FAIL_STOP",
+    "steps": {},
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/launch.py\", line 414, in main\n    owner.update(process_table())\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/owned_processes.py\", line 12, in process_table\n    for p in Path('/proc').glob('[0-9]*/stat'):\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1177, in glob\n    for p in selector.select_from(self):\n  File \"/usr/lib64/python3.9/pathlib.py\", line 575, in _select_from\n    for p in self.successor._select_from(path, is_dir, exists, scandir):\n  File \"/usr/lib64/python3.9/pathlib.py\", line 543, in _select_from\n    if (is_dir if self.dironly else exists)(path):\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1424, in exists\n    self.stat()\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1232, in stat\n    return self._accessor.stat(self)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/launch.py\", line 323, in stop\n    raise InterruptedError(\"native signal \" + str(signum))\nInterruptedError: native signal 14\n"
+  },
+  "results": {},
+  "cleanup": {
+    "actions": [
+      {
+        "at": 994159.256997772,
+        "pid": 3068174,
+        "signal": "TERM",
+        "start_ticks": 99356234
+      },
+      {
+        "at": 994160.010541282,
+        "pid": 3068177,
+        "signal": "TERM",
+        "start_ticks": 99356234
+      },
+      {
+        "at": 994160.76025215,
+        "pid": 3096588,
+        "signal": "TERM",
+        "start_ticks": 99389249
+      }
+    ],
+    "all_reaped": true,
+    "deadline": 994186.685674655,
+    "finished": 994167.876963405,
+    "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+    "owned": {
+      "3068174": 99356234,
+      "3068175": 99356234,
+      "3068176": 99356234,
+      "3068177": 99356234,
+      "3068179": 99356241,
+      "3068180": 99356241,
+      "3068182": 99356242,
+      "3068184": 99356242,
+      "3075688": 99364728,
+      "3075857": 99365143,
+      "3079407": 99369166,
+      "3083502": 99374026,
+      "3084072": 99374605,
+      "3092237": 99384339,
+      "3095821": 99388459,
+      "3096588": 99389249,
+      "3097188": 99389909,
+      "3111545": 99407105
+    },
+    "reaped": [
+      {
+        "exit_code": 2,
+        "pid": 3068177,
+        "wait_status": 512
+      },
+      {
+        "exit_code": 2,
+        "pid": 3068174,
+        "wait_status": 512
+      }
+    ],
+    "remaining_live": [],
+    "remaining_processes": [],
+    "started": 994156.685687625
+  },
+  "queue_seconds": null,
+  "native_times": {
+    "createTime": "2026-11-10T21:53:39Z",
+    "startTime": "2026-11-10T21:53:41Z",
+    "lastModifiedTime": "-",
+    "endTime": "2026-11-10T22:03:53Z",
+    "startTimeEstimated": "-",
+    "scheduledTime": "-"
+  },
+  "domains": {
+    "node0": {
+      "summary": {
+        "active_phase": "strict_candidate",
+        "error": "TimeoutError('strict shared deadline')",
+        "finished": 994165.620067917,
+        "hbm_pool_restored": true,
+        "node": 0,
+        "started": 993562.397032354,
+        "status": "FAIL_STOP",
+        "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/launch.py\", line 229, in phase\n    raise TimeoutError(name + \" shared deadline\")\nTimeoutError: strict shared deadline\n"
+      },
+      "strict5_passed": false,
+      "complete_perf_pair": false,
+      "phases": {
+        "strict_baseline": {
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "historical_model5_exact": true,
+          "final_model_sha256": {
+            "baseline": "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
+          },
+          "tail_counts": null,
+          "sample_count": 0,
+          "sample_seconds": 0,
+          "sample_median_s": null,
+          "sample_frames_s": null,
+          "peak_estimate_MiB": 4411.92578125,
+          "kml_counts": [
+            197
+          ]
+        },
+        "strict_candidate": {
+          "status": null,
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "historical_model5_exact": null,
+          "final_model_sha256": null,
+          "tail_counts": null,
+          "sample_count": 0,
+          "sample_seconds": 0,
+          "sample_median_s": null,
+          "sample_frames_s": null,
+          "peak_estimate_MiB": 5233.58203125,
+          "kml_counts": [
+            185
+          ]
+        }
+      },
+      "comparison": null
+    },
+    "node1": {
+      "summary": {
+        "active_phase": null,
+        "finished": 994058.192454245,
+        "hbm_pool_restored": true,
+        "node": 1,
+        "started": 993562.386786206,
+        "status": "PASS_STRICT5_AND_PERF15"
+      },
+      "strict5_passed": true,
+      "complete_perf_pair": true,
+      "phases": {
+        "perf_baseline_r1": {
+          "status": "PASS_PERF15",
+          "error": null,
+          "recorded_updates": 15,
+          "charged_updates": 15,
+          "metrics": 15,
+          "failed_metrics": [],
+          "historical_model5_exact": null,
+          "final_model_sha256": {
+            "baseline": "61dfe312e03bb0f1714a9d2bec7a168dfed491d31fdb086c4be84a002bacff74"
+          },
+          "tail_counts": null,
+          "sample_count": 12,
+          "sample_seconds": 102.73075119199999,
+          "sample_median_s": 8.596380382,
+          "sample_frames_s": 3.7379265268129713,
+          "peak_estimate_MiB": 3722.05859375,
+          "kml_counts": [
+            197
+          ]
+        },
+        "perf_candidate_r1": {
+          "status": "PASS_PERF15",
+          "error": null,
+          "recorded_updates": 15,
+          "charged_updates": 15,
+          "metrics": 15,
+          "failed_metrics": [],
+          "historical_model5_exact": null,
+          "final_model_sha256": {
+            "candidate": "61dfe312e03bb0f1714a9d2bec7a168dfed491d31fdb086c4be84a002bacff74"
+          },
+          "tail_counts": {
+            "skipped": 180,
+            "escaped": 0
+          },
+          "sample_count": 12,
+          "sample_seconds": 103.95822750299999,
+          "sample_median_s": 7.6942612145,
+          "sample_frames_s": 3.6937913354565293,
+          "peak_estimate_MiB": 3720.421875,
+          "kml_counts": [
+            185
+          ]
+        },
+        "strict_baseline": {
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "historical_model5_exact": true,
+          "final_model_sha256": {
+            "baseline": "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
+          },
+          "tail_counts": null,
+          "sample_count": 0,
+          "sample_seconds": 0,
+          "sample_median_s": null,
+          "sample_frames_s": null,
+          "peak_estimate_MiB": 4411.54296875,
+          "kml_counts": [
+            197
+          ]
+        },
+        "strict_candidate": {
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "historical_model5_exact": true,
+          "final_model_sha256": {
+            "candidate": "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
+          },
+          "tail_counts": {
+            "skipped": 60,
+            "escaped": 0
+          },
+          "sample_count": 0,
+          "sample_seconds": 0,
+          "sample_median_s": null,
+          "sample_frames_s": null,
+          "peak_estimate_MiB": 5228.64453125,
+          "kml_counts": [
+            185
+          ]
+        }
+      },
+      "comparison": {
+        "sample_seconds": {
+          "baseline": 102.73075119199999,
+          "candidate": 103.95822750299999,
+          "change_pct": 1.194847985396219
+        },
+        "sample_median_s": {
+          "baseline": 8.596380382,
+          "candidate": 7.6942612145,
+          "change_pct": -10.49417461085076
+        },
+        "sample_frames_s": {
+          "baseline": 3.7379265268129713,
+          "candidate": 3.6937913354565293,
+          "change_pct": -1.180739938033848
+        },
+        "peak_estimate_MiB": {
+          "baseline": 3722.05859375,
+          "candidate": 3720.421875,
+          "change_pct": -0.04397348157678671
+        }
+      }
+    },
+    "node2": {
+      "summary": {
+        "active_phase": null,
+        "finished": 994048.781600382,
+        "hbm_pool_restored": true,
+        "node": 2,
+        "started": 993562.381076504,
+        "status": "PASS_STRICT5_AND_PERF15"
+      },
+      "strict5_passed": true,
+      "complete_perf_pair": true,
+      "phases": {
+        "perf_baseline_r1": {
+          "status": "PASS_PERF15",
+          "error": null,
+          "recorded_updates": 15,
+          "charged_updates": 15,
+          "metrics": 15,
+          "failed_metrics": [],
+          "historical_model5_exact": null,
+          "final_model_sha256": {
+            "baseline": "61dfe312e03bb0f1714a9d2bec7a168dfed491d31fdb086c4be84a002bacff74"
+          },
+          "tail_counts": null,
+          "sample_count": 12,
+          "sample_seconds": 105.84144402,
+          "sample_median_s": 8.726566489,
+          "sample_frames_s": 3.6280684145563873,
+          "peak_estimate_MiB": 3717.25390625,
+          "kml_counts": [
+            197
+          ]
+        },
+        "perf_candidate_r1": {
+          "status": "PASS_PERF15",
+          "error": null,
+          "recorded_updates": 15,
+          "charged_updates": 15,
+          "metrics": 15,
+          "failed_metrics": [],
+          "historical_model5_exact": null,
+          "final_model_sha256": {
+            "candidate": "61dfe312e03bb0f1714a9d2bec7a168dfed491d31fdb086c4be84a002bacff74"
+          },
+          "tail_counts": {
+            "skipped": 180,
+            "escaped": 0
+          },
+          "sample_count": 12,
+          "sample_seconds": 95.38496043400002,
+          "sample_median_s": 7.8631720425000005,
+          "sample_frames_s": 4.0257918884990485,
+          "peak_estimate_MiB": 3723.0625,
+          "kml_counts": [
+            185
+          ]
+        },
+        "strict_baseline": {
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "historical_model5_exact": true,
+          "final_model_sha256": {
+            "baseline": "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
+          },
+          "tail_counts": null,
+          "sample_count": 0,
+          "sample_seconds": 0,
+          "sample_median_s": null,
+          "sample_frames_s": null,
+          "peak_estimate_MiB": 4412.96875,
+          "kml_counts": [
+            197
+          ]
+        },
+        "strict_candidate": {
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "historical_model5_exact": true,
+          "final_model_sha256": {
+            "candidate": "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
+          },
+          "tail_counts": {
+            "skipped": 60,
+            "escaped": 0
+          },
+          "sample_count": 0,
+          "sample_seconds": 0,
+          "sample_median_s": null,
+          "sample_frames_s": null,
+          "peak_estimate_MiB": 5215.140625,
+          "kml_counts": [
+            185
+          ]
+        }
+      },
+      "comparison": {
+        "sample_seconds": {
+          "baseline": 105.84144402,
+          "candidate": 95.38496043400002,
+          "change_pct": -9.879384850441097
+        },
+        "sample_median_s": {
+          "baseline": 8.726566489,
+          "candidate": 7.8631720425000005,
+          "change_pct": -9.893862008480935
+        },
+        "sample_frames_s": {
+          "baseline": 3.6280684145563873,
+          "candidate": 4.0257918884990485,
+          "change_pct": 10.962402813214078
+        },
+        "peak_estimate_MiB": {
+          "baseline": 3717.25390625,
+          "candidate": 3723.0625,
+          "change_pct": 0.15626034423512625
+        }
+      }
+    },
+    "node3": {
+      "summary": {
+        "active_phase": "perf_baseline",
+        "error": "TimeoutError('perf shared deadline')",
+        "finished": 994160.993354227,
+        "hbm_pool_restored": true,
+        "node": 3,
+        "started": 993562.380329909,
+        "status": "FAIL_STOP",
+        "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/launch.py\", line 388, in run_domain\n    phase(\"perf\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements, 1)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R15_INDEPENDENT_DOMAINS/launch.py\", line 229, in phase\n    raise TimeoutError(name + \" shared deadline\")\nTimeoutError: perf shared deadline\n"
+      },
+      "strict5_passed": true,
+      "complete_perf_pair": false,
+      "phases": {
+        "perf_baseline_r1": {
+          "status": "FAIL_STOP",
+          "error": "TimeoutError('shared stop-new-update deadline')",
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 15,
+          "failed_metrics": [],
+          "historical_model5_exact": null,
+          "final_model_sha256": null,
+          "tail_counts": null,
+          "sample_count": 2,
+          "sample_seconds": 22.287352446,
+          "sample_median_s": 11.143676223,
+          "sample_frames_s": 2.871583789733012,
+          "peak_estimate_MiB": 3719.5546875,
+          "kml_counts": [
+            197
+          ]
+        },
+        "perf_candidate_r1": {
+          "status": "PASS_PERF15",
+          "error": null,
+          "recorded_updates": 15,
+          "charged_updates": 15,
+          "metrics": 15,
+          "failed_metrics": [],
+          "historical_model5_exact": null,
+          "final_model_sha256": {
+            "candidate": "61dfe312e03bb0f1714a9d2bec7a168dfed491d31fdb086c4be84a002bacff74"
+          },
+          "tail_counts": {
+            "skipped": 180,
+            "escaped": 0
+          },
+          "sample_count": 12,
+          "sample_seconds": 148.35662680299998,
+          "sample_median_s": 12.568185935999999,
+          "sample_frames_s": 2.588357583176291,
+          "peak_estimate_MiB": 3717.76171875,
+          "kml_counts": [
+            185
+          ]
+        },
+        "strict_baseline": {
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "historical_model5_exact": true,
+          "final_model_sha256": {
+            "baseline": "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
+          },
+          "tail_counts": null,
+          "sample_count": 0,
+          "sample_seconds": 0,
+          "sample_median_s": null,
+          "sample_frames_s": null,
+          "peak_estimate_MiB": 4411.42578125,
+          "kml_counts": [
+            197
+          ]
+        },
+        "strict_candidate": {
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "historical_model5_exact": true,
+          "final_model_sha256": {
+            "candidate": "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
+          },
+          "tail_counts": {
+            "skipped": 60,
+            "escaped": 0
+          },
+          "sample_count": 0,
+          "sample_seconds": 0,
+          "sample_median_s": null,
+          "sample_frames_s": null,
+          "peak_estimate_MiB": 5222.08984375,
+          "kml_counts": [
+            185
+          ]
+        }
+      },
+      "comparison": null
+    }
+  },
+  "recorded_updates": 120,
+  "charged_updates": 120,
+  "protocol": "four independent lifecycles; strict5 then perf15 with3warm12samples; preserve failed domains",
+  "all_four_domains_passed": false
+}

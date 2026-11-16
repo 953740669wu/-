@@ -1,0 +1,73 @@
+--- a/launch.py
++++ b/launch.py
+@@ -356,6 +356,10 @@
+         end = START + wall - 120
+         signal.setitimer(signal.ITIMER_REAL, max(.001, end-time.monotonic()))
+         contracts = allocation(binding)
++        execute(EVIDENCE, "control_guard_compile", ["/usr/bin/gcc", "-shared", "-fPIC", "-O2",
++                str(ROOT/"kml_control_guard.c"), "-o", str(EVIDENCE/"libcontrol_guard.so")], min(end,time.monotonic()+30))
++        save(EVIDENCE/"CONTROL_GUARD_BUILD.json", dict(source_sha256=sha(ROOT/"kml_control_guard.c"),
++             library_sha256=sha(EVIDENCE/"libcontrol_guard.so")))
+         selections = bound_selection(ROOT, binding)
+         if cert:
+             need(selections["baseline"]["HBM_LIB"] is None and selections["candidate"]["HBM_LIB"] is not None,
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -148,6 +148,11 @@
+     module = sys.modules["kml_ops"]
+     if data.sha(module.__file__) != BASELINE or module.LINEAR_DTYPE != torch.float32:
+         raise ValueError("wrong original baseline or dtype")
++    control = ctypes.CDLL(str(ROOT.parent/"job_evidence/libcontrol_guard.so"))
++    control.read_fpcr.restype = control.read_svcr.restype = ctypes.c_uint64
++    control.restore_fpcr.argtypes = [ctypes.c_uint64]
++    control.restore_fpcr.restype = control.stop_streaming.restype = None
++    result["control_restores"] = dict(fpcr=0, sm=0)
+     native = module._sgemm
+     if not isinstance(native, ctypes._CFuncPtr):
+         raise ValueError("actual native KML function required")
+@@ -161,7 +166,18 @@
+         shapes[key] = shapes.get(key, 0) + 1
+         if native_diagnostic is not None:
+             print(json.dumps(dict(event="enter", shape=key, at_ns=time.monotonic_ns())), file=native_diagnostic, flush=True)
++        fpcr_before, svcr_before = control.read_fpcr(), control.read_svcr()
+         answer = native(*values)
++        fpcr_after, svcr_after = control.read_fpcr(), control.read_svcr()
++        if fpcr_before != fpcr_after:
++            control.restore_fpcr(fpcr_before)
++            result["control_restores"]["fpcr"] += 1
++        if not svcr_before & 1 and svcr_after & 1:
++            control.stop_streaming()
++            result["control_restores"]["sm"] += 1
++        if native_diagnostic is not None:
++            print(json.dumps(dict(event="control", fpcr_before=fpcr_before, fpcr_after=fpcr_after,
++                 svcr_before=svcr_before, svcr_after=svcr_after)), file=native_diagnostic, flush=True)
+         if native_diagnostic is not None:
+             print(json.dumps(dict(event="exit", shape=key, at_ns=time.monotonic_ns())), file=native_diagnostic, flush=True)
+         return answer
+@@ -350,6 +366,10 @@
+     data.load_descriptor(args.descriptor, args.descriptor_sha)
+     result["final_model_sha256"] = {role: training.model_sha(model) for role, model in models.items()}
+     if strict:
++        expected_model5 = "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
++        if any(v != expected_model5 for v in result["final_model_sha256"].values()):
++            raise ValueError("historical original model5 SHA differs")
++        result["historical_original_model5_exact"] = True
+         residency(args.output, "strict_end")
+     if attention:
+         attention.check_maps()
+--- a/kml_control_guard.c
++++ b/kml_control_guard.c
+@@ -0,0 +1,13 @@
++#include <stdint.h>
++uint64_t read_fpcr(void) {
++    uint64_t v; __asm__ volatile("mrs %0, fpcr" : "=r"(v)); return v;
++}
++uint64_t read_svcr(void) {
++    uint64_t v; __asm__ volatile("mrs %0, S3_3_C4_C2_2" : "=r"(v)); return v;
++}
++void restore_fpcr(uint64_t v) {
++    __asm__ volatile("msr fpcr, %0; isb" :: "r"(v) : "memory");
++}
++void stop_streaming(void) {
++    __asm__ volatile(".inst 0xd503427f" ::: "memory");
++}

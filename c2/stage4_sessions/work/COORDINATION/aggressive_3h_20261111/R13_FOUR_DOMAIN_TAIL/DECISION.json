@@ -1,0 +1,57 @@
+{
+  "version": "R13_FOUR_DOMAIN_TAIL",
+  "job_id": "2088765",
+  "decision": "FOUR_DOMAIN_BASELINE_INCOMPLETE_SLOW_DOMAIN0",
+  "tail_candidate_status": "NOT_REACHED",
+  "numerical_decision": "NOT_EVALUATED_FULL5_INCOMPLETE",
+  "completed_updates": 7,
+  "charged_updates": 11,
+  "allocation_seconds": 207,
+  "queue_seconds": 1,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "domains": {
+    "node0": {
+      "recorded_updates": 1,
+      "confirmed_updates": 1,
+      "in_flight_step": 2,
+      "step_seconds": [
+        15.559556784
+      ],
+      "charged_updates": 2
+    },
+    "node1": {
+      "recorded_updates": 2,
+      "confirmed_updates": 2,
+      "in_flight_step": 3,
+      "step_seconds": [
+        9.219777013,
+        8.938882833
+      ],
+      "charged_updates": 3
+    },
+    "node2": {
+      "recorded_updates": 2,
+      "confirmed_updates": 2,
+      "in_flight_step": 3,
+      "step_seconds": [
+        9.173754314,
+        8.891728789
+      ],
+      "charged_updates": 3
+    },
+    "node3": {
+      "recorded_updates": 2,
+      "confirmed_updates": 2,
+      "in_flight_step": 3,
+      "step_seconds": [
+        9.168158419,
+        8.898090096
+      ],
+      "charged_updates": 3
+    }
+  },
+  "reason": "All four first updates completed: domain0 15.56s, others near9.17s. Domain0 update2 exceeded120s while other3 finished update2 near8.9s then waited. Stop preserves all four domains and does not call this four-domain optimization acceptance.",
+  "charge_note": "In-flight attempts waiting for an unreleased barrier remain conservatively charged; they are not confirmed model updates.",
+  "next": "R14_DOMAIN1_TAIL explicitly scopes code test to domain1 inside native152CPU allocation; actual36 compute and idle116 recorded; no four-/sixteen-domain speed or allocation-efficiency claim."
+}

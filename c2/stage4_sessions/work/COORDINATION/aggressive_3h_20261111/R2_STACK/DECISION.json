@@ -1,0 +1,21 @@
+{
+  "decision": "REJECTED_NO_SPEED_GAIN",
+  "job_id": "2087572",
+  "strict_numeric": "3880 records pass; original thresholds unchanged; final model equal after strict5 and perf25",
+  "median_step_s": [
+    6.518776599,
+    6.6398202745
+  ],
+  "sample_total_s": [
+    130.3119778,
+    132.78692716
+  ],
+  "step_time_change_pct": 1.899249325951069,
+  "memory_estimate_MiB": [
+    8062.30078125,
+    7947.33203125
+  ],
+  "reason": "32E B32 HBM FFN-checkpoint scope slower despite lower memory; no adoption; keep R1_F1",
+  "old_16E_result": "separate scope; does not establish 32E benefit",
+  "cleanup_passed": true
+}

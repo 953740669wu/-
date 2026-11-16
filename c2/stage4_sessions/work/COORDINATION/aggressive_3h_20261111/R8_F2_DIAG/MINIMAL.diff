@@ -1,0 +1,51 @@
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -1,6 +1,7 @@
+ """One original Encoder replica in one bound domain, with the R12 strict comparator."""
+ import argparse
+ import ctypes
++import faulthandler
+ from contextlib import nullcontext
+ import hashlib
+ import json
+@@ -151,13 +152,19 @@
+     if not isinstance(native, ctypes._CFuncPtr):
+         raise ValueError("actual native KML function required")
+     shapes = {}
++    native_diagnostic = None
+ 
+     def count_native(*values):
+         if len(values) != 14:
+             raise ValueError("unexpected direct SGEMM ABI")
+         key = str(tuple(values[i] for i in (0,1,2,3,4,5,6,8,10,11,13)))
+         shapes[key] = shapes.get(key, 0) + 1
+-        return native(*values)
++        if native_diagnostic is not None:
++            print(json.dumps(dict(event="enter", shape=key, at_ns=time.monotonic_ns())), file=native_diagnostic, flush=True)
++        answer = native(*values)
++        if native_diagnostic is not None:
++            print(json.dumps(dict(event="exit", shape=key, at_ns=time.monotonic_ns())), file=native_diagnostic, flush=True)
++        return answer
+ 
+     module._sgemm = count_native
+     cpu36_guard.checkpoint(guard, "after_backend", torch, namespace_probe)
+@@ -266,11 +273,19 @@
+                     strict and step == 1 and os.environ.get("S09_INVENTORY") == "1") else None
+                 hooks = torch.autograd.graph.saved_tensors_hooks(inventory.pack, inventory.unpack) if inventory else nullcontext()
+                 attn_before = dict(attention.counts) if attention else None
++                diagnostic_first = strict and args.variant == "baseline" and step == 1
++                if diagnostic_first:
++                    native_diagnostic = (args.output / "native_first_step.jsonl").open("x")
++                    faulthandler.dump_traceback_later(30, repeat=False)
+                 begin = time.monotonic_ns()
+                 try:
+                     with hooks:
+                         loss = losses[role] = training.train_step(torch, model, opts[role], values[role], mask)
+                 finally:
++                    if diagnostic_first:
++                        faulthandler.cancel_dump_traceback_later()
++                        native_diagnostic.close()
++                        native_diagnostic = None
+                     for handle in handles:
+                         handle.remove()
+                 end = time.monotonic_ns()

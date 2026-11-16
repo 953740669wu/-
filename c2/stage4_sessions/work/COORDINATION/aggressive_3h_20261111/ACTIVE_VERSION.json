@@ -1,0 +1,31 @@
+{
+  "status": "PROVISIONAL_BY_MEASURED_SCOPE",
+  "single_domain": {
+    "version": "R3_THREEWAY",
+    "checkpoint_scope": "none",
+    "hbm_min_request_KiB": 256,
+    "frames_s": 5.109258603556347,
+    "evidence": "R3_THREEWAY/ADOPTION.json"
+  },
+  "full16": {
+    "version": "R5_FULL16/A",
+    "checkpoint_scope": "full",
+    "hbm_min_request_KiB": 256,
+    "frames_s": 45.12,
+    "window_seconds": 600,
+    "evidence": "R5_FULL16/DECISION.json"
+  },
+  "balanced_memory_fallback": "R1_F1/ADOPTION.json",
+  "pending": [],
+  "accuracy": "Original numerical thresholds unchanged; full16 loss checks are not full-state revalidation",
+  "experimental_low_memory_tail": {
+    "version": "R15_INDEPENDENT_DOMAINS",
+    "scope": "Validated domains1/2 only; not full16 default; node0 not accepted",
+    "decision": "R15_INDEPENDENT_DOMAINS/DECISION.json",
+    "checkpoint_scope": "full with unused FFN2 replay omitted",
+    "numerical_gates": "unchanged; domains1/2/3 strict pass",
+    "node1_total_time_change_pct": 1.1948479854,
+    "node2_total_time_change_pct": -9.8793848504
+  },
+  "runtime_limitation": "Intermittent original CPU SDPA/SLEEF slow steps remain unresolved; preserve fallback and evidence."
+}

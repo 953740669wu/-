@@ -1,0 +1,56 @@
+{
+  "version": "R10_SDPA_SERIAL",
+  "job_id": "2088715",
+  "native_state": "FAILED",
+  "archive_sha256": "13dc066eab09688abe353a9bb50c07d1806956563ae8403d8147348f5adc7a3b",
+  "verified_members": 233,
+  "summary": {
+    "active_phase": "strict_baseline",
+    "error": "TimeoutError('baseline first update exceeded 90 seconds; candidate not reached')",
+    "finished": 992445.717180705,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2088715",
+    "start": 992330.806330722,
+    "status": "FAIL_STOP",
+    "steps": {},
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R10_SDPA_SERIAL/launch.py\", line 373, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R10_SDPA_SERIAL/launch.py\", line 227, in phase\n    raise TimeoutError(\"baseline first update exceeded 90 seconds; candidate not reached\")\nTimeoutError: baseline first update exceeded 90 seconds; candidate not reached\n"
+  },
+  "results": {},
+  "cleanup": {
+    "actions": [
+      {
+        "at": 992443.122876092,
+        "pid": 2958393,
+        "signal": "TERM",
+        "start_ticks": 99233643
+      }
+    ],
+    "all_reaped": true,
+    "deadline": 992471.35191133,
+    "finished": 992445.694129375,
+    "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+    "owned": {
+      "2958393": 99233643
+    },
+    "reaped": [
+      {
+        "exit_code": -15,
+        "pid": 2958393,
+        "wait_status": 15
+      }
+    ],
+    "remaining_live": [],
+    "remaining_processes": [],
+    "started": 992441.35192025
+  },
+  "queue_seconds": null,
+  "native_times": {
+    "createTime": "2026-11-10T21:33:14Z",
+    "startTime": "2026-11-10T21:33:15Z",
+    "lastModifiedTime": "-",
+    "endTime": "2026-11-10T21:35:10Z",
+    "startTimeEstimated": "-",
+    "scheduledTime": "-"
+  }
+}

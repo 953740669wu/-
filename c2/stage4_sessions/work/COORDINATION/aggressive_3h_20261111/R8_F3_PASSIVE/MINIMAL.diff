@@ -1,0 +1,23 @@
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -104,6 +104,10 @@
+ 
+ 
+ def run(args, result):
++    waiting = {k: os.environ.get(k) for k in ("OMP_WAIT_POLICY", "GOMP_SPINCOUNT", "KMP_BLOCKTIME")}
++    if waiting != dict(OMP_WAIT_POLICY="PASSIVE", GOMP_SPINCOUNT="0", KMP_BLOCKTIME="0"):
++        raise ValueError("passive wait policy missing")
++    result["thread_wait_policy"] = waiting
+     strict = args.phase == "strict"
+     planned = 5 if strict else 25
+     batch = int(os.environ["S00_BATCH"])
+--- a/run_worker.sh
++++ b/run_worker.sh
+@@ -3,6 +3,7 @@
+ ROOT=$(cd -- "$(dirname -- "$0")" && pwd -P)
+ source "$ROOT/payload/interfaces/cluster_runtime.env"
+ export HBM=0 CKPT=0 COMPILE=0
++export OMP_WAIT_POLICY=PASSIVE GOMP_SPINCOUNT=0 KMP_BLOCKTIME=0
+ CPUS=$1 NODE=$2
+ shift 2
+ inherited=$(sed -n 's/^Cpus_allowed_list:[[:space:]]*//p' "/proc/$$/status")

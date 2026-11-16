@@ -1,0 +1,56 @@
+{
+  "version": "R8_F2_DIAG",
+  "job_id": "2088597",
+  "native_state": "FAILED",
+  "archive_sha256": "b57700a48565eb5915b5f2a75547830ab5aa8f0533378ace3f715a8591ea3bcf",
+  "verified_members": 233,
+  "summary": {
+    "active_phase": "strict_baseline",
+    "error": "TimeoutError('baseline first update exceeded 90 seconds; candidate not reached')",
+    "finished": 991782.092744126,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2088597",
+    "start": 991666.433808143,
+    "status": "FAIL_STOP",
+    "steps": {},
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F2_DIAG/launch.py\", line 373, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R8_F2_DIAG/launch.py\", line 227, in phase\n    raise TimeoutError(\"baseline first update exceeded 90 seconds; candidate not reached\")\nTimeoutError: baseline first update exceeded 90 seconds; candidate not reached\n"
+  },
+  "results": {},
+  "cleanup": {
+    "actions": [
+      {
+        "at": 991779.664952096,
+        "pid": 2898664,
+        "signal": "TERM",
+        "start_ticks": 99167195
+      }
+    ],
+    "all_reaped": true,
+    "deadline": 991808.053150543,
+    "finished": 991782.069013486,
+    "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+    "owned": {
+      "2898664": 99167195
+    },
+    "reaped": [
+      {
+        "exit_code": -15,
+        "pid": 2898664,
+        "wait_status": 15
+      }
+    ],
+    "remaining_live": [],
+    "remaining_processes": [],
+    "started": 991778.053158763
+  },
+  "queue_seconds": null,
+  "native_times": {
+    "createTime": "2026-11-10T21:22:10Z",
+    "startTime": "2026-11-10T21:22:10Z",
+    "lastModifiedTime": "-",
+    "endTime": "2026-11-10T21:24:07Z",
+    "startTimeEstimated": "-",
+    "scheduledTime": "-"
+  }
+}

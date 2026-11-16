@@ -1,0 +1,25 @@
+--- a/launch.py
++++ b/launch.py
+@@ -344,7 +344,7 @@
+         count = binding["domain_count"]
+         need(binding["mode"] == "checkpoint_tail_skip_ab" and count == 4
+              and 120 < wall <= 1800, "wrong wall or mode")
+-        need(binding["max_model_updates"] == 10*count + 50*count*binding["pairs"], "wrong update bound")
++        need(binding["max_model_updates"] == 60 and binding["active_domain_count"] == 1, "wrong scoped update bound")
+         rounds = binding["pairs"]
+         need(rounds == 1, "one paired measurement only")
+         need(shutil.disk_usage(EVIDENCE).free >= binding["strict_storage_min_bytes"],
+@@ -355,7 +355,12 @@
+             signal.signal(sig, stop)
+         end = START + wall - 120
+         signal.setitimer(signal.ITIMER_REAL, max(.001, end-time.monotonic()))
+-        contracts = allocation(binding)
++        allocated_contracts = allocation(binding)
++        need(binding["active_cpu_node"] == 1 and 1 in allocated_contracts, "domain1 not allocated")
++        contracts = {1: allocated_contracts[1]}
++        save(EVIDENCE/"ACTIVE_CONTRACTS.json", dict(allocated=allocated_contracts, active=contracts,
++             active_compute_cpus=36, native_allocated_cpus=152,
++             scope="domain1 only; remaining allocated domains intentionally idle; no whole-node throughput claim"))
+         selections = bound_selection(ROOT, binding)
+         if cert:
+             need(selections["baseline"]["HBM_LIB"] is None and selections["candidate"]["HBM_LIB"] is not None,

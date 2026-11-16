@@ -1,0 +1,169 @@
+--- a/launch.py
++++ b/launch.py
+@@ -232,7 +232,7 @@
+                 samples.write(json.dumps(sample(proc, contracts)) + "\n")
+                 samples.flush()
+                 sampled_at = now
+-            if step <= (5 if name == "strict" else 26):
++            if step <= (5 if name == "strict" else 16):
+                 ready = {n:barriers / f"{step}.node{n}.ready" for n in proc}
+                 if all(p.is_file() for p in ready.values()):
+                     arrivals = {n:read(p) for n,p in ready.items()}
+@@ -245,9 +245,9 @@
+                          release_at_ns=time.monotonic_ns()+100_000_000))
+                     step += 1
+             time.sleep(.02)
+-    need(step == (6 if name == "strict" else 27), "incomplete full-node rendezvous")
++    need(step == (6 if name == "strict" else 17), "incomplete full-node rendezvous")
+     results = [read(out / f"node{n}" / "result.json") for n in contracts]
+-    expected, updates = ("PASS_PERF25",25)
++    expected, updates = ("PASS_PERF15",15)
+     if name == "strict":
+         expected, updates = ("PASS_STRICT_REFERENCE5" if variant == "baseline" else "PASS_STRICT_ENCODER5", 5)
+     need(all(r["status"] == expected and r["completed_updates"] == updates and r["job_id"] == os.environ["CCS_JOB_ID"]
+@@ -344,7 +344,7 @@
+         count = binding["domain_count"]
+         need(binding["mode"] == "checkpoint_tail_skip_ab" and count == 4
+              and 120 < wall <= 1800, "wrong wall or mode")
+-        need(binding["max_model_updates"] == 10*count + 50*count*binding["pairs"], "wrong update bound")
++        need(binding["max_model_updates"] == 10*count + 30*count*binding["pairs"], "wrong update bound")
+         rounds = binding["pairs"]
+         need(rounds == 1, "one paired measurement only")
+         need(shutil.disk_usage(EVIDENCE).free >= binding["strict_storage_min_bytes"],
+@@ -364,32 +364,63 @@
+         else:
+             need(selections["baseline"] == selections["candidate"], "pair must use one HBM selection")
+         outcome["hbm_safety"] = "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS"
+-        for variant in ("baseline","candidate"):
+-            outcome["active_phase"] = f"strict_{variant}"
+-            if cert or not placements:
+-                placements = prepare_hbm(ROOT, EVIDENCE, contracts,
+-                                         dict(binding, **selections[variant]), end,
+-                                         "baseline")
+-            phase("strict", variant, contracts, owner, binding, end, placements)
+-            verify_return(placements, f"strict_{variant}")
+-            outcome["steps"][f"strict_{variant}_each_domain"] = 5
+-        dispose_snapshots()
+-        outcome["completed_pairs"] = []
+-        estimate = binding["first_pair_projection_seconds"]
+-        for run in range(1, rounds+1):
+-            if end-time.monotonic() < estimate*(rounds-run+1):
+-                raise TimeoutError("remaining wall cannot fit all complete paired rounds and cleanup")
+-            t0 = time.monotonic()
+-            order = ("candidate","baseline")
+-            for variant in order:
+-                label = f"perf_{variant}_r{run}"
+-                outcome["active_phase"] = label
+-                phase("perf", variant, contracts, owner, binding, end, placements, run)
+-                verify_return(placements, label)
+-                outcome["steps"][label+"_each_domain"] = 25
+-            outcome["completed_pairs"].append(run)
+-            estimate = (time.monotonic()-t0)*1.15 + 20
+-        outcome["active_phase"] = None
++        placements = prepare_hbm(ROOT, EVIDENCE, contracts, dict(binding, **selections["baseline"]), end, "baseline")
++        parent_evidence = EVIDENCE
++        children, codes = {}, {}
++
++        def run_domain(node):
++            global EVIDENCE
++            EVIDENCE = parent_evidence/"domains"/f"node{node}"
++            EVIDENCE.mkdir(parents=True)
++            shutil.copyfile(parent_evidence/f"node{node}.allocation.json", EVIDENCE/f"node{node}.allocation.json")
++            local_owner = Owned(os.getpid())
++            local_placements = {node: placements[node]}
++            report = dict(status="FAIL_STOP", node=node, started=time.monotonic())
++            try:
++                need(libc.prctl(36,1,0,0,0) == 0, "domain subreaper failed")
++                for variant in ("baseline","candidate"):
++                    report["active_phase"] = "strict_"+variant
++                    phase("strict", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)
++                    verify_return(local_placements, "strict_"+variant)
++                dispose_snapshots()
++                for variant in ("candidate","baseline"):
++                    report["active_phase"] = "perf_"+variant
++                    phase("perf", variant, {node:contracts[node]}, local_owner, binding, end, local_placements, 1)
++                    verify_return(local_placements, "perf_"+variant)
++                report.update(status="PASS_STRICT5_AND_PERF15", active_phase=None)
++            except BaseException as exc:
++                report.update(error=repr(exc), traceback=traceback.format_exc())
++            finally:
++                for sig in (signal.SIGTERM, signal.SIGINT): signal.signal(sig, signal.SIG_IGN)
++                try:
++                    receipt = cleanup(local_owner, min(deadline,time.monotonic()+25))
++                    save(EVIDENCE/"cleanup.json", receipt)
++                    need(receipt["all_reaped"], "domain cleanup incomplete")
++                    dispose_snapshots()
++                    verify_return(local_placements, "terminal")
++                    report["hbm_pool_restored"] = True
++                except BaseException as exc:
++                    report.update(status="FAIL_STOP", cleanup_error=repr(exc))
++                report["finished"] = time.monotonic()
++                save(EVIDENCE/"DOMAIN_SUMMARY.json", report)
++            os._exit(0 if report["status"] == "PASS_STRICT5_AND_PERF15" else 2)
++
++        for node in contracts:
++            pid = os.fork()
++            if pid == 0: run_domain(node)
++            children[node] = pid
++        save(EVIDENCE/"DOMAIN_CHILDREN.json", children)
++        while len(codes) < len(children):
++            owner.update(process_table())
++            for node, pid in children.items():
++                if node in codes: continue
++                done, status = os.waitpid(pid, os.WNOHANG)
++                if done: codes[node] = os.waitstatus_to_exitcode(status)
++            if time.monotonic() >= end: raise TimeoutError("independent domain deadline")
++            time.sleep(.2)
++        outcome["domain_exit_codes"] = codes
++        outcome["domain_summaries"] = {n:read(parent_evidence/"domains"/f"node{n}"/"DOMAIN_SUMMARY.json") for n in contracts}
++        need(all(c == 0 for c in codes.values()), "one or more domains failed; preserve partial valid results")
+         verify(ROOT, pin)
+         outcome["status"] = "PASS_FULL_NODE_COMPLETED_PHASES"
+     except BaseException as exc:
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -105,7 +105,7 @@
+ 
+ def run(args, result):
+     strict = args.phase == "strict"
+-    planned = 5 if strict else 25
++    planned = 5 if strict else 15
+     batch = int(os.environ["S00_BATCH"])
+     ckpt_layers = int(os.environ["S00_MATCHED_CKPT"])
+     if batch != 32 or ckpt_layers != 12:
+@@ -243,7 +243,7 @@
+             frames = [train["frame_ids"][i] for i in ids]
+             mask_sha = pairing["mask_sha256"][step-1]
+             ledger.attempt(step, ids, frames)
+-            if not strict and step == 6:
++            if not strict and step == 4:
+                 residency(args.output, "observe_start")
+             captures, losses, values, rows = {}, {}, {}, []
+             for role in roles:
+@@ -335,7 +335,7 @@
+                                  start_ns=begin, end_ns=end, release_ns=release, step_seconds=(end-begin)/1e9,
+                                  rss_before=rss_before, training_start=start_memory, rss_after=rss_after,
+                                  peak_reset=reset, kml_calls=logical, native_sgemm_calls=sum(shapes.values()),
+-                                 native_shapes=dict(shapes), fused_attention=dispatch, sampled=not strict and step >= 6))
++                                 native_shapes=dict(shapes), fused_attention=dispatch, sampled=not strict and step >= 4))
+             for row in rows:
+                 log.write(json.dumps(row) + "\n")
+             log.flush()
+@@ -345,7 +345,7 @@
+             ledger.confirm(step)
+             result["completed_updates"] = step
+     if not strict:
+-        barrier(args, 26)
++        barrier(args, 16)
+         residency(args.output, "observe_end")
+     data.load_descriptor(args.descriptor, args.descriptor_sha)
+     result["final_model_sha256"] = {role: training.model_sha(model) for role, model in models.items()}
+@@ -368,7 +368,7 @@
+     if strict:
+         result["status"] = "PASS_STRICT_REFERENCE5" if args.variant == "baseline" else "PASS_STRICT_ENCODER5"
+     else:
+-        result["status"] = "PASS_PERF25"
++        result["status"] = "PASS_PERF15"
+ 
+ 
+ if __name__ == "__main__":

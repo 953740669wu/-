@@ -1,0 +1,82 @@
+{
+  "version": "R15_INDEPENDENT_DOMAINS",
+  "job_id": "2088845",
+  "decision": "PROVISIONALLY_ADOPTED_LIMITED_LOW_MEMORY_SCOPE",
+  "native_state": "FAILED",
+  "whole_four_domain_pass": false,
+  "strict5_passed_domains": [
+    1,
+    2,
+    3
+  ],
+  "complete_perf_pairs": [
+    1,
+    2
+  ],
+  "unaccepted_domains": {
+    "0": "Strict candidate recorded five steps but result/metrics not completed before shared deadline; numerical acceptance UNKNOWN.",
+    "3": "Strict gate passed; perf baseline incomplete at shared deadline, no speed conclusion."
+  },
+  "original_numerical_gates_unchanged": true,
+  "comparison": {
+    "node1": {
+      "sample_seconds": {
+        "baseline": 102.73075119199999,
+        "candidate": 103.95822750299999,
+        "change_pct": 1.194847985396219
+      },
+      "sample_median_s": {
+        "baseline": 8.596380382,
+        "candidate": 7.6942612145,
+        "change_pct": -10.49417461085076
+      },
+      "sample_frames_s": {
+        "baseline": 3.7379265268129713,
+        "candidate": 3.6937913354565293,
+        "change_pct": -1.180739938033848
+      },
+      "peak_estimate_MiB": {
+        "baseline": 3722.05859375,
+        "candidate": 3720.421875,
+        "change_pct": -0.04397348157678671
+      }
+    },
+    "node2": {
+      "sample_seconds": {
+        "baseline": 105.84144402,
+        "candidate": 95.38496043400002,
+        "change_pct": -9.879384850441097
+      },
+      "sample_median_s": {
+        "baseline": 8.726566489,
+        "candidate": 7.8631720425000005,
+        "change_pct": -9.893862008480935
+      },
+      "sample_frames_s": {
+        "baseline": 3.6280684145563873,
+        "candidate": 4.0257918884990485,
+        "change_pct": 10.962402813214078
+      },
+      "peak_estimate_MiB": {
+        "baseline": 3717.25390625,
+        "candidate": 3723.0625,
+        "change_pct": 0.15626034423512625
+      }
+    }
+  },
+  "adoption_scope": "Experimental low-memory full-checkpoint profile only for validated domains 1 and 2; keep full16 R5/A default. No whole4/16 or node0 acceptance.",
+  "caveats": [
+    "Single fixed-order pairs with changing background concurrency.",
+    "Node1 total sample time regressed 1.19485%; retain all slow samples.",
+    "Three strict gates passed; node0 gate unknown, not inferred from other domains.",
+    "Removing twelve unused replay GEMMs is not an attention numerical change.",
+    "No formal scientific training acceptance or formal entry-point deployment."
+  ],
+  "completed_updates": 120,
+  "charged_updates": 120,
+  "allocation_seconds": 612,
+  "queue_seconds": 2,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "archive_sha256": "20db7a40dac39587f9ef74f2835f1d97750129e5e2d5a8c9898e91feb4a28a99"
+}

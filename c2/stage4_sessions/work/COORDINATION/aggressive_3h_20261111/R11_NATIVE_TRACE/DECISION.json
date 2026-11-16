@@ -1,0 +1,19 @@
+{
+  "version": "R11_NATIVE_TRACE",
+  "job_id": "2088731",
+  "decision": "DIAGNOSED_NATIVE_SLEEF_EXP_IN_CPU_FLASH_ATTENTION",
+  "tail_candidate_status": "NOT_REACHED",
+  "numerical_decision": "NOT_EVALUATED",
+  "completed_updates": 0,
+  "charged_updates": 1,
+  "allocation_seconds": 117,
+  "queue_seconds": 1,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "native_top": "libtorch_cpu.so Sleef_expf4_u10+0x30",
+  "instruction": "frintn v2.4s, v2.4s (read-only objdump of installed library)",
+  "caller": "CPU flash attention inside GOMP_parallel",
+  "scope": "One main-thread native stack at 25 seconds; proves location, not distribution of all CPU samples and not a unique root cause.",
+  "reason": "Native arithmetic location weakens the lock-wait explanation. Passive and serial-wait fixes remain rejected; original baseline and candidate gates never completed.",
+  "next": "R12_CONTROL_GUARD observes FPCR/SVCR around direct KML and restores only changed caller control state; unchanged model and strict precision plus original model5 exact gate."
+}

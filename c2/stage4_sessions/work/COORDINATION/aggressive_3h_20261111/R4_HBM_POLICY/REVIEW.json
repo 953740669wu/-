@@ -1,0 +1,155 @@
+{
+  "version": "R4_HBM_POLICY",
+  "job_id": "2088005",
+  "native_state": "SUCCEEDED",
+  "archive_sha256": "0fc57de01bad1d5d779d9df9627f249e3166cacdd691b194d9e966ed397affce",
+  "verified_members": 428,
+  "summary": {
+    "active_phase": null,
+    "completed_pairs": [
+      1
+    ],
+    "finished": 987110.588403421,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2088005",
+    "start": 986526.042307067,
+    "status": "PASS_FULL_NODE_COMPLETED_PHASES",
+    "steps": {
+      "perf_baseline_r1_each_domain": 25,
+      "perf_candidate_r1_each_domain": 25,
+      "strict_baseline_each_domain": 5,
+      "strict_candidate_each_domain": 5
+    }
+  },
+  "results": {
+    "perf_baseline_r1/node0": {
+      "status": "PASS_PERF25",
+      "completed_updates": 25,
+      "recorded_updates": 25,
+      "error": null,
+      "metrics": 15,
+      "failed_metrics": [],
+      "final_model_sha256": {
+        "baseline": "dddf0418f879ea661591ef4988388dfe214ba28a4f6aa9b734061082a9496731"
+      },
+      "checkpoint_scope": "none",
+      "sample_count": 20,
+      "sample_median_s": 6.221891365,
+      "sample_total_s": 124.43718963500001,
+      "all_steps_total_s": 155.96373339599998,
+      "observed_peak_estimate_MiB": 10497.55078125,
+      "kml_counts": [
+        149
+      ]
+    },
+    "perf_candidate_r1/node0": {
+      "status": "PASS_PERF25",
+      "completed_updates": 25,
+      "recorded_updates": 25,
+      "error": null,
+      "metrics": 15,
+      "failed_metrics": [],
+      "final_model_sha256": {
+        "candidate": "dddf0418f879ea661591ef4988388dfe214ba28a4f6aa9b734061082a9496731"
+      },
+      "checkpoint_scope": "none",
+      "sample_count": 20,
+      "sample_median_s": 6.66618052,
+      "sample_total_s": 133.042453598,
+      "all_steps_total_s": 166.58535612799997,
+      "observed_peak_estimate_MiB": 10431.4296875,
+      "kml_counts": [
+        149
+      ]
+    },
+    "strict_baseline/node0": {
+      "status": "PASS_STRICT_REFERENCE5",
+      "completed_updates": 5,
+      "recorded_updates": 5,
+      "error": null,
+      "metrics": 0,
+      "failed_metrics": [],
+      "final_model_sha256": {
+        "baseline": "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
+      },
+      "checkpoint_scope": "none",
+      "sample_count": 0,
+      "sample_median_s": null,
+      "sample_total_s": 0,
+      "all_steps_total_s": 36.183427451,
+      "observed_peak_estimate_MiB": 11963.28515625,
+      "kml_counts": [
+        149
+      ]
+    },
+    "strict_candidate/node0": {
+      "status": "PASS_STRICT_ENCODER5",
+      "completed_updates": 5,
+      "recorded_updates": 5,
+      "error": null,
+      "metrics": 3880,
+      "failed_metrics": [],
+      "final_model_sha256": {
+        "candidate": "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
+      },
+      "checkpoint_scope": "none",
+      "sample_count": 0,
+      "sample_median_s": null,
+      "sample_total_s": 0,
+      "all_steps_total_s": 33.607535954,
+      "observed_peak_estimate_MiB": 10574.9140625,
+      "kml_counts": [
+        149
+      ]
+    }
+  },
+  "cleanup": {
+    "actions": [],
+    "all_reaped": true,
+    "deadline": 987137.883793338,
+    "finished": 987110.567525217,
+    "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+    "owned": {
+      "1665412": 98653018,
+      "1673403": 98661668,
+      "1682273": 98671403,
+      "1701146": 98692070
+    },
+    "reaped": [],
+    "remaining_live": [],
+    "remaining_processes": [],
+    "started": 987107.883803328
+  },
+  "queue_seconds": null,
+  "native_times": {
+    "createTime": "2026-11-10T19:57:35Z",
+    "startTime": "2026-11-10T19:57:37Z",
+    "lastModifiedTime": "-",
+    "endTime": "2026-11-10T20:07:23Z",
+    "startTimeEstimated": "-",
+    "scheduledTime": "-"
+  },
+  "comparison": {
+    "sample_median_s": {
+      "baseline": 6.221891365,
+      "candidate": 6.66618052,
+      "candidate_change_pct": 7.140741117713167
+    },
+    "sample_total_s": {
+      "baseline": 124.43718963500001,
+      "candidate": 133.042453598,
+      "candidate_change_pct": 6.915347403972261
+    },
+    "all_steps_total_s": {
+      "baseline": 155.96373339599998,
+      "candidate": 166.58535612799997,
+      "candidate_change_pct": 6.810315770674169
+    },
+    "observed_peak_estimate_MiB": {
+      "baseline": 10497.55078125,
+      "candidate": 10431.4296875,
+      "candidate_change_pct": -0.6298716255614734
+    }
+  }
+}

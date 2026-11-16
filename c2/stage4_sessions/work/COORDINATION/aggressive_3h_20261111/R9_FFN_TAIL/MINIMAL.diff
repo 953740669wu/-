@@ -1,0 +1,42 @@
+--- a/payload/checkpoint_tail.py
++++ b/payload/checkpoint_tail.py
+@@ -26,7 +26,7 @@
+             raise ValueError("tail replay requires the frozen FP32 FFN projection")
+         replay = [False]
+         original_linear = layer.linear2.forward
+-        original_layer = layer.forward
++        original_layer = layer._ff_block
+ 
+         @contextmanager
+         def recompute():
+@@ -49,7 +49,7 @@
+             raise RuntimeError("checkpoint did not stop at the final FFN saved inputs")
+ 
+         layer.linear2.forward = linear
+-        layer.forward = lambda *a, **k: checkpoint(original_layer, *a, use_reentrant=False,
++        layer._ff_block = lambda *a, **k: checkpoint(original_layer, *a, use_reentrant=False,
+                                                    context_fn=lambda: (nullcontext(), recompute()), **k)
+ 
+     if len(enc.tf.layers) != 12:
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -230,8 +230,8 @@
+         from checkpoint_tail import enable_checkpoint_tail
+         tail_counts = enable_checkpoint_tail(models[args.variant])
+     else:
+-        enable_checkpoint(models[args.variant])
+-    result["checkpoint_scope"] = "full_tail_skip" if tail_counts is not None else "full"
++        enable_checkpoint(models[args.variant], "ffn")
++    result["checkpoint_scope"] = "ffn_tail_skip" if tail_counts is not None else "ffn"
+     result["checkpoint_layers"] = ckpt_layers
+     residency(args.output, "initialized")
+     with (args.output / "steps.jsonl").open("x") as log:
+@@ -315,7 +315,7 @@
+                     if args.variant == "candidate":
+                         key = str((101,111,112,batch*928,512,2048,1.0,2048,2048,1.0,512))
+                         if expected_shapes[key] != 24:
+-                            raise ValueError("unexpected full-checkpoint FFN2 multiplicity")
++                            raise ValueError("unexpected FFN-checkpoint projection multiplicity")
+                         expected_shapes[key] -= 12
+                         expected_calls -= 12
+                     trace_matches = logical == expected_calls and shapes == expected_shapes

@@ -1,0 +1,60 @@
+{
+  "version": "R1",
+  "job_id": "2087413",
+  "native_state": "FAILED",
+  "archive_sha256": "4376d13bfd7ec2189acb6539242fd6a5e885db8e5bf418b22538dae5de7b0081",
+  "verified_members": 225,
+  "summary": {
+    "active_phase": "strict_baseline",
+    "error": "RuntimeError('strict worker failed: {0: 2}')",
+    "finished": 983937.144484851,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2087413",
+    "start": 983918.069549051,
+    "status": "FAIL_STOP",
+    "steps": {},
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R1/launch.py\", line 367, in main\n    phase(\"strict\", variant, contracts, owner, binding, end, placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/AGGRESSIVE3H_20261111_R1/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {0: 2}\n"
+  },
+  "results": {
+    "strict_baseline/node0": {
+      "status": "FAIL_STOP",
+      "completed_updates": 0,
+      "recorded_updates": 0,
+      "error": "ValueError('HBM allocator path/SHA mapping differs')",
+      "metrics": 0,
+      "failed_metrics": [],
+      "final_model_sha256": null,
+      "checkpoint_scope": null,
+      "sample_count": 0,
+      "sample_median_s": null,
+      "sample_total_s": 0,
+      "all_steps_total_s": 0,
+      "observed_peak_estimate_MiB": null,
+      "kml_counts": []
+    }
+  },
+  "cleanup": {
+    "actions": [],
+    "all_reaped": true,
+    "deadline": 983964.492820909,
+    "finished": 983937.111563634,
+    "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+    "owned": {
+      "1425212": 98392331
+    },
+    "reaped": [],
+    "remaining_live": [],
+    "remaining_processes": [],
+    "started": 983934.492829219
+  },
+  "queue_seconds": null,
+  "native_times": {
+    "createTime": "2026-11-10T19:14:09Z",
+    "startTime": "2026-11-10T19:14:09Z",
+    "lastModifiedTime": "-",
+    "endTime": "2026-11-10T19:14:29Z",
+    "startTimeEstimated": "-",
+    "scheduledTime": "-"
+  }
+}

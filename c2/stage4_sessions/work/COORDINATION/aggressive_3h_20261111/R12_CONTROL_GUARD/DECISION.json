@@ -1,0 +1,17 @@
+{
+  "version": "R12_CONTROL_GUARD",
+  "job_id": "2088752",
+  "decision": "REJECT_CONTROL_GUARD_NO_LEAK_OBSERVED",
+  "tail_candidate_status": "NOT_REACHED",
+  "numerical_decision": "NOT_EVALUATED",
+  "completed_updates": 0,
+  "charged_updates": 1,
+  "allocation_seconds": 115,
+  "queue_seconds": 2,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "observed_direct_kml_control_records": 14,
+  "all_observed_fpcr_svcr_zero": true,
+  "reason": "Observed direct KML calls did not alter FPCR or SVCR; no repair was applied and SDPA 30-second intervals persisted. Does not prove every hidden BLAS path has the same state.",
+  "next": "R13_FOUR_DOMAIN_TAIL compares four full physical domains in one die, retaining all domains; original math and precision plus historical model5 exact gate."
+}

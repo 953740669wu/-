@@ -1,0 +1,45 @@
+{
+  "actions": [
+    {
+      "at": 993232.816100592,
+      "pid": 3021317,
+      "signal": "TERM",
+      "start_ticks": 99303529
+    }
+  ],
+  "all_reaped": true,
+  "deadline": 993260.832333571,
+  "finished": 993235.946070332,
+  "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+  "owned": {
+    "3021317": 99303529,
+    "3021325": 99303532,
+    "3021327": 99303537,
+    "3021332": 99303542
+  },
+  "reaped": [
+    {
+      "exit_code": -2,
+      "pid": 3021317,
+      "wait_status": 2
+    },
+    {
+      "exit_code": -2,
+      "pid": 3021325,
+      "wait_status": 2
+    },
+    {
+      "exit_code": -2,
+      "pid": 3021327,
+      "wait_status": 2
+    },
+    {
+      "exit_code": -2,
+      "pid": 3021332,
+      "wait_status": 2
+    }
+  ],
+  "remaining_live": [],
+  "remaining_processes": [],
+  "started": 993230.832342732
+}
