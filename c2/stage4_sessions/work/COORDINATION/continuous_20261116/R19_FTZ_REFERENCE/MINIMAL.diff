@@ -1,0 +1,150 @@
+--- a/launch.py
++++ b/launch.py
+@@ -188,7 +188,7 @@
+                 "--phase",name,"--variant",variant,"--descriptor",str(ROOT / "ENGINEERING_DESCRIPTOR.json"),
+                 "--descriptor-sha",binding["descriptor_sha256"],"--allocation",str(EVIDENCE / f"{rank}.allocation.json"),
+                 "--phase-root",str(out),"--output",str(out / rank),"--deadline",str(deadline),
+-                "--reference",str(EVIDENCE / "strict_baseline")]
++                "--reference",binding["external_reference_root"]]
+         save(out / f"{rank}.command.json", dict(argv=argv))
+         env = dict(os.environ, M1_PARENT_CPU_LIST=inherited, M1_INHERIT_RECEIPT=str(out / f"{rank}.before_numactl.txt"))
+         cfg = placements[node]
+@@ -219,12 +219,12 @@
+             if all(code == 0 for code in codes.values()):
+                 save(out / "exit_codes.json", codes)
+                 break
+-            if name == "strict" and variant == "baseline" and step == 2:
+-                released = read(barriers / "1.release")["release_at_ns"] / 1e9
+-                if now - released > 90 and any(
+-                    (out / f"node{n}" / "steps.jsonl").stat().st_size == 0 for n in proc
++            if name == "strict" and step > 1:
++                released = read(barriers / f"{step-1}.release")["release_at_ns"] / 1e9
++                if now - released > binding["update_timeout_seconds"] and any(
++                    len((out/f"node{n}"/"steps.jsonl").read_text().splitlines()) < step-1 for n in proc
+                 ):
+-                    raise TimeoutError("baseline first update exceeded 90 seconds; candidate not reached")
++                    raise TimeoutError("candidate update exceeded 120 seconds; stop this domain")
+             if now >= deadline:
+                 raise TimeoutError(name + " shared deadline")
+             if now - sampled_at >= 5:
+@@ -342,9 +342,9 @@
+         deadline = START + wall - 30
+         cert = False
+         count = binding["domain_count"]
+-        need(binding["mode"] == "checkpoint_tail_skip_ab" and count == 16
++        need(binding["mode"] == "fp32_flush_denormal_reference" and count == 16
+              and 120 < wall <= 1800, "wrong wall or mode")
+-        need(binding["max_model_updates"] == 10*count, "wrong update bound")
++        need(binding["max_model_updates"] == 5*count, "wrong update bound")
+         rounds = binding["pairs"]
+         need(rounds == 0, "strict-only scope")
+         need(shutil.disk_usage(EVIDENCE).free >= binding["strict_storage_min_bytes"],
+@@ -378,7 +378,7 @@
+             report = dict(status="FAIL_STOP", node=node, started=time.monotonic())
+             try:
+                 need(libc.prctl(36,1,0,0,0) == 0, "domain subreaper failed")
+-                for variant in ("baseline","candidate"):
++                for variant in ("candidate",):
+                     report["active_phase"] = "strict_"+variant
+                     phase("strict", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)
+                     verify_return(local_placements, "strict_"+variant)
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -46,7 +46,7 @@
+ 
+ def strict_evidence(torch, accepted, args, result, step, model, opt, initial, captured, loss, values):
+     got = tensors(model, opt, initial, captured, loss, values)
+-    path = args.reference / args.output.name / f"strict_step{step}.pt"
++    path = args.reference / f"strict_step{step}.pt"
+     if args.variant == "baseline":
+         torch.save(got, path)
+         result.setdefault("reference_snapshots", []).append(
+@@ -119,9 +119,21 @@
+           reserved=guard["receipt"]["reserved"], guard_before_framework=guard["checkpoints"][0]))
+     import numpy as np
+     import torch
++    if not strict or args.variant != "candidate":
++        raise ValueError("FTZ experiment requires the bound strict-only candidate")
++    if not torch.set_flush_denormal(True):
++        raise RuntimeError("denormal flush unsupported by this runtime")
++    result["flush_denormal_requested"] = True
+     cpu36_guard.checkpoint(guard, "after_framework", torch)
+     runtime, expected = configure_backend(torch, "kml", expected_cpu)
+     result["runtime"] = runtime
++    probe = torch.ones(36*4096, dtype=torch.int32).view(torch.float32)
++    flushed = probe * 2.0
++    nonzero = int(torch.count_nonzero(flushed.view(torch.int32)))
++    result["denormal_probe"] = dict(input_bits=1, elements=probe.numel(), nonzero_output_bits=nonzero)
++    if nonzero:
++        raise RuntimeError("denormal flush not effective for the exercised CPU tensor lanes")
++    del probe, flushed
+     maps = Path("/proc/self/maps").read_text()
+     (args.output / "after_framework.maps").write_text(maps)
+     paths = {line.split()[-1] for line in maps.splitlines() if "libhbm_alloc" in line}
+@@ -214,7 +226,7 @@
+     prior = args.descriptor.parent / "PRIOR_PAIRING.json"
+     if batch == 32 and json.loads(prior.read_bytes()) != pairing:
+         raise ValueError("external 32E reference differs")
+-    ref_dir = args.reference / args.output.name
++    ref_dir = args.reference
+     if strict and args.variant == "baseline":
+         write(args.output / "PAIRING.json", pairing)
+         reference_steps = []
+@@ -226,11 +238,7 @@
+             raise ValueError("frozen strict reference incomplete")
+     result["pairing_sha256"] = hashlib.sha256(json.dumps(pairing,sort_keys=True).encode()).hexdigest()
+     tail_counts = None
+-    if args.variant == "candidate":
+-        from checkpoint_tail import enable_checkpoint_tail
+-        tail_counts = enable_checkpoint_tail(models[args.variant])
+-    else:
+-        enable_checkpoint(models[args.variant])
++    enable_checkpoint(models[args.variant])
+     result["checkpoint_scope"] = "full_tail_skip" if tail_counts is not None else "full"
+     result["checkpoint_layers"] = ckpt_layers
+     residency(args.output, "initialized")
+@@ -312,12 +320,6 @@
+                     pinned = reference_steps[(step-1) % 5]
+                     expected_shapes = dict(pinned["native_shapes"])
+                     expected_calls = pinned["kml_calls"]
+-                    if args.variant == "candidate":
+-                        key = str((101,111,112,batch*928,512,2048,1.0,2048,2048,1.0,512))
+-                        if expected_shapes[key] != 24:
+-                            raise ValueError("unexpected full-checkpoint FFN2 multiplicity")
+-                        expected_shapes[key] -= 12
+-                        expected_calls -= 12
+                     trace_matches = logical == expected_calls and shapes == expected_shapes
+                     if not trace_matches:
+                         result["bad_native"] = dict(step=step, role=role, shapes=dict(shapes), logical=logical)
+--- a/prepare.py
++++ b/prepare.py
+@@ -41,6 +41,18 @@
+     need(sha(root / "ENGINEERING_DESCRIPTOR.json") == binding["descriptor_sha256"], "descriptor differs")
+     for name,expected in binding["frozen_sidecars"].items():
+         need(sha(root/name) == expected, "frozen dependency sidecar differs: " + name)
++    ref = json.loads((root/"EXTERNAL_REFERENCE.json").read_bytes())
++    external = Path(binding["external_reference_root"])
++    need(str(external) == ref["remote_root"], "external reference directory differs")
++    for name, expected in ref["metadata_sha256"].items():
++        need(sha(external/name) == expected, "external reference metadata changed: " + name)
++    receipt = json.loads((external/"result.json").read_bytes())
++    need(receipt["status"] == "PASS_STRICT_REFERENCE5" and receipt["completed_updates"] == 5,
++         "external reference is incomplete")
++    need([(r["bytes"],r["sha256"]) for r in ref["snapshots"]] ==
++         [(r["bytes"],r["sha256"]) for r in receipt["reference_snapshots"]], "reference identities differ")
++    for row in ref["snapshots"]:
++        need((external/row["name"]).stat().st_size == row["bytes"], "reference snapshot size changed")
+     return binding
+ 
+ 
+--- a/submit_once.py
++++ b/submit_once.py
+@@ -89,7 +89,7 @@
+                 and res["memFree"] >= 393216 and res["hugePagesFree"] >= binding["domain_count"]*(binding["hbm_cap_MiB"]//2+16)):
+             qualified.append(host)
+     need(qualified, "no eligible host currently shows full-node CPU, DDR and hugepage capacity")
+-    need(binding["batch_deadline_utc"] is None and binding["wall_seconds"] == 1800,
++    need(binding["batch_deadline_utc"] is None and binding["wall_seconds"] == 900,
+          "unlimited campaign requires bounded individual job")
+     stop_queue = time.monotonic() + binding["remaining_queue_seconds"]
+     argv = binding["native_argv"]

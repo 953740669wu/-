@@ -1,0 +1,161 @@
+{
+  "domain_exit_codes": {
+    "0": 0,
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 2,
+    "5": 0,
+    "6": 0,
+    "7": 0,
+    "8": 0,
+    "9": 0,
+    "10": 0,
+    "11": 0,
+    "12": 0,
+    "13": 0,
+    "14": 0,
+    "15": 0
+  },
+  "domain_summaries": {
+    "0": {
+      "active_phase": null,
+      "finished": 1489087.944064014,
+      "hbm_pool_restored": true,
+      "node": 0,
+      "started": 1488968.686700049,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "1": {
+      "active_phase": null,
+      "finished": 1489075.514138604,
+      "hbm_pool_restored": true,
+      "node": 1,
+      "started": 1488968.686549448,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "2": {
+      "active_phase": null,
+      "finished": 1489080.980429856,
+      "hbm_pool_restored": true,
+      "node": 2,
+      "started": 1488968.690828922,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "3": {
+      "active_phase": null,
+      "finished": 1489079.957681109,
+      "hbm_pool_restored": true,
+      "node": 3,
+      "started": 1488968.693614087,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "4": {
+      "active_phase": "strict_candidate",
+      "error": "TimeoutError('candidate update exceeded 120 seconds; stop this domain')",
+      "finished": 1489223.993120912,
+      "hbm_pool_restored": true,
+      "node": 4,
+      "started": 1488968.695226636,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R19_FTZ_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R19_FTZ_REFERENCE/launch.py\", line 227, in phase\n    raise TimeoutError(\"candidate update exceeded 120 seconds; stop this domain\")\nTimeoutError: candidate update exceeded 120 seconds; stop this domain\n"
+    },
+    "5": {
+      "active_phase": null,
+      "finished": 1489094.438633606,
+      "hbm_pool_restored": true,
+      "node": 5,
+      "started": 1488968.695061995,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "6": {
+      "active_phase": null,
+      "finished": 1489093.43950119,
+      "hbm_pool_restored": true,
+      "node": 6,
+      "started": 1488968.693188115,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "7": {
+      "active_phase": null,
+      "finished": 1489092.805713873,
+      "hbm_pool_restored": true,
+      "node": 7,
+      "started": 1488968.697706269,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "8": {
+      "active_phase": null,
+      "finished": 1489098.776989977,
+      "hbm_pool_restored": true,
+      "node": 8,
+      "started": 1488968.696653704,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "9": {
+      "active_phase": null,
+      "finished": 1489098.783714832,
+      "hbm_pool_restored": true,
+      "node": 9,
+      "started": 1488968.698671175,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "10": {
+      "active_phase": null,
+      "finished": 1489098.749856607,
+      "hbm_pool_restored": true,
+      "node": 10,
+      "started": 1488968.70134361,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "11": {
+      "active_phase": null,
+      "finished": 1489099.607498468,
+      "hbm_pool_restored": true,
+      "node": 11,
+      "started": 1488968.699021177,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "12": {
+      "active_phase": null,
+      "finished": 1489102.000520793,
+      "hbm_pool_restored": true,
+      "node": 12,
+      "started": 1488968.702613737,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "13": {
+      "active_phase": null,
+      "finished": 1489101.267817543,
+      "hbm_pool_restored": true,
+      "node": 13,
+      "started": 1488968.703425401,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "14": {
+      "active_phase": null,
+      "finished": 1489101.932065558,
+      "hbm_pool_restored": true,
+      "node": 14,
+      "started": 1488968.705571083,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    },
+    "15": {
+      "active_phase": null,
+      "finished": 1489100.905192772,
+      "hbm_pool_restored": true,
+      "node": 15,
+      "started": 1488968.700836127,
+      "status": "PASS_STRICT5_ALL_METRICS"
+    }
+  },
+  "error": "ValueError('one or more domains failed; preserve partial valid results')",
+  "finished": 1489228.164919409,
+  "hbm_pool_restored": true,
+  "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+  "job_id": "2147410",
+  "start": 1488964.32065416,
+  "status": "FAIL_STOP",
+  "steps": {},
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R19_FTZ_REFERENCE/launch.py\", line 419, in main\n    need(all(c == 0 for c in codes.values()), \"one or more domains failed; preserve partial valid results\")\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R19_FTZ_REFERENCE/prepare.py\", line 25, in need\n    raise ValueError(why)\nValueError: one or more domains failed; preserve partial valid results\n"
+}

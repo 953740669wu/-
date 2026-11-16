@@ -1,0 +1,10 @@
+{
+  "active_phase": "strict_candidate",
+  "error": "TimeoutError('candidate update exceeded 120 seconds; stop this domain')",
+  "finished": 1489223.993120912,
+  "hbm_pool_restored": true,
+  "node": 4,
+  "started": 1488968.695226636,
+  "status": "FAIL_STOP",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R19_FTZ_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R19_FTZ_REFERENCE/launch.py\", line 227, in phase\n    raise TimeoutError(\"candidate update exceeded 120 seconds; stop this domain\")\nTimeoutError: candidate update exceeded 120 seconds; stop this domain\n"
+}

@@ -1,0 +1,696 @@
+{
+  "version": "R19_FTZ_REFERENCE",
+  "job_id": "2147410",
+  "native_state": "FAILED",
+  "archive_sha256": "e66b8cf6f4f6b185b3e6f659187540f6b03474932fd5947ae1befeb836d229f0",
+  "verified_members": 794,
+  "summary": {
+    "domain_exit_codes": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 2,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "13": 0,
+      "14": 0,
+      "15": 0
+    },
+    "domain_summaries": {
+      "0": {
+        "active_phase": null,
+        "finished": 1489087.944064014,
+        "hbm_pool_restored": true,
+        "node": 0,
+        "started": 1488968.686700049,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "1": {
+        "active_phase": null,
+        "finished": 1489075.514138604,
+        "hbm_pool_restored": true,
+        "node": 1,
+        "started": 1488968.686549448,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "2": {
+        "active_phase": null,
+        "finished": 1489080.980429856,
+        "hbm_pool_restored": true,
+        "node": 2,
+        "started": 1488968.690828922,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "3": {
+        "active_phase": null,
+        "finished": 1489079.957681109,
+        "hbm_pool_restored": true,
+        "node": 3,
+        "started": 1488968.693614087,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "4": {
+        "active_phase": "strict_candidate",
+        "error": "TimeoutError('candidate update exceeded 120 seconds; stop this domain')",
+        "finished": 1489223.993120912,
+        "hbm_pool_restored": true,
+        "node": 4,
+        "started": 1488968.695226636,
+        "status": "FAIL_STOP",
+        "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R19_FTZ_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R19_FTZ_REFERENCE/launch.py\", line 227, in phase\n    raise TimeoutError(\"candidate update exceeded 120 seconds; stop this domain\")\nTimeoutError: candidate update exceeded 120 seconds; stop this domain\n"
+      },
+      "5": {
+        "active_phase": null,
+        "finished": 1489094.438633606,
+        "hbm_pool_restored": true,
+        "node": 5,
+        "started": 1488968.695061995,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "6": {
+        "active_phase": null,
+        "finished": 1489093.43950119,
+        "hbm_pool_restored": true,
+        "node": 6,
+        "started": 1488968.693188115,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "7": {
+        "active_phase": null,
+        "finished": 1489092.805713873,
+        "hbm_pool_restored": true,
+        "node": 7,
+        "started": 1488968.697706269,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "8": {
+        "active_phase": null,
+        "finished": 1489098.776989977,
+        "hbm_pool_restored": true,
+        "node": 8,
+        "started": 1488968.696653704,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "9": {
+        "active_phase": null,
+        "finished": 1489098.783714832,
+        "hbm_pool_restored": true,
+        "node": 9,
+        "started": 1488968.698671175,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "10": {
+        "active_phase": null,
+        "finished": 1489098.749856607,
+        "hbm_pool_restored": true,
+        "node": 10,
+        "started": 1488968.70134361,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "11": {
+        "active_phase": null,
+        "finished": 1489099.607498468,
+        "hbm_pool_restored": true,
+        "node": 11,
+        "started": 1488968.699021177,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "12": {
+        "active_phase": null,
+        "finished": 1489102.000520793,
+        "hbm_pool_restored": true,
+        "node": 12,
+        "started": 1488968.702613737,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "13": {
+        "active_phase": null,
+        "finished": 1489101.267817543,
+        "hbm_pool_restored": true,
+        "node": 13,
+        "started": 1488968.703425401,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "14": {
+        "active_phase": null,
+        "finished": 1489101.932065558,
+        "hbm_pool_restored": true,
+        "node": 14,
+        "started": 1488968.705571083,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "15": {
+        "active_phase": null,
+        "finished": 1489100.905192772,
+        "hbm_pool_restored": true,
+        "node": 15,
+        "started": 1488968.700836127,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      }
+    },
+    "error": "ValueError('one or more domains failed; preserve partial valid results')",
+    "finished": 1489228.164919409,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2147410",
+    "start": 1488964.32065416,
+    "status": "FAIL_STOP",
+    "steps": {},
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R19_FTZ_REFERENCE/launch.py\", line 419, in main\n    need(all(c == 0 for c in codes.values()), \"one or more domains failed; preserve partial valid results\")\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R19_FTZ_REFERENCE/prepare.py\", line 25, in need\n    raise ValueError(why)\nValueError: one or more domains failed; preserve partial valid results\n"
+  },
+  "results": {},
+  "cleanup": {
+    "actions": [],
+    "all_reaped": true,
+    "deadline": 1489254.718750044,
+    "finished": 1489228.134960527,
+    "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+    "owned": {
+      "2572990": 148896867,
+      "2572991": 148896867,
+      "2572992": 148896867,
+      "2572993": 148896867,
+      "2572994": 148896867,
+      "2572995": 148896867,
+      "2572996": 148896867,
+      "2572997": 148896867,
+      "2572998": 148896867,
+      "2572999": 148896868,
+      "2573000": 148896868,
+      "2573001": 148896868,
+      "2573002": 148896868,
+      "2573003": 148896868,
+      "2573004": 148896868,
+      "2573005": 148896868,
+      "2573008": 148896871,
+      "2573009": 148896872,
+      "2573010": 148896872,
+      "2573012": 148896872,
+      "2573013": 148896872,
+      "2573015": 148896872,
+      "2573016": 148896872,
+      "2573017": 148896873,
+      "2573034": 148896874,
+      "2573044": 148896877,
+      "2573068": 148896898,
+      "2573069": 148896898,
+      "2573070": 148896898,
+      "2573071": 148896898,
+      "2573073": 148896898,
+      "2573076": 148896898
+    },
+    "reaped": [],
+    "remaining_live": [],
+    "remaining_processes": [],
+    "started": 1489224.718761364
+  },
+  "queue_seconds": 2.0,
+  "native_times": {
+    "createTime": "2026-11-16T15:30:27Z",
+    "startTime": "2026-11-16T15:30:29Z",
+    "lastModifiedTime": "-",
+    "endTime": "2026-11-16T15:34:54Z",
+    "startTimeEstimated": "-",
+    "scheduledTime": "-"
+  },
+  "domains": {
+    "node0": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489087.944064014,
+        "hbm_pool_restored": true,
+        "node": 0,
+        "started": 1488968.686700049,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            12.394524565,
+            11.230770476,
+            9.323150199,
+            9.475540079,
+            8.204539951
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node1": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489075.514138604,
+        "hbm_pool_restored": true,
+        "node": 1,
+        "started": 1488968.686549448,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.010815429,
+            8.74121464,
+            8.231716018,
+            8.632762229,
+            8.505989223
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node2": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489080.980429856,
+        "hbm_pool_restored": true,
+        "node": 2,
+        "started": 1488968.690828922,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.045008465,
+            8.729446334,
+            8.732518705,
+            8.517311654,
+            8.100715772
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node3": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489079.957681109,
+        "hbm_pool_restored": true,
+        "node": 3,
+        "started": 1488968.693614087,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            9.989573475,
+            8.633337898,
+            8.644159829,
+            8.561153175,
+            8.364243405
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node4": {
+      "summary": {
+        "active_phase": "strict_candidate",
+        "error": "TimeoutError('candidate update exceeded 120 seconds; stop this domain')",
+        "finished": 1489223.993120912,
+        "hbm_pool_restored": true,
+        "node": 4,
+        "started": 1488968.695226636,
+        "status": "FAIL_STOP",
+        "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R19_FTZ_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R19_FTZ_REFERENCE/launch.py\", line 227, in phase\n    raise TimeoutError(\"candidate update exceeded 120 seconds; stop this domain\")\nTimeoutError: candidate update exceeded 120 seconds; stop this domain\n"
+      },
+      "phases": {
+        "candidate": {
+          "passed": false,
+          "status": null,
+          "error": null,
+          "recorded_updates": 2,
+          "charged_updates": 3,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            35.631582325,
+            34.97558527
+          ]
+        }
+      },
+      "strict5_passed": false
+    },
+    "node5": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489094.438633606,
+        "hbm_pool_restored": true,
+        "node": 5,
+        "started": 1488968.695061995,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            11.074029633,
+            8.719424537,
+            8.859950103,
+            10.258890558,
+            10.240089905
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node6": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489093.43950119,
+        "hbm_pool_restored": true,
+        "node": 6,
+        "started": 1488968.693188115,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            9.959883088,
+            8.651366347,
+            8.934669712,
+            9.806156441,
+            10.627141795
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node7": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489092.805713873,
+        "hbm_pool_restored": true,
+        "node": 7,
+        "started": 1488968.697706269,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            11.993977817,
+            9.207164781,
+            9.330421806,
+            9.783535312,
+            9.564745315
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node8": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489098.776989977,
+        "hbm_pool_restored": true,
+        "node": 8,
+        "started": 1488968.696653704,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.931916711,
+            10.582380038,
+            10.451967491,
+            10.3740657,
+            10.477632535
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node9": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489098.783714832,
+        "hbm_pool_restored": true,
+        "node": 9,
+        "started": 1488968.698671175,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            11.438600819,
+            10.338386524,
+            10.123503274,
+            9.93868712,
+            10.186500218
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node10": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489098.749856607,
+        "hbm_pool_restored": true,
+        "node": 10,
+        "started": 1488968.70134361,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            11.066425482,
+            10.342439106,
+            10.14070404,
+            10.076328717,
+            10.186520838
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node11": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489099.607498468,
+        "hbm_pool_restored": true,
+        "node": 11,
+        "started": 1488968.699021177,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            11.392189917,
+            10.688048014,
+            10.374510034,
+            10.301835949,
+            10.450679997
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node12": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489102.000520793,
+        "hbm_pool_restored": true,
+        "node": 12,
+        "started": 1488968.702613737,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            11.222128601,
+            10.579456236,
+            10.522033328,
+            11.010868139,
+            10.270850887
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node13": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489101.267817543,
+        "hbm_pool_restored": true,
+        "node": 13,
+        "started": 1488968.703425401,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            11.08698562,
+            10.747498384,
+            10.570497314,
+            10.996022541,
+            10.23433629
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node14": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489101.932065558,
+        "hbm_pool_restored": true,
+        "node": 14,
+        "started": 1488968.705571083,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            11.095858788,
+            10.582786983,
+            10.657194803,
+            11.102498,
+            10.273748262
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node15": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1489100.905192772,
+        "hbm_pool_restored": true,
+        "node": 15,
+        "started": 1488968.700836127,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.71480737,
+            10.747490963,
+            10.520823892,
+            10.779283625,
+            10.20684384
+          ]
+        }
+      },
+      "strict5_passed": true
+    }
+  },
+  "all16_strict_passed": false,
+  "reference_kind": "cross-job exact completed original five-step snapshots from R16 node4; metadata and each snapshot hash verified",
+  "reference_job_id": "2146931",
+  "cleanup_passed": true,
+  "recorded_updates": 77,
+  "charged_updates": 78,
+  "allocation_seconds": 265.0,
+  "fixed_inputs_before_after_equal": true
+}

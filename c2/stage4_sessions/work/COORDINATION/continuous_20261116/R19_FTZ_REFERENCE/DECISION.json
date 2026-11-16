@@ -1,0 +1,38 @@
+{
+  "version": "R19_FTZ_REFERENCE",
+  "job_id": "2147410",
+  "decision": "DO_NOT_ADOPT_FTZ_SLOW_DOMAIN_UNRESOLVED",
+  "native_state": "FAILED",
+  "strict5_passed_domains": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "strict_metrics": 58200,
+  "original_numerical_gates_unchanged": true,
+  "incomplete_domains": [
+    4
+  ],
+  "reason": "Node4 recorded two updates35.631582325/34.975585270s; next update exceeded120s. No full16 numerical acceptance or performance A/B. Fifteen completed domains meet original strict gates and exact original model5 SHA.",
+  "queue_visibility_note": "QUEUE_AFTER was taken before scheduler removal and retained one entry; POST_COLLECTION_QUEUE at15:40:32UTC confirms empty. Original receipt preserved.",
+  "recorded_updates": 77,
+  "charged_updates": 78,
+  "allocation_seconds": 265.0,
+  "queue_seconds": 2.0,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "archive_sha256": "e66b8cf6f4f6b185b3e6f659187540f6b03474932fd5947ae1befeb836d229f0",
+  "next": "R20 mixed profile: tail-skip only on15 strict-passed R16 domains; unchanged original on node4; full16 fixed-window comparison. No FTZ or foreach combination."
+}
