@@ -1,0 +1,17 @@
+hbm_alloc: arena 3800 MB on node 20, requests >= 256 KB
+/home/share/songzhenlong/eitfm/sw/torch_kml/torch/nn/modules/transformer.py:382: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+Timeout (0:00:30)!
+Thread 0x0000400005b032a0 (most recent call first):
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/payload/worker.py", line 164 in count_native
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/payload/baseline/kml_ops.py", line 47 in gemm
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/payload/diagnostic_common.py", line 99 in counted
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/payload/baseline/kml_ops.py", line 186 in backward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/autograd/function.py", line 307 in apply
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/autograd/graph.py", line 824 in _engine_run_backward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/autograd/__init__.py", line 353 in backward
+  File "/home/share/songzhenlong/eitfm/sw/torch_kml/torch/_tensor.py", line 648 in backward
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/payload/engineering_training.py", line 39 in train_step
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/payload/worker.py", line 283 in run
+  File "/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/payload/worker.py", line 387 in <module>
+hbm_alloc: hbm allocs 8180 (309.2 GB, 7745 reused), ddr large allocs 0 (0.0 GB), arena high-water 3.76 GB

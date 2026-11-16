@@ -1,0 +1,66 @@
+--- a/launch.py
++++ b/launch.py
+@@ -342,11 +342,11 @@
+         deadline = START + wall - 30
+         cert = False
+         count = binding["domain_count"]
+-        need(binding["mode"] == "checkpoint_tail_skip_ab" and count == 4
++        need(binding["mode"] == "checkpoint_tail_skip_ab" and count == 16
+              and 120 < wall <= 1800, "wrong wall or mode")
+-        need(binding["max_model_updates"] == 10*count + 30*count*binding["pairs"], "wrong update bound")
++        need(binding["max_model_updates"] == 10*count, "wrong update bound")
+         rounds = binding["pairs"]
+-        need(rounds == 1, "one paired measurement only")
++        need(rounds == 0, "strict-only scope")
+         need(shutil.disk_usage(EVIDENCE).free >= binding["strict_storage_min_bytes"],
+              "insufficient private workspace free space for complete DDR references")
+         libc = ctypes.CDLL(None, use_errno=True)
+@@ -383,11 +383,7 @@
+                     phase("strict", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)
+                     verify_return(local_placements, "strict_"+variant)
+                 dispose_snapshots()
+-                for variant in ("candidate","baseline"):
+-                    report["active_phase"] = "perf_"+variant
+-                    phase("perf", variant, {node:contracts[node]}, local_owner, binding, end, local_placements, 1)
+-                    verify_return(local_placements, "perf_"+variant)
+-                report.update(status="PASS_STRICT5_AND_PERF15", active_phase=None)
++                report.update(status="PASS_STRICT5_ALL_METRICS", active_phase=None)
+             except BaseException as exc:
+                 report.update(error=repr(exc), traceback=traceback.format_exc())
+             finally:
+@@ -403,7 +399,7 @@
+                     report.update(status="FAIL_STOP", cleanup_error=repr(exc))
+                 report["finished"] = time.monotonic()
+                 save(EVIDENCE/"DOMAIN_SUMMARY.json", report)
+-            os._exit(0 if report["status"] == "PASS_STRICT5_AND_PERF15" else 2)
++            os._exit(0 if report["status"] == "PASS_STRICT5_ALL_METRICS" else 2)
+ 
+         for node in contracts:
+             pid = os.fork()
+--- a/prepare.py
++++ b/prepare.py
+@@ -30,7 +30,7 @@
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+     need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/wujunyi/opt/stage4_sessions/S00")
+-         and root.name.startswith("AGGRESSIVE3H_20261111_") and binding["user_authorized"] is True,
++         and root.name.startswith("CONTINUOUS_20261116_") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+     need(sha(root / "FULL16_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"
+--- a/submit_once.py
++++ b/submit_once.py
+@@ -89,10 +89,9 @@
+                 and res["memFree"] >= 393216 and res["hugePagesFree"] >= binding["domain_count"]*(binding["hbm_cap_MiB"]//2+16)):
+             qualified.append(host)
+     need(qualified, "no eligible host currently shows full-node CPU, DDR and hugepage capacity")
+-    until = datetime.fromisoformat(binding["batch_deadline_utc"])
+-    room = (until - datetime.now(timezone.utc)).total_seconds()
+-    need(room > binding["wall_seconds"] + 120, "insufficient batch time to execute full job")
+-    stop_queue = time.monotonic() + min(binding["remaining_queue_seconds"],room-binding["wall_seconds"]-120)
++    need(binding["batch_deadline_utc"] is None and binding["wall_seconds"] == 1800,
++         "unlimited campaign requires bounded individual job")
++    stop_queue = time.monotonic() + binding["remaining_queue_seconds"]
+     argv = binding["native_argv"]
+     # The source pin is passed as its explicit runtime operand, avoiding a self-hash cycle.
+     argv = [pin if a == "BINDING_SHA256" else a for a in argv]

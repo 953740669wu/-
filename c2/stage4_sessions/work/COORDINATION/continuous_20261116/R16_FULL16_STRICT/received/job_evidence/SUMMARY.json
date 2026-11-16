@@ -1,0 +1,11 @@
+{
+  "error": "InterruptedError('native signal 14')",
+  "finished": 1487955.830746168,
+  "hbm_pool_restored": true,
+  "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+  "job_id": "2146931",
+  "start": 1486264.459384008,
+  "status": "FAIL_STOP",
+  "steps": {},
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/launch.py\", line 410, in main\n    owner.update(process_table())\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/owned_processes.py\", line 14, in process_table\n    text = p.read_text(); f = text[text.rfind(')') + 2:].split()\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1267, in read_text\n    return f.read()\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/launch.py\", line 323, in stop\n    raise InterruptedError(\"native signal \" + str(signum))\nInterruptedError: native signal 14\n"
+}

@@ -1,0 +1,43 @@
+{
+  "version": "R16_FULL16_STRICT",
+  "job_id": "2146931",
+  "decision": "PARTIAL_NUMERICAL_COVERAGE_FULL16_NOT_ACCEPTED",
+  "native_state": "FAILED",
+  "passed_domains": [
+    "node0",
+    "node1",
+    "node2",
+    "node3",
+    "node5",
+    "node6",
+    "node7",
+    "node8",
+    "node9",
+    "node10",
+    "node11",
+    "node12",
+    "node13",
+    "node14",
+    "node15"
+  ],
+  "strict_metric_records": 58200,
+  "unaccepted_domain": 4,
+  "unaccepted_reason": "Candidate completed one 538.989755143-second update; second was in flight at bounded deadline; no complete candidate numerical result. Not a measured numerical-threshold failure.",
+  "full16_timing_unlocked": false,
+  "original_numerical_thresholds_unchanged": true,
+  "adoption": "Keep previous scope-limited R15 and full16 R5/A. No new full16 speed claim.",
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "allocation_seconds": 1693.0,
+  "queue_seconds": 3.0,
+  "recorded_updates": 156,
+  "charged_updates": 157,
+  "frozen_reference": {
+    "remote_root": "/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/FROZEN_REFERENCE_NODE4",
+    "bytes": 4109559763,
+    "purpose": "Exact completed original five-step reference retained for later directed fixes; intentionally retained model data excluded from Git.",
+    "provenance": "received/FROZEN_REFERENCE_NODE4/PROVENANCE.json"
+  },
+  "archive_sha256": "3c45ddc98d9b9b51c7e925aaf769dca323eb12d39153b54b44dbeaefd4b9ed0b",
+  "next": "R18 foreach independent four-domain experiment; R17 full16 timing remains gate-locked."
+}
