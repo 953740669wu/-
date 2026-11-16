@@ -1,0 +1,10 @@
+{
+  "active_phase": "strict_candidate",
+  "error": "RuntimeError('strict worker failed: {14: 2}')",
+  "finished": 1494100.110008266,
+  "hbm_pool_restored": true,
+  "node": 14,
+  "started": 1494045.969590801,
+  "status": "FAIL_STOP",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {14: 2}\n"
+}

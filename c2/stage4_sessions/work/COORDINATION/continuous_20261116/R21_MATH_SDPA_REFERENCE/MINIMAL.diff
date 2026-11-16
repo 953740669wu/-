@@ -1,0 +1,68 @@
+--- a/launch.py
++++ b/launch.py
+@@ -342,7 +342,7 @@
+         deadline = START + wall - 30
+         cert = False
+         count = binding["domain_count"]
+-        need(binding["mode"] == "fp32_flush_denormal_reference" and count == 16
++        need(binding["mode"] == "fp32_math_sdpa_reference" and count == 16
+              and 120 < wall <= 1800, "wrong wall or mode")
+         need(binding["max_model_updates"] == 5*count, "wrong update bound")
+         rounds = binding["pairs"]
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -120,20 +120,29 @@
+     import numpy as np
+     import torch
+     if not strict or args.variant != "candidate":
+-        raise ValueError("FTZ experiment requires the bound strict-only candidate")
+-    if not torch.set_flush_denormal(True):
+-        raise RuntimeError("denormal flush unsupported by this runtime")
+-    result["flush_denormal_requested"] = True
++        raise ValueError("math SDPA requires the bound strict-only candidate")
++    from torch.nn.attention import sdpa_kernel, SDPBackend
++    original_sdpa = torch.nn.functional.scaled_dot_product_attention
++    result["math_sdpa"] = dict(calls=0, backend="MATH", dtype="float32")
++
++    def math_sdpa(q, k, v, *positional, **keywords):
++        if any(t.device.type != "cpu" or t.dtype != torch.float32 for t in (q,k,v)):
++            raise ValueError("math SDPA input must be CPU FP32")
++        with sdpa_kernel(SDPBackend.MATH):
++            flags = dict(math=torch.backends.cuda.math_sdp_enabled(),
++                         flash=torch.backends.cuda.flash_sdp_enabled(),
++                         efficient=torch.backends.cuda.mem_efficient_sdp_enabled(),
++                         cudnn=torch.backends.cuda.cudnn_sdp_enabled())
++            if flags != dict(math=True,flash=False,efficient=False,cudnn=False):
++                raise ValueError("math-only SDPA dispatch not established")
++            result["math_sdpa"]["flags"] = flags
++            result["math_sdpa"]["calls"] += 1
++            return original_sdpa(q, k, v, *positional, **keywords)
++
++    torch.nn.functional.scaled_dot_product_attention = math_sdpa
+     cpu36_guard.checkpoint(guard, "after_framework", torch)
+     runtime, expected = configure_backend(torch, "kml", expected_cpu)
+     result["runtime"] = runtime
+-    probe = torch.ones(36*4096, dtype=torch.int32).view(torch.float32)
+-    flushed = probe * 2.0
+-    nonzero = int(torch.count_nonzero(flushed.view(torch.int32)))
+-    result["denormal_probe"] = dict(input_bits=1, elements=probe.numel(), nonzero_output_bits=nonzero)
+-    if nonzero:
+-        raise RuntimeError("denormal flush not effective for the exercised CPU tensor lanes")
+-    del probe, flushed
+     maps = Path("/proc/self/maps").read_text()
+     (args.output / "after_framework.maps").write_text(maps)
+     paths = {line.split()[-1] for line in maps.splitlines() if "libhbm_alloc" in line}
+@@ -353,9 +362,10 @@
+     result["final_model_sha256"] = {role: training.model_sha(model) for role, model in models.items()}
+     if strict:
+         expected_model5 = "2e777d61801988322e0709d078b7364629fa01ebd83b8001d5d5f1acfcd12a05"
+-        if any(v != expected_model5 for v in result["final_model_sha256"].values()):
+-            raise ValueError("historical original model5 SHA differs")
+-        result["historical_original_model5_exact"] = True
++        result["historical_original_model5_exact"] = all(
++            v == expected_model5 for v in result["final_model_sha256"].values())
++        if result["math_sdpa"]["calls"] != 24 * result["completed_updates"]:
++            raise ValueError("full checkpoint math SDPA call coverage differs")
+         residency(args.output, "strict_end")
+     if attention:
+         attention.check_maps()

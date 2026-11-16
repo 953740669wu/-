@@ -1,0 +1,41 @@
+{
+  "version": "R21_MATH_SDPA_REFERENCE",
+  "job_id": "2148011",
+  "decision": "REJECT_MATH_SDPA_ORIGINAL_NUMERICAL_GATE",
+  "failed_domains": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "failed_metric": "1.output.h",
+  "max_abs": 4.291534423828125e-05,
+  "absolute_threshold": 2e-05,
+  "relative_L2": 1.4878514327762498e-06,
+  "relative_threshold": 2e-06,
+  "incomplete_domains": [
+    4
+  ],
+  "incomplete_reason": "Node4 first update exceeded120s and was stopped; no numerical verdict on this domain.",
+  "gate_note": "15 completed first updates failed the first output comparison. Later gradients/Adam states/five-step checks were not reached. No performance phase; original thresholds unchanged.",
+  "actual_dispatch": "MATH-only CPU FP32 flags and24 SDPA calls in every returned first-step failure;197 direct KML calls per recorded update",
+  "allocation_seconds": 177.0,
+  "queue_seconds": 3.0,
+  "recorded_updates": 15,
+  "charged_updates": 16,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "archive_sha256": "de7a9dfa78e16fb52002a4c485c490ac6f92b84617cfe55406e544c5b7ffacc2",
+  "next": "Retain R20 mixed tail profile. Next investigate unchanged original FP32 computation with DDR fallback only on node4; do not loosen accuracy or revive this unmodified math candidate."
+}

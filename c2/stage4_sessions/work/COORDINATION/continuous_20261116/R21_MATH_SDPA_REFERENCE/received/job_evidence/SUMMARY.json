@@ -1,0 +1,191 @@
+{
+  "domain_exit_codes": {
+    "0": 2,
+    "1": 2,
+    "2": 2,
+    "3": 2,
+    "4": 2,
+    "5": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 2,
+    "12": 2,
+    "13": 2,
+    "14": 2,
+    "15": 2
+  },
+  "domain_summaries": {
+    "0": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {0: 2}')",
+      "finished": 1494096.524807662,
+      "hbm_pool_restored": true,
+      "node": 0,
+      "started": 1494045.952628893,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {0: 2}\n"
+    },
+    "1": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {1: 2}')",
+      "finished": 1494096.08182091,
+      "hbm_pool_restored": true,
+      "node": 1,
+      "started": 1494045.951590541,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {1: 2}\n"
+    },
+    "2": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {2: 2}')",
+      "finished": 1494095.492872066,
+      "hbm_pool_restored": true,
+      "node": 2,
+      "started": 1494045.95412179,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {2: 2}\n"
+    },
+    "3": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {3: 2}')",
+      "finished": 1494095.693130637,
+      "hbm_pool_restored": true,
+      "node": 3,
+      "started": 1494045.955435996,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {3: 2}\n"
+    },
+    "4": {
+      "active_phase": "strict_candidate",
+      "error": "TimeoutError('candidate update exceeded 120 seconds; stop this domain')",
+      "finished": 1494212.643717345,
+      "hbm_pool_restored": true,
+      "node": 4,
+      "started": 1494045.955557607,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 227, in phase\n    raise TimeoutError(\"candidate update exceeded 120 seconds; stop this domain\")\nTimeoutError: candidate update exceeded 120 seconds; stop this domain\n"
+    },
+    "5": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {5: 2}')",
+      "finished": 1494097.571763046,
+      "hbm_pool_restored": true,
+      "node": 5,
+      "started": 1494045.961588307,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {5: 2}\n"
+    },
+    "6": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {6: 2}')",
+      "finished": 1494097.523289998,
+      "hbm_pool_restored": true,
+      "node": 6,
+      "started": 1494045.962140454,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {6: 2}\n"
+    },
+    "7": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {7: 2}')",
+      "finished": 1494097.308108521,
+      "hbm_pool_restored": true,
+      "node": 7,
+      "started": 1494045.95925456,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {7: 2}\n"
+    },
+    "8": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {8: 2}')",
+      "finished": 1494101.250131145,
+      "hbm_pool_restored": true,
+      "node": 8,
+      "started": 1494045.969642771,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {8: 2}\n"
+    },
+    "9": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {9: 2}')",
+      "finished": 1494101.212138196,
+      "hbm_pool_restored": true,
+      "node": 9,
+      "started": 1494045.96436746,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {9: 2}\n"
+    },
+    "10": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {10: 2}')",
+      "finished": 1494100.949457612,
+      "hbm_pool_restored": true,
+      "node": 10,
+      "started": 1494045.962611069,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {10: 2}\n"
+    },
+    "11": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {11: 2}')",
+      "finished": 1494101.332141846,
+      "hbm_pool_restored": true,
+      "node": 11,
+      "started": 1494045.969279417,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {11: 2}\n"
+    },
+    "12": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {12: 2}')",
+      "finished": 1494101.529127045,
+      "hbm_pool_restored": true,
+      "node": 12,
+      "started": 1494045.96439417,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {12: 2}\n"
+    },
+    "13": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {13: 2}')",
+      "finished": 1494101.499881306,
+      "hbm_pool_restored": true,
+      "node": 13,
+      "started": 1494045.968351976,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {13: 2}\n"
+    },
+    "14": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {14: 2}')",
+      "finished": 1494100.110008266,
+      "hbm_pool_restored": true,
+      "node": 14,
+      "started": 1494045.969590801,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {14: 2}\n"
+    },
+    "15": {
+      "active_phase": "strict_candidate",
+      "error": "RuntimeError('strict worker failed: {15: 2}')",
+      "finished": 1494100.681357346,
+      "hbm_pool_restored": true,
+      "node": 15,
+      "started": 1494045.968390947,
+      "status": "FAIL_STOP",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 218, in phase\n    raise RuntimeError(name + \" worker failed: \" + repr(codes))\nRuntimeError: strict worker failed: {15: 2}\n"
+    }
+  },
+  "error": "ValueError('one or more domains failed; preserve partial valid results')",
+  "finished": 1494216.858553934,
+  "hbm_pool_restored": true,
+  "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+  "job_id": "2148011",
+  "start": 1494040.7817942,
+  "status": "FAIL_STOP",
+  "steps": {},
+  "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/launch.py\", line 419, in main\n    need(all(c == 0 for c in codes.values()), \"one or more domains failed; preserve partial valid results\")\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R21_MATH_SDPA_REFERENCE/prepare.py\", line 25, in need\n    raise ValueError(why)\nValueError: one or more domains failed; preserve partial valid results\n"
+}
