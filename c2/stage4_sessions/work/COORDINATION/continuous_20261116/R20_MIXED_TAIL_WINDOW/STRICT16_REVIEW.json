@@ -1,0 +1,834 @@
+{
+  "version": "R16_FULL16_STRICT",
+  "job_id": "2146931",
+  "native_state": "FAILED",
+  "archive_sha256": "3c45ddc98d9b9b51c7e925aaf769dca323eb12d39153b54b44dbeaefd4b9ed0b",
+  "verified_members": 1356,
+  "summary": {
+    "error": "InterruptedError('native signal 14')",
+    "finished": 1487955.830746168,
+    "hbm_pool_restored": true,
+    "hbm_safety": "CAPACITY_AND_ALLOCATOR_IDENTITY_PASS",
+    "job_id": "2146931",
+    "start": 1486264.459384008,
+    "status": "FAIL_STOP",
+    "steps": {},
+    "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/launch.py\", line 410, in main\n    owner.update(process_table())\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/owned_processes.py\", line 14, in process_table\n    text = p.read_text(); f = text[text.rfind(')') + 2:].split()\n  File \"/usr/lib64/python3.9/pathlib.py\", line 1267, in read_text\n    return f.read()\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/launch.py\", line 323, in stop\n    raise InterruptedError(\"native signal \" + str(signum))\nInterruptedError: native signal 14\n"
+  },
+  "results": {},
+  "cleanup": {
+    "actions": [
+      {
+        "at": 1487946.082969912,
+        "pid": 2332905,
+        "signal": "TERM",
+        "start_ticks": 148626805
+      },
+      {
+        "at": 1487946.893259329,
+        "pid": 2427010,
+        "signal": "TERM",
+        "start_ticks": 148735328
+      }
+    ],
+    "all_reaped": true,
+    "deadline": 1487974.468818359,
+    "finished": 1487955.804364187,
+    "method": "PR_SET_CHILD_SUBREAPER; descendants across sessions; PID/start-ticks checked",
+    "owned": {
+      "2332901": 148626804,
+      "2332902": 148626805,
+      "2332903": 148626805,
+      "2332904": 148626805,
+      "2332905": 148626805,
+      "2332906": 148626805,
+      "2332907": 148626805,
+      "2332908": 148626805,
+      "2332909": 148626805,
+      "2332910": 148626806,
+      "2332911": 148626806,
+      "2332912": 148626806,
+      "2332913": 148626806,
+      "2332914": 148626806,
+      "2332915": 148626806,
+      "2332916": 148626806,
+      "2332919": 148626809,
+      "2332921": 148626809,
+      "2332922": 148626810,
+      "2332923": 148626810,
+      "2332924": 148626810,
+      "2332928": 148626810,
+      "2332930": 148626811,
+      "2332931": 148626811,
+      "2332936": 148626811,
+      "2332937": 148626811,
+      "2332945": 148626811,
+      "2332954": 148626812,
+      "2332960": 148626812,
+      "2332966": 148626813,
+      "2332968": 148626813,
+      "2332981": 148626840,
+      "2342338": 148637082,
+      "2342421": 148637255,
+      "2342466": 148637342,
+      "2342503": 148637449,
+      "2342703": 148637640,
+      "2342763": 148637701,
+      "2342801": 148637734,
+      "2342810": 148637765,
+      "2342986": 148637931,
+      "2343321": 148638280,
+      "2343327": 148638286,
+      "2343378": 148638339,
+      "2343383": 148638343,
+      "2343397": 148638373,
+      "2343485": 148638485,
+      "2427010": 148735328
+    },
+    "reaped": [
+      {
+        "exit_code": 2,
+        "pid": 2332905,
+        "wait_status": 512
+      }
+    ],
+    "remaining_live": [],
+    "remaining_processes": [],
+    "started": 1487944.468848189
+  },
+  "queue_seconds": 3.0,
+  "native_times": {
+    "createTime": "2026-11-16T14:45:26Z",
+    "startTime": "2026-11-16T14:45:29Z",
+    "lastModifiedTime": "-",
+    "endTime": "2026-11-16T15:13:42Z",
+    "startTimeEstimated": "-",
+    "scheduledTime": "-"
+  },
+  "domains": {
+    "node0": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486520.867692588,
+        "hbm_pool_restored": true,
+        "node": 0,
+        "started": 1486268.065593009,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.641551242,
+            10.315116292,
+            10.032435267,
+            9.62799711,
+            8.216972327
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            8.086418519,
+            10.0657564,
+            9.84052412,
+            12.355673764,
+            7.551517985
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node1": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486496.478153377,
+        "hbm_pool_restored": true,
+        "node": 1,
+        "started": 1486268.070984974,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.29033681,
+            10.057534641,
+            9.80844545,
+            9.031050331,
+            7.523670949
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            7.05031963,
+            7.520818913,
+            8.990745031,
+            7.506411873,
+            7.84395786
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node2": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486515.30881126,
+        "hbm_pool_restored": true,
+        "node": 2,
+        "started": 1486268.071512235,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.910210789,
+            10.700632091,
+            10.417640081,
+            10.364389622,
+            9.217698569
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            7.781791431,
+            6.905138005,
+            7.164533444,
+            7.390879337,
+            7.039710496
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node3": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486507.308388434,
+        "hbm_pool_restored": true,
+        "node": 3,
+        "started": 1486268.071111604,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.867215179,
+            10.700080667,
+            10.500125752,
+            10.381248525,
+            9.179038031
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            7.391555393,
+            7.080800242,
+            7.310090106,
+            7.097407458,
+            7.680366023
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node4": {
+      "summary": {
+        "active_phase": "strict_candidate",
+        "error": "TimeoutError('strict shared deadline')",
+        "finished": 1487952.7227935,
+        "hbm_pool_restored": true,
+        "node": 4,
+        "started": 1486268.068605237,
+        "status": "FAIL_STOP",
+        "traceback": "Traceback (most recent call last):\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/launch.py\", line 383, in run_domain\n    phase(\"strict\", variant, {node:contracts[node]}, local_owner, binding, end, local_placements)\n  File \"/home/share/wujunyi/opt/stage4_sessions/S00/CONTINUOUS_20261116_R16_FULL16_STRICT/launch.py\", line 229, in phase\n    raise TimeoutError(name + \" shared deadline\")\nTimeoutError: strict shared deadline\n"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            32.119280069,
+            55.171983816,
+            65.763822052,
+            320.551607293,
+            539.120525844
+          ]
+        },
+        "candidate": {
+          "passed": false,
+          "status": null,
+          "error": null,
+          "recorded_updates": 1,
+          "charged_updates": 2,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            538.989755143
+          ]
+        }
+      },
+      "strict5_passed": false
+    },
+    "node5": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486515.418122661,
+        "hbm_pool_restored": true,
+        "node": 5,
+        "started": 1486268.066981353,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            11.220399427,
+            10.289892675,
+            8.949582743,
+            8.012749951,
+            9.113525683
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.001817286,
+            7.540582468,
+            8.443981733,
+            9.04164673,
+            7.620787909
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node6": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486526.085730216,
+        "hbm_pool_restored": true,
+        "node": 6,
+        "started": 1486268.074225663,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            9.680588084,
+            9.525028275,
+            11.194033362,
+            7.55871321,
+            7.858271297
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            7.933305507,
+            7.738319458,
+            7.782943805,
+            9.821235913,
+            8.406742968
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node7": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486508.277921879,
+        "hbm_pool_restored": true,
+        "node": 7,
+        "started": 1486268.078048304,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            11.16997536,
+            9.712049214,
+            9.221057632,
+            7.988379961,
+            8.218405156
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            8.273991935,
+            7.571580565,
+            7.635370771,
+            7.452704614,
+            8.2607136
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node8": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486509.817253329,
+        "hbm_pool_restored": true,
+        "node": 8,
+        "started": 1486268.073328761,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.973598659,
+            10.371404165,
+            10.238166223,
+            10.253319284,
+            10.20873945
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            9.766133457,
+            8.515294631,
+            8.489253701,
+            8.781843301,
+            8.680369157
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node9": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486512.712257885,
+        "hbm_pool_restored": true,
+        "node": 9,
+        "started": 1486268.079200437,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.786053238,
+            10.277118491,
+            10.355042785,
+            10.257910524,
+            10.427113241
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.341041975,
+            8.825594369,
+            8.841221471,
+            9.229555898,
+            8.883818419
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node10": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486511.253428287,
+        "hbm_pool_restored": true,
+        "node": 10,
+        "started": 1486268.077017111,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.977927892,
+            10.324306272,
+            10.377417673,
+            10.458844072,
+            10.45917416
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.441869333,
+            8.995702547,
+            8.932727894,
+            9.386932562,
+            8.984449431
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node11": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486512.677932318,
+        "hbm_pool_restored": true,
+        "node": 11,
+        "started": 1486268.080011469,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.95881521,
+            10.45078039,
+            10.457243902,
+            10.284972912,
+            10.397437855
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.363622736,
+            9.062466543,
+            9.001620803,
+            9.438620766,
+            9.01525456
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node12": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486507.607141338,
+        "hbm_pool_restored": true,
+        "node": 12,
+        "started": 1486268.08021905,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.611173562,
+            10.351359248,
+            9.738733272,
+            9.398425631,
+            9.453413114
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            8.824369711,
+            8.417368562,
+            8.067350145,
+            8.319090869,
+            8.268037053
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node13": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486517.364343134,
+        "hbm_pool_restored": true,
+        "node": 13,
+        "started": 1486268.081513174,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.614740452,
+            10.116931068,
+            9.215714838,
+            8.555850016,
+            8.461481398
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            8.194024727,
+            7.853354362,
+            8.197873099,
+            8.819776035,
+            7.701024053
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node14": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486505.810789618,
+        "hbm_pool_restored": true,
+        "node": 14,
+        "started": 1486268.083521729,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.613305908,
+            10.436830914,
+            9.823067635,
+            9.41935382,
+            9.419456824
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            8.825951636,
+            8.469010881,
+            8.145754986,
+            8.639220594,
+            8.56734654
+          ]
+        }
+      },
+      "strict5_passed": true
+    },
+    "node15": {
+      "summary": {
+        "active_phase": null,
+        "finished": 1486502.323804968,
+        "hbm_pool_restored": true,
+        "node": 15,
+        "started": 1486268.081536524,
+        "status": "PASS_STRICT5_ALL_METRICS"
+      },
+      "phases": {
+        "baseline": {
+          "passed": true,
+          "status": "PASS_STRICT_REFERENCE5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 0,
+          "failed_metrics": [],
+          "step_seconds": [
+            10.619951587,
+            10.422477706,
+            9.779237919,
+            9.396682547,
+            9.377592652
+          ]
+        },
+        "candidate": {
+          "passed": true,
+          "status": "PASS_STRICT_ENCODER5",
+          "error": null,
+          "recorded_updates": 5,
+          "charged_updates": 5,
+          "metrics": 3880,
+          "failed_metrics": [],
+          "step_seconds": [
+            8.824750744,
+            8.443062652,
+            8.217179866,
+            8.648853288,
+            8.743153201
+          ]
+        }
+      },
+      "strict5_passed": true
+    }
+  },
+  "all16_strict_passed": false,
+  "cleanup_passed": true,
+  "recorded_updates": 156,
+  "charged_updates": 157,
+  "allocation_seconds": 1693.0,
+  "fixed_inputs_before_after_equal": true
+}

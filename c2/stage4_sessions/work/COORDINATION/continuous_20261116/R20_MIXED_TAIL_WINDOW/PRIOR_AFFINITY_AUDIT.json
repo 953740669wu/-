@@ -1,0 +1,2300 @@
+{
+  "status": "READ_ONLY_PRIOR_EVIDENCE_AUDIT",
+  "source_job": "2146931",
+  "domains": {
+    "node0": {
+      "source": "c2\\stage4_sessions\\work\\COORDINATION\\continuous_20261116\\R16_FULL16_STRICT\\received\\job_evidence\\domains\\node0\\strict_baseline\\node0\\result.json",
+      "source_sha256": "243f66bc9bbc7d6674f91353cce78c30ddaec9f7dd074ededa47d7aedbc3c6a6",
+      "checkpoints": [
+        {
+          "name": "after_framework",
+          "calling_affinity": [
+            0
+          ],
+          "threads": 1,
+          "masks": [
+            {
+              "cpus": [
+                0
+              ],
+              "threads": 1
+            }
+          ]
+        },
+        {
+          "name": "after_backend",
+          "calling_affinity": [
+            0
+          ],
+          "threads": 36,
+          "masks": [
+            {
+              "cpus": [
+                0
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                1
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                2
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                3
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                4
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                5
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                6
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                7
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                8
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                9
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                10
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                11
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                12
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                13
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                14
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                15
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                16
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                17
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                18
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                19
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                20
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                21
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                22
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                23
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                24
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                25
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                26
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                27
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                28
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                29
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                30
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                31
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                32
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                33
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                34
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                35
+              ],
+              "threads": 1
+            }
+          ]
+        },
+        {
+          "name": "before_baseline_1",
+          "calling_affinity": [
+            0
+          ],
+          "threads": 36,
+          "masks": [
+            {
+              "cpus": [
+                0
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                1
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                2
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                3
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                4
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                5
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                6
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                7
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                8
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                9
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                10
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                11
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                12
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                13
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                14
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                15
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                16
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                17
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                18
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                19
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                20
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                21
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                22
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                23
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                24
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                25
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                26
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                27
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                28
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                29
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                30
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                31
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                32
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                33
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                34
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                35
+              ],
+              "threads": 1
+            }
+          ]
+        },
+        {
+          "name": "after_baseline_1",
+          "calling_affinity": [
+            0
+          ],
+          "threads": 36,
+          "masks": [
+            {
+              "cpus": [
+                0
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                1
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                2
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                3
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                4
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                5
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                6
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                7
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                8
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                9
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                10
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                11
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                12
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                13
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                14
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                15
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                16
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                17
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                18
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                19
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                20
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                21
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                22
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                23
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                24
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                25
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                26
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                27
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                28
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                29
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                30
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                31
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                32
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                33
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                34
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                35
+              ],
+              "threads": 1
+            }
+          ]
+        },
+        {
+          "name": "after_baseline_5",
+          "calling_affinity": [
+            0
+          ],
+          "threads": 36,
+          "masks": [
+            {
+              "cpus": [
+                0
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                1
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                2
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                3
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                4
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                5
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                6
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                7
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                8
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                9
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                10
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                11
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                12
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                13
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                14
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                15
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                16
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                17
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                18
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                19
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                20
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                21
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                22
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                23
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                24
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                25
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                26
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                27
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                28
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                29
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                30
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                31
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                32
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                33
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                34
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                35
+              ],
+              "threads": 1
+            }
+          ]
+        },
+        {
+          "name": "publish",
+          "calling_affinity": [
+            0
+          ],
+          "threads": 36,
+          "masks": [
+            {
+              "cpus": [
+                0
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                1
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                2
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                3
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                4
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                5
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                6
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                7
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                8
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                9
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                10
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                11
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                12
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                13
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                14
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                15
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                16
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                17
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                18
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                19
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                20
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                21
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                22
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                23
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                24
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                25
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                26
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                27
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                28
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                29
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                30
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                31
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                32
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                33
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                34
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                35
+              ],
+              "threads": 1
+            }
+          ]
+        }
+      ]
+    },
+    "node4": {
+      "source": "c2\\stage4_sessions\\work\\COORDINATION\\continuous_20261116\\R16_FULL16_STRICT\\received\\job_evidence\\domains\\node4\\strict_baseline\\node4\\result.json",
+      "source_sha256": "3d115166a855f0882183e5f327800be807ecda3090678c5158a18eec8bba59aa",
+      "checkpoints": [
+        {
+          "name": "after_framework",
+          "calling_affinity": [
+            152
+          ],
+          "threads": 1,
+          "masks": [
+            {
+              "cpus": [
+                152
+              ],
+              "threads": 1
+            }
+          ]
+        },
+        {
+          "name": "after_backend",
+          "calling_affinity": [
+            152
+          ],
+          "threads": 36,
+          "masks": [
+            {
+              "cpus": [
+                152
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                153
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                154
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                155
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                156
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                157
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                158
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                159
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                160
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                161
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                162
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                163
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                164
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                165
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                166
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                167
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                168
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                169
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                170
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                171
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                172
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                173
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                174
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                175
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                176
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                177
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                178
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                179
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                180
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                181
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                182
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                183
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                184
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                185
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                186
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                187
+              ],
+              "threads": 1
+            }
+          ]
+        },
+        {
+          "name": "before_baseline_1",
+          "calling_affinity": [
+            152
+          ],
+          "threads": 36,
+          "masks": [
+            {
+              "cpus": [
+                152
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                153
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                154
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                155
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                156
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                157
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                158
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                159
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                160
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                161
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                162
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                163
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                164
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                165
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                166
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                167
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                168
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                169
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                170
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                171
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                172
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                173
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                174
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                175
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                176
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                177
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                178
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                179
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                180
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                181
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                182
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                183
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                184
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                185
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                186
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                187
+              ],
+              "threads": 1
+            }
+          ]
+        },
+        {
+          "name": "after_baseline_1",
+          "calling_affinity": [
+            152
+          ],
+          "threads": 36,
+          "masks": [
+            {
+              "cpus": [
+                152
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                153
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                154
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                155
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                156
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                157
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                158
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                159
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                160
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                161
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                162
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                163
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                164
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                165
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                166
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                167
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                168
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                169
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                170
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                171
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                172
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                173
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                174
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                175
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                176
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                177
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                178
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                179
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                180
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                181
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                182
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                183
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                184
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                185
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                186
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                187
+              ],
+              "threads": 1
+            }
+          ]
+        },
+        {
+          "name": "after_baseline_5",
+          "calling_affinity": [
+            152
+          ],
+          "threads": 36,
+          "masks": [
+            {
+              "cpus": [
+                152
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                153
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                154
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                155
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                156
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                157
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                158
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                159
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                160
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                161
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                162
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                163
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                164
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                165
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                166
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                167
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                168
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                169
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                170
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                171
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                172
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                173
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                174
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                175
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                176
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                177
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                178
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                179
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                180
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                181
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                182
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                183
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                184
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                185
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                186
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                187
+              ],
+              "threads": 1
+            }
+          ]
+        },
+        {
+          "name": "publish",
+          "calling_affinity": [
+            152
+          ],
+          "threads": 36,
+          "masks": [
+            {
+              "cpus": [
+                152
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                153
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                154
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                155
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                156
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                157
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                158
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                159
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                160
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                161
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                162
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                163
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                164
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                165
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                166
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                167
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                168
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                169
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                170
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                171
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                172
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                173
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                174
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                175
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                176
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                177
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                178
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                179
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                180
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                181
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                182
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                183
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                184
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                185
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                186
+              ],
+              "threads": 1
+            },
+            {
+              "cpus": [
+                187
+              ],
+              "threads": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "conclusion": "At the inspected checkpoints, fast node0 and slow node4 both have36 threads on36 distinct selected cores after backend initialization. No observed collapse of all workers onto the main core at these checkpoints.",
+  "limits": "Snapshots do not measure utilization, frequency, hardware health or every moment of training; root cause remains unresolved."
+}

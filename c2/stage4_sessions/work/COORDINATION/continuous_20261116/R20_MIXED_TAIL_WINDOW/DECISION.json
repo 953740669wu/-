@@ -1,0 +1,115 @@
+{
+  "version": "R20_MIXED_TAIL_WINDOW",
+  "job_id": "2147510",
+  "decision": "PROVISIONAL_USE_FULL16_MIXED_TAIL_PROFILE",
+  "reference": "A: full checkpoint HBM original on all16",
+  "candidate": "B: exact R16 tail-skip on15 strict-passed domains, original full checkpoint on node4",
+  "profile": {
+    "helper_sha256": {
+      "payload/checkpoint_layers.py": "f77d580f27994e5cfb267c8c1e4d63d3f09da51a6fcc10dda40373a4e69cfa9d",
+      "payload/checkpoint_tail.py": "355db15e81dd97dbd7b05a82d3326fd3db599a5f5053714ca2c6083723a8f030"
+    },
+    "host": "cn22035",
+    "no_foreach": true,
+    "no_ftz": true,
+    "original_domains": [
+      4
+    ],
+    "source_job_id": "2146931",
+    "strict_binding_sha256": "72b4939f91916e092f4cdc508397345e7a88433a9bfdebe33da118a872f27a15",
+    "strict_review_sha256": "57eec5b336ee0de8f14b761c1633d95b2efcd327c8321ff94791cefe8beb8830",
+    "tail_domains": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "comparison": {
+    "throughput_change_pct": 4.935370152761465,
+    "delta_frames_s": 2.240000000000002,
+    "per_domain_delta_frames_s": {
+      "0": 0.21333333333333337,
+      "1": 0.05333333333333368,
+      "2": 0.05333333333333368,
+      "3": 0.21333333333333337,
+      "4": 0.0,
+      "5": 0.26666666666666705,
+      "6": 0.10666666666666691,
+      "7": 0.2666666666666666,
+      "8": 0.0,
+      "9": 0.10666666666666691,
+      "10": 0.21333333333333337,
+      "11": 0.10666666666666691,
+      "12": 0.0,
+      "13": 0.10666666666666691,
+      "14": 0.2666666666666666,
+      "15": 0.2666666666666666
+    }
+  },
+  "arms": {
+    "A": {
+      "window": {
+        "close_ns": 1491220215447716,
+        "open_ns": 1490620215447716
+      },
+      "frame_visits": 27232,
+      "frames_s": 45.38666666666666,
+      "updates_reserved": 947,
+      "startup_and_warmup_s": 657.824586829,
+      "post_window_worker_finish_s": 210.959924297,
+      "worker_envelope_s": 1468.784511126,
+      "tail_after_window_s": 210.160840033
+    },
+    "B": {
+      "window": {
+        "close_ns": 1493485065468913,
+        "open_ns": 1492885065468913
+      },
+      "frame_visits": 28576,
+      "frames_s": 47.626666666666665,
+      "updates_reserved": 988,
+      "startup_and_warmup_s": 1451.15473879,
+      "post_window_worker_finish_s": 417.870867977,
+      "worker_envelope_s": 2469.025606767,
+      "tail_after_window_s": 417.057979219
+    }
+  },
+  "numerical": {
+    "original_thresholds_unchanged": true,
+    "inherited_strict_source": "R16_FULL16_STRICT/REVIEW.json",
+    "changed_domains_strict_metrics": 58200,
+    "unchanged_node4_original5_complete": true,
+    "current_first5_loss_metrics": 480,
+    "current_loss_metrics_all_passed": true,
+    "actual_KML_calls": {
+      "original": 197,
+      "tail": 185
+    }
+  },
+  "limits": [
+    "One fixed-order A then B pair; provisional engineering use without repetition or statistical significance claim.",
+    "B startup/warmup1451.15s versus A657.82s; B post-window417.87s versus A210.96s. Do not claim overall job time improved.",
+    "Node4 unchanged and1.44frames/s in both windows; slow startup/tail root cause unresolved.",
+    "No formal production entrypoint or scientific/generalization acceptance."
+  ],
+  "allocation_seconds": 3955.0,
+  "queue_seconds": 3.0,
+  "recorded_updates": 1935,
+  "charged_updates": 1935,
+  "reserved_updates": 1935,
+  "cleanup_passed": true,
+  "fixed_inputs_before_after_equal": true,
+  "archive_sha256": "13191b10e776669f1b58c1e7be64afec261412a1d8b4752990488e759c82df3e"
+}

@@ -1,0 +1,205 @@
+--- a/launch.py
++++ b/launch.py
+@@ -194,7 +194,7 @@
+             env.update(M23_HBM_LIBRARY=cfg["library"], M23_HBM_LIBRARY_SHA=cfg["library_sha256"],
+                        HBM_NODE=str(cfg["hbm_node"]), HBM_MB=str(cfg["cap_MiB"]), HBM_MIN_KB=str(binding["hbm_min_request_KiB"][arm]), HBM_STATS="1")
+         env.update(S09_INVENTORY="0", S00_BATCH=str(binding["batch_size"]),
+-                   S00_MATCHED_CKPT="12" if arm == "A" else "0")
++                   S00_MATCHED_CKPT="12")
+         save(out / f"{rank}.env.json", {k:v for k,v in env.items() if k.startswith(("M23_", "HBM_", "S09_", "S00_"))})
+         with (out / f"{rank}.log").open("xb") as log:
+             proc[node] = subprocess.Popen(argv, cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
+--- a/payload/checkpoint_layers.py
++++ b/payload/checkpoint_layers.py
+@@ -1,5 +1,9 @@
+-def enable_checkpoint(enc):
+-    """Same per-layer non-reentrant checkpoint wrapper as the frozen source."""
++def enable_checkpoint(enc, mode="full"):
++    """Keep attention activations and recompute only FFN in the candidate."""
+     from torch.utils.checkpoint import checkpoint
++    if mode not in ("full", "ffn"):
++        raise ValueError("unknown checkpoint scope")
++    attribute = "forward" if mode == "full" else "_ff_block"
+     for layer in enc.tf.layers:
+-        layer.forward = lambda *a, _f=layer.forward, **k: checkpoint(_f, *a, use_reentrant=False, **k)
++        original = getattr(layer, attribute)
++        setattr(layer, attribute, lambda *a, _f=original, **k: checkpoint(_f, *a, use_reentrant=False, **k))
+--- a/payload/worker.py
++++ b/payload/worker.py
+@@ -19,6 +19,7 @@
+ import memory_metrics
+ from m23_memory import SavedStorage
+ from checkpoint_layers import enable_checkpoint
++from checkpoint_tail import enable_checkpoint_tail
+ from window_control import Window
+ 
+ ROOT = Path(__file__).resolve().parent
+@@ -94,7 +95,7 @@
+     window = Window(args, result, write)
+     batch = int(os.environ["S00_BATCH"])
+     ckpt_layers = int(os.environ["S00_MATCHED_CKPT"])
+-    if batch != 32 or ckpt_layers != (12 if args.arm == "A" else 0):
++    if batch != 32 or ckpt_layers != 12:
+         raise ValueError("expected a dependency-bound B32 or B64 with CKPT12")
+     expected_cpu = json.loads(args.allocation.read_bytes())["receipt"]["selected"]
+     guard = result["cpu36"] = {}
+@@ -195,9 +196,18 @@
+         if len(reference_steps) != 5:
+             raise ValueError("frozen DDR strict reference incomplete")
+     result["pairing_sha256"] = hashlib.sha256(json.dumps(pairing,sort_keys=True).encode()).hexdigest()
+-    if args.arm == "A":
++    profile = json.loads((args.descriptor.parent / "PROFILE_GATE.json").read_bytes())
++    node = guard["receipt"]["node"]
++    if args.output.name != "node" + str(node):
++        raise ValueError("profile domain differs from actual CPU allocation")
++    use_tail = args.arm == "B" and node in profile["tail_domains"]
++    tail_counts = None
++    if use_tail:
++        tail_counts = enable_checkpoint_tail(models[args.variant])
++    else:
+         enable_checkpoint(models[args.variant])
+-    result["checkpoint_scope"] = "full" if args.arm == "A" else "none"
++    result["checkpoint_scope"] = "full_tail_skip" if use_tail else "full"
++    result["profile_domain"] = node
+     result["hbm_min_request_KiB"] = int(os.environ["HBM_MIN_KB"])
+     result["checkpoint_layers"] = ckpt_layers
+     residency(args.output, "initialized")
+@@ -271,13 +281,13 @@
+                     pinned = reference_steps[(step-1) % 5]
+                     expected_shapes = dict(pinned["native_shapes"])
+                     expected_calls = pinned["kml_calls"]
+-                    if args.arm == "B":
+-                        for width, inputs in ((1536,512),(512,512),(2048,512),(512,2048)):
++                    if use_tail:
++                        for width, inputs in ((512,2048),):
+                             key = str((101,111,112,batch*928,width,inputs,1.0,inputs,inputs,1.0,width))
+                             if expected_shapes[key] != 24:
+                                 raise ValueError("unexpected checkpointed forward multiplicity")
+                             expected_shapes[key] -= 12
+-                        expected_calls -= 48
++                        expected_calls -= 12
+                     trace_matches = logical == expected_calls and shapes == expected_shapes
+                     if not trace_matches:
+                         result["bad_native"] = dict(step=step, role=role, shapes=dict(shapes), logical=logical)
+@@ -315,6 +325,10 @@
+     residency(args.output, "observe_end")
+     data.load_descriptor(args.descriptor, args.descriptor_sha)
+     result["final_model_sha256"] = {role: training.model_sha(model) for role, model in models.items()}
++    if tail_counts is not None:
++        result["checkpoint_tail_counts"] = dict(tail_counts)
++        if tail_counts != dict(skipped=12*result["completed_updates"], escaped=0):
++            raise ValueError("tail replay count or early-stop guard differs")
+     finish_backend(runtime, expected)
+     runtime_check(runtime, hbm)
+     cpu36_guard.checkpoint(guard, "publish", torch)
+--- a/prepare.py
++++ b/prepare.py
+@@ -30,7 +30,7 @@
+     need(sha(path) == pin, "independent run binding SHA differs")
+     binding = json.loads(path.read_bytes())
+     need(binding["remote_root"] == str(root) and root.parent == Path("/home/share/wujunyi/opt/stage4_sessions/S00")
+-         and root.name.startswith("AGGRESSIVE3H_20261111_R5_") and binding["user_authorized"] is True,
++         and root.name.startswith("CONTINUOUS_20261116_") and binding["user_authorized"] is True,
+          "wrong dedicated directory or scope")
+     need(sha(root / "FULL16_PAYLOAD.zip") == binding["package_sha256"], "package SHA differs")
+     manifest = root / "SOURCE_SHA256.json"
+@@ -41,6 +41,17 @@
+     need(sha(root / "ENGINEERING_DESCRIPTOR.json") == binding["descriptor_sha256"], "descriptor differs")
+     for name,expected in binding["frozen_sidecars"].items():
+         need(sha(root/name) == expected, "frozen dependency sidecar differs: " + name)
++    gate = json.loads((root/"STRICT16_REVIEW.json").read_bytes())
++    profile = json.loads((root/"PROFILE_GATE.json").read_bytes())
++    need(profile["tail_domains"] == [i for i in range(16) if i != 4]
++         and profile["original_domains"] == [4], "wrong mixed profile")
++    need(gate["cleanup_passed"] and gate["job_id"] == "2146931", "strict source not closed")
++    need(all(d["phases"]["baseline"]["passed"] for d in gate["domains"].values()), "original coverage incomplete")
++    for node in profile["tail_domains"]:
++        value = gate["domains"]["node"+str(node)]
++        phase = value["phases"]["candidate"]
++        need(value["strict5_passed"] and phase["metrics"] == 3880
++             and not phase["failed_metrics"], "changed domain strict gate incomplete")
+     return binding
+ 
+ 
+--- a/submit_once.py
++++ b/submit_once.py
+@@ -86,13 +86,12 @@
+              and topo["nThreadsPerCore"] == 1,
+              f"node class differs: {host}")
+         if (row["status"] == "OK" and row["runningJobsCount"] == 0 and res["cpuFree"] >= 608
+-                and res["memFree"] >= 393216 and res["hugePagesFree"] >= 16*(binding["hbm_cap_MiB"]//2+16)):
++                and res["memFree"] >= 393216 and res["hugePagesFree"] >= binding["domain_count"]*(binding["hbm_cap_MiB"]//2+16)):
+             qualified.append(host)
+     need(qualified, "no eligible host currently shows full-node CPU, DDR and hugepage capacity")
+-    until = datetime.fromisoformat(binding["batch_deadline_utc"])
+-    room = (until - datetime.now(timezone.utc)).total_seconds()
+-    need(room > binding["wall_seconds"] + 120, "insufficient batch time to execute full job")
+-    stop_queue = time.monotonic() + min(binding["remaining_queue_seconds"],room-binding["wall_seconds"]-120)
++    need(binding["batch_deadline_utc"] is None and binding["wall_seconds"] == 7200,
++         "unlimited campaign requires bounded individual job")
++    stop_queue = time.monotonic() + binding["remaining_queue_seconds"]
+     argv = binding["native_argv"]
+     # The source pin is passed as its explicit runtime operand, avoiding a self-hash cycle.
+     argv = [pin if a == "BINDING_SHA256" else a for a in argv]
+--- a/payload/checkpoint_tail.py
++++ b/payload/checkpoint_tail.py
+@@ -0,0 +1,59 @@
++"""Restore the final Linear's saved inputs without computing an unused replay output."""
++from contextlib import contextmanager, nullcontext
++
++
++def enable_checkpoint_tail(enc):
++    import torch
++    from torch.utils.checkpoint import checkpoint
++
++    counts = dict(skipped=0, escaped=0)
++
++    class SavedInputsOnly(torch.autograd.Function):
++        @staticmethod
++        def forward(ctx, x, weight):
++            ctx.save_for_backward(x.reshape(-1, x.shape[-1]).float().contiguous(),
++                                  weight.float().contiguous())
++            return x.new_empty(0)
++
++        @staticmethod
++        def backward(ctx, grad):
++            raise RuntimeError("replay-only saver must never participate in backward")
++
++    def install(layer):
++        if not layer.norm_first or any(m.p != 0 for m in (layer.dropout, layer.dropout1, layer.dropout2)):
++            raise ValueError("tail replay requires the frozen norm-first, dropout-zero block")
++        if tuple(layer.linear2.weight.shape) != (512, 2048) or layer.linear2.weight.dtype != torch.float32:
++            raise ValueError("tail replay requires the frozen FP32 FFN projection")
++        replay = [False]
++        original_linear = layer.linear2.forward
++        original_layer = layer.forward
++
++        @contextmanager
++        def recompute():
++            if replay[0]:
++                raise RuntimeError("nested replay is unsupported")
++            replay[0] = True
++            try:
++                yield
++            finally:
++                replay[0] = False
++
++        def linear(x):
++            if not replay[0]:
++                return original_linear(x)
++            counts['skipped'] += 1
++            SavedInputsOnly.apply(x, layer.linear2.weight)
++            # The framework must raise its early-stop exception while saving the
++            # final input/weight. No dummy output may reach any model operation.
++            counts['escaped'] += 1
++            raise RuntimeError("checkpoint did not stop at the final FFN saved inputs")
++
++        layer.linear2.forward = linear
++        layer.forward = lambda *a, **k: checkpoint(original_layer, *a, use_reentrant=False,
++                                                   context_fn=lambda: (nullcontext(), recompute()), **k)
++
++    if len(enc.tf.layers) != 12:
++        raise ValueError("exactly twelve frozen encoder blocks required")
++    for layer in enc.tf.layers:
++        install(layer)
++    return counts
